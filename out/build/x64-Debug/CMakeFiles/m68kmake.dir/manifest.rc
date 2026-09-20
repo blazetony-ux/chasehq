@@ -1,0 +1,2 @@
+#pragma code_page(65001)
+1 /* CREATEPROCESS_MANIFEST_RESOURCE_ID */ 24 /* RT_MANIFEST */ "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.8/out/build/x64-Debug/CMakeFiles/m68kmake.dir/embed.manifest"

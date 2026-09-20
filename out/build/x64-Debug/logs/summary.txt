@@ -1,0 +1,18 @@
+CPU A: cycles=24004646 instructions=1312666 PC=0x5a6 SR=0x2708 SP=0x103f00
+Status: budget reached / diagnostic run ended; not proof of game boot
+Bus byte-access counters (ROM write counts are rejected attempts):
+  rom R=3815696 W=0
+  work_low R=64680 W=48584
+  shared R=65536 W=49152
+  work_high R=0 W=0
+  io_stub R=250628 W=0
+  cpu_control_stub R=0 W=1
+  sound_stub R=0 W=0
+  palette_registers R=32768 W=100098
+  tilemap R=172544 W=226896
+  tile_control R=0 W=40
+  sprites R=8192 W=8192
+  motor_stub R=0 W=0
+  sub_work R=0 W=0
+  road R=0 W=0
+  unmapped R=0 W=0

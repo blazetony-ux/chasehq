@@ -1,0 +1,250 @@
+{
+	"artifacts" : 
+	[
+		{
+			"path" : "ChaseHQNative.exe"
+		},
+		{
+			"path" : "ChaseHQNative.pdb"
+		}
+	],
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_executable",
+			"target_link_libraries",
+			"add_custom_command"
+		],
+		"files" : 
+		[
+			"CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 53,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 54,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 32,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 56,
+				"parent" : 0
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "/DWIN32 /D_WINDOWS /EHsc /Zi /Ob0 /Od /RTC1 -std:c++20 -MDd"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"backtrace" : 2,
+					"define" : "CHASEHQ_NATIVE_VERSION=\"0.8\""
+				},
+				{
+					"backtrace" : 2,
+					"define" : "CHASEHQ_PROJECT_DIR=\"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.8\""
+				},
+				{
+					"backtrace" : 2,
+					"define" : "M68K_EMULATE_010=0"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "M68K_EMULATE_020=0"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "M68K_EMULATE_030=0"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "M68K_EMULATE_040=0"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "M68K_EMULATE_ADDRESS_ERROR=1"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "M68K_EMULATE_EC020=0"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "M68K_EMULATE_INT_ACK=1"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "M68K_EMULATE_PMMU=0"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "M68K_EMULATE_TRACE=1"
+				},
+				{
+					"backtrace" : 2,
+					"define" : "M68K_INSTRUCTION_HOOK=1"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 2,
+					"path" : "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.8/src"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.8/third_party/musashi"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.8/out/build/x64-Debug/SDL/include-revision"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.8/SDL/include"
+				}
+			],
+			"language" : "CXX",
+			"languageStandard" : 
+			{
+				"backtraces" : 
+				[
+					1
+				],
+				"standard" : "20"
+			},
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2,
+				3
+			]
+		}
+	],
+	"dependencies" : 
+	[
+		{
+			"backtrace" : 2,
+			"id" : "chq_runtime::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 2,
+			"id" : "musashi::@6890427a1f51a3e7e1df"
+		},
+		{
+			"backtrace" : 4,
+			"id" : "SDL3-shared::@e7c329919722962a2ad4"
+		}
+	],
+	"id" : "ChaseHQNative::@6890427a1f51a3e7e1df",
+	"link" : 
+	{
+		"commandFragments" : 
+		[
+			{
+				"fragment" : "/DWIN32 /D_WINDOWS /EHsc /Zi /Ob0 /Od /RTC1 -MDd",
+				"role" : "flags"
+			},
+			{
+				"fragment" : "/machine:x64 /debug /INCREMENTAL /subsystem:console",
+				"role" : "flags"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "chq_runtime.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 2,
+				"fragment" : "SDL\\SDL3.lib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 3,
+				"fragment" : "musashi.lib",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib",
+				"role" : "libraries"
+			}
+		],
+		"language" : "CXX"
+	},
+	"name" : "ChaseHQNative",
+	"nameOnDisk" : "ChaseHQNative.exe",
+	"paths" : 
+	{
+		"build" : ".",
+		"source" : "."
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2,
+				3
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/main.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/machine.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/rom_loader.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "src/video.cpp",
+			"sourceGroupIndex" : 0
+		}
+	],
+	"type" : "EXECUTABLE"
+}

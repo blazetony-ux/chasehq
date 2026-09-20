@@ -1,0 +1,208 @@
+{
+	"archive" : 
+	{
+		"commandFragments" : 
+		[
+			{
+				"fragment" : "/machine:x64",
+				"role" : "flags"
+			}
+		]
+	},
+	"artifacts" : 
+	[
+		{
+			"path" : "musashi.lib"
+		}
+	],
+	"backtrace" : 1,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_library",
+			"add_custom_command",
+			"target_compile_definitions",
+			"target_include_directories"
+		],
+		"files" : 
+		[
+			"CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 15,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 12,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 18,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 28,
+				"parent" : 0
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 17,
+				"parent" : 0
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "/DWIN32 /D_WINDOWS /Zi /Ob0 /Od /RTC1 -MDd"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"backtrace" : 3,
+					"define" : "M68K_EMULATE_010=0"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "M68K_EMULATE_020=0"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "M68K_EMULATE_030=0"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "M68K_EMULATE_040=0"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "M68K_EMULATE_ADDRESS_ERROR=1"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "M68K_EMULATE_EC020=0"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "M68K_EMULATE_INT_ACK=1"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "M68K_EMULATE_PMMU=0"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "M68K_EMULATE_TRACE=1"
+				},
+				{
+					"backtrace" : 3,
+					"define" : "M68K_INSTRUCTION_HOOK=1"
+				},
+				{
+					"backtrace" : 4,
+					"define" : "_CRT_SECURE_NO_WARNINGS"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 5,
+					"path" : "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.8/third_party/musashi"
+				},
+				{
+					"backtrace" : 5,
+					"path" : "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.8/out/build/x64-Debug/generated"
+				}
+			],
+			"language" : "C",
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2
+			]
+		}
+	],
+	"dependencies" : 
+	[
+		{
+			"backtrace" : 2,
+			"id" : "m68kmake::@6890427a1f51a3e7e1df"
+		}
+	],
+	"id" : "musashi::@6890427a1f51a3e7e1df",
+	"name" : "musashi",
+	"nameOnDisk" : "musashi.lib",
+	"paths" : 
+	{
+		"build" : ".",
+		"source" : "."
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				0,
+				1,
+				2
+			]
+		},
+		{
+			"name" : "CMake Rules",
+			"sourceIndexes" : 
+			[
+				3
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "third_party/musashi/m68kcpu.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "third_party/musashi/softfloat/softfloat.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"isGenerated" : true,
+			"path" : "out/build/x64-Debug/generated/m68kops.c",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "out/build/x64-Debug/generated/m68kops.c.rule",
+			"sourceGroupIndex" : 1
+		}
+	],
+	"type" : "STATIC_LIBRARY"
+}
