@@ -8,6 +8,14 @@
 - New RC3.0 actions must be present in Workbench allow-list, machine-readable schema and API docs.
 - Full Regression must include `regression-v06690-rc30-course-mapping-live-survey.chqscript`.
 
+## First Windows focused-regression result
+
+The first RC3.0 candidate reached the focused regression but failed immediately at `api course.follow.configure` with:
+
+`Method invocation failed because [System.Object[]] does not contain a method named 'ContainsKey'.`
+
+Root cause was `Set-CourseFollowConfig($args)`: `$args` is PowerShell's automatic unbound-argument array and is not a safe name for the caller-supplied hashtable parameter. The corrected replacement uses `$config` and adds a static release guard for this exact failure mode. The failed archive is withdrawn and does not count as an RC3.0 regression result.
+
 ## Windows/SDL promotion gate
 
 1. `./Build-Debug.bat` must succeed under the existing narrow CPU-bus SEGFAULT exception (sole exact known failure only).

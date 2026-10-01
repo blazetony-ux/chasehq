@@ -1,6 +1,6 @@
 ChaseHQ-Native v0.66.9.0-RC3.0 source package manifest
 Baseline: 0.66.9.0-RC2.9
-SOURCE CANDIDATE; LINUX NO-SDL + PORTABLE WORKBENCH TESTS PASS; WINDOWS/SDL PROOF PENDING
+CORRECTED SOURCE CANDIDATE; FIRST RC3.0 ARCHIVE WITHDRAWN; LINUX NO-SDL + PORTABLE WORKBENCH TESTS PASS; WINDOWS/SDL RE-PROOF PENDING
 
 Files hashed (excluding the two current manifest files): 816
 
@@ -9,7 +9,9 @@ Portable validation:
   linuxNoSdlBuild: PASS
   linuxCTest: 4/4 PASS
   workbenchNode: PASS: sdl-controls + history
-  windowsSdl: PENDING Build-Debug + focused RC3.0 mapping regression + Full Regression
+  courseFollowBindingGuard: PASS: $config hashtable binding + recurrence guard
+  firstWindowsFocusedRegression: FAIL/WITHDRAWN (first archive only; PowerShell $args automatic-variable collision)
+  windowsSdl: PENDING corrected Build-Debug + focused RC3.0 mapping regression + Full Regression
   powerShellParse: PENDING Windows Validate-Release.ps1 (pwsh unavailable in source environment)
 
 Key RC3.0 features:
@@ -22,10 +24,11 @@ Key RC3.0 features:
   - Reconstructable mapping JSON/CSV/SVG export
   - 600/3600/bias/current-state survey scripts and permanent focused regression
   - Ctrl+P secondary SDL pause shortcut
+  - Corrected PowerShell course-follow hashtable binding with release-validator guard
 
 SHA-256 / bytes / path
 1b971f1d26bfa92049b281b631bf25effae0bdc25a679e0836a72798296b26c6          18  .gitignore
-b3f76c897b4a6cb19c2aa634256688ae82fcf1ca4ef569c1442c5eb7b7e6c61b       15075  AGENTS.md
+35cb16d85808db7a4790e433835b9a33ec7a3e76a7c938e8ee95f5db52f3d32b       15495  AGENTS.md
 c032d83822179de9614e5da829a70be806507a7d3d2530ad23fbd0dcea5014c1        1354  BUILD_LOCAL_SETUP.md
 9424706dd94755d7e1e95771ee4ee225161506414790bd05ebb1e061ce4fcacf         920  BUILD_NOTES_0.64.8.4.txt
 0e8bd43a01c0c7ca47b1ddf060d3a61a76d842cc3241bb429db5a2b1721b0268         444  BUILD_NOTES_0.64.9.txt
@@ -54,7 +57,7 @@ d5109347373701cba60bbefb91df6a542be3a33d1380f5d99d496dbbbe368a65         397  BU
 9be92e9465f403ed0056cc6015032acc146a493d9668ff3aa79239603df5c04e         762  BUILD_NOTES_0.66.9.0-RC2.8.txt
 4eb86296ab5231b878a8d8eacc50df02a7a01f4640aa51e2a47b74851843f3c1        1426  BUILD_NOTES_0.66.9.0-RC2.9.txt
 6f452e310abce8a3dafdc340e4a1884a44626814ea4dc50af9e5bad120ad4f6a         502  BUILD_NOTES_0.66.9.0-RC2.txt
-81f8a36394f053e015a26011d244c9ba68532ce3ddb0449c3baf19406acf683c         453  BUILD_NOTES_0.66.9.0-RC3.0.txt
+ba27e78ad7f42c4ad4e3a56e9df8bc667edfac5c60a92af55fdb3ce8c35947fb         968  BUILD_NOTES_0.66.9.0-RC3.0.txt
 b4275b02e52c5c2e7ba03953a10c4a9b15d77ed4591a82f7942bd34987a2e5f9         527  BUILD_NOTES_0.66.9.0.txt
 a4f4fa4d216d6a70958488c312c1473843fb32623a6bbf497042ca155a665eb0         139  Build-And-Run.bat
 4b58b2b76d28f1c96d400d4d598f783c4f2c78c900ec5f6297a8574cb61b6c3c        1365  Build-Debug.bat
@@ -128,16 +131,16 @@ f64b5ea29d42c31dc18840a2f56dff81faf3ffe0d03fb32520d985c16950ef4d        2042  RE
 8ebd19127a66f4d324512fec5c925596e26ef2ae832eb08a4935b772d4aec464        1617  RELEASE_NOTES_0.66.9.0-RC2.8.md
 e914d6177dc0997d493d2822363126618f1dcc614dd29dc13009169d1d16ecb4        2344  RELEASE_NOTES_0.66.9.0-RC2.9.md
 1640a241a6db20795de152937c27fcf344ac4f9e9b7994a7f132ce7409335e77        2072  RELEASE_NOTES_0.66.9.0-RC2.md
-ba93453d9364545c784fcd5437e057fe421be0484fb47159693b55f8cb3e4fd8        2210  RELEASE_NOTES_0.66.9.0-RC3.0.md
+3c09586596a6faf5f346ffdb721b5b68899b27e7d92cab91e49dd8134be16ad5        3000  RELEASE_NOTES_0.66.9.0-RC3.0.md
 58d277fc83a0c8a2a554c7f16e3b51986fc52f838368ae4f28a6ea6f9c3505c5         229  Rebuild-All.bat
 359940a6fbe8be45889caada708b8d6af47e92ae8d46acfd29810e9c5ac63a57       22899  Start-ChaseHQ.ps1
 a30621b24e3d125c633a7284afa2d28d1ea91ed8a78e91f2c1af40814930212e        1835  Start-ChaseHQMultiResearch.ps1
 cbbf2adf61114f1b5913e07416eea84711a8aa3a15d02d1d421538445dac12fa       13402  Start-ChaseHQResearch.ps1
-d1159ec714d4672158f6f77452c3943b062dde8c4b14d7824dc37e0f089f1335      468038  Start-ChaseHQWeb.ps1
+d47ce0b1394caae3f7d24233f47ac7653066f966407d7f1ff95ea7227734d2fb      468210  Start-ChaseHQWeb.ps1
 5cfb19ed13466b7429db35da22156d92722c9ead3c5e3da55fdee00d439cafdc         597  THIRD_PARTY.md
 f7cdf64b5225f9b159e1a14c9f6efcd0b5fee55700ee9debaf5e24e9db562bc3         311  Test-SpriteGfx.bat
 601793624fa3d716248dedb34c982a8625f7cf78941e7d7843ab3ad15cad95de         321  Test-SpritePriority.bat
-cfcc8e39dd1c8ec3c5bde00ab664c0d46f6a19e3736f36ced2ebac03255a525f         236  VALIDATION.md
+55a6613aaaf7f7cd41c3543bf7f3ab5ffaeac466808646e2e7bd200e936c3e50         480  VALIDATION.md
 eb9e319d1222eaaab5a67e68ffe55aede5765ad2b422a3d6cfec00ae3fb38f6f         887  VALIDATION_0.66.1.1.md
 274fdb1677c2769637f8485917087ba49116b997dc4d417040ca2690971b32de         496  VALIDATION_0.66.1.2.md
 f02af28f1118cb3820b2db8cdac74a445f84c29f19d7f21a72cb5c5d05610ec5         781  VALIDATION_0.66.1.md
@@ -173,13 +176,13 @@ ee092d5c648389c3fcc54acd668737d8a08d956b040e0ff2c37a9050804b081f        1232  VA
 324664f2d2b21bf0506599d6e76d1db3c87c30b42ced7e2840c7b6f453de52a5        1317  VALIDATION_0.66.9.0-RC2.8.md
 56abe24fdf09b89276f5597d81448947a766decd7e5d47c77339be72514ac64e        4559  VALIDATION_0.66.9.0-RC2.9.md
 10825af4fe68e06e2b149e90041d06a006de08ae699057ef8b5e007ef0b9fbc5         802  VALIDATION_0.66.9.0-RC2.md
-6251a80697f8ba18536acc6856a19a088d70b6bda0b9267c94f7da2a97758514        1193  VALIDATION_0.66.9.0-RC3.0.md
+78a70a994058e57db769e0100aac4f1a2d7a4fbc5fb51e9fb1c9042fb9dbb87e        1816  VALIDATION_0.66.9.0-RC3.0.md
 10825af4fe68e06e2b149e90041d06a006de08ae699057ef8b5e007ef0b9fbc5         802  VALIDATION_0.66.9.0.md
 3f611e58a24df1c05162d6aa2d785356284e8d3ce1033aa624cbf22b366cac6a         761  VALIDATION_RESULTS_0.66.9.0-RC2.7.json
 ed7d845ad0ae9dee18b39e8fe7014ba8244209c1e100f75f2439ae278c0a4d6a         820  Validate-FrameSnapshotRefresh.ps1
 989e74e0343a46b3e81c9811a4bbd085e71d8990f407150260909a1aeb7ca844       23399  Validate-Release.ps1
 54e519e044881759ae3d431b696b8347cd8824ed7d98765c3c10ef0916f5b1d8        1970  Validate-TC0100SCN-Y.ps1
-3169a690dbd4947752ba2bfc56fb08282e5105d19d4f06d3d496cc889b65724c       18913  Validate-Workbench.ps1
+2002385bc3fd45ee742aa9287dcc4d3e519a9b03a49634cb86ae3af37296ebdd       19371  Validate-Workbench.ps1
 f1969896492eb4b383adfd66570d26b05659644fa743a458b8e475a1dc312b8d        1357  Watch-ChaseHQEvent.ps1
 b69d4ed7e4dd40bcc256e435b43860ec4de711bb59bced3240e3075a546ca654         972  batch_examples.txt
 739075bd306912a8b4ea5a49358ceea98479956fc50dbc0ae80a86643b48d349         122  build-local.example.json
@@ -204,17 +207,17 @@ ac05565618b12b52e04f1f15b25533d0386b2a0442259022bda9a0dbbc2e5d4e        1112  ch
 8c82442c14ce406c70d7f1a0a2639e4293cb74c68559de6c7d84000a1514477d         192  debug_stage1_car.cfg
 60426b906e9480f1b865eee7fb0ff74675f3fdf1f163ff3c3f125c3ab08df0c7       13113  docs/API_CHANGELOG.md
 0139b6b909959e7cd14fb836c10a66e00472e7c5c5de5522f97824cce3998628       38463  docs/API_REFERENCE.md
-bc335a4ea6df13dc3372aabb7cae754e5e6af2a22c770e3bdbfbb024386bd3f9         926  docs/CHATGPT_HANDOVER_PROMPT.md
+7ab233278b973dd1f75b7bb93ab1a8c9c9b870570e9a7b93d375ff0f6ba094a6        1313  docs/CHATGPT_HANDOVER_PROMPT.md
 09fdf1e65877bfcdf5dbf22446e2d309ea27d3bd2e8dad9e72852c7b9912d44a        3591  docs/COURSE_MAPPING_SURVEY.md
 41f2db8aca219361aafdff96ad049265096aca9fe16bded9011875d7dc2e2109       14199  docs/FORENSIC_TIMELINE.md
-a2530d24aa70f0a0cfb98c9fe3c0ca28c8ca52d6a7a9b85ab9b6045218899d73        1049  docs/HANDOVER.md
+691f448d12cddbe030fac6d299c4ef37d905f8e6f85e7fce75084e43cfaff70d        1274  docs/HANDOVER.md
 71b7de26fc17369abbb9f302d1d92d97423c9cb8df7c11c28aee5b91d5919d4e        4178  docs/KNOWLEDGE_SYSTEM.md
 dbccd6bd908036f9ecc00563c6de84d6b33852c288e24b94caadf82c470246dc        2066  docs/NATIVE_RECONSTRUCTION.md
 bec39cafdb08c32b752f4cc2dd64b2e480252dbc053d165e9894403d1419611b         536  docs/NEXT_BUILD_CHANGELOG.md
 97e653d3c0b4aac014dbb514c4e2245f34fd53e9c4caa53a884e7efb283de3ba        4584  docs/POSTMORTEM_0.66.7.8_RELEASE_PROVEOFF.md
-c044162b99fd300db765a50826dd6c5dce2bd92c7cf767cc70867f180071f9f9        2385  docs/PROJECT_STATE.md
+ec604ac25ae9bc37968653f44a230c38ae6c3cd12719998a27302e41c631ab8f        2746  docs/PROJECT_STATE.md
 4a7b118e416168472cb93e337b0c236d37a6a27b4808bf18a9c1c71302f820d0         697  docs/README.md
-863f6e36fa9996db50bcaab58eef731e3d5f8d01144b6256e61f0cd2e2826244        9251  docs/RELEASE_PROCESS.md
+2b6d37421bbb72fbece38b5b3bdb088a959725205c9962b15bc1a0678fa5594f        9556  docs/RELEASE_PROCESS.md
 04dabbc0d2b463b1db5dbe668dd04abd98e4ed789903a2aeaacbcdebdaa2797f        1704  docs/RELEASE_PROOF_0.66.8.0.md
 fa4f478efbadc2a2f1f6293da8dc96e43d0eeefac8129a096399dfe1a497ff2d        3884  docs/RELEASE_SCOPE_RC27.md
 b131ee2116f969eac14b7d92c77a4d0370954bcc9c5b55e73c6b818d699d1711        5105  docs/RESEARCH_RECOVERY_PLAN.md

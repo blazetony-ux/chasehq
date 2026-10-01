@@ -265,6 +265,10 @@ This guide was introduced on the v0.66.9.0-RC2.4.3 project line. Keep it short a
 
 Release identity is authoritative in `src/version.h`; CMake, launchers and Workbench consume it. Keep feature/schema/knowledge catalogs in sync. Old/corrected renderer diagnostics are not independent shadow verification.
 
+## PowerShell hashtable parameter safety
+
+Do not use PowerShell automatic-variable names such as `$args` for explicit hashtable/config parameters. RC3.0 first-candidate Windows proof failed because `Set-CourseFollowConfig($args)` resolved as `System.Object[]` and `.ContainsKey()` was invalid. Prefer explicit names such as `$config`, `$map`, or `$options`, and add a validator guard when the path is release-critical.
+
 ## Course mapping / survey discipline (RC3.0+)
 
 Use the live `course.follow.*` / `course.survey.*` API surfaces and bundled mapping scripts before inventing launch-only survey flows. Long course surveys should retain road geometry and the player's driven line as separate data. Preserve generic visible sprites as `UNCLASSIFIED_DYNAMIC_OBJECT` until evidence proves traffic/obstacle semantics. Preserve raw course-record + TC0150ROD surface signatures as unclassified evidence until screenshots/behaviour justify material names. Structural fork candidates remain A/B until physical left/right semantics are proven. Prefer the 600-frame shakedown before any 3600+ frame evidence run.

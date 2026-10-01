@@ -52,6 +52,8 @@ A public/source release can omit machine-specific `build-local.json`; a develope
 
 ## 3. Static validation requirements
 
+RC3.0 correction note: when a PowerShell helper expects a hashtable/config map, do **not** name the parameter `$args`; `$args` is an automatic `System.Object[]` variable and can silently break `.ContainsKey()` dispatch. `Validate-Workbench.ps1` now guards the `Set-CourseFollowConfig` path specifically.
+
 Before a package is handed to Windows testing:
 
 1. Parse every project-owned `.ps1` file with the PowerShell parser.

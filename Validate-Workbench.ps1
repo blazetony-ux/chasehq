@@ -162,5 +162,7 @@ if($nativeVersion -eq '0.66.9.0-RC3.0'){
     if(-not(Test-Path (Join-Path $root 'research\scripts\regression\regression-v06690-rc30-course-mapping-live-survey.chqscript'))){throw 'Workbench validation failed: RC3.0 focused regression missing'}
     $apiDoc=Get-Content (Join-Path $root 'docs\API_REFERENCE.md') -Raw
     if($apiDoc -notmatch 'course\.follow\.configure' -or $apiDoc -notmatch 'track\.map\.export'){throw 'Workbench validation failed: RC3.0 API documentation is stale'}
+    if($text -match 'function Set-CourseFollowConfig\(\$args\)' -or $text -match '\$args\.ContainsKey\('){throw 'Workbench validation failed: RC3.0 course-follow config must not use PowerShell automatic $args as its hashtable parameter'}
+    if($text -notmatch 'function Set-CourseFollowConfig\(\$config\)' -or $text -notmatch '\$config\.ContainsKey\(\$key\)'){throw 'Workbench validation failed: RC3.0 course-follow config hashtable binding guard missing'}
     Write-Host 'v0.66.9.0-RC3.0 live course mapping / survey parity: PASS' -ForegroundColor Green
 }

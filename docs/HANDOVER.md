@@ -1,6 +1,6 @@
 # ChaseHQ-Native handover — v0.66.9.0-RC3.0
 
-RC2.9 is the Windows/SDL-proven baseline. RC3.0 is the current source candidate and adds live Course Mapping / Survey tooling.
+RC2.9 is the Windows/SDL-proven baseline. RC3.0 is the current source candidate and adds live Course Mapping / Survey tooling. The first RC3.0 archive is withdrawn: its focused regression exposed a PowerShell automatic `$args` parameter collision in `course.follow.configure`; the corrected replacement uses `$config` and must be re-proven on Windows.
 
 ## Authoritative continuation
 

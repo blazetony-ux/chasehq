@@ -2,7 +2,7 @@
   "schema": "chq-release-source-manifest-v1",
   "release": "0.66.9.0-RC3.0",
   "baseline": "0.66.9.0-RC2.9",
-  "status": "SOURCE CANDIDATE; LINUX NO-SDL + PORTABLE WORKBENCH TESTS PASS; WINDOWS/SDL PROOF PENDING",
+  "status": "CORRECTED SOURCE CANDIDATE; FIRST RC3.0 ARCHIVE WITHDRAWN; LINUX NO-SDL + PORTABLE WORKBENCH TESTS PASS; WINDOWS/SDL RE-PROOF PENDING",
   "manifestExcludes": [
     "PACKAGE_MANIFEST_0.66.9.0-RC3.0.json",
     "PACKAGE_MANIFEST_0.66.9.0-RC3.0.txt"
@@ -12,7 +12,9 @@
     "linuxNoSdlBuild": "PASS",
     "linuxCTest": "4/4 PASS",
     "workbenchNode": "PASS: sdl-controls + history",
-    "windowsSdl": "PENDING Build-Debug + focused RC3.0 mapping regression + Full Regression",
+    "courseFollowBindingGuard": "PASS: Set-CourseFollowConfig uses $config; validator rejects $args/ContainsKey recurrence",
+    "firstWindowsFocusedRegression": "FAIL/WITHDRAWN: first archive failed at course.follow.configure because Set-CourseFollowConfig($args) collided with PowerShell automatic System.Object[] $args",
+    "windowsSdl": "PENDING corrected Build-Debug + focused RC3.0 mapping regression + Full Regression",
     "powerShellParse": "PENDING Windows Validate-Release.ps1 (pwsh unavailable in source environment)"
   },
   "canonicalCheckpoints": [
@@ -34,7 +36,8 @@
     "Composite raw course-record + representative TC0150ROD surface signatures",
     "Reconstructable mapping JSON/CSV/SVG export",
     "600/3600/bias/current-state survey scripts and permanent focused regression",
-    "Ctrl+P secondary SDL pause shortcut"
+    "Ctrl+P secondary SDL pause shortcut",
+    "Corrected PowerShell course-follow hashtable binding with release-validator guard"
   ],
   "fileCount": 816,
   "files": [
@@ -45,8 +48,8 @@
     },
     {
       "path": "AGENTS.md",
-      "bytes": 15075,
-      "sha256": "b3f76c897b4a6cb19c2aa634256688ae82fcf1ca4ef569c1442c5eb7b7e6c61b"
+      "bytes": 15495,
+      "sha256": "35cb16d85808db7a4790e433835b9a33ec7a3e76a7c938e8ee95f5db52f3d32b"
     },
     {
       "path": "BUILD_LOCAL_SETUP.md",
@@ -190,8 +193,8 @@
     },
     {
       "path": "BUILD_NOTES_0.66.9.0-RC3.0.txt",
-      "bytes": 453,
-      "sha256": "81f8a36394f053e015a26011d244c9ba68532ce3ddb0449c3baf19406acf683c"
+      "bytes": 968,
+      "sha256": "ba27e78ad7f42c4ad4e3a56e9df8bc667edfac5c60a92af55fdb3ce8c35947fb"
     },
     {
       "path": "BUILD_NOTES_0.66.9.0.txt",
@@ -560,8 +563,8 @@
     },
     {
       "path": "RELEASE_NOTES_0.66.9.0-RC3.0.md",
-      "bytes": 2210,
-      "sha256": "ba93453d9364545c784fcd5437e057fe421be0484fb47159693b55f8cb3e4fd8"
+      "bytes": 3000,
+      "sha256": "3c09586596a6faf5f346ffdb721b5b68899b27e7d92cab91e49dd8134be16ad5"
     },
     {
       "path": "Rebuild-All.bat",
@@ -585,8 +588,8 @@
     },
     {
       "path": "Start-ChaseHQWeb.ps1",
-      "bytes": 468038,
-      "sha256": "d1159ec714d4672158f6f77452c3943b062dde8c4b14d7824dc37e0f089f1335"
+      "bytes": 468210,
+      "sha256": "d47ce0b1394caae3f7d24233f47ac7653066f966407d7f1ff95ea7227734d2fb"
     },
     {
       "path": "THIRD_PARTY.md",
@@ -605,8 +608,8 @@
     },
     {
       "path": "VALIDATION.md",
-      "bytes": 236,
-      "sha256": "cfcc8e39dd1c8ec3c5bde00ab664c0d46f6a19e3736f36ced2ebac03255a525f"
+      "bytes": 480,
+      "sha256": "55a6613aaaf7f7cd41c3543bf7f3ab5ffaeac466808646e2e7bd200e936c3e50"
     },
     {
       "path": "VALIDATION_0.66.1.1.md",
@@ -785,8 +788,8 @@
     },
     {
       "path": "VALIDATION_0.66.9.0-RC3.0.md",
-      "bytes": 1193,
-      "sha256": "6251a80697f8ba18536acc6856a19a088d70b6bda0b9267c94f7da2a97758514"
+      "bytes": 1816,
+      "sha256": "78a70a994058e57db769e0100aac4f1a2d7a4fbc5fb51e9fb1c9042fb9dbb87e"
     },
     {
       "path": "VALIDATION_0.66.9.0.md",
@@ -815,8 +818,8 @@
     },
     {
       "path": "Validate-Workbench.ps1",
-      "bytes": 18913,
-      "sha256": "3169a690dbd4947752ba2bfc56fb08282e5105d19d4f06d3d496cc889b65724c"
+      "bytes": 19371,
+      "sha256": "2002385bc3fd45ee742aa9287dcc4d3e519a9b03a49634cb86ae3af37296ebdd"
     },
     {
       "path": "Watch-ChaseHQEvent.ps1",
@@ -940,8 +943,8 @@
     },
     {
       "path": "docs/CHATGPT_HANDOVER_PROMPT.md",
-      "bytes": 926,
-      "sha256": "bc335a4ea6df13dc3372aabb7cae754e5e6af2a22c770e3bdbfbb024386bd3f9"
+      "bytes": 1313,
+      "sha256": "7ab233278b973dd1f75b7bb93ab1a8c9c9b870570e9a7b93d375ff0f6ba094a6"
     },
     {
       "path": "docs/COURSE_MAPPING_SURVEY.md",
@@ -955,8 +958,8 @@
     },
     {
       "path": "docs/HANDOVER.md",
-      "bytes": 1049,
-      "sha256": "a2530d24aa70f0a0cfb98c9fe3c0ca28c8ca52d6a7a9b85ab9b6045218899d73"
+      "bytes": 1274,
+      "sha256": "691f448d12cddbe030fac6d299c4ef37d905f8e6f85e7fce75084e43cfaff70d"
     },
     {
       "path": "docs/KNOWLEDGE_SYSTEM.md",
@@ -980,8 +983,8 @@
     },
     {
       "path": "docs/PROJECT_STATE.md",
-      "bytes": 2385,
-      "sha256": "c044162b99fd300db765a50826dd6c5dce2bd92c7cf767cc70867f180071f9f9"
+      "bytes": 2746,
+      "sha256": "ec604ac25ae9bc37968653f44a230c38ae6c3cd12719998a27302e41c631ab8f"
     },
     {
       "path": "docs/README.md",
@@ -990,8 +993,8 @@
     },
     {
       "path": "docs/RELEASE_PROCESS.md",
-      "bytes": 9251,
-      "sha256": "863f6e36fa9996db50bcaab58eef731e3d5f8d01144b6256e61f0cd2e2826244"
+      "bytes": 9556,
+      "sha256": "2b6d37421bbb72fbece38b5b3bdb088a959725205c9962b15bc1a0678fa5594f"
     },
     {
       "path": "docs/RELEASE_PROOF_0.66.8.0.md",
