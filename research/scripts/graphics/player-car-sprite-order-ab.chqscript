@@ -1,0 +1,26 @@
+# name: Player Car Sprite Order A/B
+# category: graphics
+# purpose: Render the same captured player-car frame with both same-priority sprite traversal modes.
+# target: car-shadow-layer-investigation timeline, frame 2352.
+# method: Capture higher-slot and lower-slot traversal from the identical historical frame.
+# expected: Diagnostic A/B images differ globally; canonical ownership truth is asserted separately by regression-sprite-ownership.chqscript.
+# cleanup: Restore lower-slot and reset timeline state.
+echo === Player Car Sprite Order A/B ===
+api timeline.reset
+try
+api timeline.load name=car-shadow-layer-investigation
+api timeline.seek frame=2352
+api sprite.order.set mode=higher-slot
+api frame.snapshot name=car-shadow-higher-slot
+api sprite.order.inspect
+api sprite.order.set mode=lower-slot
+api frame.snapshot name=car-shadow-lower-slot
+api sprite.order.inspect
+api sprite.order.set mode=lower-slot
+finally
+api sprite.order.set mode=lower-slot
+api sprite.visual.clear
+api sprite.override.clear
+api timeline.reset
+end
+echo === Player Car Sprite Order A/B complete ===

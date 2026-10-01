@@ -1,0 +1,32 @@
+# name: Regression - Sprite Ownership and Export Coordinates
+# category: regression
+# purpose: Assert front body ownership, uncovered black shadow, overlap coverage and per-sprite/live coordinate agreement at canonical frame 2352.
+# target: stage1-driving-2352.chqstate; body slot 82/map 475 and shadow slot 81/map 575.
+# method: Capture aggregate plus body/shadow solo snapshots under descending traversal and assert overlap ownership/export coordinates.
+# expected: Nonzero overlap is never owned by slot 81, body-owned overlap is nonzero, shadow remains visible outside body, and exportCoordinatesExact=true.
+# cleanup: Restore lower-slot traversal and clear sprite visual/override state even if capture/assertion fails.
+# regression-version: 0.66.9.0
+# regression-scope: version
+
+api sprite.visual.clear
+api sprite.override.clear
+api sprite.order.set mode=lower-slot
+
+try
+    api checkpoint.load file=stage1-driving-2352.chqstate run=false
+    assert status frame=2352
+    api sprite.order.inspect
+    api frame.snapshot name=regression-sprite-ownership
+    api sprite.visual slot=82 mode=solo
+    api frame.snapshot name=regression-sprite-body-solo
+    api sprite.visual slot=81 mode=solo
+    api frame.snapshot name=regression-sprite-shadow-solo
+    api sprite.visual.clear
+    api frame.snapshot.assert-overlap name=regression-sprite-ownership front=82 back=81 frontSolo=regression-sprite-body-solo backSolo=regression-sprite-shadow-solo
+finally
+    api sprite.visual.clear
+    api sprite.override.clear
+    api sprite.order.set mode=lower-slot
+end
+
+echo === Sprite ownership and export coordinate assertions COMPLETE ===

@@ -1,0 +1,30 @@
+# name: Track Experiment - Strong Left 4 Records
+# category: experimental
+# purpose: Apply a synthetic strong-left four-record track experiment.
+# EXPERIMENTAL: Force a strong left-hand bend over four upcoming records
+# Baseline: stage1-driving-2352.chqstate (ATTRACT mode)
+# +0 curvature is signed 8-bit and CONFIRMED:
+#   negative = LEFT
+# 0xC0 = -64
+#
+# Safe recovery:
+# Stop/pause, then reload stage1-driving-2352.chqstate.
+
+api patch.clear
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+
+echo === EXPERIMENT: FORCE STRONG LEFT BEND ===
+
+api track.state
+
+api memory.write cpu=A address=1090B0 width=8 value=C0
+api memory.write cpu=A address=1090B8 width=8 value=C0
+api memory.write cpu=A address=1090C0 width=8 value=C0
+api memory.write cpu=A address=1090C8 width=8 value=C0
+
+api memory.read-range cpu=A address=1090A8 length=40
+api frame.capture
+
+echo Modified upcoming curvature bytes to 0xC0 (-64)
+echo Resume attract mode and watch SDL + Track View
+api control.resume

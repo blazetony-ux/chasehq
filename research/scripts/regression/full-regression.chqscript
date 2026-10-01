@@ -1,0 +1,391 @@
+# name: Full Regression Suite
+# category: regression
+# purpose: Run the complete permanent ChaseHQ-Native regression suite for the current build.
+# regression-version: current
+# regression-scope: permanent
+# ChaseHQ Native - Full Regression
+# Target: v0.64.8.4+
+# Purpose: broad, deterministic Workbench/API smoke + intervention regression
+# Safe baseline: stage1-driving-2352.chqstate (ATTRACT graphics reference)
+#
+# Notes:
+# - Designed to finish in a known paused/checkpoint-restored state.
+# - Mutating tests use known values and restore via checkpoint reload.
+# - Keep "Stop on error" enabled when running this script.
+# regression-version: legacy
+# regression-scope: permanent
+
+echo === ChaseHQ Full Regression: BEGIN ===
+
+# ----------------------------------------------------------------------
+# 1. Core discovery / metadata
+# ----------------------------------------------------------------------
+api status
+api capabilities
+api actions
+api schema
+api schema action=memory.read
+api schema action=memory.read-range
+api schema action=memory.write
+api schema action=cpu.disassemble
+api schema action=control.run-frames
+api schema action=checkpoint.load
+api schema action=checkpoint.save
+api schema action=patch.freeze
+api schema action=patch.replace
+api schema action=patch.suppress
+api schema action=patch.list
+api schema action=patch.remove
+api schema action=patch.clear
+api schema action=register.read
+api schema action=register.write
+api schema action=frame.capture
+api schema action=track.state
+api schema action=gameplay.registry
+api schema action=evidence.capture
+
+# ----------------------------------------------------------------------
+# 2. Restore canonical deterministic baseline
+# ----------------------------------------------------------------------
+api patch.clear
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api status
+
+# Known canonical baseline assertions
+if memory cpu=A address=10A04A width=16 value = 000E
+    echo PASS baseline player render selector 0x10A04A = 0x000E
+else
+    echo FAIL baseline player render selector unexpected
+end
+
+if memory cpu=A address=10A076 width=16 value = 000E
+    echo PASS baseline cached render selector 0x10A076 = 0x000E
+else
+    echo FAIL baseline cached render selector unexpected
+end
+
+# ----------------------------------------------------------------------
+# 3. Read-only debugger/API coverage
+# ----------------------------------------------------------------------
+api memory.read cpu=A address=10A040 width=32
+api memory.read cpu=A address=10A044 width=16
+api memory.read cpu=A address=10A048 width=8
+api memory.read cpu=A address=10A05A width=16
+api memory.read cpu=A address=10A05C width=32
+api memory.read-range cpu=A address=109000 length=64
+api cpu.disassemble cpu=A address=008C2A count=32
+api track.state
+api gameplay.registry
+api input.ports
+api events.tail
+api sprites.tail
+api logs.list
+api evidence.list
+
+# ----------------------------------------------------------------------
+# 4. Deterministic execution / step coverage
+# ----------------------------------------------------------------------
+api control.step-frame
+api status
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+
+api control.step-instruction
+api status
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+
+# Short run-frames watchdog regression.
+# This is intentionally small: it must complete quickly.
+api control.run-frames frames=2
+api status
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+
+# ----------------------------------------------------------------------
+# 5. memory.write regression
+# ----------------------------------------------------------------------
+api memory.read cpu=A address=10A04A width=16
+api memory.write cpu=A address=10A04A width=16 value=000E expect=000E
+api memory.read cpu=A address=10A04A width=16
+
+if memory cpu=A address=10A04A width=16 value = 000E
+    echo PASS memory.write compare-before-write/idempotent path
+else
+    echo FAIL memory.write idempotent path
+end
+
+# Deliberate write then restore via checkpoint
+api memory.write cpu=A address=10A04A width=16 value=0011 expect=000E
+if memory cpu=A address=10A04A width=16 value = 0011
+    echo PASS memory.write changed value
+else
+    echo FAIL memory.write changed value
+end
+
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+if memory cpu=A address=10A04A width=16 value = 000E
+    echo PASS checkpoint reload restored mutated memory
+else
+    echo FAIL checkpoint reload did not restore memory
+end
+
+# ----------------------------------------------------------------------
+# 6. patch.freeze enforcement regression
+# ----------------------------------------------------------------------
+api patch.clear
+api patch.freeze cpu=A address=10A04A width=16 value=0011
+api patch.freeze cpu=A address=10A076 width=16 value=0011
+api patch.list
+
+# Game normally rewrites these fields; a working freeze must survive.
+api control.run-frames frames=2
+
+api memory.read cpu=A address=10A04A width=16
+api memory.read cpu=A address=10A076 width=16
+api patch.list
+
+if memory cpu=A address=10A04A width=16 value = 0011
+    echo PASS patch.freeze enforced 0x10A04A
+else
+    echo FAIL patch.freeze did not enforce 0x10A04A
+end
+
+if memory cpu=A address=10A076 width=16 value = 0011
+    echo PASS patch.freeze enforced 0x10A076
+else
+    echo FAIL patch.freeze did not enforce 0x10A076
+end
+
+api patch.clear
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+
+# ----------------------------------------------------------------------
+# 7. Screenshot / evidence uniqueness regression
+# ----------------------------------------------------------------------
+api frame.capture
+wait 50
+api frame.capture
+wait 50
+api frame.capture
+
+# Three captures made within the same second must still have unique names.
+api evidence.list
+
+# ----------------------------------------------------------------------
+# 8. Track mapping sampling regression
+# ----------------------------------------------------------------------
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api track.state
+
+repeat 4
+    api control.run-frames frames=2
+    api track.state
+end
+
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+
+# ----------------------------------------------------------------------
+# 9. Checkpoint save/load regression
+# ----------------------------------------------------------------------
+api checkpoint.save file=regression-temp.chqstate
+api checkpoint.list
+api control.step-frame
+api checkpoint.load file=regression-temp.chqstate run=false
+api status
+
+# Return to packaged canonical state rather than leaving temp state active.
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+
+# ----------------------------------------------------------------------
+# 10. Current intervention/control schemas
+# ----------------------------------------------------------------------
+api schema action=control.abort
+api schema action=register.read
+api schema action=register.write
+api schema action=patch.freeze
+api schema action=patch.replace
+api schema action=patch.suppress
+
+# ----------------------------------------------------------------------
+# 11. Final cleanup and final-state verification
+# ----------------------------------------------------------------------
+api patch.clear
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api status
+
+if memory cpu=A address=10A04A width=16 value = 000E
+    echo PASS final baseline 0x10A04A restored
+else
+    echo FAIL final baseline 0x10A04A incorrect
+end
+
+if memory cpu=A address=10A076 width=16 value = 000E
+    echo PASS final baseline 0x10A076 restored
+else
+    echo FAIL final baseline 0x10A076 incorrect
+end
+
+# v0.64.9 structured graphics snapshot smoke
+api frame.snapshot name=regression-graphics-snapshot
+api frame.snapshot.list
+
+
+# 17. v0.66.0.3 command transport regression
+echo === v0.66.0.3 command transport regression ===
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+repeat 5
+  api control.run-frames frames=5
+  api status
+  api track.state
+end
+echo === v0.66.0.3 command transport regression complete ===
+
+
+
+# ----------------------------------------------------------------------
+# 12. v0.65.0 API-backed query and live graphics surface
+# ----------------------------------------------------------------------
+getregions()
+getmaps()
+getpalettes()
+getpaletteentries(bank=75)
+getcheckpoints()
+getcapabilities()
+api regions.list
+api sprites.list
+api sprites.maps
+api sprites.palettes
+api palette.entries bank=75
+api state.snapshot include=sprites,regions,gameplay,track
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api control.run-frames frames=30
+api sprite.inspect slot=44
+api sprite.visual slot=44 mode=solo
+api sprite.visual.clear
+api sprite.override slot=44 map=182
+api sprite.override.clear
+api schema action=sprites.list
+api schema action=sprite.override
+api schema action=state.snapshot
+echo === v0.65.0 query/live-graphics regression complete ===
+
+
+# ----------------------------------------------------------------------
+# 13. v0.65.1 profile metadata regression (read-only)
+# ----------------------------------------------------------------------
+echo === v0.65.1 profile metadata regression ===
+getprofiles()
+api profiles.list
+api profile.get id=chasehq
+api profile.get id=sci
+api schema action=profiles.list
+api schema action=profile.get
+echo === v0.65.1 profile metadata regression complete ===
+
+# 14. v0.66.0 platform/introspection surface
+echo === v0.66.0 introspection regression ===
+api platform.info
+api features.list
+api script.functions
+getregistry()
+gettrackrecords(before=1,after=2)
+getobjects()
+getaudiochannels()
+echo === v0.66.0 introspection regression complete ===
+
+# 15. v0.66.0 audio foundation (read-only)
+echo === v0.66.0 audio foundation regression ===
+api audio.capabilities
+api audio.events
+api audio.waveform.plan
+api audio.export.plan
+api audio.inject.plan
+echo === v0.66.0 audio foundation regression complete ===
+
+
+# 16. v0.66.0.2 diagnostics/log round-trip
+echo === v0.66.0.2 diagnostics regression ===
+api logs.list
+api logs.tail file=@runtime/web-listener.log lines=20
+api schema action=logs.tail
+api track.state
+echo === v0.66.0.2 diagnostics regression complete ===
+
+
+
+
+
+include "regression/regression-v0661-collision-api.chqscript"
+
+include "regression/regression-v0661-sprite-order.chqscript"
+
+include "regression/regression-v0661-manifest-version.chqscript"
+
+
+# v0.66.1.2 resilience/diagnostics hotfix checks
+include "regression/regression-v06612-resilience-hotfix.chqscript"
+
+# v0.66.2 authoritative steering controls
+include "regression/regression-v0662-steering-controls.chqscript"
+
+# v0.66.3 contract/provenance coverage
+include "regression/regression-v0663-contracts.chqscript"
+
+# v0.66.3.1 workbench reliability
+include "regression/regression-v06631-workbench-reliability.chqscript"
+
+# v0.66.4 palette-write trace + release reliability
+include "regression/regression-v0664-palette-trace.chqscript"
+
+# v0.66.5 generic memory-write trace
+include "regression/regression-v0665-memory-trace.chqscript"
+
+# v0.66.5.1 shared Track View recorder + scripted SVG export
+include "regression/regression-v06651-track-recorder.chqscript"
+
+# v0.66.6.1 reconstructable layered frame snapshot + HUD isolation
+include "regression/regression-v06661-layered-frame-snapshot.chqscript"
+
+# v0.66.7.5 User Handbook / live-reference regression
+include "regression/regression-v06675-user-handbook.chqscript"
+
+# v0.66.7.6 documentation/search/export consolidation
+include "regression/regression-v06676-docs-consolidation.chqscript"
+
+# v0.66.7.7 authoritative run-history + completed-run snapshot discovery
+include "regression/regression-v06677-run-history-snapshot-discovery.chqscript"
+
+include "regression/regression-v06678-discovery-performance.chqscript"
+echo --- v0.66.7.8 run finalization ---
+include "regression/regression-v06678-run-finalization.chqscript"
+
+# v0.66.7.9 research recovery / corrected turbo knowledge
+include "regression/regression-v06679-research-recovery.chqscript"
+
+# v0.66.8.0 Forensic Timeline v1
+include "regression/regression-v06680-forensic-timeline.chqscript"
+
+# v0.66.8.0 RC7 portable automated timeline analysis
+include "regression/regression-v06680-rc7-portable-auto-analysis.chqscript"
+include "regression/regression-v06680-rc74-bounded-history.chqscript"
+
+# v0.66.9.0 focused Game Lab + TC0100SCN character-inspector regression
+include "regression/regression-v06690-game-lab-tile-inspector.chqscript"
+
+# v0.66.9.0 RC2 sprite-order / speed-semantics regression
+include "regression/regression-v06690-rc2-sprite-order-speed-semantics.chqscript"
+
+# v0.66.9.0 RC2.2 MAME-reference sprite-order default regression
+include "regression/regression-v06690-rc22-mame-sprite-order.chqscript"
+
+# v0.66.9.0 RC2.4.3 assertive current-run snapshot discovery
+include "regression/regression-v06690-rc243-snapshot-discovery.chqscript"
+
+include "regression/regression-sprite-ownership.chqscript"
+
+# v0.66.9.0 RC2.5 safe experiment lifecycle / timeline cleanup
+include "regression/regression-v06690-rc25-script-safety.chqscript"
+
+# v0.66.9.0 RC2.6.1 sprite bitplane significance integration regression
+include "regression/regression-v06690-rc261-sprite-bitplane-significance.chqscript"
+
+include "regression/regression-v06690-rc27-tc0100-reliability.chqscript"
+echo === ChaseHQ Full Regression: COMPLETE ===

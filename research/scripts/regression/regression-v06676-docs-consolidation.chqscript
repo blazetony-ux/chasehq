@@ -1,0 +1,31 @@
+# name: Regression - v0.66.7.6 Docs / Knowledge Consolidation
+# purpose: Prove article-body search, handbook/live schema access, article-aware export and carried-forward SDL/snapshot control paths.
+# category: regression
+# regression-version: 0.66.7.6
+# regression-scope: current
+# status: awaiting-windows-proof
+# requires: stage1-driving-2352.chqstate
+
+echo === v0.66.7.6 Docs / Knowledge Consolidation ===
+api docs.handbook
+api docs.search query=context
+api docs.search query=producer
+api docs.search query=opacity
+api knowledge.search query=context
+api docs.get id=memory-write-tracing
+api docs.get id=processed-brake-input
+api docs.get id=individual-sprite-forensics
+api docs.handover
+api schema.all
+api script.schema
+api window.status
+api window.fullscreen enabled=false
+api window.scale scale=3
+api window.restore
+api window.show
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api frame.snapshot name=regression-v06676-docs-consolidation
+api frame.snapshot.list
+api docs.export format=html evidence=key output=regression-v06676-docs-consolidation
+api window.status
+echo === v0.66.7.6 regression complete ===

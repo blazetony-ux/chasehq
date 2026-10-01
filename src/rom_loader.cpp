@@ -63,7 +63,12 @@ bool RomLoader::load_required() {
         {"b52-33.10", 524288},
 
         {"b52-38.34", 524288},
-        {"b52-28.4",  524288}
+        {"b52-28.4",  524288},
+        {"b52-29.27", 524288},
+
+        // Chase H.Q. bipolar PROMs used by the video mixer.
+        {"b52-01.7",      256},
+        {"b52-06.24",     256}
     };
 
     roms_.clear();

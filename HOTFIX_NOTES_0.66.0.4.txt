@@ -1,0 +1,10 @@
+ChaseHQ-Native v0.66.0.4 - Preflight, History & Windows Test Hotfix
+
+- Script Console marks the run busy before query-function preflight, preventing background frame/status polling from racing preflight requests.
+- Defensive JSON parsing identifies empty/truncated preflight responses with the action name and raw response sample.
+- Run history records build version and session ID and can filter by either.
+- Previous-session artifacts are resolved across retained ChaseHQ version folders when the original evidence file still exists.
+- Missing historical artifacts render explicitly instead of as silent broken thumbnails.
+- Windows runtime tests allocate large Bus test fixtures on the heap to avoid the MSVC Debug stack overflow observed as 0xC00000FD.
+- Build scripts distinguish compile success from test failure.
+- No Chase H.Q. emulator behaviour changes are introduced by this hotfix.

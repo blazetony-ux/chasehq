@@ -1,0 +1,107 @@
+{
+  "schema": "chq-research-script-language-v1",
+  "engine": "chq-research-script-v2",
+  "build": "0.66.9.0-RC2.7",
+  "statements": [
+    {
+      "syntax": "# comment",
+      "description": "Comment"
+    },
+    {
+      "syntax": "set NAME = VALUE",
+      "description": "Set a variable"
+    },
+    {
+      "syntax": "${NAME}",
+      "description": "Variable substitution"
+    },
+    {
+      "syntax": "for ITEM in LIST ... end",
+      "description": "Iterate a list/query result"
+    },
+    {
+      "syntax": "repeat N ... end",
+      "description": "Repeat a block; exposes ${repeat_index}"
+    },
+    {
+      "syntax": "if status KEY=VALUE ... [else] ... end",
+      "description": "Conditional status check"
+    },
+    {
+      "syntax": "if memory cpu=A address=HEX width=8|16|32 value=HEX ... end",
+      "description": "Conditional memory check"
+    },
+    {
+      "syntax": "if capability NAME ... end",
+      "description": "Conditional capability check"
+    },
+    {
+      "syntax": "try ... finally ... end",
+      "description": "Always execute cleanup after the try body on success, failure, and user cancellation where practical; preserve the original body error as primary if cleanup also fails."
+    },
+    {
+      "syntax": "wait MS",
+      "description": "Sleep 0..5000 ms"
+    },
+    {
+      "syntax": "wait-until step-complete [TIMEOUT_MS]",
+      "description": "Wait for native frame-step completion"
+    },
+    {
+      "syntax": "require capability NAME",
+      "description": "Require native capability"
+    },
+    {
+      "syntax": "assert status KEY=VALUE",
+      "description": "Assert a status field"
+    },
+    {
+      "syntax": "echo TEXT",
+      "description": "Write run output"
+    },
+    {
+      "syntax": "api ACTION key=value ...",
+      "description": "Invoke a documented Script API action"
+    },
+    {
+      "syntax": "include \"path.chqscript\"",
+      "description": "Include a saved library script"
+    },
+    {
+      "syntax": "zip evidence latest|NAME",
+      "description": "ZIP one evidence capture"
+    },
+    {
+      "syntax": "zip evidence-match PREFIX [BUNDLE_NAME]",
+      "description": "ZIP captures sharing a prefix"
+    }
+  ],
+  "queryFunctions": [
+    "getregions()",
+    "getprofiles()",
+    "getsprites()",
+    "getpaletteentries(bank=N)",
+    "getcheckpoints()",
+    "getcapabilities()",
+    "getmaps()",
+    "getpalettes()",
+    "getregistry()",
+    "gettrackrecords()",
+    "getevidence()",
+    "getobjects()",
+    "getaudiochannels()",
+    "count()",
+    "first()",
+    "last()",
+    "contains()",
+    "unique()"
+  ],
+  "limits": {
+    "sourceBytes": 65536,
+    "sourceLines": 1000,
+    "expandedCommands": 1000,
+    "loopIterations": 256,
+    "nestingDepth": 4,
+    "waitUntilMs": 30000
+  }
+}

@@ -1,0 +1,15 @@
+# name: Regression - v0.66.9.0 RC2.4.3 Snapshot Discovery
+# category: regression
+# purpose: Prove that a snapshot created inside the current script run is returned immediately by frame.snapshot.list, then exercise exact reconstruction comparisons.
+# checkpoint: stage1-gameplay-2064.chqstate
+# regression-version: 0.66.9.0
+# regression-scope: current
+
+echo === RC2.4.3 snapshot discovery regression ===
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api control.step-frame
+api frame.snapshot name=regression-rc243-snapshot-discovery sprites=individual
+api frame.snapshot.list require=regression-rc243-snapshot-discovery
+api image.compare a=regression-rc243-snapshot-discovery b=regression-rc243-snapshot-discovery region=FULL hud=normal
+api image.compare a=regression-rc243-snapshot-discovery b=regression-rc243-snapshot-discovery region=FULL hud=hidden
+echo === RC2.4.3 snapshot discovery regression complete ===

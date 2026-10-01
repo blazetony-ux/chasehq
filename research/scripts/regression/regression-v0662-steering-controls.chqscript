@@ -1,0 +1,37 @@
+# name: Regression - v0.66.2 steering controls
+# category: regression
+# regression-version: 0.66.2
+# regression-scope: permanent
+# purpose: Confirm authentic signed-12-bit steering path and processed game-side steering.
+echo === v0.66.2 steering controls regression ===
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api input.ioc.clear
+api input.steering.set value=0000
+api input.ioc.xor port=3 mask=20
+api control.run-frames frames=5
+if memory cpu=A address=100300 width=16 value = 0000
+  echo PASS steering centre processed=0
+else
+  echo FAIL steering centre
+end
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api input.steering.set value=0060
+api input.ioc.xor port=3 mask=20
+api control.run-frames frames=60
+if memory cpu=A address=100300 width=16 value = 0060
+  echo PASS steering right +96
+else
+  echo FAIL steering right
+end
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api input.steering.set value=0FA0
+api input.ioc.xor port=3 mask=20
+api control.run-frames frames=60
+if memory cpu=A address=100300 width=16 value = FFA0
+  echo PASS steering left -96
+else
+  echo FAIL steering left
+end
+api input.ioc.clear
+api input.steering.set value=0000
+echo === v0.66.2 steering controls regression complete ===

@@ -1,0 +1,16 @@
+# ChaseHQ-Native v0.66.1 — Legacy Findings / API / Workbench Roll-up
+
+This build promotes existing Chase H.Q. discoveries into discoverable, regression-tested tooling without changing the primary emulator target.
+
+## Added
+- Collision response state/control API. Disabling response suppresses only proven lateral/speed response writes; detection/event logic remains live.
+- Steering injection API is explicitly distinguished from unresolved authoritative game-side steering state.
+- Sprite structured records now report the hardware priority source (`sprite word1 bit15`) and draw-order/slot provenance.
+- Expanded semantic-object registry for player/target/turbo/brake-lamp/road-edge/collision research.
+- Script-run provenance: library / modified / ad-hoc / selection / line, SHA-256 source hash, retained source text.
+- History semantic-version parsing fix and current v0.66.1 metadata.
+- Feature manifest build consistency guard.
+- Local build staging via `build-local.json` or `CHASEHQ_ROM_SOURCE` / `CHASEHQ_SDL_SOURCE`; `Prepare-Project.bat --check` validates without copying.
+
+## Safety
+ROM files remain user-local and are never added to release packages by the build scripts. Collision suppression is evidence-scoped and reversible.

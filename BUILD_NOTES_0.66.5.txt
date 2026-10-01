@@ -1,0 +1,8 @@
+ChaseHQ-Native v0.66.5 - Memory Trace / Track / Workbench Polish
+
+- Generic memory-write trace API + Research Script integration.
+- Track View auto-fit, Fit Track, and Save SVG.
+- Removed Script Console Syntax Preview.
+- Build scripts retain Prepare-Project.bat unblocking/bootstrap and whitelist only the historical cpu_bus_rom_tests SEGFAULT signature.
+- Restart cleanup avoids PID 4/System and cleans stale Workbench hosts.
+- Carries forward v0.66.4 palette-write tracing and run reliability fixes.

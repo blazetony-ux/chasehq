@@ -1,0 +1,13 @@
+# name: Regression - v0.66.9.0 RC2.2 MAME Sprite Order Default
+# category: regression
+# purpose: Smoke-test reversible sprite traversal controls; pixel ownership is asserted by regression-sprite-ownership.chqscript.
+# regression-version: 0.66.9.0
+# regression-scope: version
+
+echo === v0.66.9.0 RC2.2 MAME sprite-order regression ===
+api sprite.order.inspect
+api sprite.order.set mode=higher-slot
+api sprite.order.inspect
+api sprite.order.set mode=lower-slot
+api sprite.order.inspect
+echo === v0.66.9.0 RC2.2 MAME sprite-order regression complete ===

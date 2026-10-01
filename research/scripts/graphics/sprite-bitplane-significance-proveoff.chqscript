@@ -1,0 +1,23 @@
+# name: Sprite Bitplane-Significance Native Prove-Off
+# purpose: Verify the RC2.6/RC2.6.1 shared sprite decoder renders Map 405 with MAME-consistent 4bpp plane significance without palette overrides.
+# category: graphics-investigation
+# target: Canonical Stage 1 frame 2352 / Map 405 / palette bank 175.
+# precondition: RC2.6.1-or-newer candidate (same decoder semantics as RC2.6) containing the shared sprite 4bpp significance correction.
+# expected: Map-405 clouds render as coherent shaded artwork; snapshot reconstruction remains exact; no palette override is required.
+# cleanup: palette overrides and timeline state are cleared defensively.
+
+echo === Sprite bitplane-significance native prove-off ===
+
+api timeline.reset
+api palette.overrides.clear
+
+try
+    api checkpoint.load file=stage1-driving-2352.chqstate run=false
+    api sprite.map.inspect map=405
+    api frame.snapshot name=map405-native-plane-order sprites=individual
+finally
+    api palette.overrides.clear
+    api timeline.reset
+end
+
+echo === Sprite bitplane-significance native prove-off COMPLETE ===

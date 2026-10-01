@@ -1,0 +1,15 @@
+# name: Turbo HUD Tile Character Inspection
+# category: graphics
+# purpose: Export the normal and active TC0100SCN RAM text characters used by the turbo HUD for raw-pen and palette-aware comparison.
+# tags: turbo hud tc0100scn tile character reusable
+
+echo === Turbo HUD Tile Character Inspection ===
+api tile.inspect code=7C palette=0 scale=16
+api tile.inspect code=7D palette=0 scale=16
+api tile.inspect code=7E palette=0 scale=16
+api tile.inspect code=7F palette=0 scale=16
+api tile.inspect code=0C palette=0 scale=16
+api tile.inspect code=0D palette=0 scale=16
+api tile.inspect code=0E palette=0 scale=16
+api tile.inspect code=0F palette=0 scale=16
+echo === Turbo HUD Tile Character Inspection complete ===

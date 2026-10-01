@@ -1,0 +1,17 @@
+{
+  "schema": "chq-frame-reconstruction-v2",
+  "build": "0.66.6.1",
+  "frame": 2352,
+  "width": 320, "height": 240,
+  "compositor": "prom-mask",
+  "promInputMask": 255,
+  "tileControl6": 40,
+  "hudModel": "tc0100scn-text-layer",
+  "hudModes": {"normal":"final.png","hidden":"final-no-hud.png","only":"hud-only.png"},
+  "offsets": {"bg0":[0,-4],"bg1":[0,-20],"text":[0,0],"sprites":[0,0],"road":[0,0]},
+  "sourceRegions": {"background":"tilemap/tile_control","road":"road","sprites":"sprites + sprite graphics/spritemap","textHud":"tilemap text plane","palette":"TC0110PCR"},
+  "paletteState": "palette.csv",
+  "reconstruction": {"method":"alpha-over-contribution-layers","exact":true,"verifiedExact":true,"mismatchedPixels":0,"baseLayer":"layers/00_base.png","layers":["layers/00_base.png","layers/01_bg-bottom.png","layers/02_road.png","layers/03_bg-upper.png","layers/04_sprites.png","layers/05_text-hud.png"]},
+  "sources": ["sources/bg-bottom.png","sources/road.png","sources/bg-upper.png","sources/sprites.png","sources/text-hud.png"],
+  "notes": ["Contribution layers reproduce the selected compositor output in the recorded order.","Raw source renders are independent forensic views and are not guaranteed to alpha-compose to the final frame."]
+}

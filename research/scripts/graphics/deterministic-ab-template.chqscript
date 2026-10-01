@@ -1,0 +1,28 @@
+# category: graphics
+# name: Deterministic A/B experiment template
+# purpose: Reusable zero-noise baseline/test capture pattern. Edit only the MUTATION block.
+# checkpoint: stage1-driving-2352.chqstate
+
+set regions = getregions()
+set frames = 30
+
+api patch.clear
+api palette.overrides.clear
+api sprite.override.clear
+api sprite.visual.clear
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api control.run-frames frames=${frames}
+api frame.capture name=ab-control
+
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+# --- MUTATION: replace the next line with one controlled change ---
+api sprite.override slot=44 map=182
+# --- END MUTATION ---
+api control.run-frames frames=${frames}
+api frame.capture name=ab-test
+
+for region in regions
+    api image.compare a=ab-control b=ab-test region=${region}
+end
+api image.diff a=ab-control b=ab-test region=FULL output=ab-diff
+api sprite.override.clear

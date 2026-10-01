@@ -1,0 +1,56 @@
+Chase H.Q. Native v0.66.6.1 - Layered Frame Forensics reconstruction hotfix
+
+Hotfix validation change:
+- Normalises exported compositor finals to opaque RGBA, matching the effective SDL framebuffer.
+- Encodes every changed reconstruction pixel as an opaque replacement colour, so alpha-over can represent transitions that previously ended as RGBA 0,0,0,0.
+- Self-verifies reconstruction in the native capture path. frame.snapshot now fails if any reconstructed pixel differs from final.png.
+- reconstruction.json records verifiedExact and mismatchedPixels.
+- Regression/library/docs/contracts remain aligned with the 0.66.6.1 build.
+
+ChaseHQ-Native v0.66.6.1 - Layered Frame Forensics + HUD Isolation
+=================================================================
+
+Baseline
+--------
+Built from proven v0.66.5.1 Track Recorder/Scripting Hotfix.
+
+Delivered
+---------
+- Native `graphics snapshot PATH` command and `graphics.layered_snapshot` capability.
+- Structured frame snapshot schema v2.
+- `final.png`, `final-no-hud.png`, and `hud-only.png` per snapshot.
+- Exact reconstruction contribution PNGs in compositor order under `layers/`.
+- Opaque `layers/00_base.png` is included as the first reconstruction stage so reconstruction does not rely on an assumed viewer background.
+- Transparent raw forensic source PNGs under `sources/` for bottom background, road, upper background, sprites and TC0100SCN text/HUD.
+- `reconstruction.json` records compositor selection, layer order, layer offsets, PROM input mask, tile-control state, source-region descriptions, HUD model and palette-state path.
+- Complete live TC0110PCR `palette.csv` with raw value and write provenance fields.
+- Source-aware HUD isolation: normal / hidden / only. HUD hiding suppresses the TC0100SCN text source; it does not crop or apply a fixed screen mask.
+- `frame.snapshot` now creates the v2 reconstructable snapshot format.
+- `image.compare` and `image.diff` accept `hud=normal|hidden|only` (`exclude` is accepted as a hidden alias internally).
+- HTTP snapshot manifest and asset endpoints for the Graphics Lab viewer.
+- Graphics Lab layered snapshot viewer with normal / HUD hidden / HUD only / reconstruction modes, per-layer show/hide, solo and opacity controls, plus raw text/HUD source access.
+- v0.66.6.1 regression script covering snapshot creation/listing and all HUD compare modes.
+- Full regression suite includes the v0.66.6.1 regression.
+
+Documentation/contracts updated in the same build
+-------------------------------------------------
+- docs/API_REFERENCE.md
+- docs/API_CHANGELOG.md
+- docs/SCRIPT_LANGUAGE_REFERENCE.md
+- docs/SCRIPT_CHANGELOG.md
+- docs/ROADMAP.md
+- docs/PROJECT_STATE.md
+- docs/HANDOVER.md
+- docs/NEXT_BUILD_CHANGELOG.md
+- research/scripts/graphics/README.md
+- research/schema/api-actions.json
+- research/schema/script-language.json
+- research/feature-manifest.json
+
+Important HUD semantics
+-----------------------
+`hud-only.png` is the pixel contribution/influence caused by enabling the TC0100SCN text/HUD source relative to the otherwise-identical compositor pass with that source disabled. `sources/text-hud.png` is the independent raw text/HUD source render.
+
+Required dev-machine proof
+--------------------------
+The package environment used to prepare this build does not contain SDL3 source or PowerShell, so the Windows SDL target must still be compiled on the normal dev machine and the bundled v0.66.6.1 regression must be run there before this version is considered fully proven.

@@ -1,0 +1,10 @@
+ChaseHQ-Native v0.59.4 build validation
+Date: 2026-09-24
+
+CPU/runtime configure (CHASEHQ_BUILD_SDL=OFF): PASS
+CPU/runtime build: PASS
+ctest: 1/1 PASS
+main.cpp + machine.cpp + rom_loader.cpp C++20 syntax: PASS
+
+SDL frontend note:
+The distributable intentionally does not include SDL3 source. The v0.59.4 paged debug-UI changes are source-reviewed here and require the established Windows SDL3 build workflow for full frontend compilation/acceptance.

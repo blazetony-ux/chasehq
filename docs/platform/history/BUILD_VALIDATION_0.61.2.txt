@@ -1,0 +1,15 @@
+ChaseHQ-Native v0.61.2 validation
+Date: 2026-09-25
+
+Validated in this environment:
+- CPU/runtime-only CMake configure with -DCHASEHQ_BUILD_SDL=OFF: PASS
+- CPU/runtime compile: PASS
+- ctest: 1/1 PASS
+
+Not executable in this Linux environment:
+- Windows/MSVC + SDL frontend build
+- Windows PowerShell HttpListener Web Debugger/API bridge
+- Invoke-RestMethod / Invoke-WebRequest live integration against ChaseHQNative.exe
+- Browser UI and multi-instance Windows launcher
+
+These Windows-facing additions are therefore candidate infrastructure pending real dev-machine validation. No gameplay/emulation behaviour was intentionally changed.

@@ -1,0 +1,16 @@
+# name: Game Lab Turbo / Speed Controls Demo
+# category: experimental
+# purpose: Demonstrate reversible Chase H.Q.-specific Game Lab API controls for turbo stock, active duration and current speed.
+# tags: experimental game-lab turbo speed reversible
+
+echo === Game Lab Turbo / Speed Controls Demo ===
+api game.experiment.status
+api game.turbo.stock enabled=true value=3
+api game.turbo.active enabled=true
+api game.speed.freeze enabled=true value=602
+api game.experiment.status
+api game.speed.clear
+api game.turbo.active enabled=false
+api game.turbo.stock enabled=false
+api game.experiment.status
+echo === Game Lab Turbo / Speed Controls Demo complete ===

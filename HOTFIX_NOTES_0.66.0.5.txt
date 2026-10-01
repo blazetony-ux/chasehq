@@ -1,0 +1,8 @@
+ChaseHQ-Native v0.66.0.5 - Preflight Progress / Timeout / Cache Hotfix
+
+- Script Console preflight now shows current query and N/total progress.
+- Each query-function and include fetch has an 8 second timeout; hangs become named failures.
+- Duplicate query expressions within one preflight are resolved once and cached.
+- Full regression no longer includes a second query-function stress block; standalone regression-v066005-preflight.chqscript covers it.
+- v0.66.0.4 Windows test-harness heap-fixture fix and history/artifact work are carried forward.
+- No emulator behaviour changes.

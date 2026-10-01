@@ -1,0 +1,22 @@
+{
+  "Roms": ".\\roms\\chasehq",
+  "Checkpoint": ".\\checkpoints\\stage1-target-post-final-hit-9548.chqstate",
+  "Port": 37600,
+  "EmulatorArgs": [
+    "--course-survey",
+    "--course-follow",
+    "--course-follow-controller", "legacy",
+    "--no-collisions",
+    "--infinite-time",
+    "--unlimited-turbo",
+    "--auto-turbo",
+    "--cornering-scale", "1.15",
+    "--cornering-speed-retain", "1.00"
+  ],
+  "PrimeCommands": [
+    "events limit 100000",
+    "snapshot save launch-baseline",
+    "watch add A 10A080:10A0BF write change",
+    "watch add A 1002A0:1002DF write change"
+  ]
+}

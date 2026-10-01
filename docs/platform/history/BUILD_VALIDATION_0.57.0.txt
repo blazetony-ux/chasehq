@@ -1,0 +1,18 @@
+ChaseHQ-Native v0.57.0 build validation
+Date: 2026-09-24
+
+Validated in the build environment:
+- Clean CMake configure with -DCHASEHQ_BUILD_SDL=OFF: PASS
+- CPU/runtime library compile: PASS
+- ChaseHQRuntime compile/link: PASS
+- runtime_tests compile/link: PASS
+- ctest cpu_bus_rom_tests: PASS (1/1)
+
+SDL frontend note:
+The transferable source ZIP intentionally retains the project's SDL placeholder rather than redistributing SDL source. The Windows ChaseHQNative frontend therefore must be rebuilt with the same local SDL3 source directory used for prior releases. Do not reuse an older out/build cache.
+
+Required Windows clean-build principle:
+- extract/use root ChaseHQ-Native-v0.57.0
+- remove any old out/build directory before configuring
+- provide the established local SDL3 source
+- configure/build afresh

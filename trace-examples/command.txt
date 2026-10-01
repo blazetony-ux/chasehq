@@ -1,0 +1,9 @@
+# CPU-B command/scheduler investigation
+cpu=B
+mem=100802-100807,rw
+mem=108018-10801b,rw
+pc=0474-0540
+trigger=change,100802-100807
+before=128
+after=256
+max=150000

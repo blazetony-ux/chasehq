@@ -1,0 +1,11 @@
+# name: Audio foundation diagnostics
+# purpose: Print v0.66.0 audio research capabilities and planned channels without mutating runtime audio.
+# category: audio
+# status: foundation
+api platform.info
+api audio.capabilities
+getaudiochannels()
+api audio.events
+api audio.waveform.plan
+api audio.export.plan
+api audio.inject.plan

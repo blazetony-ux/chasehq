@@ -1,0 +1,10 @@
+# name: Regression - v0.66.0.7 zero-query runner lifecycle
+# category: Regression
+# purpose: Ensure a no-query script transitions PREPARING -> RUNNING -> DONE without wedging the UI.
+# regression-version: 0.66.0.7
+# regression-scope: permanent
+
+echo === v0.66.0.7 zero-query lifecycle ===
+api status
+api platform.info
+echo === zero-query lifecycle complete ===

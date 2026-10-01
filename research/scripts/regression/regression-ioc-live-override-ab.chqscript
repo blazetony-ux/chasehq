@@ -1,0 +1,39 @@
+# category: regression
+# name: IOC Live Override A/B Validation
+# purpose: Prove a held Research API IOC XOR reaches the CPU-visible TC0040IOC read while emulation runs.
+# checkpoint: stage1-gameplay-2064.chqstate
+# regression-version: legacy
+# regression-scope: version
+
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api input.ioc.clear
+legacytrace reset
+legacytrace cpu A
+legacytrace mem 400000:400003 rw
+legacytrace context 0 0
+legacytrace max 5000
+legacytrace output evidence\ioc-p3-baseline.log
+legacytrace start
+api control.resume
+wait 500
+api control.pause
+legacytrace stop
+
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api input.ioc.clear
+api input.ioc.xor port=3 mask=01
+input ports
+legacytrace reset
+legacytrace cpu A
+legacytrace mem 400000:400003 rw
+legacytrace context 0 0
+legacytrace max 5000
+legacytrace output evidence\ioc-p3-xor01.log
+legacytrace start
+api control.resume
+wait 500
+api control.pause
+legacytrace stop
+input ports
+api input.ioc.clear
+api control.resume

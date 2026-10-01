@@ -1,0 +1,31 @@
+ChaseHQ-Native v0.66.6.1 package manifest
+========================================
+
+Changed or added from v0.66.5.1 baseline:
+- BUILD_NOTES_0.66.6.1.txt
+- VALIDATION_0.66.6.1.md
+- PACKAGE_MANIFEST_0.66.6.1.txt
+- CMakeLists.txt
+- README.md
+- Start-ChaseHQ.ps1
+- Start-ChaseHQResearch.ps1
+- Start-ChaseHQWeb.ps1
+- docs/API_CHANGELOG.md
+- docs/API_REFERENCE.md
+- docs/HANDOVER.md
+- docs/NEXT_BUILD_CHANGELOG.md
+- docs/PROJECT_STATE.md
+- docs/ROADMAP.md
+- docs/SCRIPT_CHANGELOG.md
+- docs/SCRIPT_LANGUAGE_REFERENCE.md
+- research/feature-manifest.json
+- research/schema/api-actions.json
+- research/schema/script-language.json
+- research/scripts/graphics/README.md
+- research/scripts/regression/README.md
+- research/scripts/regression/full-regression.chqscript
+- research/scripts/regression/regression-v06661-layered-frame-snapshot.chqscript
+- src/main.cpp
+- src/version.h
+- src/video.cpp
+- src/video.h

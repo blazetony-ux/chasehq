@@ -1,0 +1,11 @@
+# name: Track Experiment - Restore Canonical State
+# category: experimental
+# purpose: Restore the canonical deterministic track state after synthetic experiments.
+# Restore the canonical attract checkpoint and clear all live patches.
+
+api patch.clear
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api status
+api track.state
+
+echo === CANONICAL TRACK STATE RESTORED ===

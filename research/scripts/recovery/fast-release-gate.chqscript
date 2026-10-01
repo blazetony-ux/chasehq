@@ -1,0 +1,14 @@
+# name: Fast Release Gate
+# category: recovery
+# purpose: Catch startup, discovery, run-history, docs, checkpoint and structured-snapshot failures before spending time on Full Regression.
+echo === Fast Release Gate ===
+api platform.info
+api status
+api window.status
+api docs.search query=turbo
+api script.runs limit=25
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api gameplay.registry
+api frame.snapshot name=fast-release-gate-stage1-driving
+api frame.snapshot.list
+echo === Fast Release Gate complete ===

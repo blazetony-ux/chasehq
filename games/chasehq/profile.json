@@ -1,0 +1,45 @@
+{
+  "schema": "chq-game-profile-v1",
+  "id": "chasehq",
+  "displayName": "Chase H.Q.",
+  "hardware": "taito_z",
+  "role": "primary",
+  "status": "authoritative",
+  "default": true,
+  "purpose": "Primary development and research target. Existing ChaseHQ-Native behavior remains authoritative.",
+  "activation": "native-fixed",
+  "romPolicy": "existing ChaseHQ-Native ROM loading path",
+  "capabilityTiers": {
+    "generic": [
+      "frame_capture",
+      "image_compare",
+      "checkpoint_replay",
+      "deterministic_stepping",
+      "memory_access",
+      "register_access",
+      "script_engine",
+      "evidence",
+      "sprites",
+      "palette"
+    ],
+    "profileSpecific": [
+      "gameplay_registry",
+      "track_state",
+      "ioc_research",
+      "semantic_player_car"
+    ],
+    "experimental": [
+      "live_sprite_override",
+      "live_sprite_visualisation"
+    ]
+  },
+  "files": {
+    "gameplayRegistry": "gameplay-registry.json",
+    "imageRegions": "image-regions.json",
+    "nextSteps": "next-steps.json"
+  },
+  "notes": [
+    "No existing Chase H.Q. addresses or code paths are redirected through this descriptor in v1.",
+    "Profile metadata is additive and read-only."
+  ]
+}

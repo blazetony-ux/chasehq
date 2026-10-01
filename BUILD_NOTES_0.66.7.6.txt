@@ -1,0 +1,21 @@
+ChaseHQ-Native v0.66.7.6 - Docs / Knowledge Consolidation Release Candidate
+
+Purpose
+-------
+Consolidate the locally proven v0.66.7.5 handbook/search/export fixes into one clean release candidate and add release-hardening validation before returning to gameplay research.
+
+Highlights
+----------
+* Project Knowledge articles contain discovery/significance/confirmed-values/method/reproduction/open-question sections.
+* Unified UI search and docs.search/knowledge.search index article-body text.
+* HTML/PDF export path renders article bodies and omits empty reference sections.
+* Project Knowledge landing groups clickable entries by proof/status.
+* Full ChatGPT handover remains visible/copyable/downloadable in Workbench.
+* Workbench source is kept ASCII-safe for Windows PowerShell 5.1.
+* Release validation checks article/schema integrity, search/export wiring, single handbook handler, mojibake sentinels and backup-file exclusion.
+* No emulator/gameplay semantics and no Research API action names or .chqscript grammar changed.
+
+Proof status
+------------
+Release candidate assembled from the locally tested v0.66.7.5 tree. Windows native build, SDL controls, Graphics Lab and full regression proof are still required.
+Run: Regression - v0.66.7.6 Docs / Knowledge Consolidation

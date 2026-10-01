@@ -1,0 +1,4 @@
+# category: diagnostics
+# name: Disassembly example
+# purpose: Decode the known turbo control routine directly through Musashi.
+api cpu.disassemble cpu=A address=008460 count=48

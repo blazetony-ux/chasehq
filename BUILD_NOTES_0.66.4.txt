@@ -1,0 +1,13 @@
+ChaseHQ-Native v0.66.4 - Palette Trace + Release Reliability
+
+Highlights
+- Adds first-class TC0110PCR palette-write tracing with frame, CPU, PC, palette index/bank/pen, old/new raw values, changed flag and write count.
+- Adds Script API actions: palette.trace.start/status/tail/stop/clear.
+- Adds v0.66.4 palette-trace regression and includes it in Full Regression.
+- Fixes per-run duration metadata so multi-command Script Console runs retain the first command's start time instead of overwriting duration on every command request.
+- Adds descriptive run-bundle download names while keeping the short physical bundle.zip inside each run folder.
+- Carries forward the full console transcript dictionary-key hotfix from the validated v0.66.3.1 working tree.
+- Adds Validate-Release.ps1 as the packaging gate and updates API/Script documentation.
+
+Immediate Chase H.Q. use
+Trace palette indices 1037 (bank 64 pen 13) and 1053 (bank 65 pen 13) around the Stage 1 brake-lamp transition, then disassemble the exact writer PC(s).

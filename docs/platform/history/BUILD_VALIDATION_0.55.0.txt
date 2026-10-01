@@ -1,0 +1,12 @@
+ChaseHQ-Native v0.55.0 validation
+
+CPU/runtime validation performed in this environment with CHASEHQ_BUILD_SDL=OFF because the transferable source ZIP intentionally contains only the SDL placeholder, not the SDL3 source tree.
+
+Validated:
+- CMake configure: PASS
+- C++ runtime build: PASS
+- runtime_tests / cpu_bus_rom_tests: PASS
+- v0.55 CLI parse/help for course-survey/course-follow/infinite-time/unlimited-turbo/auto-turbo: PASS
+- Existing checkpoint format retained.
+
+Windows SDL frontend must be rebuilt by the user after copying/reusing their existing SDL source directory, exactly as for prior releases. The frontend source changes are included but could not be linked against SDL in this container.

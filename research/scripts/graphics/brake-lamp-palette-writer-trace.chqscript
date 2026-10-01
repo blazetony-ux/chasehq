@@ -1,0 +1,15 @@
+# name: Brake Lamp Palette Writer Trace
+# category: graphics-research
+# purpose: Trace exact CPU writer PCs for Stage 1 brake-lamp palette entries 1037 and 1053 while applying the proven brake IOC input.
+
+api palette.trace.clear
+api palette.trace.start indices=1037,1053 limit=256
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api control.run-frames frames=5
+api input.ioc.xor port=2 mask=20
+api control.run-frames frames=8
+api palette.trace.tail count=50
+api input.ioc.clear
+api control.run-frames frames=8
+api palette.trace.tail count=100
+api palette.trace.stop

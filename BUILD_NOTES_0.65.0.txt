@@ -1,0 +1,16 @@
+ChaseHQ-Native v0.65.0 — Live Graphics & Script Query Workbench
+
+Built from the documentation-updated v0.64.9 source baseline.
+
+Major implementation areas:
+- native compositor sprite list/inspect/presentation overrides and solo/hide/flash controls
+- first-class Research API + REST surfaces for sprites/regions/state snapshot
+- API-backed Script Console query functions with direct diagnostic printing
+- image region v2 and frame.snapshot name support in compare/diff
+- script library category cleanup + reusable graphics/evidence scripts
+- living regression suite additions and explicit regression-maintenance rule
+
+Validation status in packaging environment:
+- embedded Web Workbench JavaScript syntax checked with Node.js
+- CPU-only CMake configure/build/test is run where supported
+- full SDL3/Windows native compile/runtime validation remains required on the development machine because the packaged source does not carry the local SDL source tree used by the Windows build workflow

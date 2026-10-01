@@ -1,0 +1,77 @@
+# category: regression
+# name: Regression - API schema contracts
+# purpose: Assert every currently scriptable API action exposes a real schema contract.
+# generated-from: Start-ChaseHQWeb.ps1 $scriptApiActions
+# regression-version: legacy
+# regression-scope: permanent
+
+echo === API SCHEMA CONTRACT REGRESSION ===
+api schema action=status
+api schema action=capabilities
+api schema action=input.ports
+api schema action=events.tail
+api schema action=sprites.tail
+api schema action=memory.read
+api schema action=memory.read-range
+api schema action=memory.write
+api schema action=register.read
+api schema action=register.write
+api schema action=patch.freeze
+api schema action=patch.replace
+api schema action=patch.suppress
+api schema action=patch.list
+api schema action=patch.remove
+api schema action=patch.clear
+api schema action=cpu.disassemble
+api schema action=control.pause
+api schema action=control.resume
+api schema action=control.step-frame
+api schema action=control.run-frames
+api schema action=control.abort
+api schema action=control.step-instruction
+api schema action=timer.hold
+api schema action=window.always-on-top
+api schema action=tuning.handling.get
+api schema action=tuning.handling.set
+api schema action=tuning.handling.reset
+api schema action=palette.bank
+api schema action=palette.entry.set
+api schema action=palette.entry.restore
+api schema action=palette.overrides.clear
+api schema action=input.ioc.xor
+api schema action=input.ioc.clear
+api schema action=input.ioc.pulse
+api schema action=input.ioc.sweep
+api schema action=checkpoint.list
+api schema action=checkpoint.load
+api schema action=checkpoint.save
+api schema action=logs.list
+api schema action=logs.tail
+api schema action=evidence.capture
+api schema action=evidence.list
+api schema action=evidence.view
+api schema action=evidence.load
+api schema action=evidence.zip
+api schema action=frame.capture
+api schema action=frame.snapshot
+api schema action=frame.snapshot.list
+api schema action=image.compare
+api schema action=image.diff
+api schema action=image.regions
+api schema action=regions.list
+api schema action=sprites.list
+api schema action=sprites.maps
+api schema action=sprites.palettes
+api schema action=sprite.inspect
+api schema action=sprite.override
+api schema action=sprite.override.clear
+api schema action=sprite.visual
+api schema action=sprite.visual.clear
+api schema action=palette.entries
+api schema action=state.snapshot
+api schema action=gameplay.registry
+api schema action=track.state
+api schema action=next-steps
+api schema action=memory.export
+api schema action=schema
+echo === API SCHEMA CONTRACT REGRESSION COMPLETE ===

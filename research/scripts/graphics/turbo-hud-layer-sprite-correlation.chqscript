@@ -1,0 +1,64 @@
+# name: Turbo HUD Layer Sprite Correlation
+# category: graphics
+# purpose: Offline graphics-focused investigation of the existing turbo forensic timeline. Captures exact layered/sprite evidence at key historical frames and compares HUD_TURBO with HUD normal/only/hidden modes. No gameplay replay required.
+# tags: turbo hud timeline graphics sprites reusable
+
+set timeline_name = turbo-complete-cycle
+
+echo === Turbo HUD Layer / Sprite Correlation ===
+api timeline.load name=${timeline_name}
+api timeline.status
+api regions.list
+
+api timeline.seek frame=2064
+api gameplay.registry
+api state.snapshot include=sprites,regions,gameplay,track
+api sprites.list
+api frame.snapshot name=turbo-layer-before-2064
+
+api timeline.seek frame=2065
+api gameplay.registry
+api state.snapshot include=sprites,regions,gameplay,track
+api sprites.list
+api frame.snapshot name=turbo-layer-activation-2065
+
+api timeline.seek frame=2079
+api gameplay.registry
+api state.snapshot include=sprites,regions,gameplay,track
+api sprites.list
+api frame.snapshot name=turbo-layer-active-2079
+
+api timeline.seek frame=2170
+api gameplay.registry
+api state.snapshot include=sprites,regions,gameplay,track
+api sprites.list
+api frame.snapshot name=turbo-layer-mid-2170
+
+api timeline.seek frame=2275
+api gameplay.registry
+api state.snapshot include=sprites,regions,gameplay,track
+api sprites.list
+api frame.snapshot name=turbo-layer-expiry-2275
+
+api timeline.seek frame=2276
+api gameplay.registry
+api state.snapshot include=sprites,regions,gameplay,track
+api sprites.list
+api frame.snapshot name=turbo-layer-after-2276
+
+api image.compare a=turbo-layer-before-2064 b=turbo-layer-activation-2065 region=HUD_TURBO hud=normal
+api image.compare a=turbo-layer-before-2064 b=turbo-layer-activation-2065 region=HUD_TURBO hud=only
+api image.compare a=turbo-layer-before-2064 b=turbo-layer-activation-2065 region=HUD_TURBO hud=hidden
+api image.diff a=turbo-layer-before-2064 b=turbo-layer-activation-2065 region=HUD_TURBO hud=normal output=turbo-hud-activation-normal
+api image.diff a=turbo-layer-before-2064 b=turbo-layer-activation-2065 region=HUD_TURBO hud=only output=turbo-hud-activation-hud-only
+api image.diff a=turbo-layer-before-2064 b=turbo-layer-activation-2065 region=HUD_TURBO hud=hidden output=turbo-hud-activation-hud-hidden
+
+api image.compare a=turbo-layer-expiry-2275 b=turbo-layer-after-2276 region=HUD_TURBO hud=normal
+api image.compare a=turbo-layer-expiry-2275 b=turbo-layer-after-2276 region=HUD_TURBO hud=only
+api image.compare a=turbo-layer-expiry-2275 b=turbo-layer-after-2276 region=HUD_TURBO hud=hidden
+api image.diff a=turbo-layer-expiry-2275 b=turbo-layer-after-2276 region=HUD_TURBO hud=normal output=turbo-hud-expiry-normal
+api image.diff a=turbo-layer-expiry-2275 b=turbo-layer-after-2276 region=HUD_TURBO hud=only output=turbo-hud-expiry-hud-only
+api image.diff a=turbo-layer-expiry-2275 b=turbo-layer-after-2276 region=HUD_TURBO hud=hidden output=turbo-hud-expiry-hud-hidden
+
+api timeline.unload
+echo === Turbo HUD Layer / Sprite Correlation complete ===

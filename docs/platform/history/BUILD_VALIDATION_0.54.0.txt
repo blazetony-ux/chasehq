@@ -1,0 +1,13 @@
+Chase H.Q. Native v0.54.0 validation
+=====================================
+
+Validated in the build environment supplied for this task:
+- CMake configure: PASS with CHASEHQ_BUILD_SDL=OFF
+- chq_runtime: PASS
+- ChaseHQRuntime: PASS
+- runtime_tests: PASS
+- src/main.cpp frontend translation-unit syntax check: PASS (C++17)
+
+SDL3 source is intentionally not present in the uploaded v0.53.0 source package, so a full SDL-linked ChaseHQNative binary could not be linked in this Linux environment. The Windows build should use the project's existing SDL3 source/runtime setup exactly as in prior working builds.
+
+v0.54.0 additions validated at compile/parser level include combined provenance access filtering, signed steering options, course-data logging structures, and updated version metadata.

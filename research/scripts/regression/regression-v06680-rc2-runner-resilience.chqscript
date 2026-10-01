@@ -1,0 +1,15 @@
+# name: Regression - v0.66.8.0 RC2 Timeline Runner Resilience
+# category: regression
+# purpose: Prove that a timeline-heavy frame run can exceed the old 15-second Script API wait while continuing to make frame progress, then finalize normally.
+# regression-version: 0.66.8.0
+# regression-scope: current
+
+echo === v0.66.8.0 RC2 Timeline Runner Resilience ===
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api input.ioc.clear
+api timeline.record.start name=regression-v06680-rc2-long-run
+api control.run-frames frames=160
+api timeline.record.stop
+api timeline.status
+api status
+echo === v0.66.8.0 RC2 Timeline Runner Resilience complete ===

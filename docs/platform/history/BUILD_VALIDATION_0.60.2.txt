@@ -1,0 +1,16 @@
+# v0.60.2 validation
+
+Validation performed in the build environment before packaging:
+
+- CPU/runtime CMake configure with `CHASEHQ_BUILD_SDL=OFF`: **PASS**
+- CPU/runtime build: **PASS**
+- `runtime_tests`: **PASS (1/1)**
+- v0.60.2 unit coverage for stable watch IDs/removal, event-limit configuration, replace-on-write patching, patch removal and CPU register read/write: **PASS**
+- existing Workbench/runtime regression tests: **PASS**
+- `chq_debug_api` compilation: **PASS**
+- `chqctl` compilation including `--wait`, scripts and shell `source`: **PASS**
+- localhost API transport smoke test (`chqctl` -> server -> response): **PASS**
+- `main.cpp` C++20 syntax validation with the expanded API handler: **PASS**
+- package ZIP integrity: checked after packaging
+
+The package intentionally does not embed the SDL3 source tree. A real Windows/SDL link-and-run acceptance test therefore remains for the dev machine. The established graphical target still expects SDL3 under `SDL/` unless the normal local dependency arrangement is used.

@@ -1,0 +1,15 @@
+# name: Timeline Fork-Live Example
+# category: timeline
+# purpose: Load a recorded timeline, move to a recorded state and fork that exact checkpoint back into the paused live emulator for a counterfactual experiment.
+set timeline_name = turbo-complete-cycle
+
+echo === Timeline Fork-Live Example ===
+api timeline.load name=${timeline_name}
+api timeline.next
+api timeline.next
+api status
+api gameplay.registry
+api timeline.fork-live
+api status
+# From this point normal live writes/patches/stepping are available.
+echo === Forked selected recorded state back to LIVE ===

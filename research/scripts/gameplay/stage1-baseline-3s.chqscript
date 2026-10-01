@@ -1,0 +1,15 @@
+# category: gameplay
+# name: Stage 1 Baseline 3 Seconds
+# purpose: Establish normal Stage 1 progression without IOC intervention.
+# checkpoint: stage1-gameplay-2064.chqstate
+
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api input.ioc.clear
+api timer.hold enabled=false
+api control.resume
+wait 3000
+api control.pause
+api status
+api evidence.capture name=stage1-baseline-3s
+api control.resume
+api status

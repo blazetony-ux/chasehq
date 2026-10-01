@@ -1,0 +1,36 @@
+# name: Track Experiment - Synthetic Slalom 8 Records
+# category: experimental
+# purpose: Apply an eight-record synthetic slalom track experiment.
+# EXPERIMENTAL: Synthetic alternating left/right section
+# Baseline: stage1-driving-2352.chqstate (ATTRACT mode)
+# This deliberately creates an artificial sequence:
+#   +48 +48 -48 -48 +48 +48 0 0
+#
+# The aim is visual/causal proof that the live RAM track cache
+# controls the road geometry consumed by the game.
+#
+# Safe recovery:
+# Stop/pause, then reload stage1-driving-2352.chqstate.
+
+api patch.clear
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+
+echo === EXPERIMENT: SYNTHETIC TRACK SLALOM ===
+
+api track.state
+
+api memory.write cpu=A address=1090B0 width=8 value=30
+api memory.write cpu=A address=1090B8 width=8 value=30
+api memory.write cpu=A address=1090C0 width=8 value=D0
+api memory.write cpu=A address=1090C8 width=8 value=D0
+api memory.write cpu=A address=1090D0 width=8 value=30
+api memory.write cpu=A address=1090D8 width=8 value=30
+api memory.write cpu=A address=1090E0 width=8 value=00
+api memory.write cpu=A address=1090E8 width=8 value=00
+
+api memory.read-range cpu=A address=1090A8 length=72
+api frame.capture
+
+echo Synthetic curvature pattern installed in live track cache
+echo Resume attract mode and watch SDL + Track View
+api control.resume

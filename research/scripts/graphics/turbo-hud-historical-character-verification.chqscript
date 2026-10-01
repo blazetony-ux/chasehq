@@ -1,0 +1,30 @@
+# name: Turbo HUD Historical Character Verification
+# category: graphics
+# purpose: Inspect normal and active turbo TC0100SCN RAM character sets at exact historical timeline states.
+echo === Turbo HUD Historical Character Verification ===
+api timeline.load name=turbo-complete-cycle
+api timeline.seek frame=2064
+api tile.inspect code=7C palette=0 scale=16
+api tile.inspect code=7D palette=0 scale=16
+api tile.inspect code=7E palette=0 scale=16
+api tile.inspect code=7F palette=0 scale=16
+api tile.inspect code=0C palette=0 scale=16
+api tile.inspect code=0D palette=0 scale=16
+api tile.inspect code=0E palette=0 scale=16
+api tile.inspect code=0F palette=0 scale=16
+api timeline.seek frame=2079
+api tile.inspect code=7C palette=0 scale=16
+api tile.inspect code=7D palette=0 scale=16
+api tile.inspect code=7E palette=0 scale=16
+api tile.inspect code=7F palette=0 scale=16
+api tile.inspect code=0C palette=0 scale=16
+api tile.inspect code=0D palette=0 scale=16
+api tile.inspect code=0E palette=0 scale=16
+api tile.inspect code=0F palette=0 scale=16
+api timeline.seek frame=2275
+api tile.inspect code=0C palette=0 scale=16
+api tile.inspect code=0D palette=0 scale=16
+api tile.inspect code=0E palette=0 scale=16
+api tile.inspect code=0F palette=0 scale=16
+api timeline.unload
+echo === Turbo HUD Historical Character Verification complete ===

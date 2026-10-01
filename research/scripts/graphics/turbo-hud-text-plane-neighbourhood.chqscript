@@ -1,0 +1,35 @@
+# name: Turbo HUD Text Plane Neighbourhood Investigation
+# category: graphics
+# purpose: Inspect the exact TC0100SCN text-plane cells and their neighbours across the existing turbo timeline.
+# tags: turbo hud text-plane timeline reusable
+
+echo === Turbo HUD Text Plane Neighbourhood Investigation ===
+api timeline.load name=turbo-complete-cycle
+
+api timeline.seek frame=2064
+api memory.read-range cpu=A address=0xC04E80 length=32
+api memory.read-range cpu=A address=0xC04F00 length=32
+api frame.snapshot name=turbo-text-before-2064
+
+api timeline.seek frame=2079
+api memory.read-range cpu=A address=0xC04E80 length=32
+api memory.read-range cpu=A address=0xC04F00 length=32
+api frame.snapshot name=turbo-text-active-2079
+
+api timeline.seek frame=2275
+api memory.read-range cpu=A address=0xC04E80 length=32
+api memory.read-range cpu=A address=0xC04F00 length=32
+api frame.snapshot name=turbo-text-expiry-2275
+
+api timeline.seek frame=2276
+api memory.read-range cpu=A address=0xC04E80 length=32
+api memory.read-range cpu=A address=0xC04F00 length=32
+api frame.snapshot name=turbo-text-after-2276
+
+api image.compare a=turbo-text-before-2064 b=turbo-text-active-2079 region=HUD_TURBO hud=only
+api image.diff a=turbo-text-before-2064 b=turbo-text-active-2079 region=HUD_TURBO hud=only output=turbo-text-before-vs-active
+api image.compare a=turbo-text-expiry-2275 b=turbo-text-after-2276 region=HUD_TURBO hud=only
+api image.diff a=turbo-text-expiry-2275 b=turbo-text-after-2276 region=HUD_TURBO hud=only output=turbo-text-expiry-vs-after
+
+api timeline.unload
+echo === Turbo HUD Text Plane Neighbourhood Investigation complete ===

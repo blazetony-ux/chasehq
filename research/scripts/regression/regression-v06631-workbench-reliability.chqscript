@@ -1,0 +1,15 @@
+# name: Regression - v0.66.3.1 workbench reliability
+# category: regression
+# purpose: Smoke-test current build identity, documented schema, deterministic snapshot creation and run-owned artifact paths.
+# regression-version: 0.66.3.1
+# regression-scope: permanent
+
+echo === v0.66.3.1 workbench reliability regression ===
+api platform.info
+api schema.all
+api script.schema
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api control.run-frames frames=5
+api frame.snapshot name=regression-v06631-artifact-path
+api frame.snapshot.list
+echo === v0.66.3.1 workbench reliability regression complete ===

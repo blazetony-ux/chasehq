@@ -1,0 +1,27 @@
+# name: Regression - v0.66.5.1 shared track recorder scripting
+# category: regression
+# purpose: Verify the shared Track View recorder can be cleared, started, sampled deterministically, stopped, inspected and exported to SVG entirely from Research Script.
+# regression-version: 0.66.5.1
+# regression-scope: track recorder API, Script Console integration and SVG export
+
+echo === v0.66.5.1 shared track recorder regression ===
+api schema action=track.record.start
+api schema action=track.record.stop
+api schema action=track.record.clear
+api schema action=track.record.status
+api schema action=track.record.sample
+api schema action=track.svg.export
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api track.record.clear
+api track.record.start
+api track.record.sample
+api control.run-frames frames=30
+api track.record.sample
+api control.run-frames frames=30
+api track.record.sample
+api track.record.stop
+api track.record.status
+api track.svg.export name=regression-v06651-track
+api track.record.clear
+api track.record.status
+echo === v0.66.5.1 shared track recorder regression complete ===

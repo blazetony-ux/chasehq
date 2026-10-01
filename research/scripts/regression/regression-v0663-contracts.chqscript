@@ -1,0 +1,16 @@
+# name: Regression - v0.66.3 research contracts and sprite provenance
+# category: regression
+# purpose: Verify API/script contracts and sprite-map provenance tooling introduced in v0.66.3.
+# regression-version: 0.66.3
+# regression-scope: permanent
+echo === v0.66.3 contracts / provenance regression ===
+api platform.info
+api schema.all
+api script.schema
+api schema action=sprite.map.inspect
+api schema action=ui.prompt
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api control.run-frames frames=5
+api sprite.inspect slot=45
+api sprite.map.inspect slot=45
+echo === v0.66.3 contracts / provenance regression complete ===

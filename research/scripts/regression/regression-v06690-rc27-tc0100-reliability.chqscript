@@ -1,0 +1,47 @@
+# name: Regression - v0.66.9.0 RC2.7 TC0100SCN and Reliability
+# category: regression
+# purpose: Assert release identity, reversible layer offsets and exact old/corrected canonical captures.
+# target: All four canonical Stage 1 checkpoints; sprite-heavy frame 2352.
+# method: Keep CPU state fixed while changing only the diagnostic X model; assert snapshot reconstruction and no-sprites output.
+# expected: Full release version parity, layer set/get/reset parity, exact captures and non-empty sprite difference at 2352.
+# cleanup: Corrected mode and zero layer offsets restored even on failure.
+# regression-version: 0.66.9.0-RC2.7
+# regression-scope: current
+
+api release.assert-version
+api timeline.reset
+api sprite.visual.clear
+api sprite.override.clear
+api layer.offsets.reset
+try
+    api layer.offsets.set layer=bg0 x=7 y=-3
+    api layer.offsets.get
+    api layer.offsets.assert layer=bg0 x=7 y=-3
+    api layer.offsets.reset layer=bg0
+    api layer.offsets.assert layer=bg0 x=0 y=0
+    set checkpoints = stage1-gameplay-2064,stage1-driving-2352,stage1-target-post-final-hit-9548,stage1-end-level-9988
+    for checkpoint in checkpoints
+        api checkpoint.load file=${checkpoint}.chqstate run=false
+        api tc0100.mode mode=legacy
+        api frame.snapshot name=rc27-${checkpoint}-legacy
+        api frame.snapshot.list require=rc27-${checkpoint}-legacy
+        api frame.snapshot.assert-exact name=rc27-${checkpoint}-legacy
+        api tc0100.mode mode=corrected
+        api frame.snapshot name=rc27-${checkpoint}-corrected
+        api frame.snapshot.list require=rc27-${checkpoint}-corrected
+        api frame.snapshot.assert-exact name=rc27-${checkpoint}-corrected
+        api image.compare a=rc27-${checkpoint}-legacy b=rc27-${checkpoint}-corrected region=FULL hud=hidden
+    end
+    api checkpoint.load file=stage1-driving-2352.chqstate run=false
+    assert status frame=2352
+    api frame.snapshot name=rc27-scene-no-sprites sprites=individual
+    api frame.snapshot.assert-scene-no-sprites name=rc27-scene-no-sprites
+    api frame.snapshot.assert-exact name=rc27-scene-no-sprites requireColumnZero=true
+finally
+    api tc0100.mode mode=corrected
+    api layer.offsets.reset
+    api sprite.visual.clear
+    api sprite.override.clear
+    api timeline.reset
+end
+echo === RC2.7 TC0100SCN and Reliability regression COMPLETE ===

@@ -1,0 +1,17 @@
+# name: Recover Existing Turbo Forensic Timeline
+# category: timeline
+# purpose: Reuse an already recorded turbo-complete-cycle timeline from this or an earlier sibling build, create a non-destructive authoritative turbo-active event window and generate streaming offline memory/write analysis without replaying gameplay.
+
+echo === Recover Existing Turbo Forensic Timeline ===
+api timeline.list
+# The original RC1 capture has already proven turbo-active rise=2065 / fall=2275.
+# Do not call timeline.trim.event here: an RC2 run destructively altered one sibling copy.
+# Analyse the immutable/proven event window directly, with one frame of context.
+api timeline.scan.memory name=turbo-complete-cycle triggerFrame=2065 stopFrame=2275 window=1
+api timeline.load name=turbo-complete-cycle
+api timeline.status
+api timeline.frames
+api gameplay.registry
+api sprites.list
+api timeline.unload
+echo === Existing turbo timeline recovered and analysed ===

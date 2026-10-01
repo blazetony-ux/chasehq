@@ -1,0 +1,58 @@
+[test] ROM reconstruction
+[test] dual bus maps
+[test] TC0040IOC selected-port model
+[test] input pulse option parsing
+[test] repeated input pulse option parsing
+[test] v0.27 conditional trace option parsing
+[test] v0.51 PROM mixer default and explicit overrides
+[test] v0.50 multi-value sprite selector and quad candidate parsing
+[test] v0.50.3 semantic player-car CLI parsing
+[test] dual CPU scheduler/shared RAM
+[RESET A] SP=0x110000 PC=0x100
+[RESET B] SP=0x104000 PC=0x100 enabled=yes
+[test] checkpoint resume after runtime reconstruction
+[RESET A] SP=0x110000 PC=0x100
+[RESET B] SP=0x104000 PC=0x100 enabled=yes
+[RESET A] SP=0x110000 PC=0x100
+[RESET B] SP=0x104000 PC=0x100 enabled=yes
+[test] generic runtime tracer
+[RESET A] SP=0x110000 PC=0x100
+[RESET B] SP=0x104000 PC=0x100 enabled=yes
+[test] generic memory PC gate
+[RESET A] SP=0x110000 PC=0x100
+[RESET B] SP=0x104000 PC=0x100 enabled=yes
+[test] generic memory PC gate matching write
+[RESET A] SP=0x110000 PC=0x100
+[RESET B] SP=0x104000 PC=0x100 enabled=yes
+[test] v0.27 memory arming + frame tag
+[test] v0.27 change-only memory trace
+[test] v0.27 task-state decoder
+[test] v0.43 provenance option parsing
+[test] v0.43 address provenance export
+[RESET A] SP=0x110000 PC=0x100
+[RESET B] SP=0x104000 PC=0x100 enabled=yes
+[test] v0.43 dynamic callgraph reconstruction
+[RESET A] SP=0x110000 PC=0x100
+[RESET B] SP=0x104000 PC=0x100 enabled=yes
+[test] v0.43 focused provenance + forensic workflow parsing
+[test] v0.44 graphics experiment parsing
+[test] v0.45 multi-pixel + known-bad regression set parsing
+[test] v0.45 known-bad graphics regression set
+[test] v0.46 primask matrix + investigate profile + watch parsing
+[test] v0.46 one-command compositor investigation profile
+[test] v0.48 SDL continuous-default frame intent parsing
+[test] v0.47 transition/capture/checkpoint option parsing
+[test] v0.47 checkpoint round-trip
+[RESET A] SP=0x110000 PC=0x100
+[RESET B] SP=0x104000 PC=0x100 enabled=yes
+[test] v0.43 focused provenance suppresses global graph exports
+[RESET A] SP=0x110000 PC=0x100
+[RESET B] SP=0x104000 PC=0x100 enabled=yes
+[test] CPU B reset latch
+[RESET A] SP=0x110000 PC=0x100
+[RESET B] SP=0x104000 PC=0x100 enabled=yes
+[CPU B] reset asserted by CPU A control latch
+PASS: dual ROMs, maps, TC0040IOC + input injection, tracer gates, scheduler, provenance, shared RAM, road RAM, CPU B reset control
+
+CPU-only Linux build/test validation exit=0
+Full SDL frontend not compiled in this environment because the package intentionally contains only the SDL placeholder; perform the documented fresh Windows SDL build before runtime validation.

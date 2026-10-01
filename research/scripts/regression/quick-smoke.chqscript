@@ -1,0 +1,24 @@
+# category: regression
+# name: v0.65.0 quick smoke
+# purpose: Fast baseline smoke for status, checkpoint, dynamic queries, image regions and live sprite API.
+# checkpoint: stage1-driving-2352.chqstate
+# regression-version: legacy
+# regression-scope: version
+
+api status
+api capabilities
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api memory.read cpu=A address=10A04A width=16
+api control.run-frames frames=2
+getregions()
+getmaps()
+getpalettes()
+api sprites.list
+api state.snapshot include=sprites,regions,gameplay,track
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api patch.clear
+api sprite.override.clear
+api sprite.visual.clear
+api frame.snapshot name=quick-smoke-frame
+api frame.snapshot.list
+echo QUICK SMOKE COMPLETE

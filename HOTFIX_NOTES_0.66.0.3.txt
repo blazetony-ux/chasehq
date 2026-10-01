@@ -1,0 +1,19 @@
+ChaseHQ-Native v0.66.0.4 - Workbench UX, Transport & Build Workflow Patch
+
+User-validated v0.66.0.2 baseline plus:
+- Serialized Workbench -> native debugger command dispatcher using a named mutex.
+- Background SDL frame preview is suppressed while Script Console execution is active.
+- Empty/native command diagnostics remain enabled; no automatic retry masks failures.
+- Script output defaults to wrapped lines.
+- Generated PNGs render inline beneath the command that produced them and remain in the run artifact gallery.
+- Same-tab image modal/lightbox with previous/next/download/escape-close.
+- Thumbnail toggle hides image previews only; non-image artifact cards remain visible.
+- Artifact downloads preserve original filenames through the concurrent front proxy.
+- Artifact serving can resolve prior evidence sessions after a Workbench restart, including safe sibling-version evidence/checkpoint paths inside the ChaseHQ workspace.
+- Persistent run history can therefore reopen older thumbnails after restart where the source artifact still exists.
+- Carries forward the locally proven PowerShell ${width}: parser fix.
+- Adds CMakePresets.json plus Prepare-Project.bat, Build-Debug.bat, Build-Release.bat, Build-And-Run.bat, Rebuild-All.bat, Clean-Build.bat and Find-CMake.bat.
+- Prepare-Project.bat recursively Unblock-File's packaged PowerShell scripts without changing machine-wide execution policy.
+- Build launchers support both legacy flat x64-Debug executables and Visual Studio generator Debug/ subfolders.
+
+No Chase H.Q. emulation behavior, gameplay addresses, track semantics or audio runtime behavior is intentionally changed by this patch.

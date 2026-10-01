@@ -1,0 +1,12 @@
+{
+  "schema": "chq-experiment-v1",
+  "name": "determinism-smoke",
+  "description": "Replay the same checkpoint twice for the same frame count and compare selected RAM ranges.",
+  "checkpoint": "checkpoints/stage1-gameplay-2064.chqstate",
+  "runs": 2,
+  "steps": [
+    {"op":"step-frame","frames":120},
+    {"op":"capture-memory","name":"cpu-a-work","cpu":"A","start":"100000","end":"100FFF"},
+    {"op":"capture-evidence","name":"end"}
+  ]
+}

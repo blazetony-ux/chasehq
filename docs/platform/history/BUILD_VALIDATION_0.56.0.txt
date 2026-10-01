@@ -1,0 +1,10 @@
+# Build validation — v0.56.0
+
+Validated in the Linux build environment on 2026-09-24:
+
+- CMake configure with `-DCHASEHQ_BUILD_SDL=OFF`: PASS
+- `cmake --build`: PASS
+- `ctest --output-on-failure`: PASS (1/1)
+- `g++ -std=c++17 -fsyntax-only` on `src/main.cpp`: PASS
+
+The packaged `SDL/` directory remains the established placeholder and does not contain SDL3 source, so the graphical executable was not link-tested here. Rebuild on Windows using the same SDL3 source tree used for the prior working releases.

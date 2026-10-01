@@ -1,0 +1,30 @@
+# name: Turbo HUD Before During After
+# category: graphics
+# purpose: Capture reconstructable normal, HUD-hidden and HUD-only evidence before, during and after a real turbo activation, then compare the HUD_TURBO region to localize the visual path.
+# checkpoint: stage1-gameplay-2064.chqstate
+echo === Turbo HUD Before During After ===
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api input.ioc.clear
+api gameplay.registry
+api frame.snapshot name=turbo-hud-before
+
+api input.ioc.xor port=3 mask=21
+api control.run-frames frames=15
+api gameplay.registry
+api frame.snapshot name=turbo-hud-during
+
+api input.ioc.clear
+api control.run-frames frames=225
+api gameplay.registry
+api frame.snapshot name=turbo-hud-after
+
+# If the HUD-only comparisons change, the text/HUD source itself changed.
+# If normal changes but HUD-only does not, investigate composition/sprites/road rather than the text source.
+api image.compare a=turbo-hud-before b=turbo-hud-during region=HUD_TURBO hud=normal
+api image.compare a=turbo-hud-before b=turbo-hud-during region=HUD_TURBO hud=only
+api image.compare a=turbo-hud-before b=turbo-hud-during region=HUD_TURBO hud=hidden
+api image.compare a=turbo-hud-during b=turbo-hud-after region=HUD_TURBO hud=normal
+api image.compare a=turbo-hud-during b=turbo-hud-after region=HUD_TURBO hud=only
+api image.diff a=turbo-hud-before b=turbo-hud-during region=HUD_TURBO hud=only output=turbo-hud-only-before-vs-during
+api input.ioc.clear
+echo === Turbo HUD Before During After complete ===

@@ -1,0 +1,16 @@
+# name: Research Session Preflight
+# category: recovery
+# purpose: Fast non-destructive preflight for build identity, core research APIs, packaged checkpoints, regions and the current turbo/HUD knowledge entry before starting a substantive investigation.
+echo === Research Session Preflight ===
+api platform.info
+api status
+api capabilities
+api window.status
+api checkpoint.list
+api regions.list
+api schema action=gameplay.registry
+api schema action=frame.snapshot
+api schema action=memory.trace.start
+api docs.get id=turbo-hud-investigation
+api gameplay.registry
+echo === Research Session Preflight complete ===

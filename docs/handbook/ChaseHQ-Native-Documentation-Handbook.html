@@ -1,0 +1,965 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>ChaseHQ-Native Handbook 0.66.9.0-RC2.7</title><style>body{margin:0;background:#0b1018;color:#e8f0fa;font:15px/1.55 system-ui}header{padding:32px;background:#152236;border-bottom:8px solid #e13039}header small{color:#85ccff}.layout{display:grid;grid-template-columns:240px minmax(0,1fr)}nav{padding:20px;position:sticky;top:0;height:90vh;overflow:auto}nav a{display:block;color:#8ed2ff;margin:12px 0}main{padding:24px;max-width:1200px}article{padding:18px;margin:16px 0;background:#121c29;border:1px solid #2c4058}h2{color:#8ed2ff}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#080d14;padding:12px}table{border-collapse:collapse;width:100%;font-size:12px}td,th{padding:8px;border:1px solid #33465d;text-align:left;overflow-wrap:anywhere}.callout{border-left:4px solid #e13039;padding:12px;background:#22202a}small{color:#a9bacd}@media(max-width:850px){.layout{display:block}nav{position:static;height:auto}table{display:block;overflow:auto}}</style><header><h1>CHASE H.Q. — Native Research Handbook</h1><small>0.66.9.0-RC2.7 · SOURCE CANDIDATE · Windows promotion pending</small></header><div class="layout"><nav><a href="#rc27-candidate">RC2.7 Candidate and Prove-Off</a><a href="#getting-started">Getting Started</a><a href="#workbench">Workbench Guide</a><a href="#api">Research API</a><a href="#scripting">Research Scripting</a><a href="#research-guides">Research Guides</a><a href="#project-knowledge">Project Knowledge</a><a href="#continuation">Project Continuation</a><a href="#api">Current API contracts</a><a href="#knowledge">Knowledge and findings</a></nav><main><section id="rc27-candidate"><h2>RC2.7 Candidate and Prove-Off</h2><article id="rc27-proveoff"><h3>RC2.7: renderer and reliability</h3><p>Source candidate; Windows proof is pending.</p><div class="callout"><b>Validation boundary</b><p>RC2.7 Linux native tests pass. Windows/SDL build, PowerShell tests and full Script Console regression still require local execution. Build-Debug stages SDL and ROMs from build-local.json.</p></div><div class="p"><p>The shared BG X transform is corrected; Y and zero presentation defaults are unchanged. Old/corrected snapshots compare all canonical checkpoints. Column scroll remains unsupported and explicitly reported.</p></div><div class="p"><p>History uses parsed timestamp order, session-filtered server queries and full release labels. SDL controls now bind to the native command path. Live layer.offsets.get/set/reset/assert and snapshot exact/no-sprites assertions are documented in API_REFERENCE.md.</p></div><div class="p"><p>See TC0100SCN_RC261_FINDINGS.md, NATIVE_RECONSTRUCTION.md, RELEASE_SCOPE_RC27.md and VALIDATION_0.66.9.0-RC2.7.md. The diagnostic comparison is not independent shadow verification.</p></div></article></section><section id="getting-started"><h2>Getting Started</h2><article id="welcome"><h3>Welcome to ChaseHQ-Native</h3><p>What the project is, how the runtime and Workbench fit together, and where to begin.</p><div class="callout"><b>Current proven release</b><p>v0.66.8.0 (2026-09-29): Forensic Timeline v1, portable automated timeline analysis/playback, and bounded Workbench history discovery are proven on Windows/SDL.</p></div><div class="p"><p>ChaseHQ-Native is both a native Chase H.Q. runtime and an evidence-driven reverse-engineering platform. The SDL window is the live game/render output; the Research Workbench is the browser-based control, inspection, scripting and documentation environment.</p></div><div class="callout"><b>Core rule</b><p>Gameplay and rendering fidelity are the project. Tooling exists to make behaviour observable, reproducible and provable.</p></div><ul><li>Use checkpoints or scenarios to start from known states.</li><li>Prefer API/scriptable experiments over one-off UI gestures.</li><li>Capture evidence with build, frame, checkpoint and source metadata.</li><li>Promote only sufficiently proven findings into authoritative knowledge.</li></ul></article><article id="build-launch"><h3>Build and launch</h3><p>Normal Windows development build and research launch workflow.</p><div class="p"><p>The normal Windows development entry point is Build-Debug.bat. It prepares the project, configures/builds the native target and runs the packaged tests. The research launcher then starts the SDL runtime, private debugger API and browser Workbench together.</p></div><pre>.\Build-Debug.bat</pre><pre>.\Start-ChaseHQ.ps1</pre><div class="callout"><b>Known Windows test exception</b><p>A narrowly documented historical cpu_bus_rom_tests SEGFAULT may be tolerated only when it exactly matches the known signature recorded in validation documentation. Other failures remain blocking.</p></div></article><article id="first-investigation"><h3>Your first reproducible investigation</h3><p>A minimal checkpoint → action → capture → compare workflow.</p><ol><li>Load a canonical checkpoint.</li><li>Apply one controlled intervention.</li><li>Advance a bounded number of emulated frames.</li><li>Capture structured evidence.</li><li>Compare the changed state against the baseline.</li><li>Record the conclusion only when the evidence supports it.</li></ol><pre>api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api frame.snapshot name=baseline sprites=individual
+api control.run-frames count=30
+api frame.snapshot name=after sprites=individual
+api image.compare a=baseline b=after hud=hidden</pre></article><article id="release-proveoff"><h3>Release and prove-off workflow</h3><p>Use cheap gates before Full Regression and keep one authoritative run/bundle lifecycle.</p><div class="p"><p>The canonical Windows build path is Build-Debug.bat. Do not bypass it with ad-hoc build or validator sequences.</p></div><ol><li>Build with Build-Debug.bat.</li><li>Launch with Start-ChaseHQ.ps1 -Restart and require browser bootstrap READY.</li><li>Check root/status/run-history/snapshot endpoints.</li><li>Run Recovery / Fast Release Gate.</li><li>Run the focused regression for the changed subsystem.</li><li>Run Full Regression Suite once against the exact candidate intended for promotion.</li></ol><div class="callout"><b>One run, one bundle</b><p>A script run must create one run directory and generate bundle-manifest.json / bundle.zip only once at PASS, FAIL or CANCELLED finalization. Repeated Compress-Archive activity during individual commands is a runner defect.</p></div><div class="p"><p>See docs/RELEASE_PROCESS.md for the complete packaging, validation, discovery and lifecycle rules.</p></div></article></section><section id="workbench"><h2>Workbench Guide</h2><article id="workbench-overview"><h3>Workbench overview</h3><p>What each Workbench tab is for.</p><table><thead><tr><th>Tab</th><th>Purpose</th></tr></thead><tbody><tr><td>Dashboard</td><td>Live machine state and quick runtime controls.</td></tr><tr><td>Script Console</td><td>Author, validate and run repeatable .chqscript experiments.</td></tr><tr><td>Gameplay Registry</td><td>Evidence-backed semantic gameplay state.</td></tr><tr><td>Track View</td><td>Record and export road/course motion data.</td></tr><tr><td>Graphics Lab</td><td>Layered frame, image and per-sprite forensic analysis.</td></tr><tr><td>Docs / Knowledge</td><td>User handbook, API/script reference, project findings and glossary.</td></tr><tr><td>Experimental</td><td>Game-profile-specific research controls.</td></tr><tr><td>Evidence</td><td>Browse, restore and package experiment captures.</td></tr><tr><td>Logs / Diagnostics</td><td>Session health, logs and diagnostic bundles.</td></tr></tbody></table></article><article id="graphics-lab-guide"><h3>Graphics Lab</h3><p>Layered snapshots, HUD isolation and individual sprite controls.</p><div class="p"><p>Graphics Lab works with structured snapshots rather than ordinary screenshots. Exact reconstruction uses ordered contribution layers. Raw source layers are independent forensic views. The HUD can be shown normally, suppressed at source, or isolated by itself.</p></div><ul><li>Normal / HUD hidden / HUD only frame views.</li><li>Exact contribution-layer reconstruction with native verification.</li><li>Raw logical source layers for road/background/sprite/text investigation.</li><li>Individual visible sprite hide/show, solo and opacity controls.</li><li>Per-sprite slot, map, palette, priority, zoom/flip and provenance metadata where available.</li></ul><div class="callout"><b>Exactness</b><p>Individual-sprite assets are forensic/exploratory. The aggregate sprite contribution remains authoritative for exact frame reconstruction.</p></div></article><article id="script-console-guide"><h3>Script Console</h3><p>How to use the reusable script library and run history.</p><div class="p"><p>The Script Console is the preferred place to turn a successful manual experiment into a reproducible recipe. Scripts may call any documented Script API action through the generic api statement.</p></div><ul><li>Use Validate before long runs when editing a script.</li><li>Use the Script Library for packaged diagnostics, surveys and regressions.</li><li>Run history records source, output, artifacts, build and session metadata.</li><li>Prefer include for reusable script fragments instead of copy/paste duplication.</li></ul></article><article id="evidence-guide"><h3>Evidence and run bundles</h3><p>How captures, run artifacts and ZIP bundles are organized.</p><div class="p"><p>Important experiments should leave a portable evidence trail. A run owns its script source, console output, metadata and generated artifacts; the final ZIP should be sufficient for later review without relying on the live session.</p></div><pre>evidence/sessions/YYYYMMDD_HHMMSS/
+  evidence/runs/001/
+    script.chqscript
+    console-output.txt
+    run-metadata.json
+    artifacts/
+    bundle-manifest.json
+    bundle.zip</pre></article><article id="game-lab-guide"><h3>Experimental / Game Lab</h3><p>Reversible Chase H.Q.-specific turbo and speed experiments with API/script parity.</p><div class="p"><p>Game Lab groups confirmed gameplay manipulations into named reversible controls. Infinite turbo stock freezes 0x1003A2, infinite active turbo freezes the duration timer at 0x100414, and current speed set/freeze targets 0x10041C.</p></div><div class="callout"><b>Current speed is not top-speed limit</b><p>0x10041C is the confirmed current-speed field. The actual maximum-speed clamp/target-speed logic remains an open reverse-engineering task.</p></div><pre>api game.turbo.stock enabled=true value=3
+api game.turbo.active enabled=true
+api game.turbo.fire frames=3
+api game.speed.freeze enabled=true value=602
+api game.speed.clear</pre></article></section><section id="api"><h2>Research API</h2><article id="api-overview"><h3>Research API overview</h3><p>How to discover and invoke the authoritative API contract.</p><div class="p"><p>The Research API is the authoritative action surface shared by the Workbench and .chqscript. Do not invent action names: discover the current contract from the schema in the running build.</p></div><pre>api actions
+api schema.all
+api schema action=frame.snapshot
+api script.schema</pre><div class="callout"><b>Workbench parity</b><p>Meaningful Workbench controls should map to documented API actions so the same operation can be reproduced from scripts or external localhost clients.</p></div></article><article id="api-reference"><h3>Complete API action reference</h3><p>Generated from research/schema/api-actions.json for the running build.</p></article><article id="v06690-rc2-game-research"><h3>v0.66.9.0-RC2 Game Research Controls</h3><p>Sprite-order A/B diagnostics, corrected sprite-map lookup, and clarified speed semantics.</p><div class="paragraph"><p>Game Lab distinguishes HUD display speed at CPU-A 0x100400 (packed BCD) from raw internal/physics speed at 0x10041C. The values are not expected to match numerically.</p></div><div class="paragraph"><p>Sprite-order diagnostics preserve legacy names: lower-slot selects descending and higher-slot ascending traversal. First nontransparent candidates reserve pixels, even if layer-masked; names do not describe the winner. Use frame.snapshot.assert-overlap for ownership and export-coordinate assertions.</p></div><div class="paragraph"><p>Turbo HUD animation is confirmed game behavior: active characters 0x0C..0x0F are rewritten from a three-frame source table and cleared at turbo expiry.</p></div></article><article id="safe-experiment-lifecycle"><h3>Safe experiment lifecycle (RC2.5)</h3><p>Use meaningful headers, known preconditions, try/finally and idempotent timeline.reset so failed experiments do not leak timeline/sprite state.</p><p>Mutation scripts should never assume the previous run cleaned up successfully. Call timeline.reset before timeline work and again in finally.</p><p>Historical timeline state is read-only; use timeline.fork-live before memory writes.</p><p>A cleanup failure must not replace the primary experiment failure.</p><p>Script Console history defaults to the active session; switch filters explicitly when researching older runs.</p><pre>api timeline.reset
+try
+  api timeline.load name=car-shadow-layer-investigation
+  api timeline.seek frame=2352
+  api timeline.fork-live
+  # experiment
+finally
+  api timeline.reset
+end</pre></article></section><section id="scripting"><h2>Research Scripting</h2><article id="scripting-intro"><h3>Research Script introduction</h3><p>The purpose and shape of .chqscript.</p><div class="p"><p>.chqscript is intentionally small and deterministic. It is designed for repeatable research recipes and regressions, not as a general-purpose programming language.</p></div><pre># name: Minimal deterministic capture
+set cp = stage1-driving-2352.chqstate
+api checkpoint.load file=${cp} run=false
+api frame.snapshot name=baseline sprites=individual
+api control.run-frames count=30
+api frame.snapshot name=after sprites=individual</pre></article><article id="script-reference"><h3>Complete language reference</h3><p>Generated from research/schema/script-language.json for the running build.</p></article></section><section id="research-guides"><h2>Research Guides</h2><article id="guide-memory-writer"><h3>Trace a memory writer</h3><p>Find which CPU/PC writes an address or range.</p><div class="p"><p>Start from a deterministic checkpoint, enable a bounded write trace, reproduce the state transition, then inspect writer PCs and transaction widths. For byte discovery, width=any avoids missing writes performed by a wider bus transaction.</p></div><pre>api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api memory.trace.clear
+api memory.trace.start cpu=A address=0x100303 length=1 width=any limit=256
+api control.run-frames count=120
+api memory.trace.stop
+api memory.trace.tail count=50</pre></article><article id="guide-frame-compare"><h3>Compare two frames</h3><p>Use HUD-aware captures to reduce visual comparison noise.</p><div class="p"><p>When the question concerns the road, scenery or sprites rather than counters/text, compare structured snapshots with HUD hidden. HUD suppression occurs at the identified text source; it is not a fixed rectangle mask.</p></div><pre>api frame.snapshot name=a
+api control.run-frames count=30
+api frame.snapshot name=b
+api image.compare a=a b=b hud=hidden</pre></article><article id="guide-sprite"><h3>Investigate one sprite</h3><p>Use individual-sprite forensic assets and provenance to isolate a visible object.</p><ol><li>Capture a structured snapshot with individual sprites enabled.</li><li>Open it in Graphics Lab.</li><li>Solo the candidate sprite and inspect slot/map/palette/priority metadata.</li><li>Use sprite.inspect / sprite.map.inspect for deeper provenance.</li><li>Correlate the visible object with gameplay state only after the relationship is evidenced.</li></ol><pre>api frame.snapshot name=sprite-study sprites=individual
+api sprites.list
+api sprite.inspect slot=45</pre></article><article id="guide-hud"><h3>Investigate HUD rendering</h3><p>Determine whether a HUD element is missing at source or lost during composition.</p><ol><li>Capture normal, HUD-hidden and HUD-only variants in one structured snapshot.</li><li>Inspect the text/HUD raw source and contribution layer.</li><li>If the expected element is absent at source, trace text/tile state and gameplay producer state.</li><li>If present at source but absent in final, investigate priority/compositor behaviour.</li></ol></article><article id="guide-track"><h3>Record and export a track</h3><p>Use the shared Track View recorder from UI or script.</p><pre>api track.record.clear
+api track.record.start
+api track.record.sample
+api control.run-frames count=30
+api track.record.sample
+api track.record.stop
+api track.svg.export name=stage1-study</pre></article><article id="guide-turbo-hud"><h3>Turbo / HUD investigation</h3><p>Follow the proven turbo gameplay-to-TC0100SCN HUD path and inspect the active RAM characters directly.</p><div class="p"><p>The turbo gameplay/HUD chain is now substantially proven. Activation decrements 0x1003A2 and sets 0x10040F bit 1; the timer 0x100414 expires at 0x00D2. The HUD swaps the consumed slot from normal characters 0x7C..0x7F to active characters 0x0C..0x0F, then clears it at expiry.</p></div><pre>include &quot;graphics/turbo-hud-layer-sprite-correlation.chqscript&quot;
+include &quot;graphics/turbo-hud-exact-tile-writer-investigation.chqscript&quot;
+include &quot;graphics/turbo-hud-text-plane-neighbourhood.chqscript&quot;
+include &quot;gameplay/turbo-gameplay-to-hud-writer-path.chqscript&quot;
+include &quot;graphics/turbo-hud-tile-character-inspection.chqscript&quot;</pre><ol><li>Reuse the existing turbo timeline; do not replay gameplay.</li><li>Inspect active characters 0x0C..0x0F and normal 0x7C..0x7F with tile.inspect.</li><li>Compare raw pens and palette-aware output.</li><li>Only reopen compositor/palette hypotheses if the source characters themselves decode correctly but final output remains wrong.</li></ol></article><article id="guide-forensic-timeline"><h3>Forensic Timeline: record once, investigate repeatedly</h3><p>Capture a gameplay event once, then import/seek/inspect it through the normal research APIs and fork historical frames back to live execution.</p><div class="p"><p>Forensic Timeline v1 stores a deterministic CHQSTATE for every recorded frame and an unfiltered bus-write provenance stream. This intentionally prioritises fidelity and later analysis over storage efficiency.</p></div><pre>api timeline.record.start name=turbo-complete-cycle
+# run event once
+api timeline.record.stop
+api timeline.trim.event name=turbo-complete-cycle cpu=A address=0x10040F width=8 mask=02 pre=1 post=1
+api timeline.scan.memory name=turbo-complete-cycle</pre><div class="p"><p>After timeline.load/timeline.seek, the ordinary memory, register, gameplay, sprite and palette inspection APIs operate on the selected historical checkpoint. timeline.fork-live keeps that checkpoint loaded and returns to paused live execution.</p></div><div class="callout"><b>Audio limitation</b><p>The current native runtime has only sound_stub. Timeline v1 does not claim authentic sound CPU/chip/PCM capture; that capability will be added when native audio emulation exists.</p></div></article><article id="guide-tc0100-character-inspector"><h3>TC0100SCN RAM character inspection</h3><p>Inspect the 256 RAM-backed 8x8 text characters used by the HUD.</p><pre>api tile.inspect code=0C palette=0 scale=16</pre><div class="p"><p>The inspector exports a PNG, pen matrix and JSON metadata from character RAM at 0xC06000 + code*16. Pen 0 is transparent; pens 1..3 use the selected palette bank. v1 does not inspect background ROM tiles.</p></div></article><article id="guide-sprite-bitplanes"><h3>Verify sprite bitplane significance (RC2.6.1)</h3><p>Prove the source-level 4bpp pen mapping without palette or compositor workarounds.</p><div class="callout"><b>Confirmed mapping</b><p>Physical sprite planes 0,1,2,3 contribute pen bits 3,2,1,0. This is equivalent to reversing the RC2.5 decoded four-bit pen.</p></div><ol><li>Run Test-SpriteGfx.bat to exhaustively validate all 16 pen combinations.</li><li>Launch the RC2.6.1 candidate normally.</li><li>Run regression/regression-v06690-rc261-sprite-bitplane-significance.chqscript as the explicit build-specific focused regression.</li><li>Run graphics/sprite-bitplane-significance-proveoff.chqscript and inspect map405-native-plane-order: the Map-405 cloud family should be coherently shaded without palette overrides.</li><li>Require exact structured-snapshot reconstruction, then run sprite ownership and Full Regression before promotion.</li></ol><pre>api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api sprite.map.inspect map=405
+api frame.snapshot name=map405-native-plane-order sprites=individual</pre></article></section><section id="project-knowledge"><h2>Project Knowledge</h2><article id="knowledge-browser"><h3>Findings and investigations</h3><p>Evidence-backed project knowledge, statuses and relationships.</p></article><article id="glossary"><h3>Glossary</h3><p>Quick definitions for common ChaseHQ-Native and research terms.</p></article></section><section id="continuation"><h2>Project Continuation</h2><article id="chatgpt-handover"><h3>Authoritative ChatGPT handover</h3><p>How to move the project to a new ChatGPT conversation without losing current state.</p><div class="p"><p>Every build carries docs/CHATGPT_HANDOVER_PROMPT.md. Upload the latest project ZIP and provide that prompt in a new conversation. The ZIP plus handover prompt are the authoritative continuation source when older conversation assumptions conflict.</p></div><div class="callout"><b>Release rule</b><p>The handover build/proof status must be updated with every revision. Release validation should flag stale continuation metadata.</p></div></article></section><section id="api"><h2>Current API contracts</h2><table><thead><tr><th>Action</th><th>Parameters</th><th>Example</th><th>Meaning</th></tr></thead><tbody><tr><td>status</td><td></td><td>api status</td><td>Read machine/frame status</td></tr><tr><td>capabilities</td><td></td><td>api capabilities</td><td>List native debugger capabilities</td></tr><tr><td>memory.read</td><td>cpu=A|B required; address=HEX required; width=8|16|32 optional default 16</td><td>api memory.read cpu=A address=10A048 width=8</td><td>Read one value</td></tr><tr><td>memory.read-range</td><td>cpu=A|B required; address=HEX required; length=COUNT required, decimal or 0xHEX, max 65536</td><td>api memory.read-range cpu=A address=109000 length=512</td><td>Read a contiguous byte range and return a compact hex dump</td></tr><tr><td>memory.write</td><td>cpu=A|B required; address=HEX required; width=8|16|32 optional default 16; value=HEX required; expect=HEX optional compare-before-write</td><td>api memory.write cpu=A address=10A04A width=16 value=0051 expect=0011</td><td>Debugger-safe write; pauses machine and reports old/new values</td></tr><tr><td>memory.trace.start</td><td>cpu=A|B required; address=HEX required; length=COUNT optional default 1; width=8|16|32|any optional default any; limit=64..1000000 optional default 4096</td><td>api memory.trace.start cpu=A address=0x100303 length=1 width=any limit=256</td><td>Start bounded generic memory-write tracing for an address or range; width filters the originating write transaction width, while range overlap determines address matches. Use width=any when tracing a byte that may be written by a wider transaction.</td></tr><tr><td>memory.trace.status</td><td></td><td>api memory.trace.status</td><td>Read generic memory-write trace configuration, event count and limit</td></tr><tr><td>memory.trace.tail</td><td>count=N optional default 20</td><td>api memory.trace.tail count=50</td><td>Return recent matching generic memory-write events, including unchanged writes</td></tr><tr><td>memory.trace.stop</td><td></td><td>api memory.trace.stop</td><td>Stop generic memory-write tracing while retaining captured events</td></tr><tr><td>memory.trace.clear</td><td></td><td>api memory.trace.clear</td><td>Clear captured generic memory-write events and reset the trace write count</td></tr><tr><td>register.read</td><td>cpu=A|B required; name=D0..D7|A0..A7|PC|SR|SP optional</td><td>api register.read cpu=A name=D0</td><td>Read one register or complete CPU register set</td></tr><tr><td>register.write</td><td>cpu=A|B required; name=REGISTER required; value=HEX required</td><td>api register.write cpu=A name=D0 value=00000001</td><td>Write a CPU register while paused</td></tr><tr><td>patch.freeze</td><td>cpu=A|B required; address=HEX required; width=8|16|32 required; value=HEX required; expect=HEX optional</td><td>api patch.freeze cpu=A address=10A04A width=16 value=0051</td><td>Immediately write and continuously freeze a value; returns patch ID</td></tr><tr><td>patch.replace</td><td>cpu=A|B required; address=HEX required; width=8|16|32 required; value=HEX required</td><td>api patch.replace cpu=A address=10A04A width=16 value=0051</td><td>Replace matching game writes with a fixed value</td></tr><tr><td>patch.suppress</td><td>cpu=A|B required; address=HEX required; width=8|16|32 required</td><td>api patch.suppress cpu=A address=10A04A width=16</td><td>Suppress writes and preserve current value</td></tr><tr><td>patch.list</td><td></td><td>api patch.list</td><td>List active live patches</td></tr><tr><td>patch.remove</td><td>id=N required</td><td>api patch.remove id=1</td><td>Remove one live patch</td></tr><tr><td>patch.clear</td><td></td><td>api patch.clear</td><td>Remove all live patches</td></tr><tr><td>memory.export</td><td>cpu=A|B required; address=HEX + length=COUNT OR start=HEX + end=HEX; output=relative evidence path optional; name=basename optional legacy alias; max 1 MiB</td><td>api memory.export cpu=A address=109000 length=512 output=evidence\\stage1-track-109000.bin</td><td>Export a contiguous debugger-safe byte range under the evidence root</td></tr><tr><td>cpu.disassemble</td><td>cpu=A|B optional default A; address=HEX required; count=N optional default 16</td><td>api cpu.disassemble cpu=A address=008120 count=64</td><td>Read-only disassembly</td></tr><tr><td>control.run-frames</td><td>frames=1..100000 required</td><td>api control.run-frames frames=100</td><td>Run exactly N emulated frames and pause; cancellation-aware</td></tr><tr><td>control.abort</td><td></td><td>api control.abort</td><td>Out-of-band pause/cancel of active frame execution</td></tr><tr><td>checkpoint.load</td><td>file=packaged .chqstate required; run=true|false optional default false</td><td>api checkpoint.load file=stage1-gameplay-2064.chqstate run=false</td><td>Load a packaged deterministic checkpoint</td></tr><tr><td>checkpoint.save</td><td>file=packaged filename required; name=display name optional; role=role optional; description=text optional</td><td>api checkpoint.save file=stage1-gradient-test.chqstate role=research</td><td>Save current deterministic state into packaged checkpoints and write metadata</td></tr><tr><td>frame.snapshot</td><td>name=optional snapshot name</td><td>api frame.snapshot name=stage1-bad-foreground</td><td>Capture reconstructable layered frame snapshot with exact aggregate alpha contribution layers, raw sources, HUD variants, scene-no-sprites base, cropped per-visible-sprite forensic assets/metadata, palette state and manifest</td></tr><tr><td>frame.snapshot.assert-overlap</td><td>name=NAME required; front=SLOT required; back=SLOT required; frontSolo=NAME required; backSolo=NAME required</td><td>api frame.snapshot.assert-overlap name=normal front=82 back=81 frontSolo=body backSolo=shadow</td><td>Assert non-vacuous front ownership, uncovered back visibility, overlap coverage and exact per-sprite coordinates against solo runtime source renders; throws on mismatch</td></tr><tr><td>frame.snapshot.list</td><td>require=NAME optional; throw unless exactly one snapshot named NAME is present in the returned list</td><td>api frame.snapshot.list require=stage1-study</td><td>List structured frame snapshots, optionally asserting that a named snapshot is immediately discoverable</td></tr><tr><td>regions.list</td><td></td><td>api regions.list</td><td>Return authoritative image regions as structured JSON</td></tr><tr><td>profiles.list</td><td></td><td>api profiles.list</td><td>List packaged game-profile descriptors; metadata only and does not switch runtime</td></tr><tr><td>profile.get</td><td>id=profile id optional default chasehq</td><td>api profile.get id=sci</td><td>Read one packaged game profile and whether it is active/activatable</td></tr><tr><td>sprites.list</td><td></td><td>api sprites.list</td><td>Return current live composed sprite records as structured JSON</td></tr><tr><td>sprites.maps</td><td></td><td>api sprites.maps</td><td>Return unique live sprite map IDs</td></tr><tr><td>sprites.palettes</td><td></td><td>api sprites.palettes</td><td>Return unique live sprite palette IDs</td></tr><tr><td>sprite.inspect</td><td>slot=N required</td><td>api sprite.inspect slot=44</td><td>Inspect one currently active sprite slot</td></tr><tr><td>sprite.map.inspect</td><td>slot=N optional; map=N optional; resolves all currently active matching slots</td><td>api sprite.map.inspect map=475</td><td>Inspect raw spritemap/chunk provenance and raw pen histogram for an active sprite slot or all active slots using a requested map.</td></tr><tr><td>schema.all</td><td></td><td>api schema.all</td><td>Return every Script API action contract from the authoritative in-process schema</td></tr><tr><td>script.schema</td><td></td><td>api script.schema</td><td>Return the authoritative Research Script v2 grammar and limits</td></tr><tr><td>ui.prompt</td><td>message=TEXT required; underscores render as spaces; pause=true|false optional default true; top=true|false optional default true; timeout=1000..3600000 optional default 300000</td><td>api ui.prompt message=Hold_DOWN_then_press_ENTER pause=true top=true</td><td>Show an SDL-native prompt overlay and wait for Enter/Escape while physical gameplay keys remain live</td></tr><tr><td>sprite.override</td><td>slot=N required; map=N optional; palette=N optional; visible=true|false optional</td><td>api sprite.override slot=44 map=182</td><td>Presentation-only live SDL sprite override; omitted fields retain original values</td></tr><tr><td>sprite.override.clear</td><td></td><td>api sprite.override.clear</td><td>Clear all live sprite presentation overrides</td></tr><tr><td>sprite.visual</td><td>slot=N required; mode=solo|hide|flash required</td><td>api sprite.visual slot=44 mode=flash</td><td>Live SDL sprite isolation/highlight mode</td></tr><tr><td>sprite.visual.clear</td><td></td><td>api sprite.visual.clear</td><td>Clear sprite solo/hide/flash presentation mode</td></tr><tr><td>palette.entries</td><td>bank=0..255 required</td><td>api palette.entries bank=75</td><td>Return the 16 palette entry indices for a bank</td></tr><tr><td>state.snapshot</td><td>include=sprites,regions,gameplay,track optional</td><td>api state.snapshot include=sprites,regions,gameplay,track</td><td>Capture coherent structured research state from the current paused instant</td></tr><tr><td>input.ports</td><td></td><td>api input.ports</td><td>Read current IOC/input port state</td></tr><tr><td>events.tail</td><td>count=N optional default 100</td><td>api events.tail count=50</td><td>Return recent research events</td></tr><tr><td>sprites.tail</td><td>count=N optional default 100</td><td>api sprites.tail count=100</td><td>Return recent semantic sprite-change events</td></tr><tr><td>control.pause</td><td></td><td>api control.pause</td><td>Pause emulation</td></tr><tr><td>control.resume</td><td></td><td>api control.resume</td><td>Resume emulation</td></tr><tr><td>control.step-frame</td><td>frames=N optional default 1</td><td>api control.step-frame frames=1</td><td>Advance paused emulation by N frames</td></tr><tr><td>control.step-instruction</td><td>cpu=A|B optional default A</td><td>api control.step-instruction cpu=A</td><td>Step one CPU instruction</td></tr><tr><td>timer.hold</td><td>enabled=true|false optional default true</td><td>api timer.hold enabled=true</td><td>Freeze or resume the game timer helper</td></tr><tr><td>window.always-on-top</td><td>enabled=true|false optional default true</td><td>api window.always-on-top enabled=true</td><td>Toggle SDL always-on-top</td></tr><tr><td>tuning.handling.get</td><td></td><td>api tuning.handling.get</td><td>Read handling override plus instruction-time turn/table/speed/lateral coefficient telemetry when valid</td></tr><tr><td>tuning.handling.set</td><td>cornering=NUMBER optional default 1; speedRetain=NUMBER optional default 1</td><td>api tuning.handling.set cornering=1.15 speedRetain=1.0</td><td>Set live handling multipliers</td></tr><tr><td>tuning.handling.reset</td><td></td><td>api tuning.handling.reset</td><td>Restore authentic handling values</td></tr><tr><td>collision.state</td><td></td><td>api collision.state</td><td>Read evidence-scoped collision-response suppression state and counters; detection remains live</td></tr><tr><td>collision.response.get</td><td></td><td>api collision.response.get</td><td>Read whether authentic collision response writes are enabled</td></tr><tr><td>collision.response.set</td><td>enabled=true|false required</td><td>api collision.response.set enabled=false</td><td>Enable/disable only proven collision response writes while preserving detection/event logic</td></tr><tr><td>collision.response.reset</td><td></td><td>api collision.response.reset</td><td>Restore authentic collision response</td></tr><tr><td>input.steering.get</td><td></td><td>api input.steering.get</td><td>Read raw IOC steering injection (signed 12-bit encoding, centre=0000)</td></tr><tr><td>input.steering.set</td><td>value=HEX required</td><td>api input.steering.set value=0060</td><td>Set raw IOC steering injection; use 0000 centre, 0060 right, 0FA0 left for proven full steering</td></tr><tr><td>palette.bank</td><td>bank=N required</td><td>api palette.bank bank=75</td><td>Inspect one 16-pen palette bank</td></tr><tr><td>palette.entry.set</td><td>index=N required; raw=HEX required</td><td>api palette.entry.set index=1209 raw=7FFF</td><td>Freeze one live palette entry</td></tr><tr><td>palette.entry.restore</td><td>index=N required</td><td>api palette.entry.restore index=1209</td><td>Return one palette entry to game control</td></tr><tr><td>palette.overrides.clear</td><td></td><td>api palette.overrides.clear</td><td>Clear all palette freezes</td></tr><tr><td>input.ioc.xor</td><td>port=N required; mask=HEX required</td><td>api input.ioc.xor port=3 mask=20</td><td>Set held IOC XOR mask</td></tr><tr><td>input.ioc.clear</td><td></td><td>api input.ioc.clear</td><td>Clear held IOC XOR masks</td></tr><tr><td>input.ioc.pulse</td><td>port=N required; mask=HEX required; frames=N optional default 3</td><td>api input.ioc.pulse port=3 mask=20 frames=3</td><td>Pulse IOC mask for emulated frames</td></tr><tr><td>input.ioc.sweep</td><td>checkpoint=FILE optional; port=N optional default 3; masks=comma list optional; pulseFrames=N optional; observeFrames=N optional</td><td>api input.ioc.sweep checkpoint=stage1-gameplay-2064.chqstate port=3 masks=01,02,04</td><td>Run deterministic IOC mask sweep and collect evidence</td></tr><tr><td>checkpoint.list</td><td></td><td>api checkpoint.list</td><td>List packaged checkpoints</td></tr><tr><td>logs.list</td><td></td><td>api logs.list</td><td>List active-session logs</td></tr><tr><td>logs.tail</td><td>file=RELATIVE required; lines=N optional default 80</td><td>api logs.tail file=@runtime/web-listener.log lines=80</td><td>Tail a log using the exact identifier returned by logs.list</td></tr><tr><td>evidence.capture</td><td>name=NAME optional</td><td>api evidence.capture name=experiment-a</td><td>Capture checkpoint/events/sprites/screenshot evidence bundle</td></tr><tr><td>evidence.list</td><td></td><td>api evidence.list</td><td>List evidence captures</td></tr><tr><td>evidence.view</td><td>name=NAME optional latest</td><td>api evidence.view name=experiment-a</td><td>Read evidence manifest</td></tr><tr><td>evidence.load</td><td>name=NAME optional latest</td><td>api evidence.load name=experiment-a</td><td>Load captured evidence checkpoint paused</td></tr><tr><td>evidence.zip</td><td>name=NAME|latest optional</td><td>api evidence.zip name=latest</td><td>Create ZIP for one evidence capture</td></tr><tr><td>frame.capture</td><td>name=NAME optional</td><td>api frame.capture name=control</td><td>Capture current SDL frame PNG</td></tr><tr><td>image.compare</td><td>a=NAME required; b=NAME required; region=NAME optional default FULL; hud=normal|hidden|only optional default normal</td><td>api image.compare a=control b=test region=PLAYER_CAR hud=hidden</td><td>Compare two captures/snapshots and return pixel-difference metrics; HUD modes require layered snapshots</td></tr><tr><td>image.diff</td><td>a=NAME required; b=NAME required; region=NAME optional default FULL; output=NAME optional default image-diff; hud=normal|hidden|only optional default normal</td><td>api image.diff a=control b=test region=FULL hud=hidden output=diff</td><td>Compare images and optionally save a grayscale diff PNG; HUD modes require layered snapshots</td></tr><tr><td>image.regions</td><td></td><td>api image.regions</td><td>Return raw named image-region document</td></tr><tr><td>gameplay.registry</td><td></td><td>api gameplay.registry</td><td>Return live evidence-backed gameplay registry</td></tr><tr><td>track.state</td><td></td><td>api track.state</td><td>Return current authoritative track/road state</td></tr><tr><td>next-steps</td><td></td><td>api next-steps</td><td>Return packaged high-level research next steps</td></tr><tr><td>experiment.begin</td><td>name=NAME optional</td><td>api experiment.begin name=player-car-ab</td><td>Start a grouped research experiment/evidence manifest</td></tr><tr><td>experiment.capture</td><td>label=NAME optional; include=sprites,regions,gameplay,track optional</td><td>api experiment.capture label=control</td><td>Capture screenshot plus structured state into the active experiment</td></tr><tr><td>experiment.status</td><td></td><td>api experiment.status</td><td>Return the active experiment manifest or inactive state</td></tr><tr><td>experiment.end</td><td></td><td>api experiment.end</td><td>Finalize and close the active experiment manifest</td></tr><tr><td>platform.info</td><td></td><td>api platform.info</td><td>Return build, script engine, active profile and research-platform identity</td></tr><tr><td>features.list</td><td></td><td>api features.list</td><td>Return machine-readable feature/regression manifest</td></tr><tr><td>script.functions</td><td></td><td>api script.functions</td><td>List supported Script Console query/collection functions</td></tr><tr><td>registry.list</td><td></td><td>api registry.list</td><td>Return gameplay registry items as a flat structured list</td></tr><tr><td>track.records</td><td>before=0..64 optional default 4; after=0..64 optional default 12</td><td>api track.records before=2 after=8</td><td>Read track records around the current authoritative record</td></tr><tr><td>objects.list</td><td></td><td>api objects.list</td><td>Return semantic-object registry candidates and evidence confidence</td></tr><tr><td>audio.capabilities</td><td></td><td>api audio.capabilities</td><td>Describe planned/current audio research capabilities without mutating audio runtime</td></tr><tr><td>audio.channels</td><td></td><td>api audio.channels</td><td>Return audio channel/source descriptors from the audio research profile</td></tr><tr><td>audio.events</td><td></td><td>api audio.events</td><td>Return current audio-event foundation status; runtime capture is intentionally not enabled yet</td></tr><tr><td>audio.waveform.plan</td><td></td><td>api audio.waveform.plan</td><td>Return waveform-viewer/capture implementation contract for future validated audio tooling</td></tr><tr><td>audio.export.plan</td><td></td><td>api audio.export.plan</td><td>Return planned sample/music export contract and evidence formats</td></tr><tr><td>audio.inject.plan</td><td></td><td>api audio.inject.plan</td><td>Return guarded runtime audio-injection design; does not inject audio</td></tr><tr><td>evidence.names</td><td></td><td>api evidence.names</td><td>Return structured evidence-session directory list</td></tr><tr><td>schema</td><td>action=ACTION optional</td><td>api schema action=memory.export</td><td>Describe scriptable API actions and parameter contracts</td></tr><tr><td>palette.trace.start</td><td>indices=comma-separated palette indices 0..4095 required; limit=64..1000000 optional default 4096</td><td>api palette.trace.start indices=1037,1053 limit=4096</td><td>Start bounded semantic TC0110PCR write tracing for selected palette entries; captures frame, CPU, PC, old/new value and write count</td></tr><tr><td>palette.trace.status</td><td></td><td>api palette.trace.status</td><td>Read palette trace enabled state, selected indices, event count and limit</td></tr><tr><td>palette.trace.tail</td><td>count=N optional default 20</td><td>api palette.trace.tail count=50</td><td>Return recent matching palette-write events including frame, CPU, PC, index/bank/pen, old/new value, changed flag and write count</td></tr><tr><td>palette.trace.stop</td><td></td><td>api palette.trace.stop</td><td>Stop palette-write capture while retaining captured events</td></tr><tr><td>palette.trace.clear</td><td></td><td>api palette.trace.clear</td><td>Clear captured palette-write events without changing the selected trace filter</td></tr><tr><td>track.record.start</td><td></td><td>api track.record.start</td><td>Enable the shared server-side Track View recorder; browser UI and scripts operate on the same recorder state</td></tr><tr><td>track.record.stop</td><td></td><td>api track.record.stop</td><td>Disable track recording while retaining collected samples</td></tr><tr><td>track.record.clear</td><td></td><td>api track.record.clear</td><td>Clear all shared track recorder samples</td></tr><tr><td>track.record.status</td><td></td><td>api track.record.status</td><td>Return recorder enabled state, sample/segment counts, frame range and spatial bounds</td></tr><tr><td>track.record.sample</td><td></td><td>api track.record.sample</td><td>Append one deterministic authoritative track.state sample to the shared recorder</td></tr><tr><td>track.svg.export</td><td>name=NAME optional</td><td>api track.svg.export name=stage1-track-survey-3600</td><td>Export shared recorded track samples to a genuine SVG under evidence/track-exports; refuses empty recordings</td></tr><tr><td>window.status</td><td></td><td>api window.status</td><td>Read live SDL window state including fullscreen, visibility, minimized state, scale and always-on-top</td></tr><tr><td>window.fullscreen</td><td>enabled=true|false optional default true</td><td>api window.fullscreen enabled=true</td><td>Toggle SDL fullscreen</td></tr><tr><td>window.scale</td><td>scale=1..8 required</td><td>api window.scale scale=4</td><td>Set SDL integer window scale; exits fullscreen</td></tr><tr><td>window.show</td><td></td><td>api window.show</td><td>Show SDL window</td></tr><tr><td>window.hide</td><td></td><td>api window.hide</td><td>Hide SDL window</td></tr><tr><td>window.minimize</td><td></td><td>api window.minimize</td><td>Minimize SDL window</td></tr><tr><td>window.restore</td><td></td><td>api window.restore</td><td>Restore SDL window</td></tr><tr><td>docs.index</td><td></td><td>api docs.index</td><td>Return machine-readable documentation/knowledge index</td></tr><tr><td>docs.search</td><td>query=TEXT optional; category=TEXT optional; status=TEXT optional</td><td>api docs.search query=HUD</td><td>Search documentation/knowledge entries</td></tr><tr><td>docs.get</td><td>id=ENTRY required</td><td>api docs.get id=hud-isolation</td><td>Return one documentation/knowledge entry</td></tr><tr><td>docs.glossary</td><td></td><td>api docs.glossary</td><td>Return glossary entries</td></tr><tr><td>docs.handover</td><td></td><td>api docs.handover</td><td>Return authoritative ChatGPT continuation handover prompt</td></tr><tr><td>docs.export</td><td>format=html|pdf optional default html; id=ENTRY optional; query=TEXT optional; evidence=none|key|full optional default key; output=basename optional</td><td>api docs.export format=pdf evidence=key</td><td>Export documentation from authoritative knowledge source</td></tr><tr><td>knowledge.list</td><td></td><td>api knowledge.list</td><td>List machine-readable knowledge entries</td></tr><tr><td>knowledge.get</td><td>id=ENTRY required</td><td>api knowledge.get id=layered-frame-forensics</td><td>Return one knowledge entry</td></tr><tr><td>knowledge.search</td><td>query=TEXT optional; category=TEXT optional; status=TEXT optional</td><td>api knowledge.search query=brake</td><td>Search machine-readable knowledge</td></tr><tr><td>knowledge.related</td><td>id=ENTRY required</td><td>api knowledge.related id=hud-isolation</td><td>Return explicitly related knowledge entries</td></tr><tr><td>docs.handbook</td><td></td><td>api docs.handbook</td><td>Return the complete user-facing handbook navigation and authored guide content</td></tr><tr><td>docs.page</td><td>id=PAGE required</td><td>api docs.page id=graphics-lab-guide</td><td>Return one authored handbook page and its parent section</td></tr><tr><td>script.runs</td><td>limit=N optional default 25 max 100; offset=N optional default 0; status=PASS|FAIL|CANCELLED optional; version=VERSION optional; session=SESSION optional</td><td>api script.runs</td><td>List bounded authoritative script-run history with status/version/session filters and currentSession metadata for active-session UI defaults.</td></tr><tr><td>timeline.record.start</td><td>name=NAME optional</td><td>api timeline.record.start name=turbo-complete-cycle</td><td>Start Forensic Timeline v1 capture in the current run; captures the current frame immediately, every subsequent emulated frame as CHQSTATE, and every bus write with PC/old/new provenance.</td></tr><tr><td>timeline.record.stop</td><td></td><td>api timeline.record.stop</td><td>Stop/finalize the active Forensic Timeline recording.</td></tr><tr><td>timeline.status</td><td></td><td>api timeline.status</td><td>Read native timeline recording/import/source state.</td></tr><tr><td>timeline.list</td><td></td><td>api timeline.list</td><td>List discoverable timelines from the active run, completed runs and packaged research timelines.</td></tr><tr><td>timeline.load</td><td>name=NAME or path=PATH required</td><td>api timeline.load name=turbo-complete-cycle</td><td>Import a timeline and load its first frame into the paused emulator inspection surface; ordinary memory/register/sprite/palette/gameplay APIs inspect the selected recorded frame.</td></tr><tr><td>timeline.seek</td><td>frame=N required</td><td>api timeline.seek frame=2065</td><td>Seek an imported timeline to an exact recorded frame.</td></tr><tr><td>timeline.next</td><td></td><td>api timeline.next</td><td>Seek to the next recorded frame.</td></tr><tr><td>timeline.prev</td><td></td><td>api timeline.prev</td><td>Seek to the previous recorded frame.</td></tr><tr><td>timeline.frames</td><td></td><td>api timeline.frames</td><td>Return recorded frame numbers for the imported timeline.</td></tr><tr><td>timeline.trim.event</td><td>name=NAME or path=PATH required; cpu=A|B required; address=HEX required; width=8|16|32 required; mask=HEX required; pre=N optional default 1; post=N optional default 1</td><td>api timeline.trim.event name=turbo-complete-cycle cpu=A address=0x10040F width=8 mask=02 pre=1 post=1</td><td>Find a masked rising/falling event window with a streaming pass and write a non-destructive analysis/event-window.json view; the authoritative timeline is not trimmed or rewritten.</td></tr><tr><td>timeline.scan.memory</td><td>name=NAME or path=PATH required; triggerFrame=N optional (trigger=N alias accepted); stopFrame=N optional (stop=N alias accepted); window=N optional default 1</td><td>api timeline.scan.memory name=turbo-complete-cycle triggerFrame=2065 stopFrame=2275 window=1</td><td>Streaming offline analysis of the recorded bus-write stream; exports ranked changed-address/writer-PC evidence into the current run artifact tree so the source timeline remains immutable and the result travels in the run bundle.</td></tr><tr><td>timeline.fork-live</td><td></td><td>api timeline.fork-live</td><td>Leave timeline mode while keeping the selected checkpoint loaded, producing a paused live fork for counterfactual experiments.</td></tr><tr><td>timeline.unload</td><td></td><td>api timeline.unload</td><td>Exit timeline mode and restore the live state from before timeline.load.</td></tr><tr><td>timeline.play</td><td>name=NAME or path=PATH optional when a timeline is already loaded; from=N optional; to=N optional; fps=1..60 optional default 30</td><td>api timeline.play name=turbo-complete-cycle from=2064 to=2276 fps=30</td><td>Replay recorded frame checkpoints through the SDL renderer at a paced frame rate. This is visual state playback, not CPU re-execution; the timeline remains loaded at the final frame.</td></tr><tr><td>timeline.analyze.auto</td><td>name=NAME or path=PATH required; triggerFrame=N required (trigger=N alias accepted); stopFrame=N required (stop=N alias accepted); window=N optional default 1; top=N optional default 20</td><td>api timeline.analyze.auto name=turbo-complete-cycle triggerFrame=2065 stopFrame=2275 window=1 top=20</td><td>Run the automated offline forensic pipeline: portable current-run memory analysis, ranked temporal candidates, writer-PC grouping/disassembly, milestone state and structured frame snapshots, and HUD_TURBO graphics correlation.</td></tr><tr><td>game.experiment.status</td><td></td><td>api game.experiment.status</td><td>Read Chase H.Q.-specific Game Lab state for turbo stock/active timer/current speed and reversible override toggles</td></tr><tr><td>game.turbo.stock</td><td>enabled=true|false required; value=0..65535 optional default 3</td><td>api game.turbo.stock enabled=true value=3</td><td>Enable/disable an infinite turbo-stock freeze on confirmed CPU-A 0x1003A2</td></tr><tr><td>game.turbo.active</td><td>enabled=true|false required</td><td>api game.turbo.active enabled=true</td><td>Enable/disable infinite active turbo by freezing confirmed duration timer CPU-A 0x100414 at zero; activation still uses the normal turbo path</td></tr><tr><td>game.turbo.fire</td><td>frames=N optional default 3</td><td>api game.turbo.fire frames=3</td><td>Pulse the confirmed IOC P3 turbo input (mask 0x01)</td></tr><tr><td>game.turbo.timer.reset</td><td></td><td>api game.turbo.timer.reset</td><td>Reset the confirmed turbo duration timer at CPU-A 0x100414 to zero</td></tr><tr><td>game.turbo.remaining.set</td><td>value=0..65535 required</td><td>api game.turbo.remaining.set value=3</td><td>Set the confirmed turbos-remaining value at CPU-A 0x1003A2 once</td></tr><tr><td>game.speed.set</td><td>value=0..65535 required</td><td>api game.speed.set value=602</td><td>Set raw internal/physics speed CPU-A 0x10041C once while preserving prior run/pause state. HUD speed at 0x100400 is separate packed-BCD display state.</td></tr><tr><td>game.speed.freeze</td><td>enabled=true|false required; value=0..65535 optional; current internal speed used when omitted</td><td>api game.speed.freeze enabled=true value=700</td><td>Freeze/unfreeze raw internal/physics speed CPU-A 0x10041C while preserving prior run/pause state.</td></tr><tr><td>game.speed.clear</td><td></td><td>api game.speed.clear</td><td>Remove only the Game Lab current-speed freeze, leaving unrelated research patches untouched</td></tr><tr><td>tile.inspect</td><td>code=00..FF required (hex); palette=0..255 optional default 0; scale=1..32 optional default 8</td><td>api tile.inspect code=0C palette=0 scale=8</td><td>Inspect/export a TC0100SCN RAM text character as raw 2bpp pens, palette-aware PNG and JSON metadata; output names include the current frame to preserve historical phases.</td></tr><tr><td>sprite.order.inspect</td><td></td><td>api sprite.order.inspect</td><td>Report exact current sprite traversal/tie-break and resolved active draw order.</td></tr><tr><td>sprite.order.set</td><td>mode=higher-slot|lower-slot required</td><td>api sprite.order.set mode=lower-slot</td><td>Reversibly switch same-priority sprite tie-breaking at runtime for compositor A/B experiments.</td></tr><tr><td>game.sprite.order.inspect</td><td></td><td>api game.sprite.order.inspect</td><td>Game Lab alias for current sprite-order report.</td></tr><tr><td>game.sprite.order.set</td><td>mode=higher-slot|lower-slot required</td><td>api game.sprite.order.set mode=lower-slot</td><td>Game Lab alias for reversible same-priority sprite-order experiment.</td></tr><tr><td>timeline.reset</td><td></td><td>api timeline.reset</td><td>Idempotent cleanup for script-initiated timeline work: restore the live state captured before timeline.load even after timeline.fork-live; succeed unchanged when no timeline transaction is active.</td></tr><tr><td>layer.offsets.get</td><td></td><td>api layer.offsets.get</td><td>Read live presentation offsets for all five layers</td></tr><tr><td>layer.offsets.set</td><td>layer=bg0|bg1|text|sprites|road|all required; x=-4096..4096 required; y=-4096..4096 required</td><td>api layer.offsets.set layer=bg0 x=0 y=4</td><td>Set reversible live presentation offsets; hardware state is unchanged</td></tr><tr><td>layer.offsets.reset</td><td>layer=bg0|bg1|text|sprites|road|all optional default all</td><td>api layer.offsets.reset layer=all</td><td>Reset presentation offsets to zero</td></tr><tr><td>tc0100.mode</td><td>mode=legacy|corrected optional</td><td>api tc0100.mode mode=corrected</td><td>Select diagnostic old/new X transform; this is not independent shadow verification</td></tr><tr><td>frame.snapshot.assert-scene-no-sprites</td><td>name=NAME required</td><td>api frame.snapshot.assert-scene-no-sprites name=rc27-corrected</td><td>Require exact reconstruction, visible sprite ownership and changed no-sprites pixels</td></tr><tr><td>layer.offsets.assert</td><td>layer=bg0|bg1|text|sprites|road required; x=INTEGER required; y=INTEGER required</td><td>api layer.offsets.assert layer=bg0 x=0 y=4</td><td>Assert live layer offsets against expected values</td></tr><tr><td>release.assert-version</td><td></td><td>api release.assert-version</td><td>Require native status, Workbench and feature manifest to share the full release label</td></tr><tr><td>frame.snapshot.assert-exact</td><td>name=NAME required; requireColumnZero=true|false optional default false</td><td>api frame.snapshot.assert-exact name=rc27-corrected</td><td>Require exact=true, verifiedExact=true and zero reconstruction mismatches</td></tr></tbody></table></section><section id="knowledge"><h2>Knowledge and findings</h2><article><h3>Checkpoint</h3><small>confirmed · established</small><p>Deterministic saved emulation state used to reproduce an experiment.</p><p><b>docs:</b> docs/chasehq/discoveries/checkpoints.md</p></article><article><h3>Scenario</h3><small>planned · design</small><p>Higher-level reproducible setup that drives the game into a known state before observation begins.</p><p><b>docs:</b> docs/ROADMAP.md</p></article><article><h3>Research API</h3><small>confirmed · established</small><p>Documented HTTP/debug action surface shared by Workbench tooling and repeatable research scripts.</p><p><b>docs:</b> docs/API_REFERENCE.md</p><p><b>apiActions:</b> schema, schema.all</p></article><article><h3>Research Script</h3><small>confirmed · established</small><p>Small deterministic .chqscript language for repeatable experiments, regressions and evidence capture.</p><p><b>docs:</b> docs/SCRIPT_LANGUAGE_REFERENCE.md</p></article><article><h3>Evidence bundle</h3><small>confirmed · established</small><p>Portable ZIP containing script source, output, metadata and generated artifacts for a research run.</p><p><b>docs:</b> docs/HANDOVER.md</p></article><article><h3>Provenance</h3><small>confirmed · established</small><p>Trace from an observed effect back to the memory routine, object record or raw source data that produced it.</p><p><b>docs:</b> docs/chasehq/reference/SPRITE_FORENSICS.md</p></article><article><h3>Contribution layer</h3><small>confirmed · regression-proven</small><p>Reconstruction PNG containing the pixels introduced or replaced at one compositor stage.</p><p><b>docs:</b> docs/PROJECT_STATE.md</p></article><article><h3>Raw source layer</h3><small>confirmed · regression-proven</small><p>Independent forensic rendering of one logical hardware source; it is not assumed to alpha-compose directly into the final frame.</p><p><b>docs:</b> docs/PROJECT_STATE.md</p></article><article><h3>HUD isolation</h3><small>confirmed · regression-proven</small><p>Suppressing or isolating the identified text/HUD source at render time rather than masking fixed screen coordinates.</p><p><b>docs:</b> docs/PROJECT_STATE.md</p><p><b>apiActions:</b> frame.snapshot, image.compare, image.diff</p></article><article><h3>Semantic state</h3><small>confirmed · methodology</small><p>Gameplay meaning promoted only after the underlying address and producer/consumer path are sufficiently proven.</p><p><b>docs:</b> docs/chasehq/discoveries/gameplay-state.md</p></article><article><h3>Layered Frame Forensics / HUD Isolation</h3><small>confirmed · regression-proven</small><p>v0.66.6.1 proved exact reconstructable frame snapshots, transparent contribution layers, raw logical-source layers and source-level HUD hidden/HUD-only variants. Native capture rejects a snapshot if recomposition is not pixel exact.</p><p><b>docs:</b> VALIDATION_0.66.6.1.md, docs/PROJECT_STATE.md</p><p><b>scripts:</b> research/scripts/regression/regression-v06661-layered-frame-snapshot.chqscript</p><details><summary>Source details</summary><pre>{
+  &quot;discovery&quot;: &quot;The v0.66.6.1 layered-frame snapshot format can reconstruct the final 320x240 frame exactly while also exposing logical source layers, contribution layers and source-level HUD variants.&quot;,
+  &quot;significance&quot;: &quot;Graphics investigations can now separate compositor stages and HUD contribution without relying on screenshot masking or visual inference. A snapshot is rejected if native recomposition is not pixel exact.&quot;,
+  &quot;confirmedValues&quot;: [
+    {
+      &quot;name&quot;: &quot;Reference build&quot;,
+      &quot;value&quot;: &quot;0.66.6.1&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Reconstruction&quot;,
+      &quot;value&quot;: &quot;verifiedExact=true&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Pixel mismatches&quot;,
+      &quot;value&quot;: &quot;0&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Output size&quot;,
+      &quot;value&quot;: &quot;320x240&quot;
+    },
+    {
+      &quot;name&quot;: &quot;HUD modes&quot;,
+      &quot;value&quot;: &quot;normal / hidden / only&quot;
+    }
+  ],
+  &quot;method&quot;: [
+    &quot;Capture a structured layered snapshot from a deterministic state.&quot;,
+    &quot;Recompose the contribution layers in compositor order.&quot;,
+    &quot;Compare the reconstructed image byte-for-byte/pixel-for-pixel against final.png.&quot;,
+    &quot;Independently verify the result from the Windows regression evidence bundle.&quot;
+  ],
+  &quot;reproduction&quot;: [
+    &quot;Run research/scripts/regression/regression-v06661-layered-frame-snapshot.chqscript.&quot;,
+    &quot;Inspect reconstruction.json and require verifiedExact=true and mismatchedPixels=0.&quot;,
+    &quot;Compare final.png, final-no-hud.png and hud-only.png.&quot;,
+    &quot;Inspect contribution layers separately from raw logical-source layers.&quot;
+  ],
+  &quot;openQuestions&quot;: [
+    &quot;The tooling is proven; current graphics research priority is applying it to the missing/incorrect turbo HUD indicators.&quot;
+  ]
+}</pre></details></article><article><h3>Brake lamp palette transformation</h3><small>confirmed · source-provenance</small><p>The player&#x27;s visible rear-lamp braking change is a palette transformation rather than a separate brake-light sprite. Confirmed banks 64/65, pen 13, raw transition 0x000E to 0x18DE, player slot 45, map 516, 140 pen-13 pixels, OBJ A source.</p><p><b>docs:</b> docs/chasehq/discoveries/sprite-and-video.md</p><p><b>scripts:</b> research/scripts/graphics/brake-lamp-palette-writer-trace.chqscript</p><details><summary>Source details</summary><pre>{
+  &quot;discovery&quot;: &quot;The player&#x27;s visible rear-lamp braking change is produced by a palette transformation rather than by a separate brake-light sprite.&quot;,
+  &quot;significance&quot;: &quot;This changes the investigation path from sprite substitution or sprite visibility to palette state, palette writers and the gameplay state that selects the braking colour.&quot;,
+  &quot;confirmedValues&quot;: [
+    {
+      &quot;name&quot;: &quot;Palette banks&quot;,
+      &quot;value&quot;: &quot;64 / 65&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Pen&quot;,
+      &quot;value&quot;: &quot;13&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Raw transition&quot;,
+      &quot;value&quot;: &quot;0x000E -&gt; 0x18DE&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Player sprite slot&quot;,
+      &quot;value&quot;: &quot;45&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Sprite map&quot;,
+      &quot;value&quot;: &quot;516&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Affected source pixels&quot;,
+      &quot;value&quot;: &quot;140 pen-13 pixels&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Object source&quot;,
+      &quot;value&quot;: &quot;OBJ A&quot;
+    }
+  ],
+  &quot;method&quot;: [
+    &quot;Identify the player-car sprite and isolate the pixels visually changing during braking.&quot;,
+    &quot;Compare palette state rather than assuming a separate lamp sprite.&quot;,
+    &quot;Trace the player sprite, palette banks and pen usage back to their source/provenance.&quot;,
+    &quot;Confirm that the same sprite geometry remains present while the palette value changes.&quot;
+  ],
+  &quot;reproduction&quot;: [
+    &quot;Use the packaged graphics research script research/scripts/graphics/brake-lamp-palette-writer-trace.chqscript.&quot;,
+    &quot;Reproduce from a deterministic gameplay checkpoint.&quot;,
+    &quot;Observe palette banks 64/65 and pen 13 while comparing braking and non-braking state.&quot;,
+    &quot;Use sprite/provenance tooling to confirm player slot 45, map 516 and OBJ A source.&quot;
+  ],
+  &quot;openQuestions&quot;: [
+    &quot;The authoritative gameplay-state producer that ultimately drives this visual change remains a separate semantic-state investigation.&quot;
+  ]
+}</pre></details></article><article><h3>Generic memory-write tracing</h3><small>confirmed · regression-proven</small><p>Bounded address/range writer tracing records frame, CPU, PC, transaction width, old/new value and changed state. width=any is preferred for discovery when a byte may be affected by a wider bus write.</p><p><b>docs:</b> docs/API_REFERENCE.md</p><p><b>scripts:</b> research/scripts/regression/regression-v0665-memory-trace.chqscript</p><p><b>apiActions:</b> memory.trace.start, memory.trace.tail, memory.trace.status, memory.trace.stop, memory.trace.clear</p><details><summary>Source details</summary><pre>{
+  &quot;discovery&quot;: &quot;The generic memory-write tracer can watch a bounded byte/range and record the exact writer context for each matching transaction.&quot;,
+  &quot;significance&quot;: &quot;This provides a reusable provenance tool for finding which CPU routine produces a changing gameplay value without adding one-off game-specific instrumentation.&quot;,
+  &quot;confirmedValues&quot;: [
+    {
+      &quot;name&quot;: &quot;Recorded context&quot;,
+      &quot;value&quot;: &quot;frame / CPU / PC&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Transaction data&quot;,
+      &quot;value&quot;: &quot;width / old value / new value&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Change indicator&quot;,
+      &quot;value&quot;: &quot;changed state&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Discovery mode&quot;,
+      &quot;value&quot;: &quot;width=any&quot;
+    }
+  ],
+  &quot;method&quot;: [
+    &quot;Start a bounded trace for a known address or small range.&quot;,
+    &quot;Exercise the deterministic gameplay condition that changes the watched value.&quot;,
+    &quot;Inspect writer CPU, PC, transaction width and old/new values.&quot;,
+    &quot;Use width=any during discovery when a byte may be written as part of a wider transaction.&quot;
+  ],
+  &quot;reproduction&quot;: [
+    &quot;Run research/scripts/regression/regression-v0665-memory-trace.chqscript.&quot;,
+    &quot;Use memory.trace.start with CPU, address/range and an appropriate event limit.&quot;,
+    &quot;Inspect memory.trace.status and memory.trace.tail.&quot;,
+    &quot;Stop or clear the trace when the experiment is complete.&quot;
+  ],
+  &quot;openQuestions&quot;: []
+}</pre></details></article><article><h3>Processed brake input around CPU-A 0x100303</h3><small>provisional · writer-path-under-investigation</small><p>CPU-A 0x100303 is an important processed-input investigation point. Tooling exists to trace its writers, but semantic promotion should remain evidence-led.</p><p><b>docs:</b> docs/chasehq/discoveries/IOC_POLLING_AND_OVERRIDE_PATH_0.63.3.md</p><p><b>scripts:</b> research/scripts/gameplay/brake-processed-input-writer-trace.chqscript</p><details><summary>Source details</summary><pre>{
+  &quot;discovery&quot;: &quot;CPU-A 0x100303 is a useful processed-input investigation point, but its final semantic meaning has not yet been promoted to a confirmed gameplay-state field.&quot;,
+  &quot;significance&quot;: &quot;Tracing this location may help connect raw IOC/brake input to the higher-level state that eventually drives gameplay behaviour and visual effects.&quot;,
+  &quot;method&quot;: [
+    &quot;Reproduce a deterministic braking experiment.&quot;,
+    &quot;Trace writers affecting CPU-A 0x100303.&quot;,
+    &quot;Record writer PC, width, old/new values and timing relative to brake input.&quot;,
+    &quot;Compare repeated runs before assigning a semantic meaning to the location.&quot;
+  ],
+  &quot;reproduction&quot;: [
+    &quot;Run research/scripts/gameplay/brake-processed-input-writer-trace.chqscript.&quot;,
+    &quot;Use the generic memory-write tracing API rather than relying on screenshot inference.&quot;,
+    &quot;Repeat the same checkpoint/input sequence so writer behaviour can be compared across runs.&quot;
+  ],
+  &quot;openQuestions&quot;: [
+    &quot;Which routine is the authoritative producer of the processed brake state?&quot;,
+    &quot;Does 0x100303 represent brake state directly, a transient input stage, or part of a wider control structure?&quot;,
+    &quot;How does the processed state relate to the proven brake-lamp palette transformation?&quot;
+  ]
+}</pre></details></article><article><h3>Shared Track Recorder</h3><small>confirmed · regression-proven</small><p>Workbench Track View and Research Script/API share one recorder state with start, stop, clear, status, explicit sample and deterministic SVG export operations.</p><p><b>docs:</b> docs/API_REFERENCE.md</p><p><b>scripts:</b> research/scripts/regression/regression-v06651-track-recorder.chqscript</p><p><b>apiActions:</b> track.record.start, track.record.stop, track.record.clear, track.record.status, track.record.sample, track.svg.export</p><details><summary>Source details</summary><pre>{
+  &quot;discovery&quot;: &quot;Track View and Research Script/API share one authoritative recorder state rather than maintaining separate UI-only and automation-only recordings.&quot;,
+  &quot;significance&quot;: &quot;Road/course investigations can be repeated deterministically, automated from scripts, inspected interactively in Workbench and exported as SVG from the same sample set.&quot;,
+  &quot;confirmedValues&quot;: [
+    {
+      &quot;name&quot;: &quot;Shared state&quot;,
+      &quot;value&quot;: &quot;Workbench + Research API + .chqscript&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Operations&quot;,
+      &quot;value&quot;: &quot;start / stop / clear / status / sample&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Export&quot;,
+      &quot;value&quot;: &quot;deterministic SVG&quot;
+    }
+  ],
+  &quot;method&quot;: [
+    &quot;Record road/course samples through the shared recorder.&quot;,
+    &quot;Verify that Workbench Track View and script/API calls observe the same recorder state.&quot;,
+    &quot;Export the same recorded samples to SVG and compare deterministic output through regression.&quot;
+  ],
+  &quot;reproduction&quot;: [
+    &quot;Run research/scripts/regression/regression-v06651-track-recorder.chqscript.&quot;,
+    &quot;Use track.record.start, track.record.sample, track.record.status and track.record.stop.&quot;,
+    &quot;Export with track.svg.export.&quot;,
+    &quot;Open Track View and verify it reflects the same recording state.&quot;
+  ],
+  &quot;openQuestions&quot;: [
+    &quot;The recorder infrastructure is proven; exact physical semantics for all discovered Stage 1 road/course values are not yet fully named.&quot;
+  ]
+}</pre></details></article><article><h3>Turbo gameplay state / HUD indicator rendering</h3><small>open · gameplay-state-confirmed-render-path-open</small><p>Turbo input/active/count/timer state is already confirmed; the open investigation is why the bottom-HUD turbo indicators are absent, incorrect or inconsistently composed in the current renderer.</p><p><b>docs:</b> docs/RESEARCH_RECOVERY_PLAN.md, docs/chasehq/discoveries/gameplay-state.md, docs/ROADMAP.md</p><p><b>scripts:</b> research/scripts/gameplay/turbo-state-causal-validation.chqscript, research/scripts/gameplay/turbo-state-writer-trace.chqscript, research/scripts/graphics/turbo-hud-before-during-after.chqscript</p><p><b>apiActions:</b> gameplay.registry, memory.read, memory.trace.start, memory.trace.tail, frame.snapshot, image.compare, image.diff, input.ioc.xor, control.run-frames</p><details><summary>Source details</summary><pre>{
+  &quot;discovery&quot;: &quot;Authoritative turbo gameplay state is already confirmed. The unresolved question is the rendering/source path for the bottom-HUD turbo indicators in the current renderer.&quot;,
+  &quot;significance&quot;: &quot;This narrows the work from broad state discovery to a source-localization problem: compare confirmed gameplay transitions against HUD-only, HUD-hidden and final composition before tracing the responsible text/tile/character-data writers.&quot;,
+  &quot;confirmedValues&quot;: [
+    {
+      &quot;name&quot;: &quot;Processed turbo input&quot;,
+      &quot;value&quot;: &quot;CPU-A 0x100303 bit 0&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Turbo active&quot;,
+      &quot;value&quot;: &quot;CPU-A 0x10040F bit 1&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Turbos remaining&quot;,
+      &quot;value&quot;: &quot;CPU-A 0x1003A2 (16-bit count)&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Turbo active-duration counter&quot;,
+      &quot;value&quot;: &quot;CPU-A 0x100414 (16-bit frame counter)&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Tested expiry threshold&quot;,
+      &quot;value&quot;: &quot;0x00D2 / 210 emulated frames in the canonical Stage 1 configuration&quot;
+    },
+    {
+      &quot;name&quot;: &quot;IOC Port 3 turbo&quot;,
+      &quot;value&quot;: &quot;0x01; accelerator is 0x20&quot;
+    }
+  ],
+  &quot;method&quot;: [
+    &quot;Revalidate the confirmed state transition from stage1-gameplay-2064.chqstate.&quot;,
+    &quot;Capture reconstructable before/during/after snapshots using a genuine IOC turbo activation.&quot;,
+    &quot;Compare HUD_TURBO in normal, HUD-only and HUD-hidden modes to determine which source contributes the change.&quot;,
+    &quot;If expected HUD content is absent at source, inspect text/tile/character-data producer state; if present at source but absent in final, investigate composition/priority/geometry.&quot;,
+    &quot;Use memory writer tracing only after the visual source path is localized.&quot;
+  ],
+  &quot;reproduction&quot;: [
+    &quot;Run research/scripts/gameplay/turbo-state-causal-validation.chqscript.&quot;,
+    &quot;Run research/scripts/graphics/turbo-hud-before-during-after.chqscript.&quot;,
+    &quot;Open the three snapshots in Graphics Lab and inspect HUD-only, HUD-hidden and contribution layers.&quot;,
+    &quot;Run research/scripts/gameplay/turbo-state-writer-trace.chqscript when exact producer PCs are needed.&quot;
+  ],
+  &quot;openQuestions&quot;: [
+    &quot;Which TC0100SCN tile/character-data entries represent each remaining turbo in the current renderer?&quot;,
+    &quot;Are the expected indicators absent from the HUD source or lost/incorrect later in composition?&quot;,
+    &quot;Does the historical rows 29/30 visible-area finding reproduce in the current renderer?&quot;,
+    &quot;Which writer/consumer path updates the visual indicator state from the confirmed gameplay values?&quot;
+  ]
+}</pre></details></article><article><h3>Workbench Documentation / Knowledge System</h3><small>confirmed · regression-proven</small><p>Machine-readable documentation and research knowledge powers the Workbench Docs/Knowledge UI, read-only API/script access, cross-links, evidence display, HTML/PDF export and authoritative continuation handover.</p><p><b>docs:</b> docs/KNOWLEDGE_SYSTEM.md</p><p><b>scripts:</b> research/scripts/regression/regression-v06672-knowledge-sdl-sprite-controls.chqscript</p><p><b>apiActions:</b> docs.index, docs.search, docs.get, docs.glossary, docs.handover, docs.export, knowledge.list, knowledge.get, knowledge.search, knowledge.related</p><details><summary>Source details</summary><pre>{
+  &quot;discovery&quot;: &quot;Workbench documentation and project knowledge are backed by machine-readable sources rather than hardcoded UI-only text.&quot;,
+  &quot;significance&quot;: &quot;The same source can drive search, Workbench presentation, API/script access, evidence links, exports and project continuation without maintaining separate conflicting documentation copies.&quot;,
+  &quot;confirmedValues&quot;: [
+    {
+      &quot;name&quot;: &quot;Knowledge source&quot;,
+      &quot;value&quot;: &quot;research/knowledge/documentation.json&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Handbook source&quot;,
+      &quot;value&quot;: &quot;research/knowledge/handbook.json&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Access&quot;,
+      &quot;value&quot;: &quot;Workbench + Research API + .chqscript&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Exports&quot;,
+      &quot;value&quot;: &quot;HTML / PDF&quot;
+    }
+  ],
+  &quot;method&quot;: [
+    &quot;Load documentation/knowledge from packaged machine-readable sources.&quot;,
+    &quot;Expose the same data through Workbench, read-only API actions and script access.&quot;,
+    &quot;Cross-link knowledge entries to evidence, scripts, checkpoints and API actions.&quot;,
+    &quot;Validate build/version metadata as part of release preparation.&quot;
+  ],
+  &quot;reproduction&quot;: [
+    &quot;Open Docs / Knowledge in Workbench.&quot;,
+    &quot;Use docs.index, docs.search, docs.get and knowledge.* API actions.&quot;,
+    &quot;Inspect research/knowledge/documentation.json and research/knowledge/handbook.json directly.&quot;,
+    &quot;Run the packaged documentation/knowledge regression.&quot;
+  ],
+  &quot;openQuestions&quot;: [
+    &quot;Continue expanding article-quality content as new research findings are promoted.&quot;
+  ]
+}</pre></details></article><article><h3>Authoritative ChatGPT continuation handover</h3><small>confirmed · regression-proven</small><p>Versioned continuation prompt designed to accompany the latest source ZIP into a new ChatGPT conversation. Package validation checks that its build metadata matches the native build.</p><p><b>docs:</b> docs/CHATGPT_HANDOVER_PROMPT.md, docs/HANDOVER.md</p><p><b>apiActions:</b> docs.handover</p><details><summary>Source details</summary><pre>{
+  &quot;discovery&quot;: &quot;Each revision carries a versioned ChatGPT continuation prompt intended to travel with the latest project ZIP into a new conversation.&quot;,
+  &quot;significance&quot;: &quot;This provides an explicit continuation contract so a new conversation can recover current build state, proof status, project rules, checkpoints, tooling surfaces and immediate next work without relying on stale chat history.&quot;,
+  &quot;confirmedValues&quot;: [
+    {
+      &quot;name&quot;: &quot;Authoritative file&quot;,
+      &quot;value&quot;: &quot;docs/CHATGPT_HANDOVER_PROMPT.md&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Workbench/API source&quot;,
+      &quot;value&quot;: &quot;docs.handover&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Pairing&quot;,
+      &quot;value&quot;: &quot;latest project ZIP + handover prompt&quot;
+    }
+  ],
+  &quot;method&quot;: [
+    &quot;Package the handover prompt with every meaningful revision.&quot;,
+    &quot;Keep build/proof status synchronized with the current source package.&quot;,
+    &quot;Expose the same prompt through the Workbench and Research API.&quot;,
+    &quot;Validate stale continuation metadata during release checks.&quot;
+  ],
+  &quot;reproduction&quot;: [
+    &quot;Open Docs / Knowledge -&gt; Authoritative ChatGPT handover.&quot;,
+    &quot;Use Copy full handover or docs.handover.&quot;,
+    &quot;Upload the latest project ZIP and provide the copied prompt in the new conversation.&quot;
+  ],
+  &quot;openQuestions&quot;: []
+}</pre></details></article><article><h3>Documentation evidence attachment</h3><small>confirmed · regression-proven</small><p>Structured link from a knowledge entry to screenshots, layered captures, JSON/CSV traces, scripts, checkpoints or other proof, retaining build/source/caption metadata.</p><p><b>docs:</b> docs/KNOWLEDGE_SYSTEM.md</p></article><article><h3>Individual sprite forensics</h3><small>confirmed · regression-proven</small><p>Layered snapshots retain the exact aggregate sprite contribution while also exporting cropped transparent per-visible-sprite assets and metadata so Graphics Lab can hide, show, solo and change opacity for individual sprite slots.</p><p><b>docs:</b> docs/API_REFERENCE.md, docs/PROJECT_STATE.md</p><p><b>scripts:</b> research/scripts/regression/regression-v06672-knowledge-sdl-sprite-controls.chqscript</p><p><b>apiActions:</b> frame.snapshot</p><details><summary>Source details</summary><pre>{
+  &quot;discovery&quot;: &quot;Structured frame snapshots retain exact aggregate sprite contribution while also exporting metadata and cropped transparent assets for each visible sprite.&quot;,
+  &quot;significance&quot;: &quot;Graphics Lab can inspect individual sprite slots without replacing the aggregate contribution layer used for exact frame reconstruction.&quot;,
+  &quot;confirmedValues&quot;: [
+    {
+      &quot;name&quot;: &quot;Exact reconstruction source&quot;,
+      &quot;value&quot;: &quot;aggregate sprite contribution&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Per-sprite assets&quot;,
+      &quot;value&quot;: &quot;cropped transparent PNGs&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Interactive controls&quot;,
+      &quot;value&quot;: &quot;hide / show / solo / opacity&quot;
+    }
+  ],
+  &quot;method&quot;: [
+    &quot;Capture a structured snapshot with individual-sprite export enabled.&quot;,
+    &quot;Retain the aggregate sprite contribution for reconstruction.&quot;,
+    &quot;Export per-visible-sprite metadata and cropped transparent PNGs.&quot;,
+    &quot;Use Graphics Lab controls to isolate individual sprite slots without changing authoritative reconstruction.&quot;
+  ],
+  &quot;reproduction&quot;: [
+    &quot;Run the packaged v0.66.7 sprite/knowledge regression.&quot;,
+    &quot;Capture a frame snapshot with individual sprite assets enabled.&quot;,
+    &quot;Open Graphics Lab and inspect the sprite list.&quot;,
+    &quot;Exercise hide, show, solo and opacity controls while keeping the aggregate reconstruction unchanged.&quot;
+  ],
+  &quot;openQuestions&quot;: [
+    &quot;Future asset-explorer work may add richer provenance and replacement/upscale workflows.&quot;
+  ]
+}</pre></details></article><article><h3>SDL Workbench/runtime controls</h3><small>confirmed · regression-proven</small><p>Workbench controls for pause/resume/step/snapshot and SDL show/hide, minimize/restore, fullscreen, integer scale and always-on-top are backed by the same native Research API actions available to .chqscript.</p><p><b>docs:</b> docs/API_REFERENCE.md, docs/SCRIPT_LANGUAGE_REFERENCE.md</p><p><b>scripts:</b> research/scripts/regression/regression-v06672-knowledge-sdl-sprite-controls.chqscript</p><p><b>apiActions:</b> window.status, window.always-on-top, window.fullscreen, window.scale, window.show, window.hide, window.minimize, window.restore, control.pause, control.resume, control.step-frame</p><details><summary>Source details</summary><pre>{
+  &quot;discovery&quot;: &quot;SDL/runtime controls exposed in Workbench are backed by the same Research API actions available to scripts rather than being UI-only controls.&quot;,
+  &quot;significance&quot;: &quot;Interactive debugging and automated experiments can manipulate the same runtime/window state through one authoritative control surface.&quot;,
+  &quot;confirmedValues&quot;: [
+    {
+      &quot;name&quot;: &quot;Runtime control&quot;,
+      &quot;value&quot;: &quot;pause / resume / step&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Window visibility&quot;,
+      &quot;value&quot;: &quot;show / hide / minimize / restore&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Display&quot;,
+      &quot;value&quot;: &quot;fullscreen / integer scale&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Window flag&quot;,
+      &quot;value&quot;: &quot;always-on-top&quot;
+    }
+  ],
+  &quot;method&quot;: [
+    &quot;Expose native/window state through Research API actions.&quot;,
+    &quot;Make Workbench controls call those same actions.&quot;,
+    &quot;Read back authoritative runtime/window state after control changes.&quot;,
+    &quot;Exercise the control surface through the regression script.&quot;
+  ],
+  &quot;reproduction&quot;: [
+    &quot;Use window.status to read current SDL state.&quot;,
+    &quot;Exercise window.show, window.hide, window.minimize and window.restore.&quot;,
+    &quot;Exercise window.fullscreen, window.scale and window.always-on-top.&quot;,
+    &quot;Compare Workbench behaviour with the same actions invoked from .chqscript.&quot;
+  ],
+  &quot;openQuestions&quot;: []
+}</pre></details></article><article><h3>Documentation export</h3><small>confirmed · regression-proven</small><p>The authoritative knowledge source can be exported to self-contained HTML and, where Microsoft Edge is available, PDF, with none/key/full evidence inclusion modes.</p><p><b>docs:</b> docs/KNOWLEDGE_SYSTEM.md</p><p><b>apiActions:</b> docs.export</p><details><summary>Source details</summary><pre>{
+  &quot;discovery&quot;: &quot;The documentation system can produce portable self-contained HTML and, where Microsoft Edge is available, PDF output from the same sources used by Workbench.&quot;,
+  &quot;significance&quot;: &quot;Project knowledge can be carried outside the running Workbench without maintaining a separate hand-edited manual.&quot;,
+  &quot;confirmedValues&quot;: [
+    {
+      &quot;name&quot;: &quot;Formats&quot;,
+      &quot;value&quot;: &quot;HTML / PDF&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Evidence modes&quot;,
+      &quot;value&quot;: &quot;none / key / full&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Primary source&quot;,
+      &quot;value&quot;: &quot;same handbook + schema + knowledge data as Workbench&quot;
+    }
+  ],
+  &quot;method&quot;: [
+    &quot;Build the export from packaged handbook, API schema, script schema and project-knowledge sources.&quot;,
+    &quot;Optionally embed selected evidence according to the requested evidence mode.&quot;,
+    &quot;Create a self-contained HTML document.&quot;,
+    &quot;Use Microsoft Edge headless printing for PDF when available.&quot;
+  ],
+  &quot;reproduction&quot;: [
+    &quot;Use Docs / Knowledge -&gt; Export full handbook HTML.&quot;,
+    &quot;Select none, key or full evidence mode as required.&quot;,
+    &quot;Use Export full handbook PDF where Microsoft Edge is available.&quot;,
+    &quot;The same operation is available through docs.export.&quot;
+  ],
+  &quot;openQuestions&quot;: [
+    &quot;Regenerate the final PDF once after the Windows release-candidate prove-off so the packaged PDF matches the final HTML/export code.&quot;
+  ]
+}</pre></details></article><article><h3>Workbench User &amp; Research Handbook</h3><small>implemented-awaiting-proof · new-build</small><p>User-facing built-in documentation with handbook navigation, task-oriented guides, complete schema-generated API and .chqscript references, grouped full-text search, copyable examples, project knowledge and glossary views, and matching full HTML/PDF export.</p><p><b>docs:</b> docs/KNOWLEDGE_SYSTEM.md, docs/API_REFERENCE.md, docs/SCRIPT_LANGUAGE_REFERENCE.md</p><p><b>apiActions:</b> docs.handbook, docs.page, docs.export</p><details><summary>Source details</summary><pre>{
+  &quot;discovery&quot;: &quot;v0.66.7.6 consolidates the user-facing handbook with live generated API/scripting references, article-body search, richer Project Knowledge articles, full article-aware export and release-validation coverage.&quot;,
+  &quot;significance&quot;: &quot;The Workbench can act as its own offline research manual instead of requiring contributors to reconstruct available tooling from source code or scattered Markdown files.&quot;,
+  &quot;confirmedValues&quot;: [
+    {
+      &quot;name&quot;: &quot;Modes&quot;,
+      &quot;value&quot;: &quot;Handbook / API Reference / Scripting Reference / Project Knowledge / Glossary&quot;
+    },
+    {
+      &quot;name&quot;: &quot;API reference&quot;,
+      &quot;value&quot;: &quot;generated from live action schema&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Script reference&quot;,
+      &quot;value&quot;: &quot;generated from live language schema&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Search&quot;,
+      &quot;value&quot;: &quot;cross-domain documentation search&quot;
+    }
+  ],
+  &quot;method&quot;: [
+    &quot;Load authored handbook navigation and pages.&quot;,
+    &quot;Generate API and scripting references from authoritative runtime schemas.&quot;,
+    &quot;Expose evidence-backed project knowledge and glossary entries alongside those references.&quot;,
+    &quot;Use the same sources for full HTML/PDF export.&quot;
+  ],
+  &quot;reproduction&quot;: [
+    &quot;Open each of the five Docs / Knowledge modes.&quot;,
+    &quot;Search across handbook, API, scripting, knowledge and glossary content.&quot;,
+    &quot;Open individual API and scripting reference entries.&quot;,
+    &quot;Exercise full HTML export and PDF export where supported.&quot;
+  ],
+  &quot;openQuestions&quot;: [
+    &quot;This release candidate remains implemented-awaiting-proof until the Windows/SDL control, Graphics Lab and full regression passes complete.&quot;
+  ]
+}</pre></details></article><article><h3>Completed-run history and snapshot persistence</h3><small>implemented-awaiting-proof · release-candidate</small><p>Workbench run history now merges authoritative on-disk run metadata with browser-local history, and Graphics Lab discovers structured snapshots stored inside completed run artifact roots.</p><p><b>docs:</b> docs/API_REFERENCE.md, VALIDATION_0.66.7.7.md</p><p><b>scripts:</b> research/scripts/regression/regression-v06677-run-history-snapshot-discovery.chqscript</p><p><b>apiActions:</b> script.runs, frame.snapshot.list</p><details><summary>Source details</summary><pre>{
+  &quot;discovery&quot;: &quot;The v0.66.7.6 prove-off showed that successful completed runs and their structured frame snapshots could persist correctly on disk while disappearing from browser-local run history or the normal Graphics Lab snapshot list after the run ended.&quot;,
+  &quot;significance&quot;: &quot;Run metadata and evidence artifacts are authoritative project records; user-facing discovery must survive browser reloads and run-root changes rather than depending on transient localStorage or the active evidence root.&quot;,
+  &quot;confirmedValues&quot;: [],
+  &quot;method&quot;: [
+    &quot;Use on-disk run-metadata.json as the authoritative completed-run catalogue.&quot;,
+    &quot;Merge server-discovered runs with browser-local history for convenience rather than treating localStorage as authoritative.&quot;,
+    &quot;Scan completed run artifact frame-snapshot roots as well as the active snapshot root.&quot;,
+    &quot;Resolve manifest and asset requests through the same snapshot discovery path.&quot;
+  ],
+  &quot;reproduction&quot;: [
+    &quot;Run a regression that produces a structured snapshot and completes with bundle.zip.&quot;,
+    &quot;Reload or restart the Workbench and confirm the completed run remains in Recent Script Runs.&quot;,
+    &quot;Open Graphics Lab and confirm the completed-run snapshot remains listed and viewable.&quot;
+  ],
+  &quot;openQuestions&quot;: [
+    &quot;Windows/SDL prove-off is required before promoting this feature to confirmed.&quot;
+  ]
+}</pre></details></article><article><h3>Release / prove-off discipline</h3><small>confirmed · full-regression-proven</small><p>Canonical staged release workflow proven on Windows/SDL after the v0.66.7.6-v0.66.7.8 cycle exposed packaging, parser/strict-mode, identity, discovery-performance, run-finalization and UI-lifecycle defects.</p><p><b>docs:</b> docs/RELEASE_PROCESS.md, VALIDATION_0.66.7.9.md, docs/RESEARCH_RECOVERY_PLAN.md, docs/POSTMORTEM_0.66.7.8_RELEASE_PROVEOFF.md</p><p><b>scripts:</b> research/scripts/recovery/fast-release-gate.chqscript, research/scripts/regression/regression-v06679-research-recovery.chqscript</p><details><summary>Source details</summary><pre>{
+  &quot;discovery&quot;: &quot;A long Windows prove-off showed that candidate quality must be validated as an end-to-end release process, not as isolated source edits. Failures included omitted local config continuity, accidental SDL bundling, strict-mode validator behavior, an unparsed PowerShell brace defect, stale build identity, unbounded run/snapshot discovery, repeated per-command bundle compression, incidental transient runs and a UI ticker overwriting completion state.&quot;,
+  &quot;significance&quot;: &quot;These failures consumed development time without advancing game fidelity. Encoding the lessons as release contracts and cheap gates reduces the chance of repeating the same class of failure and keeps Full Regression as the final proof rather than the first diagnostic tool.&quot;,
+  &quot;confirmedValues&quot;: [
+    {
+      &quot;name&quot;: &quot;Canonical build entry&quot;,
+      &quot;value&quot;: &quot;Build-Debug.bat&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Canonical launch&quot;,
+      &quot;value&quot;: &quot;Start-ChaseHQ.ps1 -Restart&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Script run artifact rule&quot;,
+      &quot;value&quot;: &quot;one parent run / one final bundle&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Runner terminal sequence&quot;,
+      &quot;value&quot;: &quot;RUNNING -&gt; FINALIZING -&gt; COMPLETE/DONE&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Full Regression role&quot;,
+      &quot;value&quot;: &quot;final expensive gate after fast/focused checks&quot;
+    },
+    {
+      &quot;name&quot;: &quot;v0.66.7.9 release proof&quot;,
+      &quot;value&quot;: &quot;Fast Release Gate + Research Recovery + Full Regression PASS&quot;
+    }
+  ],
+  &quot;method&quot;: [
+    &quot;Document the exact failures observed during Windows prove-off.&quot;,
+    &quot;Convert each failure class into a source validator, package rule, runtime lifecycle contract or staged gate.&quot;,
+    &quot;Add a fast release-gate script and archive validator.&quot;,
+    &quot;Keep the canonical process in the handbook/handover so later conversations do not improvise a new path.&quot;
+  ],
+  &quot;reproduction&quot;: [
+    &quot;Read docs/RELEASE_PROCESS.md.&quot;,
+    &quot;Build only through Build-Debug.bat.&quot;,
+    &quot;Run Recovery / Fast Release Gate before Full Regression.&quot;,
+    &quot;Use tools/Test-ReleaseArchive.ps1 on the final ZIP before handoff.&quot;
+  ],
+  &quot;openQuestions&quot;: [
+    &quot;Revise the process only when new evidence exposes a genuine gap; do not add gates speculatively.&quot;
+  ]
+}</pre></details></article><article><h3>Forensic Timeline v1</h3><small>confirmed · proven-windows-sdl-full-regression</small><p>Record-once forensic timelines are proven for offline import/inspection, SDL recorded-state playback, fork-live continuation, portable automated writer/disassembly/graphics correlation, and large historical turbo write-stream analysis without replaying gameplay.</p><p><b>docs:</b> docs/FORENSIC_TIMELINE.md, docs/API_REFERENCE.md, docs/PROJECT_STATE.md</p><p><b>scripts:</b> research/scripts/timeline/capture-turbo-complete-cycle.chqscript, research/scripts/timeline/import-and-inspect-timeline.chqscript, research/scripts/timeline/timeline-fork-live-example.chqscript, research/scripts/regression/regression-v06680-forensic-timeline.chqscript, research/scripts/timeline/analyze-existing-turbo-forensic-timeline.chqscript, research/scripts/timeline/replay-turbo-timeline-in-sdl.chqscript, research/scripts/regression/regression-v06680-rc7-portable-auto-analysis.chqscript</p><p><b>apiActions:</b> timeline.record.start, timeline.record.stop, timeline.status, timeline.list, timeline.load, timeline.seek, timeline.next, timeline.prev, timeline.frames, timeline.trim.event, timeline.scan.memory, timeline.fork-live, timeline.unload, timeline.play, timeline.analyze.auto</p><details><summary>Source details</summary><pre>{
+  &quot;discovery&quot;: &quot;Forensic Timeline v1 is implemented as a fidelity-first portable session corpus: every recorded frame is a complete deterministic CHQSTATE and every bus write is recorded with frame/CPU/PC/address/width/old/new provenance.&quot;,
+  &quot;significance&quot;: &quot;A captured gameplay event can be reopened, visually replayed and investigated repeatedly without replaying gameplay. Derived analyses are portable in the current run bundle and include candidate ranking, writer disassembly and historical graphics/HUD correlation.&quot;,
+  &quot;confirmedValues&quot;: [
+    {
+      &quot;name&quot;: &quot;Storage model&quot;,
+      &quot;value&quot;: &quot;per-frame CHQSTATE + writes.csv&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Read inspection parity&quot;,
+      &quot;value&quot;: &quot;existing live APIs after timeline.load/seek&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Sprite state&quot;,
+      &quot;value&quot;: &quot;full sprite/object RAM checkpointed every frame&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Event trim&quot;,
+      &quot;value&quot;: &quot;masked rise/fall with configurable pre/post frames&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Offline analysis&quot;,
+      &quot;value&quot;: &quot;all changed bus addresses grouped/ranked with writer PCs&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Audio&quot;,
+      &quot;value&quot;: &quot;sound_stub only; authentic sound CPU/chip/PCM capture unavailable&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Release proof&quot;,
+      &quot;value&quot;: &quot;Windows/SDL Full Regression PASS on 2026-09-29&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Historical turbo reuse&quot;,
+      &quot;value&quot;: &quot;existing turbo timeline analysed offline without gameplay replay&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Browser history resilience&quot;,
+      &quot;value&quot;: &quot;bounded/paginated summary-first script.runs prevents prior Full Regression OOM&quot;
+    }
+  ],
+  &quot;method&quot;: [
+    &quot;Record the current frame immediately and every emulated frame thereafter.&quot;,
+    &quot;Capture every bus write independently of targeted memory watches.&quot;,
+    &quot;Reload any historical frame through the ordinary deterministic checkpoint loader.&quot;,
+    &quot;Reuse existing live read-side APIs against the selected recorded checkpoint.&quot;,
+    &quot;Trim broad captures from the write stream and run offline memory/writer ranking without replaying gameplay.&quot;,
+    &quot;RC3 requires immutable master recordings: event windows and memory analyses are derived streaming views under analysis/, never destructive trims of the source timeline.&quot;
+  ],
+  &quot;reproduction&quot;: [
+    &quot;Run research/scripts/regression/regression-v06680-forensic-timeline.chqscript.&quot;,
+    &quot;Run research/scripts/timeline/capture-turbo-complete-cycle.chqscript to create the first substantive event corpus.&quot;,
+    &quot;Import it with research/scripts/timeline/import-and-inspect-timeline.chqscript.&quot;,
+    &quot;Use timeline.fork-live for a counterfactual continuation from a selected frame.&quot;
+  ],
+  &quot;openQuestions&quot;: [
+    &quot;Per-frame CHQSTATE storage may later be supplemented by keyframe+delta compression without changing the public workflow.&quot;,
+    &quot;Authentic audio timeline capture depends on implementing the real sound CPU/chip/PCM runtime.&quot;,
+    &quot;A richer Workbench timeline scrubber is optional follow-on UI work and should be driven by research utility.&quot;
+  ]
+}</pre></details></article><article><h3>Turbo HUD active-character path</h3><small>confirmed · writer-and-timeline-proven</small><p>Turbo HUD behavior is confirmed game logic: activation replaces the consumed normal icon with a three-phase animated TC0100SCN RAM-character icon, then clears the slot at expiry.</p><p><b>docs:</b> docs/PROJECT_STATE.md, docs/ROADMAP.md, docs/API_REFERENCE.md</p><p><b>scripts:</b> research/scripts/graphics/turbo-hud-layer-sprite-correlation.chqscript, research/scripts/graphics/turbo-hud-exact-tile-writer-investigation.chqscript, research/scripts/graphics/turbo-hud-text-plane-neighbourhood.chqscript, research/scripts/gameplay/turbo-gameplay-to-hud-writer-path.chqscript, research/scripts/graphics/turbo-hud-tile-character-inspection.chqscript</p><p><b>apiActions:</b> timeline.load, timeline.seek, memory.read, memory.read-range, cpu.disassemble, tile.inspect</p><details><summary>Source details</summary><pre>{
+  &quot;discovery&quot;: &quot;Timeline/write evidence and disassembly connect the confirmed gameplay turbo state directly to the TC0100SCN text-plane cells used by the bottom turbo icons.&quot;,
+  &quot;significance&quot;: &quot;The previously suspected missing turbo indicator is resolved as intentional game behavior. The active slot uses animated RAM characters 0x0C..0x0F and is cleared only when the active duration expires.&quot;,
+  &quot;confirmedValues&quot;: [
+    {
+      &quot;name&quot;: &quot;turbos remaining&quot;,
+      &quot;value&quot;: &quot;CPU-A 0x1003A2 (16-bit)&quot;
+    },
+    {
+      &quot;name&quot;: &quot;turbo active&quot;,
+      &quot;value&quot;: &quot;CPU-A 0x10040F bit 1&quot;
+    },
+    {
+      &quot;name&quot;: &quot;active timer&quot;,
+      &quot;value&quot;: &quot;CPU-A 0x100414; normal expiry 0x00D2&quot;
+    },
+    {
+      &quot;name&quot;: &quot;activation routine&quot;,
+      &quot;value&quot;: &quot;0x8460..0x84E6; decrement at 0x8482, active bit set at 0x8486&quot;
+    },
+    {
+      &quot;name&quot;: &quot;active HUD chars&quot;,
+      &quot;value&quot;: &quot;0x0C,0x0D / 0x0E,0x0F; hard-coded writes at 0x1C82/0x1C8A&quot;
+    },
+    {
+      &quot;name&quot;: &quot;normal HUD chars&quot;,
+      &quot;value&quot;: &quot;0x7C,0x7D / 0x7E,0x7F; draw loop at 0x1CE6/0x1CEE&quot;
+    },
+    {
+      &quot;name&quot;: &quot;expiry clear&quot;,
+      &quot;value&quot;: &quot;0x1CD4/0x1CD8 clear consumed 2x2 slot&quot;
+    },
+    {
+      &quot;name&quot;: &quot;animation phase&quot;,
+      &quot;value&quot;: &quot;CPU-A 0x1002AA cycles 0x00/0x40/0x80&quot;
+    },
+    {
+      &quot;name&quot;: &quot;animation source table&quot;,
+      &quot;value&quot;: &quot;0x33A1A, 0x33A5A, 0x33A9A (64 bytes each)&quot;
+    },
+    {
+      &quot;name&quot;: &quot;RAM character destination&quot;,
+      &quot;value&quot;: &quot;CPU-A 0xC060C0..0xC060FF; chars 0x0C..0x0F&quot;
+    },
+    {
+      &quot;name&quot;: &quot;animation cadence&quot;,
+      &quot;value&quot;: &quot;updates every 2 emulated frames; full 3-phase cycle every 6 frames&quot;
+    }
+  ],
+  &quot;method&quot;: [
+    &quot;Reuse turbo-complete-cycle.chqtimeline.&quot;,
+    &quot;Compare HUD-only/hidden layered snapshots around activation and expiry.&quot;,
+    &quot;Inspect exact text-plane words and writer PCs.&quot;,
+    &quot;Disassemble gameplay and HUD writer routines.&quot;
+  ],
+  &quot;reproduction&quot;: [
+    &quot;Run Turbo HUD Layer Sprite Correlation.&quot;,
+    &quot;Run Turbo HUD Exact Tile Writer Investigation.&quot;,
+    &quot;Run Turbo HUD Text Plane Neighbourhood Investigation.&quot;,
+    &quot;Run Turbo Gameplay To HUD Writer Path.&quot;
+  ],
+  &quot;openQuestions&quot;: []
+}</pre></details></article><article><h3>Chase H.Q. Game Lab turbo / speed experiments</h3><small>implemented-awaiting-proof · candidate-static-validation</small><p>Reversible Game Lab controls expose turbo and raw internal/physics-speed experiments while preserving prior run/pause state and explicitly distinguishing HUD display speed.</p><p><b>docs:</b> docs/API_REFERENCE.md, docs/PROJECT_STATE.md</p><p><b>scripts:</b> research/scripts/experimental/gameplay/game-lab-turbo-speed-demo.chqscript, research/scripts/regression/regression-v06690-game-lab-tile-inspector.chqscript</p><p><b>apiActions:</b> game.experiment.status, game.turbo.stock, game.turbo.active, game.turbo.fire, game.turbo.timer.reset, game.turbo.remaining.set, game.speed.set, game.speed.freeze, game.speed.clear</p><details><summary>Source details</summary><pre>{
+  &quot;discovery&quot;: &quot;Confirmed gameplay fields are wrapped in named reversible Game Lab actions instead of ad-hoc raw patch commands.&quot;,
+  &quot;significance&quot;: &quot;Sustained turbo/speed experiments become repeatable from UI and scripts while preserving API parity.&quot;,
+  &quot;confirmedValues&quot;: [
+    {
+      &quot;name&quot;: &quot;HUD/display speed&quot;,
+      &quot;value&quot;: &quot;CPU-A 0x100400, 16-bit packed BCD&quot;
+    },
+    {
+      &quot;name&quot;: &quot;internal/physics speed&quot;,
+      &quot;value&quot;: &quot;CPU-A 0x10041C, 16-bit raw&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Infinite stock&quot;,
+      &quot;value&quot;: &quot;freeze 0x1003A2&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Infinite active&quot;,
+      &quot;value&quot;: &quot;freeze 0x100414 at 0&quot;
+    }
+  ],
+  &quot;method&quot;: [
+    &quot;Use named game.* actions; do not clear unrelated patches.&quot;
+  ],
+  &quot;reproduction&quot;: [
+    &quot;Run Regression - v0.66.9.0 Game Lab and Tile Inspector on Windows/SDL.&quot;
+  ],
+  &quot;openQuestions&quot;: [
+    &quot;The actual top-speed clamp/target-speed logic is not yet proven.&quot;
+  ]
+}</pre></details></article><article><h3>TC0100SCN RAM character inspector</h3><small>implemented-awaiting-proof · candidate-static-validation</small><p>Exports any TC0100SCN RAM text character (00..FF) as raw 2bpp pens, palette-aware PNG and JSON metadata, with Workbench preview and script/API access.</p><p><b>docs:</b> docs/API_REFERENCE.md, docs/PROJECT_STATE.md</p><p><b>scripts:</b> research/scripts/graphics/turbo-hud-tile-character-inspection.chqscript, research/scripts/regression/regression-v06690-game-lab-tile-inspector.chqscript</p><p><b>apiActions:</b> tile.inspect</p><details><summary>Source details</summary><pre>{
+  &quot;discovery&quot;: &quot;The existing renderer already proves TC0100SCN RAM text characters are 256 x 8x8, 2bpp at tilemap RAM +0x6000; the inspector exposes the same source data as portable artifacts.&quot;,
+  &quot;significance&quot;: &quot;The turbo HUD question can now be reduced to direct character-source inspection instead of screenshot inference.&quot;,
+  &quot;confirmedValues&quot;: [
+    {
+      &quot;name&quot;: &quot;Character RAM base&quot;,
+      &quot;value&quot;: &quot;CPU-A 0xC06000&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Character size&quot;,
+      &quot;value&quot;: &quot;16 bytes; 8x8; 2bpp&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Code range&quot;,
+      &quot;value&quot;: &quot;0x00..0xFF&quot;
+    }
+  ],
+  &quot;method&quot;: [
+    &quot;Read 16 bytes for the selected code, decode the two bitplanes using the renderer convention, render pens 1..3 through the selected palette bank, and preserve pen 0 as transparent.&quot;
+  ],
+  &quot;reproduction&quot;: [
+    &quot;api tile.inspect code=0C palette=0 scale=16&quot;
+  ],
+  &quot;openQuestions&quot;: [
+    &quot;Background ROM tile inspection is not part of v1.&quot;
+  ]
+}</pre></details></article><article><h3>Player shadow: sprite occupancy and visible coordinates</h3><small>confirmed · runtime-regression-and-causal-frame</small><p>Frame 2352 proves body 82/map 475 must retain overlap ownership ahead of shadow 81/map 575 under descending traversal. RC2.2 correctly found descending traversal but incorrectly inferred lower-slot overwrite ownership. RC2.5 adds first-nontransparent occupancy and corrected individual-sprite visible coordinates; focused and Full Regression Windows proof passed.</p><p><b>docs:</b> docs/SPRITE_OWNERSHIP.md</p><p><b>scripts:</b> research/scripts/regression/regression-sprite-ownership.chqscript</p><p><b>apiActions:</b> sprite.order.inspect, sprite.order.set, frame.snapshot, frame.snapshot.assert-overlap</p><details><summary>Source details</summary><pre>{
+  &quot;discovery&quot;: &quot;Hiding slot 81 restores 948 pixels; hiding effects 83/84 does not remove central occlusion. MAME priority drawing reserves nonzero-pen pixels even when background-masked.&quot;,
+  &quot;significance&quot;: &quot;Keep descending traversal and black pens; implement occupancy instead of reversing global order.&quot;,
+  &quot;confirmedValues&quot;: [
+    {
+      &quot;name&quot;: &quot;canonical overlap&quot;,
+      &quot;value&quot;: &quot;frame 2352: overlapPixels=689, frontOwnedOverlap=553, backVisibleOutsideFront=247&quot;
+    },
+    {
+      &quot;name&quot;: &quot;default traversal/ownership&quot;,
+      &quot;value&quot;: &quot;descending (lower-slot control name), first-nontransparent occupancy&quot;
+    },
+    {
+      &quot;name&quot;: &quot;export geometry&quot;,
+      &quot;value&quot;: &quot;exportCoordinatesExact=true; visible raster start 16 applied once&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Full Regression&quot;,
+      &quot;value&quot;: &quot;PASS session 20260930_151202 run 002&quot;
+    }
+  ],
+  &quot;method&quot;: [
+    &quot;Read causal run 20260930_131005/003 and the full MAME drawing call chain.&quot;
+  ],
+  &quot;reproduction&quot;: [
+    &quot;Run regression-sprite-ownership.chqscript; require overlapPixels&gt;0, frontOwnedOverlap&gt;0, backVisibleOutsideFront&gt;0 and exportCoordinatesExact=true.&quot;,
+    &quot;Run Full Regression and require its terminal COMPLETE marker.&quot;
+  ],
+  &quot;openQuestions&quot;: [
+    &quot;Sprite ownership defect is closed; resume TC0100SCN sky/rowscroll raster mapping unless contradictory evidence appears.&quot;
+  ]
+}</pre></details></article><article><h3>Player shadow: sprite occupancy and visible coordinates</h3><small>confirmed · runtime-regression-and-causal-frame</small><p>Frame 2352 proves body 82/map 475 must retain overlap ownership ahead of shadow 81/map 575 under descending traversal. RC2.2 correctly found descending traversal but incorrectly inferred lower-slot overwrite ownership. RC2.5 adds first-nontransparent occupancy and corrected individual-sprite visible coordinates; focused and Full Regression Windows proof passed.</p><p><b>docs:</b> docs/SPRITE_OWNERSHIP.md</p><p><b>scripts:</b> research/scripts/regression/regression-sprite-ownership.chqscript</p><p><b>apiActions:</b> sprite.order.inspect, sprite.order.set, frame.snapshot, frame.snapshot.assert-overlap</p><details><summary>Source details</summary><pre>{
+  &quot;discovery&quot;: &quot;Hiding slot 81 restores 948 pixels; hiding effects 83/84 does not remove central occlusion. MAME priority drawing reserves nonzero-pen pixels even when background-masked.&quot;,
+  &quot;significance&quot;: &quot;Keep descending traversal and black pens; implement occupancy instead of reversing global order.&quot;,
+  &quot;confirmedValues&quot;: [
+    {
+      &quot;name&quot;: &quot;canonical overlap&quot;,
+      &quot;value&quot;: &quot;frame 2352: overlapPixels=689, frontOwnedOverlap=553, backVisibleOutsideFront=247&quot;
+    },
+    {
+      &quot;name&quot;: &quot;default traversal/ownership&quot;,
+      &quot;value&quot;: &quot;descending (lower-slot control name), first-nontransparent occupancy&quot;
+    },
+    {
+      &quot;name&quot;: &quot;export geometry&quot;,
+      &quot;value&quot;: &quot;exportCoordinatesExact=true; visible raster start 16 applied once&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Full Regression&quot;,
+      &quot;value&quot;: &quot;PASS session 20260930_151202 run 002&quot;
+    }
+  ],
+  &quot;method&quot;: [
+    &quot;Read causal run 20260930_131005/003 and the full MAME drawing call chain.&quot;
+  ],
+  &quot;reproduction&quot;: [
+    &quot;Run regression-sprite-ownership.chqscript; require overlapPixels&gt;0, frontOwnedOverlap&gt;0, backVisibleOutsideFront&gt;0 and exportCoordinatesExact=true.&quot;,
+    &quot;Run Full Regression and require its terminal COMPLETE marker.&quot;
+  ],
+  &quot;openQuestions&quot;: [
+    &quot;Sprite ownership defect is closed; resume TC0100SCN sky/rowscroll raster mapping unless contradictory evidence appears.&quot;
+  ]
+}</pre></details></article><article><h3>TC0100SCN vertical scroll sign and neutral BG offsets</h3><small>confirmed · deterministic-ab-and-reference-confirmed</small><p>RC2.3 controlled Stage 1 evidence proved the native BG/TEXT source-Y calculation inverted the TC0100SCN control-word sign. RC2.4 corrects the source coordinate and removes historical BG presentation-offset compensation.</p><details><summary>Source details</summary><pre>{
+  &quot;discovery&quot;: &quot;At frame 2065 the Stage 1 control words are CTRL3=CTRL4=0x01E0. The old renderer converted that to -480 and subtracted it again. A controlled -64 presentation proxy moved both dark and pale building planes from the lower road/foreground to the skyline. For visible-top hardware Y 16, the corrected formula resolves source Y 40; this is exactly the old formula with the -64 proxy and matches the TC0100SCN negative-scroll convention used by MAME. TEXT shares the same corrected Y helper for non-zero CTRL5 cases.&quot;,
+  &quot;significance&quot;: &quot;Removes historical presentation compensation and aligns source-Y semantics with evidence/reference behavior.&quot;,
+  &quot;confirmedValues&quot;: [
+    {
+      &quot;item&quot;: &quot;Stage 1 BG Y control&quot;,
+      &quot;value&quot;: &quot;CTRL3=CTRL4=0x01E0&quot;
+    },
+    {
+      &quot;item&quot;: &quot;Correct visible-top source Y&quot;,
+      &quot;value&quot;: &quot;40 (hardware Y 16, 512-line wrap)&quot;
+    },
+    {
+      &quot;item&quot;: &quot;RC2.4 BG0 default presentation offset&quot;,
+      &quot;value&quot;: &quot;0:0&quot;
+    },
+    {
+      &quot;item&quot;: &quot;RC2.4 BG1 default presentation offset&quot;,
+      &quot;value&quot;: &quot;0:0&quot;
+    }
+  ],
+  &quot;method&quot;: [
+    &quot;Used deterministic frame-2065 A/B offset proxy and source/control-register evidence.&quot;
+  ],
+  &quot;reproduction&quot;: [
+    &quot;Run Validate-TC0100SCN-Y.ps1 when fresh renderer proof is required.&quot;
+  ],
+  &quot;openQuestions&quot;: []
+}</pre></details></article><article><h3>Same-turn structured snapshot discovery</h3><small>confirmed · windows-regression-proven</small><p>RC2.4.3 same-turn structured snapshot discovery is Windows-proven: a newly created current-run snapshot is returned immediately by assertive frame.snapshot.list require=NAME.</p><p><b>docs:</b> docs/API_REFERENCE.md, RELEASE_NOTES_0.66.9.0-RC2.4.3.md, VALIDATION_0.66.9.0-RC2.4.3.md</p><p><b>scripts:</b> research/scripts/regression/regression-v06690-rc243-snapshot-discovery.chqscript</p><p><b>apiActions:</b> frame.snapshot, frame.snapshot.list</p><details><summary>Source details</summary><pre>{
+  &quot;discovery&quot;: &quot;The uploaded RC2.4.3 focused regression created `regression-rc243-snapshot-discovery` at frame 2065 and the immediately following `frame.snapshot.list require=regression-rc243-snapshot-discovery` returned that current-run snapshot. The run completed PASS and both self-comparisons were pixel-identical.&quot;,
+  &quot;significance&quot;: &quot;A regression that only prints diagnostic output can mask a real user-facing failure. Same-turn discovery needs an explicit authoritative current-process record and a hard assertion surface.&quot;,
+  &quot;confirmedValues&quot;: [
+    {
+      &quot;name&quot;: &quot;RC2.4.2 failed current-run name 1&quot;,
+      &quot;value&quot;: &quot;regression-rc242-tc0100scn&quot;
+    },
+    {
+      &quot;name&quot;: &quot;RC2.4.2 failed current-run name 2&quot;,
+      &quot;value&quot;: &quot;tc0100scn-yfix-2065&quot;
+    },
+    {
+      &quot;name&quot;: &quot;RC2.4.3 assertion&quot;,
+      &quot;value&quot;: &quot;frame.snapshot.list require=NAME&quot;
+    }
+  ],
+  &quot;method&quot;: [
+    &quot;Register a completed snapshot in a same-process map before returning from frame.snapshot.&quot;,
+    &quot;Invalidate snapshot list, snapshot-root and known-session-root caches after capture.&quot;,
+    &quot;Merge recent entries into frame.snapshot.list and consult them first for named snapshot resolution.&quot;,
+    &quot;Use require=NAME in the regression so absence becomes a script error.&quot;
+  ],
+  &quot;reproduction&quot;: [
+    &quot;Run Regression - v0.66.9.0 RC2.4.3 Snapshot Discovery.&quot;,
+    &quot;Confirm the command frame.snapshot.list require=regression-rc243-snapshot-discovery succeeds.&quot;,
+    &quot;Run Validate-FrameSnapshotRefresh.ps1 as the independent HTTP-level check.&quot;
+  ],
+  &quot;openQuestions&quot;: []
+}</pre></details></article><article><h3>Stage 1 sky texture is present in the raw TC0100SCN background source</h3><small>confirmed · layered-snapshot-localized</small><p>The post-Y-fix frame-2065 layered snapshot shows the visible sky dithering/banding already present in raw bg-bottom source pixels before road, upper background, sprites, text or final compositor reconstruction.</p><p><b>docs:</b> docs/chasehq/reference/VIDEO_PIPELINE.md, docs/PROJECT_STATE.md</p><p><b>scripts:</b> research/scripts/graphics/tc0100scn-post-y-fix-layer-isolation.chqscript</p><p><b>apiActions:</b> frame.snapshot, image.compare</p><details><summary>Source details</summary><pre>{
+  &quot;discovery&quot;: &quot;In the RC2.4.2 deterministic frame-2065 snapshot, the characteristic sky pattern is visible in sources/bg-bottom.png itself. The snapshot reconstruction is pixel exact, so later compositor stages are not introducing that pattern.&quot;,
+  &quot;significance&quot;: &quot;Do not use presentation offsets or compositor changes merely to remove this texture. Further renderer work should be driven by a direct mismatch against authoritative reference output.&quot;,
+  &quot;confirmedValues&quot;: [
+    {
+      &quot;name&quot;: &quot;localized source&quot;,
+      &quot;value&quot;: &quot;sources/bg-bottom.png&quot;
+    },
+    {
+      &quot;name&quot;: &quot;capture frame&quot;,
+      &quot;value&quot;: &quot;2065&quot;
+    },
+    {
+      &quot;name&quot;: &quot;reconstruction&quot;,
+      &quot;value&quot;: &quot;verifiedExact=true, mismatchedPixels=0&quot;
+    }
+  ],
+  &quot;method&quot;: [
+    &quot;Capture a v2 layered snapshot at canonical frame 2065.&quot;,
+    &quot;Inspect raw source PNGs separately from contribution layers and final output.&quot;,
+    &quot;Confirm exact reconstruction metadata before attributing differences to composition.&quot;
+  ],
+  &quot;reproduction&quot;: [
+    &quot;Run the packaged TC0100SCN Post-Y-Fix Layer Isolation reference if a fresh baseline is required; RC2.4.3 asserts immediate snapshot discovery.&quot;
+  ],
+  &quot;openQuestions&quot;: [
+    &quot;Only reopen sky rendering as a defect if direct MAME/arcade reference evidence demonstrates a specific mismatch.&quot;
+  ]
+}</pre></details></article><article><h3>Full Regression script capacity and authoritative session build metadata</h3><small>implemented-awaiting-proof · failure-localized-candidate-fix</small><p>RC2.4.4 raises the Research Script v2 expanded-command ceiling from 500 to 1000 because Full Regression now expands to 503 commands, and derives startup/research-session build metadata from the project source version instead of stale hard-coded 0.66.8.0.</p><p><b>docs:</b> docs/SCRIPT_LANGUAGE_REFERENCE.md, RELEASE_NOTES_0.66.9.0-RC2.4.4.md, VALIDATION_0.66.9.0-RC2.4.4.md</p><p><b>scripts:</b> research/scripts/regression/full-regression.chqscript</p><p><b>apiActions:</b> script.schema</p><details><summary>Source details</summary><pre>{
+  &quot;discovery&quot;: &quot;After the RC2.4.3 focused snapshot regression passed, Full Regression failed in preflight with `Expanded script exceeds 500 commands`. Static expansion of the packaged suite is exactly 503 commands. The same diagnostic&#x27;s startup-session.json reported stale build 0.66.8.0 while native-status reported 0.66.9.0.&quot;,
+  &quot;significance&quot;: &quot;The permanent regression gate must be able to grow without silently crossing an obsolete ceiling, and evidence metadata must identify the actual build rather than a historical hard-coded value.&quot;,
+  &quot;confirmedValues&quot;: [
+    {
+      &quot;name&quot;: &quot;RC2.4.3 Full Regression expanded commands&quot;,
+      &quot;value&quot;: &quot;503&quot;
+    },
+    {
+      &quot;name&quot;: &quot;RC2.4.4 expanded-command ceiling&quot;,
+      &quot;value&quot;: &quot;1000&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Other script safety limits&quot;,
+      &quot;value&quot;: &quot;64 KiB source; 1000 source lines; 256 loop iterations; nesting depth 4&quot;
+    }
+  ],
+  &quot;method&quot;: [
+    &quot;Raise the same expanded-command ceiling in browser and server-side compilers.&quot;,
+    &quot;Update script.schema and machine-readable script-language schema/reference.&quot;,
+    &quot;Derive startup/research-session build metadata from src/version.h with CMake fallback.&quot;
+  ],
+  &quot;reproduction&quot;: [
+    &quot;Build/start RC2.4.4 on Windows.&quot;,
+    &quot;Run Full Regression Suite and require its terminal COMPLETE marker.&quot;,
+    &quot;Inspect startup/session metadata and confirm build=0.66.9.0.&quot;
+  ],
+  &quot;openQuestions&quot;: [
+    &quot;Windows Full Regression proof remains required before promoting RC2.4.4 to proven.&quot;
+  ]
+}</pre></details></article><article><h3>RC2.5 sprite correction and safe script lifecycle</h3><small>implemented-awaiting-proof · mixed-proven-and-candidate</small><p>RC2.5 packages the Windows-proven sprite ownership/export-coordinate correction and adds candidate try/finally, timeline.reset, Script Console schema parity, current-session history defaulting and diagnostic source-attribution fixes. Fresh Windows proof is required for the new scripting/Workbench changes.</p><p><b>docs:</b> RELEASE_NOTES_0.66.9.0-RC2.5.md, VALIDATION_0.66.9.0-RC2.5.md, docs/SPRITE_OWNERSHIP.md</p><p><b>scripts:</b> research/scripts/regression/regression-v06690-rc25-script-safety.chqscript, research/scripts/regression/regression-sprite-ownership.chqscript, research/scripts/graphics/tc0100scn-rowscroll-raster-mapping.chqscript</p><p><b>apiActions:</b> timeline.reset, frame.snapshot.assert-overlap, script.runs</p><details><summary>Source details</summary><pre>{
+  &quot;discovery&quot;: &quot;Repeated failed ad-hoc rowscroll probes exposed persistent timeline state and stale diagnostic script attribution, motivating durable cleanup semantics rather than more defensive one-off scripts.&quot;,
+  &quot;significance&quot;: &quot;Future experiments can establish/reset timeline state deterministically and always execute cleanup while Script Console/API registration drift is caught at startup.&quot;,
+  &quot;confirmedValues&quot;: [
+    {
+      &quot;name&quot;: &quot;sprite ownership&quot;,
+      &quot;value&quot;: &quot;Windows focused + Full Regression PASS before packaging&quot;
+    },
+    {
+      &quot;name&quot;: &quot;cpu_bus_rom_tests&quot;,
+      &quot;value&quot;: &quot;SEGFAULT independently reproduced on pristine RC2.4.4&quot;
+    }
+  ],
+  &quot;method&quot;: [
+    &quot;Carry the proven sprite working tree into a coherent RC and add focused script-lifecycle/regression coverage.&quot;
+  ],
+  &quot;reproduction&quot;: [
+    &quot;Follow VALIDATION_0.66.9.0-RC2.5.md on Windows.&quot;
+  ],
+  &quot;openQuestions&quot;: [
+    &quot;Fresh Windows proof for RC2.5 try/finally/timeline.reset/history/source-attribution changes.&quot;
+  ]
+}</pre></details></article><article><h3>Sprite 4bpp bitplane significance</h3><small>confirmed · causal-frame-and-exhaustive-native-test</small><p>RC2.5 Map-405 causal evidence proves the sprite decoder used the correct physical plane addresses but reversed their 4bpp significance. Physical planes 0,1,2,3 must contribute pen bits 3,2,1,0. RC2.6 centralizes that mapping in the shared live/export decoder.</p><p><b>docs:</b> docs/evidence/sprite-bitplane-significance/README.md, docs/chasehq/reference/SPRITE_HARDWARE.md, docs/chasehq/discoveries/sprite-and-video.md</p><p><b>scripts:</b> research/scripts/graphics/sprite-bitplane-significance-proveoff.chqscript</p><details><summary>Source details</summary><pre>{
+  &quot;discovery&quot;: &quot;The Chase H.Q. native sprite decoder had the correct physical plane addresses but assigned their significance backwards: plane 0 was treated as the LSB. A controlled RC2.5 Map-405 palette intervention produced the exact artwork expected if the four-bit pen were reversed, without touching sprite geometry, priority or ownership.&quot;,
+  &quot;significance&quot;: &quot;Sprite colour errors can be corrected at the source decode contract rather than by palette substitution or compositor compensation. Sharing the corrected decoder also keeps live rendering, map inspection and forensic exports on one pen interpretation.&quot;,
+  &quot;confirmedValues&quot;: [
+    {
+      &quot;name&quot;: &quot;physical plane -&gt; pen bit&quot;,
+      &quot;value&quot;: &quot;0-&gt;3, 1-&gt;2, 2-&gt;1, 3-&gt;0&quot;
+    },
+    {
+      &quot;name&quot;: &quot;equivalent old-pen transform&quot;,
+      &quot;value&quot;: &quot;4-bit reversal&quot;
+    },
+    {
+      &quot;name&quot;: &quot;causal target&quot;,
+      &quot;value&quot;: &quot;frame 2352 / Map 405 / palette bank 175&quot;
+    },
+    {
+      &quot;name&quot;: &quot;affected visible target sprites&quot;,
+      &quot;value&quot;: &quot;16 Map-405 sprites&quot;
+    },
+    {
+      &quot;name&quot;: &quot;causal snapshot reconstruction&quot;,
+      &quot;value&quot;: &quot;verifiedExact=true; mismatchedPixels=0&quot;
+    },
+    {
+      &quot;name&quot;: &quot;bundle SHA-256&quot;,
+      &quot;value&quot;: &quot;343c14d710023fbb308312900dc453d2eed365409243242c634493aece42c6b2&quot;
+    }
+  ],
+  &quot;method&quot;: [
+    &quot;Fork the deterministic frame-2352 timeline to live state without changing sprite geometry or priority.&quot;,
+    &quot;Recolour only the currently decoded Map-405 pens using palette entries selected by the MAME-consistent 4-bit reversal mapping.&quot;,
+    &quot;Capture a structured layered/per-sprite snapshot and inspect the cloud family plus reconstruction metadata.&quot;,
+    &quot;Implement the proven significance in one shared low-level decoder and exhaustively test all 16 physical-plane masks.&quot;
+  ],
+  &quot;reproduction&quot;: [
+    &quot;Read docs/evidence/sprite-bitplane-significance/README.md for the RC2.5 causal run identity and intervention.&quot;,
+    &quot;On RC2.6, run Test-SpriteGfx.bat; all 16 pen mappings must pass.&quot;,
+    &quot;Run research/scripts/graphics/sprite-bitplane-significance-proveoff.chqscript and inspect map405-native-plane-order without palette overrides.&quot;,
+    &quot;Run sprite ownership and Full Regression before promotion.&quot;
+  ],
+  &quot;openQuestions&quot;: [
+    &quot;Complete Windows/SDL prove-off of the RC2.6 source correction across canonical sprite scenes.&quot;,
+    &quot;The separate scene-no-sprites snapshot export currently retains sprites and remains a tooling fix, not part of this decoder correction.&quot;
+  ]
+}</pre></details></article><article><h3>TC0100SCN X correction and RC2.6.1 findings</h3><small>implemented-awaiting-proof · controlled-prior-runs-plus-source-and-coordinate-tests</small><p>Shared BG X now subtracts control and rowscroll; Y/origin and zero presentation defaults are preserved. Old/corrected comparison and exact/no-sprites assertions are available. Windows canonical proof is pending.</p><p><b>docs:</b> docs/TC0100SCN_RC261_FINDINGS.md, docs/RELEASE_SCOPE_RC27.md</p><p><b>scripts:</b> research/scripts/regression/regression-v06690-rc27-tc0100-reliability.chqscript</p><p><b>apiActions:</b> layer.offsets.get, layer.offsets.set, layer.offsets.reset, layer.offsets.assert, tc0100.mode, release.assert-version, frame.snapshot.assert-exact, frame.snapshot.assert-scene-no-sprites</p><details><summary>Source details</summary><pre>{
+  &quot;summary&quot;: &quot;See the authoritative findings document; column scrolling is unsupported outside the tested zero state.&quot;
+}</pre></details></article><article><h3>Native reconstruction maturity</h3><small>planned · documented-long-term-direction</small><p>Evidence ladder from UNKNOWN to NATIVE, with independent SHADOW/COMPARE required before claiming replacement parity.</p><p><b>docs:</b> docs/NATIVE_RECONSTRUCTION.md</p><details><summary>Source details</summary><pre>{
+  &quot;summary&quot;: &quot;Machine-readable subsystem state is in research/knowledge/native-subsystems.json.&quot;
+}</pre></details></article></section></main></div></html>

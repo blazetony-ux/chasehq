@@ -1,0 +1,28 @@
+# category: regression
+# name: Regression - API-backed query functions
+# purpose: Verify dynamic script query functions and direct diagnostic printing.
+# checkpoint: stage1-driving-2352.chqstate
+# regression-version: legacy
+# regression-scope: permanent
+
+api patch.clear
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api control.run-frames frames=30
+
+getregions()
+getsprites()
+getmaps()
+getpalettes()
+getpaletteentries(bank=75)
+getcheckpoints()
+getcapabilities()
+
+set regions = getregions()
+for region in regions
+    echo region=${region}
+end
+
+set sprites = getsprites()
+for slot in sprites
+    api sprite.inspect slot=${slot}
+end

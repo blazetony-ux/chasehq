@@ -1,0 +1,11 @@
+# Follow prepared road data and catch the first non-zero road write
+cpu=B
+mem=100802-100807,rw
+mem=101600-102200,rw
+mem=101a58-101a5b,rw
+mem=800000-801fff,nonzero
+pc=0480-0540
+trigger=nonzero,800000-801fff
+before=128
+after=256
+max=200000

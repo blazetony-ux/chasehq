@@ -1,0 +1,12 @@
+# name: Regression - v0.66.0.5 runtime hotfix
+# category: regression
+# purpose: Runtime-only checks safe to include in full regression without duplicate query-function preflight.
+# regression-version: 0.66.0.5
+# regression-scope: version
+
+echo === v0.66.0.5 runtime hotfix regression ===
+api platform.info
+api status
+api track.state
+api logs.list
+echo === v0.66.0.5 runtime hotfix regression complete ===

@@ -1,0 +1,14 @@
+# v0.26.3.2 multi-pulse IOC experiment
+# Three separate inversions of IOC port 2 bit 4.
+# Goal: determine whether work RAM 0x100108 increments 0 -> 1 -> 2 -> 3.
+
+--irq4
+--frames 600
+--no-legacy-debug
+--pulse-ioc 2:10:120:5
+--pulse-ioc 2:10:180:5
+--pulse-ioc 2:10:240:5
+--trace-cpu A
+--trace-mem 100106:10010a
+--trace-pc 2e10:2e40
+--trace-max 12000

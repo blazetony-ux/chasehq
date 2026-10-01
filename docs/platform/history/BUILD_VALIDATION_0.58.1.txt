@@ -1,0 +1,13 @@
+ChaseHQ-Native v0.58.1 build validation
+
+Linux CPU-only configure/build/tests: PASS
+Windows/MSVC x64-Debug: requires user validation.
+
+Internal ctest changing into directory: /tmp/chq581
+Test project /tmp/chq581
+    Start 1: cpu_bus_rom_tests
+1/1 Test #1: cpu_bus_rom_tests ................   Passed    0.07 sec
+
+100% tests passed, 0 tests failed out of 1
+
+Total Test time (real) =   0.07 sec

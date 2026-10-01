@@ -1,0 +1,97 @@
+{
+  "schema": "chq-audio-research-capabilities-v1",
+  "build": "0.66.9.0-RC2.7",
+  "status": "FOUNDATION_ONLY",
+  "guardrail": "No runtime audio injection is enabled until native Windows/SDL audio timing and mixer behavior are validated.",
+  "channels": [
+    {
+      "id": "mixed_output",
+      "kind": "mixer",
+      "status": "planned",
+      "description": "Final stereo/mono PCM output after emulated mixing"
+    },
+    {
+      "id": "sound_cpu_commands",
+      "kind": "event-stream",
+      "status": "planned",
+      "description": "Commands written toward the sound CPU / sound subsystem"
+    },
+    {
+      "id": "sample_voice",
+      "kind": "sample-source",
+      "status": "research",
+      "description": "Future decoded sample/voice events when authoritative chip/source mapping is known"
+    },
+    {
+      "id": "music_voice",
+      "kind": "music-source",
+      "status": "research",
+      "description": "Future music sequence/channel events when authoritative sound architecture is mapped"
+    }
+  ],
+  "waveform": {
+    "planned": true,
+    "formats": [
+      "PCM16 WAV",
+      "CSV envelope",
+      "JSON markers"
+    ],
+    "viewer": [
+      "zoom",
+      "scrub",
+      "frame markers",
+      "event markers",
+      "loop selection",
+      "A/B overlay"
+    ],
+    "capture": [
+      "mixed output",
+      "per-source where architecture permits",
+      "deterministic checkpoint-aligned capture"
+    ]
+  },
+  "export": {
+    "planned": true,
+    "targets": [
+      "decoded one-shot samples",
+      "music/sequences where legally/user-provided ROM-derived extraction is technically possible",
+      "event logs"
+    ],
+    "formats": [
+      "WAV",
+      "raw PCM",
+      "JSON/CSV metadata"
+    ],
+    "rule": "Exports originate only from user-provided local game data/runtime evidence; no copyrighted ROM/audio is bundled."
+  },
+  "injection": {
+    "planned": true,
+    "enabled": false,
+    "stages": [
+      "offline replacement preview",
+      "muted/source-isolated injection",
+      "runtime sample replacement",
+      "music/stream injection"
+    ],
+    "safety": [
+      "explicit enable flag",
+      "automatic restore",
+      "volume clamp",
+      "no permanent ROM modification",
+      "evidence manifest records injection source/hash"
+    ],
+    "validationRequired": [
+      "Windows SDL audio device",
+      "sample rate/buffer timing",
+      "save-state determinism",
+      "sound CPU synchronization"
+    ]
+  },
+  "timelineCapture": {
+    "schema": "chq-timeline-audio-capability-v1",
+    "runtimeAudioAvailable": false,
+    "soundStubCaptured": true,
+    "status": "blocked-by-audio-runtime",
+    "description": "Forensic Timeline v1 checkpoints the current sound_stub bus region but cannot capture real sound CPU/chip/PCM state because the native audio runtime is not yet implemented."
+  }
+}

@@ -1,0 +1,19 @@
+# name: Regression - v0.66.9.0 Game Lab and Tile Inspector
+# category: regression
+# purpose: Prove reversible Chase H.Q. Game Lab controls and TC0100SCN RAM character inspection/export without disturbing unrelated patches.
+# regression-version: 0.66.9.0
+# regression-scope: current
+
+echo === v0.66.9.0 Game Lab / Tile Inspector regression ===
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api game.experiment.status
+api game.turbo.remaining.set value=3
+api game.turbo.stock enabled=true value=3
+api game.turbo.stock enabled=false
+api game.speed.set value=602
+api game.speed.freeze enabled=true value=602
+api game.speed.clear
+api tile.inspect code=7C palette=0 scale=8
+api tile.inspect code=0C palette=0 scale=8
+api game.experiment.status
+echo === v0.66.9.0 Game Lab / Tile Inspector regression complete ===

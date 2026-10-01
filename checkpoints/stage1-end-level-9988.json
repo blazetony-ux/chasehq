@@ -1,0 +1,7 @@
+{
+  "name": "stage1-end-level-9988",
+  "frame": 9988,
+  "semantic_state": "Confirmed Stage 1 end-of-level screen",
+  "confidence": "user-confirmed",
+  "notes": "Use for before/after comparisons against post-final-hit state and future stage-complete / level-skip research."
+}

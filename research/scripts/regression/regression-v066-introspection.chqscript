@@ -1,0 +1,16 @@
+# name: Regression - v0.66.0 introspection
+# purpose: Exercise platform, feature, registry, track, evidence, semantic-object and audio introspection APIs.
+# category: regression
+# regression-version: 0.66.0
+# regression-scope: version
+api platform.info
+api features.list
+api script.functions
+getregions()
+getprofiles()
+getsprites()
+getregistry()
+gettrackrecords(before=1,after=2)
+getevidence()
+getobjects()
+getaudiochannels()

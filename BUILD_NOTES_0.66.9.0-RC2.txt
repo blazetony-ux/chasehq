@@ -1,0 +1,13 @@
+ChaseHQ-Native v0.66.9.0-RC2
+Focused sprite-order / Game Lab semantics candidate.
+
+Highlights:
+- sprite.map.inspect map=N fixed
+- sprite.order.inspect / sprite.order.set
+- Game Lab sprite-order card
+- HUD display speed vs raw internal/physics speed clarified
+- Game Lab mutations preserve prior run/pause state
+- tile.inspect outputs include frame number
+- unhandled native ERR fails scripts
+- reusable turbo animation and car-shadow/order scripts bundled
+- documentation/schema/knowledge synchronized

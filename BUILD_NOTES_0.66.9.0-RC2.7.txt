@@ -1,0 +1,6 @@
+RC2.7 source candidate; Windows/SDL proof pending.
+Preserve build-local.json. Build-Debug.bat invokes Prepare-Project.ps1 to copy local SDL and Chase H.Q. ROMs, configures Windows/SDL, compiles and runs CTest (including new history and CLI evidence tests).
+Run: .\Build-Debug.bat
+Then: .\Start-ChaseHQ.ps1 -Restart
+Run the focused RC2.7 regression, RC2.6.1 sprite regression and Full Regression in Workbench. Review old/corrected canonical captures before promotion.
+See VALIDATION_0.66.9.0-RC2.7.md for actual Linux results and remaining local gates.

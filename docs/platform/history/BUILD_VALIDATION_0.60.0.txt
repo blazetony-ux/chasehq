@@ -1,0 +1,9 @@
+ChaseHQ-Native v0.60.0 validation
+================================
+CPU/runtime configure: PASS
+CPU/runtime build:     PASS
+ctest:                  1/1 PASS
+Workbench unit tests:   PASS
+main/machine/rom syntax: PASS
+video syntax (SDL stub): PASS
+Windows/real SDL link:  NOT RUN - SDL source is not bundled in this package

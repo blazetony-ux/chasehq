@@ -1,0 +1,19 @@
+# category: regression
+# name: Regression - live sprite API
+# purpose: Smoke-test current sprite list/inspect/presentation override controls without changing game RAM.
+# checkpoint: stage1-driving-2352.chqstate
+# regression-version: legacy
+# regression-scope: permanent
+
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api control.run-frames frames=30
+api sprites.list
+api sprite.inspect slot=44
+api sprite.visual slot=44 mode=solo
+api frame.capture name=regression-sprite-solo
+api sprite.visual slot=44 mode=hide
+api frame.capture name=regression-sprite-hide
+api sprite.visual.clear
+api sprite.override slot=44 map=182
+api frame.capture name=regression-sprite-map-override
+api sprite.override.clear

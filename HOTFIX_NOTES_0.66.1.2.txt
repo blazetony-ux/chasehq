@@ -1,0 +1,12 @@
+ChaseHQ-Native v0.66.1.2 - Regression & Resilience Polish
+
+- Restores appendScriptOutput and validates it statically.
+- Resolves @runtime/web-listener.log correctly through logs.tail.
+- Updates stale logs.tail schema/regression references.
+- Stops the script progress ticker immediately on FAILED/CANCELLED paths.
+- Moves the full-regression COMPLETE marker to the true end.
+- Migrates legacy v1 run-history records into v2 without deleting the v1 backup.
+- Adds regression Version and Regression view (Current build/Permanent/All) filters.
+- Adds regression-version/regression-scope metadata support.
+- Tones down routine web polling in the visible listener console while retaining the full request log on disk.
+- Adds regression-v06612-resilience-hotfix.chqscript and stronger Validate-Workbench checks.

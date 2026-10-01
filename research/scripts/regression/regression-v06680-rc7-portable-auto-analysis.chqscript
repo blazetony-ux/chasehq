@@ -1,0 +1,21 @@
+# name: Regression - v0.66.8.0 RC7 Portable Automated Timeline Analysis
+# category: regression
+# purpose: Prove portable current-run timeline analysis, automatic writer disassembly, milestone snapshots, HUD correlation and paced SDL timeline playback on a short deterministic recording.
+# regression-version: 0.66.8.0
+# regression-scope: current
+
+echo === v0.66.8.0 RC7 Portable Automated Timeline Analysis ===
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api input.ioc.clear
+api timeline.record.start name=regression-v06680-rc7-auto
+api input.ioc.xor port=3 mask=21
+api control.run-frames frames=2
+api input.ioc.clear
+api control.run-frames frames=3
+api timeline.record.stop
+api timeline.analyze.auto name=regression-v06680-rc7-auto triggerFrame=2065 stopFrame=2067 window=1 top=8
+api timeline.play name=regression-v06680-rc7-auto from=2064 to=2069 fps=60
+api timeline.status
+api timeline.unload
+api status
+echo === v0.66.8.0 RC7 Portable Automated Timeline Analysis complete ===

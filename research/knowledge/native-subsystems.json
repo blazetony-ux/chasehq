@@ -1,0 +1,80 @@
+{
+  "schema": "chq-native-subsystem-maturity-v1",
+  "build": "0.66.9.0-RC2.7",
+  "ladder": [
+    "UNKNOWN",
+    "OBSERVED",
+    "MAPPED",
+    "BEHAVIOUR UNDERSTOOD",
+    "NATIVE-CANDIDATE",
+    "SHADOW VERIFIED",
+    "REPLACEABLE",
+    "NATIVE"
+  ],
+  "independentShadowImplemented": false,
+  "subsystems": [
+    {
+      "id": "sprite-4bpp-decoder",
+      "maturity": "NATIVE-CANDIDATE",
+      "evidenceSummary": "All 16 plane-to-pen mappings tested; geometry/transparency invariants preserved; no independent shadow backend.",
+      "backend": "original/emulated",
+      "replacementEnabled": false
+    },
+    {
+      "id": "sprite-placement-ownership",
+      "maturity": "BEHAVIOUR UNDERSTOOD",
+      "evidenceSummary": "Canonical ownership evidence and native priority tests; full general hardware coverage remains open.",
+      "backend": "original/emulated",
+      "replacementEnabled": false
+    },
+    {
+      "id": "tc0100scn-bg",
+      "maturity": "MAPPED",
+      "evidenceSummary": "X correction implemented and coordinate tests pass; Windows canonical prove-off pending; column scroll unsupported.",
+      "backend": "original/emulated",
+      "replacementEnabled": false
+    },
+    {
+      "id": "tc0150rod",
+      "maturity": "MAPPED",
+      "evidenceSummary": "Mapped road state and rendering diagnostics; native replacement parity not established.",
+      "backend": "original/emulated",
+      "replacementEnabled": false
+    },
+    {
+      "id": "compositor-mixer",
+      "maturity": "MAPPED",
+      "evidenceSummary": "Exact internal reconstruction exists; hardware priority completeness remains under research.",
+      "backend": "original/emulated",
+      "replacementEnabled": false
+    },
+    {
+      "id": "tile-text",
+      "maturity": "MAPPED",
+      "evidenceSummary": "RAM text inspection and source-layer HUD model; independent rendering parity not established.",
+      "backend": "original/emulated",
+      "replacementEnabled": false
+    },
+    {
+      "id": "hud",
+      "maturity": "OBSERVED",
+      "evidenceSummary": "Source-isolated HUD captures; complete gameplay semantics unresolved.",
+      "backend": "original/emulated",
+      "replacementEnabled": false
+    },
+    {
+      "id": "inputs",
+      "maturity": "MAPPED",
+      "evidenceSummary": "IOC and processed-input mappings with causal probes; native translation not shadow verified.",
+      "backend": "original/emulated",
+      "replacementEnabled": false
+    },
+    {
+      "id": "gameplay-physics",
+      "maturity": "OBSERVED",
+      "evidenceSummary": "Speed/lateral behaviour observable; sufficient native reproduction model not established.",
+      "backend": "original/emulated",
+      "replacementEnabled": false
+    }
+  ]
+}

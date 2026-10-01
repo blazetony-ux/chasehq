@@ -1,0 +1,22 @@
+# name: Player Car Shadow Layer Investigation
+# category: graphics
+# purpose: Capture a short deterministic timeline and layered/per-sprite evidence for the player car and under-car effect.
+echo === Player Car Shadow Layer Investigation ===
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api input.ioc.clear
+api gameplay.registry
+api sprites.list
+api frame.snapshot name=car-shadow-2352
+api timeline.record.start name=car-shadow-layer-investigation
+api control.run-frames frames=1
+api frame.snapshot name=car-shadow-2353
+api control.run-frames frames=1
+api frame.snapshot name=car-shadow-2354
+api control.run-frames frames=2
+api frame.snapshot name=car-shadow-2356
+api control.run-frames frames=4
+api frame.snapshot name=car-shadow-2360
+api control.run-frames frames=4
+api frame.snapshot name=car-shadow-2364
+api timeline.record.stop
+echo === Player Car Shadow Layer Investigation complete ===

@@ -1,0 +1,8 @@
+{
+  "schema": "chq-workspace-v1",
+  "id": "enemy-health",
+  "title": "Enemy Health Investigation",
+  "panels": ["machine-status","memory-pins","events","sprites","cpu-registers","snapshots","console"],
+  "pins": [],
+  "notes": "Do not pre-label any RAM location as enemy health until evidence promotes the hypothesis."
+}

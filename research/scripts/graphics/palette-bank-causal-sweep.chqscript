@@ -1,0 +1,24 @@
+# category: graphics
+# name: Palette bank causal sweep
+# purpose: Deterministically test every pen in a palette bank against the same replay frame.
+# checkpoint: stage1-driving-2352.chqstate
+
+set bank = 75
+set frames = 30
+set entries = getpaletteentries(bank=${bank})
+
+api patch.clear
+api palette.overrides.clear
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api control.run-frames frames=${frames}
+api frame.capture name=palette-bank-${bank}-control
+
+for idx in entries
+    api checkpoint.load file=stage1-driving-2352.chqstate run=false
+    api palette.entry.set index=${idx} raw=7FFF
+    api control.run-frames frames=${frames}
+    api frame.capture name=palette-bank-${bank}-${idx}
+    api image.compare a=palette-bank-${bank}-control b=palette-bank-${bank}-${idx} region=FULL
+    api palette.entry.restore index=${idx}
+end
+api palette.overrides.clear

@@ -1,0 +1,44 @@
+# name: Turbo State Writer Trace
+# category: gameplay
+# purpose: Capture exact CPU-A writer PCs for processed turbo input, turbos remaining, turbo active and the active-duration counter using deterministic repeated activation from the same checkpoint.
+# checkpoint: stage1-gameplay-2064.chqstate
+echo === Turbo State Writer Trace ===
+
+# Phase 1: processed turbo input byte.
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api input.ioc.clear
+api memory.trace.clear
+api memory.trace.start cpu=A address=0x100303 length=1 width=any limit=256
+api input.ioc.xor port=3 mask=21
+api control.run-frames frames=15
+api input.ioc.clear
+api memory.trace.stop
+api memory.trace.status
+api memory.trace.tail count=80
+
+# Phase 2: authoritative turbos-remaining count.
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api input.ioc.clear
+api memory.trace.clear
+api memory.trace.start cpu=A address=0x1003A2 length=2 width=any limit=256
+api input.ioc.xor port=3 mask=21
+api control.run-frames frames=15
+api input.ioc.clear
+api memory.trace.stop
+api memory.trace.status
+api memory.trace.tail count=80
+
+# Phase 3: turbo active flag at 0x10040F and timer at 0x100414.
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api input.ioc.clear
+api memory.trace.clear
+api memory.trace.start cpu=A address=0x10040F length=7 width=any limit=1024
+api input.ioc.xor port=3 mask=21
+api control.run-frames frames=15
+api input.ioc.clear
+api control.run-frames frames=225
+api memory.trace.stop
+api memory.trace.status
+api memory.trace.tail count=160
+api input.ioc.clear
+echo === Turbo State Writer Trace complete ===

@@ -1,0 +1,1147 @@
+{
+  "schema": "chq-script-api-actions-v1",
+  "build": "0.66.9.0-RC2.7",
+  "actions": {
+    "status": {
+      "params": [],
+      "example": "api status",
+      "description": "Read machine/frame status"
+    },
+    "capabilities": {
+      "params": [],
+      "example": "api capabilities",
+      "description": "List native debugger capabilities"
+    },
+    "memory.read": {
+      "params": [
+        "cpu=A|B required",
+        "address=HEX required",
+        "width=8|16|32 optional default 16"
+      ],
+      "example": "api memory.read cpu=A address=10A048 width=8",
+      "description": "Read one value"
+    },
+    "memory.read-range": {
+      "params": [
+        "cpu=A|B required",
+        "address=HEX required",
+        "length=COUNT required, decimal or 0xHEX, max 65536"
+      ],
+      "example": "api memory.read-range cpu=A address=109000 length=512",
+      "description": "Read a contiguous byte range and return a compact hex dump"
+    },
+    "memory.write": {
+      "params": [
+        "cpu=A|B required",
+        "address=HEX required",
+        "width=8|16|32 optional default 16",
+        "value=HEX required",
+        "expect=HEX optional compare-before-write"
+      ],
+      "example": "api memory.write cpu=A address=10A04A width=16 value=0051 expect=0011",
+      "description": "Debugger-safe write; pauses machine and reports old/new values"
+    },
+    "memory.trace.start": {
+      "params": [
+        "cpu=A|B required",
+        "address=HEX required",
+        "length=COUNT optional default 1",
+        "width=8|16|32|any optional default any",
+        "limit=64..1000000 optional default 4096"
+      ],
+      "example": "api memory.trace.start cpu=A address=0x100303 length=1 width=any limit=256",
+      "description": "Start bounded generic memory-write tracing for an address or range; width filters the originating write transaction width, while range overlap determines address matches. Use width=any when tracing a byte that may be written by a wider transaction."
+    },
+    "memory.trace.status": {
+      "params": [],
+      "example": "api memory.trace.status",
+      "description": "Read generic memory-write trace configuration, event count and limit"
+    },
+    "memory.trace.tail": {
+      "params": [
+        "count=N optional default 20"
+      ],
+      "example": "api memory.trace.tail count=50",
+      "description": "Return recent matching generic memory-write events, including unchanged writes"
+    },
+    "memory.trace.stop": {
+      "params": [],
+      "example": "api memory.trace.stop",
+      "description": "Stop generic memory-write tracing while retaining captured events"
+    },
+    "memory.trace.clear": {
+      "params": [],
+      "example": "api memory.trace.clear",
+      "description": "Clear captured generic memory-write events and reset the trace write count"
+    },
+    "register.read": {
+      "params": [
+        "cpu=A|B required",
+        "name=D0..D7|A0..A7|PC|SR|SP optional"
+      ],
+      "example": "api register.read cpu=A name=D0",
+      "description": "Read one register or complete CPU register set"
+    },
+    "register.write": {
+      "params": [
+        "cpu=A|B required",
+        "name=REGISTER required",
+        "value=HEX required"
+      ],
+      "example": "api register.write cpu=A name=D0 value=00000001",
+      "description": "Write a CPU register while paused"
+    },
+    "patch.freeze": {
+      "params": [
+        "cpu=A|B required",
+        "address=HEX required",
+        "width=8|16|32 required",
+        "value=HEX required",
+        "expect=HEX optional"
+      ],
+      "example": "api patch.freeze cpu=A address=10A04A width=16 value=0051",
+      "description": "Immediately write and continuously freeze a value; returns patch ID"
+    },
+    "patch.replace": {
+      "params": [
+        "cpu=A|B required",
+        "address=HEX required",
+        "width=8|16|32 required",
+        "value=HEX required"
+      ],
+      "example": "api patch.replace cpu=A address=10A04A width=16 value=0051",
+      "description": "Replace matching game writes with a fixed value"
+    },
+    "patch.suppress": {
+      "params": [
+        "cpu=A|B required",
+        "address=HEX required",
+        "width=8|16|32 required"
+      ],
+      "example": "api patch.suppress cpu=A address=10A04A width=16",
+      "description": "Suppress writes and preserve current value"
+    },
+    "patch.list": {
+      "params": [],
+      "example": "api patch.list",
+      "description": "List active live patches"
+    },
+    "patch.remove": {
+      "params": [
+        "id=N required"
+      ],
+      "example": "api patch.remove id=1",
+      "description": "Remove one live patch"
+    },
+    "patch.clear": {
+      "params": [],
+      "example": "api patch.clear",
+      "description": "Remove all live patches"
+    },
+    "memory.export": {
+      "params": [
+        "cpu=A|B required",
+        "address=HEX + length=COUNT OR start=HEX + end=HEX",
+        "output=relative evidence path optional",
+        "name=basename optional legacy alias",
+        "max 1 MiB"
+      ],
+      "example": "api memory.export cpu=A address=109000 length=512 output=evidence\\\\stage1-track-109000.bin",
+      "description": "Export a contiguous debugger-safe byte range under the evidence root"
+    },
+    "cpu.disassemble": {
+      "params": [
+        "cpu=A|B optional default A",
+        "address=HEX required",
+        "count=N optional default 16"
+      ],
+      "example": "api cpu.disassemble cpu=A address=008120 count=64",
+      "description": "Read-only disassembly"
+    },
+    "control.run-frames": {
+      "params": [
+        "frames=1..100000 required"
+      ],
+      "example": "api control.run-frames frames=100",
+      "description": "Run exactly N emulated frames and pause; cancellation-aware"
+    },
+    "control.abort": {
+      "params": [],
+      "example": "api control.abort",
+      "description": "Out-of-band pause/cancel of active frame execution"
+    },
+    "checkpoint.load": {
+      "params": [
+        "file=packaged .chqstate required",
+        "run=true|false optional default false"
+      ],
+      "example": "api checkpoint.load file=stage1-gameplay-2064.chqstate run=false",
+      "description": "Load a packaged deterministic checkpoint"
+    },
+    "checkpoint.save": {
+      "params": [
+        "file=packaged filename required",
+        "name=display name optional",
+        "role=role optional",
+        "description=text optional"
+      ],
+      "example": "api checkpoint.save file=stage1-gradient-test.chqstate role=research",
+      "description": "Save current deterministic state into packaged checkpoints and write metadata"
+    },
+    "frame.snapshot": {
+      "params": [
+        "name=optional snapshot name"
+      ],
+      "example": "api frame.snapshot name=stage1-bad-foreground",
+      "description": "Capture reconstructable layered frame snapshot with exact aggregate alpha contribution layers, raw sources, HUD variants, scene-no-sprites base, cropped per-visible-sprite forensic assets/metadata, palette state and manifest"
+    },
+    "frame.snapshot.assert-overlap": {
+      "params": [
+        "name=NAME required",
+        "front=SLOT required",
+        "back=SLOT required",
+        "frontSolo=NAME required",
+        "backSolo=NAME required"
+      ],
+      "example": "api frame.snapshot.assert-overlap name=normal front=82 back=81 frontSolo=body backSolo=shadow",
+      "description": "Assert non-vacuous front ownership, uncovered back visibility, overlap coverage and exact per-sprite coordinates against solo runtime source renders; throws on mismatch"
+    },
+    "frame.snapshot.list": {
+      "params": [
+        "require=NAME optional; throw unless exactly one snapshot named NAME is present in the returned list"
+      ],
+      "example": "api frame.snapshot.list require=stage1-study",
+      "description": "List structured frame snapshots, optionally asserting that a named snapshot is immediately discoverable"
+    },
+    "regions.list": {
+      "params": [],
+      "example": "api regions.list",
+      "description": "Return authoritative image regions as structured JSON"
+    },
+    "profiles.list": {
+      "params": [],
+      "example": "api profiles.list",
+      "description": "List packaged game-profile descriptors; metadata only and does not switch runtime"
+    },
+    "profile.get": {
+      "params": [
+        "id=profile id optional default chasehq"
+      ],
+      "example": "api profile.get id=sci",
+      "description": "Read one packaged game profile and whether it is active/activatable"
+    },
+    "sprites.list": {
+      "params": [],
+      "example": "api sprites.list",
+      "description": "Return current live composed sprite records as structured JSON"
+    },
+    "sprites.maps": {
+      "params": [],
+      "example": "api sprites.maps",
+      "description": "Return unique live sprite map IDs"
+    },
+    "sprites.palettes": {
+      "params": [],
+      "example": "api sprites.palettes",
+      "description": "Return unique live sprite palette IDs"
+    },
+    "sprite.inspect": {
+      "params": [
+        "slot=N required"
+      ],
+      "example": "api sprite.inspect slot=44",
+      "description": "Inspect one currently active sprite slot"
+    },
+    "sprite.map.inspect": {
+      "params": [
+        "slot=N optional",
+        "map=N optional; resolves all currently active matching slots"
+      ],
+      "example": "api sprite.map.inspect map=475",
+      "description": "Inspect raw spritemap/chunk provenance and raw pen histogram for an active sprite slot or all active slots using a requested map."
+    },
+    "schema.all": {
+      "params": [],
+      "example": "api schema.all",
+      "description": "Return every Script API action contract from the authoritative in-process schema"
+    },
+    "script.schema": {
+      "params": [],
+      "example": "api script.schema",
+      "description": "Return the authoritative Research Script v2 grammar and limits"
+    },
+    "ui.prompt": {
+      "params": [
+        "message=TEXT required; underscores render as spaces",
+        "pause=true|false optional default true",
+        "top=true|false optional default true",
+        "timeout=1000..3600000 optional default 300000"
+      ],
+      "example": "api ui.prompt message=Hold_DOWN_then_press_ENTER pause=true top=true",
+      "description": "Show an SDL-native prompt overlay and wait for Enter/Escape while physical gameplay keys remain live"
+    },
+    "sprite.override": {
+      "params": [
+        "slot=N required",
+        "map=N optional",
+        "palette=N optional",
+        "visible=true|false optional"
+      ],
+      "example": "api sprite.override slot=44 map=182",
+      "description": "Presentation-only live SDL sprite override; omitted fields retain original values"
+    },
+    "sprite.override.clear": {
+      "params": [],
+      "example": "api sprite.override.clear",
+      "description": "Clear all live sprite presentation overrides"
+    },
+    "sprite.visual": {
+      "params": [
+        "slot=N required",
+        "mode=solo|hide|flash required"
+      ],
+      "example": "api sprite.visual slot=44 mode=flash",
+      "description": "Live SDL sprite isolation/highlight mode"
+    },
+    "sprite.visual.clear": {
+      "params": [],
+      "example": "api sprite.visual.clear",
+      "description": "Clear sprite solo/hide/flash presentation mode"
+    },
+    "palette.entries": {
+      "params": [
+        "bank=0..255 required"
+      ],
+      "example": "api palette.entries bank=75",
+      "description": "Return the 16 palette entry indices for a bank"
+    },
+    "state.snapshot": {
+      "params": [
+        "include=sprites,regions,gameplay,track optional"
+      ],
+      "example": "api state.snapshot include=sprites,regions,gameplay,track",
+      "description": "Capture coherent structured research state from the current paused instant"
+    },
+    "input.ports": {
+      "params": [],
+      "example": "api input.ports",
+      "description": "Read current IOC/input port state"
+    },
+    "events.tail": {
+      "params": [
+        "count=N optional default 100"
+      ],
+      "example": "api events.tail count=50",
+      "description": "Return recent research events"
+    },
+    "sprites.tail": {
+      "params": [
+        "count=N optional default 100"
+      ],
+      "example": "api sprites.tail count=100",
+      "description": "Return recent semantic sprite-change events"
+    },
+    "control.pause": {
+      "params": [],
+      "example": "api control.pause",
+      "description": "Pause emulation"
+    },
+    "control.resume": {
+      "params": [],
+      "example": "api control.resume",
+      "description": "Resume emulation"
+    },
+    "control.step-frame": {
+      "params": [
+        "frames=N optional default 1"
+      ],
+      "example": "api control.step-frame frames=1",
+      "description": "Advance paused emulation by N frames"
+    },
+    "control.step-instruction": {
+      "params": [
+        "cpu=A|B optional default A"
+      ],
+      "example": "api control.step-instruction cpu=A",
+      "description": "Step one CPU instruction"
+    },
+    "timer.hold": {
+      "params": [
+        "enabled=true|false optional default true"
+      ],
+      "example": "api timer.hold enabled=true",
+      "description": "Freeze or resume the game timer helper"
+    },
+    "window.always-on-top": {
+      "params": [
+        "enabled=true|false optional default true"
+      ],
+      "example": "api window.always-on-top enabled=true",
+      "description": "Toggle SDL always-on-top"
+    },
+    "tuning.handling.get": {
+      "params": [],
+      "example": "api tuning.handling.get",
+      "description": "Read handling override plus instruction-time turn/table/speed/lateral coefficient telemetry when valid"
+    },
+    "tuning.handling.set": {
+      "params": [
+        "cornering=NUMBER optional default 1",
+        "speedRetain=NUMBER optional default 1"
+      ],
+      "example": "api tuning.handling.set cornering=1.15 speedRetain=1.0",
+      "description": "Set live handling multipliers"
+    },
+    "tuning.handling.reset": {
+      "params": [],
+      "example": "api tuning.handling.reset",
+      "description": "Restore authentic handling values"
+    },
+    "collision.state": {
+      "params": [],
+      "example": "api collision.state",
+      "description": "Read evidence-scoped collision-response suppression state and counters; detection remains live"
+    },
+    "collision.response.get": {
+      "params": [],
+      "example": "api collision.response.get",
+      "description": "Read whether authentic collision response writes are enabled"
+    },
+    "collision.response.set": {
+      "params": [
+        "enabled=true|false required"
+      ],
+      "example": "api collision.response.set enabled=false",
+      "description": "Enable/disable only proven collision response writes while preserving detection/event logic"
+    },
+    "collision.response.reset": {
+      "params": [],
+      "example": "api collision.response.reset",
+      "description": "Restore authentic collision response"
+    },
+    "input.steering.get": {
+      "params": [],
+      "example": "api input.steering.get",
+      "description": "Read raw IOC steering injection (signed 12-bit encoding, centre=0000)"
+    },
+    "input.steering.set": {
+      "params": [
+        "value=HEX required"
+      ],
+      "example": "api input.steering.set value=0060",
+      "description": "Set raw IOC steering injection; use 0000 centre, 0060 right, 0FA0 left for proven full steering"
+    },
+    "palette.bank": {
+      "params": [
+        "bank=N required"
+      ],
+      "example": "api palette.bank bank=75",
+      "description": "Inspect one 16-pen palette bank"
+    },
+    "palette.entry.set": {
+      "params": [
+        "index=N required",
+        "raw=HEX required"
+      ],
+      "example": "api palette.entry.set index=1209 raw=7FFF",
+      "description": "Freeze one live palette entry"
+    },
+    "palette.entry.restore": {
+      "params": [
+        "index=N required"
+      ],
+      "example": "api palette.entry.restore index=1209",
+      "description": "Return one palette entry to game control"
+    },
+    "palette.overrides.clear": {
+      "params": [],
+      "example": "api palette.overrides.clear",
+      "description": "Clear all palette freezes"
+    },
+    "input.ioc.xor": {
+      "params": [
+        "port=N required",
+        "mask=HEX required"
+      ],
+      "example": "api input.ioc.xor port=3 mask=20",
+      "description": "Set held IOC XOR mask"
+    },
+    "input.ioc.clear": {
+      "params": [],
+      "example": "api input.ioc.clear",
+      "description": "Clear held IOC XOR masks"
+    },
+    "input.ioc.pulse": {
+      "params": [
+        "port=N required",
+        "mask=HEX required",
+        "frames=N optional default 3"
+      ],
+      "example": "api input.ioc.pulse port=3 mask=20 frames=3",
+      "description": "Pulse IOC mask for emulated frames"
+    },
+    "input.ioc.sweep": {
+      "params": [
+        "checkpoint=FILE optional",
+        "port=N optional default 3",
+        "masks=comma list optional",
+        "pulseFrames=N optional",
+        "observeFrames=N optional"
+      ],
+      "example": "api input.ioc.sweep checkpoint=stage1-gameplay-2064.chqstate port=3 masks=01,02,04",
+      "description": "Run deterministic IOC mask sweep and collect evidence"
+    },
+    "checkpoint.list": {
+      "params": [],
+      "example": "api checkpoint.list",
+      "description": "List packaged checkpoints"
+    },
+    "logs.list": {
+      "params": [],
+      "example": "api logs.list",
+      "description": "List active-session logs"
+    },
+    "logs.tail": {
+      "params": [
+        "file=RELATIVE required",
+        "lines=N optional default 80"
+      ],
+      "example": "api logs.tail file=@runtime/web-listener.log lines=80",
+      "description": "Tail a log using the exact identifier returned by logs.list"
+    },
+    "evidence.capture": {
+      "params": [
+        "name=NAME optional"
+      ],
+      "example": "api evidence.capture name=experiment-a",
+      "description": "Capture checkpoint/events/sprites/screenshot evidence bundle"
+    },
+    "evidence.list": {
+      "params": [],
+      "example": "api evidence.list",
+      "description": "List evidence captures"
+    },
+    "evidence.view": {
+      "params": [
+        "name=NAME optional latest"
+      ],
+      "example": "api evidence.view name=experiment-a",
+      "description": "Read evidence manifest"
+    },
+    "evidence.load": {
+      "params": [
+        "name=NAME optional latest"
+      ],
+      "example": "api evidence.load name=experiment-a",
+      "description": "Load captured evidence checkpoint paused"
+    },
+    "evidence.zip": {
+      "params": [
+        "name=NAME|latest optional"
+      ],
+      "example": "api evidence.zip name=latest",
+      "description": "Create ZIP for one evidence capture"
+    },
+    "frame.capture": {
+      "params": [
+        "name=NAME optional"
+      ],
+      "example": "api frame.capture name=control",
+      "description": "Capture current SDL frame PNG"
+    },
+    "image.compare": {
+      "params": [
+        "a=NAME required",
+        "b=NAME required",
+        "region=NAME optional default FULL",
+        "hud=normal|hidden|only optional default normal"
+      ],
+      "example": "api image.compare a=control b=test region=PLAYER_CAR hud=hidden",
+      "description": "Compare two captures/snapshots and return pixel-difference metrics; HUD modes require layered snapshots"
+    },
+    "image.diff": {
+      "params": [
+        "a=NAME required",
+        "b=NAME required",
+        "region=NAME optional default FULL",
+        "output=NAME optional default image-diff",
+        "hud=normal|hidden|only optional default normal"
+      ],
+      "example": "api image.diff a=control b=test region=FULL hud=hidden output=diff",
+      "description": "Compare images and optionally save a grayscale diff PNG; HUD modes require layered snapshots"
+    },
+    "image.regions": {
+      "params": [],
+      "example": "api image.regions",
+      "description": "Return raw named image-region document"
+    },
+    "gameplay.registry": {
+      "params": [],
+      "example": "api gameplay.registry",
+      "description": "Return live evidence-backed gameplay registry"
+    },
+    "track.state": {
+      "params": [],
+      "example": "api track.state",
+      "description": "Return current authoritative track/road state"
+    },
+    "next-steps": {
+      "params": [],
+      "example": "api next-steps",
+      "description": "Return packaged high-level research next steps"
+    },
+    "experiment.begin": {
+      "params": [
+        "name=NAME optional"
+      ],
+      "example": "api experiment.begin name=player-car-ab",
+      "description": "Start a grouped research experiment/evidence manifest"
+    },
+    "experiment.capture": {
+      "params": [
+        "label=NAME optional",
+        "include=sprites,regions,gameplay,track optional"
+      ],
+      "example": "api experiment.capture label=control",
+      "description": "Capture screenshot plus structured state into the active experiment"
+    },
+    "experiment.status": {
+      "params": [],
+      "example": "api experiment.status",
+      "description": "Return the active experiment manifest or inactive state"
+    },
+    "experiment.end": {
+      "params": [],
+      "example": "api experiment.end",
+      "description": "Finalize and close the active experiment manifest"
+    },
+    "platform.info": {
+      "params": [],
+      "example": "api platform.info",
+      "description": "Return build, script engine, active profile and research-platform identity"
+    },
+    "features.list": {
+      "params": [],
+      "example": "api features.list",
+      "description": "Return machine-readable feature/regression manifest"
+    },
+    "script.functions": {
+      "params": [],
+      "example": "api script.functions",
+      "description": "List supported Script Console query/collection functions"
+    },
+    "registry.list": {
+      "params": [],
+      "example": "api registry.list",
+      "description": "Return gameplay registry items as a flat structured list"
+    },
+    "track.records": {
+      "params": [
+        "before=0..64 optional default 4",
+        "after=0..64 optional default 12"
+      ],
+      "example": "api track.records before=2 after=8",
+      "description": "Read track records around the current authoritative record"
+    },
+    "objects.list": {
+      "params": [],
+      "example": "api objects.list",
+      "description": "Return semantic-object registry candidates and evidence confidence"
+    },
+    "audio.capabilities": {
+      "params": [],
+      "example": "api audio.capabilities",
+      "description": "Describe planned/current audio research capabilities without mutating audio runtime"
+    },
+    "audio.channels": {
+      "params": [],
+      "example": "api audio.channels",
+      "description": "Return audio channel/source descriptors from the audio research profile"
+    },
+    "audio.events": {
+      "params": [],
+      "example": "api audio.events",
+      "description": "Return current audio-event foundation status; runtime capture is intentionally not enabled yet"
+    },
+    "audio.waveform.plan": {
+      "params": [],
+      "example": "api audio.waveform.plan",
+      "description": "Return waveform-viewer/capture implementation contract for future validated audio tooling"
+    },
+    "audio.export.plan": {
+      "params": [],
+      "example": "api audio.export.plan",
+      "description": "Return planned sample/music export contract and evidence formats"
+    },
+    "audio.inject.plan": {
+      "params": [],
+      "example": "api audio.inject.plan",
+      "description": "Return guarded runtime audio-injection design; does not inject audio"
+    },
+    "evidence.names": {
+      "params": [],
+      "example": "api evidence.names",
+      "description": "Return structured evidence-session directory list"
+    },
+    "schema": {
+      "params": [
+        "action=ACTION optional"
+      ],
+      "example": "api schema action=memory.export",
+      "description": "Describe scriptable API actions and parameter contracts"
+    },
+    "palette.trace.start": {
+      "params": [
+        "indices=comma-separated palette indices 0..4095 required",
+        "limit=64..1000000 optional default 4096"
+      ],
+      "example": "api palette.trace.start indices=1037,1053 limit=4096",
+      "description": "Start bounded semantic TC0110PCR write tracing for selected palette entries; captures frame, CPU, PC, old/new value and write count"
+    },
+    "palette.trace.status": {
+      "params": [],
+      "example": "api palette.trace.status",
+      "description": "Read palette trace enabled state, selected indices, event count and limit"
+    },
+    "palette.trace.tail": {
+      "params": [
+        "count=N optional default 20"
+      ],
+      "example": "api palette.trace.tail count=50",
+      "description": "Return recent matching palette-write events including frame, CPU, PC, index/bank/pen, old/new value, changed flag and write count"
+    },
+    "palette.trace.stop": {
+      "params": [],
+      "example": "api palette.trace.stop",
+      "description": "Stop palette-write capture while retaining captured events"
+    },
+    "palette.trace.clear": {
+      "params": [],
+      "example": "api palette.trace.clear",
+      "description": "Clear captured palette-write events without changing the selected trace filter"
+    },
+    "track.record.start": {
+      "params": [],
+      "example": "api track.record.start",
+      "description": "Enable the shared server-side Track View recorder; browser UI and scripts operate on the same recorder state"
+    },
+    "track.record.stop": {
+      "params": [],
+      "example": "api track.record.stop",
+      "description": "Disable track recording while retaining collected samples"
+    },
+    "track.record.clear": {
+      "params": [],
+      "example": "api track.record.clear",
+      "description": "Clear all shared track recorder samples"
+    },
+    "track.record.status": {
+      "params": [],
+      "example": "api track.record.status",
+      "description": "Return recorder enabled state, sample/segment counts, frame range and spatial bounds"
+    },
+    "track.record.sample": {
+      "params": [],
+      "example": "api track.record.sample",
+      "description": "Append one deterministic authoritative track.state sample to the shared recorder"
+    },
+    "track.svg.export": {
+      "params": [
+        "name=NAME optional"
+      ],
+      "example": "api track.svg.export name=stage1-track-survey-3600",
+      "description": "Export shared recorded track samples to a genuine SVG under evidence/track-exports; refuses empty recordings"
+    },
+    "window.status": {
+      "params": [],
+      "example": "api window.status",
+      "description": "Read live SDL window state including fullscreen, visibility, minimized state, scale and always-on-top"
+    },
+    "window.fullscreen": {
+      "params": [
+        "enabled=true|false optional default true"
+      ],
+      "example": "api window.fullscreen enabled=true",
+      "description": "Toggle SDL fullscreen"
+    },
+    "window.scale": {
+      "params": [
+        "scale=1..8 required"
+      ],
+      "example": "api window.scale scale=4",
+      "description": "Set SDL integer window scale; exits fullscreen"
+    },
+    "window.show": {
+      "params": [],
+      "example": "api window.show",
+      "description": "Show SDL window"
+    },
+    "window.hide": {
+      "params": [],
+      "example": "api window.hide",
+      "description": "Hide SDL window"
+    },
+    "window.minimize": {
+      "params": [],
+      "example": "api window.minimize",
+      "description": "Minimize SDL window"
+    },
+    "window.restore": {
+      "params": [],
+      "example": "api window.restore",
+      "description": "Restore SDL window"
+    },
+    "docs.index": {
+      "params": [],
+      "example": "api docs.index",
+      "description": "Return machine-readable documentation/knowledge index"
+    },
+    "docs.search": {
+      "params": [
+        "query=TEXT optional",
+        "category=TEXT optional",
+        "status=TEXT optional"
+      ],
+      "example": "api docs.search query=HUD",
+      "description": "Search documentation/knowledge entries"
+    },
+    "docs.get": {
+      "params": [
+        "id=ENTRY required"
+      ],
+      "example": "api docs.get id=hud-isolation",
+      "description": "Return one documentation/knowledge entry"
+    },
+    "docs.glossary": {
+      "params": [],
+      "example": "api docs.glossary",
+      "description": "Return glossary entries"
+    },
+    "docs.handover": {
+      "params": [],
+      "example": "api docs.handover",
+      "description": "Return authoritative ChatGPT continuation handover prompt"
+    },
+    "docs.export": {
+      "params": [
+        "format=html|pdf optional default html",
+        "id=ENTRY optional",
+        "query=TEXT optional",
+        "evidence=none|key|full optional default key",
+        "output=basename optional"
+      ],
+      "example": "api docs.export format=pdf evidence=key",
+      "description": "Export documentation from authoritative knowledge source"
+    },
+    "knowledge.list": {
+      "params": [],
+      "example": "api knowledge.list",
+      "description": "List machine-readable knowledge entries"
+    },
+    "knowledge.get": {
+      "params": [
+        "id=ENTRY required"
+      ],
+      "example": "api knowledge.get id=layered-frame-forensics",
+      "description": "Return one knowledge entry"
+    },
+    "knowledge.search": {
+      "params": [
+        "query=TEXT optional",
+        "category=TEXT optional",
+        "status=TEXT optional"
+      ],
+      "example": "api knowledge.search query=brake",
+      "description": "Search machine-readable knowledge"
+    },
+    "knowledge.related": {
+      "params": [
+        "id=ENTRY required"
+      ],
+      "example": "api knowledge.related id=hud-isolation",
+      "description": "Return explicitly related knowledge entries"
+    },
+    "docs.handbook": {
+      "params": [],
+      "example": "api docs.handbook",
+      "description": "Return the complete user-facing handbook navigation and authored guide content"
+    },
+    "docs.page": {
+      "params": [
+        "id=PAGE required"
+      ],
+      "example": "api docs.page id=graphics-lab-guide",
+      "description": "Return one authored handbook page and its parent section"
+    },
+    "script.runs": {
+      "params": [
+        "limit=N optional default 25 max 100",
+        "offset=N optional default 0",
+        "status=PASS|FAIL|CANCELLED optional",
+        "version=VERSION optional",
+        "session=SESSION optional"
+      ],
+      "example": "api script.runs",
+      "description": "List bounded authoritative script-run history with status/version/session filters and currentSession metadata for active-session UI defaults."
+    },
+    "timeline.record.start": {
+      "params": [
+        "name=NAME optional"
+      ],
+      "example": "api timeline.record.start name=turbo-complete-cycle",
+      "description": "Start Forensic Timeline v1 capture in the current run; captures the current frame immediately, every subsequent emulated frame as CHQSTATE, and every bus write with PC/old/new provenance."
+    },
+    "timeline.record.stop": {
+      "params": [],
+      "example": "api timeline.record.stop",
+      "description": "Stop/finalize the active Forensic Timeline recording."
+    },
+    "timeline.status": {
+      "params": [],
+      "example": "api timeline.status",
+      "description": "Read native timeline recording/import/source state."
+    },
+    "timeline.list": {
+      "params": [],
+      "example": "api timeline.list",
+      "description": "List discoverable timelines from the active run, completed runs and packaged research timelines."
+    },
+    "timeline.load": {
+      "params": [
+        "name=NAME or path=PATH required"
+      ],
+      "example": "api timeline.load name=turbo-complete-cycle",
+      "description": "Import a timeline and load its first frame into the paused emulator inspection surface; ordinary memory/register/sprite/palette/gameplay APIs inspect the selected recorded frame."
+    },
+    "timeline.seek": {
+      "params": [
+        "frame=N required"
+      ],
+      "example": "api timeline.seek frame=2065",
+      "description": "Seek an imported timeline to an exact recorded frame."
+    },
+    "timeline.next": {
+      "params": [],
+      "example": "api timeline.next",
+      "description": "Seek to the next recorded frame."
+    },
+    "timeline.prev": {
+      "params": [],
+      "example": "api timeline.prev",
+      "description": "Seek to the previous recorded frame."
+    },
+    "timeline.frames": {
+      "params": [],
+      "example": "api timeline.frames",
+      "description": "Return recorded frame numbers for the imported timeline."
+    },
+    "timeline.trim.event": {
+      "params": [
+        "name=NAME or path=PATH required",
+        "cpu=A|B required",
+        "address=HEX required",
+        "width=8|16|32 required",
+        "mask=HEX required",
+        "pre=N optional default 1",
+        "post=N optional default 1"
+      ],
+      "example": "api timeline.trim.event name=turbo-complete-cycle cpu=A address=0x10040F width=8 mask=02 pre=1 post=1",
+      "description": "Find a masked rising/falling event window with a streaming pass and write a non-destructive analysis/event-window.json view; the authoritative timeline is not trimmed or rewritten."
+    },
+    "timeline.scan.memory": {
+      "params": [
+        "name=NAME or path=PATH required",
+        "triggerFrame=N optional (trigger=N alias accepted)",
+        "stopFrame=N optional (stop=N alias accepted)",
+        "window=N optional default 1"
+      ],
+      "example": "api timeline.scan.memory name=turbo-complete-cycle triggerFrame=2065 stopFrame=2275 window=1",
+      "description": "Streaming offline analysis of the recorded bus-write stream; exports ranked changed-address/writer-PC evidence into the current run artifact tree so the source timeline remains immutable and the result travels in the run bundle."
+    },
+    "timeline.fork-live": {
+      "params": [],
+      "example": "api timeline.fork-live",
+      "description": "Leave timeline mode while keeping the selected checkpoint loaded, producing a paused live fork for counterfactual experiments."
+    },
+    "timeline.unload": {
+      "params": [],
+      "example": "api timeline.unload",
+      "description": "Exit timeline mode and restore the live state from before timeline.load."
+    },
+    "timeline.play": {
+      "params": [
+        "name=NAME or path=PATH optional when a timeline is already loaded",
+        "from=N optional",
+        "to=N optional",
+        "fps=1..60 optional default 30"
+      ],
+      "example": "api timeline.play name=turbo-complete-cycle from=2064 to=2276 fps=30",
+      "description": "Replay recorded frame checkpoints through the SDL renderer at a paced frame rate. This is visual state playback, not CPU re-execution; the timeline remains loaded at the final frame."
+    },
+    "timeline.analyze.auto": {
+      "params": [
+        "name=NAME or path=PATH required",
+        "triggerFrame=N required (trigger=N alias accepted)",
+        "stopFrame=N required (stop=N alias accepted)",
+        "window=N optional default 1",
+        "top=N optional default 20"
+      ],
+      "example": "api timeline.analyze.auto name=turbo-complete-cycle triggerFrame=2065 stopFrame=2275 window=1 top=20",
+      "description": "Run the automated offline forensic pipeline: portable current-run memory analysis, ranked temporal candidates, writer-PC grouping/disassembly, milestone state and structured frame snapshots, and HUD_TURBO graphics correlation."
+    },
+    "game.experiment.status": {
+      "params": [],
+      "example": "api game.experiment.status",
+      "description": "Read Chase H.Q.-specific Game Lab state for turbo stock/active timer/current speed and reversible override toggles"
+    },
+    "game.turbo.stock": {
+      "params": [
+        "enabled=true|false required",
+        "value=0..65535 optional default 3"
+      ],
+      "example": "api game.turbo.stock enabled=true value=3",
+      "description": "Enable/disable an infinite turbo-stock freeze on confirmed CPU-A 0x1003A2"
+    },
+    "game.turbo.active": {
+      "params": [
+        "enabled=true|false required"
+      ],
+      "example": "api game.turbo.active enabled=true",
+      "description": "Enable/disable infinite active turbo by freezing confirmed duration timer CPU-A 0x100414 at zero; activation still uses the normal turbo path"
+    },
+    "game.turbo.fire": {
+      "params": [
+        "frames=N optional default 3"
+      ],
+      "example": "api game.turbo.fire frames=3",
+      "description": "Pulse the confirmed IOC P3 turbo input (mask 0x01)"
+    },
+    "game.turbo.timer.reset": {
+      "params": [],
+      "example": "api game.turbo.timer.reset",
+      "description": "Reset the confirmed turbo duration timer at CPU-A 0x100414 to zero"
+    },
+    "game.turbo.remaining.set": {
+      "params": [
+        "value=0..65535 required"
+      ],
+      "example": "api game.turbo.remaining.set value=3",
+      "description": "Set the confirmed turbos-remaining value at CPU-A 0x1003A2 once"
+    },
+    "game.speed.set": {
+      "params": [
+        "value=0..65535 required"
+      ],
+      "example": "api game.speed.set value=602",
+      "description": "Set raw internal/physics speed CPU-A 0x10041C once while preserving prior run/pause state. HUD speed at 0x100400 is separate packed-BCD display state."
+    },
+    "game.speed.freeze": {
+      "params": [
+        "enabled=true|false required",
+        "value=0..65535 optional; current internal speed used when omitted"
+      ],
+      "example": "api game.speed.freeze enabled=true value=700",
+      "description": "Freeze/unfreeze raw internal/physics speed CPU-A 0x10041C while preserving prior run/pause state."
+    },
+    "game.speed.clear": {
+      "params": [],
+      "example": "api game.speed.clear",
+      "description": "Remove only the Game Lab current-speed freeze, leaving unrelated research patches untouched"
+    },
+    "tile.inspect": {
+      "params": [
+        "code=00..FF required (hex)",
+        "palette=0..255 optional default 0",
+        "scale=1..32 optional default 8"
+      ],
+      "example": "api tile.inspect code=0C palette=0 scale=8",
+      "description": "Inspect/export a TC0100SCN RAM text character as raw 2bpp pens, palette-aware PNG and JSON metadata; output names include the current frame to preserve historical phases."
+    },
+    "sprite.order.inspect": {
+      "params": [],
+      "example": "api sprite.order.inspect",
+      "description": "Report exact current sprite traversal/tie-break and resolved active draw order."
+    },
+    "sprite.order.set": {
+      "params": [
+        "mode=higher-slot|lower-slot required"
+      ],
+      "example": "api sprite.order.set mode=lower-slot",
+      "description": "Reversibly switch same-priority sprite tie-breaking at runtime for compositor A/B experiments."
+    },
+    "game.sprite.order.inspect": {
+      "params": [],
+      "example": "api game.sprite.order.inspect",
+      "description": "Game Lab alias for current sprite-order report."
+    },
+    "game.sprite.order.set": {
+      "params": [
+        "mode=higher-slot|lower-slot required"
+      ],
+      "example": "api game.sprite.order.set mode=lower-slot",
+      "description": "Game Lab alias for reversible same-priority sprite-order experiment."
+    },
+    "timeline.reset": {
+      "params": [],
+      "example": "api timeline.reset",
+      "description": "Idempotent cleanup for script-initiated timeline work: restore the live state captured before timeline.load even after timeline.fork-live; succeed unchanged when no timeline transaction is active."
+    },
+    "layer.offsets.get": {
+      "params": [],
+      "example": "api layer.offsets.get",
+      "description": "Read live presentation offsets for all five layers"
+    },
+    "layer.offsets.set": {
+      "params": [
+        "layer=bg0|bg1|text|sprites|road|all required",
+        "x=-4096..4096 required",
+        "y=-4096..4096 required"
+      ],
+      "example": "api layer.offsets.set layer=bg0 x=0 y=4",
+      "description": "Set reversible live presentation offsets; hardware state is unchanged"
+    },
+    "layer.offsets.reset": {
+      "params": [
+        "layer=bg0|bg1|text|sprites|road|all optional default all"
+      ],
+      "example": "api layer.offsets.reset layer=all",
+      "description": "Reset presentation offsets to zero"
+    },
+    "tc0100.mode": {
+      "params": [
+        "mode=legacy|corrected optional"
+      ],
+      "example": "api tc0100.mode mode=corrected",
+      "description": "Select diagnostic old/new X transform; this is not independent shadow verification"
+    },
+    "frame.snapshot.assert-scene-no-sprites": {
+      "params": [
+        "name=NAME required"
+      ],
+      "example": "api frame.snapshot.assert-scene-no-sprites name=rc27-corrected",
+      "description": "Require exact reconstruction, visible sprite ownership and changed no-sprites pixels"
+    },
+    "layer.offsets.assert": {
+      "params": [
+        "layer=bg0|bg1|text|sprites|road required",
+        "x=INTEGER required",
+        "y=INTEGER required"
+      ],
+      "example": "api layer.offsets.assert layer=bg0 x=0 y=4",
+      "description": "Assert live layer offsets against expected values"
+    },
+    "release.assert-version": {
+      "params": [],
+      "example": "api release.assert-version",
+      "description": "Require native status, Workbench and feature manifest to share the full release label"
+    },
+    "frame.snapshot.assert-exact": {
+      "params": [
+        "name=NAME required",
+        "requireColumnZero=true|false optional default false"
+      ],
+      "example": "api frame.snapshot.assert-exact name=rc27-corrected",
+      "description": "Require exact=true, verifiedExact=true and zero reconstruction mismatches"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "schema": "chq-tc0100scn-provenance-plan-v1",
+  "build": "0.66.9.0-RC2.7",
+  "implemented": false,
+  "plannedQueries": [
+    "semantic-state",
+    "screen-pixel-provenance"
+  ],
+  "fields": [
+    "screenXY",
+    "hardwareRaster",
+    "rawCtrl",
+    "decodedCtrl",
+    "rowscrollIndex",
+    "rowscrollAddress",
+    "rowscrollValue",
+    "columnScrollStatus",
+    "sourceXY",
+    "tileCell",
+    "tileRamAddress",
+    "tileCode",
+    "attributes",
+    "palette",
+    "pen",
+    "physicalLayer",
+    "logicalLayer"
+  ],
+  "apiAction": null
+}

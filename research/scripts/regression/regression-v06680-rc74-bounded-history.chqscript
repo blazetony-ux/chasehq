@@ -1,0 +1,9 @@
+# name: Regression - v0.66.8.0 RC7.4 Bounded History Discovery
+# purpose: Prove script-run discovery is bounded and summary-only so long regression history cannot exhaust browser memory.
+# category: regression
+# regression-version: 0.66.8.0
+# regression-scope: current
+echo === v0.66.8.0 RC7.4 Bounded History Discovery ===
+api schema action=script.runs
+api script.runs limit=10
+echo === v0.66.8.0 RC7.4 bounded history discovery complete ===

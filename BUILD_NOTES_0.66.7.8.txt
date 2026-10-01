@@ -1,0 +1,10 @@
+ChaseHQ-Native v0.66.7.8 RC2
+
+- Focused discovery/performance regression proven on Windows.
+- Permanent fix for missing closing brace in Start-ChaseHQWeb.ps1 / Get-StructuredFrameSnapshotRoots().
+- Launcher health metadata synchronized to build 0.66.7.8.
+- Cross-version run history and completed-run snapshot discovery retained.
+- Full SDL source tree is not bundled; build-local.json points at local SDL/ROM dependencies.
+- Remaining release gate: Full Regression Suite against this RC2 package.
+
+RC3: defer script-run ZIP creation until one PASS/FAIL/CANCELLED finalization; transient preflight/predicate requests no longer create incidental runs. Added regression-v06678-run-finalization.chqscript and Full Regression coverage.

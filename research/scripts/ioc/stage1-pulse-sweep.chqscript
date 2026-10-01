@@ -1,0 +1,7 @@
+# category: ioc
+# name: Stage 1 Deterministic IOC Pulse Sweep
+# purpose: Use the API sweep helper from the player-gameplay checkpoint and ZIP the output.
+# checkpoint: stage1-gameplay-2064.chqstate
+
+api input.ioc.sweep checkpoint=stage1-gameplay-2064.chqstate port=3 masks=01,02,04,08,10,20,40,80 pulseFrames=8 observeFrames=90
+zip ioc-sweep latest

@@ -1,0 +1,24 @@
+# category: regression
+# name: Regression - checkpoint render determinism
+# purpose: Prove canonical checkpoint replay produces pixel-identical output.
+# checkpoint: stage1-driving-2352.chqstate
+# regression-version: legacy
+# regression-scope: permanent
+
+set regions = getregions()
+api patch.clear
+api palette.overrides.clear
+api sprite.override.clear
+api sprite.visual.clear
+
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api control.run-frames frames=30
+api frame.capture name=regression-determinism-a
+
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api control.run-frames frames=30
+api frame.capture name=regression-determinism-b
+
+for region in regions
+    api image.compare a=regression-determinism-a b=regression-determinism-b region=${region}
+end

@@ -1,0 +1,77 @@
+# name: TC0100SCN Rowscroll Raster-Mapping Probe
+# purpose: Determine which BG0/BG1 rowscroll RAM entries feed visible raster bands at recorded frame 2352.
+# category: graphics
+# target: car-shadow-layer-investigation timeline, frame 2352, TC0100SCN BG0/BG1 rowscroll tables.
+# method: Fork the same historical frame into live state and shift selected 16-row rowscroll regions by +64 pixels, one condition at a time.
+# expected: Each counterfactual snapshot moves only the raster band controlled by the patched entries, distinguishing pre-visible/top/horizon mapping.
+# cleanup: timeline.reset restores the pre-load live state on success or failure; sprite visual/override state is cleared defensively.
+
+api timeline.reset
+api sprite.visual.clear
+api sprite.override.clear
+
+echo === TC0100SCN rowscroll raster-mapping probe ===
+
+try
+    api timeline.load name=car-shadow-layer-investigation
+    api timeline.seek frame=2352
+    api frame.snapshot name=rowscroll-probe-baseline-2352
+finally
+    api timeline.reset
+end
+
+try
+    api timeline.load name=car-shadow-layer-investigation
+    api timeline.seek frame=2352
+    api timeline.fork-live
+    set addresses = C0C400,C0C402,C0C404,C0C406,C0C408,C0C40A,C0C40C,C0C40E,C0C410,C0C412,C0C414,C0C416,C0C418,C0C41A,C0C41C,C0C41E
+    for address in addresses
+        api memory.write cpu=A address=${address} width=16 value=0235 expect=01F5
+    end
+    api frame.snapshot name=rowscroll-probe-bg1-pre-visible
+finally
+    api timeline.reset
+end
+
+try
+    api timeline.load name=car-shadow-layer-investigation
+    api timeline.seek frame=2352
+    api timeline.fork-live
+    set addresses = C0C420,C0C422,C0C424,C0C426,C0C428,C0C42A,C0C42C,C0C42E,C0C430,C0C432,C0C434,C0C436,C0C438,C0C43A,C0C43C,C0C43E
+    for address in addresses
+        api memory.write cpu=A address=${address} width=16 value=0235 expect=01F5
+    end
+    api frame.snapshot name=rowscroll-probe-bg1-visible-top
+finally
+    api timeline.reset
+end
+
+try
+    api timeline.load name=car-shadow-layer-investigation
+    api timeline.seek frame=2352
+    api timeline.fork-live
+    set addresses = C0C518,C0C51A,C0C51C,C0C51E,C0C520,C0C522,C0C524,C0C526,C0C528,C0C52A,C0C52C,C0C52E,C0C530,C0C532,C0C534,C0C536
+    for address in addresses
+        api memory.write cpu=A address=${address} width=16 value=0227 expect=01E7
+    end
+    api frame.snapshot name=rowscroll-probe-bg1-horizon
+finally
+    api timeline.reset
+end
+
+try
+    api timeline.load name=car-shadow-layer-investigation
+    api timeline.seek frame=2352
+    api timeline.fork-live
+    set addresses = C0C118,C0C11A,C0C11C,C0C11E,C0C120,C0C122,C0C124,C0C126,C0C128,C0C12A,C0C12C,C0C12E,C0C130,C0C132,C0C134,C0C136
+    for address in addresses
+        api memory.write cpu=A address=${address} width=16 value=021F expect=01DF
+    end
+    api frame.snapshot name=rowscroll-probe-bg0-horizon
+finally
+    api sprite.visual.clear
+    api sprite.override.clear
+    api timeline.reset
+end
+
+echo === TC0100SCN rowscroll raster-mapping probe COMPLETE ===

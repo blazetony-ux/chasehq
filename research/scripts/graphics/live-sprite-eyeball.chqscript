@@ -1,0 +1,11 @@
+# category: graphics
+# name: Live sprite eyeball helper
+# purpose: Prepare a canonical frame and flash a candidate sprite in the SDL window.
+# checkpoint: stage1-driving-2352.chqstate
+
+set slot = 44
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api control.run-frames frames=30
+api sprite.inspect slot=${slot}
+api sprite.visual slot=${slot} mode=flash
+echo SDL preview armed. Use api sprite.visual.clear when finished.

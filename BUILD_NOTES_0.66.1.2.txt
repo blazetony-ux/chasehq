@@ -1,0 +1,23 @@
+ChaseHQ-Native v0.66.1.2 — Regression & Resilience Polish
+
+This build is the Windows-acceptance follow-up to v0.66.1.1.
+
+Key changes:
+- Fixes Script Console appendScriptOutput helper omission and validates the helper statically.
+- Fixes @runtime/web-listener.log resolution through both Script API logs.tail and HTTP logs/tail.
+- Updates the logs.tail schema/example and regression references away from removed web-stdout.log.
+- Stops the run progress ticker immediately on FAILED/CANCELLED paths.
+- Moves full-regression COMPLETE to the actual end of the script.
+- Migrates legacy chq-script-run-history-v1 records into v2 while retaining the legacy key until Clear history is explicitly used.
+- Adds regression-version and regression-scope metadata with Version and Current build/Permanent/All UI filters.
+- Keeps full request logging in .chq/web-listener.log while suppressing routine successful poll requests from the visible listener console unless slow.
+- Retains v0.66.1.1 supervised startup, ROM/SDL staging validation, frontend bootstrap handshake, HealthCheck/Diagnostics/SupportBundle and build-local.json.
+
+Local validation performed before packaging:
+- Workbench JavaScript syntax: PASS
+- JSON/data parse: PASS
+- Static resilience/helper/alias/version checks: PASS
+- CPU-only CMake configure/build: PASS
+- CPU/bus tests: 1/1 PASS
+- Regression metadata coverage: 28/28 scripts
+- Package ROM exclusion: PASS

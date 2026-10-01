@@ -1,0 +1,11 @@
+# v0.60.2 example: reversible target-motion experiment
+pause
+snapshot save target-motion-baseline
+events clear
+events limit 50000
+watch add A 10A080:10A0BF write change
+patch replace A 10A096 16 01AA
+run 30
+changed A 10A080:10A0BF
+why mem A 10A096
+snapshot restore target-motion-baseline

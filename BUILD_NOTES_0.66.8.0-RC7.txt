@@ -1,0 +1,22 @@
+ChaseHQ-Native v0.66.8.0-RC7 — Portable Automated Timeline Analysis
+
+Purpose
+-------
+Turn the now-proven offline timeline recovery into a portable, unattended diagnosis workflow.
+
+Key changes
+-----------
+- timeline.scan.memory writes derived evidence into the active run artifact tree, leaving source timelines immutable.
+- source.json hashes the source manifest and writes.csv for provenance.
+- improved temporal scoring and known turbo reference tagging.
+- timeline.analyze.auto ranks candidates, groups/disassembles writer PCs, captures historical before/active/mid/expiry/after state + layered snapshots, and correlates HUD_TURBO in normal/HUD-only/HUD-hidden modes.
+- timeline.play replays historical frame checkpoints through SDL at a requested frame rate; this is recorded-state playback, not CPU re-execution.
+- new automated-analysis, SDL replay and permanent RC7 regression scripts.
+
+Proof order
+-----------
+1. Build-Debug.bat
+2. Start-ChaseHQ.ps1 -Restart
+3. Regression - v0.66.8.0 RC7 Portable Automated Timeline Analysis
+4. Analyze Existing Turbo Forensic Timeline
+5. Full Regression Suite once if focused proof is clean.

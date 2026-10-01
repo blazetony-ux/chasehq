@@ -1,0 +1,9 @@
+# name: Replay Turbo Timeline in SDL
+# category: timeline
+# purpose: Visually replay the recorded turbo event through the SDL renderer using historical frame checkpoints; this is state playback, not CPU re-execution.
+
+echo === Replay Turbo Timeline in SDL ===
+api timeline.play name=turbo-complete-cycle from=2064 to=2276 fps=30
+api timeline.status
+api timeline.unload
+echo === Turbo SDL timeline replay complete ===

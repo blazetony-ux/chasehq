@@ -1,0 +1,13 @@
+# name: Regression - v0.66.0.2 diagnostics
+# purpose: Verify runtime log identifiers returned by logs.list can be consumed by logs.tail and diagnostics schemas remain available.
+# category: regression
+# status: stable
+# regression-version: 0.66.0.2
+# regression-scope: permanent
+
+echo === v0.66.0.2 diagnostics regression ===
+api logs.list
+api logs.tail file=@runtime/web-listener.log lines=20
+api schema action=logs.tail
+api track.state
+echo === v0.66.0.2 diagnostics regression complete ===

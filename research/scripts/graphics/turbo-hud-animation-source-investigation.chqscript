@@ -1,0 +1,22 @@
+# name: Turbo HUD Animation Source Investigation
+# category: graphics
+# purpose: Inspect the three proven active-turbo source frames and correlate the animation phase from the existing timeline.
+echo === Turbo HUD Animation Source Investigation ===
+api timeline.load name=turbo-complete-cycle
+api memory.read-range cpu=A address=0x33A1A length=64
+api memory.read-range cpu=A address=0x33A5A length=64
+api memory.read-range cpu=A address=0x33A9A length=64
+api timeline.seek frame=2064
+api memory.read cpu=A address=0x1002AA width=16
+api memory.read-range cpu=A address=0xC060C0 length=64
+api timeline.seek frame=2066
+api memory.read cpu=A address=0x1002AA width=16
+api memory.read-range cpu=A address=0xC060C0 length=64
+api timeline.seek frame=2068
+api memory.read cpu=A address=0x1002AA width=16
+api memory.read-range cpu=A address=0xC060C0 length=64
+api timeline.seek frame=2070
+api memory.read cpu=A address=0x1002AA width=16
+api memory.read-range cpu=A address=0xC060C0 length=64
+api timeline.unload
+echo === Turbo HUD Animation Source Investigation complete ===

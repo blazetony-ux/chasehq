@@ -4,8 +4,8 @@
 
 
 # Configuration directories and files
-SourceDirectory: C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.8
-BuildDirectory: C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.8/out/build/x64-Debug
+SourceDirectory: C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC2.7
+BuildDirectory: C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC2.7/out/build/x64-Debug
 
 # Where to place the cost data store
 CostDataFile: 
@@ -14,7 +14,7 @@ CostDataFile:
 Site: DESKTOP-1H61R6I
 
 # Build name is osname-revision-compiler, i.e. Linux-2.4.2-2smp-c++
-BuildName: Win32-ninja
+BuildName: Win32-MSBuild
 
 # Subprojects
 LabelsForSubprojects: 
@@ -27,7 +27,7 @@ SubmitInactivityTimeout:
 NightlyStartTime: 00:00:00 EDT
 
 # Commands for the build/test/submit cycle
-ConfigureCommand: "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/cmake.exe" "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.8"
+ConfigureCommand: "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/cmake.exe" "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC2.7"
 MakeCommand: "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" --build . --config "${CTEST_CONFIGURATION_TYPE}"
 DefaultCTestConfigurationType: Release
 
@@ -98,7 +98,7 @@ TestLoad:
 TLSVerify: 
 TLSVersion: 
 
-UseLaunchers: 
+UseLaunchers: 0
 CurlOptions: 
 # warning, if you add new options here that have to do with submit,
 # you have to update cmCTestSubmitCommand.cxx

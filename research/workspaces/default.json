@@ -1,0 +1,8 @@
+{
+  "schema": "chq-workspace-v1",
+  "id": "default",
+  "title": "General Research",
+  "panels": ["machine-status","cpu-registers","memory-pins","ioc","events","sprites","watches","snapshots","console"],
+  "pins": [],
+  "notes": "Portable workspace definition. Future Web Debugger versions may persist layout/size information here."
+}

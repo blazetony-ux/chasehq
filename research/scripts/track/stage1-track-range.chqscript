@@ -1,0 +1,6 @@
+# category: track
+# name: Stage 1 track table range read
+# purpose: Dump the first 64 eight-byte live track records for schema decoding.
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api memory.read-range cpu=A address=109000 length=512
+api memory.export cpu=A address=109000 length=512 output=evidence\stage1-track-109000.bin

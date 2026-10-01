@@ -1,0 +1,25 @@
+ChaseHQ-Native v0.66.4 package manifest
+
+Primary additions:
+- TC0110PCR palette-write trace: palette.trace.start/status/tail/stop/clear
+- Exact frame/CPU/writer-PC/index/bank/pen/old/new/change/write-count events
+- Same-build Script regression and example brake-lamp writer trace
+- Whole-run duration metadata fix
+- Descriptive bundle download filenames
+- Full console transcript fix carried forward
+- Validate-Release.ps1 release gate
+- API reference, Script language reference, static schemas, feature manifest and handover documentation updated
+
+Packaging-environment validation:
+- CMake CPU/runtime build with CHASEHQ_BUILD_SDL=OFF: PASS
+- runtime_tests: PASS
+- Embedded Workbench JavaScript syntax (node --check): PASS
+- Static version/schema/docs/script metadata/include checks: PASS
+- Fresh ZIP extraction + static revalidation: required before handoff
+
+Windows validation still required:
+- Validate-Release.ps1
+- Build-Debug.bat (performed by validator unless -SkipBuild)
+- Restart smoke
+- Regression - v0.66.4 palette write trace
+- Full Regression through final COMPLETE marker

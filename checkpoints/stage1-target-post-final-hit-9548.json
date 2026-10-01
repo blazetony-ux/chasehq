@@ -1,0 +1,7 @@
+{
+  "name": "stage1-target-post-final-hit-9548",
+  "frame": 9548,
+  "semantic_state": "Stage 1 target has received the decisive/final interaction and is visibly entering its scripted slowdown",
+  "confidence": "user-confirmed semantic state; target defeat-motion chain independently traced",
+  "notes": "Use for post-final-hit slowdown, defeat timer and target motion research. This is NOT a pre-final-hit health checkpoint."
+}

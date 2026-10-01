@@ -1,0 +1,5 @@
+ChaseHQ-Native v0.66.5.1 package
+Patch base: v0.66.5
+Primary additions: shared/scriptable Track View recorder, deterministic SVG export, recorder regression, memory-trace transaction-width clarification.
+ROMs are not included.
+Canonical local build: Build-Debug.bat (runs Prepare-Project.bat first).

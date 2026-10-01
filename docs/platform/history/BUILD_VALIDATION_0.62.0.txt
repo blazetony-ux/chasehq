@@ -1,0 +1,18 @@
+ChaseHQ-Native v0.62.0 validation
+=================================
+Validated in build environment:
+- CMake configure with CHASEHQ_BUILD_SDL=OFF: PASS
+- C++ CPU/runtime build: PASS
+- ctest: 1/1 PASS
+- OpenAPI/docs/workbench source packaged: PASS (static inspection)
+
+REQUIRES WINDOWS DEV-MACHINE VALIDATION:
+1. MSVC + SDL build.
+2. Launch v0.62.0 with debug API and Start-ChaseHQWeb.ps1.
+3. Open http://127.0.0.1:37680/ and /api/docs/.
+4. Driving Tuning: change cornering scale live, then Restore authentic.
+5. Palette Lab: cycle banks; freeze one disposable test entry; Restore entry; Restore all.
+6. Controller: verify raw Gamepad axes/buttons update. Do not assume IOC masks until confirmed.
+7. IOC held-state: test only with a known mask, then Clear all IOC overrides.
+8. Evidence capture after overrides are cleared; verify status shows handling_override=0 palette_overrides=0.
+9. Confirm existing v0.61.x checkpoint, experiment, memory, event and sprite workflows still operate.

@@ -1,0 +1,22 @@
+ChaseHQ-Native v0.66.5 package manifest
+
+Primary changes
+- Generic memory-write trace: memory.trace.start/status/tail/stop/clear
+- Exact write-time frame / CPU / PC / address / width / old / new / changed / write-count capture
+- Same-build Script API schema, documentation and regression coverage
+- Brake processed-input writer research script targeting CPU-A 0x100303
+- Script Console Syntax Preview removed
+- Track View auto-fit, manual Fit Track and Save SVG
+- Descriptive run-bundle filename slugging retained/fixed
+- Restart cleanup avoids PID 4/System and cleans stale Workbench host processes
+- Build-Debug.bat / Build-Release.bat retain Prepare-Project.bat unblocking and allow only the exact historical cpu_bus_rom_tests SEGFAULT signature as a known non-blocking test issue
+
+Validation
+- CPU-only CMake configure/build: PASS in packaging environment
+- cpu_bus_rom_tests: PASS in packaging environment
+- Workbench embedded JavaScript syntax: PASS via node --check
+- JSON schema/manifest parse and v0.66.5 build consistency: PASS
+- Windows SDL build/runtime and historical Windows CTest behavior must be validated locally with Validate-Release.ps1
+
+ROM policy
+- ROMs are never packaged.

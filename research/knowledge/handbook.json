@@ -1,0 +1,628 @@
+{
+  "schema": "chq-handbook-v1",
+  "build": "0.66.9.0-RC2.7",
+  "title": "Chase H.Q. Native User & Research Handbook",
+  "sections": [
+    {
+      "id": "rc27-candidate",
+      "title": "RC2.7 Candidate and Prove-Off",
+      "pages": [
+        {
+          "id": "rc27-proveoff",
+          "title": "RC2.7: renderer and reliability",
+          "summary": "Source candidate; Windows proof is pending.",
+          "blocks": [
+            {
+              "type": "callout",
+              "tone": "warning",
+              "title": "Validation boundary",
+              "text": "RC2.7 Linux native tests pass. Windows/SDL build, PowerShell tests and full Script Console regression still require local execution. Build-Debug stages SDL and ROMs from build-local.json."
+            },
+            {
+              "type": "p",
+              "text": "The shared BG X transform is corrected; Y and zero presentation defaults are unchanged. Old/corrected snapshots compare all canonical checkpoints. Column scroll remains unsupported and explicitly reported."
+            },
+            {
+              "type": "p",
+              "text": "History uses parsed timestamp order, session-filtered server queries and full release labels. SDL controls now bind to the native command path. Live layer.offsets.get/set/reset/assert and snapshot exact/no-sprites assertions are documented in API_REFERENCE.md."
+            },
+            {
+              "type": "p",
+              "text": "See TC0100SCN_RC261_FINDINGS.md, NATIVE_RECONSTRUCTION.md, RELEASE_SCOPE_RC27.md and VALIDATION_0.66.9.0-RC2.7.md. The diagnostic comparison is not independent shadow verification."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "getting-started",
+      "title": "Getting Started",
+      "pages": [
+        {
+          "id": "welcome",
+          "title": "Welcome to ChaseHQ-Native",
+          "summary": "What the project is, how the runtime and Workbench fit together, and where to begin.",
+          "blocks": [
+            {
+              "type": "callout",
+              "tone": "info",
+              "title": "Current proven release",
+              "text": "v0.66.8.0 (2026-09-29): Forensic Timeline v1, portable automated timeline analysis/playback, and bounded Workbench history discovery are proven on Windows/SDL."
+            },
+            {
+              "type": "p",
+              "text": "ChaseHQ-Native is both a native Chase H.Q. runtime and an evidence-driven reverse-engineering platform. The SDL window is the live game/render output; the Research Workbench is the browser-based control, inspection, scripting and documentation environment."
+            },
+            {
+              "type": "callout",
+              "tone": "info",
+              "title": "Core rule",
+              "text": "Gameplay and rendering fidelity are the project. Tooling exists to make behaviour observable, reproducible and provable."
+            },
+            {
+              "type": "list",
+              "items": [
+                "Use checkpoints or scenarios to start from known states.",
+                "Prefer API/scriptable experiments over one-off UI gestures.",
+                "Capture evidence with build, frame, checkpoint and source metadata.",
+                "Promote only sufficiently proven findings into authoritative knowledge."
+              ]
+            }
+          ]
+        },
+        {
+          "id": "build-launch",
+          "title": "Build and launch",
+          "summary": "Normal Windows development build and research launch workflow.",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "The normal Windows development entry point is Build-Debug.bat. It prepares the project, configures/builds the native target and runs the packaged tests. The research launcher then starts the SDL runtime, private debugger API and browser Workbench together."
+            },
+            {
+              "type": "code",
+              "language": "powershell",
+              "title": "Build",
+              "text": ".\\Build-Debug.bat"
+            },
+            {
+              "type": "code",
+              "language": "powershell",
+              "title": "Launch research session",
+              "text": ".\\Start-ChaseHQ.ps1"
+            },
+            {
+              "type": "callout",
+              "tone": "warning",
+              "title": "Known Windows test exception",
+              "text": "A narrowly documented historical cpu_bus_rom_tests SEGFAULT may be tolerated only when it exactly matches the known signature recorded in validation documentation. Other failures remain blocking."
+            }
+          ]
+        },
+        {
+          "id": "first-investigation",
+          "title": "Your first reproducible investigation",
+          "summary": "A minimal checkpoint \u2192 action \u2192 capture \u2192 compare workflow.",
+          "blocks": [
+            {
+              "type": "steps",
+              "items": [
+                "Load a canonical checkpoint.",
+                "Apply one controlled intervention.",
+                "Advance a bounded number of emulated frames.",
+                "Capture structured evidence.",
+                "Compare the changed state against the baseline.",
+                "Record the conclusion only when the evidence supports it."
+              ]
+            },
+            {
+              "type": "code",
+              "language": "chqscript",
+              "title": "Example",
+              "text": "api checkpoint.load file=stage1-driving-2352.chqstate run=false\napi frame.snapshot name=baseline sprites=individual\napi control.run-frames count=30\napi frame.snapshot name=after sprites=individual\napi image.compare a=baseline b=after hud=hidden"
+            }
+          ]
+        },
+        {
+          "id": "release-proveoff",
+          "title": "Release and prove-off workflow",
+          "summary": "Use cheap gates before Full Regression and keep one authoritative run/bundle lifecycle.",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "The canonical Windows build path is Build-Debug.bat. Do not bypass it with ad-hoc build or validator sequences."
+            },
+            {
+              "type": "steps",
+              "items": [
+                "Build with Build-Debug.bat.",
+                "Launch with Start-ChaseHQ.ps1 -Restart and require browser bootstrap READY.",
+                "Check root/status/run-history/snapshot endpoints.",
+                "Run Recovery / Fast Release Gate.",
+                "Run the focused regression for the changed subsystem.",
+                "Run Full Regression Suite once against the exact candidate intended for promotion."
+              ]
+            },
+            {
+              "type": "callout",
+              "tone": "warning",
+              "title": "One run, one bundle",
+              "text": "A script run must create one run directory and generate bundle-manifest.json / bundle.zip only once at PASS, FAIL or CANCELLED finalization. Repeated Compress-Archive activity during individual commands is a runner defect."
+            },
+            {
+              "type": "p",
+              "text": "See docs/RELEASE_PROCESS.md for the complete packaging, validation, discovery and lifecycle rules."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "workbench",
+      "title": "Workbench Guide",
+      "pages": [
+        {
+          "id": "workbench-overview",
+          "title": "Workbench overview",
+          "summary": "What each Workbench tab is for.",
+          "blocks": [
+            {
+              "type": "table",
+              "headers": [
+                "Tab",
+                "Purpose"
+              ],
+              "rows": [
+                [
+                  "Dashboard",
+                  "Live machine state and quick runtime controls."
+                ],
+                [
+                  "Script Console",
+                  "Author, validate and run repeatable .chqscript experiments."
+                ],
+                [
+                  "Gameplay Registry",
+                  "Evidence-backed semantic gameplay state."
+                ],
+                [
+                  "Track View",
+                  "Record and export road/course motion data."
+                ],
+                [
+                  "Graphics Lab",
+                  "Layered frame, image and per-sprite forensic analysis."
+                ],
+                [
+                  "Docs / Knowledge",
+                  "User handbook, API/script reference, project findings and glossary."
+                ],
+                [
+                  "Experimental",
+                  "Game-profile-specific research controls."
+                ],
+                [
+                  "Evidence",
+                  "Browse, restore and package experiment captures."
+                ],
+                [
+                  "Logs / Diagnostics",
+                  "Session health, logs and diagnostic bundles."
+                ]
+              ]
+            }
+          ]
+        },
+        {
+          "id": "graphics-lab-guide",
+          "title": "Graphics Lab",
+          "summary": "Layered snapshots, HUD isolation and individual sprite controls.",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Graphics Lab works with structured snapshots rather than ordinary screenshots. Exact reconstruction uses ordered contribution layers. Raw source layers are independent forensic views. The HUD can be shown normally, suppressed at source, or isolated by itself."
+            },
+            {
+              "type": "list",
+              "items": [
+                "Normal / HUD hidden / HUD only frame views.",
+                "Exact contribution-layer reconstruction with native verification.",
+                "Raw logical source layers for road/background/sprite/text investigation.",
+                "Individual visible sprite hide/show, solo and opacity controls.",
+                "Per-sprite slot, map, palette, priority, zoom/flip and provenance metadata where available."
+              ]
+            },
+            {
+              "type": "callout",
+              "tone": "info",
+              "title": "Exactness",
+              "text": "Individual-sprite assets are forensic/exploratory. The aggregate sprite contribution remains authoritative for exact frame reconstruction."
+            }
+          ]
+        },
+        {
+          "id": "script-console-guide",
+          "title": "Script Console",
+          "summary": "How to use the reusable script library and run history.",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "The Script Console is the preferred place to turn a successful manual experiment into a reproducible recipe. Scripts may call any documented Script API action through the generic api statement."
+            },
+            {
+              "type": "list",
+              "items": [
+                "Use Validate before long runs when editing a script.",
+                "Use the Script Library for packaged diagnostics, surveys and regressions.",
+                "Run history records source, output, artifacts, build and session metadata.",
+                "Prefer include for reusable script fragments instead of copy/paste duplication."
+              ]
+            }
+          ]
+        },
+        {
+          "id": "evidence-guide",
+          "title": "Evidence and run bundles",
+          "summary": "How captures, run artifacts and ZIP bundles are organized.",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Important experiments should leave a portable evidence trail. A run owns its script source, console output, metadata and generated artifacts; the final ZIP should be sufficient for later review without relying on the live session."
+            },
+            {
+              "type": "code",
+              "language": "text",
+              "text": "evidence/sessions/YYYYMMDD_HHMMSS/\n  evidence/runs/001/\n    script.chqscript\n    console-output.txt\n    run-metadata.json\n    artifacts/\n    bundle-manifest.json\n    bundle.zip"
+            }
+          ]
+        },
+        {
+          "id": "game-lab-guide",
+          "title": "Experimental / Game Lab",
+          "summary": "Reversible Chase H.Q.-specific turbo and speed experiments with API/script parity.",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Game Lab groups confirmed gameplay manipulations into named reversible controls. Infinite turbo stock freezes 0x1003A2, infinite active turbo freezes the duration timer at 0x100414, and current speed set/freeze targets 0x10041C."
+            },
+            {
+              "type": "callout",
+              "style": "warning",
+              "title": "Current speed is not top-speed limit",
+              "text": "0x10041C is the confirmed current-speed field. The actual maximum-speed clamp/target-speed logic remains an open reverse-engineering task."
+            },
+            {
+              "type": "code",
+              "language": "chqscript",
+              "text": "api game.turbo.stock enabled=true value=3\napi game.turbo.active enabled=true\napi game.turbo.fire frames=3\napi game.speed.freeze enabled=true value=602\napi game.speed.clear"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "api",
+      "title": "Research API",
+      "pages": [
+        {
+          "id": "api-overview",
+          "title": "Research API overview",
+          "summary": "How to discover and invoke the authoritative API contract.",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "The Research API is the authoritative action surface shared by the Workbench and .chqscript. Do not invent action names: discover the current contract from the schema in the running build."
+            },
+            {
+              "type": "code",
+              "language": "chqscript",
+              "title": "Discover actions",
+              "text": "api actions\napi schema.all\napi schema action=frame.snapshot\napi script.schema"
+            },
+            {
+              "type": "callout",
+              "tone": "info",
+              "title": "Workbench parity",
+              "text": "Meaningful Workbench controls should map to documented API actions so the same operation can be reproduced from scripts or external localhost clients."
+            }
+          ]
+        },
+        {
+          "id": "api-reference",
+          "title": "Complete API action reference",
+          "summary": "Generated from research/schema/api-actions.json for the running build.",
+          "generated": "api-reference",
+          "blocks": []
+        },
+        {
+          "id": "v06690-rc2-game-research",
+          "title": "v0.66.9.0-RC2 Game Research Controls",
+          "summary": "Sprite-order A/B diagnostics, corrected sprite-map lookup, and clarified speed semantics.",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "text": "Game Lab distinguishes HUD display speed at CPU-A 0x100400 (packed BCD) from raw internal/physics speed at 0x10041C. The values are not expected to match numerically."
+            },
+            {
+              "type": "paragraph",
+              "text": "Sprite-order diagnostics preserve legacy names: lower-slot selects descending and higher-slot ascending traversal. First nontransparent candidates reserve pixels, even if layer-masked; names do not describe the winner. Use frame.snapshot.assert-overlap for ownership and export-coordinate assertions."
+            },
+            {
+              "type": "paragraph",
+              "text": "Turbo HUD animation is confirmed game behavior: active characters 0x0C..0x0F are rewritten from a three-frame source table and cleared at turbo expiry."
+            }
+          ]
+        },
+        {
+          "id": "safe-experiment-lifecycle",
+          "title": "Safe experiment lifecycle (RC2.5)",
+          "summary": "Use meaningful headers, known preconditions, try/finally and idempotent timeline.reset so failed experiments do not leak timeline/sprite state.",
+          "body": [
+            "Mutation scripts should never assume the previous run cleaned up successfully. Call timeline.reset before timeline work and again in finally.",
+            "Historical timeline state is read-only; use timeline.fork-live before memory writes.",
+            "A cleanup failure must not replace the primary experiment failure.",
+            "Script Console history defaults to the active session; switch filters explicitly when researching older runs."
+          ],
+          "examples": [
+            "api timeline.reset\ntry\n  api timeline.load name=car-shadow-layer-investigation\n  api timeline.seek frame=2352\n  api timeline.fork-live\n  # experiment\nfinally\n  api timeline.reset\nend"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "scripting",
+      "title": "Research Scripting",
+      "pages": [
+        {
+          "id": "scripting-intro",
+          "title": "Research Script introduction",
+          "summary": "The purpose and shape of .chqscript.",
+          "blocks": [
+            {
+              "type": "p",
+              "text": ".chqscript is intentionally small and deterministic. It is designed for repeatable research recipes and regressions, not as a general-purpose programming language."
+            },
+            {
+              "type": "code",
+              "language": "chqscript",
+              "text": "# name: Minimal deterministic capture\nset cp = stage1-driving-2352.chqstate\napi checkpoint.load file=${cp} run=false\napi frame.snapshot name=baseline sprites=individual\napi control.run-frames count=30\napi frame.snapshot name=after sprites=individual"
+            }
+          ]
+        },
+        {
+          "id": "script-reference",
+          "title": "Complete language reference",
+          "summary": "Generated from research/schema/script-language.json for the running build.",
+          "generated": "script-reference",
+          "blocks": []
+        }
+      ]
+    },
+    {
+      "id": "research-guides",
+      "title": "Research Guides",
+      "pages": [
+        {
+          "id": "guide-memory-writer",
+          "title": "Trace a memory writer",
+          "summary": "Find which CPU/PC writes an address or range.",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Start from a deterministic checkpoint, enable a bounded write trace, reproduce the state transition, then inspect writer PCs and transaction widths. For byte discovery, width=any avoids missing writes performed by a wider bus transaction."
+            },
+            {
+              "type": "code",
+              "language": "chqscript",
+              "text": "api checkpoint.load file=stage1-gameplay-2064.chqstate run=false\napi memory.trace.clear\napi memory.trace.start cpu=A address=0x100303 length=1 width=any limit=256\napi control.run-frames count=120\napi memory.trace.stop\napi memory.trace.tail count=50"
+            }
+          ]
+        },
+        {
+          "id": "guide-frame-compare",
+          "title": "Compare two frames",
+          "summary": "Use HUD-aware captures to reduce visual comparison noise.",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "When the question concerns the road, scenery or sprites rather than counters/text, compare structured snapshots with HUD hidden. HUD suppression occurs at the identified text source; it is not a fixed rectangle mask."
+            },
+            {
+              "type": "code",
+              "language": "chqscript",
+              "text": "api frame.snapshot name=a\napi control.run-frames count=30\napi frame.snapshot name=b\napi image.compare a=a b=b hud=hidden"
+            }
+          ]
+        },
+        {
+          "id": "guide-sprite",
+          "title": "Investigate one sprite",
+          "summary": "Use individual-sprite forensic assets and provenance to isolate a visible object.",
+          "blocks": [
+            {
+              "type": "steps",
+              "items": [
+                "Capture a structured snapshot with individual sprites enabled.",
+                "Open it in Graphics Lab.",
+                "Solo the candidate sprite and inspect slot/map/palette/priority metadata.",
+                "Use sprite.inspect / sprite.map.inspect for deeper provenance.",
+                "Correlate the visible object with gameplay state only after the relationship is evidenced."
+              ]
+            },
+            {
+              "type": "code",
+              "language": "chqscript",
+              "text": "api frame.snapshot name=sprite-study sprites=individual\napi sprites.list\napi sprite.inspect slot=45"
+            }
+          ]
+        },
+        {
+          "id": "guide-hud",
+          "title": "Investigate HUD rendering",
+          "summary": "Determine whether a HUD element is missing at source or lost during composition.",
+          "blocks": [
+            {
+              "type": "steps",
+              "items": [
+                "Capture normal, HUD-hidden and HUD-only variants in one structured snapshot.",
+                "Inspect the text/HUD raw source and contribution layer.",
+                "If the expected element is absent at source, trace text/tile state and gameplay producer state.",
+                "If present at source but absent in final, investigate priority/compositor behaviour."
+              ]
+            }
+          ]
+        },
+        {
+          "id": "guide-track",
+          "title": "Record and export a track",
+          "summary": "Use the shared Track View recorder from UI or script.",
+          "blocks": [
+            {
+              "type": "code",
+              "language": "chqscript",
+              "text": "api track.record.clear\napi track.record.start\napi track.record.sample\napi control.run-frames count=30\napi track.record.sample\napi track.record.stop\napi track.svg.export name=stage1-study"
+            }
+          ]
+        },
+        {
+          "id": "guide-turbo-hud",
+          "title": "Turbo / HUD investigation",
+          "summary": "Follow the proven turbo gameplay-to-TC0100SCN HUD path and inspect the active RAM characters directly.",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "The turbo gameplay/HUD chain is now substantially proven. Activation decrements 0x1003A2 and sets 0x10040F bit 1; the timer 0x100414 expires at 0x00D2. The HUD swaps the consumed slot from normal characters 0x7C..0x7F to active characters 0x0C..0x0F, then clears it at expiry."
+            },
+            {
+              "type": "code",
+              "language": "chqscript",
+              "text": "include \"graphics/turbo-hud-layer-sprite-correlation.chqscript\"\ninclude \"graphics/turbo-hud-exact-tile-writer-investigation.chqscript\"\ninclude \"graphics/turbo-hud-text-plane-neighbourhood.chqscript\"\ninclude \"gameplay/turbo-gameplay-to-hud-writer-path.chqscript\"\ninclude \"graphics/turbo-hud-tile-character-inspection.chqscript\""
+            },
+            {
+              "type": "steps",
+              "items": [
+                "Reuse the existing turbo timeline; do not replay gameplay.",
+                "Inspect active characters 0x0C..0x0F and normal 0x7C..0x7F with tile.inspect.",
+                "Compare raw pens and palette-aware output.",
+                "Only reopen compositor/palette hypotheses if the source characters themselves decode correctly but final output remains wrong."
+              ]
+            }
+          ]
+        },
+        {
+          "id": "guide-forensic-timeline",
+          "title": "Forensic Timeline: record once, investigate repeatedly",
+          "summary": "Capture a gameplay event once, then import/seek/inspect it through the normal research APIs and fork historical frames back to live execution.",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Forensic Timeline v1 stores a deterministic CHQSTATE for every recorded frame and an unfiltered bus-write provenance stream. This intentionally prioritises fidelity and later analysis over storage efficiency."
+            },
+            {
+              "type": "code",
+              "language": "chqscript",
+              "text": "api timeline.record.start name=turbo-complete-cycle\n# run event once\napi timeline.record.stop\napi timeline.trim.event name=turbo-complete-cycle cpu=A address=0x10040F width=8 mask=02 pre=1 post=1\napi timeline.scan.memory name=turbo-complete-cycle"
+            },
+            {
+              "type": "p",
+              "text": "After timeline.load/timeline.seek, the ordinary memory, register, gameplay, sprite and palette inspection APIs operate on the selected historical checkpoint. timeline.fork-live keeps that checkpoint loaded and returns to paused live execution."
+            },
+            {
+              "type": "callout",
+              "tone": "warning",
+              "title": "Audio limitation",
+              "text": "The current native runtime has only sound_stub. Timeline v1 does not claim authentic sound CPU/chip/PCM capture; that capability will be added when native audio emulation exists."
+            }
+          ]
+        },
+        {
+          "id": "guide-tc0100-character-inspector",
+          "title": "TC0100SCN RAM character inspection",
+          "summary": "Inspect the 256 RAM-backed 8x8 text characters used by the HUD.",
+          "blocks": [
+            {
+              "type": "code",
+              "language": "chqscript",
+              "text": "api tile.inspect code=0C palette=0 scale=16"
+            },
+            {
+              "type": "p",
+              "text": "The inspector exports a PNG, pen matrix and JSON metadata from character RAM at 0xC06000 + code*16. Pen 0 is transparent; pens 1..3 use the selected palette bank. v1 does not inspect background ROM tiles."
+            }
+          ]
+        },
+        {
+          "id": "guide-sprite-bitplanes",
+          "title": "Verify sprite bitplane significance (RC2.6.1)",
+          "summary": "Prove the source-level 4bpp pen mapping without palette or compositor workarounds.",
+          "blocks": [
+            {
+              "type": "callout",
+              "tone": "info",
+              "title": "Confirmed mapping",
+              "text": "Physical sprite planes 0,1,2,3 contribute pen bits 3,2,1,0. This is equivalent to reversing the RC2.5 decoded four-bit pen."
+            },
+            {
+              "type": "steps",
+              "items": [
+                "Run Test-SpriteGfx.bat to exhaustively validate all 16 pen combinations.",
+                "Launch the RC2.6.1 candidate normally.",
+                "Run regression/regression-v06690-rc261-sprite-bitplane-significance.chqscript as the explicit build-specific focused regression.",
+                "Run graphics/sprite-bitplane-significance-proveoff.chqscript and inspect map405-native-plane-order: the Map-405 cloud family should be coherently shaded without palette overrides.",
+                "Require exact structured-snapshot reconstruction, then run sprite ownership and Full Regression before promotion."
+              ]
+            },
+            {
+              "type": "code",
+              "language": "chqscript",
+              "text": "api checkpoint.load file=stage1-driving-2352.chqstate run=false\napi sprite.map.inspect map=405\napi frame.snapshot name=map405-native-plane-order sprites=individual"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "project-knowledge",
+      "title": "Project Knowledge",
+      "pages": [
+        {
+          "id": "knowledge-browser",
+          "title": "Findings and investigations",
+          "summary": "Evidence-backed project knowledge, statuses and relationships.",
+          "generated": "knowledge-browser",
+          "blocks": []
+        },
+        {
+          "id": "glossary",
+          "title": "Glossary",
+          "summary": "Quick definitions for common ChaseHQ-Native and research terms.",
+          "generated": "glossary",
+          "blocks": []
+        }
+      ]
+    },
+    {
+      "id": "continuation",
+      "title": "Project Continuation",
+      "pages": [
+        {
+          "id": "chatgpt-handover",
+          "title": "Authoritative ChatGPT handover",
+          "summary": "How to move the project to a new ChatGPT conversation without losing current state.",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "Every build carries docs/CHATGPT_HANDOVER_PROMPT.md. Upload the latest project ZIP and provide that prompt in a new conversation. The ZIP plus handover prompt are the authoritative continuation source when older conversation assumptions conflict."
+            },
+            {
+              "type": "callout",
+              "tone": "warning",
+              "title": "Release rule",
+              "text": "The handover build/proof status must be updated with every revision. Release validation should flag stale continuation metadata."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

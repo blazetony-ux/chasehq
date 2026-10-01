@@ -1,0 +1,22 @@
+# category: regression
+# name: Road transition conditional smoke
+# purpose: Exercise restricted status/memory if blocks at the deterministic attract-mode road transition.
+# checkpoint: stage1-driving-2352.chqstate
+# regression-version: legacy
+# regression-scope: version
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api control.run-frames frames=100
+api control.run-frames frames=100
+api control.run-frames frames=100
+api control.run-frames frames=4
+if status frame=2656
+    api memory.read cpu=A address=10A048 width=8
+else
+    echo unexpected-frame
+end
+api control.run-frames frames=1
+if memory cpu=A address=10A048 width=8 value=05
+    echo left-off-road-transition-confirmed
+else
+    echo road-transition-mismatch
+end

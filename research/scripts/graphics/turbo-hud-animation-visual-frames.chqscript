@@ -1,0 +1,25 @@
+# name: Turbo HUD Animation Visual Frames
+# category: graphics
+# purpose: Export all three proven active-turbo animation phases with frame-safe character-inspector outputs.
+echo === Turbo HUD Animation Visual Frames ===
+api timeline.load name=turbo-complete-cycle
+api timeline.seek frame=2066
+api tile.inspect code=0C palette=0 scale=16
+api tile.inspect code=0D palette=0 scale=16
+api tile.inspect code=0E palette=0 scale=16
+api tile.inspect code=0F palette=0 scale=16
+api frame.snapshot name=turbo-animation-phase-40
+api timeline.seek frame=2068
+api tile.inspect code=0C palette=0 scale=16
+api tile.inspect code=0D palette=0 scale=16
+api tile.inspect code=0E palette=0 scale=16
+api tile.inspect code=0F palette=0 scale=16
+api frame.snapshot name=turbo-animation-phase-80
+api timeline.seek frame=2070
+api tile.inspect code=0C palette=0 scale=16
+api tile.inspect code=0D palette=0 scale=16
+api tile.inspect code=0E palette=0 scale=16
+api tile.inspect code=0F palette=0 scale=16
+api frame.snapshot name=turbo-animation-phase-00
+api timeline.unload
+echo === Turbo HUD Animation Visual Frames complete ===

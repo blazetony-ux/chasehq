@@ -1,0 +1,19 @@
+ChaseHQ-Native v0.66.7.9 - Research Recovery / Release Discipline
+
+Purpose
+-------
+This revision deliberately stops expanding platform tooling and turns the v0.66.7.6-v0.66.7.8 prove-off failures into explicit release rules, validation guards and reusable research scripts. Runtime/emulator semantics are carried forward from v0.66.7.8.
+
+Key changes
+-----------
+- Canonical docs/RELEASE_PROCESS.md with staged build/launch/fast-gate/focused-regression/full-regression order.
+- Post-package tools/Test-ReleaseArchive.ps1 validator.
+- Corrected turbo/HUD knowledge: gameplay state is confirmed; HUD rendering path remains open.
+- New recovery, turbo/HUD, checkpoint survey and target/end-level .chqscript workflows.
+- Regenerated Script Catalog from packaged headers.
+- New permanent v0.66.7.9 research-recovery regression wired into Full Regression.
+- Developer handoff package keeps build-local.json but excludes SDL, out, ROMs and transient evidence.
+
+Immediate research after proof
+------------------------------
+Run turbo-state-causal-validation, then turbo-hud-before-during-after. Use turbo-state-writer-trace only after the visual source path is localized. Then move to target/end-level state survey and track topology.

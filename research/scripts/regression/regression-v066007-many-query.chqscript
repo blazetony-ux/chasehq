@@ -1,0 +1,12 @@
+# name: Regression - v0.66.0.7 many-query preflight
+# category: Regression
+# purpose: Exercise cached multi-query preflight and collection helpers.
+# regression-version: 0.66.0.7
+# regression-scope: permanent
+
+getregions()
+getmaps()
+getpalettes()
+getcheckpoints()
+getcapabilities()
+echo === many-query preflight complete ===

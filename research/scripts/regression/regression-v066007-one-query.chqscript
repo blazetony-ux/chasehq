@@ -1,0 +1,8 @@
+# name: Regression - v0.66.0.7 one-query preflight
+# category: Regression
+# purpose: Exercise one dynamic query through bounded/cancellable preflight.
+# regression-version: 0.66.0.7
+# regression-scope: permanent
+
+getcapabilities()
+echo === one-query preflight complete ===

@@ -1,0 +1,12 @@
+# name: Regression - v0.66.8.0 RC6 Legacy Timeline CSV Compatibility
+# category: regression
+# purpose: Focused compatibility check against the already-recorded turbo-complete-cycle timeline whose writes.csv may have been rewritten by RC2 Export-Csv with quoted fields; does not replay gameplay.
+# regression-version: 0.66.8.0
+# regression-scope: focused-manual legacy timeline CSV parser parameter aliases streaming scan
+
+echo === v0.66.8.0 RC6 legacy timeline CSV compatibility ===
+api schema action=timeline.scan.memory
+api timeline.list
+# Use the existing turbo recording and explicit event bounds; no gameplay replay.
+api timeline.scan.memory name=turbo-complete-cycle triggerFrame=2065 stopFrame=2275 window=1
+echo === v0.66.8.0 RC6 legacy timeline CSV compatibility complete ===

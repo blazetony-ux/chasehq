@@ -1,0 +1,9 @@
+ChaseHQ-Native v0.66.2 — Player Steering & Driving Controls
+
+- Confirmed authoritative steering chain: IOC ports 0x0C/0x0D -> CPU-A 0x10014C raw -> CPU-A 0x100300 processed -> handling/cornering -> 0x10A044 lateral position.
+- SDL gameplay keys: Left/Right steer at proven ±96 raw values; Up accelerator; Down brake; Space turbo. All use IOC input rather than RAM patches.
+- Workbench browser gamepad live steering toggle uses axis 0 with deadzone and authentic signed-12-bit IOC encoding.
+- Gameplay Registry now exposes raw and processed steering as CONFIRMED.
+- Permanent v0.66.2 steering regression included and added to full regression.
+- Web command dispatcher records and retries one intermittent empty native response once, preserving RECOVERED/RETRY_FAILED telemetry.
+- Carries forward v0.66.1.2 regression/resilience fixes and build-local staging.

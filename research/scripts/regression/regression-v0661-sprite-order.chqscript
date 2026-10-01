@@ -1,0 +1,9 @@
+# purpose: Execute Regression - v0.66.1 sprite priority provenance as a documented ChaseHQ-Native research script.
+# name: Regression - v0.66.1 sprite priority provenance
+# category: Regression
+# regression-version: 0.66.1
+# regression-scope: permanent
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api sprites.list
+api sprite.inspect slot=46
+echo === sprite priority provenance complete ===

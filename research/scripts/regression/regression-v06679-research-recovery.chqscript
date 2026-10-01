@@ -1,0 +1,21 @@
+# name: Regression - v0.66.7.9 Research Recovery
+# category: regression
+# purpose: Prove the recovery/research handoff surfaces and corrected turbo-state knowledge are available before returning to substantive gameplay research.
+# regression-version: 0.66.7.9
+# regression-scope: permanent
+echo === v0.66.7.9 research recovery regression ===
+api platform.info
+api status
+api docs.get id=turbo-hud-investigation
+api schema action=gameplay.registry
+api schema action=frame.snapshot
+api schema action=image.compare
+api schema action=memory.trace.start
+api regions.list
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api gameplay.registry
+api memory.read cpu=A address=0x100303 width=8
+api memory.read cpu=A address=0x10040F width=8
+api memory.read cpu=A address=0x1003A2 width=16
+api memory.read cpu=A address=0x100414 width=16
+echo === v0.66.7.9 research recovery regression complete ===

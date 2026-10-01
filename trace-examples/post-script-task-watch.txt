@@ -1,0 +1,7 @@
+# v0.27 post-script task debugger example
+cpu=A
+arm_mem=100172:3800
+tasks=all
+from_frame=1200
+to_frame=1600
+max=4000

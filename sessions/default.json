@@ -1,0 +1,8 @@
+{
+  "Roms": ".\\roms\\chasehq",
+  "Port": 37600,
+  "EmulatorArgs": [],
+  "PrimeCommands": [
+    "events limit 50000"
+  ]
+}

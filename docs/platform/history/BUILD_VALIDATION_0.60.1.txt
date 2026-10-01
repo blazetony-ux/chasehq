@@ -1,0 +1,15 @@
+# v0.60.1 validation
+
+Validation performed in the build environment before packaging:
+
+- CPU/runtime CMake configure with `CHASEHQ_BUILD_SDL=OFF`: **PASS**
+- CPU/runtime build: **PASS**
+- `runtime_tests`: **PASS (1/1)**
+- v0.60 Workbench write-once, FREEZE, SUPPRESS and watched-change tests retained: **PASS**
+- `chq_debug_api` localhost server compilation: **PASS**
+- `chqctl` client compilation: **PASS**
+- localhost API transport smoke test (`chqctl` -> server -> response): **PASS**
+- `main.cpp` C++20 syntax validation with v0.60.1 API command handler: **PASS**
+- ZIP integrity: checked after packaging
+
+The package does not contain the SDL3 source tree, so a real SDL/Windows link-and-run acceptance test cannot be performed in this Linux build environment. Copy the normal SDL3 source into `SDL/` before configuring the graphical target. The API server is compiled into `ChaseHQNative`; `chqctl` is an independent target.

@@ -1,0 +1,13 @@
+# name: TC0100SCN Post-Y-Fix Layer Isolation
+# category: graphics
+# purpose: Capture the deterministic post-Y-fix layered/per-sprite reference; RC2.4.2 evidence localized the visible sky texture to the raw TC0100SCN bottom/background source.
+# checkpoint: stage1-gameplay-2064.chqstate
+# status: reference
+
+echo === TC0100SCN Post-Y-Fix Layer Isolation ===
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api control.step-frame
+api frame.snapshot name=tc0100scn-yfix-2065 sprites=individual
+api frame.snapshot.list require=tc0100scn-yfix-2065
+echo === Open Graphics Lab and select tc0100scn-yfix-2065 ===
+echo === Raw bg-bottom carries the known sky texture; use this capture as a deterministic reference ===

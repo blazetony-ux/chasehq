@@ -1,0 +1,28 @@
+# name: Regression - v0.66.4 palette write trace
+# category: regression
+# purpose: Verify semantic TC0110PCR palette-write tracing, schema exposure, bounded history, stop/clear behavior and the known Stage 1 brake-lamp entries.
+# regression-version: 0.66.4
+# regression-scope: palette trace API and Script Console integration
+
+echo === v0.66.4 palette write trace regression ===
+api schema action=palette.trace.start
+api schema action=palette.trace.status
+api schema action=palette.trace.tail
+api schema action=palette.trace.stop
+api schema action=palette.trace.clear
+api palette.trace.clear
+api palette.trace.start indices=1037,1053 limit=128
+api palette.trace.status
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api control.run-frames frames=5
+api input.ioc.xor port=2 mask=20
+api control.run-frames frames=8
+api palette.trace.tail count=20
+api input.ioc.clear
+api control.run-frames frames=8
+api palette.trace.tail count=40
+api palette.trace.stop
+api palette.trace.status
+api palette.trace.clear
+api palette.trace.tail count=10
+echo === v0.66.4 palette write trace regression complete ===

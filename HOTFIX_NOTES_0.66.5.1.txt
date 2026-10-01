@@ -1,0 +1,15 @@
+ChaseHQ-Native v0.66.5.1 - Track Recorder Scripting Hotfix
+
+Purpose
+-------
+Patch v0.66.5 validation/usability gaps without expanding into the planned layered-frame/HUD feature work.
+
+Changes
+-------
+* Track View recording is shared server-side state.
+* Research Script actions: track.record.start/stop/clear/status/sample.
+* track.svg.export writes deterministic SVG evidence and refuses empty recordings.
+* Track View UI uses the same shared recorder state.
+* Added regression-v06651-track-recorder.chqscript and scripted 3600-frame SVG survey.
+* Corrected memory-trace regression/docs: width filters originating write transaction width; use width=any when unknown.
+* Build-Debug.bat / Build-Release.bat retain Prepare-Project.bat bootstrap and the narrow known cpu_bus_rom_tests SEGFAULT exception.

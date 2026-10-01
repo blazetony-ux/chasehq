@@ -1,0 +1,30 @@
+# name: Regression - v0.66.7.4 Workbench Knowledge / SDL / Sprite Controls
+# purpose: Prove documentation/knowledge API, native SDL control parity and v0.66.7.4 per-sprite layered snapshot artifacts.
+# category: regression
+# regression-version: 0.66.7.4
+# regression-scope: current
+# status: awaiting-windows-proof
+# requires: stage1-driving-2352.chqstate
+
+echo === v0.66.7.4 Workbench Knowledge / SDL / Sprite Controls ===
+api schema action=docs.index
+api schema action=docs.search
+api schema action=docs.handover
+api schema action=window.status
+api schema action=window.fullscreen
+api schema action=window.scale
+api docs.index
+api docs.search query=HUD
+api docs.glossary
+api docs.handover
+api window.status
+api window.fullscreen enabled=false
+api window.scale scale=3
+api window.restore
+api window.show
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api frame.snapshot name=regression-v06674-sprite-controls
+api frame.snapshot.list
+api docs.export format=html evidence=key output=regression-v06674-docs
+api window.status
+echo === v0.66.7.4 regression complete ===

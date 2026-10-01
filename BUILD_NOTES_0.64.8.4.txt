@@ -1,0 +1,21 @@
+ChaseHQ-Native v0.64.8.4
+Reliability & Autonomous-Research Foundation
+
+Packaging-environment validation completed:
+- CMake configure/build with CHASEHQ_BUILD_SDL=OFF: PASS
+- runtime_tests / ctest: PASS (includes patch enforcement while research tracing disabled)
+- embedded Workbench JavaScript syntax (node --check): PASS
+
+Windows acceptance tests are bundled in:
+  research\scripts\regression\quick-smoke.chqscript
+  research\scripts\regression\full-regression.chqscript
+
+Key fixes:
+- live patch freeze/replace/suppress enforcement independent of trace enable state
+- patch hit count / last-PC now update on intercepted writes
+- out-of-band Script Stop via emulator pause
+- cancellation-aware run-frames waiting and better timeout diagnostics
+- collision-proof frame.capture naming (milliseconds + suffix)
+- timestamped Web request logs
+- Debug /Od + /O2 warning cleanup
+- explicit SDL3-shared dependency/link staging

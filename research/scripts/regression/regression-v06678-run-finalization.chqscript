@@ -1,0 +1,22 @@
+# name: Regression - v0.66.7.8 Run Finalization
+# category: regression
+# purpose: exercise a multi-command run with predicates so one parent run is finalized and bundled exactly once
+# regression-version: 0.66.7.8
+# regression-scope: script-run lifecycle transient predicates single final bundle
+
+echo === v0.66.7.8 run finalization ===
+api status
+if capability execution.pause
+  echo capability predicate transient PASS
+else
+  echo capability predicate not reported
+end
+if memory cpu=A address=0x100303 width=8 value >= 0x00
+  echo memory predicate transient PASS
+else
+  echo memory predicate evaluated false
+end
+api window.status
+api frame.snapshot.list
+api script.runs limit=25
+echo === v0.66.7.8 run finalization complete ===

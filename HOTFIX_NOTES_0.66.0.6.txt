@@ -1,0 +1,10 @@
+ChaseHQ-Native v0.66.0.6 - Zero-query Preflight + Historical Artifact Resolver Hotfix
+
+Fixes:
+- Scripts with zero dynamic query functions no longer remain stuck at PREFLIGHT 0 / 0.
+- Historical run entries now rehydrate missing version/session metadata from stored output/artifact paths when possible.
+- Artifact serving for previous ChaseHQ version/session folders uses safe string/path checks instead of malformed regex matching.
+- Previous-session image thumbnails can resolve from exact old paths, or from the same evidence-session suffix in sibling ChaseHQ-Native-v* folders when a version folder was renamed/moved.
+- Keeps v0.66.0.5 preflight timeout/cache/progress behavior for scripts that do use query functions.
+
+No emulator behavior changes.

@@ -1,0 +1,12 @@
+ChaseHQ-Native v0.61.3 Research Core validation
+Date: 2026-09-25
+
+Validation performed in the build environment:
+- Source/package structure checked.
+- CPU/runtime configured and built with CHASEHQ_BUILD_SDL=OFF.
+- CTest runtime suite executed.
+- JSON experiment/workspace/knowledge files parsed.
+- PowerShell scripts could not be executed because PowerShell is not installed in this Linux build environment.
+- Windows/MSVC + SDL frontend and live HttpListener/API require validation on the user's dev machine.
+
+No intentional Chase H.Q. emulation/gameplay changes were made in this candidate.

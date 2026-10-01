@@ -1,0 +1,37 @@
+# name: Turbo State Causal Validation
+# category: gameplay
+# purpose: Revalidate the confirmed processed turbo input, active flag, remaining count and active-duration counter from the canonical Stage 1 gameplay checkpoint.
+# checkpoint: stage1-gameplay-2064.chqstate
+echo === Turbo State Causal Validation ===
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api input.ioc.clear
+
+echo --- baseline ---
+api gameplay.registry
+api memory.read cpu=A address=0x100303 width=8
+api memory.read cpu=A address=0x10040F width=8
+api memory.read cpu=A address=0x1003A2 width=16
+api memory.read cpu=A address=0x100414 width=16
+
+# Proven Stage 1 IOC combination: accelerator 0x20 + turbo 0x01.
+api input.ioc.xor port=3 mask=21
+api control.run-frames frames=15
+
+echo --- turbo active ---
+api gameplay.registry
+api memory.read cpu=A address=0x100303 width=8
+api memory.read cpu=A address=0x10040F width=8
+api memory.read cpu=A address=0x1003A2 width=16
+api memory.read cpu=A address=0x100414 width=16
+
+api input.ioc.clear
+api control.run-frames frames=225
+
+echo --- after expiry window ---
+api gameplay.registry
+api memory.read cpu=A address=0x100303 width=8
+api memory.read cpu=A address=0x10040F width=8
+api memory.read cpu=A address=0x1003A2 width=16
+api memory.read cpu=A address=0x100414 width=16
+api input.ioc.clear
+echo === Turbo State Causal Validation complete ===

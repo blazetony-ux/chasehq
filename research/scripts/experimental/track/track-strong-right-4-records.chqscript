@@ -1,0 +1,30 @@
+# name: Track Experiment - Strong Right 4 Records
+# category: experimental
+# purpose: Apply a synthetic strong-right four-record track experiment.
+# EXPERIMENTAL: Force a strong right-hand bend over four upcoming records
+# Baseline: stage1-driving-2352.chqstate (ATTRACT mode)
+# +0 curvature is signed 8-bit and CONFIRMED:
+#   positive = RIGHT
+# 0x40 = +64
+#
+# Safe recovery:
+# Stop/pause, then reload stage1-driving-2352.chqstate.
+
+api patch.clear
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+
+echo === EXPERIMENT: FORCE STRONG RIGHT BEND ===
+
+api track.state
+
+api memory.write cpu=A address=1090B0 width=8 value=40
+api memory.write cpu=A address=1090B8 width=8 value=40
+api memory.write cpu=A address=1090C0 width=8 value=40
+api memory.write cpu=A address=1090C8 width=8 value=40
+
+api memory.read-range cpu=A address=1090A8 length=40
+api frame.capture
+
+echo Modified upcoming curvature bytes to 0x40 (+64)
+echo Resume attract mode and watch SDL + Track View
+api control.resume

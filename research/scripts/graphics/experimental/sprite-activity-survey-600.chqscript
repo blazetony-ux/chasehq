@@ -1,0 +1,16 @@
+# name: Sprite Activity Survey - 600 frames
+# category: graphics
+# purpose: Survey live sprite activity across 600 frames.
+# 600-frame semantic sprite activity survey from canonical attract checkpoint.
+api patch.clear
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api frame.snapshot name=sprite-survey-600-start
+repeat 4
+    repeat 10
+        api control.run-frames frames=15
+        api sprites.tail count=30
+    end
+    api frame.snapshot
+end
+api frame.snapshot name=sprite-survey-600-end
+echo === SPRITE ACTIVITY SURVEY 600 COMPLETE ===

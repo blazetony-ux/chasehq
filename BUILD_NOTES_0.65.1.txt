@@ -1,0 +1,16 @@
+ChaseHQ-Native v0.65.1
+
+Experimental Profile Plumbing
+
+This is an additive, low-risk layer on top of v0.65.0. Chase H.Q. remains the sole active runtime and no existing game-specific address or emulation path has been moved behind a profile.
+
+Adds:
+- games/chasehq/profile.json authoritative primary descriptor
+- games/sci/profile.json metadata-only experimental probe
+- hardware/taitoz/profile.json adapter-boundary descriptor
+- GET /api/v1/profiles
+- GET /api/v1/profile?game=<id>
+- script actions profiles.list / profile.get
+- Script Console getprofiles() query function
+
+SCI activation/runtime support is deliberately absent.

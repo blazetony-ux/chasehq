@@ -1,0 +1,19 @@
+# name: Target and End-Level State Survey
+# category: gameplay
+# purpose: Compare coherent gameplay, sprite, region and track state at the canonical post-final-hit and confirmed end-level checkpoints without assigning unresolved target-health semantics.
+echo === Target and End-Level State Survey ===
+api checkpoint.load file=stage1-target-post-final-hit-9548.chqstate run=false
+api gameplay.registry
+api track.state
+api state.snapshot include=sprites,regions,gameplay,track
+api frame.snapshot name=target-post-final-hit-9548-survey
+
+api checkpoint.load file=stage1-end-level-9988.chqstate run=false
+api gameplay.registry
+api track.state
+api state.snapshot include=sprites,regions,gameplay,track
+api frame.snapshot name=end-level-9988-survey
+
+api image.compare a=target-post-final-hit-9548-survey b=end-level-9988-survey region=TARGET_AREA hud=hidden
+api image.compare a=target-post-final-hit-9548-survey b=end-level-9988-survey region=FULL hud=hidden
+echo === Target and End-Level State Survey complete ===

@@ -1,0 +1,11 @@
+# name: Regression - v0.66.7.7 Run History / Snapshot Discovery
+# purpose: Verify authoritative on-disk run discovery and structured snapshot listing contracts.
+# category: regression
+# regression-version: 0.66.7.7
+# regression-scope: current
+
+echo === v0.66.7.7 Run History / Snapshot Discovery ===
+api schema action=script.runs
+api script.runs limit=25
+api frame.snapshot.list
+echo === v0.66.7.7 persistence/discovery regression complete ===

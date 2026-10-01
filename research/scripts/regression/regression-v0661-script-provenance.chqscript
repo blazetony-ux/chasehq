@@ -1,0 +1,8 @@
+# purpose: Execute Regression - v0.66.1 script provenance as a documented ChaseHQ-Native research script.
+# name: Regression - v0.66.1 script provenance
+# category: Regression
+# regression-version: 0.66.1
+# regression-scope: permanent
+echo === script provenance smoke ===
+api platform.info
+echo === script provenance smoke complete ===

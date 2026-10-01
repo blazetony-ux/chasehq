@@ -1,0 +1,14 @@
+ChaseHQ-Native 0.66.9.0-RC1
+Game-facing research candidate: Game Lab + TC0100SCN RAM character inspector.
+Built from proven v0.66.8.0 baseline.
+Runtime version: 0.66.9.0
+Package label: RC1 until focused Windows/SDL and Full Regression prove-off.
+
+Packaging-environment proof:
+- non-SDL native configure/build PASS
+- cpu_bus_rom_tests PASS (1/1)
+- Workbench JavaScript syntax PASS
+- JSON/schema/catalog/static parity PASS
+- package-hygiene precheck PASS
+
+First Windows proof: Regression - v0.66.9.0 Game Lab and Tile Inspector.

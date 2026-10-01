@@ -1,0 +1,33 @@
+ChaseHQ-Native v0.66.0.2 - Workbench UX & Diagnostics Patch
+
+Built on the user-validated v0.66.0.1 Windows/SDL baseline. No Chase H.Q. emulation behaviour is intentionally changed.
+
+Script Console UX
+- Script library category/search structure retained; selecting a script auto-loads it again.
+- PowerShell source is UTF-8 BOM for Windows PowerShell 5.1; script metadata is read explicitly as UTF-8.
+- Full-width script output beneath editor/preview.
+- Collapsible syntax preview.
+- Wrap/no-wrap and maximize/restore output controls.
+- Inline generated-image thumbnails are rendered separately from the text log, so Copy output remains plain text.
+- Recent run history is persisted in browser localStorage with status, duration, command count, script name, output and detected artifact paths.
+- Artifact files under the active session/evidence roots can be viewed/downloaded through a guarded local endpoint.
+
+Evidence / registry
+- Evidence list now ignores container directories such as frame-snapshots, experiments and script-runs unless they are real chq-evidence-v2 captures.
+- Unknown gameplay-registry values remain null in the API and render as an ASCII-safe placeholder in the UI.
+
+Logs / diagnostics
+- logs.tail now accepts the exact @runtime identifiers returned by logs.list in both HTTP and Script Console APIs.
+- Added @runtime/web-command-diagnostics.log.
+- Invoke-Chq rejects truly empty command arrays before transport and records request/caller/command/status context when native transport returns ERR empty command.
+- track.state internal reads now carry field-specific context in failure messages.
+- Added v0.66.0.2 diagnostics regression and folded it into full-regression.chqscript.
+
+Validation in build environment
+- Embedded Workbench JavaScript syntax: PASS.
+- CPU-only CMake build: PASS.
+- cpu_bus_rom_tests: 1/1 PASS.
+- JSON feature manifest: PASS.
+- ZIP integrity: PASS.
+
+Still requires Windows/SDL validation of the new browser UX and runtime log resolver.

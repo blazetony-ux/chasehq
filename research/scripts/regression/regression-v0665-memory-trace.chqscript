@@ -1,0 +1,28 @@
+# name: Regression - v0.66.5 generic memory write trace
+# category: regression
+# purpose: Verify generic memory-write tracing with range-overlap matching independent of originating transaction width, plus schema/status/tail/stop/clear behavior.
+# regression-version: 0.66.5
+# regression-scope: memory trace API and Script Console integration
+
+echo === v0.66.5 generic memory write trace regression ===
+api schema action=memory.trace.start
+api schema action=memory.trace.status
+api schema action=memory.trace.tail
+api schema action=memory.trace.stop
+api schema action=memory.trace.clear
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api memory.trace.clear
+api memory.trace.start cpu=A address=0x100303 length=1 width=any limit=128
+api memory.trace.status
+api control.run-frames frames=5
+api input.ioc.xor port=2 mask=20
+api control.run-frames frames=6
+api memory.trace.tail count=20
+api input.ioc.clear
+api control.run-frames frames=6
+api memory.trace.tail count=40
+api memory.trace.stop
+api memory.trace.status
+api memory.trace.clear
+api memory.trace.tail count=10
+echo === v0.66.5 generic memory write trace regression complete ===

@@ -1,0 +1,12 @@
+# name: Regression - v0.66.1.2 resilience hotfix
+# category: Regression
+# regression-version: 0.66.1.2
+# regression-scope: version
+# purpose: Verify runtime log aliases, manifest/runtime version consistency, and basic runner diagnostics surface.
+echo === v0.66.1.2 resilience hotfix regression ===
+api platform.info
+api features.list
+api logs.list
+api logs.tail file=@runtime/web-listener.log lines=20
+api schema action=logs.tail
+echo === v0.66.1.2 resilience hotfix regression complete ===

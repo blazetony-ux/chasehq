@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.7\tests\sprite_gfx_tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.7\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{907A566B-AE63-3C40-A2B5-122E1FF7D06E}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

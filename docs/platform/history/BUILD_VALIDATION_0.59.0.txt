@@ -1,0 +1,22 @@
+ChaseHQ-Native v0.59.0 build/validation record
+
+Local source validation performed in the build environment:
+- CMake configure with CHASEHQ_BUILD_SDL=OFF: PASS
+- CPU/runtime build: PASS
+- ctest cpu_bus_rom_tests: PASS (1/1)
+
+Windows/MSVC acceptance still required for the SDL frontend. Preserve the validated v0.58.3 layout:
+  .\out\build\x64-Debug\ChaseHQNative.exe
+Do not introduce CMakePresets.json or a nested x64-Debug\Debug executable layout.
+
+Recommended v0.59.0 acceptance:
+1. Build with the established Windows x64-Debug workflow.
+2. Confirm --help includes --target-state-log and --no-collisions.
+3. Load stage1-gameplay-2064 and run --course-survey --fast-forward-to 7058 --exit-at-frame 7087.
+4. Confirm target_state.csv records the Stage-1 target/contact sequence near 7084 and sampled score progression remains deterministic.
+5. Repeat with --no-collisions and confirm:
+   - contact/event telemetry remains present,
+   - interaction timer/type remain present,
+   - collision_events.csv reports LATERAL_SHOVE_SUPPRESSED,
+   - player lateral coordinate does not receive the proven $00A156 shove.
+6. Measure fast-forward performance to ensure v0.58.3 quiet-fast-forward regression has not returned.

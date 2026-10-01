@@ -1,0 +1,20 @@
+ChaseHQ-Native v0.66.3.1 - Workbench Reliability & Run History Hotfix
+
+Scope is deliberately bounded: restore a dependable research workflow, then return to Chase H.Q. game/render investigation.
+
+Fixes:
+- corrected full-regression v0.66.3 include ordering/path
+- restart port-owner fallback
+- compact session/evidence/runs layout (no web-evidence)
+- sequential per-session run IDs and automatic bundle.zip
+- explicit run build/session/name/purpose/source provenance
+- pasted script metadata support (# name/# purpose/# category)
+- selected-row shared history actions
+- no folder-regex version inference for new history; malformed legacy versions display unknown
+- script include and metadata validation
+- carried forward API/script schema documentation discipline
+
+Gameplay/research handover:
+- do not expand tooling unless it blocks the active investigation
+- investigate/remediate before rebuilding or packaging
+- immediate target remains map 516 raw spritemap/OBJ provenance for the confirmed 140 pen-13 rear-window pixels

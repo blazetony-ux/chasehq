@@ -1,0 +1,24 @@
+# name: Regression - v0.66.8.0 RC3 Streaming Timeline Analysis
+# category: regression
+# purpose: Prove non-destructive event-window detection and streaming offline memory analysis without Import-Csv of the full timeline write stream.
+# regression-version: 0.66.8.0
+# regression-scope: current
+
+echo === v0.66.8.0 RC3 Streaming Timeline Analysis ===
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api input.ioc.clear
+api timeline.record.start name=regression-v06680-rc3-streaming
+api input.ioc.xor port=3 mask=21
+api control.run-frames frames=2
+api input.ioc.clear
+api control.run-frames frames=2
+api timeline.record.stop
+api timeline.trim.event name=regression-v06680-rc3-streaming cpu=A address=0x100303 width=8 mask=01 pre=0 post=0
+api timeline.scan.memory name=regression-v06680-rc3-streaming
+api timeline.load name=regression-v06680-rc3-streaming
+api timeline.status
+api gameplay.registry
+api sprites.list
+api timeline.unload
+api status
+echo === v0.66.8.0 RC3 Streaming Timeline Analysis complete ===

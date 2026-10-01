@@ -1,0 +1,20 @@
+ChaseHQ-Native v0.66.7.5 package manifest
+
+Core continuation artifacts:
+- docs/CHATGPT_HANDOVER_PROMPT.md
+- docs/PROJECT_STATE.md
+- docs/HANDOVER.md
+- docs/ROADMAP.md
+- docs/KNOWLEDGE_SYSTEM.md
+- docs/API_REFERENCE.md / docs/API_CHANGELOG.md
+- docs/SCRIPT_LANGUAGE_REFERENCE.md / docs/SCRIPT_CHANGELOG.md
+- research/knowledge/handbook.json
+- research/knowledge/documentation.json
+- research/schema/api-actions.json
+- research/schema/script-language.json
+- docs/handbook/ChaseHQ-Native-Documentation-Handbook.html
+- research/scripts/regression/regression-v06675-user-handbook.chqscript
+- canonical checkpoints and existing evidence/docs carried forward
+
+Validation target:
+Regression - v0.66.7.5 User Handbook / Live Reference

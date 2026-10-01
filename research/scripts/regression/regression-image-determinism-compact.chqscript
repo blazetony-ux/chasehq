@@ -1,0 +1,24 @@
+# category: regression
+# name: Deterministic image comparison baseline
+# purpose: Verify checkpoint reload + equal frame advance produces frame-equivalent captures using compact loop syntax.
+# checkpoint: stage1-driving-2352.chqstate
+# regression-version: legacy
+# regression-scope: version
+
+set checkpoint = stage1-driving-2352.chqstate
+set regions = FULL,ROAD_AREA,PLAYER_CAR,HUD_TOP,HUD_TURBO,TARGET_AREA
+
+api patch.clear
+api checkpoint.load file=${checkpoint} run=false
+api control.run-frames frames=30
+api frame.capture name=determinism-a
+
+api checkpoint.load file=${checkpoint} run=false
+api control.run-frames frames=30
+api frame.capture name=determinism-b
+
+for region in regions
+    api image.compare a=determinism-a b=determinism-b region=${region}
+end
+
+api image.diff a=determinism-a b=determinism-b region=FULL output=determinism-diff

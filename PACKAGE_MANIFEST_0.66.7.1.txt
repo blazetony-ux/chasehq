@@ -1,0 +1,31 @@
+ChaseHQ-Native v0.66.7.2 package manifest
+=======================================
+
+Build identity
+- CMakeLists.txt / src/version.h: 0.66.7.2
+- Previous proven baseline: 0.66.6.1
+- Current status: implemented; awaiting Windows/SDL proof-off
+
+Authoritative continuation
+- docs/CHATGPT_HANDOVER_PROMPT.md
+- docs/PROJECT_STATE.md
+- docs/HANDOVER.md
+- docs/ROADMAP.md
+
+v0.66.7.2 documentation / knowledge
+- docs/KNOWLEDGE_SYSTEM.md
+- docs/handbook/ChaseHQ-Native-Documentation-Handbook.html
+- research/knowledge/documentation.json
+- docs/evidence/layered-frame-forensics/*
+
+Contracts / regressions
+- research/schema/api-actions.json
+- research/schema/script-language.json
+- research/feature-manifest.json
+- research/scripts/regression/regression-v06672-knowledge-sdl-sprite-controls.chqscript
+- research/scripts/regression/full-regression.chqscript
+
+Release records
+- BUILD_NOTES_0.66.7.2.txt
+- VALIDATION_0.66.7.2.md
+- PACKAGE_MANIFEST_0.66.7.2.txt

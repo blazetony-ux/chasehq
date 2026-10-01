@@ -1,0 +1,16 @@
+ChaseHQ-Native v0.59.3 build validation
+
+Linux CPU/runtime configure: PASS (-DCHASEHQ_BUILD_SDL=OFF)
+Linux CPU/runtime build: PASS
+ctest: 1/1 PASS
+src/main.cpp C++20 syntax validation: PASS
+SDL frontend not linked in container because SDL3 source is intentionally not bundled. Windows acceptance required using established out/build/x64-Debug/ChaseHQNative.exe layout.
+
+Acceptance focus:
+- corrected D3 lateral coefficient / D4 forward coefficient telemetry
+- F1 original vs applied handling coefficients
+- --cornering-scale controlled A/B
+- --cornering-speed-retain controlled A/B
+- --course-profile replay + live centre correction + hard recovery
+- collision suppression regression
+- progress ETA regression

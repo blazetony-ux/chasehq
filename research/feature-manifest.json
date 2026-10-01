@@ -1,0 +1,420 @@
+{
+  "schema": "chq-feature-manifest-v1",
+  "build": "0.66.9.0-RC2.7",
+  "policy": "New API/script features should ship with schema and regression coverage in the same build.",
+  "features": [
+    {
+      "id": "graphics.tc0100scn-x-and-workbench-reliability",
+      "status": "implemented-awaiting-proof",
+      "since": "0.66.9.0-RC2.7",
+      "regression": "research/scripts/regression/regression-v06690-rc27-tc0100-reliability.chqscript",
+      "description": "X-transform correction, no-sprites source-state export, live offsets and old/corrected mode; focused native/JS tests pass; Windows prove-off pending."
+    },
+    {
+      "id": "graphics.sprite-ownership-and-export-coordinates",
+      "status": "confirmed",
+      "regression": "research/scripts/regression/regression-sprite-ownership.chqscript",
+      "since": "0.66.9.0-RC2.5",
+      "description": "Descending traversal with first-nontransparent occupancy, canonical frame-2352 overlap assertion, and corrected visible-raster individual-sprite coordinates. Focused and Full Regression Windows proof completed before packaging."
+    },
+    {
+      "id": "graphics.layered-frame-snapshot-v2",
+      "status": "new",
+      "regression": "research/scripts/regression/regression-v06661-layered-frame-snapshot.chqscript"
+    },
+    {
+      "id": "graphics.hud-source-isolation",
+      "status": "new",
+      "regression": "research/scripts/regression/regression-v06661-layered-frame-snapshot.chqscript"
+    },
+    {
+      "id": "workbench.layer-reconstruction-viewer",
+      "status": "new",
+      "regression": "research/scripts/regression/regression-v06661-layered-frame-snapshot.chqscript"
+    },
+    {
+      "id": "track.shared-scriptable-recorder",
+      "status": "hotfix",
+      "regression": "research/scripts/regression/regression-v06651-track-recorder.chqscript"
+    },
+    {
+      "id": "research.memory-write-trace",
+      "status": "patched",
+      "regression": "research/scripts/regression/regression-v0665-memory-trace.chqscript"
+    },
+    {
+      "id": "workbench.track-svg-export-autofit",
+      "status": "stable",
+      "regression": null
+    },
+    {
+      "id": "workbench.script-console-preview-removed",
+      "status": "ui-cleanup",
+      "regression": null
+    },
+    {
+      "id": "script.api-query-functions",
+      "status": "stable",
+      "regression": "research/scripts/regression/regression-script-query-functions.chqscript"
+    },
+    {
+      "id": "script.dynamic-introspection",
+      "status": "new",
+      "regression": "research/scripts/regression/regression-v066-introspection.chqscript"
+    },
+    {
+      "id": "state.snapshot",
+      "status": "stable",
+      "regression": "research/scripts/evidence/state-snapshot.chqscript"
+    },
+    {
+      "id": "graphics.live-sprite-api",
+      "status": "experimental",
+      "regression": "research/scripts/regression/regression-live-sprite-api.chqscript"
+    },
+    {
+      "id": "profiles.readonly",
+      "status": "experimental",
+      "regression": "research/scripts/regression/regression-profile-metadata.chqscript"
+    },
+    {
+      "id": "audio.research-foundation",
+      "status": "foundation",
+      "regression": "research/scripts/regression/regression-audio-foundation.chqscript"
+    },
+    {
+      "id": "audio.runtime-injection",
+      "status": "planned",
+      "regression": null
+    },
+    {
+      "id": "workbench.logs-roundtrip",
+      "status": "hotfix",
+      "regression": "research/scripts/regression/regression-v066002-diagnostics.chqscript"
+    },
+    {
+      "id": "workbench.script-run-history",
+      "status": "ui-hotfix",
+      "regression": null
+    },
+    {
+      "id": "workbench.zero-query-preflight",
+      "status": "hotfix",
+      "regression": "research/scripts/regression/regression-v066006-zero-query.chqscript"
+    },
+    {
+      "id": "gameplay.collision-response-control",
+      "status": "experimental",
+      "regression": "research/scripts/regression/regression-v0661-collision-api.chqscript"
+    },
+    {
+      "id": "graphics.sprite-priority-provenance",
+      "status": "research",
+      "regression": "research/scripts/regression/regression-v0661-sprite-order.chqscript"
+    },
+    {
+      "id": "workbench.script-provenance",
+      "status": "stable",
+      "regression": "research/scripts/regression/regression-v0661-script-provenance.chqscript"
+    },
+    {
+      "id": "build.local-staging",
+      "status": "stable",
+      "regression": null
+    },
+    {
+      "id": "manifest.runtime-version-consistency",
+      "status": "stable",
+      "regression": "research/scripts/regression/regression-v0661-manifest-version.chqscript"
+    },
+    {
+      "id": "startup.native-process-supervision",
+      "status": "hotfix",
+      "regression": "Validate-Workbench.ps1"
+    },
+    {
+      "id": "workbench.frontend-bootstrap-handshake",
+      "status": "hotfix",
+      "regression": "Validate-Workbench.ps1"
+    },
+    {
+      "id": "build.rom-layout-validation",
+      "status": "hotfix",
+      "regression": "Prepare-Project.ps1 --check"
+    },
+    {
+      "id": "diagnostics.support-bundle",
+      "status": "hotfix",
+      "regression": "research/scripts/regression/regression-v06611-diagnostics-surface.chqscript"
+    },
+    {
+      "id": "workbench.listener-console-log",
+      "status": "hotfix",
+      "regression": "Validate-Workbench.ps1"
+    },
+    {
+      "id": "workbench.regression-version-filter",
+      "status": "hotfix",
+      "regression": "research/scripts/regression/regression-v06612-resilience-hotfix.chqscript"
+    },
+    {
+      "id": "workbench.history-v1-migration",
+      "status": "hotfix",
+      "regression": "Validate-Workbench.ps1"
+    },
+    {
+      "id": "gameplay.authoritative-steering",
+      "status": "confirmed",
+      "regression": "research/scripts/regression/regression-v0662-steering-controls.chqscript"
+    },
+    {
+      "id": "gameplay.native-keyboard-controls",
+      "status": "new",
+      "regression": "research/scripts/regression/regression-v0662-steering-controls.chqscript"
+    },
+    {
+      "id": "workbench.gamepad-live-steering",
+      "status": "new",
+      "regression": "research/scripts/regression/regression-v0662-steering-controls.chqscript"
+    },
+    {
+      "id": "script.authoritative-schema-docs",
+      "status": "new",
+      "regression": "research/scripts/regression/regression-v0663-contracts.chqscript"
+    },
+    {
+      "id": "script.per-run-artifacts",
+      "status": "new",
+      "regression": "research/scripts/regression/regression-v0663-contracts.chqscript"
+    },
+    {
+      "id": "graphics.sprite-map-provenance",
+      "status": "new",
+      "regression": "research/scripts/regression/regression-v0663-contracts.chqscript"
+    },
+    {
+      "id": "script.sdl-interactive-prompt",
+      "status": "experimental",
+      "regression": "research/scripts/regression/regression-v0663-contracts.chqscript"
+    },
+    {
+      "id": "workbench.compact-session-run-layout",
+      "status": "hotfix",
+      "regression": "research/scripts/regression/regression-v06631-workbench-reliability.chqscript"
+    },
+    {
+      "id": "workbench.explicit-run-metadata",
+      "status": "hotfix",
+      "regression": "research/scripts/regression/regression-v06631-workbench-reliability.chqscript"
+    },
+    {
+      "id": "startup.port-owner-restart-fallback",
+      "status": "hotfix",
+      "regression": "Validate-Workbench.ps1"
+    },
+    {
+      "id": "graphics.palette-write-trace",
+      "status": "new",
+      "regression": "research/scripts/regression/regression-v0664-palette-trace.chqscript"
+    },
+    {
+      "id": "workbench.run-duration-accumulation",
+      "status": "hotfix",
+      "regression": "Validate-Release.ps1"
+    },
+    {
+      "id": "workbench.descriptive-run-bundle-download",
+      "status": "hotfix",
+      "regression": "Validate-Release.ps1"
+    },
+    {
+      "id": "build.release-validation-gate",
+      "status": "new",
+      "regression": "Validate-Release.ps1"
+    },
+    {
+      "id": "workbench.docs-knowledge-v1",
+      "status": "proven",
+      "regression": "research/scripts/regression/regression-v06674-knowledge-sdl-sprite-controls.chqscript"
+    },
+    {
+      "id": "graphics.per-sprite-snapshot-controls-v1",
+      "status": "proven",
+      "regression": "research/scripts/regression/regression-v06674-knowledge-sdl-sprite-controls.chqscript"
+    },
+    {
+      "id": "runtime.sdl-window-api-v1",
+      "status": "proven",
+      "regression": "research/scripts/regression/regression-v06674-knowledge-sdl-sprite-controls.chqscript"
+    },
+    {
+      "id": "docs.chatgpt-handover-v1",
+      "status": "proven",
+      "regression": "research/scripts/regression/regression-v06674-knowledge-sdl-sprite-controls.chqscript"
+    },
+    {
+      "id": "workbench.user-handbook-live-reference-v1",
+      "status": "confirmed",
+      "regression": "research/scripts/regression/regression-v06675-user-handbook.chqscript"
+    },
+    {
+      "id": "workbench.authoritative-run-history-v1",
+      "status": "confirmed",
+      "regression": "research/scripts/regression/regression-v06677-run-history-snapshot-discovery.chqscript"
+    },
+    {
+      "id": "graphics.completed-run-snapshot-discovery-v1",
+      "status": "confirmed",
+      "regression": "research/scripts/regression/regression-v06677-run-history-snapshot-discovery.chqscript"
+    },
+    {
+      "id": "release.staged-proveoff-discipline",
+      "status": "new",
+      "regression": "research/scripts/regression/regression-v06679-research-recovery.chqscript"
+    },
+    {
+      "id": "research.turbo-hud-recovery-pack",
+      "status": "new",
+      "regression": "research/scripts/regression/regression-v06679-research-recovery.chqscript"
+    },
+    {
+      "id": "research.forensic-timeline-v1",
+      "status": "new",
+      "regression": "research/scripts/regression/regression-v06680-forensic-timeline.chqscript"
+    },
+    {
+      "id": "research.timeline-full-write-provenance",
+      "status": "new",
+      "regression": "research/scripts/regression/regression-v06680-forensic-timeline.chqscript"
+    },
+    {
+      "id": "research.timeline-script-import-seek-fork",
+      "status": "new",
+      "regression": "research/scripts/regression/regression-v06680-forensic-timeline.chqscript"
+    },
+    {
+      "id": "research.timeline-event-trim-memory-ranking",
+      "status": "new",
+      "regression": "research/scripts/regression/regression-v06680-forensic-timeline.chqscript"
+    },
+    {
+      "id": "research.timeline-portable-analysis-v1",
+      "status": "new",
+      "regression": "research/scripts/regression/regression-v06680-rc7-portable-auto-analysis.chqscript"
+    },
+    {
+      "id": "research.timeline-automated-correlation-v1",
+      "status": "new",
+      "regression": "research/scripts/regression/regression-v06680-rc7-portable-auto-analysis.chqscript"
+    },
+    {
+      "id": "research.timeline-sdl-playback-v1",
+      "status": "new",
+      "regression": "research/scripts/regression/regression-v06680-rc7-portable-auto-analysis.chqscript"
+    },
+    {
+      "id": "game.game-lab-turbo-speed-v1",
+      "status": "new",
+      "regression": "research/scripts/regression/regression-v06690-game-lab-tile-inspector.chqscript"
+    },
+    {
+      "id": "graphics.tc0100scn-text-character-inspector-v1",
+      "status": "new",
+      "regression": "research/scripts/regression/regression-v06690-game-lab-tile-inspector.chqscript"
+    },
+    {
+      "id": "research.timeline-frame-boundary-documented-v1",
+      "status": "new",
+      "regression": "research/scripts/regression/regression-v06680-forensic-timeline.chqscript"
+    },
+    {
+      "id": "graphics.sprite-order-runtime-ab-v1",
+      "status": "new",
+      "regression": "research/scripts/regression/regression-v06690-rc2-sprite-order-speed-semantics.chqscript"
+    },
+    {
+      "id": "graphics.sprite-map-inspect-map-selector",
+      "status": "fixed",
+      "regression": "research/scripts/regression/regression-v06690-rc2-sprite-order-speed-semantics.chqscript"
+    },
+    {
+      "id": "game.game-lab-speed-semantics-v2",
+      "status": "fixed",
+      "regression": "research/scripts/regression/regression-v06690-rc2-sprite-order-speed-semantics.chqscript"
+    },
+    {
+      "id": "script.native-err-propagation",
+      "status": "fixed",
+      "regression": "research/scripts/regression/regression-v06690-rc2-sprite-order-speed-semantics.chqscript"
+    },
+    {
+      "id": "graphics.tile-inspect-frame-safe-output",
+      "status": "fixed",
+      "regression": "research/scripts/regression/regression-v06690-rc2-sprite-order-speed-semantics.chqscript"
+    },
+    {
+      "id": "graphics.chasehq-mame-sprite-order-v1",
+      "status": "candidate",
+      "since": "0.66.9.0-RC2.2",
+      "description": "Descending traversal is retained; RC2.2 winner inference was incorrect. First nontransparent candidates now reserve sprite occupancy.",
+      "regression": "research/scripts/regression/regression-v06690-rc22-mame-sprite-order.chqscript"
+    },
+    {
+      "id": "workbench.frame-snapshot-immediate-discovery",
+      "status": "confirmed",
+      "since": "0.66.9.0-RC2.4.3",
+      "description": "RC2.4.3 Windows focused regression proved a newly created run-owned structured snapshot is returned immediately by assertive frame.snapshot.list require=NAME.",
+      "regression": "research/scripts/regression/regression-v06690-rc243-snapshot-discovery.chqscript"
+    },
+    {
+      "id": "graphics.tc0100scn-y-scroll-corrected",
+      "status": "confirmed",
+      "since": "0.66.9.0-RC2.4",
+      "description": "BG0/BG1/TEXT TC0100SCN Y source calculation uses corrected hardware scroll sign with neutral presentation defaults.",
+      "regression": "research/scripts/regression/regression-v06690-rc243-snapshot-discovery.chqscript"
+    },
+    {
+      "id": "script-expanded-command-capacity",
+      "title": "Research Script expanded-command capacity",
+      "category": "Workbench / Scripting",
+      "status": "confirmed",
+      "since": "0.66.9.0-RC2.4.4",
+      "description": "Browser/server Research Script v2 compilation accepts up to 1000 expanded commands so the permanent Full Regression suite can grow beyond the historical 500-command ceiling while retaining existing source/loop/nesting safeguards.",
+      "regression": "research/scripts/regression/full-regression.chqscript"
+    },
+    {
+      "id": "script.safe-experiment-lifecycle",
+      "title": "Research Script safe experiment lifecycle",
+      "category": "Workbench / Scripting",
+      "status": "candidate",
+      "since": "0.66.9.0-RC2.5",
+      "description": "Adds try/finally cleanup and idempotent timeline.reset for script-initiated timeline transactions; packages focused regression coverage.",
+      "regression": "research/scripts/regression/regression-v06690-rc25-script-safety.chqscript"
+    },
+    {
+      "id": "workbench.script-action-schema-parity",
+      "title": "Script Console action/schema parity enforcement",
+      "category": "Workbench / API",
+      "status": "candidate",
+      "since": "0.66.9.0-RC2.5",
+      "description": "Workbench startup fails if the documented action schema and executable Script Console allow-list disagree in either direction."
+    },
+    {
+      "id": "workbench.script-history-current-session-default",
+      "title": "Script Console current-session history default",
+      "category": "Workbench / Scripting",
+      "status": "candidate",
+      "since": "0.66.9.0-RC2.5",
+      "description": "Run-history responses expose currentSession and the Workbench defaults the history filter to that active session while retaining all-history/version/session filtering."
+    },
+    {
+      "id": "graphics.sprite-bitplane-significance",
+      "title": "Chase H.Q. sprite 4bpp plane significance",
+      "category": "Graphics",
+      "status": "candidate",
+      "since": "0.66.9.0-RC2.6",
+      "description": "Shared live/export sprite decoder assigns physical planes 0,1,2,3 to pen bits 3,2,1,0. The mapping was causally confirmed on RC2.5 Map 405; RC2.6 packages exhaustive native coverage and a no-override visual prove-off; RC2.6.1 adds the explicitly version-labelled focused Script Console regression and Full Regression include.",
+      "regression": "tests/sprite_gfx_tests.cpp"
+    }
+  ]
+}

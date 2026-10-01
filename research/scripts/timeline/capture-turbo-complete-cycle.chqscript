@@ -1,0 +1,26 @@
+# name: Capture Turbo Complete-Cycle Forensic Timeline
+# category: timeline
+# purpose: Record a broad deterministic turbo event once, then trim it to exactly one frame before turbo-active rises through one frame after turbo-active falls and generate ranked whole-write-stream analysis.
+# checkpoint: stage1-gameplay-2064.chqstate
+set timeline_name = turbo-complete-cycle
+
+echo === Capture Turbo Complete-Cycle Forensic Timeline ===
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api input.ioc.clear
+api timeline.record.start name=${timeline_name}
+
+# Broad capture. timeline.trim.event below now creates a non-destructive exact event-window index; the master recording remains intact.
+api input.ioc.xor port=3 mask=21
+api control.run-frames frames=15
+api input.ioc.clear
+repeat 4
+  api control.run-frames frames=60
+end
+api timeline.record.stop
+
+# Authoritative turbo-active bit: CPU-A 0x10040F bit 1 (mask 0x02).
+api timeline.trim.event name=${timeline_name} cpu=A address=0x10040F width=8 mask=02 pre=1 post=1
+api timeline.scan.memory name=${timeline_name}
+api timeline.list
+
+echo === Turbo timeline captured, indexed and analysed ===

@@ -1,0 +1,6 @@
+{
+  "romSource": "D:\\Arcade\\ROMs\\chasehq",
+  "sdlSource": "D:\\DevDeps\\SDL3",
+  "copyRoms": true,
+  "copySdl": true
+}

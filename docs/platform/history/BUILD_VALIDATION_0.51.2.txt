@@ -1,0 +1,10 @@
+Chase H.Q. Native v0.51.2 container validation
+
+Configure: PASS
+  cmake -S . -B /mnt/data/build0512 -DCHASEHQ_BUILD_SDL=OFF -DBUILD_TESTING=ON
+Build: PASS
+  cmake --build /mnt/data/build0512 -j2
+Tests: PASS
+  cpu_bus_rom_tests (1/1)
+
+Windows/SDL runtime geometry validation remains required.

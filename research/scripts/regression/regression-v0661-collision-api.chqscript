@@ -1,0 +1,13 @@
+# purpose: Execute Regression - v0.66.1 collision response API as a documented ChaseHQ-Native research script.
+# name: Regression - v0.66.1 collision response API
+# category: Regression
+# regression-version: 0.66.1
+# regression-scope: permanent
+echo === collision API regression ===
+api collision.state
+api collision.response.get
+api collision.response.set enabled=false
+api collision.state
+api collision.response.reset
+api collision.response.get
+echo === collision API regression complete ===

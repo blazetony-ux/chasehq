@@ -1,0 +1,5 @@
+# v0.26.2: trace only TC0040IOC accesses made by CPU-A runtime code.
+cpu=A
+mem=400000-400003,rw
+mem_pc=40000-44000
+max=12000

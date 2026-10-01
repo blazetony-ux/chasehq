@@ -1,0 +1,8 @@
+# purpose: Execute Regression - v0.66.1 manifest/runtime consistency as a documented ChaseHQ-Native research script.
+# name: Regression - v0.66.1 manifest/runtime consistency
+# category: Regression
+# regression-version: 0.66.1
+# regression-scope: permanent
+api platform.info
+api features.list
+echo === manifest/runtime consistency complete ===

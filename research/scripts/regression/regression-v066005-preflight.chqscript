@@ -1,0 +1,19 @@
+# name: Regression - v0.66.0.5 preflight cache/timeout
+# category: regression
+# purpose: Exercise query preflight progress, deduplication and bounded completion. Run standalone.
+# regression-version: 0.66.0.5
+# regression-scope: version
+
+echo === v0.66.0.5 preflight regression ===
+getregions()
+getregions()
+getmaps()
+getmaps()
+getpalettes()
+getcheckpoints()
+getcapabilities()
+getregistry()
+gettrackrecords(before=1,after=2)
+getobjects()
+getaudiochannels()
+echo === v0.66.0.5 preflight regression complete ===

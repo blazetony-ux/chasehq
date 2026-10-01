@@ -1,0 +1,34 @@
+# category: graphics
+# name: Brake lamp / map 516 provenance workflow
+# purpose: Capture the raw player-sprite map provenance, then allow a controlled physical-brake capture in SDL.
+# build: 0.66.3
+
+echo === BRAKE MAP516 PROVENANCE ===
+api patch.clear
+api input.ioc.clear
+api palette.overrides.clear
+api sprite.override.clear
+api sprite.visual.clear
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api control.run-frames frames=5
+api sprite.inspect slot=45
+api sprite.map.inspect slot=45
+api palette.bank bank=64
+api palette.bank bank=65
+api frame.snapshot name=map516-provenance-baseline
+
+echo === INTERACTIVE PHYSICAL BRAKE STEP ===
+api control.resume
+api ui.prompt message=Drive_then_hold_DOWN_until_the_red_brake_region_is_visible_then_press_ENTER_while_still_holding_DOWN pause=false top=true timeout=600000
+api control.pause
+api input.ports
+api palette.bank bank=64
+api palette.bank bank=65
+api sprite.inspect slot=45
+api sprite.map.inspect slot=45
+api frame.snapshot name=map516-provenance-physical-brake
+api image.compare a=map516-provenance-baseline b=map516-provenance-physical-brake region=PLAYER_CAR
+api image.diff a=map516-provenance-baseline b=map516-provenance-physical-brake region=PLAYER_CAR output=map516-provenance-brake-diff
+api evidence.capture name=map516-provenance-v0663
+api evidence.zip name=map516-provenance-v0663
+echo === BRAKE MAP516 PROVENANCE COMPLETE ===

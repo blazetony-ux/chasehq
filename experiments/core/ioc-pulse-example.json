@@ -1,0 +1,13 @@
+{
+  "schema": "chq-experiment-v1",
+  "name": "ioc-pulse-example",
+  "description": "Example deterministic intervention experiment.",
+  "checkpoint": "checkpoints/stage1-gameplay-2064.chqstate",
+  "runs": 1,
+  "steps": [
+    {"op":"capture-evidence","name":"before"},
+    {"op":"ioc-pulse","port":3,"mask":"20","frames":3},
+    {"op":"step-frame","frames":120},
+    {"op":"capture-evidence","name":"after"}
+  ]
+}

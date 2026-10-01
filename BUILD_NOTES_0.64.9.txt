@@ -1,0 +1,11 @@
+ChaseHQ-Native v0.64.9
+Graphics Research & Autonomous Experimentation
+
+Key additions:
+- Live Sprite Monitor
+- Structured frame snapshots
+- Experimental track mutation scripts
+- 1800/3600-frame autonomous track surveys
+- Graphics baseline capture script
+
+Validation: CPU/runtime build + tests and Workbench embedded JavaScript syntax checks should pass before release. Windows SDL build remains the user's canonical full validation environment.

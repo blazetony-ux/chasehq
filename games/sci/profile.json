@@ -1,0 +1,41 @@
+{
+  "schema": "chq-game-profile-v1",
+  "id": "sci",
+  "displayName": "Special Criminal Investigation",
+  "hardware": "taito_z",
+  "role": "cross_game_probe",
+  "status": "experimental-metadata-only",
+  "default": false,
+  "purpose": "Time-boxed Taito Z compatibility probe used to distinguish reusable workbench behaviour from Chase H.Q.-specific knowledge.",
+  "activation": "not-supported",
+  "romPolicy": "no SCI ROM/runtime loading is implemented by this profile layer",
+  "capabilityTiers": {
+    "genericCandidates": [
+      "frame_capture",
+      "image_compare",
+      "deterministic_stepping",
+      "memory_access",
+      "register_access",
+      "script_engine",
+      "evidence"
+    ],
+    "unmapped": [
+      "checkpoint_replay",
+      "sprites",
+      "palette",
+      "gameplay_registry",
+      "track_state",
+      "ioc_research",
+      "semantic_objects"
+    ]
+  },
+  "guardrails": [
+    "Must not alter or gate the Chase H.Q. runtime path.",
+    "No Chase H.Q. address is moved solely to support this probe.",
+    "Promote abstractions only when they improve or validate Chase H.Q. tooling."
+  ],
+  "notes": [
+    "Descriptor does not claim SCI runtime compatibility.",
+    "Capabilities remain candidates until measured on a deliberately added SCI probe runtime."
+  ]
+}

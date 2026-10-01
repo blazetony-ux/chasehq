@@ -1,0 +1,55 @@
+{
+  "schema": "chq-next-steps-v1",
+  "items": [
+    {
+      "title": "Steering path",
+      "status": "CONFIRMED",
+      "detail": "Authoritative steering path confirmed: IOC ports 0x0C/0x0D -> CPU-A 0x10014C raw -> 0x100300 processed -> handling/cornering -> 0x10A044 lateral position."
+    },
+    {
+      "title": "Physical controller mapping",
+      "status": "IN PROGRESS",
+      "detail": "v0.66.2 adds SDL keyboard steering and Workbench browser-gamepad live steering through authentic IOC input; expand semantic mappings for accelerator/brake/turbo/start/credit."
+    },
+    {
+      "title": "Brake-lamp state",
+      "status": "OPEN",
+      "detail": "Promote the current palette-based visual proxy to an authoritative gameplay/control state if one exists."
+    },
+    {
+      "title": "Turbo HUD indicators",
+      "status": "OPEN",
+      "detail": "Regression-check the bottom HUD indicators against authoritative turbo state and isolate any remaining compositor/text-layer issue."
+    },
+    {
+      "title": "Track topology / branch selector",
+      "status": "OPEN",
+      "detail": "Live road geometry is known; decode branch/fork selector and branch-commit semantics for a complete course map."
+    },
+    {
+      "title": "Palette / colour accuracy",
+      "status": "OPEN",
+      "detail": "Resolve remaining decoder/bank/intensity accuracy while preserving proven palette override semantics."
+    },
+    {
+      "title": "Enemy health / damage",
+      "status": "OPEN",
+      "detail": "Use near-destruction checkpoints to locate authoritative target-health and damage state."
+    },
+    {
+      "title": "End-of-level state",
+      "status": "OPEN",
+      "detail": "Use the confirmed end-level checkpoint to identify the authoritative Stage-1 completion transition."
+    },
+    {
+      "title": "Collision / vehicle state",
+      "status": "OPEN",
+      "detail": "Expand authoritative crash/contact/scenery/airborne state beyond the existing collision-response findings."
+    },
+    {
+      "title": "Audio / sound CPU",
+      "status": "LATER",
+      "detail": "Perform a dedicated audio/device communication diagnostic pass after core gameplay controls are mapped."
+    }
+  ]
+}

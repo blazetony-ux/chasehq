@@ -1,0 +1,21 @@
+ChaseHQ-Native v0.66.0.1 - Script Console / Regression Hotfix
+
+Fixes
+-----
+1. Fixed the first regression/preflight failure:
+   System.Management.Automation.PSCustomObject does not contain a method named ContainsKey.
+   Get-LiveSprites parsed debugger key/value rows into PSCustomObject instances, then incorrectly used ContainsKey(). The code now uses the common Prop accessor for PSCustomObject-safe field access.
+
+2. Script Console library organisation:
+   - category filter
+   - text search across name/purpose/path
+   - grouped OPTGROUP sections by category
+   - script metadata preview (category/path/status/checkpoint/requires)
+   - selection no longer auto-loads unexpectedly; Load is explicit
+
+3. Diagnostics:
+   Runtime query/preflight errors are now labelled Query/preflight failed rather than Compile failed. Parser/compiler errors retain Compile failed.
+
+Scope
+-----
+This is a hotfix to v0.66.0 only. It intentionally does NOT include the planned legacy-findings roll-up (collision-response toggle, sprite tie-break policy, layer offsets, etc.). That remains for v0.66.1 after this hotfix passes on Windows/SDL.

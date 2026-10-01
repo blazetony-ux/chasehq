@@ -47,22 +47,36 @@ bool Machine::load_roms(const std::filesystem::path& directory) {
 
     const auto* map = loader_->find("b52-38.34");
     const auto* road = loader_->find("b52-28.4");
+    const auto* tiles = loader_->find("b52-29.27");
+    const auto* priority_prom = loader_->find("b52-01.7");
+    const auto* road_priority_prom = loader_->find("b52-06.24");
 
     if (!a0 || !a1 || !a2 || !a3 ||
         !b0 || !b1 || !b2 || !b3 ||
-        !map || !road)
+        !map || !road || !tiles || !priority_prom || !road_priority_prom)
         return false;
 
     sprites_a_ = build_sprite_region(*a0, *a1, *a2, *a3);
     sprites_b_ = build_sprite_region(*b0, *b1, *b2, *b3);
     spritemap_ = map->data;
     road_gfx_ = road->data;
+    priority_prom_ = priority_prom->data;
+    road_priority_prom_ = road_priority_prom->data;
+
+    // MAME loads b52-29.27 with ROM_LOAD16_WORD_SWAP.  Store the
+    // post-load byte order used by TC0100SCN's packed-MSB 8x8x4 decoder.
+    tile_gfx_ = tiles->data;
+    for (std::size_t i = 0; i + 1 < tile_gfx_.size(); i += 2)
+        std::swap(tile_gfx_[i], tile_gfx_[i + 1]);
 
     std::cout << "\nAssembled graphics hardware data:\n"
               << "  OBJ A graphics : " << sprites_a_.size() << " bytes\n"
               << "  OBJ B graphics : " << sprites_b_.size() << " bytes\n"
               << "  Spritemap      : " << spritemap_.size() << " bytes\n"
-              << "  TC0150ROD ROM  : " << road_gfx_.size() << " bytes\n\n";
+              << "  TC0150ROD ROM  : " << road_gfx_.size() << " bytes\n"
+              << "  TC0100SCN ROM  : " << tile_gfx_.size() << " bytes\n"
+              << "  B52-01 MIX PROM: " << priority_prom_.size() << " bytes\n"
+              << "  B52-06 ROD PROM: " << road_priority_prom_.size() << " bytes\n\n";
 
     return true;
 }

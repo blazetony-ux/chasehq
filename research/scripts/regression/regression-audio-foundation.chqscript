@@ -1,0 +1,11 @@
+# name: Regression - audio research foundation
+# purpose: Ensure audio introspection contracts remain available while runtime injection stays disabled until validated.
+# category: regression
+# regression-version: legacy
+# regression-scope: version
+api schema action=audio.capabilities
+api schema action=audio.channels
+api schema action=audio.events
+api audio.capabilities
+getaudiochannels()
+api audio.events

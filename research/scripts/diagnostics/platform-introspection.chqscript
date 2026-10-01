@@ -1,0 +1,7 @@
+# name: Platform introspection
+# purpose: Identify exact running build, feature manifest, scripting functions and active profile for future diagnosis.
+# category: diagnostics
+api platform.info
+api features.list
+api script.functions
+api profiles.list

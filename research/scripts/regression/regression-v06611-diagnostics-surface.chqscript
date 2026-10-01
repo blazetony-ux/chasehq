@@ -1,0 +1,11 @@
+# name: Regression - v0.66.1.1 diagnostics surface
+# category: Regression
+# purpose: Confirm the hotfix runtime identity, feature manifest and diagnostic log surface remain discoverable.
+# regression-version: 0.66.1.1
+# regression-scope: version
+echo === v0.66.1.1 diagnostics surface ===
+api platform.info
+api features.list
+api logs.list
+api schema
+echo === v0.66.1.1 diagnostics surface complete ===

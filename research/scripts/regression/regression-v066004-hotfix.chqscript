@@ -1,0 +1,15 @@
+# name: Regression - v0.66.0.4 preflight/history hotfix
+# category: regression
+# purpose: Exercise query-function preflight and core API after the v0.66.0.4 concurrency/JSON hotfix.
+# regression-version: 0.66.0.4
+# regression-scope: version
+
+echo === v0.66.0.4 hotfix regression ===
+getregions()
+getmaps()
+getpalettes()
+getcheckpoints()
+getcapabilities()
+api platform.info
+api track.state
+echo === v0.66.0.4 hotfix regression complete ===

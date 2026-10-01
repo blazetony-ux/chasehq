@@ -1,0 +1,7 @@
+v0.61.1 validation status
+
+- Source/runtime Linux configure/build: PASS: configured and compiled CPU/runtime targets in the package-generation Linux environment.
+- Runtime tests: PASS: ctest 1/1 cpu_bus_rom_tests passed.
+- Windows/MSVC + SDL frontend: NOT validated here.
+- PowerShell HttpListener Web Debugger: NOT live-tested here (requires Windows dev environment and running ChaseHQNative debugger API).
+- Emulated gameplay behaviour: intentionally unchanged by this web/debugger tooling candidate.

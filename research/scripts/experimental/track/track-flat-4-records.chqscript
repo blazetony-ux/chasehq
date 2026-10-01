@@ -1,0 +1,33 @@
+# name: Track Experiment - Flat 4 Records
+# category: experimental
+# purpose: Apply a synthetic flat four-record track experiment.
+# EXPERIMENTAL: Flatten four upcoming track records
+# Baseline: stage1-driving-2352.chqstate (ATTRACT mode)
+# Current record at baseline: 0x1090A8
+# Upcoming records modified: 0x1090B0..0x1090C8
+# Changes only +0 curvature byte; all other record fields remain untouched.
+#
+# Expected visible result:
+# The upcoming section should become much straighter than the original.
+#
+# Safe recovery:
+# Stop/pause, then reload stage1-driving-2352.chqstate.
+
+api patch.clear
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+
+echo === EXPERIMENT: FLATTEN FOUR UPCOMING TRACK RECORDS ===
+
+api track.state
+
+api memory.write cpu=A address=1090B0 width=8 value=00
+api memory.write cpu=A address=1090B8 width=8 value=00
+api memory.write cpu=A address=1090C0 width=8 value=00
+api memory.write cpu=A address=1090C8 width=8 value=00
+
+api memory.read-range cpu=A address=1090A8 length=40
+api frame.capture
+
+echo Modified upcoming curvature bytes to 0x00
+echo Resume attract mode and watch SDL + Track View
+api control.resume

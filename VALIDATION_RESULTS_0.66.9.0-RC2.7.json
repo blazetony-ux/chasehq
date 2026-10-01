@@ -1,0 +1,29 @@
+{
+  "schema": "chq-source-validation-v1",
+  "build": "0.66.9.0-RC2.7",
+  "nativeTests": {
+    "tc0100scn_geometry_tests": "PASS",
+    "sprite_gfx_tests": "PASS",
+    "sprite_priority_tests": "PASS",
+    "cpu_bus_rom_tests": "PASS"
+  },
+  "javascriptTests": {
+    "syntax": "PASS",
+    "historySessionVersionIdentity": "PASS",
+    "sdlBindingsToggleSnapshot": "PASS"
+  },
+  "cppSyntax": {
+    "main.cpp": "PASS",
+    "changedVideoMethods": "PASS"
+  },
+  "staticIntegrity": "PASS",
+  "notRun": [
+    "PowerShell parser/StrictMode",
+    "Windows/SDL compile/link",
+    "Windows history and CLI ZIP integration CTest",
+    "focused Script Console RC2.7 regression",
+    "Full Regression",
+    "canonical visual review"
+  ],
+  "promotion": "PENDING WINDOWS PROOF"
+}

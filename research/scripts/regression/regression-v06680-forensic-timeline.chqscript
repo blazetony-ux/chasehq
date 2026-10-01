@@ -1,0 +1,32 @@
+# name: Regression - v0.66.8.0 Forensic Timeline v1
+# category: regression
+# purpose: Prove per-frame timeline recording, write provenance, script import, ordinary API inspection of a recorded frame, seek navigation and restoration to the prior live state.
+# regression-version: 0.66.8.0
+# regression-scope: permanent
+
+echo === v0.66.8.0 Forensic Timeline regression ===
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api input.ioc.clear
+api timeline.record.start name=regression-v06680-timeline
+api control.run-frames frames=3
+api timeline.record.stop
+api timeline.list
+api timeline.load name=regression-v06680-timeline
+assert status source=timeline
+api timeline.status
+api timeline.frames
+api timeline.seek frame=2065
+api memory.read cpu=A address=0x100303 width=8
+api register.read cpu=A name=PC
+api sprites.list
+api gameplay.registry
+api timeline.next
+api timeline.prev
+api timeline.unload
+assert status source=live
+api status
+api timeline.scan.memory name=regression-v06680-timeline triggerFrame=2064 stopFrame=2067 window=1
+api schema action=timeline.scan.memory
+api schema action=timeline.trim.event
+api audio.capabilities
+echo === v0.66.8.0 Forensic Timeline regression complete ===

@@ -1,0 +1,16 @@
+# category: regression
+# name: Script Console Smoke Test
+# purpose: Validate pause, deterministic stepping, assertions and resume.
+# checkpoint: stage1-gameplay-2064.chqstate
+# regression-version: legacy
+# regression-scope: version
+
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api control.pause
+assert status paused=1
+api control.step-frame frames=5
+wait-until step-complete 10000
+assert status paused=1
+api status
+api control.resume
+assert status paused=0

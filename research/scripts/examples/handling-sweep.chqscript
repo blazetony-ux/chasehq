@@ -1,0 +1,16 @@
+# category: examples
+# name: Handling Multiplier Sweep Example
+# purpose: Demonstrate variable/loop driven handling experiments from a fixed checkpoint.
+# checkpoint: stage1-gameplay-2064.chqstate
+
+set values = 0.8,1.0,1.2,1.4
+for value in values
+    api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+    api tuning.handling.set cornering=${value} speedRetain=1.0
+    api control.resume
+    wait 2000
+    api control.pause
+    api evidence.capture name=cornering-${value}
+end
+api tuning.handling.reset
+api control.resume

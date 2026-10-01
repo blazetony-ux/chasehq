@@ -1,0 +1,24 @@
+ChaseHQ-Native v0.66.8.0 - Forensic Timeline v1
+STATUS: PROVEN RELEASE (2026-09-29)
+
+Promoted from the proven RC7.4 candidate with no runtime/emulator semantic changes during promotion.
+
+Highlights:
+- deterministic per-frame forensic timeline recording plus complete bus-write provenance;
+- import/seek/read inspection parity and recorded-state SDL playback;
+- fork-live counterfactual continuation;
+- immutable source timelines with portable current-run derived analysis;
+- streaming candidate/writer analysis, automatic disassembly and HUD/graphics correlation;
+- legacy first-turbo-capture compatibility;
+- progress-aware long recording waits;
+- script autoload/startup diagnostics corrections;
+- bounded run-history discovery/browser output and summary-first artifact presentation;
+- RC-aware history version filtering and PASS/FAIL/CANCELLED filtering.
+
+Final proof:
+- Regression - v0.66.8.0 RC7.4 Bounded History Discovery: PASS (1.071 s).
+- Full Regression Suite: PASS (78.422 s), Windows/SDL, 2026-09-29.
+
+Known limitation: authentic audio remains unavailable while the runtime uses sound_stub.
+
+See RELEASE_NOTES_0.66.8.0.md and docs/FORENSIC_TIMELINE.md.

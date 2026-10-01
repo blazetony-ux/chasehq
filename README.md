@@ -1,175 +1,209 @@
-# ChaseHQ-Native v0.8 — CPU Runtime
+# ChaseHQ-Native v0.66.9.0-RC2.7
 
-Replacement source project based on the supplied v0.7 Scene Renderer.
-This is an initial main-68000 runtime, **not a playable emulator**.
-The v0.7 road/sprite renderer and scene controls are preserved. Its scene is
-still synthetic and does not yet consume the CPU's sprite, palette or road RAM.
-The window title explicitly identifies this preview.
+# Active candidate: v0.66.9.0-RC2.7
 
-## Windows setup
+Authoritative source baseline: supplied v0.66.9.0-RC2.6.1. RC2.7 is a source/research candidate awaiting local Windows/SDL promotion, not a proven Windows release.
 
-1. Install Visual Studio 2022 with **Desktop development with C++**, Windows SDK,
-   and CMake tools. Open an **x64 Native Tools Command Prompt for VS 2022**.
-2. Extract this ZIP to a new folder. Copy the contents of your working v0.7
-   `SDL` folder into this project's `SDL` folder. `SDL/CMakeLists.txt` must exist.
-   Use SDL3 source, not SDL2 or a prebuilt development library.
-3. Copy your extracted v0.7 ROM files into `roms/chasehq`.
-   Add the four World-set main CPU ROMs listed below if they are not already there.
-4. From the folder containing this README:
+Implemented: shared TC0100SCN BG X correction with unchanged Y/origin/zero offsets; same-state legacy/corrected diagnostic mode; correct pre-sprite snapshot base; parsed authoritative history sorting without pre-filter truncation; server-side Current Session queries; full release stamping from src/version.h; bounded local cache and exact selected-run identity; wired SDL controls; live layer offset get/set/reset/assert; checkpoint-frame capture before advancement; requested-artifact completeness checks and CLI identity manifest.
 
-```bat
-cmake -S . -B build -G "Visual Studio 17 2022" -A x64
-cmake --build build --config Release --parallel
-ctest --test-dir build -C Release --output-on-failure
-build\Release\ChaseHQNative.exe
-```
+Linux proof: TC0100SCN coordinate/raster/column-zero detection tests PASS; sprite 16-pen decoder PASS; sprite ownership/priority PASS; full CPU/bus/runtime test target compiled and PASS. JavaScript current-session/version/identity test PASS and frontend syntax check PASS. Windows CTest history/evidence tests and full Script Console regressions are bundled but not executed here.
 
-Musashi is included in `third_party/musashi`. CMake builds its opcode generator
-locally; no Git, FetchContent, network download or separate CPU installation is
-needed. SDL3.dll is copied beside the frontend executable automatically.
+Next gate: `Build-Debug.bat` stages local SDL/ROMs via `Prepare-Project.ps1` and `build-local.json`, compiles Windows/SDL and runs CTest. Then `Start-ChaseHQ.ps1 -Restart`, focused RC2.7 regression, preserved RC2.6.1 sprite regression, and Full Regression through its terminal COMPLETE marker. Inspect all four canonical old/corrected captures and require zero reconstruction mismatches before promotion.
 
-The default ROM directory is the project's absolute `roms/chasehq` path recorded
-at configure time, so launching from another working directory works. Reconfigure
-if you move the source folder, or pass `--roms "D:\Games\roms\chasehq"`.
-The legacy first positional ROM-directory argument also works.
+Column scroll remains unsupported beyond the observed zero table and is exposed as such. Semantic TC0100SCN state and pixel-to-tile provenance remain stretch goals with an explicit unimplemented schema plan. No independent shadow backend or SHADOW VERIFIED claim is made.
 
-## Main CPU ROMs (MAME World `chasehq` set)
+References: `TC0100SCN_RC261_FINDINGS.md`, `NATIVE_RECONSTRUCTION.md`, `RELEASE_SCOPE_RC27.md`, `../VALIDATION_0.66.9.0-RC2.7.md`. Canonical post-final-hit 9548 is the packaged checkpoint filename; do not rename it to the older near-destruction label.
 
-| File | Bytes | Region offset / byte lane | CRC32 |
-| --- | ---: | --- | --- |
-| b52-130.36 | 131072 | 0x00000 even | 4e7beb46 |
-| b52-136.29 | 131072 | 0x00001 odd | 2f414df0 |
-| b52-131.37 | 131072 | 0x40000 even | aa945d83 |
-| b52-129.30 | 131072 | 0x40001 odd | 0eaebc08 |
 
-Each pair is interleaved byte by byte into a big-endian 0x80000-byte region;
-there is no extra word swap. All four file sizes and CRCs must match. Missing,
-short, corrupted or renamed regional-set ROMs produce explicit errors. Other
-regional revisions need an explicit ROM manifest update; they are not guessed.
-No game ROMs are included.
+See `docs/RELEASE_SCOPE_RC27.md` for every approved item.
 
-The SDL scene additionally requires the same ten graphics ROMs as v0.7:
-`b52-34.5`, `b52-35.7`, `b52-36.9`, `b52-37.11`, `b52-30.4`,
-`b52-31.6`, `b52-32.8`, `b52-33.10`, `b52-38.34`, `b52-28.4`.
-Each graphics file is 524288 bytes; existing v0.7 size validation is preserved.
+---
+## Historical release introductions
 
-## CPU-only build and execution
+# ChaseHQ-Native v0.66.9.0-RC2.6.1
 
-This target needs only the four main CPU ROMs, without SDL or graphics assets:
+## Current candidate: v0.66.9.0-RC2.6.1
 
-```bat
-cmake -S . -B build-cpu -G "Visual Studio 17 2022" -A x64 -DCHASEHQ_BUILD_SDL=OFF
-cmake --build build-cpu --config Release --parallel
-ctest --test-dir build-cpu -C Release --output-on-failure
-build-cpu\Release\ChaseHQRuntime.exe --frames 120 --logs logs\first-boot
-```
+RC2.6.1 is a packaging/regression-label correction to the RC2.6 focused graphics-correctness candidate. The emulator/source-decoder semantics are unchanged. RC2.6 itself was built on top of the RC2.5 source baseline. The RC2.5 frame-2352 / Map-405 causal probe proved that the four physical sprite bitplanes were assigned the wrong pen significance. RC2.6 corrects that in one shared live/export 4bpp decoder (`plane 0 -> pen bit 3`, `1 -> 2`, `2 -> 1`, `3 -> 0`), adds exhaustive native coverage for all 16 pen combinations, and packages a no-palette-override visual prove-off. See `RELEASE_NOTES_0.66.9.0-RC2.6.1.md`, `VALIDATION_0.66.9.0-RC2.6.1.md`, and `docs/evidence/sprite-bitplane-significance/README.md`.
 
-Both executables use the same runtime. By default they execute at most 120 slices
-of 200000 cycles each (nominal 12 MHz / 60 Hz; instruction completion can overshoot
-slightly). The CPU-only target exits after the budget. The SDL target runs one
-slice per preview frame, saves diagnostics at the budget, and keeps the scene
-interactive until Esc. Closing early saves the partial run.
+RC2.5 remains the authoritative source baseline for the correction and carries the proven sprite-ownership/export-coordinate work plus safe Research Script lifecycle support (`try/finally`, `timeline.reset`), Script Console action/schema parity enforcement, current-session history defaulting, and corrected diagnostic script attribution.
 
-Optional arguments:
+RC2.4.4 raises the Research Script v2 expanded-command ceiling from 500 to 1000 so the now-503-command permanent Full Regression suite can run, fixes stale startup/research-session build metadata by deriving it from the project version, and introduces root `AGENTS.md` for Codex/agent workflow continuity. Native emulator/video output is unchanged from RC2.4.3.
 
-- `--frames N`: 1 to 36000 slices. Default 120. There is no unbounded mode.
-- `--roms PATH`: ROM directory.
-- `--logs PATH`: diagnostic directory, relative to the launch directory unless
-  absolute. Default `logs`. Existing files at that location are overwritten;
-  use a fresh directory for each comparison run.
-- `--trace-all`: include ROM reads/instruction fetches in the capped bus trace.
-- `--irq4`: inject a simplified level-4 interrupt once per slice, held until
-  autovector acknowledgement. Off by default for initial reset-path inspection.
-  This is diagnostic timing, not a complete video/dual-CPU scheduler.
-- `--scene-only`: SDL target only; original v0.7 scene without main CPU ROMs.
-- `--help`: print options and exit.
+RC2.4.3 is a Workbench snapshot-discovery correctness hotfix on top of the proven RC2.4 TC0100SCN Y-scroll correction. Two Windows RC2.4.2 bundles showed that `frame.snapshot` could create a valid run-owned snapshot while the immediately following `frame.snapshot.list` still returned only older snapshots. RC2.4.3 adds an explicit same-process recent-snapshot registry, invalidates all relevant discovery caches, and adds assertive `frame.snapshot.list require=NAME` regression coverage.
 
-```bat
-build\Release\ChaseHQNative.exe --scene-only
-build\Release\ChaseHQRuntime.exe --frames 600 --irq4 --logs logs\irq-run
-```
+Native emulator/video output is unchanged from RC2.4.2. The RC2.4.2 layered capture also localized the visible sky pattern to the raw TC0100SCN background source, so sky dithering/banding is no longer treated as a compositor defect without contradictory reference evidence. See the historical `RELEASE_NOTES_0.66.9.0-RC2.4.4.md` and `VALIDATION_0.66.9.0-RC2.4.4.md` for that earlier gate; RC2.4.3 snapshot-discovery proof is carried forward.
 
-Scene controls: arrows adjust curve/horizon; Shift increases adjustment;
-A/D changes road-ROM phase; R toggles road; T toggles sprites; Home resets the
-scene; Esc quits. Home does not reset the CPU. Restart for a fresh CPU run.
+**Status: DEVELOPMENT CANDIDATE. Current proven baseline remains v0.66.8.0.** This candidate is the first game-facing follow-up after the Forensic Timeline release. It adds reversible Chase H.Q.-specific turbo/speed experiments to the Workbench Game Lab, a TC0100SCN RAM text-character inspector with PNG/raw-pen export, and packages the reusable turbo/HUD investigation scripts that proved the current HUD behaviour.
 
-## Diagnostics
+Key additions: infinite turbo stock (`0x1003A2` freeze), infinite active turbo (`0x100414` timer freeze), current-speed set/freeze (`0x10041C`), improved Game Lab presentation/API parity, `tile.inspect`, reusable turbo/HUD scripts, and explicit timeline frame-boundary documentation.
 
-`bus.log` records CPU space, last instruction PC, read/write, access width,
-address, value and region. The default omits ROM reads, but includes RAM/device
-reads, writes (including rejected ROM writes), and unmapped accesses. At 20000
-entries it writes a truncation notice; counters continue without logging more.
-Long operations are represented as the accesses issued by Musashi; some CPU
-operations naturally appear as two 16-bit accesses. Values are hexadecimal.
+# ChaseHQ-Native v0.66.8.0 — Forensic Timeline v1
 
-`summary.txt` reports final PC, SR, stack, cycles, instruction count and per-region
-**byte-access** counters. Instruction counts exclude cycles spent stopped.
-`ram/` contains big-endian byte dumps of work/shared RAM, sprites, tilemaps,
-controls, palette registers, a separate 8192-byte `palette.bin`, and road RAM.
-Stub writes are retained for inspection even when their read behavior is fixed.
-Road RAM should remain zero when only CPU A runs; that is expected.
+**Status: PROVEN RELEASE.** Promoted from RC7.4 after the focused bounded-history regression and the complete Full Regression Suite both passed on Windows/SDL on 2026-09-29. The final runtime is unchanged from the proven RC7.4 candidate; this promotion updates the release/documentation state only.
 
-Exit codes: 0 = diagnostic budget/normal exit, 1 = setup, ROM, file or argument
-error, 2 = execution left the supported executable address ranges. Exit 0 does
-not establish that the original game has booted. Waiting for CPU B, sound,
-inputs, or a hardware status transition is possible. STOP and exception handling
-are performed by Musashi. No synthetic success responses are inserted to skip
-handshakes. A PC guard stops further slices when execution leaves ROM/work RAM;
-this is a diagnostic guard rather than emulated bus-error hardware.
+v0.66.8.0 introduces the project's **record once, investigate repeatedly** workflow. Forensic Timeline captures deterministic per-frame CHQSTATE state plus the complete bus-write provenance stream, supports offline import/seek/inspection through the ordinary research APIs, can visually replay recorded states in SDL, can fork a historical frame back into LIVE execution, and can generate portable automated memory/writer/disassembly/graphics analyses without replaying gameplay.
 
-## Initial memory abstraction
+The final RC7.x work also made long-running Workbench regression/history discovery safe: run-history responses are bounded and summary-first, browser output is bounded, thumbnails default off, and historical run filtering supports RC-aware versions plus PASS/FAIL/CANCELLED status.
 
-All addresses below are hexadecimal, inclusive, 24-bit; words are big-endian.
-Unmapped reads return all ones, writes are ignored and counted. ROM is read-only.
+**Release proof:**
+- `Regression - v0.66.8.0 RC7.4 Bounded History Discovery` — PASS, 1.071 s, 2026-09-29.
+- `Full Regression Suite` — PASS, 78.422 s, 2026-09-29, ending with the complete regression marker and no browser OOM.
+- Earlier focused RC7 proof also passed portable automated timeline analysis and the real existing turbo forensic analysis without replaying gameplay.
 
-| CPU A range | Implementation |
-| --- | --- |
-| 000000–07ffff | Reconstructed program ROM |
-| 100000–107fff | Work RAM |
-| 108000–10bfff | Shared RAM, aliased by the CPU B bus view |
-| 10c000–10ffff | Work RAM |
-| 400000–400003 | I/O/watchdog placeholder; reads FF, writes retained |
-| 800000–800001 | CPU control latch placeholder; no CPU B reset action yet |
-| 820000–820003 | Sound placeholder; odd-byte reads 00, high lanes FF |
-| a00000–a00007 | TC0110PCR-style indirect palette registers |
-| c00000–c0ffff | Tilemap RAM placeholder |
-| c20000–c2000f | Tile control storage |
-| d00000–d007ff | Sprite RAM |
-| e00000–e003ff | Motor interface storage placeholder |
+Start with `docs/PROJECT_STATE.md`, `docs/ROADMAP.md`, `docs/FORENSIC_TIMELINE.md`, `docs/RELEASE_PROCESS.md`, and `docs/CHATGPT_HANDOVER_PROMPT.md`.
 
-Palette address is written at a00000 (low 12 bits, Chase H.Q. shift=0).
-Data is read/written at a00002. There are 4096 raw xBGR555 entries, no automatic
-index increment; other palette-register reads return 00ff. Byte writes merge
-big-endian lanes. Raster timing and palette rendering are not connected yet.
+# ChaseHQ-Native v0.66.7.9 — Research Recovery / Release Discipline
 
-The reserved CPU B bus view provides private RAM at 100000–103fff, the shared
-alias at 108000–10bfff, and **road RAM at 800000–801fff**. CPU A's 800000 address
-is its CPU control latch, not road RAM. The bus API accepts `BusSpace::Sub` so this
-separation is testable now. CPU B program loading and execution are not implemented.
+**Status:** **PROVEN RELEASE**. Windows/SDL build, Fast Release Gate, v0.66.7.9 Research Recovery regression and the final Full Regression Suite all passed on 2026-09-28. Runtime/emulator semantics are carried forward from v0.66.7.8; this revision consolidates the proven runner/discovery fixes, documents the canonical release process, corrects stale turbo/HUD research framing, and adds reusable recovery/gameplay/graphics scripts so work can return to Chase H.Q. fidelity research.
 
-## Architecture and next work
+Start with `docs/RELEASE_PROCESS.md` for build/prove-off discipline and `docs/RESEARCH_RECOVERY_PLAN.md` for the substantive next research sequence.
 
-- `cpu_rom.*`: validated World ROM loader and lane reconstruction.
-- `runtime.*`: bus, backing RAM, stubs, logging, Musashi adapter and run budget.
-- `runtime_main.cpp`: CPU-only executable.
-- `machine.*`, `rom_loader.*`, `video.*`: preserved v0.7 graphics pipeline.
-- `main.cpp`: SDL scene plus bounded CPU execution.
-- `tests/runtime_tests.cpp`: ROM interleave, bus semantics and synthetic 68000 tests.
+# ChaseHQ-Native v0.66.7 — Workbench Knowledge / Documentation Foundation
 
-Musashi is configured for a 68000, with address errors, trace exceptions,
-instruction callbacks and interrupt acknowledge enabled. Its state is global;
-only one runtime instance may exist at a time. This is not thread-safe. A future
-CPU B implementation must use explicit context save/restore and a scheduler.
+**Status:** implemented; Windows/SDL proof-off required. **Previous proven baseline:** v0.66.6.1.
 
-Next work: execute CPU B and reproduce shared-RAM communication, implement real
-I/O and sound handshakes, feed hardware RAM into the renderer, and add accurate
-interrupt/device scheduling. This project does not claim a working attract mode.
+See `docs/CHATGPT_HANDOVER_PROMPT.md` for the authoritative cross-conversation continuation context. v0.66.7 adds the Workbench Docs/Knowledge system, API/script documentation access and export, evidence-backed knowledge, individual-sprite Graphics Lab controls, and expanded API/scriptable SDL window controls.
 
-## Provenance and validation
 
-Based on the user-provided `ChaseHQ-Native-v0.7-Scene-Renderer.zip`.
-The sprite and road decoding algorithms are unchanged.
-Musashi snapshot: `313ebf1bd9f4d0d93341eb5ce21fd8a119e9dbdd`.
-Original CPU and SoftFloat notices are retained under `third_party/musashi`.
-See `THIRD_PARTY.md` for reference links and licensing locations.
-See `VALIDATION.md` for the checks performed for this release.
+## v0.66.6.1 layered graphics forensics
+
+- Structured frame snapshots are now v2 reconstructable bundles with `final.png`, `final-no-hud.png`, `hud-only.png`, exact alpha contribution layers, raw source-layer renders, reconstruction metadata and semantic sprite evidence.
+- Chase H.Q. HUD isolation currently maps to the TC0100SCN text layer and is suppressed at source rather than masked by screen coordinates.
+- `image.compare` / `image.diff` accept `hud=normal|hidden|only` for deterministic HUD-aware comparisons.
+- Graphics Lab can inspect saved snapshots, switch HUD modes, reconstruct contribution layers and toggle/solo/adjust opacity per layer.
+- Same-build API/script schemas, Markdown references and regression coverage are included.
+
+Adds exact TC0110PCR palette-write PC tracing, same-build API/Script documentation and regression coverage, correct whole-run duration metadata, descriptive bundle download names, and a release validation gate. Chase H.Q. remains the primary target; the immediate use is tracing brake-lamp palette entries 1037/1053 back to the game writer PC.
+
+
+This build follows the project rule **investigate/remediate first, build second**. Non-blocking Workbench polish is backlog-only; the immediate substantive target after reliability validation is map 516 OBJ/spritemap decode provenance. See `docs/PROJECT_STATE.md`.
+
+# ChaseHQ-Native v0.66.3 — Research Contracts, Run Artifacts & Sprite Provenance
+
+v0.66.3 carries forward the v0.66.2 steering/driving controls and adds the research infrastructure needed for the next graphics/debugging pass:
+
+- authoritative, queryable API and Script Language schemas with complete generated reference documentation;
+- dedicated per-run artifact folders with exact script source, console output, generated/changed artifacts, metadata, manifest and automatic ZIP bundle;
+- native `sprite.map.inspect` provenance for spritemap offsets, chunk tile codes and raw pen histograms;
+- SDL-native interactive research prompts through `api ui.prompt ...`;
+- regression coverage for the new contracts/provenance surface.
+
+See `BUILD_NOTES_0.66.3.txt`, `VALIDATION_0.66.3.md`, `docs/API_REFERENCE.md`, `docs/SCRIPT_LANGUAGE_REFERENCE.md`, and `docs/SCHEMA_POLICY.md`.
+
+## v0.66.2 gameplay milestone
+
+Authoritative player steering was revalidated and promoted into the live Gameplay Registry. SDL keyboard controls route through the arcade IOC path (Left/Right steering, Up accelerator, Down brake, Space turbo), and the Workbench can optionally drive steering from browser gamepad axis 0. The game retains its own nonlinear steering/handling response rather than patching lateral RAM. A permanent deterministic steering regression is included.
+
+## v0.66.1.2 regression/resilience milestone
+
+This preserved the v0.66.1 legacy-findings/API roll-up and v0.66.1.1 startup resilience work while closing Windows acceptance issues around runtime log aliases, failed-run UI state, history migration, regression completion/filtering and listener logging.
+
+# ChaseHQ-Native v0.66.0.6
+
+**Research Automation, Introspection & Audio Foundations**
+
+See `BUILD_NOTES_0.66.0.txt` and `docs/platform/current/RESEARCH_SCRIPTING_0.66.0.md`.
+
+# ChaseHQ-Native v0.65.1 — Live Graphics, Script Query & Experimental Profiles
+
+> **Current scripting reference:** `docs/platform/current/RESEARCH_SCRIPTING_0.65.0.md`.
+
+This release carries forward the v0.64.9 graphics/autonomous-research baseline and adds live SDL sprite experimentation, API-backed query functions, structured state snapshots, improved image regions, direct frame-snapshot image comparison, and a reorganised reusable script/regression library.
+
+## Start
+
+Use `Start-ChaseHQ.ps1` for the normal one-command gameplay/research session, or `Start-ChaseHQResearch.ps1` for parameter-heavy research launches.
+
+
+## v0.65.1 experimental profile layer
+- Adds **read-only, additive game-profile descriptors** under `games/<id>/profile.json`.
+- Chase H.Q. remains the active/default/authoritative runtime; no established addresses or emulator paths were moved.
+- Adds an **SCI metadata-only probe descriptor** for future cross-game quantification. It cannot activate or load SCI.
+- New read-only API: `GET /api/v1/profiles` and `GET /api/v1/profile?game=sci`.
+- New script API actions: `api profiles.list`, `api profile.get id=sci`, plus `getprofiles()` for dynamic scripts.
+- This layer exists to validate/generalise tooling only when doing so benefits Chase H.Q.; it is not a second emulation target.
+
+## v0.65.0 highlights
+
+- Live SDL sprite inspect / map / palette / visibility presentation overrides.
+- Sprite solo, hide and frame-driven flash visualization.
+- `getregions()`, `getsprites()`, `getmaps()`, `getpalettes()`, `getpaletteentries()`, `getcheckpoints()`, `getcapabilities()`.
+- Query functions are thin wrappers over the Research API and print their backing API result when called directly.
+- `api state.snapshot` for coherent current research state.
+- Improved image regions and structured `frame.snapshot` name resolution in image compare/diff.
+- Reusable graphics/evidence scripts and living regression coverage.
+- Script categories documented in `research/scripts/SCRIPT_CATALOG.md`.
+
+See `docs/platform/current/RELEASE_NOTES_0.65.0.md` and `VALIDATION.md`.
+
+## Command-line build workflow (v0.66.0.6)
+Visual Studio IDE is no longer required for normal rebuilds. On Windows, double-click or run `Build-Debug.bat` for the normal development build. `Prepare-Project.bat` first unblocks project `.ps1` files and locates CMake from `tools\cmake`, PATH, or Visual Studio Build Tools. `Build-And-Run.bat` builds, tests, then launches the standard `Start-ChaseHQ.ps1` workflow. `Rebuild-All.bat` performs clean Debug + Release builds.
+
+The project does not redistribute a CMake binary; `tools\cmake\bin\cmake.exe` is an optional portable location if you want to pin one locally.
+
+## v0.66.5.1 Track Recorder scripting hotfix
+
+- Shared server-side Track View recorder backs both browser controls and Research Script.
+- Added start/stop/clear/status/sample actions plus deterministic SVG export.
+- Empty SVG exports are rejected.
+- Memory-trace documentation/regression now uses `width=any` when the producer transaction width is unknown.
+- `Build-Debug.bat` remains the canonical entry point, still runs `Prepare-Project.bat` first to unblock PowerShell files, and still tolerates only the exact historical `cpu_bus_rom_tests (SEGFAULT)` signature.
+
+
+### v0.66.7.5 built-in User & Research Handbook
+The Workbench Docs / Knowledge tab now provides a user-facing handbook, complete schema-generated API and scripting references, project knowledge/glossary views, cross-domain search and full HTML/PDF handbook export. See `research/knowledge/handbook.json` and `docs/KNOWLEDGE_SYSTEM.md`.
+
+
+### v0.66.7.6 Docs / Knowledge consolidation
+Consolidates article-body search, human-readable Project Knowledge articles, article-aware standalone export, grouped knowledge navigation and release-hardening validation. Windows/SDL prove-off remains required before this release candidate is marked proven.
+
+### v0.66.7.7 Run-history / snapshot persistence hotfix
+
+- Recent Script Runs now merges authoritative on-disk `run-metadata.json` records with browser-local history, so completed runs remain visible even if the browser did not persist local history.
+- `GET /api/v1/script/runs` and `api script.runs` expose the same authoritative completed-run catalogue.
+- Graphics Lab structured snapshot discovery now includes snapshots stored under completed run artifact roots (`evidence/sessions/<session>/runs/<run>/artifacts/frame-snapshots`).
+- Snapshot manifest/asset endpoints resolve those completed-run snapshots by name, preferring the newest match when names repeat.
+
+
+### v0.66.7.8 RC2
+Cross-version run/snapshot discovery performance hotfix: avoid recursive evidence scans that can monopolize the Workbench backend; cache discovery results briefly. Full SDL source is no longer bundled in the RC package.
+### v0.66.7.8 RC4
+RC4 fixes the Script Console completion lifecycle discovered during RC3 prove-off: the RUNNING ticker is stopped before finalization, a distinct FINALIZING state is shown while the one authoritative bundle/history entry is committed, and COMPLETE/DONE is published only after finalization succeeds.
+
+
+
+## RC5 validator correction
+The RC4 Workbench validator incorrectly used multiline-sensitive regex assertions without singleline mode, causing a false build failure even though the runner ordering was correct. RC5 changes only those validation expressions to `(?s)` singleline matching; runtime semantics are unchanged.
+
+### v0.66.8.0 RC3
+
+- `timeline.trim.event` is retained for compatibility but is now **non-destructive**: it creates an indexed event-window view under `analysis/` instead of deleting frame checkpoints or rewriting `writes.csv`.
+- Event-edge discovery streams `writes.csv` line-by-line and stops as soon as the matching falling edge is found; it no longer `Import-Csv`s the full write stream or grows a PowerShell array with `$rows +=`.
+- `timeline.scan.memory` now streams and aggregates changed writes rather than loading the full CSV into memory. When `analysis/event-window.json` exists, it automatically scopes analysis to that event window.
+- The original `.chqtimeline` remains immutable and reusable for future investigations.
+
+### RC7.3 Workbench UI resilience
+The Script Console defaults artifact thumbnails off, summarizes artifact counts by type, bounds opt-in previews and live output DOM, and adds RC-aware Version plus PASS/FAIL/CANCELLED filters to Recent Script Runs. Complete output and artifacts remain authoritative in the run bundle.
+
+
+Release evidence summary: `docs/RELEASE_PROOF_0.66.8.0.md`.
+
+## v0.66.9.0-RC2 research candidate
+RC2 adds corrected sprite-map lookup, live same-priority sprite-order A/B controls, clearer HUD-vs-internal speed semantics, run-state-preserving Game Lab mutations, frame-safe tile-inspector exports, and stricter script error handling. See `RELEASE_NOTES_0.66.9.0-RC2.md`.
+
+## RC2.2 candidate note
+Use `v0.66.9.0-RC2.2` for Windows proof. RC2.2 supersedes RC2.1 by changing the native Chase H.Q. same-priority sprite default to `lower-slot`, matching MAME's reverse sprite-RAM traversal; `higher-slot` remains a reversible diagnostic mode.
+
+### v0.66.9.0-RC2.2 candidate
+Chase H.Q. same-priority sprite traversal now defaults to **lower-slot wins**, matching the current MAME `chasehq_draw_sprites_16x16` reverse sprite-RAM traversal. The higher-slot mode remains available for controlled forensic comparisons.
+
+
+### v0.66.9.0-RC2.3 build-gate correction
+RC2.3 supersedes RC2.2. The RC2.2 sprite-order regression had been appended after the Full Regression `COMPLETE` marker, violating the canonical build gate. RC2.3 moves that include before the final marker. Runtime/emulator behaviour is unchanged from RC2.2.
+### RC2.4.1 launcher hotfix
+`Start-ChaseHQ.ps1 -Restart` now cleans up a stale Web Workbench from an older extracted ChaseHQ build when it owns the requested HTTP port through HTTP.sys. Cleanup is port-scoped and never terminates PID 4/System.
+
+
+## RC2.4.2
+See `RELEASE_NOTES_0.66.9.0-RC2.4.2.md`. This hotfix makes newly captured structured snapshots immediately discoverable and adds the packaged TC0100SCN post-fix investigation/regression scripts.

@@ -1,0 +1,8 @@
+ChaseHQ-Native v0.66.9.0-RC2.2
+
+Focused renderer correction candidate.
+- Default same-priority sprite ordering changed to lower-slot-wins.
+- Basis: MAME Chase H.Q. chasehq_draw_sprites_16x16 traverses sprite RAM high-to-low.
+- Higher-slot remains available as diagnostic override.
+- Adds loop-based multi-scene validation and focused regression.
+- Documentation/knowledge/schema updated together.

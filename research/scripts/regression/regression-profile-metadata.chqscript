@@ -1,0 +1,12 @@
+# name: Regression - v0.65.1 profile metadata
+# category: regression
+# purpose: Confirm Chase H.Q. profile metadata remains authoritative and SCI remains metadata-only.
+# v0.65.1 additive profile metadata regression
+# regression-version: legacy
+# regression-scope: version
+echo === PROFILE METADATA REGRESSION ===
+api profiles.list
+api profile.get id=chasehq
+api profile.get id=sci
+getprofiles()
+echo === PROFILE METADATA REGRESSION COMPLETE ===

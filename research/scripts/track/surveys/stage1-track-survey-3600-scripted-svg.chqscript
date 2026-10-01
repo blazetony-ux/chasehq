@@ -1,0 +1,18 @@
+# name: Stage 1 track survey 3600 - scripted recorder + SVG
+# category: track
+# purpose: Run the established 3600-frame Stage 1 attract-mode survey using the shared recorder and export a deterministic SVG without requiring the Track View tab to be open.
+
+api patch.clear
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api track.record.clear
+api track.record.start
+api track.record.sample
+repeat 120
+    api control.run-frames frames=30
+    api track.record.sample
+end
+api track.record.stop
+api track.record.status
+api track.svg.export name=stage1-track-survey-3600
+api status
+echo === SCRIPTED STAGE 1 TRACK SURVEY 3600 COMPLETE ===

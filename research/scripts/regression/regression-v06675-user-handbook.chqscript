@@ -1,0 +1,29 @@
+# name: Regression - v0.66.7.5 User Handbook / Live Reference
+# purpose: Prove the built-in user handbook, handbook API/script access, generated API/script references, documentation export, SDL controls and per-sprite snapshot path.
+# category: regression
+# regression-version: 0.66.7.5
+# regression-scope: current
+# status: awaiting-windows-proof
+# requires: stage1-driving-2352.chqstate
+
+echo === v0.66.7.5 User Handbook / Live Reference ===
+api schema action=docs.handbook
+api schema action=docs.page
+api docs.handbook
+api docs.page id=api-overview
+api docs.page id=graphics-lab-guide
+api schema.all
+api script.schema
+api docs.search query=frame.snapshot
+api docs.handover
+api window.status
+api window.fullscreen enabled=false
+api window.scale scale=3
+api window.restore
+api window.show
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api frame.snapshot name=regression-v06675-user-handbook
+api frame.snapshot.list
+api docs.export format=html evidence=key output=regression-v06675-user-handbook
+api window.status
+echo === v0.66.7.5 regression complete ===

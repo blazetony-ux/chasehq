@@ -1,0 +1,13 @@
+# name: Turbo Gameplay To HUD Writer Path
+# category: gameplay
+# purpose: Disassemble the proven gameplay and HUD routines controlling turbo consumption, active-icon drawing and expiry clearing.
+# tags: turbo hud disassembly writer reusable
+
+echo === Turbo Gameplay -> HUD Writer Path ===
+api cpu.disassemble cpu=A address=0x8440 count=48
+api cpu.disassemble cpu=A address=0x84A0 count=40
+api cpu.disassemble cpu=A address=0x1C50 count=40
+api cpu.disassemble cpu=A address=0x1CB0 count=32
+api cpu.disassemble cpu=A address=0x8690 count=32
+api cpu.disassemble cpu=A address=0x8790 count=32
+echo === Turbo Gameplay -> HUD Writer Path complete ===

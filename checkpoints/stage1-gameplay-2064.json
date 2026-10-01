@@ -1,0 +1,22 @@
+{
+  "format_version": 1,
+  "name": "stage1-gameplay-2064",
+  "game": "Chase H.Q.",
+  "frame": 2064,
+  "description": "Curated live Stage 1 gameplay checkpoint captured during actual driving and retained for compositor, gameplay, timer, input and future subsystem validation.",
+  "validated_with": [
+    "0.50.5",
+    "0.54.0"
+  ],
+  "checkpoint_format": "v1 binary .chqstate",
+  "notes": [
+    "Captured by the user during genuine Stage 1 gameplay.",
+    "Complements stage1-driving-2352.chqstate rather than replacing it.",
+    "Cross-process loading uses the Musashi host-pointer rebind introduced in v0.49.4.",
+    "Carry this checkpoint forward until superseded by a better validated gameplay state or a future checkpoint-format migration."
+  ],
+  "sha256": "fe9b06ed815b827742ae32331aa2d35af8e8cad57bee12c6efe8ec7dc5ec55e1",
+  "size_bytes": 250488,
+  "role": "player_gameplay",
+  "recommended_use": "Player-control, gameplay-state, road/course and deterministic input experiments."
+}

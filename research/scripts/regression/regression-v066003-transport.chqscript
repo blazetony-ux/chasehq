@@ -1,0 +1,16 @@
+# name: Regression - v0.66.0.3 command transport
+# purpose: Exercise repeated status/track-state calls while Script Console suppresses background preview traffic.
+# category: regression
+# status: stable
+# checkpoint: stage1-driving-2352.chqstate
+# regression-version: 0.66.0.3
+# regression-scope: permanent
+api patch.clear
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+repeat 10
+  api control.run-frames frames=5
+  api status
+  api track.state
+end
+api logs.tail file=@runtime/web-command-diagnostics.log lines=20
+echo === v0.66.0.3 transport regression complete ===

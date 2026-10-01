@@ -1,0 +1,20 @@
+{
+  "schema": "chq-hardware-profile-v1",
+  "id": "taito_z",
+  "displayName": "Taito Z System",
+  "status": "adapter-boundary",
+  "purpose": "Describes the intended shared hardware-adapter boundary without moving established Chase H.Q. implementation into configuration.",
+  "currentlyShared": [
+    "workbench transport",
+    "research scripting",
+    "evidence model",
+    "image analysis abstractions"
+  ],
+  "candidateShared": [
+    "sprite interpretation",
+    "palette interpretation",
+    "road-device discovery",
+    "IOC discovery"
+  ],
+  "guardrail": "Hardware-level code is only generalized when cross-game evidence demonstrates value to Chase H.Q."
+}

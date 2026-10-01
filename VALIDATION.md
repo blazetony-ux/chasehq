@@ -1,35 +1,30 @@
-# Validation — v0.8 CPU Runtime
+# RC2.7 validation
 
-Validated on Windows x64, Visual Studio 2022 / MSVC 19.44.35229,
-CMake 3.31.6, using an external local SDL3 3.2.20 source tree.
+| Check | Result |
+|---|---|
+| TC0100SCN geometry / signed X / modulo512 / rowscroll raster isolation / displacement / Y preservation / column zero detector | PASS, GCC on Linux |
+| sprite_gfx_tests, all16 pens | PASS, GCC on Linux |
+| sprite_priority_tests | PASS, GCC on Linux |
+| cpu_bus_rom_tests (full runtime_tests target with generated Musashi core) | PASS, GCC on Linux, exit0 |
+| Workbench Current Session/full version/run identity Node test | PASS |
+| Workbench SDL bindings/toggle state/snapshot route Node test | PASS; simulated transport, not GUI proof |
+| Main.cpp and changed video methods C++ syntax | PASS, GCC using actual project declarations; no SDL linking |
+| Browser JavaScript syntax | PASS, node --check |
+| PowerShell parser/StrictMode and authoritative_history_tests | Not run: PowerShell unavailable here; bundled local gate |
+| Windows/SDL build and cli_evidence_tests | Not run here; Build-Debug stages local inputs and runs CTest |
+| Focused RC2.7 and Full Regression | Not run here; require local Workbench/native runtime |
+| Canonical visual old/corrected inspection | Pending local run |
 
-- CPU-only configuration and build: passed.
-- Complete SDL3 frontend Release build: passed; SDL3.dll copied beside executable.
-- Release CTest suite: passed (1 test executable with multiple behavioral checks).
-- Synthetic CPU program: immediate word/byte writes to work RAM, long write to
-  sprite RAM, arithmetic, STOP, IRQ4 wakeup/autovector, and RTE stack restoration.
-- Full 0x80000 interleave checked against all input lane bytes.
-- Missing ROM, wrong size, wrong checksum, invalid reset vector, invalid bus
-  width and simultaneous runtime instance rejected.
-- Big-endian byte lanes, 24-bit address wrap, ROM write protection, region
-  boundary access, shared RAM alias, separate sub-CPU road space and palette
-  address/data registers checked.
-- Trace filtering/cap and RAM/palette dump sizes checked.
-- CLI help, invalid frame count and missing-ROM error behavior checked.
+The historical Windows cpu_bus_rom_tests SEGFAULT remains a platform-specific known baseline issue; this Linux PASS does not establish that it has been fixed on Windows. Existing build scripts retain their narrowly documented handling.
 
-The upstream opcode generator produced incorrect mask values with this compiler's
-Release optimization. CMake now compiles only m68kmake with /Od. The resulting
-opcode source is byte-for-byte identical to the Debug generator's output
-(SHA256 EB4BB8C9CB12BF10521658F9150D092438623164A11E35C6B46DDC6AA585A3FC).
-The Release emulation core remains optimized. CPU tests pass with the regenerated
-source. No upstream source edits are required for this build workaround.
+Local order: Build-Debug.bat → Start-ChaseHQ.ps1 -Restart → focused RC2.7 script → preserved RC2.6.1 sprite script → Full Regression COMPLETE. Keep bundles from each run. Require exact=true,verifiedExact=true,mismatchedPixels=0 and inspect road/background/sprite/HUD relationships. No screenshot preference alone proves hardware accuracy.
 
-No commercial game ROMs were supplied in the v0.7 project ZIP. Therefore actual
-Chase H.Q. boot progress, game-written RAM contents and visual runtime behavior
-have NOT been verified. The SDL frontend was compiled and its help command run;
-a rendered scene was not visually retested. The v0.7 graphics algorithms and
-scene input handling are retained, with updated preview title text.
+Source-only candidate delivery is authorised. A Windows promotion report should record the actual full build label, CTest results, session/run keys, manifests, canonical comparisons and unresolved defects before replacing this proof status.
 
-The runtime deliberately omits CPU B execution, actual I/O/sound/motor devices,
-and hardware-driven rendering. A successful bounded run is not a playable game
-or a confirmed completed arcade boot.
+---
+Historical validation:
+# Current candidate: v0.66.9.0-RC2.6.1
+
+Run `VALIDATION_0.66.9.0-RC2.6.1.md`.
+
+RC2.6.1 retains the RC2.6 source-level sprite 4bpp plane-significance correction and fixes the handoff regression packaging: the current focused Script Console regression is now explicitly version-labelled and included before the Full Regression terminal marker. Fresh Windows/SDL proof remains required before promotion.

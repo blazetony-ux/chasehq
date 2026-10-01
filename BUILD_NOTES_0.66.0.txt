@@ -1,0 +1,35 @@
+ChaseHQ-Native v0.66.0 - Research Automation, Introspection & Audio Foundations
+
+Focus
+-----
+An infrastructure release that strengthens self-description and reusable research while the user is away from the Windows dev machine. Chase H.Q. remains the authoritative runtime target.
+
+Added
+-----
+* platform.info and machine-readable feature manifest
+* script.functions self-description
+* API-backed query functions: getregistry(), gettrackrecords(), getevidence(), getobjects(), getaudiochannels()
+* track.records structured window around the current live track record
+* semantic-object registry foundation with evidence/confidence fields
+* evidence.names structured evidence query
+* v0.66 introspection regression
+* audio research namespace and capability descriptors
+* waveform viewer/capture design contract
+* sample/music export design contract
+* guarded runtime audio-injection design contract
+* audio foundation regression
+
+Audio guardrail
+---------------
+No runtime audio injection, ROM modification, or claimed waveform capture is enabled in v0.66.0. The namespace/data model is deliberately established now so later audio tooling can use the same API/script/evidence architecture. Native Windows/SDL timing, mixer and save-state behavior must be validated first.
+
+ChaseHQ guardrail
+-----------------
+No ChaseHQ gameplay addresses were moved and SCI remains metadata-only/non-activatable.
+
+Additional automation
+---------------------
+* experiment.begin / experiment.capture / experiment.status / experiment.end
+* include "path/to/script.chqscript" preprocessor for reusable script fragments
+* collection helpers over API-backed query functions: count(), first(), last(), unique(), contains()
+* script-library metadata now exposes category/status/requires when present

@@ -1,0 +1,82 @@
+{
+  "schema": "chq-semantic-objects-v1",
+  "build": "0.66.3",
+  "objects": [
+    {
+      "id": "player_car",
+      "label": "Player car",
+      "status": "candidate",
+      "confidence": "RESEARCH",
+      "resolver": "sprite-family / compositor evidence",
+      "evidence": [
+        "deterministic A/B graphics research",
+        "map 181 + palette 75/77 candidate fragments",
+        "render selector CPU-A 0x10A04A"
+      ]
+    },
+    {
+      "id": "target_car",
+      "label": "Target car",
+      "status": "open",
+      "confidence": "RESEARCH",
+      "resolver": "target-health + sprite-family correlation",
+      "evidence": [
+        "CPU-A 0x1002AE target-health candidate"
+      ]
+    },
+    {
+      "id": "hud_turbo",
+      "label": "Turbo HUD",
+      "status": "candidate",
+      "confidence": "RESEARCH",
+      "resolver": "HUD_TURBO region + palette/sprite evidence",
+      "evidence": [
+        "palette 70/0x464 changed bottom HUD area",
+        "turbo state/timer/remain registers confirmed"
+      ]
+    },
+    {
+      "id": "brake_lamp",
+      "label": "Brake lamp",
+      "status": "candidate",
+      "confidence": "RESEARCH",
+      "resolver": "visual proxy pending authoritative gameplay bit",
+      "evidence": [
+        "historical palette/render observations"
+      ]
+    },
+    {
+      "id": "road_edges",
+      "label": "Selected road edges",
+      "status": "confirmed",
+      "confidence": "CONFIRMED",
+      "resolver": "CPU-A 0x10A04C",
+      "evidence": [
+        "selected edge state confirmed; former 0x100300 edge-control interpretation superseded by authoritative steering revalidation"
+      ]
+    },
+    {
+      "id": "collision_response",
+      "label": "Collision response",
+      "status": "confirmed",
+      "confidence": "CONFIRMED",
+      "resolver": "proven response writes",
+      "evidence": [
+        "lateral writes at 0x10A044 from collision PCs",
+        "speed penalty write at 0x10041C from 0x00A200",
+        "detection preserved when response suppression enabled"
+      ]
+    },
+    {
+      "id": "steering",
+      "label": "Authoritative steering",
+      "status": "confirmed",
+      "confidence": "CONFIRMED",
+      "resolver": "IOC 0x0C/0x0D -> CPU-A 0x10014C raw -> 0x100300 processed -> 0x10A044 lateral",
+      "evidence": [
+        "v0.66.2 deterministic signed-12-bit left/centre/right causal tests",
+        "SDL car movement observed during steering tests"
+      ]
+    }
+  ]
+}

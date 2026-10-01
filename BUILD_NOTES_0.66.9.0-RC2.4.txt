@@ -1,0 +1,28 @@
+ChaseHQ-Native v0.66.9.0-RC2.4
+
+Evidence-driven TC0100SCN vertical-scroll correction.
+
+Corrected:
+- BG0/BG1/TEXT source-Y now applies TC0100SCN control Y with the same negative-scroll convention used by the reference device model.
+- Historical BG0=-4 / BG1=-20 default presentation offsets are removed; both backgrounds now default to neutral 0:0.
+- TC0100SCN geometry trace uses the same corrected source-Y helper as the live renderer.
+- Added native regression checks for wrapped source-Y arithmetic, including the proven CTRL3/4=0x01E0 case.
+
+Evidence:
+- RC2.3 frame 2065 A/B proof showed that forcing BG0 and BG1 to Y=-64 relocates both building planes from the road/foreground to the horizon.
+- At CTRL3=CTRL4=0x01E0, RC2.3's old formula plus a -64 presentation override is mathematically equivalent to the corrected formula with neutral presentation offset: visible-top hardware Y 16 resolves to source Y 40.
+- The corrected source coordinate matches MAME's TC0100SCN convention where BG/FG Y scroll is stored as -control and applied directly to the tilemap.
+
+No API or .chqscript grammar changes. Existing --layer-offset remains available as a presentation-only forensic override.
+
+Local static/unit validation:
+- CMake CPU-only configure/build: PASS
+- ctest cpu_bus_rom_tests: PASS (1/1)
+
+Windows/SDL proof required:
+1. .\Build-Debug.bat
+2. Run the canonical stage1-gameplay checkpoint with no BG layer offsets and capture frame 2065.
+3. Confirm the resulting frame matches the prior RC2.3 both-sign-proxy geometry.
+4. Run focused regression, then Full Regression only after the visual proof passes.
+
+Focused Windows visual gate: `./Validate-TC0100SCN-Y.ps1` captures canonical frame 2065 with neutral defaults and requires byte-exact equality with the packaged RC2.3 both-sign-proxy reference.

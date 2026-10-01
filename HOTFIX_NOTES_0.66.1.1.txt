@@ -1,0 +1,21 @@
+ChaseHQ-Native v0.66.1.1 — Resilience & Diagnostics Hotfix
+
+This hotfix keeps the v0.66.1 emulator/research changes and hardens the paths that failed during Windows acceptance.
+
+Fixed
+- Restored the complete Script Console resilience helper/runtime block accidentally omitted in v0.66.1, including runScriptText, runner phase/state helpers, watchdog, frontend fault logging and diagnostic bundle creation.
+- Browser frontend now performs a startup self-test and reports readiness to /api/v1/frontend-ready. The launcher does not print READY until the browser bootstrap reports ready (unless -NoBrowser is used).
+- Web /api/health now reports scriptCount and frontendBootstrap state.
+- Web listener writes timestamped startup/request messages both to its visible PowerShell console and .chq/web-listener.log.
+- Local ROM staging now understands either a ROM root containing chasehq\ or the chasehq folder itself; it validates the 19 ROM files currently required by the native loader before build/launch.
+- Native launch is supervised with a retained process handle, PID, stdout/stderr capture, early-exit detection and exit-code reporting.
+- Startup state is persisted before API readiness, so -Diagnostics can inspect failed launches.
+- Startup failures produce a diagnostic ZIP where possible instead of only a generic timeout.
+- Web startup validates /api/health, /api/v1/status, /api/v1/scripts and a non-empty script library before declaring the server ready.
+- Added .\Start-ChaseHQ.ps1 -SupportBundle for one-command support snapshots even when diagnosis is needed outside a successful run.
+- Added Validate-Workbench.ps1 static resilience/version/script-library validation to the prepare/build path.
+- Included the user's build-local.json with C:\Projects\AdditionalFiles\roms and C:\Projects\AdditionalFiles\SDL.
+
+Important
+- ROM content is never packaged in this ZIP.
+- build-local.json only points to local folders; Prepare-Project fails clearly if they are unavailable/incomplete.

@@ -1,0 +1,7 @@
+ChaseHQ-Native v0.66.3 - Research Contracts, Run Artifacts & Sprite Provenance
+
+- Authoritative API/script schema docs and introspection (`schema.all`, `script.schema`).
+- Per-script-run folder: exact source, console output, artifacts, metadata, bundle manifest and automatic ZIP.
+- `sprite.map.inspect` exposes spritemap offsets/chunk tile codes and raw pen histogram.
+- `ui.prompt` renders a research prompt over SDL with Enter/Escape completion, optional pause and Always On Top.
+- Carries forward v0.66.2 steering/driving controls and canonical checkpoints.

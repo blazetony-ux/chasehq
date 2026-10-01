@@ -1,0 +1,10 @@
+# name: Regression - v0.66.0.6 zero-query preflight
+# category: Regression
+# purpose: Prove scripts with zero dynamic query functions leave PREFLIGHT 0/0 immediately and execute normally.
+# regression-version: 0.66.0.6
+# regression-scope: version
+
+echo === v0.66.0.6 zero-query preflight regression ===
+api status
+api platform.info
+echo === v0.66.0.6 zero-query preflight regression complete ===

@@ -1,0 +1,10 @@
+# name: Capture Graphics Baseline
+# category: graphics
+# purpose: Capture a deterministic graphics baseline for comparison.
+# Capture a structured graphics baseline from canonical attract checkpoint.
+api patch.clear
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api frame.snapshot name=stage1-graphics-baseline
+api sprites.tail count=250
+api gameplay.registry
+echo === GRAPHICS BASELINE CAPTURED ===

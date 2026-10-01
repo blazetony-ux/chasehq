@@ -1,0 +1,19 @@
+# name: Player Car Sprite Draw Order Investigation
+# category: graphics
+# purpose: Inspect the player car and under-car effect maps plus the resolved same-priority sprite draw order.
+echo === Player Car Sprite Draw Order Investigation ===
+api timeline.load name=car-shadow-layer-investigation
+api timeline.seek frame=2352
+api sprite.inspect slot=82
+api sprite.inspect slot=83
+api sprite.inspect slot=84
+api sprite.order.inspect
+api sprite.map.inspect map=475
+api sprite.map.inspect map=457
+api timeline.seek frame=2356
+api sprite.order.inspect
+api sprite.map.inspect map=458
+api timeline.seek frame=2360
+api sprite.order.inspect
+api timeline.unload
+echo === Player Car Sprite Draw Order Investigation complete ===

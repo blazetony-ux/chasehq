@@ -1,0 +1,32 @@
+# name: Regression - v0.66.9.0 RC2.5 Script Safety
+# purpose: Prove timeline.reset restores the pre-load live checkpoint after a timeline seek/fork and exercise the try/finally cleanup path.
+# category: regression
+# target: canonical stage1-gameplay-2064 live state and car-shadow-layer-investigation frame 2352.
+# method: Establish frame 2064, load/seek/fork frame 2352 inside try, then restore with timeline.reset in finally.
+# expected: The fork reaches frame 2352 and cleanup returns the live emulator to frame 2064 before the terminal COMPLETE marker.
+# cleanup: timeline.reset is called before and in finally; sprite visual/override state is cleared defensively.
+# regression-version: 0.66.9.0-RC2.5
+# regression-scope: permanent
+
+api timeline.reset
+api sprite.visual.clear
+api sprite.override.clear
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+assert status frame=2064
+
+try
+    api timeline.load name=car-shadow-layer-investigation
+    set frames = 2352
+    for target_frame in frames
+        api timeline.seek frame=${target_frame}
+    end
+    api timeline.fork-live
+    assert status frame=2352
+finally
+    api sprite.visual.clear
+    api sprite.override.clear
+    api timeline.reset
+end
+
+assert status frame=2064
+echo === v0.66.9.0 RC2.5 Script Safety: COMPLETE ===

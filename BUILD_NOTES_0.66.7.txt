@@ -1,0 +1,15 @@
+ChaseHQ-Native v0.66.7 — Workbench Knowledge / Documentation Foundation
+
+Base: v0.66.6.1 proven.
+
+Adds:
+- Workbench Docs / Knowledge tab backed by research/knowledge/documentation.json.
+- docs.* / knowledge.* API and script actions.
+- HTML/PDF documentation export with evidence modes.
+- Curated documentation evidence and provenance model.
+- docs/CHATGPT_HANDOVER_PROMPT.md authoritative continuation prompt.
+- Graphics Lab individual sprite forensic mode using cropped transparent sprite assets.
+- SDL window control parity in Workbench/API/scripts: status, fullscreen, scale, show/hide, minimize/restore, always-on-top; pause/resume/step/snapshot shortcuts.
+- Updated schemas, references, changelogs, project state, handover, roadmap and regression.
+
+Validation state: static/non-SDL validation performed in packaging environment; Windows SDL runtime proof required.

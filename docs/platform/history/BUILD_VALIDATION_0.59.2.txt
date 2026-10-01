@@ -1,0 +1,15 @@
+ChaseHQ-Native v0.59.2 build validation
+
+Linux CPU/runtime configure: PASS (-DCHASEHQ_BUILD_SDL=OFF)
+Linux CPU/runtime build: PASS
+ctest: 1/1 PASS
+src/main.cpp C++20 syntax validation: PASS
+SDL frontend not linked in container because SDL3 source is intentionally not bundled. Windows acceptance required using established out/build/x64-Debug/ChaseHQNative.exe layout.
+
+Acceptance focus:
+- hybrid vs legacy A/B from same checkpoint
+- F1 road width / normalized centre error
+- F1 handling coefficients/components
+- handling_state.csv and driver_profile.csv
+- collision suppression regression
+- progress ETA regression

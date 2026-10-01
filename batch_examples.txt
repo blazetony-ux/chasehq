@@ -1,0 +1,10 @@
+# v0.43 unattended job file. Format: name|arguments
+car-pixel-provenance|--scenario stage1-gameplay --frames 1800 --fast-forward-to 1600 --gfx-trace-preset car --graphics-debug-frame 1800 --no-legacy-debug
+slot44-focused|--scenario stage1-gameplay --frames 1800 --fast-forward-to 1600 --follow-address 1027e8:1027ef --provenance-from-frame 1620 --provenance-to-frame 1650 --no-legacy-debug
+frame1627-break|--scenario stage1-gameplay --frames 1800 --fast-forward-to 1600 --break-frame 1627 --break-frame-continue --break-history 4096 --no-legacy-debug
+
+# v0.51.2 geometry A/B examples
+# Explicit default BG correction:
+--load-checkpoint checkpoints/stage1-gameplay-2064.chqstate --layer-offset bg0:0:-24 --layer-offset bg1:0:-24 --exit-at-frame 2300 --evidence-bundle --evidence-name bg-y-minus24
+# Zero-offset comparison:
+--load-checkpoint checkpoints/stage1-gameplay-2064.chqstate --layer-offset all:0:0 --exit-at-frame 2300 --evidence-bundle --evidence-name layers-zero

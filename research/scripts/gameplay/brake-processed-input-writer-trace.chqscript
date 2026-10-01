@@ -1,0 +1,22 @@
+# name: Brake Investigation 27 - Processed Input Writer Trace
+# category: gameplay
+# purpose: Capture the exact CPU-A writer PC(s) that produce the proven processed brake byte at 0x100303.
+# checkpoint: stage1-gameplay-2064.chqstate
+# status: research
+# requires: v0.66.5 memory.trace.*
+
+echo === BRAKE INVESTIGATION 27 - PROCESSED INPUT WRITER TRACE ===
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api memory.trace.clear
+api memory.trace.start cpu=A address=0x100303 length=1 width=8 limit=256
+api control.run-frames frames=5
+api input.ioc.xor port=2 mask=0x20
+api control.run-frames frames=6
+api memory.trace.tail count=50
+api input.ioc.clear
+api control.run-frames frames=6
+api memory.trace.tail count=100
+api memory.trace.stop
+api memory.trace.status
+api memory.read cpu=A address=0x100303 width=8
+echo === BRAKE INVESTIGATION 27 COMPLETE ===

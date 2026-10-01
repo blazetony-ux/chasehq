@@ -1,0 +1,22 @@
+# name: Turbo HUD Exact Tile Writer Investigation
+# category: graphics
+# purpose: Inspect the exact TC0100SCN text-plane cells used by the disappearing turbo icon and disassemble their writer path entirely from the existing turbo timeline.
+# tags: turbo hud tile writer timeline reusable
+
+echo === Turbo HUD Exact Tile Writer Investigation ===
+api timeline.load name=turbo-complete-cycle
+api timeline.status
+api cpu.disassemble cpu=A address=0x1C90 count=64
+
+set frames = 2064,2065,2079,2274,2275,2276
+for f in frames
+  api timeline.seek frame=${f}
+  api memory.read cpu=A address=0x1003A2 width=16
+  api memory.read cpu=A address=0x10040F width=8
+  api memory.read cpu=A address=0x100414 width=16
+  api memory.read cpu=A address=0xC04E8E width=32
+  api memory.read cpu=A address=0xC04F0E width=32
+end
+
+api timeline.unload
+echo === Turbo HUD Exact Tile Writer Investigation complete ===

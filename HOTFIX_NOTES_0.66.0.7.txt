@@ -1,0 +1,16 @@
+ChaseHQ-Native v0.66.0.7 - Runner Resilience / Restart / Diagnostics
+
+- Carries forward the locally proven setScriptRunUi fix using the correct DOM IDs.
+- Script runner lifecycle hardened with shared PREPARING/RUNNING/DONE/FAILED/CANCELLED states.
+- Global try/catch/finally recovery prevents frontend exceptions leaving the Workbench BUSY.
+- Stop now applies during preflight as well as command execution.
+- Force reset runner control added for browser-side recovery.
+- 30-second no-progress watchdog surfaces STALLED state rather than silently wedging.
+- Startup DOM/helper self-test catches missing IDs/helpers before a script is run.
+- Browser exceptions/unhandled promises are POSTed to @runtime/web-frontend-errors.log with phase/context/stack/last API call.
+- Query/include preflight remains timed, cached, and now cancellation-aware.
+- Added zero/one/many-query runner regressions.
+- Start-ChaseHQ.ps1 adds -Restart, -HealthCheck and -Diagnostics.
+- -Restart stops recorded processes, waits for ports to release, then launches fresh.
+- -Diagnostics tails web stdout/stderr, command diagnostics and frontend-error logs.
+- No Chase H.Q. emulation behavior changes.

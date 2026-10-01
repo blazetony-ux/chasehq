@@ -1,0 +1,18 @@
+# name: Regression - v0.66.6.1 layered frame snapshot / HUD isolation
+# category: regression
+# purpose: Verify v2 reconstructable frame capture, snapshot listing, and source-aware HUD compare/diff modes.
+# regression-version: 0.66.6.1
+# regression-scope: frame.snapshot v2, layered graphics export, HUD isolation, image compare/diff
+
+echo === v0.66.6.1 layered frame snapshot regression ===
+api schema action=frame.snapshot
+api schema action=image.compare
+api schema action=image.diff
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api frame.snapshot name=regression-v06661-layered
+api frame.snapshot.list
+api image.compare a=regression-v06661-layered b=regression-v06661-layered region=FULL hud=normal
+api image.compare a=regression-v06661-layered b=regression-v06661-layered region=FULL hud=hidden
+api image.compare a=regression-v06661-layered b=regression-v06661-layered region=FULL hud=only
+api image.diff a=regression-v06661-layered b=regression-v06661-layered region=FULL hud=hidden output=regression-v06661-hud-hidden-self-diff
+echo === v0.66.6.1 layered frame snapshot regression complete ===

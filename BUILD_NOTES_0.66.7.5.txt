@@ -1,0 +1,25 @@
+ChaseHQ-Native v0.66.7.5 — User Handbook / Live API & Scripting Reference
+
+Purpose
+-------
+Turn the v0.66.7.x Docs / Knowledge foundation into actual user-facing documentation rather than a raw knowledge-object browser.
+
+Highlights
+----------
+* Docs / Knowledge now has five first-class views: Handbook, API Reference, Scripting Reference, Project Knowledge, Glossary.
+* New research/knowledge/handbook.json is the authored manual/navigation source.
+* Getting Started, Workbench guides and task-oriented research recipes are included.
+* Complete API reference is generated from the authoritative action schema at runtime (132 actions in this package).
+* Complete .chqscript reference is generated from the authoritative script-language schema.
+* Search spans handbook pages, API actions, script constructs and project knowledge.
+* Code/API/script examples have Copy controls.
+* Project findings remain evidence-backed and can link to API actions, scripts, checkpoints and screenshots.
+* docs.handbook and docs.page are available through the API and existing .chqscript `api ...` statement.
+* Full HTML/PDF export now combines handbook + API reference + scripting reference + project knowledge/glossary + selected evidence.
+* The standalone packaged docs/handbook/ChaseHQ-Native-Documentation-Handbook.html is regenerated from the same data sources.
+* v0.66.7.4 SDL controls, per-sprite Graphics Lab controls, evidence integration and ChatGPT handover remain carried forward unchanged.
+
+Proof status
+------------
+Implemented and statically validated in the build environment. Windows/SDL/Workbench proof is still required.
+Run: Regression - v0.66.7.5 User Handbook / Live Reference

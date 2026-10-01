@@ -1,0 +1,21 @@
+# name: Canonical Checkpoint Visual Survey
+# category: graphics
+# purpose: Capture one reconstructable layered snapshot and coherent structured state from each canonical Chase H.Q. checkpoint for later visual/state comparison.
+echo === Canonical Checkpoint Visual Survey ===
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api state.snapshot include=sprites,regions,gameplay,track
+api frame.snapshot name=canonical-driving-2352
+
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api state.snapshot include=sprites,regions,gameplay,track
+api frame.snapshot name=canonical-gameplay-2064
+
+api checkpoint.load file=stage1-target-post-final-hit-9548.chqstate run=false
+api state.snapshot include=sprites,regions,gameplay,track
+api frame.snapshot name=canonical-target-post-final-hit-9548
+
+api checkpoint.load file=stage1-end-level-9988.chqstate run=false
+api state.snapshot include=sprites,regions,gameplay,track
+api frame.snapshot name=canonical-end-level-9988
+
+echo === Canonical Checkpoint Visual Survey complete ===

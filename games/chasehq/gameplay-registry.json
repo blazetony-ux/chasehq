@@ -1,0 +1,259 @@
+{
+  "schema": "chq-gameplay-registry-v3",
+  "game": "chasehq",
+  "entries": [
+    {
+      "id": "display_speed",
+      "label": "Display speed",
+      "group": "Vehicle",
+      "source": "CPU-A 0x100400",
+      "width": 16,
+      "encoding": "packed BCD",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "id": "internal_speed",
+      "label": "Internal / physics speed",
+      "group": "Vehicle",
+      "source": "CPU-A 0x10041C",
+      "width": 32,
+      "encoding": "raw physics value",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "id": "peak_display_speed",
+      "label": "Peak displayed speed",
+      "group": "Vehicle",
+      "source": "CPU-A 0x10048C",
+      "width": 16,
+      "encoding": "packed BCD",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "id": "score",
+      "label": "Authoritative score",
+      "group": "Vehicle",
+      "source": "CPU-A 0x100488",
+      "width": 32,
+      "encoding": "packed BCD",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "id": "score_display_copy",
+      "label": "Masked/display score copy",
+      "group": "Vehicle",
+      "source": "CPU-A 0x100408",
+      "width": 32,
+      "encoding": "derived packed BCD copy",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "id": "course_position",
+      "label": "Course / longitudinal position",
+      "group": "Road / Track",
+      "source": "CPU-A 0x10A040",
+      "width": 32,
+      "encoding": "raw course units",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "id": "longitudinal_delta",
+      "label": "Per-frame longitudinal delta",
+      "group": "Road / Track",
+      "source": "CPU-A 0x10A012",
+      "width": 16,
+      "encoding": "raw course units/frame",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "id": "lateral_position",
+      "label": "Player lateral position",
+      "group": "Road / Track",
+      "source": "CPU-A 0x10A044",
+      "width": 16,
+      "encoding": "road coordinate",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "id": "road_state",
+      "label": "Road state / side",
+      "group": "Road / Track",
+      "source": "CPU-A 0x10A048 bits 1-2",
+      "width": 8,
+      "encoding": "00 on-road, 02 right, 04 left, 06 extreme",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "id": "track_record_offset",
+      "label": "Live track-record offset",
+      "group": "Road / Track",
+      "source": "CPU-A 0x10A05A",
+      "width": 16,
+      "encoding": "8-byte record offset into 0x109000",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "id": "track_page",
+      "label": "Track page component",
+      "group": "Road / Track",
+      "source": "CPU-A 0x10A058",
+      "width": 8,
+      "encoding": "page/index state",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "id": "track_route",
+      "label": "Track route/page companion",
+      "group": "Road / Track",
+      "source": "CPU-A 0x10A059",
+      "width": 8,
+      "encoding": "route/page state",
+      "confidence": "HIGH CONFIDENCE"
+    },
+    {
+      "id": "road_geometry",
+      "label": "Packed road geometry",
+      "group": "Road / Track",
+      "source": "CPU-A 0x10A05C",
+      "width": 32,
+      "encoding": "decoded from current record byte +3 by 0x8142",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "id": "track_curvature",
+      "label": "Current track curvature",
+      "group": "Road / Track",
+      "source": "current live track record +0",
+      "width": 8,
+      "encoding": "signed horizontal curvature; negative=left, positive=right",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "id": "track_shape_target",
+      "label": "Track +1 target",
+      "group": "Road / Track",
+      "source": "current live track record +1",
+      "width": 8,
+      "encoding": "signed target for smoothed three-band player renderer state",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "id": "track_shape_smooth",
+      "label": "Smoothed track +1 state",
+      "group": "Road / Track",
+      "source": "CPU-A 0x10A04E",
+      "width": 8,
+      "encoding": "signed; follows record +1 by one unit/frame",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "id": "player_render_band",
+      "label": "Player render band",
+      "group": "Road / Track",
+      "source": "CPU-A 0x10A04E thresholds at -5/+5",
+      "encoding": "NEGATIVE / NEUTRAL / POSITIVE",
+      "confidence": "CONFIRMED",
+      "note": "physical uphill/downhill meaning still under causal test"
+    },
+    {
+      "id": "player_render_selector",
+      "label": "Player render selector",
+      "group": "Vehicle / Render",
+      "source": "CPU-A 0x10A04A",
+      "width": 16,
+      "encoding": "renderer descriptor index; bits 6-7 bank, bits 0-4 sub-index",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "id": "player_render_selector_cached",
+      "label": "Cached player render selector",
+      "group": "Vehicle / Render",
+      "source": "CPU-A 0x10A076 (+0x36)",
+      "width": 16,
+      "encoding": "cached copy consumed by player renderer",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "id": "selected_edge_state",
+      "label": "Selected road-edge state",
+      "group": "Driving / Road",
+      "source": "CPU-A 0x10A04C",
+      "width": 8,
+      "encoding": "signed smoothed edge-relative state",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "id": "steering_processed",
+      "label": "Processed steering",
+      "group": "Driving / Input",
+      "source": "CPU-A 0x100300",
+      "width": 16,
+      "encoding": "signed processed steering; centre=0, left negative, right positive",
+      "confidence": "CONFIRMED",
+      "note": "Revalidated causally in v0.66.2 against IOC analogue injection and lateral movement."
+    },
+    {
+      "id": "current_track_record",
+      "label": "Current 8-byte track record",
+      "group": "Road / Track",
+      "source": "CPU-A 0x109000 + 0x10A05A",
+      "width": 64,
+      "encoding": "+0 curvature, +1 renderer target, +2 flags, +3 geometry, +4 event, +5 visual selector, +6 trigger, +7 control flags",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "id": "turbo_input",
+      "label": "Processed turbo input",
+      "group": "Turbo / Input",
+      "source": "CPU-A 0x100303 bit 0",
+      "width": 8,
+      "encoding": "bit",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "id": "turbo_active",
+      "label": "Turbo active",
+      "group": "Turbo / Input",
+      "source": "CPU-A 0x10040F bit 1",
+      "width": 8,
+      "encoding": "bit",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "id": "turbos_remaining",
+      "label": "Turbos remaining",
+      "group": "Turbo / Input",
+      "source": "CPU-A 0x1003A2",
+      "width": 16,
+      "encoding": "count",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "id": "turbo_timer",
+      "label": "Turbo timer",
+      "group": "Turbo / Input",
+      "source": "CPU-A 0x100414",
+      "width": 16,
+      "encoding": "frame counter",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "id": "steering_raw",
+      "label": "Raw steering input",
+      "group": "Driving / Input",
+      "source": "CPU-A 0x10014C",
+      "encoding": "IOC signed 12-bit steering with byte-swapped in-RAM representation",
+      "confidence": "CONFIRMED",
+      "width": 16,
+      "note": "IOC ports 0x0C/0x0D; signed 12-bit centre 0x000, right positive, left negative."
+    },
+    {
+      "id": "target_health",
+      "label": "Special-target remaining-hit/damage counter",
+      "group": "Research / Open",
+      "source": "CPU-A 0x1002AE candidate",
+      "encoding": "signed/event counter candidate",
+      "confidence": "HIGH CONFIDENCE"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+# name: Same Priority Sprite Order Multi-Scene Validation
+# category: graphics
+# purpose: Compare MAME-reference descending traversal with first-nontransparent ownership ordering with the legacy higher-slot mode across captured Chase H.Q. scenes using loops.
+
+echo === Same Priority Sprite Order Multi-Scene Validation ===
+
+api timeline.load name=car-shadow-layer-investigation
+set frames = 2352,2360
+for frame in frames
+    api timeline.seek frame=${frame}
+    api sprite.order.set mode=higher-slot
+    api frame.snapshot name=order-car-${frame}-higher
+    api sprite.order.set mode=lower-slot
+    api frame.snapshot name=order-car-${frame}-lower
+end
+api timeline.unload
+
+set checkpoints = stage1-gameplay-2064,stage1-target-post-final-hit-9548,stage1-end-level-9988
+for checkpoint in checkpoints
+    api checkpoint.load file=${checkpoint}.chqstate run=false
+    api sprite.order.set mode=higher-slot
+    api frame.snapshot name=order-${checkpoint}-higher
+    api sprite.order.set mode=lower-slot
+    api frame.snapshot name=order-${checkpoint}-lower
+end
+
+api sprite.order.set mode=lower-slot
+api sprite.order.inspect
+
+echo === Same Priority Sprite Order Multi-Scene Validation complete ===

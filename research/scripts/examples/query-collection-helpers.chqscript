@@ -1,0 +1,8 @@
+# name: Query collection helpers
+# purpose: Demonstrate count/first/last/unique/contains over API-backed query functions.
+# category: examples
+count(getregions())
+first(getregions())
+last(getregions())
+unique(getpalettes())
+contains(getprofiles(),chasehq)

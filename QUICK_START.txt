@@ -1,0 +1,107 @@
+ChaseHQ-Native v0.66.9.0-RC1 - DEVELOPMENT CANDIDATE
+Proven baseline: v0.66.8.0
+Focused gate: Regression - v0.66.9.0 Game Lab and Tile Inspector
+
+ChaseHQ-Native v0.66.8.0 - PROVEN RELEASE
+
+ChaseHQ-Native v0.64.0 QUICK START
+=================================
+
+1. Build the Windows x64-Debug target as usual.
+2. From the project root run:
+
+   .\Start-ChaseHQ.ps1
+
+3. The launcher loads the canonical Stage-1 gameplay checkpoint, starts the native API and Web Workbench, and opens the browser.
+
+Useful Web Workbench features in this build:
+- Current SDL frame preview (manual / low-frequency auto refresh)
+- Canonical checkpoint Load & run / Load paused
+- Freeze / resume game timer
+- SDL always-on-top toggle
+- Responsive single-column layout when snapped
+- Session log tail
+- Known IOC quick-pulse buttons
+- Automated checkpoint-based IOC bit sweep
+- Palette live entry override with explicit original-value restore
+
+Stop the recorded session with:
+
+   .\Start-ChaseHQ.ps1 -Stop
+
+
+SCRIPT CONSOLE / WORKBENCH (v0.64.0)
+------------------------
+Once the Workbench is open, prefer the Research Script Console for repeatable research actions.
+Use `help` for syntax and `api actions` for current scriptable Research API operations.
+Bundled reusable scripts are under research\scripts.
+
+
+v0.64.0 WORKBENCH / IOC / EVIDENCE NOTES
+----------------------------
+- Held IOC XOR overrides now survive running frames; scenario/CLI pulses use a separate layer.
+- `input ports` exposes xor=, scenario= and effective_xor= for each IOC port.
+- Evidence cards are selectable; ZIP-ready state is visible.
+- Use `zip evidence-match ioc-p3- ioc-p3-held-sweep` to package a whole experiment.
+
+
+v0.64.0 QUICK RESEARCH COMMANDS
+-------------------------------
+api cpu.disassemble cpu=A address=008460 count=32
+api control.run-frames frames=60
+api gameplay.registry
+api track.state
+api image.regions
+# after `api frame.capture name=baseline` and `api frame.capture name=test`:
+api image.compare a=baseline b=test region=ROAD_AREA
+api image.diff a=baseline b=test region=ROAD_AREA output=road-diff
+
+
+v0.65.0 examples:
+  api memory.read-range cpu=A address=109000 length=512
+  api memory.export cpu=A address=109000 length=512 output=evidence\stage1-track-109000.bin
+  api schema action=memory.export
+
+Restricted conditional example:
+  if status frame=2656
+      api memory.read cpu=A address=10A048 width=8
+  else
+      echo unexpected frame
+  end
+
+
+v0.65.0 dynamic query examples:
+  getregions()
+  getsprites()
+  set regions = getregions()
+  for region in regions
+      echo region=${region}
+  end
+  api sprite.inspect slot=44
+  api sprite.visual slot=44 mode=solo
+  api sprite.override slot=44 map=182
+  api sprite.override.clear
+
+v0.66.0 diagnostics after launch:
+  In Script Console run research/scripts/regression/regression-v066-introspection.chqscript
+  Then run research/scripts/regression/regression-audio-foundation.chqscript
+Audio runtime injection remains disabled pending Windows/SDL validation.
+
+v0.66.0.7 launcher recovery helpers
+----------------------------------
+Restart the recorded session cleanly:
+  .\Start-ChaseHQ.ps1 -Restart
+
+Check recorded session health:
+  .\Start-ChaseHQ.ps1 -HealthCheck
+
+Show health plus recent runtime diagnostic log tails:
+  .\Start-ChaseHQ.ps1 -Diagnostics
+
+Script Runner resilience
+------------------------
+The Workbench now performs a startup self-test, records frontend exceptions to
+@runtime/web-frontend-errors.log, has a 30-second stalled-job watchdog, supports
+Stop during preflight, and exposes Force reset runner as a last-resort browser-
+side recovery action. Script failures attempt to create a diagnostic ZIP under
+the active evidence directory automatically.

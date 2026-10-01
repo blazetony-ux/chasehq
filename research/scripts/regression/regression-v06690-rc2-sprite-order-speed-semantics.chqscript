@@ -1,0 +1,22 @@
+# name: Regression - v0.66.9.0 RC2 Sprite Order and Speed Semantics
+# category: regression
+# purpose: Prove sprite map lookup/order controls, frame-safe tile outputs, script ERR handling surface, and Game Lab speed state semantics.
+# regression-version: 0.66.9.0
+# regression-scope: version
+echo === v0.66.9.0 RC2 sprite order / speed regression ===
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api game.experiment.status
+api sprite.order.inspect
+api sprite.map.inspect map=475
+api game.sprite.order.set mode=lower-slot
+api sprite.order.inspect
+api game.sprite.order.set mode=higher-slot
+api sprite.order.inspect
+api tile.inspect code=0C palette=0 scale=4
+api game.speed.set value=602
+api game.experiment.status
+api game.speed.freeze enabled=true value=602
+api game.experiment.status
+api game.speed.clear
+api game.experiment.status
+echo === v0.66.9.0 RC2 sprite order / speed regression complete ===

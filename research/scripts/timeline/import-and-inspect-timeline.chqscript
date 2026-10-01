@@ -1,0 +1,25 @@
+# name: Import and Inspect Forensic Timeline
+# category: timeline
+# purpose: Demonstrate that a recorded timeline can be imported by the script engine and inspected through the ordinary runtime APIs as if the selected frame were a paused live machine.
+set timeline_name = turbo-complete-cycle
+
+echo === Import Forensic Timeline ===
+api timeline.load name=${timeline_name}
+api timeline.status
+api timeline.frames
+api status
+api gameplay.registry
+api register.read cpu=A
+api register.read cpu=B
+api sprites.list
+api palette.bank bank=64
+api memory.read cpu=A address=0x10040F width=8
+api memory.read cpu=A address=0x1003A2 width=16
+api state.snapshot include=sprites,regions,gameplay,track
+api timeline.next
+api status
+api gameplay.registry
+api sprites.list
+api timeline.unload
+
+echo === Timeline import/inspection complete ===

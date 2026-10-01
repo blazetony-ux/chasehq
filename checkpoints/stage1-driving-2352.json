@@ -1,0 +1,25 @@
+{
+  "format_version": 1,
+  "name": "stage1-driving-2352",
+  "game": "Chase H.Q.",
+  "frame": 2352,
+  "description": "Curated reference checkpoint used for repeatable Stage 1 graphics/object investigations.",
+  "validated_with": [
+    "0.49.4",
+    "0.50.0",
+    "0.50.1",
+    "0.50.2",
+    "0.51.0",
+    "0.54.0"
+  ],
+  "checkpoint_format": "v1 binary .chqstate",
+  "notes": [
+    "Cross-process resume was validated after the Musashi host-pointer rebind fix in v0.49.4.",
+    "This state is carried forward as a reproducible investigation starting point.",
+    "The checkpoint format remains binary; a readable/versioned checkpoint v2 is planned separately."
+  ],
+  "sha256": "d64a72c906e7f452d798a8c385d6b71c0ce6dbb43cff153d198128dc22fc699d",
+  "size_bytes": 250488,
+  "role": "attract_graphics_reference",
+  "recommended_use": "Graphics/compositor diagnostics only; autonomous attract-mode driving, not player-control experiments."
+}

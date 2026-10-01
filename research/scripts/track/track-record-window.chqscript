@@ -1,0 +1,5 @@
+# name: Track record window
+# purpose: Print records surrounding the current authoritative Stage 1 track record.
+# category: track
+api track.state
+gettrackrecords(before=4,after=12)

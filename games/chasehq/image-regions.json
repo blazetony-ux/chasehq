@@ -1,0 +1,16 @@
+{
+  "schema":"chq-image-regions-v2",
+  "frame":{"width":320,"height":240},
+  "regions":{
+    "FULL":{"x":0,"y":0,"w":320,"h":240},
+    "HUD_TOP":{"x":0,"y":0,"w":320,"h":48},
+    "ROAD_FAR":{"x":32,"y":52,"w":256,"h":58},
+    "ROAD_MID":{"x":32,"y":110,"w":256,"h":45},
+    "ROAD_NEAR":{"x":32,"y":155,"w":256,"h":50},
+    "ROAD_AREA":{"x":32,"y":52,"w":256,"h":153},
+    "PLAYER_CAR":{"x":120,"y":145,"w":80,"h":60},
+    "PLAYER_CAR_BODY":{"x":135,"y":155,"w":50,"h":40},
+    "HUD_TURBO":{"x":0,"y":205,"w":320,"h":35},
+    "TARGET_AREA":{"x":40,"y":48,"w":240,"h":97}
+  }
+}

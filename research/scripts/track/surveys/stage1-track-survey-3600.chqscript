@@ -1,0 +1,21 @@
+# name: Stage 1 Track Survey - 3600
+# category: track
+# purpose: Survey Stage 1 track state across 3600 frames.
+# Stage 1 extended autonomous attract-mode track survey - 3600 frames
+# Samples every 30 frames and captures every 300 frames.
+api patch.clear
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+echo === EXTENDED STAGE 1 TRACK SURVEY 3600 BEGIN ===
+api frame.snapshot name=track-survey-3600-start
+repeat 12
+    repeat 10
+        api control.run-frames frames=30
+        api track.state
+    end
+    api frame.snapshot
+    api gameplay.registry
+end
+api status
+api track.state
+api frame.snapshot name=track-survey-3600-end
+echo === EXTENDED STAGE 1 TRACK SURVEY 3600 COMPLETE ===

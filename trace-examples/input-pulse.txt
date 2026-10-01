@@ -1,0 +1,13 @@
+# v0.26.3 controlled input-pulse investigation
+cpu=A
+mem=100128:100130,rw
+mem=10801a,rw
+pc=2f20:2fc0
+max=12000
+before=32
+after=64
+
+# Add on the command line, one experiment at a time:
+#   --pulse-ioc 2:10:120:5
+#   --pulse-ioc 2:04:120:5
+#   --pulse-ioc 2:08:120:5

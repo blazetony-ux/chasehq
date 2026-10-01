@@ -1,0 +1,7 @@
+# CPU A/B shared command window
+cpu=both
+mem=108000-1080ff,rw
+pc=0440-0540
+before=64
+after=128
+max=150000

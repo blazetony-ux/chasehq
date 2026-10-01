@@ -1,0 +1,13 @@
+# category: graphics
+# name: Frame diff example
+# purpose: Capture two deterministic SDL frames and compare the road region locally.
+# checkpoint: stage1-gameplay-2064.chqstate
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api input.ioc.clear
+api frame.capture name=diff-baseline
+api input.ioc.xor port=3 mask=20
+api control.run-frames frames=60
+api frame.capture name=diff-after-60
+api image.compare a=diff-baseline b=diff-after-60 region=ROAD_AREA
+api image.diff a=diff-baseline b=diff-after-60 region=ROAD_AREA output=diff-road-60
+api input.ioc.clear

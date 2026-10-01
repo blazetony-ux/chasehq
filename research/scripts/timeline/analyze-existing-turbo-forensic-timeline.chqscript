@@ -1,0 +1,8 @@
+# name: Analyze Existing Turbo Forensic Timeline
+# category: timeline
+# purpose: Run the full automated offline forensic pipeline against the already captured turbo-complete-cycle recording; no gameplay replay required.
+
+echo === Analyze Existing Turbo Forensic Timeline ===
+api timeline.list
+api timeline.analyze.auto name=turbo-complete-cycle triggerFrame=2065 stopFrame=2275 window=1 top=20
+echo === Existing turbo forensic timeline automated analysis complete ===

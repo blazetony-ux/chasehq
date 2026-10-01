@@ -1,0 +1,25 @@
+# category: ioc
+# name: Stage 1 Port 3 Held-Bit Sweep
+# purpose: Test each single IOC Port 3 bit as a held input from an identical gameplay checkpoint, then package the whole experiment.
+# checkpoint: stage1-gameplay-2064.chqstate
+
+set checkpoint = stage1-gameplay-2064.chqstate
+set masks = 01,02,04,08,10,20,40,80
+set observe_ms = 3000
+
+for mask in masks
+    echo BEGIN IOC P3:${mask}
+    api checkpoint.load file=${checkpoint} run=false
+    api input.ioc.clear
+    api input.ioc.xor port=3 mask=${mask}
+    api control.resume
+    wait ${observe_ms}
+    api control.pause
+    api status
+    api evidence.capture name=ioc-p3-${mask}
+    api input.ioc.clear
+    echo END IOC P3:${mask}
+end
+
+zip evidence-match ioc-p3- ioc-p3-held-sweep
+api control.resume

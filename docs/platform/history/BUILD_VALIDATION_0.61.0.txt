@@ -1,0 +1,10 @@
+ChaseHQ-Native v0.61.0 candidate validation performed in build environment
+Date: 2026-09-25
+
+PASS: CMake configure with CHASEHQ_BUILD_SDL=OFF and BUILD_TESTING=ON.
+PASS: CPU/runtime build.
+PASS: runtime_tests (1/1).
+NOT RUN: Windows/MSVC SDL frontend build (SDL source/runtime and Windows dev machine are not available in this environment).
+NOT RUN: live debugger API, IOC pulse timing, PowerShell launchers/browser against running ChaseHQNative.
+
+v0.60.3 remains the user's real-machine validation baseline. v0.61.0 is a candidate to validate when dev-machine access returns.

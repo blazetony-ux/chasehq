@@ -1,0 +1,12 @@
+# name: Regression - v0.66.7.8 Discovery Performance
+# category: regression
+# purpose: prove authoritative run history and completed-run snapshot discovery remain responsive after the v0.66.7.7 integration regression
+# regression-version: 0.66.7.8
+# regression-scope: run-history snapshot-discovery responsiveness
+
+echo === v0.66.7.8 discovery performance ===
+api status
+api script.runs limit=25
+api frame.snapshot.list
+api status
+echo === v0.66.7.8 discovery performance complete ===
