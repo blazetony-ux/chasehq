@@ -247,6 +247,13 @@ int main() {
         }
 
         {
+            std::cout << "[test] RC2.9 one-hit target option parsing\n";
+            const char* argv[] = {"runtime", "--one-hit-target"};
+            const auto opts = chq::parse_options(static_cast<int>(std::size(argv)), const_cast<char**>(argv));
+            check(opts.target_one_hit, "one-hit target option parse");
+        }
+
+        {
             std::cout << "[test] v0.27 conditional trace option parsing\n";
             const char* argv[] = {"runtime", "--trace-mem-change", "100080", "--trace-from-frame", "1200", "--trace-to-frame", "1600", "--trace-arm-mem", "100172:3800", "--trace-task", "100080", "--trace-write-value", "0"};
             const auto opts = chq::parse_options(static_cast<int>(std::size(argv)), const_cast<char**>(argv));

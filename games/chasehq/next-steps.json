@@ -2,49 +2,39 @@
   "schema": "chq-next-steps-v1",
   "items": [
     {
-      "title": "Steering path",
-      "status": "CONFIRMED",
-      "detail": "Authoritative steering path confirmed: IOC ports 0x0C/0x0D -> CPU-A 0x10014C raw -> 0x100300 processed -> handling/cornering -> 0x10A044 lateral position."
-    },
-    {
-      "title": "Physical controller mapping",
+      "title": "TC0100SCN text origin and flip",
       "status": "IN PROGRESS",
-      "detail": "v0.66.2 adds SDL keyboard steering and Workbench browser-gamepad live steering through authentic IOC input; expand semantic mappings for accelerator/brake/turbo/start/credit."
+      "detail": "Normal text source X uses the evidence-backed +16 origin. Validate flipped text independently against title, HUD and end-state checkpoints."
     },
     {
-      "title": "Brake-lamp state",
-      "status": "OPEN",
-      "detail": "Promote the current palette-based visual proxy to an authoritative gameplay/control state if one exists."
+      "title": "Radar and HUD regression",
+      "status": "IN PROGRESS",
+      "detail": "Compare radar position, brake lamps, turbo indicators and end-state HUD across canonical Stage 1 driving and end-level checkpoints."
     },
     {
-      "title": "Turbo HUD indicators",
+      "title": "Sprite 4bpp shadow/compare",
       "status": "OPEN",
-      "detail": "Regression-check the bottom HUD indicators against authoritative turbo state and isolate any remaining compositor/text-layer issue."
+      "detail": "Add an independent SHADOW/COMPARE path for the native sprite 4bpp decoder; require exact sprite ownership and pixel parity before any verified claim."
     },
     {
-      "title": "Track topology / branch selector",
-      "status": "OPEN",
-      "detail": "Live road geometry is known; decode branch/fork selector and branch-commit semantics for a complete course map."
+      "title": "End-results transition",
+      "status": "CONFIRMED",
+      "detail": "Post-defeat chain is behavior-understood: 0x1002D0 minimum delay -> 0x1002C8 readiness -> 0x1002CE completion handoff -> results worker -> 0x100248 -> 0x1002E8 intermission gate."
     },
     {
-      "title": "Palette / colour accuracy",
-      "status": "OPEN",
-      "detail": "Resolve remaining decoder/bank/intensity accuracy while preserving proven palette override semantics."
+      "title": "Target health / damage",
+      "status": "CONFIRMED",
+      "detail": "CPU-A 0x1002AE is the special target remaining-hit counter. PC 0xA112 decrements on genuine damaging hits; FFFF is the terminal sentinel and PC 0xA118 enters defeat. Preferred causal checkpoint: stage1-target-immediate-pre-damage-6333."
     },
     {
-      "title": "Enemy health / damage",
-      "status": "OPEN",
-      "detail": "Use near-destruction checkpoints to locate authoritative target-health and damage state."
+      "title": "Brake-lamp mechanism",
+      "status": "CONFIRMED",
+      "detail": "Processed brake at CPU-A 0x100303 feeds the 0x497E..0x49A8 palette path; banks 64/65 pen 13 switch to 0x18DE while braking and restore to 0x000E."
     },
     {
-      "title": "End-of-level state",
-      "status": "OPEN",
-      "detail": "Use the confirmed end-level checkpoint to identify the authoritative Stage-1 completion transition."
-    },
-    {
-      "title": "Collision / vehicle state",
-      "status": "OPEN",
-      "detail": "Expand authoritative crash/contact/scenery/airborne state beyond the existing collision-response findings."
+      "title": "Stage 1 course graph / minimap",
+      "status": "IN PROGRESS",
+      "detail": "Fork choice and selector lifecycle are behavior-understood. Convert proven selector 0-9 transition tables and lateral branch rule into an authoritative directed course graph/minimap."
     },
     {
       "title": "Audio / sound CPU",

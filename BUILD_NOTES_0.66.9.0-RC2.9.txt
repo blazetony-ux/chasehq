@@ -1,0 +1,18 @@
+ChaseHQ-Native v0.66.9.0-RC2.9
+
+Baseline: v0.66.9.0-RC2.8 (Windows/SDL-proven before RC2.9 changes).
+
+Build locally on Windows with Build-Debug.bat. Prepare-Project.bat stages SDL/ROM paths from build-local.json. ROMs are not bundled.
+
+RC2.9 changes native/runtime code (one-hit target and SDL Pause/Break), Workbench/API, canonical checkpoints, regressions and documentation. Linux/static validation cannot prove SDL/PowerShell behavior; run the focused RC2.9 regression and Full Regression after Windows build.
+
+Replacement archive correction:
+- Updated Validate-Workbench.ps1 from stale 300000 ms signature to the RC2.9 900000 ms progress-aware contract.
+- Validator now checks the 3700 s / 3700000 ms long-operation transport budgets and explicit RC2.9 feature/documentation parity.
+- Earlier pre-proof RC2.9 archive/hash withdrawn.
+
+Windows build-gate correction after first local CTest run:
+- tests/cli_evidence_tests.ps1 now asserts evidence build identity 0.66.9.0-RC2.9 instead of stale RC2.7.
+- Build-Debug.bat and Build-Release.bat now capture findstr ERRORLEVEL with delayed !ERRORLEVEL! inside the parenthesized failure block.
+- The historical cpu_bus_rom_tests SEGFAULT is tolerated only when CTest reports exactly one failed test; any additional failing test now returns a non-zero build status.
+- Validate-Release.ps1 now guards these release-gate contracts so the same regression is blocked before packaging.

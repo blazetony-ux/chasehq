@@ -249,10 +249,21 @@
     },
     {
       "id": "target_health",
-      "label": "Special-target remaining-hit/damage counter",
-      "group": "Research / Open",
-      "source": "CPU-A 0x1002AE candidate",
-      "encoding": "signed/event counter candidate",
+      "label": "Target remaining-hit / damage counter",
+      "group": "Target / Damage",
+      "source": "CPU-A 0x1002AE; damaging-hit writer PC 0xA112",
+      "encoding": "decrement-on-damaging-hit; 0xFFFF terminal/exhausted sentinel; 0x0000 means one final damaging hit remains",
+      "confidence": "CONFIRMED",
+      "width": 16,
+      "note": "RC2.8 causal proof: natural 000E->000D; controlled 0001->0000 remains alive; controlled 0000->FFFF takes terminal PC 0xA118, writes 0x1002D8=0x1400 and enters the known defeat state machine."
+    },
+    {
+      "id": "end_results_gate",
+      "label": "End-results / intermission gate",
+      "group": "Stage / End State",
+      "source": "CPU-A 0x1002E8",
+      "width": 8,
+      "encoding": "end-results/intermission transition gate",
       "confidence": "HIGH CONFIDENCE"
     }
   ]

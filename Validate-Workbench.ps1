@@ -70,8 +70,8 @@ if(-not(Test-Path (Join-Path $root 'research\scripts\regression\regression-v0667
 if($text -notmatch 'Get-StructuredFrameSnapshotRoots' -or $text -notmatch 'Resolve-StructuredFrameSnapshotDir' -or $text -notmatch 'artifacts\\frame-snapshots'){throw 'Workbench validation failed: completed-run snapshot discovery wiring missing'}
 
 if($text -notmatch 'async function applyScriptLibraryFilter' -or $text -notmatch "if\(!loadedScriptPath\)throw Error\('Script library discovered entries but did not auto-load the selected script'\)"){throw 'Workbench validation failed: Script Library auto-load/bootstrap guard missing'}
-if($text -notmatch 'Wait-ChqPaused\(\[int\]\$minimumFrame,\[int\]\$timeoutMs=300000,\[int\]\$stallTimeoutMs=15000\)' -or $text -notmatch 'no_progress_ms'){throw 'Workbench validation failed: progress-aware long frame wait missing'}
-if($text -notmatch 'longOp\?370000:10000' -or $text -notmatch '\?360:8;'){throw 'Workbench validation failed: long-operation browser/proxy budget missing'}
+if($text -notmatch 'Wait-ChqPaused\(\[int\]\$minimumFrame,\[int\]\$timeoutMs=900000,\[int\]\$stallTimeoutMs=15000\)' -or $text -notmatch 'no_progress_ms'){throw 'Workbench validation failed: progress-aware long frame wait missing'}
+if($text -notmatch 'longOp\?3700000:10000' -or $text -notmatch '\?3700:8;'){throw 'Workbench validation failed: long-operation browser/proxy budget missing'}
 if($text -match 'web-evidence'){throw 'Workbench validation failed: obsolete web-evidence path remains'}
 if($text -match "script-runs"){throw 'Workbench validation failed: obsolete script-runs path remains'}
 $requiredRunRoot="Join-Path "+'$sessionPath'+" 'runs'";if($text.IndexOf($requiredRunRoot,[StringComparison]::Ordinal) -lt 0){throw 'Workbench validation failed: per-session runs root missing'}
@@ -133,3 +133,23 @@ if(-not(Test-Path (Join-Path $root 'research\scripts\regression\regression-v0669
 if($full -notmatch 'regression-v06690-rc25-script-safety\.chqscript' -or $full -notmatch 'regression-sprite-ownership\.chqscript'){throw 'Workbench validation failed: RC2.5 permanent regression wiring missing'}
 Write-Host 'v0.66.9.0-RC2.5 script lifecycle / action parity: PASS' -ForegroundColor Green
 
+
+
+# v0.66.9.0-RC2.9: target-health promotion, research controls, SDL pause UX and long-run parity.
+if($nativeVersion -eq '0.66.9.0-RC2.9'){
+    foreach($cp in @(
+        'stage1-target-immediate-pre-contact-5587.chqstate',
+        'stage1-target-first-physical-contact-5588.chqstate',
+        'stage1-target-immediate-pre-damage-6333.chqstate',
+        'stage1-target-first-damage-6334.chqstate'
+    )){if(-not(Test-Path (Join-Path $root ('checkpoints\'+$cp)))){throw "Workbench validation failed: RC2.9 checkpoint missing: $cp"}}
+    if($text -notmatch "'game\.target\.one-hit'" -or $text -notmatch 'gameTargetOneHit' -or $text -notmatch 'One-hit Target Kill'){throw 'Workbench validation failed: RC2.9 one-hit target API/UI wiring missing'}
+    if($text -notmatch 'Pause/Break toggles pause/resume' -or $text -notmatch 'panel w7"><h2>Current SDL frame' -or $text -notmatch 'panel w5"><h2>SDL Window Controls' -or $text -notmatch '@media\(max-width:1200px\)'){throw 'Workbench validation failed: RC2.9 SDL pause/responsive Dashboard wiring missing'}
+    if($text -notmatch "'control\.run-frames'=\[ordered\]@\{params=@\('frames=1\.\.100000 required','timeout=1000\.\.3600000 optional default 900000 ms'\)" ){throw 'Workbench validation failed: RC2.9 run-frames schema/default timeout mismatch'}
+    if(-not(Test-Path (Join-Path $root 'research\scripts\regression\regression-v06690-rc29-target-health-tooling.chqscript'))){throw 'Workbench validation failed: RC2.9 focused regression missing'}
+    $apiDoc=Get-Content (Join-Path $root 'docs\API_REFERENCE.md') -Raw
+    if($apiDoc -notmatch 'default is 900000 ms' -or $apiDoc -notmatch 'game\.target\.one-hit'){throw 'Workbench validation failed: RC2.9 API documentation is stale'}
+    $gameplayDoc=Get-Content (Join-Path $root 'docs\chasehq\discoveries\gameplay-state.md') -Raw
+    if($gameplayDoc -notmatch '0x1002AE' -or $gameplayDoc -notmatch 'FFFF'){throw 'Workbench validation failed: RC2.9 target-health documentation is stale'}
+    Write-Host 'v0.66.9.0-RC2.9 target health / SDL UX / timeout parity: PASS' -ForegroundColor Green
+}

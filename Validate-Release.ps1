@@ -65,9 +65,14 @@ Check ($catalogRc26 -match 'sprite-bitplane-significance-proveoff\.chqscript') '
 $featureIds=@($manifest.features|ForEach-Object{[string]$_.id})
 Check ($featureIds -contains 'graphics.sprite-bitplane-significance') 'RC2.6 feature manifest entry'
 $readmeRc26=Get-Content (Join-Path $root 'README.md') -Raw
-Check ($readmeRc26 -match 'Current candidate: v0\.66\.9\.0-RC2\.6' -and (Get-Content (Join-Path $root 'VALIDATION.md') -Raw) -match 'v0\.66\.9\.0-RC2\.6') 'RC2.6 current-candidate pointers'
+Check ($readmeRc26 -match 'Active candidate: v0\.66\.9\.0-RC2\.8' -and (Get-Content (Join-Path $root 'VALIDATION.md') -Raw) -match 'v0\.66\.9\.0-RC2\.6') 'Current RC2.8 candidate pointers'
 $buildDebug=Get-Content (Join-Path $root 'Build-Debug.bat') -Raw
+$buildRelease=Get-Content (Join-Path $root 'Build-Release.bat') -Raw
+$cliEvidenceTest=Get-Content (Join-Path $root 'tests\cli_evidence_tests.ps1') -Raw
 Check ($buildDebug -match '1 tests failed out of ' -and $buildDebug -notmatch '1 tests failed out of 1') 'Build gate tolerates only one historical failure independent of total test count'
+Check ($buildDebug -match 'set "KNOWN_SEGFAULT=!ERRORLEVEL!"' -and $buildDebug -match 'set "ONLY_ONE_FAILED=!ERRORLEVEL!"' -and $buildRelease -match 'set "KNOWN_SEGFAULT=!ERRORLEVEL!"' -and $buildRelease -match 'set "ONLY_ONE_FAILED=!ERRORLEVEL!"') 'Build wrappers use delayed ERRORLEVEL for post-CTest gate checks'
+Check ($buildRelease -match '1 tests failed out of ' -and $buildRelease -notmatch '1 tests failed out of 1') 'Release build gate uses one-failure summary independent of total test count'
+Check ($cliEvidenceTest -match "\$m\.build -ne '0\.66\.9\.0-RC2\.9'" -and $cliEvidenceTest -notmatch "\$m\.build -ne '0\.66\.9\.0-RC2\.7'") 'CLI evidence test asserts current RC2.9 build identity'
 
 
 

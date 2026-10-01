@@ -1,6 +1,6 @@
 {
   "schema": "chq-native-subsystem-maturity-v1",
-  "build": "0.66.9.0-RC2.7",
+  "build": "0.66.9.0-RC2.9",
   "ladder": [
     "UNKNOWN",
     "OBSERVED",
@@ -16,7 +16,7 @@
     {
       "id": "sprite-4bpp-decoder",
       "maturity": "NATIVE-CANDIDATE",
-      "evidenceSummary": "All 16 plane-to-pen mappings tested; geometry/transparency invariants preserved; no independent shadow backend.",
+      "evidenceSummary": "All 16 plane-to-pen mappings tested. RC2.8 adds an independent SHADOW decoder and COMPARE utility; deterministic fixture parity passes, whole-frame SHADOW VERIFIED is not claimed.",
       "backend": "original/emulated",
       "replacementEnabled": false
     },
@@ -30,7 +30,7 @@
     {
       "id": "tc0100scn-bg",
       "maturity": "MAPPED",
-      "evidenceSummary": "X correction implemented and coordinate tests pass; Windows canonical prove-off pending; column scroll unsupported.",
+      "evidenceSummary": "RC2.7 Windows proof established the BG X correction and reliability path; RC2.8 tests text origin +16 and explicit flip coordinates. Column scroll remains unsupported.",
       "backend": "original/emulated",
       "replacementEnabled": false
     },
@@ -75,6 +75,21 @@
       "evidenceSummary": "Speed/lateral behaviour observable; sufficient native reproduction model not established.",
       "backend": "original/emulated",
       "replacementEnabled": false
+    },
+    {
+      "id": "target-health-damage",
+      "maturity": "BEHAVIOUR UNDERSTOOD",
+      "evidenceSummary": "CPU-A 0x1002AE is causally confirmed as the special-target remaining-hit counter. Authentic PC 0xA112 decrements; result FFFF takes terminal PC 0xA118 and known defeat sequence.",
+      "backend": "original/emulated",
+      "replacementEnabled": false
+    },
+    {
+      "id": "stage1-track-topology",
+      "maturity": "BEHAVIOUR UNDERSTOOD",
+      "evidenceSummary": "Selectors 0-9, branching/linear templates, lateral fork rule and selector +5 terminal lifecycle causally proven. Higher-level directed graph/minimap representation remains to build.",
+      "backend": "original/emulated",
+      "replacementEnabled": false
     }
-  ]
+  ],
+  "independentCompareUtility": true
 }

@@ -1,16 +1,19 @@
 # Canonical checkpoints
 
-The checkpoint corpus is intentionally small and semantic. Keep states only when they provide a reproducible research anchor.
+The checkpoint corpus is intentionally semantic: keep states that anchor reproducible claims.
 
-- `stage1-gameplay-2064.chqstate` — early player-gameplay checkpoint used for general gameplay and long-run reproduction.
-- `stage1-driving-2352.chqstate` — autonomous driving / road-state research checkpoint.
-- `stage1-target-post-final-hit-9548.chqstate` — user-confirmed Stage-1 target state after the decisive hit, while the target is entering its scripted slowdown. Do not describe this as pre-final-hit or remaining-health state.
-- `stage1-end-level-9988.chqstate` — user-confirmed Stage-1 end-of-level screen.
+## Core
 
-Important known-but-not-bundled states:
+- `stage1-gameplay-2064.chqstate` — early player gameplay; general controls/gameplay research.
+- `stage1-driving-2352.chqstate` — autonomous attract/driving graphics/road reference; **not** a player-control state.
 
-- `stage1-target-approach-7060.chqstate` — validated in prior working trees; target active/approaching and useful for collision/pursuit experiments. Its validated bytes were not present in the v0.59.3 source package used to create v0.59.4.
-- `stage1-target-pre-final-hit-9495.chqstate` — generated during final-hit tracing, but not contained in the uploaded evidence bundle. Add only when the actual checkpoint file is supplied.
-- `stage1-fork1-approach-XXXX.chqstate` — planned after the route-commit frame is proven.
+## Target/contact/damage
 
-CHQSTATE v1 remains the current restore format. A future v2 should add optional metadata and embedded PNG preview while retaining v1 compatibility.
+- `stage1-target-immediate-pre-contact-5587.chqstate` — one frame before the first proven physical target contact in the recovered contact timeline. Useful for collision-response A/B work.
+- `stage1-target-first-physical-contact-5588.chqstate` — first proven physical contact response; this contact by itself is not the damage-authority event.
+- `stage1-target-immediate-pre-damage-6333.chqstate` — **preferred target-health/damage anchor**. One frame before a known authentic damaging impact. Use this for deterministic target-health and one-hit experiments.
+- `stage1-target-first-damage-6334.chqstate` — matching first genuine damaging-hit state. PC `0xA112` decrements confirmed remaining-hit counter `0x1002AE`.
+- `stage1-target-post-final-hit-9548.chqstate` — post-final-hit transition while the defeated target is entering scripted slowdown. Do not describe as near-destruction/pre-hit health.
+- `stage1-end-level-9988.chqstate` — confirmed Stage-1 end/intermission reference.
+
+CHQSTATE v1 remains the restore format. The 6333/6334 pair supersedes older lost/non-bundled 7060/9495 references for target-damage causality.

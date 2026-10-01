@@ -1,3 +1,18 @@
+# RC2.9 API additions
+
+## `game.target.one-hit`
+
+`api game.target.one-hit enabled=true|false` enables/disables the **Stage 1 special target** one-hit research cheat. It does not freeze `0x1002AE` and does not synthesize defeat. Native runtime logic watches authentic damage PC `0xA112`; while enabled, a nonterminal counter is armed to zero immediately before the original instruction executes. The original instruction therefore performs `0000 -> FFFF`, sets authentic CPU flags, falls through to PC `0xA118`, writes `0x1002D8=0x1400`, and enters the original defeat state machine. Default: OFF.
+
+Native debugger parity: `target one-hit status|on|off`. Startup CLI: `--one-hit-target`. Workbench: Experimental / Game Lab -> **One-hit Target Kill**.
+
+## `control.run-frames` timeout
+
+`api control.run-frames frames=N timeout=MS` accepts `timeout=1000..3600000`; RC2.9 default is 900000 ms. Progress/stall detection remains active. The HTTP endpoint accepts the same optional `timeout` field. The outer Workbench budgets are deliberately larger than the maximum requested operation (3,700 seconds at the front proxy and 3,700,000 ms in the browser) so the configurable timeout is not silently truncated by transport layers.
+
+## SDL pause shortcut
+
+Pause/Break in the focused SDL window toggles emulation pause/resume. F10 retains its existing debug-overlay/evidence-bundle role and is not a pause shortcut. This is a convenience binding over the existing pause state; API/script `control.pause` and `control.resume` remain authoritative automation interfaces.
 
 ## RC2.7 public contracts
 
@@ -23,8 +38,8 @@ New scriptable actions: `game.experiment.status`, `game.turbo.stock`, `game.turb
 
 The Game Lab UI is a convenience front end over the same script actions. `POST /api/v1/game/action` accepts an `action` plus action-specific fields and maps to the documented `game.*` actions. `POST /api/v1/tile/inspect` accepts `code`, `palette`, and `scale` and maps to `tile.inspect`. Automation should prefer the Research Script/API action names so CLI/script/UI behaviour stays aligned.
 
-# ChaseHQ-Native Script API Reference — v0.66.5.1
-> **Current proven release:** v0.66.8.0 (2026-09-29). Interfaces documented here correspond to the promoted RC7.4 runtime unless a section is explicitly historical.
+# ChaseHQ-Native Script API Reference — v0.66.9.0-RC2.9
+> **Current validation baseline:** v0.66.9.0-RC2.8 (Windows/SDL proven). RC2.9 is the current source candidate; new RC2.9 interfaces remain candidate-only until focused Windows/SDL and Full Regression proof.
 
 
 **102 documented actions.** This file is generated from the same `$scriptActionSchemas` table used by the running Workbench.
@@ -33,7 +48,7 @@ The Game Lab UI is a convenience front end over the same script actions. `POST /
 
 Runtime discovery: `api actions`, `api schema action=NAME`, `api schema.all`, or `GET /api/v1/schema/actions`.
 
-## Generic memory-write tracing (v0.66.5.1)
+## Generic memory-write tracing (v0.66.9.0-RC2.9)
 
 `memory.trace.*` captures writer provenance at the `Bus::write` transaction boundary. It is game-agnostic and records matching writes even when the value does not change.
 

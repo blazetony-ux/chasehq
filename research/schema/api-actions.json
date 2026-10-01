@@ -1,6 +1,6 @@
 {
   "schema": "chq-script-api-actions-v1",
-  "build": "0.66.9.0-RC2.7",
+  "build": "0.66.9.0-RC2.9",
   "actions": {
     "status": {
       "params": [],
@@ -160,10 +160,11 @@
     },
     "control.run-frames": {
       "params": [
-        "frames=1..100000 required"
+        "frames=1..100000 required",
+        "timeout=1000..3600000 optional default 900000 ms"
       ],
-      "example": "api control.run-frames frames=100",
-      "description": "Run exactly N emulated frames and pause; cancellation-aware"
+      "example": "api control.run-frames frames=100 timeout=900000",
+      "description": "Run exactly N emulated frames and pause; cancellation-aware with configurable progress-aware timeout"
     },
     "control.abort": {
       "params": [],
@@ -992,7 +993,7 @@
     "game.experiment.status": {
       "params": [],
       "example": "api game.experiment.status",
-      "description": "Read Chase H.Q.-specific Game Lab state for turbo stock/active timer/current speed and reversible override toggles"
+      "description": "Read Chase H.Q.-specific Game Lab state including target remaining-hit counter, one-hit target mode, turbo/current speed and reversible override toggles"
     },
     "game.turbo.stock": {
       "params": [
@@ -1142,6 +1143,13 @@
       ],
       "example": "api frame.snapshot.assert-exact name=rc27-corrected",
       "description": "Require exact=true, verifiedExact=true and zero reconstruction mismatches"
+    },
+    "game.target.one-hit": {
+      "params": [
+        "enabled=true|false required"
+      ],
+      "example": "api game.target.one-hit enabled=true",
+      "description": "Enable/disable the Stage 1 special-target one-hit research cheat. When enabled, the confirmed 0x1002AE counter is armed to zero immediately before authentic damage PC 0xA112 so the genuine terminal underflow/defeat path executes."
     }
   }
 }

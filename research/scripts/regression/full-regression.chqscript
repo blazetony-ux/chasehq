@@ -387,5 +387,9 @@ include "regression/regression-v06690-rc25-script-safety.chqscript"
 # v0.66.9.0 RC2.6.1 sprite bitplane significance integration regression
 include "regression/regression-v06690-rc261-sprite-bitplane-significance.chqscript"
 
-include "regression/regression-v06690-rc27-tc0100-reliability.chqscript"
+include "regression/regression-v06690-rc28-tc0100-reliability.chqscript"
+include "regression/regression-v06690-rc28-radar-hud-endstate.chqscript"
+# v0.66.9.0 RC2.9 confirmed target health + one-hit/tooling
+include "regression/regression-v06690-rc29-target-health-tooling.chqscript"
+
 echo === ChaseHQ Full Regression: COMPLETE ===

@@ -1,6 +1,6 @@
 {
   "schema": "chq-semantic-objects-v1",
-  "build": "0.66.3",
+  "build": "0.66.9.0-RC2.9",
   "objects": [
     {
       "id": "player_car",
@@ -17,11 +17,13 @@
     {
       "id": "target_car",
       "label": "Target car",
-      "status": "open",
-      "confidence": "RESEARCH",
-      "resolver": "target-health + sprite-family correlation",
+      "status": "confirmed",
+      "confidence": "CONFIRMED",
+      "resolver": "confirmed target object record 0x10A080-0x10A0BF plus confirmed remaining-hit counter CPU-A 0x1002AE",
       "evidence": [
-        "CPU-A 0x1002AE target-health candidate"
+        "frame 6334 genuine damage: PC 0xA112 decrements 0x1002AE 000E->000D",
+        "causal terminal proof: forced 0000->FFFF takes PC 0xA118, writes 0x1002D8=0x1400 and enters defeat",
+        "canonical checkpoints stage1-target-immediate-pre-damage-6333 and stage1-target-first-damage-6334"
       ]
     },
     {
@@ -38,11 +40,13 @@
     {
       "id": "brake_lamp",
       "label": "Brake lamp",
-      "status": "candidate",
-      "confidence": "RESEARCH",
-      "resolver": "visual proxy pending authoritative gameplay bit",
+      "status": "confirmed",
+      "confidence": "CONFIRMED",
+      "resolver": "processed brake CPU-A 0x100303 -> palette writers 0x4988/0x4992 and restores 0x499E/0x49A8",
       "evidence": [
-        "historical palette/render observations"
+        "causal brake input changes 0x100302/0x100303",
+        "palette banks 64/65 pen 13 use 0x18DE during brake and 0x000E after release",
+        "78-pixel brake-lamp visual delta returns pixel-identical after release"
       ]
     },
     {

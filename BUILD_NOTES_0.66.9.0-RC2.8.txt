@@ -1,0 +1,14 @@
+ChaseHQ-Native v0.66.9.0-RC2.8 candidate
+
+Based on Windows-proven, saturated v0.66.9.0-RC2.7 Run 009.
+
+Changes:
+- TC0100SCN normal text source X origin +23 -> +16.
+- Separate flipped-text coordinate path with tests.
+- Independent sprite 4bpp SHADOW decoder and COMPARE utility; diagnostic parity only.
+- RC2.8 regression captures Stage 1 driving and end-results/radar/HUD checkpoints.
+- 0x1002E8 classified as end-results/intermission gate; 0x1002AE removed as a health claim.
+- Responsive Workbench layout, selected-run Open in Evidence action and data-driven Next Steps.
+- Native version reporting updated to RC2.8.
+
+Local Windows Build-Debug.bat stages SDL and ROMs through Prepare-Project using build-local.json. Run that exact script for Windows/SDL proof.

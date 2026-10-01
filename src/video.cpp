@@ -353,6 +353,12 @@ bool Video::process_events(
             }
         }
 
+        // RC2.9: immediate SDL pause/resume for manual research capture. Pause/Break
+        // is primary. Existing F-key diagnostics remain unchanged; API/script pause/resume remain available.
+        if (e.key.scancode == SDL_SCANCODE_PAUSE) {
+            actions.toggle_pause = true; changed = true; continue;
+        }
+
         // v0.60.0: F12 opens a dedicated live Research Workbench.  It is kept
         // separate from the compact F1 HUD so investigation controls can grow
         // without making the gameplay overlay unreadable.
@@ -1115,7 +1121,6 @@ void Video::draw_runtime_text_layer(
     const std::uint16_t ctrl6 = be16(cr->bytes, 12);
     const std::uint16_t ctrl7 = be16(cr->bytes, 14);
     if (ctrl6 & 0x04) return;
-    const int scrollx = -static_cast<std::int16_t>(ctrl2);
     const bool flip_screen = (ctrl7 & 1) != 0;
 
     for (int sy = 0; sy < HEIGHT; ++sy) {
@@ -1123,9 +1128,9 @@ void Video::draw_runtime_text_layer(
         const int hw_y = sample_y + VISIBLE_Y_START;
         for (int sx = 0; sx < WIDTH; ++sx) {
             const int sample_x = sx - layer_offset_text_.x;
-            int mx = (sample_x - scrollx + 23) & 0x1ff;
+            const int mx = tc0100scn_text_source_x(sample_x, ctrl2, flip_screen);
             int my = tc0100scn_source_y(hw_y, ctrl5);
-            if (flip_screen) { mx = 0x1ff - mx; my = 0x1ff - my; }
+            if (flip_screen) my = 0x1ff - my;
             const int tx = (mx >> 3) & 63, ty = (my >> 3) & 63;
             const std::size_t off = 0x4000 + static_cast<std::size_t>(ty * 64 + tx) * 2;
             if (off + 1 >= tr->bytes.size()) continue;
@@ -1726,10 +1731,11 @@ void Video::visualise_road_ram_map(
     }
 }
 
-void Video::update_runtime_title(const Runtime& runtime, const SceneState& scene, unsigned frame, unsigned sprites) {
+void Video::update_runtime_title(const Runtime& runtime, const SceneState& scene, unsigned frame, unsigned sprites, bool paused) {
     std::ostringstream ss;
     ss << kWindowProduct << " v" << kNativeVersion << " FORENSIC PIXEL PROVENANCE"
        << " | frame " << frame
+       << (paused ? " | PAUSED" : " | RUNNING")
        << " | CPU A " << runtime.instructions_a
        << " | CPU B " << runtime.instructions_b
        << " | sprites " << sprites
@@ -2988,7 +2994,7 @@ void Video::draw_runtime(
     if (research_workbench_) draw_research_workbench(pixels, runtime, frame, paused);
     else draw_debug_overlay(pixels, runtime, frame, paused, timer_frozen);
     draw_script_prompt(pixels);
-    update_runtime_title(runtime, scene, frame, sprites);
+    update_runtime_title(runtime, scene, frame, sprites, paused);
     present(pixels);
 }
 

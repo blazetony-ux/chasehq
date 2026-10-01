@@ -1,4 +1,5 @@
 #include "sprite_gfx.h"
+#include "sprite_gfx_shadow.h"
 
 #include <cstddef>
 #include <cstdint>
@@ -33,7 +34,12 @@ static std::uint8_t reverse_nibble(std::uint8_t value) {
 }
 
 int main() {
+    std::vector<std::uint8_t> shadow_fixture(4096);
+    for (std::size_t i = 0; i < shadow_fixture.size(); ++i) shadow_fixture[i] = static_cast<std::uint8_t>((i * 73u) ^ (i >> 2));
     try {
+        const auto shadow_parity = chq::compare_sprite_decoder_4bpp(shadow_fixture, 0, 4);
+        require(shadow_parity.pixels == 4u * 256u && shadow_parity.mismatches == 0,
+                "independent sprite SHADOW decoder must match live 4bpp decode");
         constexpr int x = 7;
         constexpr int y = 9;
 

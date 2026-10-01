@@ -1,23 +1,13 @@
-# ChaseHQ-Native v0.66.9.0-RC2.7
+# ChaseHQ-Native v0.66.9.0-RC2.9
 
-# Active candidate: v0.66.9.0-RC2.7
+## RC2.9 consolidation candidate
 
-Authoritative source baseline: supplied v0.66.9.0-RC2.6.1. RC2.7 is a source/research candidate awaiting local Windows/SDL promotion, not a proven Windows release.
+RC2.9 starts from the Windows/SDL-proven RC2.8 baseline and promotes the later RC2.8 causal research into the product, knowledge base and canonical checkpoint corpus. The release adds a native Stage-1 special-target one-hit research toggle that preserves the authentic `0xA112 -> 0xA118` terminal damage path, a global SDL Pause/Break pause/resume shortcut, a responsive Dashboard layout with SDL controls adjacent to the live frame on wide screens, and a configurable long-run timeout for `control.run-frames`.
 
-Implemented: shared TC0100SCN BG X correction with unchanged Y/origin/zero offsets; same-state legacy/corrected diagnostic mode; correct pre-sprite snapshot base; parsed authoritative history sorting without pre-filter truncation; server-side Current Session queries; full release stamping from src/version.h; bounded local cache and exact selected-run identity; wired SDL controls; live layer offset get/set/reset/assert; checkpoint-frame capture before advancement; requested-artifact completeness checks and CLI identity manifest.
+The target-health question is closed at **BEHAVIOUR UNDERSTOOD**: CPU-A `0x1002AE` is the special target remaining-hit counter; genuine damaging hits decrement it at PC `0xA112`; `0xFFFF` is the terminal/exhausted sentinel. A value of `0x0000` means one final damaging hit remains. The preferred causal anchor is `stage1-target-immediate-pre-damage-6333.chqstate`, with `stage1-target-first-damage-6334.chqstate` as its matching post-hit state.
 
-Linux proof: TC0100SCN coordinate/raster/column-zero detection tests PASS; sprite 16-pen decoder PASS; sprite ownership/priority PASS; full CPU/bus/runtime test target compiled and PASS. JavaScript current-session/version/identity test PASS and frontend syntax check PASS. Windows CTest history/evidence tests and full Script Console regressions are bundled but not executed here.
+RC2.9 requires its own Windows/SDL `Build-Debug.bat`, focused RC2.9 regression and Full Regression before promotion. Linux/static validation in the packaged candidate does not substitute for that Windows proof.
 
-Next gate: `Build-Debug.bat` stages local SDL/ROMs via `Prepare-Project.ps1` and `build-local.json`, compiles Windows/SDL and runs CTest. Then `Start-ChaseHQ.ps1 -Restart`, focused RC2.7 regression, preserved RC2.6.1 sprite regression, and Full Regression through its terminal COMPLETE marker. Inspect all four canonical old/corrected captures and require zero reconstruction mismatches before promotion.
-
-Column scroll remains unsupported beyond the observed zero table and is exposed as such. Semantic TC0100SCN state and pixel-to-tile provenance remain stretch goals with an explicit unimplemented schema plan. No independent shadow backend or SHADOW VERIFIED claim is made.
-
-References: `TC0100SCN_RC261_FINDINGS.md`, `NATIVE_RECONSTRUCTION.md`, `RELEASE_SCOPE_RC27.md`, `../VALIDATION_0.66.9.0-RC2.7.md`. Canonical post-final-hit 9548 is the packaged checkpoint filename; do not rename it to the older near-destruction label.
-
-
-See `docs/RELEASE_SCOPE_RC27.md` for every approved item.
-
----
 ## Historical release introductions
 
 # ChaseHQ-Native v0.66.9.0-RC2.6.1
@@ -34,7 +24,7 @@ RC2.4.3 is a Workbench snapshot-discovery correctness hotfix on top of the prove
 
 Native emulator/video output is unchanged from RC2.4.2. The RC2.4.2 layered capture also localized the visible sky pattern to the raw TC0100SCN background source, so sky dithering/banding is no longer treated as a compositor defect without contradictory reference evidence. See the historical `RELEASE_NOTES_0.66.9.0-RC2.4.4.md` and `VALIDATION_0.66.9.0-RC2.4.4.md` for that earlier gate; RC2.4.3 snapshot-discovery proof is carried forward.
 
-**Status: DEVELOPMENT CANDIDATE. Current proven baseline remains v0.66.8.0.** This candidate is the first game-facing follow-up after the Forensic Timeline release. It adds reversible Chase H.Q.-specific turbo/speed experiments to the Workbench Game Lab, a TC0100SCN RAM text-character inspector with PNG/raw-pen export, and packages the reusable turbo/HUD investigation scripts that proved the current HUD behaviour.
+**Historical v0.66.9.0 development note.** This was the first game-facing follow-up after the Forensic Timeline release; current release state is described at the top of this file. It adds reversible Chase H.Q.-specific turbo/speed experiments to the Workbench Game Lab, a TC0100SCN RAM text-character inspector with PNG/raw-pen export, and packages the reusable turbo/HUD investigation scripts that proved the current HUD behaviour.
 
 Key additions: infinite turbo stock (`0x1003A2` freeze), infinite active turbo (`0x100414` timer freeze), current-speed set/freeze (`0x10041C`), improved Game Lab presentation/API parity, `tile.inspect`, reusable turbo/HUD scripts, and explicit timeline frame-boundary documentation.
 

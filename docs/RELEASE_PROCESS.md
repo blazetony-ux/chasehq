@@ -1,6 +1,6 @@
-# RC2.7 source handoff gate
+# Current RC2.9 source handoff gate
 
-Linux can produce the source candidate and run available native/JavaScript tests. Local `Build-Debug.bat` supplies SDL and ROMs via the preserved staging configuration. Source delivery and Windows promotion are separate claims. Run the bundled history/CLI-evidence CTest gates and focused/Full Regression locally before calling this candidate proven. See `../VALIDATION_0.66.9.0-RC2.7.md`.
+Linux can produce the source candidate and run available native/JavaScript tests. Local `Build-Debug.bat` supplies SDL and ROMs via the preserved staging configuration. Source delivery and Windows promotion are separate claims. Run the bundled history/CLI-evidence CTest gates, the focused RC2.9 regression and Full Regression locally before calling this candidate proven. See `../VALIDATION_0.66.9.0-RC2.9.md`. The build wrapper may tolerate the one documented `cpu_bus_rom_tests (SEGFAULT)` signature only when it is the **sole** CTest failure; any additional failing test must make the build return non-zero.
 
 ---
 ## v0.66.9.0-RC2.4 candidate gate
@@ -13,7 +13,7 @@ This candidate must first pass `Regression - v0.66.9.0 Game Lab and Tile Inspect
 
 # Release / prove-off process
 
-Current proven baseline: **v0.66.8.0**, promoted 2026-09-29 after focused bounded-history and Full Regression PASS.
+Latest Windows/SDL-proven baseline: **v0.66.9.0-RC2.8**. RC2.9 is the current source candidate and requires its own focused RC2.9 + Full Regression proof before promotion.
 
 This file is the canonical ChaseHQ-Native Windows development/release process. The detailed incident record is `docs/POSTMORTEM_0.66.7.8_RELEASE_PROVEOFF.md`. It exists because the v0.66.7.6-v0.66.7.8 prove-off exposed several avoidable packaging, validator, discovery and runner-lifecycle failures. Do not improvise around this process unless evidence shows the process itself is wrong.
 

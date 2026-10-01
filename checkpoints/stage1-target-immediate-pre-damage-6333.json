@@ -1,0 +1,20 @@
+{
+  "format_version": 1,
+  "name": "stage1-target-immediate-pre-damage-6333",
+  "game": "Chase H.Q.",
+  "frame": 6333,
+  "description": "Canonical RC2.8 state one frame before the first observed genuine target-damage event in manual-damage timeline run 022. At frame 6334 the target interaction sets type 0x000A and CPU-A PC 0xA112 decrements 0x1002AE from 0x000E to 0x000D.",
+  "validated_with": [
+    "0.66.9.0-RC2.8"
+  ],
+  "checkpoint_format": "v1 binary .chqstate",
+  "notes": [
+    "Recovered losslessly from per-frame states in timeline target-manual-damage-hunt, evidence run 022.",
+    "Timeline source began from stage1-target-immediate-pre-contact-5587.chqstate.",
+    "The frame-6334 damage event is unique in this 782-frame timeline for writes to both 0x10042E and 0x1002AE."
+  ],
+  "sha256": "c40109ef16a0d3e36f065c84786c90d8271e8ddcb6e04b8c62196d5652769755",
+  "size_bytes": 250488,
+  "role": "target_pre_damage",
+  "recommended_use": "Deterministic target-health/damage causal A/B experiments, especially controlled initial values of CPU-A 0x1002AE before the known frame-6334 damaging impact."
+}

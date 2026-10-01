@@ -493,6 +493,12 @@ public:
     }
     double handling_cornering_scale() const { return handling_cornering_scale_; }
     double handling_speed_retain() const { return handling_speed_retain_; }
+    // RC2.9: causally-proven Stage-1 special-target one-hit research control.
+    // When enabled, the instruction hook arms 0x1002AE to zero immediately before
+    // authentic damage PC 0xA112; the original decrement/flags/terminal path executes.
+    void set_target_one_hit(bool enabled) { target_one_hit_ = enabled; }
+    bool target_one_hit() const { return target_one_hit_; }
+    std::uint64_t target_one_hit_arms() const { return target_one_hit_arms_; }
     // v0.64.0: safe read-only disassembly surface for the Research API.
     std::string disassemble(BusSpace space, std::uint32_t pc, unsigned* size_out = nullptr) const { return disassemble_space(space, pc, size_out); }
 
@@ -506,6 +512,8 @@ private:
     HandlingSnapshot handling_snapshot_{};
     double handling_cornering_scale_ = 1.0;
     double handling_speed_retain_ = 1.0;
+    bool target_one_hit_ = false;
+    std::uint64_t target_one_hit_arms_ = 0;
     void initialise_context(BusSpace space, std::vector<std::uint8_t>& context);
     int execute_slice(BusSpace space, int budget);
     void sync_sub_reset();
@@ -789,6 +797,7 @@ struct Options {
     std::vector<SteeringEvent> steering_events;
     bool gameplay_state_log = false;
     bool target_state_log = false; // v0.59 target/pursuit + collision telemetry
+    bool target_one_hit = false; // RC2.9 special-target research cheat; default OFF
     bool no_collisions = false;    // v0.59.1 proven lateral + speed collision-response suppression
     bool course_data_log = false; // export banked course source + live course position/channel state
     // v0.55 course-survey assists. These are explicit debugger interventions and

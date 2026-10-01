@@ -1,3 +1,9 @@
+# Current candidate: v0.66.9.0-RC2.9
+
+See `VALIDATION_0.66.9.0-RC2.9.md` for the current source checks and Windows/SDL promotion gate. The latest fully Windows/SDL-proven baseline is v0.66.9.0-RC2.8.
+
+Historical RC2.7 validation follows.
+
 # RC2.7 validation
 
 | Check | Result |

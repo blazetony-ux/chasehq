@@ -1,28 +1,29 @@
-# Discovery record — Stage-1 target identity and contact chain
+# Discovery record — Stage-1 target contact and damage
 
-**Status:** target identity/contact chain CONFIRMED; health semantics OPEN
+**Status:** target identity/contact CONFIRMED; target health/damage BEHAVIOUR UNDERSTOOD.
 
-## Starting state
-Canonical Stage-1 encounter/checkpoint research around frames 7060–7085 and later near-final-hit states.
+## Target object
 
-## Method
-1. Correlate visible pursued vehicle with object records and semantic sprite activity.
-2. Compare target-approach/contact frames.
-3. Perform causal A/B intervention by moving the candidate object longitudinally away.
-4. Observe whether interaction type, score award and response path disappear while object processing remains alive.
-5. Trace writes during the contact frame and follow physical response into player state.
+- object record: `0x10A080-0x10A0BF`
+- longitudinal position: `0x10A080`
+- lateral/response field used by physical contact: `0x10A084`
+- target motion: `0x10A092`
+- defeated setpoint/floor: `0x10A096`
 
-## Outcome
-- Target object record: `0x10A080–0x10A0BF`.
-- Target longitudinal position: `0x10A080`.
-- Investigated visual assembly: maps `319/320/321/322`, palette `152`.
-- `0x10A089` bit `0x20`: strong contact/interaction candidate.
-- `0x10042E`: interaction/event type; type 9 observed in the investigated contact.
-- `0x1002C6`: initialised to `0x003C` in the type-9 path; strong interaction-response timer candidate.
-- Contact path ultimately reaches the player lateral shove around CPU-A `$00A12A` / `$00A156`.
+Physical overlap/contact at frame 5588 reaches the `0x9C46 -> 0xA12A` response path and modifies target `0x10A084`; it does **not** by itself modify the confirmed damage counter. `0x10A089` pulses can occur without that physical contact and must not be used as a hit/damage flag.
 
-## Rejected interpretation
-`0x1002AE = target health` is **REJECTED**. Intervention showed that forcing it near zero changes downstream phase/counter behaviour without eliminating the encounter/score event. Keep it described as an interaction/phase counter candidate until stronger evidence exists.
+## Genuine damage
 
-## Why this matters
-This is a model discovery record: the causal intervention was more informative than simple correlation. The reusable procedure is extracted in `../../methods/recipes/discover-damage-or-health.md` and `../../methods/recipes/controlled-a-b-intervention.md`.
+Canonical frame 6334 is a proven damaging target impact:
+
+- PC `0x9EC8`: interaction type `0x10042E = 0x000A`
+- PC `0xA094`: response timer `0x1002C6 = 0x003C`
+- PC `0xA112`: `subq.w #1, 0x1002AE`
+- normal/nonterminal result: PC `0xA124` updates `0x1002D8` (observed `0x0155`)
+- terminal underflow: PC `0xA118` writes `0x1002D8 = 0x1400`
+
+## Superseded interpretation
+
+Earlier releases rejected `0x1002AE` as health because post-defeat observations and insufficiently controlled interventions conflated terminal/phase behavior with live target state. The frame-6333 causal A/B proof supersedes that interpretation. `0x1002AE` is now CONFIRMED as the special target remaining-hit/damage counter. Zero means one final damaging hit remains; the next authentic decrement produces `FFFF` and enters defeat.
+
+See `target-health-and-defeat.md` for the complete causal proof and downstream state machine.

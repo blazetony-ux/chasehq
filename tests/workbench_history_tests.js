@@ -8,13 +8,13 @@ const context={URLSearchParams,console,$:id=>elements[id],escapeHtml:x=>x,render
   queries.push(url);
   if(url.endsWith('limit=1'))return JSON.stringify({currentSession:'active',runs:[{session:'old'}]});
   assert(url.includes('session=active'),'Current session must be queried server-side');
-  return JSON.stringify({runs:[{serverKey:'active/001',version:'0.66.9.0-RC2.7',session:'active'}]});
+  return JSON.stringify({runs:[{serverKey:'active/001',version:'0.66.9.0-RC2.8',session:'active'}]});
 }};
 vm.createContext(context);
 vm.runInContext('let authoritativeRunHistory=[],defaultHistorySession="",historyDefaultApplied=false;'+pure+refresh,context);
 (async()=>{
   const result=await vm.runInContext('refreshAuthoritativeRunHistory()',context);
-  assert.equal(result[0].version,'0.66.9.0-RC2.7');
+  assert.equal(result[0].version,'0.66.9.0-RC2.8');
   assert.equal(result[0].id,'active/001');
   assert.equal(elements.scriptHistorySession.value,'active');
   assert.equal(queries.length,2);

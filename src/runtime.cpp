@@ -1865,6 +1865,17 @@ void Runtime::instruction_hook(unsigned int pc) {
             force_road_flag_applied_ = true;
         }
     }
+    // RC2.9: one-hit special-target research cheat. This runs before the authentic
+    // SUBQ.W at PC 0xA112. Do not freeze the counter: arm it to zero once at the real
+    // damage instruction so Musashi performs 0000->FFFF and sets authentic flags.
+    if (active_space == BusSpace::Main && pc == 0x00a112 && target_one_hit_) {
+        const auto remaining = bus.peek(0x1002ae, 2, BusSpace::Main);
+        if (remaining != 0xffffu && remaining != 0u) {
+            bus.debug_write(0x1002ae, 0u, 2, BusSpace::Main);
+            ++target_one_hit_arms_;
+        }
+    }
+
     // v0.59.3 handling/cornering telemetry + controlled coefficient override.
     // Hooks run BEFORE the current instruction.  The lifetime points were proven
     // from v0.59.2 traces: D4 is forward coefficient at $008AAA and the forward
@@ -2595,6 +2606,7 @@ static void load_master_debug_config(Options& o, const std::filesystem::path& pa
             else if(k=="steering_range"||k=="steering-range") o.steering_events.push_back(parse_steering_event(v,true));
             else if(k=="gameplay_state_log"||k=="gameplay-state-log") o.gameplay_state_log=(v!="0"&&v!="false"&&v!="off");
             else if(k=="target_state_log"||k=="target-state-log") o.target_state_log=(v!="0"&&v!="false"&&v!="off");
+            else if(k=="target_one_hit"||k=="target-one-hit"||k=="one_hit_target"||k=="one-hit-target") o.target_one_hit=(v!="0"&&v!="false"&&v!="off");
             else if(k=="no_collisions"||k=="no-collisions") { o.no_collisions=(v!="0"&&v!="false"&&v!="off"); if(o.no_collisions) o.target_state_log=true; }
             else if(k=="course_follow_controller"||k=="course-follow-controller") { o.course_follow_controller=v; }
             else if(k=="course_profile"||k=="course-profile") { o.course_profile_file=v; o.course_follow=true; o.course_follow_controller="profile"; }
@@ -2910,6 +2922,7 @@ static bool parse_core_option(Options& o, const std::string& arg, int& i, int ar
     }
     else if (arg == "--pulse-ioc") { o.input_pulses.push_back(parse_input_pulse(value())); return true; }
     else if (arg == "--pulse-ioc-every") { o.periodic_input_pulses.push_back(parse_periodic_input_pulse(value())); return true; }
+    else if (arg == "--one-hit-target") { o.target_one_hit=true; return true; }
     else if (arg == "--sprite-debug") { o.sprite_debug=true; return true; }
     else if (arg == "--sprite-debug-large") { o.sprite_debug=true; o.sprite_debug_large_only=true; return true; }
     else if (arg == "--sprite-dump-ram") { o.sprite_debug=true; o.sprite_dump_ram=true; return true; }
@@ -3225,6 +3238,7 @@ void print_help() {
         "  --steering-signed-range A:B:VALUE signed steering for inclusive frame range; repeatable\n"
         "  --gameplay-state-log          write authoritative known gameplay_state.csv (signed steering + road state)\n"
         "  --target-state-log            write target_state.csv + collision_events.csv for Stage-1 pursuit research\n"
+        "  --one-hit-target             RC2.9 research cheat: next genuine special-target damage takes authentic terminal path\n"
         "  --no-collisions               suppress proven physical collision responses at $A142/$A156/$A1BE/$A1C4/$A200\n"
         "  --course-data-log             export 0x109000 course banks and live course position/channel state\n"
         "  --course-survey              accel + course-follow + infinite time + auto/unlimited turbo + state logs\n"

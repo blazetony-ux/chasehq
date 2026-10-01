@@ -8,6 +8,6 @@ Adds Game Lab experiment controls, TC0100SCN RAM character inspection and the fo
 
 # Current platform documentation
 
-**Current proven platform baseline: v0.66.8.0 — Forensic Timeline v1.**
+**Latest Windows/SDL-proven platform baseline: v0.66.9.0-RC2.8. Current source candidate: v0.66.9.0-RC2.9.**
 
 The live implementation remains authoritative. For current interfaces use `../../API_REFERENCE.md`, `../../SCRIPT_LANGUAGE_REFERENCE.md`, `../../FORENSIC_TIMELINE.md`, and `../../PROJECT_STATE.md`. Files in this directory document major platform milestones and remain useful architectural references; older version-titled documents are not claims that those versions are still current.

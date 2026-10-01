@@ -1,3 +1,10 @@
+# RC2.9 scripting notes
+
+The grammar remains Research Script v2. RC2.9 adds `api game.target.one-hit enabled=true|false` and an optional `timeout=` parameter to `api control.run-frames`.
+
+> **State-dependent query caveat:** `getregions()`, `getsprites()`, `getmaps()`, `getpalettes()` and the other `get*()` collection helpers are resolved during Script Console preflight and cached for the run. If the script later changes machine state (especially `checkpoint.load`), a collection assigned from `getmaps()` can represent the state that existed before the script body began. Direct `api sprites.maps`, `api sprites.list`, etc. execute at runtime and reflect the current machine state. Do not treat preflight collections as dynamic queries. Explicit runtime-query syntax is a tooling backlog item.
+
+The planned structured tuple/record iterable extension remains future work; do not invent tuple/object syntax in current scripts.
 
 ## RC2.7 public contracts
 
@@ -18,8 +25,8 @@ Native CLI equivalents: `chqctl layer-offset get`, `chqctl layer-offset set bg0 
 
 The scripting language grammar is unchanged. New functionality is exposed through ordinary `api ACTION key=value` calls, notably the `game.*` and `tile.inspect` actions documented in the live API schema. Reusable turbo/HUD investigation scripts are now bundled under `research/scripts/graphics/` and `research/scripts/gameplay/`.
 
-# Research Script v2 Language Reference — v0.66.5.1
-> **Current proven release:** v0.66.8.0 (2026-09-29). Interfaces documented here correspond to the promoted RC7.4 runtime unless a section is explicitly historical.
+# Research Script v2 Language Reference — v0.66.9.0-RC2.9
+> **Current validation baseline:** v0.66.9.0-RC2.8 (Windows/SDL proven). RC2.9 is the current source candidate; new RC2.9 interfaces remain candidate-only until focused Windows/SDL and Full Regression proof.
 
 
 Authoritative runtime discovery: `api script.schema` or `GET /api/v1/schema/script`. Static schema snapshot: `research/schema/script-language.json`.
@@ -155,7 +162,7 @@ api palette.trace.stop
 
 Palette trace events contain the exact writer PC and complete palette old/new values, which makes them suitable for follow-up disassembly/provenance work.
 
-## Generic memory-write tracing from Research Script (v0.66.5.1)
+## Generic memory-write tracing from Research Script (v0.66.9.0-RC2.9)
 
 The Script grammar is unchanged. The following first-class API actions are available through `api ACTION`: `memory.trace.start`, `memory.trace.status`, `memory.trace.tail`, `memory.trace.stop`, and `memory.trace.clear`. Example:
 

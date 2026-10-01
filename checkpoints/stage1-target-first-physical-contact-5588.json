@@ -1,0 +1,20 @@
+{
+  "format_version": 1,
+  "name": "stage1-target-first-physical-contact-5588",
+  "game": "Chase H.Q.",
+  "frame": 5588,
+  "description": "State at first observed target physical collision-response frame in RC2.8 run 020; CPU-A PC 0xA13C writes target +4 (0x10A084). This does not by itself prove a damage/health decrement.",
+  "validated_with": [
+    "0.66.9.0-RC2.8"
+  ],
+  "checkpoint_format": "v1 binary .chqstate",
+  "notes": [
+    "Recovered losslessly from the per-frame states in timeline target-first-contact, evidence run 020.",
+    "Source checkpoint for the timeline was stage1-target-pre-hit-current.chqstate at frame 5573.",
+    "External debugger patches/input overrides were cleared before the source checkpoint was loaded for this timeline run."
+  ],
+  "sha256": "9c8b4d0c3f9d085eb9034d983140425f15b3e3e5e004b1bddf68a91e20b10c32",
+  "size_bytes": 250488,
+  "role": "target_contact_observed",
+  "recommended_use": "Forensic comparison against frame 5587 and subsequent contact/damage-path analysis."
+}

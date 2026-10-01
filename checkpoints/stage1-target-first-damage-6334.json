@@ -1,0 +1,20 @@
+{
+  "format_version": 1,
+  "name": "stage1-target-first-damage-6334",
+  "game": "Chase H.Q.",
+  "frame": 6334,
+  "description": "RC2.8 state at the first observed genuine target-damage event in manual-damage timeline run 022. CPU-A PC 0x9EC8 sets interaction type 0x000A, PC 0xA094 sets 0x1002C6 to 0x003C, PC 0xA112 decrements 0x1002AE 0x000E->0x000D, and PC 0xA124 sets 0x1002D8 to 0x0155.",
+  "validated_with": [
+    "0.66.9.0-RC2.8"
+  ],
+  "checkpoint_format": "v1 binary .chqstate",
+  "notes": [
+    "Recovered losslessly from per-frame states in timeline target-manual-damage-hunt, evidence run 022.",
+    "Timeline source began from stage1-target-immediate-pre-contact-5587.chqstate.",
+    "The frame-6334 damage event is unique in this 782-frame timeline for writes to both 0x10042E and 0x1002AE."
+  ],
+  "sha256": "7a84f223a3a4aae801344572f9008798d935d3130209777b88dd8e5b0d1046fd",
+  "size_bytes": 250488,
+  "role": "target_damage_observed",
+  "recommended_use": "Forensic comparison against frame 6333 and validation of the target damage-response path."
+}

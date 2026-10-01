@@ -1,26 +1,68 @@
 {
   "schema": "chq-handbook-v1",
-  "build": "0.66.9.0-RC2.7",
+  "build": "0.66.9.0-RC2.9",
   "title": "Chase H.Q. Native User & Research Handbook",
   "sections": [
     {
-      "id": "rc27-candidate",
-      "title": "RC2.7 Candidate and Prove-Off",
+      "id": "rc29-candidate",
+      "title": "RC2.9 Target Damage and Research UX",
       "pages": [
         {
-          "id": "rc27-proveoff",
-          "title": "RC2.7: renderer and reliability",
-          "summary": "Source candidate; Windows proof is pending.",
+          "id": "rc29-candidate",
+          "title": "RC2.9: confirmed target damage, canonical hit checkpoints and research UX",
+          "summary": "Consolidates RC2.8 causal discoveries and adds native one-hit target control, SDL pause hotkey, responsive Dashboard controls and longer configurable run timeouts.",
           "blocks": [
             {
               "type": "callout",
               "tone": "warning",
               "title": "Validation boundary",
-              "text": "RC2.7 Linux native tests pass. Windows/SDL build, PowerShell tests and full Script Console regression still require local execution. Build-Debug stages SDL and ROMs from build-local.json."
+              "text": "RC2.9 is built from the Windows-proven RC2.8 baseline but requires its own Windows/SDL Build-Debug plus focused RC2.9 regression and Full Regression before promotion."
             },
             {
               "type": "p",
-              "text": "The shared BG X transform is corrected; Y and zero presentation defaults are unchanged. Old/corrected snapshots compare all canonical checkpoints. Column scroll remains unsupported and explicitly reported."
+              "text": "Target damage is now causally understood: CPU-A 0x1002AE is decremented by PC 0xA112 on a genuine damaging hit. FFFF is the terminal sentinel; underflow from 0000 takes PC 0xA118, writes 0x1002D8=0x1400 and enters the mapped defeat sequence."
+            },
+            {
+              "type": "list",
+              "items": [
+                "Preferred target-damage anchor: stage1-target-immediate-pre-damage-6333.chqstate.",
+                "Matching post-hit state: stage1-target-first-damage-6334.chqstate.",
+                "Contact-only reference pair: frames 5587/5588.",
+                "Experimental One-hit Target Kill preserves the authentic A112/A118 code path and defaults OFF."
+              ]
+            },
+            {
+              "type": "p",
+              "text": "Dashboard SDL controls sit beside the frame on wide screens and collapse below responsively. Pause/Break toggles pause/resume directly in the SDL window. control.run-frames now accepts a configurable timeout for heavy evidence workloads."
+            },
+            {
+              "type": "callout",
+              "tone": "info",
+              "title": "Script query caveat",
+              "text": "RC2.9 documents that get*() query functions are preflight-evaluated and cached. If a script changes machine state (for example by loading a checkpoint), a previously preflighted getmaps()/getsprites() iterable can describe the pre-run state. Use runtime api actions for state-sensitive inspection until explicit runtime-query syntax is implemented."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rc28-candidate",
+      "title": "RC2.8 Historical Candidate Record",
+      "pages": [
+        {
+          "id": "rc28-candidate",
+          "title": "RC2.8: historical candidate and Windows proof record",
+          "summary": "Source candidate based on the Windows-proven saturated RC2.7 Run 009.",
+          "blocks": [
+            {
+              "type": "callout",
+              "tone": "warning",
+              "title": "Validation boundary",
+              "text": "RC2.8 subsequently passed Windows/SDL proof and is the current validation baseline. RC2.9 requires its own focused Windows/SDL regression and Full Regression. Build-Debug stages local SDL/ROM paths using build-local.json."
+            },
+            {
+              "type": "p",
+              "text": "RC2.8 corrects TC0100SCN normal text origin from +23 to +16 and gives flipped text an independent source-coordinate path. Check title, driving HUD and end-results checkpoints on Windows."
             },
             {
               "type": "p",
@@ -46,8 +88,8 @@
             {
               "type": "callout",
               "tone": "info",
-              "title": "Current proven release",
-              "text": "v0.66.8.0 (2026-09-29): Forensic Timeline v1, portable automated timeline analysis/playback, and bounded Workbench history discovery are proven on Windows/SDL."
+              "title": "Current validation baseline",
+              "text": "RC2.8 is the latest Windows/SDL-proven baseline. RC2.9 is the current source candidate and requires its own Windows build, focused RC2.9 regression and Full Regression before promotion."
             },
             {
               "type": "p",
@@ -102,7 +144,7 @@
         {
           "id": "first-investigation",
           "title": "Your first reproducible investigation",
-          "summary": "A minimal checkpoint \u2192 action \u2192 capture \u2192 compare workflow.",
+          "summary": "A minimal checkpoint → action → capture → compare workflow.",
           "blocks": [
             {
               "type": "steps",

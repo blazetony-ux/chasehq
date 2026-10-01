@@ -1,0 +1,20 @@
+{
+  "format_version": 1,
+  "name": "stage1-target-immediate-pre-contact-5587",
+  "game": "Chase H.Q.",
+  "frame": 5587,
+  "description": "Canonical state one frame before first observed target physical collision-response write at CPU-A PC 0xA13C in RC2.8 run 020.",
+  "validated_with": [
+    "0.66.9.0-RC2.8"
+  ],
+  "checkpoint_format": "v1 binary .chqstate",
+  "notes": [
+    "Recovered losslessly from the per-frame states in timeline target-first-contact, evidence run 020.",
+    "Source checkpoint for the timeline was stage1-target-pre-hit-current.chqstate at frame 5573.",
+    "External debugger patches/input overrides were cleared before the source checkpoint was loaded for this timeline run."
+  ],
+  "sha256": "3ab7584c08af812d93890d2c935dfa88357546b483014f9af9b3456b1917d04b",
+  "size_bytes": 250488,
+  "role": "target_pre_contact",
+  "recommended_use": "Deterministic target-contact A/B experiments; establish control vs authentic contact from identical machine state."
+}

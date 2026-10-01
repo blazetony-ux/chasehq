@@ -1,10 +1,18 @@
+# Documentation index — v0.66.9.0-RC2.9
+
+**Current source candidate:** RC2.9. **Latest Windows/SDL-proven baseline:** RC2.8. RC2.9 promotes the causally confirmed target-health/damage mechanism, bundles the 5587/5588 and preferred 6333/6334 target checkpoint pairs, adds One-hit Target Kill, SDL Pause/Break pause, responsive Dashboard SDL controls, and a configurable run-frames timeout. RC2.9 still requires its own Windows focused regression and Full Regression before promotion.
+
+Start with `PROJECT_STATE.md`, `ROADMAP.md`, `HANDOVER.md`, `API_REFERENCE.md`, and `SCRIPT_LANGUAGE_REFERENCE.md`.
+
+## Historical candidate notes
+
 ## v0.66.9.0-RC2.4 active candidate
 
 RC2.4 corrects TC0100SCN BG0/BG1/TEXT Y-scroll source-coordinate sign and restores neutral BG presentation offsets. No API or script-language surface changes. Windows/SDL canonical-frame and regression proof are pending; proven baseline remains v0.66.8.0.
 
 ## v0.66.9.0-RC1 development candidate
 
-Current proven baseline remains **v0.66.8.0**. The active candidate adds the Chase H.Q. Game Lab controls, TC0100SCN RAM text-character inspector, reusable turbo/HUD investigations, and timeline frame-boundary clarification. All interfaces remain script/API driven; UI controls are convenience front ends over the same actions.
+Historical RC1 note: at that point v0.66.8.0 was the proven baseline and the candidate added Game Lab/tile-inspector work. This section is retained for release history; current RC2.9 state is described above.
 
 # ChaseHQ-Native documentation
 

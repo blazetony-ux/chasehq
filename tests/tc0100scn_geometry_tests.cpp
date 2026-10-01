@@ -5,6 +5,13 @@
 int main() {
     using namespace chq;
     assert(tc0100scn_source_x(0,0,0)==16);
+    assert(tc0100scn_text_source_x(0,0,false)==16);
+    assert(tc0100scn_text_source_x(7,0,false)==23);
+    assert(tc0100scn_text_source_x(0,0,true)==22);
+    assert(tc0100scn_text_source_x(319,0,true)==215);
+    assert(tc0100scn_text_source_x(0,1,false)==17);
+    assert(tc0100scn_text_source_x(0,1,true)==23);
+    assert(tc0100scn_text_source_x(1,0,true)==21);
     assert(tc0100scn_source_x(0,7,0)==9);
     assert(tc0100scn_source_x(0,0,7)==9);
     assert(tc0100scn_source_x(0,0xffff,0xffff)==18);

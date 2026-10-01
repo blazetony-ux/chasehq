@@ -50,7 +50,7 @@ unset(_cmake_expected_targets)
 add_library(SDL3::Headers INTERFACE IMPORTED)
 
 set_target_properties(SDL3::Headers PROPERTIES
-  INTERFACE_INCLUDE_DIRECTORIES "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC2.7/out/build/x64-Debug/SDL/include-revision;C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC2.7/SDL/include"
+  INTERFACE_INCLUDE_DIRECTORIES "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC2.9/out/build/x64-Debug/SDL/include-revision;C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC2.9/SDL/include"
 )
 
 # This file does not depend on other imported targets which have

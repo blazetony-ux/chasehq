@@ -1,7 +1,7 @@
 {
   "schema": "chq-documentation-knowledge-v1",
-  "build": "0.66.9.0-RC2.7",
-  "generated": "2026-09-30",
+  "build": "0.66.9.0-RC2.9",
+  "generated": "2026-10-01",
   "policy": "Machine-readable knowledge is authoritative for Workbench glossary/search metadata. Confirmed findings should cite reproducible evidence where practical. Revision builds must keep this source, human docs, API schema and handover synchronized.",
   "statuses": [
     "confirmed",
@@ -21,7 +21,7 @@
       "status": "confirmed",
       "confidence": "established",
       "introduced": "0.60.0",
-      "updated": "0.66.7.5",
+      "updated": "0.66.9.0-RC2.9",
       "summary": "Deterministic saved emulation state used to reproduce an experiment.",
       "tags": [
         "reproducibility",
@@ -36,6 +36,11 @@
       ],
       "checkpoints": [
         "stage1-driving-2352.chqstate",
+        "stage1-gameplay-2064.chqstate",
+        "stage1-target-immediate-pre-contact-5587.chqstate",
+        "stage1-target-first-physical-contact-5588.chqstate",
+        "stage1-target-immediate-pre-damage-6333.chqstate",
+        "stage1-target-first-damage-6334.chqstate",
         "stage1-target-post-final-hit-9548.chqstate",
         "stage1-end-level-9988.chqstate"
       ],
@@ -2252,6 +2257,118 @@
       "article": {
         "summary": "Machine-readable subsystem state is in research/knowledge/native-subsystems.json."
       }
+    },
+    {
+      "id": "rc28-text-shadow-endstate",
+      "title": "RC2.8 text origin, sprite shadow compare and end-state findings",
+      "kind": "finding",
+      "category": "Graphics and gameplay",
+      "status": "historical",
+      "confidence": "high",
+      "introduced": "0.66.9.0-RC2.8",
+      "updated": "0.66.9.0-RC2.9",
+      "summary": "RC2.8 applies the observed +16 TC0100SCN text origin with a separate flipped path, adds independent sprite 4bpp SHADOW/COMPARE diagnostics, classifies CPU-A 0x1002E8 as the end-results/intermission gate, and, at that historical point, left 0x1002AE unclassified; RC2.9 causal evidence supersedes that target-health uncertainty.",
+      "tags": [
+        "tc0100scn",
+        "text",
+        "flip",
+        "shadow",
+        "compare",
+        "end-results",
+        "intermission"
+      ],
+      "related": [
+        "sprite-bitplane-significance"
+      ],
+      "evidence": [],
+      "docs": [
+        "docs/ROADMAP.md",
+        "RELEASE_NOTES_0.66.9.0-RC2.8.md"
+      ],
+      "scripts": [
+        "research/scripts/regression/regression-v06690-rc28-radar-hud-endstate.chqscript"
+      ],
+      "apiActions": [],
+      "article": {
+        "discovery": "Run 009 RC2.7 saturation evidence confirmed the current baseline. RC2.8 applies the text-origin correction, isolates flipped text mapping, and tracks end-results through 0x1002E8.",
+        "method": "Native coordinate tests cover text source X at +16 and both flip states. Sprite compare tests cover the independent 4bpp reference decoder on deterministic fixtures. Windows checkpoint proof remains pending.",
+        "details": [
+          "Normal text origin is +16 instead of +23.",
+          "Flipped text mirrors in the 512-pixel tilemap and uses the distinct +23 flip offset.",
+          "0x1002E8 is an end-results/intermission gate.",
+          "0x1002AE was not confirmed in RC2.8; RC2.9 later causally confirms it as the target remaining-hit counter."
+        ],
+        "limitations": [
+          "Pixel-level Windows/SDL comparison is still required.",
+          "Sprite shadow parity is tested on fixtures, not a complete ROM frame."
+        ]
+      }
+    },
+    {
+      "id": "target-health-damage",
+      "title": "Target health / damage counter",
+      "kind": "finding",
+      "category": "Gameplay / Target",
+      "status": "confirmed",
+      "confidence": "causal",
+      "introduced": "0.66.9.0-RC2.9",
+      "updated": "0.66.9.0-RC2.9",
+      "summary": "CPU-A 0x1002AE is the Stage 1 special target remaining-hit counter. Genuine damage at PC 0xA112 decrements it; FFFF is the terminal sentinel and PC 0xA118 enters the real defeat path.",
+      "tags": [
+        "target",
+        "damage",
+        "health",
+        "causal-proof"
+      ],
+      "related": [
+        "checkpoint"
+      ],
+      "docs": [
+        "docs/chasehq/discoveries/target-health-and-defeat.md",
+        "docs/chasehq/discoveries/stage1-target-contact.md"
+      ],
+      "checkpoints": [
+        "stage1-target-immediate-pre-damage-6333.chqstate",
+        "stage1-target-first-damage-6334.chqstate",
+        "stage1-target-post-final-hit-9548.chqstate"
+      ],
+      "apiActions": [
+        "game.target.one-hit",
+        "gameplay.registry"
+      ],
+      "evidence": [
+        "RC2.8 manual damage timeline frame 6334",
+        "RC2.8 run 024 decrement threshold proof",
+        "RC2.8 run 025 terminal-underflow causal proof"
+      ]
+    },
+    {
+      "id": "one-hit-target-kill",
+      "title": "One-hit Target Kill",
+      "kind": "tool",
+      "category": "Experimental / Game Lab",
+      "status": "implemented-awaiting-proof",
+      "confidence": "implementation",
+      "introduced": "0.66.9.0-RC2.9",
+      "updated": "0.66.9.0-RC2.9",
+      "summary": "Experimental special-target cheat that arms 0x1002AE to zero immediately before authentic PC 0xA112, preserving the game's genuine 0000->FFFF terminal decrement and PC 0xA118 defeat path.",
+      "tags": [
+        "experimental",
+        "target",
+        "cheat",
+        "api"
+      ],
+      "related": [
+        "target-health-damage"
+      ],
+      "docs": [
+        "docs/API_REFERENCE.md",
+        "docs/chasehq/discoveries/target-health-and-defeat.md"
+      ],
+      "apiActions": [
+        "game.target.one-hit"
+      ],
+      "evidence": []
     }
   ]
 }

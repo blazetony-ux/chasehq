@@ -18,9 +18,9 @@ set "CTEST_RC=%ERRORLEVEL%"
 type "%CTEST_LOG%"
 if not "%CTEST_RC%"=="0" (
   findstr /C:"cpu_bus_rom_tests (SEGFAULT)" "%CTEST_LOG%" >nul
-  set "KNOWN_SEGFAULT=%ERRORLEVEL%"
+  set "KNOWN_SEGFAULT=!ERRORLEVEL!"
   findstr /C:"1 tests failed out of " "%CTEST_LOG%" >nul
-  set "ONLY_ONE_FAILED=%ERRORLEVEL%"
+  set "ONLY_ONE_FAILED=!ERRORLEVEL!"
   if "!KNOWN_SEGFAULT!"=="0" if "!ONLY_ONE_FAILED!"=="0" (
     echo.
     echo BUILD COMPILE: PASS

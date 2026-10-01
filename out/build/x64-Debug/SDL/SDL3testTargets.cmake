@@ -59,28 +59,28 @@ set_target_properties(SDL3::SDL3_test PROPERTIES
 set_property(TARGET SDL3::SDL3_test APPEND PROPERTY IMPORTED_CONFIGURATIONS DEBUG)
 set_target_properties(SDL3::SDL3_test PROPERTIES
   IMPORTED_LINK_INTERFACE_LANGUAGES_DEBUG "C"
-  IMPORTED_LOCATION_DEBUG "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC2.7/out/build/x64-Debug/SDL/Debug/SDL3_test.lib"
+  IMPORTED_LOCATION_DEBUG "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC2.9/out/build/x64-Debug/SDL/Debug/SDL3_test.lib"
   )
 
 # Import target "SDL3::SDL3_test" for configuration "Release"
 set_property(TARGET SDL3::SDL3_test APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
 set_target_properties(SDL3::SDL3_test PROPERTIES
   IMPORTED_LINK_INTERFACE_LANGUAGES_RELEASE "C"
-  IMPORTED_LOCATION_RELEASE "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC2.7/out/build/x64-Debug/SDL/Release/SDL3_test.lib"
+  IMPORTED_LOCATION_RELEASE "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC2.9/out/build/x64-Debug/SDL/Release/SDL3_test.lib"
   )
 
 # Import target "SDL3::SDL3_test" for configuration "MinSizeRel"
 set_property(TARGET SDL3::SDL3_test APPEND PROPERTY IMPORTED_CONFIGURATIONS MINSIZEREL)
 set_target_properties(SDL3::SDL3_test PROPERTIES
   IMPORTED_LINK_INTERFACE_LANGUAGES_MINSIZEREL "C"
-  IMPORTED_LOCATION_MINSIZEREL "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC2.7/out/build/x64-Debug/SDL/MinSizeRel/SDL3_test.lib"
+  IMPORTED_LOCATION_MINSIZEREL "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC2.9/out/build/x64-Debug/SDL/MinSizeRel/SDL3_test.lib"
   )
 
 # Import target "SDL3::SDL3_test" for configuration "RelWithDebInfo"
 set_property(TARGET SDL3::SDL3_test APPEND PROPERTY IMPORTED_CONFIGURATIONS RELWITHDEBINFO)
 set_target_properties(SDL3::SDL3_test PROPERTIES
   IMPORTED_LINK_INTERFACE_LANGUAGES_RELWITHDEBINFO "C"
-  IMPORTED_LOCATION_RELWITHDEBINFO "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC2.7/out/build/x64-Debug/SDL/RelWithDebInfo/SDL3_test.lib"
+  IMPORTED_LOCATION_RELWITHDEBINFO "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC2.9/out/build/x64-Debug/SDL/RelWithDebInfo/SDL3_test.lib"
   )
 
 # Make sure the targets which have been exported in some other

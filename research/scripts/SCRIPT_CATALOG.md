@@ -108,7 +108,7 @@ Generated from packaged `.chqscript` headers for v0.66.9.0-RC2.7. Headers are au
 | regression/regression-v06690-rc243-snapshot-discovery.chqscript | Regression - v0.66.9.0 RC2.4.3 Snapshot Discovery | regression | Prove that a snapshot created inside the current script run is returned immediately by frame.snapshot.list, then exercise exact reconstruction comparisons. | stage1-gameplay-2064.chqstate | 0.66.9.0 | current |
 | regression/regression-v06690-rc25-script-safety.chqscript | Regression - v0.66.9.0 RC2.5 Script Safety | regression | Prove timeline.reset restores the pre-load live checkpoint after a timeline seek/fork and exercise the try/finally cleanup path. |  | 0.66.9.0-RC2.5 | permanent |
 | regression/regression-v06690-rc261-sprite-bitplane-significance.chqscript | Regression - v0.66.9.0 RC2.6.1 Sprite Bitplane Significance | regression | Exercise the RC2.6 shared sprite decoder at canonical Map 405 and require a current-run structured snapshot with no palette overrides. | stage1-driving-2352.chqstate | 0.66.9.0-RC2.6.1 | current |
-| regression/regression-v06690-rc27-tc0100-reliability.chqscript | Regression - v0.66.9.0 RC2.7 TC0100SCN and Reliability | regression | Assert release identity, reversible layer offsets and exact old/corrected canonical captures. |  | 0.66.9.0-RC2.7 | current |
+| regression/regression-v06690-rc28-tc0100-reliability.chqscript | Regression - v0.66.9.0 RC2.8 TC0100SCN and Reliability | regression | Assert release identity, reversible layer offsets and exact old/corrected canonical captures. |  | 0.66.9.0-RC2.8 | current |
 | timeline/analyze-existing-turbo-forensic-timeline.chqscript | Analyze Existing Turbo Forensic Timeline | timeline | Run the full automated offline forensic pipeline against the already captured turbo-complete-cycle recording; no gameplay replay required. |  |  |  |
 | timeline/capture-turbo-complete-cycle.chqscript | Capture Turbo Complete-Cycle Forensic Timeline | timeline | Record a broad deterministic turbo event once, then trim it to exactly one frame before turbo-active rises through one frame after turbo-active falls and generate ranked whole-write-stream analysis. | stage1-gameplay-2064.chqstate |  |  |
 | timeline/import-and-inspect-timeline.chqscript | Import and Inspect Forensic Timeline | timeline | Demonstrate that a recorded timeline can be imported by the script engine and inspected through the ordinary runtime APIs as if the selected frame were a paused live machine. |  |  |  |
@@ -120,3 +120,9 @@ Generated from packaged `.chqscript` headers for v0.66.9.0-RC2.7. Headers are au
 | track/surveys/stage1-track-survey-3600-scripted-svg.chqscript | Stage 1 track survey 3600 - scripted recorder + SVG | track | Run the established 3600-frame Stage 1 attract-mode survey using the shared recorder and export a deterministic SVG without requiring the Track View tab to be open. |  |  |  |
 | track/surveys/stage1-track-survey-3600.chqscript | Stage 1 Track Survey - 3600 | track | Survey Stage 1 track state across 3600 frames. |  |  |  |
 | track/track-record-window.chqscript | Track record window | track | Print records surrounding the current authoritative Stage 1 track record. |  |  |  |
+
+| regression/regression-v06690-rc28-radar-hud-endstate.chqscript | Regression - v0.66.9.0 RC2.8 Radar, HUD and End State | regression | Capture deterministic driving and end-level radar/HUD states and verify exact structured-frame reconstruction. | stage1-driving-2352.chqstate | 0.66.9.0-RC2.8 | current |
+
+## RC2.9
+
+- `regression/regression-v06690-rc29-target-health-tooling.chqscript` — RC2.9 target-health/one-hit/tooling focused regression.

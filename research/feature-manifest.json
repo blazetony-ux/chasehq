@@ -1,14 +1,14 @@
 {
   "schema": "chq-feature-manifest-v1",
-  "build": "0.66.9.0-RC2.7",
+  "build": "0.66.9.0-RC2.9",
   "policy": "New API/script features should ship with schema and regression coverage in the same build.",
   "features": [
     {
       "id": "graphics.tc0100scn-x-and-workbench-reliability",
-      "status": "implemented-awaiting-proof",
+      "status": "confirmed",
       "since": "0.66.9.0-RC2.7",
-      "regression": "research/scripts/regression/regression-v06690-rc27-tc0100-reliability.chqscript",
-      "description": "X-transform correction, no-sprites source-state export, live offsets and old/corrected mode; focused native/JS tests pass; Windows prove-off pending."
+      "regression": "research/scripts/regression/regression-v06690-rc28-radar-hud-endstate.chqscript",
+      "description": "RC2.7 reliability and X correction Windows-proven in Run 009; RC2.8 carries that result forward and corrects text origin to +16 with an explicit flipped-text path."
     },
     {
       "id": "graphics.sprite-ownership-and-export-coordinates",
@@ -415,6 +415,62 @@
       "since": "0.66.9.0-RC2.6",
       "description": "Shared live/export sprite decoder assigns physical planes 0,1,2,3 to pen bits 3,2,1,0. The mapping was causally confirmed on RC2.5 Map 405; RC2.6 packages exhaustive native coverage and a no-override visual prove-off; RC2.6.1 adds the explicitly version-labelled focused Script Console regression and Full Regression include.",
       "regression": "tests/sprite_gfx_tests.cpp"
+    },
+    {
+      "id": "graphics.tc0100scn-text-origin-flip",
+      "status": "implemented-awaiting-proof",
+      "since": "0.66.9.0-RC2.8",
+      "regression": "research/scripts/regression/regression-v06690-rc28-radar-hud-endstate.chqscript",
+      "description": "Normal text origin +16 with explicit flipped coordinate path; native coordinate tests pass; Windows visual checkpoint proof pending."
+    },
+    {
+      "id": "graphics.sprite-4bpp-shadow-compare",
+      "status": "implemented-awaiting-proof",
+      "since": "0.66.9.0-RC2.8",
+      "regression": "research/scripts/regression/regression-v06690-rc28-radar-hud-endstate.chqscript",
+      "description": "Independent sprite 4bpp shadow decoder and pixel compare utility. Fixture parity is tested; ROM-scene Windows shadow validation remains pending."
+    },
+    {
+      "id": "workbench.responsive-evidence-flow",
+      "status": "implemented-awaiting-proof",
+      "since": "0.66.9.0-RC2.8",
+      "regression": "research/scripts/regression/regression-v06690-rc28-radar-hud-endstate.chqscript",
+      "description": "Responsive dashboard breakpoints and selected-run Open in Evidence action; Windows Workbench regression pending."
+    },
+    {
+      "id": "gameplay.target-health-damage-authority",
+      "status": "confirmed",
+      "since": "0.66.9.0-RC2.9",
+      "regression": "research/scripts/regression/regression-v06690-rc29-target-health-tooling.chqscript",
+      "description": "CPU-A 0x1002AE causally confirmed as Stage-1 special-target remaining-hit counter; PC 0xA112 decrements; FFFF terminal sentinel."
+    },
+    {
+      "id": "gameplay.target-one-hit-research-toggle",
+      "status": "experimental",
+      "since": "0.66.9.0-RC2.9",
+      "regression": "research/scripts/regression/regression-v06690-rc29-target-health-tooling.chqscript",
+      "description": "One-hit Target Kill preserves authentic A112/A118 terminal path and defaults off."
+    },
+    {
+      "id": "runtime.sdl-pause-break-hotkey",
+      "status": "new",
+      "since": "0.66.9.0-RC2.9",
+      "regression": "research/scripts/regression/regression-v06690-rc29-target-health-tooling.chqscript",
+      "description": "Pause/Break toggles runtime pause/resume from the SDL window; API parity remains. Existing F-key diagnostics are unchanged."
+    },
+    {
+      "id": "workbench.dashboard-sdl-sidecar-controls",
+      "status": "ui-improvement",
+      "since": "0.66.9.0-RC2.9",
+      "regression": "research/scripts/regression/regression-v06690-rc29-target-health-tooling.chqscript",
+      "description": "Live SDL frame uses a 7/5 wide-screen grid with SDL controls adjacent and responsive collapse."
+    },
+    {
+      "id": "workbench.configurable-run-frames-timeout",
+      "status": "reliability",
+      "since": "0.66.9.0-RC2.9",
+      "regression": "research/scripts/regression/regression-v06690-rc29-target-health-tooling.chqscript",
+      "description": "control.run-frames accepts timeout=1000..3600000, default 900000 ms."
     }
   ]
 }

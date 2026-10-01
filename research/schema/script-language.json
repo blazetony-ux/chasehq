@@ -1,7 +1,7 @@
 {
   "schema": "chq-research-script-language-v1",
   "engine": "chq-research-script-v2",
-  "build": "0.66.9.0-RC2.7",
+  "build": "0.66.9.0-RC2.9",
   "statements": [
     {
       "syntax": "# comment",
@@ -103,5 +103,10 @@
     "loopIterations": 256,
     "nestingDepth": 4,
     "waitUntilMs": 30000
-  }
+  },
+  "notes": [
+    "get*() collection query functions are resolved during Script Console preflight and cached for the run; they do not dynamically re-evaluate after checkpoint.load or other state changes.",
+    "Use direct runtime api actions for state-sensitive inspection after in-script machine-state changes.",
+    "Structured tuple/record iterables and explicit runtime-query syntax are planned, not part of current Research Script v2."
+  ]
 }

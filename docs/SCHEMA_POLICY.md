@@ -7,7 +7,7 @@ No API, Research Script grammar, evidence-schema or Workbench endpoint change. R
 The candidate extends the API action schema without changing the script-language grammar. Game Lab and tile-inspector actions are present in both Workbench live schema and `research/schema/api-actions.json`; regression/schema parity must remain mandatory.
 
 # API / Script Schema Maintenance Policy
-> **Current proven release:** v0.66.8.0 (2026-09-29). Interfaces documented here correspond to the promoted RC7.4 runtime unless a section is explicitly historical.
+> **Current validation baseline:** v0.66.9.0-RC2.8 (Windows/SDL proven). RC2.9 is the current source candidate; new RC2.9 interfaces remain candidate-only until focused Windows/SDL and Full Regression proof.
 
 
 No API or language change is complete unless all four are changed together:

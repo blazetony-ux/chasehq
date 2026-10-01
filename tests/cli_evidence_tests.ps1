@@ -15,6 +15,6 @@ try {
     $manifest=@($files|Where-Object {$_.Name -eq 'evidence-manifest.json'})
     if($manifest.Count -ne 1){throw 'Evidence identity manifest absent or ambiguous'}
     $m=Get-Content $manifest[0].FullName -Raw|ConvertFrom-Json
-    if($m.build -ne '0.66.9.0-RC2.7' -or $m.startFrame -ne 2352){throw 'Evidence identity incorrect'}
+    if($m.build -ne '0.66.9.0-RC2.9' -or $m.startFrame -ne 2352){throw 'Evidence identity incorrect'}
     Write-Host 'CLI checkpoint-frame capture and evidence completeness: PASS'
 } finally { Remove-Item $temp -Recurse -Force -ErrorAction SilentlyContinue }

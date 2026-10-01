@@ -309,7 +309,7 @@ private:
     void draw_debug_overlay(std::vector<std::uint32_t>& pixels, const Runtime& runtime, unsigned frame, bool paused, bool timer_frozen);
     static void debug_text(std::vector<std::uint32_t>& pixels, int x, int y, const std::string& text, std::uint32_t color, int scale = 1);
     static void debug_rect(std::vector<std::uint32_t>& pixels, int x0, int y0, int x1, int y1, std::uint32_t color);
-    void update_runtime_title(const Runtime& runtime, const SceneState& scene, unsigned frame, unsigned sprites);
+    void update_runtime_title(const Runtime& runtime, const SceneState& scene, unsigned frame, unsigned sprites, bool paused);
     void present(const std::vector<std::uint32_t>& pixels);
 
     std::array<PromEntry, 256> mix_lut_{};

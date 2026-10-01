@@ -19,10 +19,10 @@ Evidence-backed gameplay values currently include:
 | Turbos remaining | CPU-A `0x1003A2` | 16-bit count | CONFIRMED |
 | Turbo active-duration counter | CPU-A `0x100414` | 16-bit frame counter | CONFIRMED |
 | Turbo expiry threshold | `0x00D2` in the tested canonical Stage-1 configuration | 210 emulated frames | CONFIRMED for tested configuration |
-| Brake-lamp visual state | palette entries `0x40D/0x41D`, pen 13 | dark/bright red transition | PROBABLE visual proxy |
+| Brake-lamp visual state | processed brake `0x100303` -> palette banks 64/65 pen 13 | `0x18DE` braking / `0x000E` released | CONFIRMED |
 | Raw steering input | CPU-A 0x10014C | IOC signed 12-bit / byte-swapped RAM representation | CONFIRMED |
 | Processed steering | CPU-A 0x100300 | signed 16-bit; centre 0, left negative, right positive | CONFIRMED |
-| Authoritative target health/damage | unresolved | — | OPEN |
+| Target remaining-hit / damage counter | CPU-A `0x1002AE` | 16-bit decrement; `FFFF` terminal sentinel | CONFIRMED |
 
 ## Current IOC P3 control map
 - `0x01` — TURBO — CONFIRMED. The processed bit appears at `0x100303` bit 0; code at `0x00846E` tests it and `0x008486` sets bit 1 of `0x10040F`.
@@ -38,7 +38,7 @@ From `stage1-gameplay-2064.chqstate`, turbo activation changed `0x1003A2` from 3
 A displayed/HUD value is not automatically the authoritative gameplay value. Display speed and internal speed are deliberately documented separately. The Workbench Gameplay Registry exposes source/confidence so visual proxies do not silently become authoritative state.
 
 ## Next tests
-Steering is confirmed and now bound through the authentic IOC path in v0.66.2. Continue target health/damage/defeat, end-level transition, palette/colour accuracy and track branch/topology research.
+Steering, target health/damage, target defeat handoff, brake-lamp mechanism and Stage-1 branch/selector mechanics are now causally established. Next gameplay/road priority is turning the proven topology tables into a directed Stage-1 course graph/minimap; palette/compositor parity remains separate graphics work.
 
 ## v0.66.9.0-RC2 speed-control clarification
 The Workbench Game Lab now displays both fields together. `0x100400` is the 16-bit packed-BCD HUD/display speed; `0x10041C` is the 16-bit raw internal/physics speed. Setting/freezing `0x10041C` is a physics experiment and is not expected to make the HUD show the same decimal number. The actual top-speed clamp/target remains unresolved.

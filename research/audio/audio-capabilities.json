@@ -1,6 +1,6 @@
 {
   "schema": "chq-audio-research-capabilities-v1",
-  "build": "0.66.9.0-RC2.7",
+  "build": "0.66.9.0-RC2.8",
   "status": "FOUNDATION_ONLY",
   "guardrail": "No runtime audio injection is enabled until native Windows/SDL audio timing and mixer behavior are validated.",
   "channels": [

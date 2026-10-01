@@ -143,10 +143,14 @@ Validate evidence-bundle identity before drawing conclusions: recorded script pa
 
 Preserve these stable research references unless explicitly superseded:
 
-- `checkpoints/stage1-gameplay-2064.chqstate`
-- `checkpoints/stage1-driving-2352.chqstate`
-- `checkpoints/stage1-target-post-final-hit-9548.chqstate`
-- `checkpoints/stage1-end-level-9988.chqstate`
+- `checkpoints/stage1-gameplay-2064.chqstate` — canonical player-gameplay state.
+- `checkpoints/stage1-driving-2352.chqstate` — canonical attract/graphics reference.
+- `checkpoints/stage1-target-immediate-pre-contact-5587.chqstate` — one frame before the first proven target physical-contact response.
+- `checkpoints/stage1-target-first-physical-contact-5588.chqstate` — matching physical-contact state.
+- `checkpoints/stage1-target-immediate-pre-damage-6333.chqstate` — **preferred target-health/damage research anchor**, one frame before a causally proven damaging hit.
+- `checkpoints/stage1-target-first-damage-6334.chqstate` — matching genuine damaging-hit state.
+- `checkpoints/stage1-target-post-final-hit-9548.chqstate` — post-final-hit/defeat-transition reference (not a near-destruction health state).
+- `checkpoints/stage1-end-level-9988.chqstate` — confirmed end-level/intermission reference.
 
 Preserve companion metadata. Do not silently overwrite canonical checkpoint files.
 

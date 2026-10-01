@@ -1,0 +1,19 @@
+# name: Regression - v0.66.9.0 RC2.8 Radar, HUD and End State
+# category: regression
+# purpose: Capture deterministic driving and end-level radar/HUD states and verify exact structured-frame reconstruction.
+# checkpoint: stage1-driving-2352.chqstate
+# tags: rc28 radar hud tc0100scn end-results regression
+# regression-version: 0.66.9.0-RC2.8
+# regression-scope: current
+
+api release.assert-version
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api frame.snapshot name=rc28-radar-hud-driving sprites=individual
+api frame.snapshot.assert-exact name=rc28-radar-hud-driving requireColumnZero=true
+api frame.snapshot.assert-scene-no-sprites name=rc28-radar-hud-driving
+api checkpoint.load file=stage1-end-level-9988.chqstate run=false
+api frame.snapshot name=rc28-radar-hud-end-results sprites=individual
+api frame.snapshot.assert-exact name=rc28-radar-hud-end-results
+api frame.snapshot.assert-scene-no-sprites name=rc28-radar-hud-end-results
+api registry.list
+echo === RC2.8 radar/HUD/end-state captures complete ===
