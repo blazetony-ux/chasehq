@@ -1,4 +1,4 @@
-ChaseHQ-Native v0.66.9.0-RC3.0
+﻿ChaseHQ-Native v0.66.9.0-RC3.0
 Course Mapping / Live Survey tooling candidate
 
 Baseline: Windows/SDL-proven RC2.9.
@@ -7,3 +7,6 @@ Scope: live course-follower API/UI/script parity; lateral-bias branch mapping; T
 ROMs and SDL are not bundled. Existing Windows build-local staging remains authoritative.
 
 Candidate correction: fixed Workbench Track View tab routing after the panel rename from "Live SVG Track View" to "Course Mapping / Live Survey". Backend course mapping was proven by the focused Windows regression; the blank tab was a frontend title-routing mismatch. Validate-Workbench now guards the exact mapping.
+
+Replacement-candidate correction: the Track View routing fix and the PowerShell live course configuration fix are now present together. A packaging merge had restored `Set-CourseFollowConfig($args)` in the prior candidate, causing `course.follow.configure` to fail because PowerShell treated `$args` as System.Object[]. The bridge now uses `Set-CourseFollowConfig($config)`, and Validate-Workbench guards both this contract and the Course Mapping panel route. Archive hash 6b209d84945a64f6d33435926a0fdb4a8fbcab7f86e60b4b04b878f8a00f56b1 is withdrawn.
+

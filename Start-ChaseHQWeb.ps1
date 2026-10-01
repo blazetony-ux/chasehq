@@ -1,4 +1,4 @@
-[CmdletBinding()]
+﻿[CmdletBinding()]
 param([int]$Port=37600,[int]$HttpPort=37680,[string]$EvidenceRoot='.\evidence\session-evidence',[string]$SessionRoot='')
 $ErrorActionPreference='Stop'
 $root=$PSScriptRoot
@@ -624,10 +624,10 @@ function Get-CourseFollowState(){
     $kv=Parse-Kv (Invoke-Chq @('course','status'))
     return [ordered]@{schema='chq-course-follow-live-v1';enabled=([int](Prop $kv 'enabled' 0)-ne 0);controller=[string](Prop $kv 'controller' 'hybrid');steer=[int](Prop $kv 'steer' 32);deadzone=[int](Prop $kv 'deadzone' 7);lookahead=[int](Prop $kv 'lookahead' 8);lateralKp=[double](Prop $kv 'lateral_kp' 0.006);lateralKd=[double](Prop $kv 'lateral_kd' 0.012);lateralMax=[int](Prop $kv 'lateral_max' 48);lateralDeadzone=[int](Prop $kv 'lateral_deadzone' 96);lateralBias=[int](Prop $kv 'lateral_bias' 0);slew=[int](Prop $kv 'slew' 8);speedControl=([int](Prop $kv 'speed_control' 0)-ne 0);steeringTarget=[int](Prop $kv 'steering_target' 0);curveNow=[int](Prop $kv 'curve_now' 0);curveAhead=[int](Prop $kv 'curve_ahead' 0);curvePredict=[int](Prop $kv 'curve_predict' 0);feedforward=[int](Prop $kv 'feedforward' 0);pTerm=[int](Prop $kv 'p_term' 0);dTerm=[int](Prop $kv 'd_term' 0);correction=[int](Prop $kv 'correction' 0);speedTarget=[int](Prop $kv 'speed_target' 390);accelCommand=([int](Prop $kv 'accel_cmd' 0)-ne 0);brakeCommand=([int](Prop $kv 'brake_cmd' 0)-ne 0);mode=[string](Prop $kv 'mode' 'IDLE');roadLeft=[string](Prop $kv 'road_left' '0x0');roadCentre=[string](Prop $kv 'road_centre' '0x0');targetLateral=[string](Prop $kv 'target_lateral' '0x0');roadRight=[string](Prop $kv 'road_right' '0x0');roadWidth=[int](Prop $kv 'road_width' 0);carLateral=[string](Prop $kv 'car_lateral' '0x0');lateralError=[int](Prop $kv 'lateral_error' 0);lateralErrorNormalized=[double](Prop $kv 'lateral_error_norm' 0);lateralSide=[string](Prop $kv 'lateral_side' 'CENTRE')}
 }
-function Set-CourseFollowConfig($args){
+function Set-CourseFollowConfig($config){
     $cmd=@('course','configure')
     $map=[ordered]@{controller='controller';steer='steer';deadzone='deadzone';lookahead='lookahead';lateralKp='lateral-kp';lateralKd='lateral-kd';lateralMax='lateral-max';lateralDeadzone='lateral-deadzone';bias='bias';lateralBias='bias';slew='slew';speedControl='speed-control'}
-    foreach($key in $map.Keys){if($args.ContainsKey($key)){$v=[string]$args[$key];if($key-eq 'speedControl'){$v=if(Bool-Arg $args $key $false){'on'}else{'off'}};$cmd += @($map[$key],$v)}}
+    foreach($key in $map.Keys){if($config.ContainsKey($key)){$v=[string]$config[$key];if($key-eq 'speedControl'){$v=if(Bool-Arg $config $key $false){'on'}else{'off'}};$cmd += @($map[$key],$v)}}
     if($cmd.Count-le 2){return Get-CourseFollowState}
     $raw=Invoke-Chq $cmd;if($raw -like 'ERR*'){throw $raw};return Get-CourseFollowState
 }

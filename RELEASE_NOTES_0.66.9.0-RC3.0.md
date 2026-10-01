@@ -1,4 +1,4 @@
-# ChaseHQ-Native v0.66.9.0-RC3.0 release candidate
+﻿# ChaseHQ-Native v0.66.9.0-RC3.0 release candidate
 
 RC3.0 is a meaningful Course Mapping / Live Survey tooling release built from the Windows/SDL-proven RC2.9 baseline. It intentionally precedes long course surveys.
 
@@ -30,3 +30,15 @@ This package is a source candidate until Windows `Build-Debug.bat`, the focused 
 The first Windows-proven mapping regression exposed a Workbench presentation defect: the Track View button still routed to the historical panel title `Live SVG Track View` after the RC3.0 panel was renamed `Course Mapping / Live Survey`. The mapping backend, recorder v2 and export path were working, but the browser hid the renamed panel and therefore displayed an empty Track View.
 
 The corrected RC3.0 candidate aligns the tab group with `Course Mapping / Live Survey` and adds a `Validate-Workbench.ps1` guard so a future panel-title/tab-routing mismatch fails validation before packaging.
+
+## Candidate correction — combined live-config + Track View fix
+
+A later Windows diagnostic exposed a packaging merge regression: the candidate that fixed Track View routing had accidentally reintroduced the earlier PowerShell bridge signature `Set-CourseFollowConfig($args)`. Because `$args` is PowerShell's automatic argument array, `course.follow.configure` failed with `System.Object[] does not contain a method named 'ContainsKey'` before the survey could start.
+
+This replacement candidate contains **both** corrections simultaneously:
+
+- `Set-CourseFollowConfig($config)` with all configuration lookups performed against the explicit hashtable;
+- `track:['Course Mapping / Live Survey']` routing to the renamed Track View panel.
+
+`Validate-Workbench.ps1` now rejects either regression independently. The prior candidate whose archive SHA-256 was `6b209d84945a64f6d33435926a0fdb4a8fbcab7f86e60b4b04b878f8a00f56b1` is withdrawn.
+

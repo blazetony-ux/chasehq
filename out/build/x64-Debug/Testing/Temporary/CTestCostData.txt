@@ -1,9 +1,9 @@
-tc0100scn_geometry_tests 1 0.760867
-sprite_priority_tests 1 0.372752
-sprite_gfx_tests 1 0.3713
-authoritative_history_tests 1 3.92306
-sprite_snapshot_assertions 1 5.13695
+tc0100scn_geometry_tests 1 0.518103
+sprite_priority_tests 1 0.551423
+sprite_gfx_tests 1 0.490748
+authoritative_history_tests 1 3.69163
+sprite_snapshot_assertions 1 4.95222
 cpu_bus_rom_tests 0 0
-cli_evidence_tests 1 16.2355
+cli_evidence_tests 1 16.1036
 ---
 cpu_bus_rom_tests

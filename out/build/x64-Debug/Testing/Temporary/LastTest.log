@@ -1,18 +1,18 @@
-Start testing: Oct 01 21:45 GMT Summer Time
+Start testing: Oct 01 21:56 GMT Summer Time
 ----------------------------------------------------------
 1/7 Testing: tc0100scn_geometry_tests
 1/7 Test: tc0100scn_geometry_tests
 Command: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/Debug/tc0100scn_geometry_tests.exe"
 Directory: C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug
-"tc0100scn_geometry_tests" start time: Oct 01 21:45 GMT Summer Time
+"tc0100scn_geometry_tests" start time: Oct 01 21:56 GMT Summer Time
 Output:
 ----------------------------------------------------------
 TC0100SCN geometry PASS
 <end of output>
-Test time =   0.76 sec
+Test time =   0.52 sec
 ----------------------------------------------------------
 Test Passed.
-"tc0100scn_geometry_tests" end time: Oct 01 21:45 GMT Summer Time
+"tc0100scn_geometry_tests" end time: Oct 01 21:57 GMT Summer Time
 "tc0100scn_geometry_tests" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -20,15 +20,15 @@ Test Passed.
 2/7 Test: sprite_priority_tests
 Command: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/Debug/sprite_priority_tests.exe"
 Directory: C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug
-"sprite_priority_tests" start time: Oct 01 21:45 GMT Summer Time
+"sprite_priority_tests" start time: Oct 01 21:57 GMT Summer Time
 Output:
 ----------------------------------------------------------
 PASS sprite ownership, masking, coverage, black pens and visible coordinates
 <end of output>
-Test time =   0.37 sec
+Test time =   0.55 sec
 ----------------------------------------------------------
 Test Passed.
-"sprite_priority_tests" end time: Oct 01 21:45 GMT Summer Time
+"sprite_priority_tests" end time: Oct 01 21:57 GMT Summer Time
 "sprite_priority_tests" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -36,15 +36,15 @@ Test Passed.
 3/7 Test: sprite_gfx_tests
 Command: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/Debug/sprite_gfx_tests.exe"
 Directory: C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug
-"sprite_gfx_tests" start time: Oct 01 21:45 GMT Summer Time
+"sprite_gfx_tests" start time: Oct 01 21:57 GMT Summer Time
 Output:
 ----------------------------------------------------------
 PASS Chase H.Q. sprite 4bpp plane significance (all 16 pens)
 <end of output>
-Test time =   0.37 sec
+Test time =   0.49 sec
 ----------------------------------------------------------
 Test Passed.
-"sprite_gfx_tests" end time: Oct 01 21:45 GMT Summer Time
+"sprite_gfx_tests" end time: Oct 01 21:57 GMT Summer Time
 "sprite_gfx_tests" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -52,15 +52,15 @@ Test Passed.
 4/7 Test: authoritative_history_tests
 Command: "C:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe" "-NoProfile" "-ExecutionPolicy" "Bypass" "-File" "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/tests/authoritative_history_tests.ps1"
 Directory: C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug
-"authoritative_history_tests" start time: Oct 01 21:45 GMT Summer Time
+"authoritative_history_tests" start time: Oct 01 21:57 GMT Summer Time
 Output:
 ----------------------------------------------------------
 Authoritative ordering, pagination, session and version tests: PASS
 <end of output>
-Test time =   3.92 sec
+Test time =   3.69 sec
 ----------------------------------------------------------
 Test Passed.
-"authoritative_history_tests" end time: Oct 01 21:45 GMT Summer Time
+"authoritative_history_tests" end time: Oct 01 21:57 GMT Summer Time
 "authoritative_history_tests" time elapsed: 00:00:03
 ----------------------------------------------------------
 
@@ -68,30 +68,30 @@ Test Passed.
 5/7 Test: sprite_snapshot_assertions
 Command: "C:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe" "-NoProfile" "-ExecutionPolicy" "Bypass" "-File" "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/tests/sprite_snapshot_assertions.ps1" "-OutputRoot" "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/sprite-snapshot-tests"
 Directory: C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug
-"sprite_snapshot_assertions" start time: Oct 01 21:45 GMT Summer Time
+"sprite_snapshot_assertions" start time: Oct 01 21:57 GMT Summer Time
 Output:
 ----------------------------------------------------------
 PASS snapshot assertions: positive ownership, opaque black, wrong owner, missing coverage, 16-line coordinate regression
 <end of output>
-Test time =   5.14 sec
+Test time =   4.95 sec
 ----------------------------------------------------------
 Test Passed.
-"sprite_snapshot_assertions" end time: Oct 01 21:45 GMT Summer Time
-"sprite_snapshot_assertions" time elapsed: 00:00:05
+"sprite_snapshot_assertions" end time: Oct 01 21:57 GMT Summer Time
+"sprite_snapshot_assertions" time elapsed: 00:00:04
 ----------------------------------------------------------
 
 6/7 Testing: cpu_bus_rom_tests
 6/7 Test: cpu_bus_rom_tests
 Command: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/Debug/runtime_tests.exe"
 Directory: C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug
-"cpu_bus_rom_tests" start time: Oct 01 21:45 GMT Summer Time
+"cpu_bus_rom_tests" start time: Oct 01 21:57 GMT Summer Time
 Output:
 ----------------------------------------------------------
 <end of output>
-Test time =   0.71 sec
+Test time =   0.57 sec
 ----------------------------------------------------------
 Test Failed.
-"cpu_bus_rom_tests" end time: Oct 01 21:45 GMT Summer Time
+"cpu_bus_rom_tests" end time: Oct 01 21:57 GMT Summer Time
 "cpu_bus_rom_tests" time elapsed: 00:00:00
 ----------------------------------------------------------
 
@@ -99,10 +99,10 @@ Test Failed.
 7/7 Test: cli_evidence_tests
 Command: "C:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe" "-NoProfile" "-ExecutionPolicy" "Bypass" "-File" "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/tests/cli_evidence_tests.ps1" "-Exe" "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/Debug/ChaseHQNative.exe"
 Directory: C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug
-"cli_evidence_tests" start time: Oct 01 21:45 GMT Summer Time
+"cli_evidence_tests" start time: Oct 01 21:57 GMT Summer Time
 Output:
 ----------------------------------------------------------
-[21:45:33.142 | +0.001] Chase H.Q. Native 0.66.9.0-RC3.0 - Course Mapping / Live Survey Tooling
+[21:57:12.590 | +0.001] Chase H.Q. Native 0.66.9.0-RC3.0 - Course Mapping / Live Survey Tooling
 [CPU ROM] OK b52-132.39
 [CPU ROM] OK b52-133.55
 [CPU ROM] OK b52-130.36
@@ -137,8 +137,8 @@ Assembled graphics hardware data:
   B52-01 MIX PROM: 256 bytes
   B52-06 ROD PROM: 256 bytes
 
-[21:45:33.338 | +0.196] [CHECKPOINT LOAD] frame=2352 <- C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\checkpoints\stage1-driving-2352.chqstate
-[21:45:33.338 | +0.196] [CHECKPOINT REPAIR] Musashi cycle-table/callback pointers rebound for this process
+[21:57:12.765 | +0.174] [CHECKPOINT LOAD] frame=2352 <- C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\checkpoints\stage1-driving-2352.chqstate
+[21:57:12.765 | +0.174] [CHECKPOINT REPAIR] Musashi cycle-table/callback pointers rebound for this process
 v0.66.9.0-RC3.0 Course Mapping / Live Survey Tooling:
   R = toggle live road rendering
   T = toggle live sprite RAM view
@@ -156,11 +156,11 @@ v0.66.9.0-RC3.0 Course Mapping / Live Survey Tooling:
   Esc = quit (or close Workbench while it has focus)
 v0.60.0: reversible live RAM interventions, watched writes, frame/instruction stepping, pause-point rewind and sprite-change provenance.
 Layout results are written to logs/road_ram_layout.log and logs/road_ram_final.bin.
-[21:45:33.338 | +0.196] [RUN MODE] bounded to absolute frame 2353
-[21:45:33.338 | +0.196] [RUN TARGET] start=2352 target=2353 remaining=1
-[GRAPHICS DIAGNOSTICS] frame=2352 -> C:\Users\user\AppData\Local\Temp\chq-evidence-cab3339211df4a03a9385a0b4bb4a39d\run\graphics_frame_2352
-[21:45:38.481 | +5.339] [DEBUG API] listening on 127.0.0.1:37600 (chqctl.exe)
-[21:45:38.684 | +5.542] [RUN TARGET REACHED] frame=2353 target=2353
+[21:57:12.765 | +0.175] [RUN MODE] bounded to absolute frame 2353
+[21:57:12.765 | +0.175] [RUN TARGET] start=2352 target=2353 remaining=1
+[GRAPHICS DIAGNOSTICS] frame=2352 -> C:\Users\user\AppData\Local\Temp\chq-evidence-0b0ba5154c124ecb887959b3192d01ca\run\graphics_frame_2352
+[21:57:17.869 | +5.278] [DEBUG API] listening on 127.0.0.1:37600 (chqctl.exe)
+[21:57:18.073 | +5.483] [RUN TARGET REACHED] frame=2353 target=2353
 CPU A: cycles=470620596 instructions=9814966 PC=0x40eb6 SR=0x2008 SP=0x103eb2
 CPU B: cycles=445011534 instructions=38811251 enabled=yes PC=0x4d8 SR=0x4 SP=0x100800
 Status: budget reached / diagnostic run ended; dual CPU execution is not proof of full game boot
@@ -219,16 +219,16 @@ CPU B pending road-control pair 0x101a58/0x101a5a:
   road-control read PCs: none
   road-control write PCs: [0x4ba:1]
   unmapped R=0 W=0
-[21:45:38.704 | +5.562] [TIMING] frames=2353 total=5.561s avg=423.098 f/s
-[21:45:38.782 | +5.640] [RUN STATUS] completed=yes start=2352 final=2353 sprite_evidence_files=0
-[21:45:42.717 | +9.575] [LOG BUNDLE] ready=C:\Users\user\AppData\Local\Temp\chq-evidence-cab3339211df4a03a9385a0b4bb4a39d\run.zip bytes=46162122
+[21:57:18.144 | +5.554] [TIMING] frames=2353 total=5.553s avg=423.740 f/s
+[21:57:18.208 | +5.618] [RUN STATUS] completed=yes start=2352 final=2353 sprite_evidence_files=0
+[21:57:22.110 | +9.519] [LOG BUNDLE] ready=C:\Users\user\AppData\Local\Temp\chq-evidence-0b0ba5154c124ecb887959b3192d01ca\run.zip bytes=46162122
 CLI checkpoint-frame capture and evidence completeness: PASS
 <end of output>
-Test time =  16.24 sec
+Test time =  16.10 sec
 ----------------------------------------------------------
 Test Passed.
-"cli_evidence_tests" end time: Oct 01 21:45 GMT Summer Time
+"cli_evidence_tests" end time: Oct 01 21:57 GMT Summer Time
 "cli_evidence_tests" time elapsed: 00:00:16
 ----------------------------------------------------------
 
-End testing: Oct 01 21:45 GMT Summer Time
+End testing: Oct 01 21:57 GMT Summer Time
