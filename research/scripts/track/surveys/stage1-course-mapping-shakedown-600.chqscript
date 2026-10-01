@@ -1,0 +1,42 @@
+# name: Stage 1 Course Mapping - 600 frame shakedown
+# category: track
+# regression-version: 0.66.9.0-RC3.0
+# purpose: Fast prove-off of the live course follower, v2 recorder, car trajectory, dynamic-object census, raw surface signatures and map export before any long survey.
+
+api release.assert-version
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api course.follow.configure controller=hybrid lookahead=8 bias=0 speedControl=true
+api experiment.begin name=stage1-course-mapping-shakedown-600
+
+try
+  api course.survey.start collisionResponse=false timerHold=true
+  api memory.trace.clear
+  api memory.trace.start cpu=A address=10A058 length=2 width=any limit=256
+  api track.record.sample
+  api experiment.capture label=start include=sprites,gameplay,track
+
+  repeat 10
+    repeat 4
+      api control.run-frames frames=15 timeout=900000
+      api track.record.sample
+    end
+    api experiment.capture label=landmark-${repeat_index} include=sprites,gameplay,track
+  end
+
+  api memory.trace.stop
+  api memory.trace.tail count=256
+  api track.record.status
+  api course.follow.status
+  api track.map.export name=stage1-course-mapping-shakedown-600
+  api experiment.capture label=end include=sprites,gameplay,track
+finally
+  api memory.trace.stop
+  api course.survey.stop
+  api experiment.end
+  api patch.clear
+  api input.ioc.clear
+  api collision.response.reset
+  api timer.hold enabled=false
+end
+
+echo === RC3.0 STAGE 1 COURSE MAPPING SHAKEDOWN 600 COMPLETE ===

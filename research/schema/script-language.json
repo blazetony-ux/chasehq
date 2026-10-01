@@ -1,7 +1,7 @@
 {
   "schema": "chq-research-script-language-v1",
   "engine": "chq-research-script-v2",
-  "build": "0.66.9.0-RC2.9",
+  "build": "0.66.9.0-RC3.0",
   "statements": [
     {
       "syntax": "# comment",

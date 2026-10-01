@@ -300,11 +300,11 @@ int main() {
 
         {
             std::cout << "[test] v0.59.1 target/collision options and generalized response suppression\n";
-            const char* argv[] = {"runtime", "--target-state-log", "--no-collisions", "--course-follow-controller", "predictive", "--course-follow-lateral-kd", "0.02", "--course-follow-slew", "6", "--course-follow-speed-control", "on", "--progress-status", "240"};
+            const char* argv[] = {"runtime", "--target-state-log", "--no-collisions", "--course-follow-controller", "predictive", "--course-follow-lateral-kd", "0.02", "--course-follow-slew", "6", "--course-follow-speed-control", "on", "--course-follow-lateral-bias", "384", "--progress-status", "240"};
             const auto opts = chq::parse_options(static_cast<int>(std::size(argv)), const_cast<char**>(argv));
             check(opts.target_state_log, "target-state log option parse");
             check(opts.no_collisions, "no-collisions option parse");
-            check(opts.course_follow_controller == "predictive" && opts.course_follow_lateral_kd == 0.02 && opts.course_follow_slew == 6 && opts.course_follow_speed_control, "predictive course-follow parse");
+            check(opts.course_follow_controller == "predictive" && opts.course_follow_lateral_kd == 0.02 && opts.course_follow_slew == 6 && opts.course_follow_speed_control && opts.course_follow_lateral_bias == 384, "predictive course-follow parse");
             check(opts.progress_status_every == 240, "progress status parse");
             auto collision_bus = std::make_unique<chq::Bus>(main_program(), sub_program());
             collision_bus->write(0x10a044, 0x7b6b, 2, chq::BusSpace::Main);

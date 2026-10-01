@@ -1,6 +1,6 @@
 {
   "schema": "chq-documentation-knowledge-v1",
-  "build": "0.66.9.0-RC2.9",
+  "build": "0.66.9.0-RC3.0",
   "generated": "2026-10-01",
   "policy": "Machine-readable knowledge is authoritative for Workbench glossary/search metadata. Confirmed findings should cite reproducible evidence where practical. Revision builds must keep this source, human docs, API schema and handover synchronized.",
   "statuses": [
@@ -2369,6 +2369,69 @@
         "game.target.one-hit"
       ],
       "evidence": []
+    },
+    {
+      "id": "course-mapping-live-survey",
+      "title": "Live Course Mapping / Survey tooling",
+      "kind": "tool",
+      "category": "Track / Course Mapping",
+      "status": "implemented-awaiting-windows-proof",
+      "confidence": "implementation",
+      "introduced": "0.66.9.0-RC3.0",
+      "updated": "0.66.9.0-RC3.0",
+      "summary": "RC3.0 exposes the native closed-loop course follower live through Workbench/API/scripting and upgrades the shared track recorder to retain road geometry, player trajectory, target/dynamic-object evidence and raw surface signatures in reconstructable mapping exports.",
+      "tags": [
+        "track",
+        "course",
+        "mapping",
+        "survey",
+        "autonomous-driver",
+        "trajectory",
+        "surface",
+        "objects"
+      ],
+      "related": [],
+      "docs": [
+        "docs/API_REFERENCE.md",
+        "docs/SCRIPT_LANGUAGE_REFERENCE.md",
+        "docs/PROJECT_STATE.md",
+        "docs/COURSE_MAPPING_SURVEY.md"
+      ],
+      "scripts": [
+        "research/scripts/track/surveys/stage1-course-mapping-shakedown-600.chqscript",
+        "research/scripts/track/surveys/stage1-course-mapping-3600.chqscript",
+        "research/scripts/track/surveys/stage1-course-mapping-negative-bias.chqscript",
+        "research/scripts/track/surveys/stage1-course-mapping-positive-bias.chqscript",
+        "research/scripts/track/surveys/current-state-course-mapping-1200.chqscript"
+      ],
+      "apiActions": [
+        "course.follow.status",
+        "course.follow.configure",
+        "course.follow.start",
+        "course.follow.stop",
+        "course.follow.reset",
+        "course.survey.status",
+        "course.survey.start",
+        "course.survey.stop",
+        "track.map.export"
+      ],
+      "evidence": [],
+      "article": {
+        "discovery": "Long Stage-1 mapping was deliberately deferred until the mature native course follower could be controlled from the live Research Workbench and mapping evidence could preserve more than centreline geometry.",
+        "method": "The Workbench now controls the native follower at runtime and samples the authoritative road/course state alongside player lateral state, gameplay telemetry, the confirmed Stage-1 target record and a generic live sprite census.",
+        "details": [
+          "Road left/centre/right and the player driven line are separate outputs.",
+          "The player line is a map projection derived from authoritative lateral error; raw lateral units remain in the dataset.",
+          "The Stage-1 special target is the only entity currently promoted to a semantic car identity. Other visible sprites remain UNCLASSIFIED_DYNAMIC_OBJECT.",
+          "Surface signatures preserve raw course-record selectors plus representative TC0150ROD control/body/gfx renderer state and remain UNCLASSIFIED until visual/behavioural evidence supports material names.",
+          "Signed lateral bias allows controlled structural branch coverage without calling candidate A/B left/right prematurely."
+        ],
+        "limitations": [
+          "RC3.0 still requires Windows/SDL build and focused/full regression proof before promotion.",
+          "Generic traffic/obstacle course-space semantics are not yet proven.",
+          "Surface signatures are evidence candidates, not material classifications."
+        ]
+      }
     }
   ]
 }

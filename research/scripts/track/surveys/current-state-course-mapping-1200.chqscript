@@ -1,0 +1,39 @@
+# name: Current State Course Mapping - 1200 frame reusable survey
+# category: track
+# regression-version: 0.66.9.0-RC3.0
+# purpose: Reusable course-mapping survey from the currently loaded paused gameplay state, intended for later stages/checkpoints without baking Stage-1 assumptions into the script. Captures dense road/player/entity/surface evidence plus periodic screenshots.
+
+api release.assert-version
+api course.follow.configure controller=hybrid lookahead=8 bias=0 speedControl=true
+api experiment.begin name=current-state-course-mapping-1200
+
+try
+  api course.survey.start collisionResponse=false timerHold=true
+  api memory.trace.clear
+  api memory.trace.start cpu=A address=10A058 length=2 width=any limit=512
+  api track.record.sample
+  api experiment.capture label=start include=sprites,gameplay,track
+
+  repeat 20
+    repeat 4
+      api control.run-frames frames=15 timeout=900000
+      api track.record.sample
+    end
+    api experiment.capture label=landmark-${repeat_index} include=sprites,gameplay,track
+  end
+
+  api memory.trace.stop
+  api memory.trace.tail count=512
+  api track.record.status
+  api course.follow.status
+  api track.map.export name=current-state-course-mapping-1200
+  api experiment.capture label=end include=sprites,gameplay,track
+finally
+  api memory.trace.stop
+  api course.survey.stop
+  api experiment.end
+  api patch.clear
+  api input.ioc.clear
+end
+
+echo === RC3.0 CURRENT-STATE COURSE MAPPING 1200 COMPLETE ===

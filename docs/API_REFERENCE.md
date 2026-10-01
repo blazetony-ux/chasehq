@@ -1,5 +1,26 @@
 # RC2.9 API additions
 
+## RC3.0 live course mapping / survey API
+
+RC3.0 closes the launch-time-only course-follower gap. The existing native autonomous driver can now be configured, started, stopped and inspected without restarting the emulator. The Workbench and Script Console use the same native controller.
+
+```text
+api course.follow.status
+api course.follow.configure controller=hybrid lookahead=8 bias=0 speedControl=true
+api course.follow.start
+api course.follow.stop
+api course.follow.reset
+api course.survey.status
+api course.survey.start collisionResponse=false timerHold=true
+api course.survey.stop
+api track.map.export name=stage1-course-map
+```
+
+`course.survey.start` is reversible orchestration: it starts the follower and v2 recorder, optionally holds the timer and suppresses only the already-proven collision-response writes while preserving detection. `course.survey.stop` restores the prior timer/collision state and restores a follower that was already enabled before the survey.
+
+The v2 recorder/export preserves road edges/centre, authoritative player lateral state, a separate projected player trajectory, speed/steering/follower telemetry, the confirmed Stage-1 target-car record, an unclassified visible-sprite census, and raw course-record + TC0150ROD renderer surface signatures. **Do not treat generic sprites as AI cars/obstacles or raw signatures as asphalt/dirt until separately proven.**
+
+
 ## `game.target.one-hit`
 
 `api game.target.one-hit enabled=true|false` enables/disables the **Stage 1 special target** one-hit research cheat. It does not freeze `0x1002AE` and does not synthesize defeat. Native runtime logic watches authentic damage PC `0xA112`; while enabled, a nonterminal counter is armed to zero immediately before the original instruction executes. The original instruction therefore performs `0000 -> FFFF`, sets authentic CPU flags, falls through to PC `0xA118`, writes `0x1002D8=0x1400`, and enters the original defeat state machine. Default: OFF.
@@ -38,7 +59,7 @@ New scriptable actions: `game.experiment.status`, `game.turbo.stock`, `game.turb
 
 The Game Lab UI is a convenience front end over the same script actions. `POST /api/v1/game/action` accepts an `action` plus action-specific fields and maps to the documented `game.*` actions. `POST /api/v1/tile/inspect` accepts `code`, `palette`, and `scale` and maps to `tile.inspect`. Automation should prefer the Research Script/API action names so CLI/script/UI behaviour stays aligned.
 
-# ChaseHQ-Native Script API Reference — v0.66.9.0-RC2.9
+# ChaseHQ-Native Script API Reference — v0.66.9.0-RC3.0
 > **Current validation baseline:** v0.66.9.0-RC2.8 (Windows/SDL proven). RC2.9 is the current source candidate; new RC2.9 interfaces remain candidate-only until focused Windows/SDL and Full Regression proof.
 
 

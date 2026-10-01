@@ -1,0 +1,7 @@
+ChaseHQ-Native v0.66.9.0-RC3.0
+Course Mapping / Live Survey tooling candidate
+
+Baseline: Windows/SDL-proven RC2.9.
+Scope: live course-follower API/UI/script parity; lateral-bias branch mapping; Track Recorder v2; player trajectory; target/dynamic-object evidence; raw surface signatures; reconstructable mapping exports; survey scripts and permanent regression.
+
+ROMs and SDL are not bundled. Existing Windows build-local staging remains authoritative.

@@ -264,3 +264,7 @@ This guide was introduced on the v0.66.9.0-RC2.4.3 project line. Keep it short a
 `Build-Debug.bat` and `Build-Release.bat` call `Prepare-Project.ps1`, which stages user-owned SDL and ROM inputs from `build-local.json`/environment settings. Their absence in the Linux source workspace does not block authorised source edits, available native tests, documentation or a clearly labelled candidate package. Preserve the staging scripts and local configuration. Never claim Windows/SDL or complete Script Console proof from Linux tests; keep the local promotion gate explicit. No user needs to repeat authorisation for routine source work already requested.
 
 Release identity is authoritative in `src/version.h`; CMake, launchers and Workbench consume it. Keep feature/schema/knowledge catalogs in sync. Old/corrected renderer diagnostics are not independent shadow verification.
+
+## Course mapping / survey discipline (RC3.0+)
+
+Use the live `course.follow.*` / `course.survey.*` API surfaces and bundled mapping scripts before inventing launch-only survey flows. Long course surveys should retain road geometry and the player's driven line as separate data. Preserve generic visible sprites as `UNCLASSIFIED_DYNAMIC_OBJECT` until evidence proves traffic/obstacle semantics. Preserve raw course-record + TC0150ROD surface signatures as unclassified evidence until screenshots/behaviour justify material names. Structural fork candidates remain A/B until physical left/right semantics are proven. Prefer the 600-frame shakedown before any 3600+ frame evidence run.

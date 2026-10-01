@@ -1,6 +1,6 @@
 {
   "schema": "chq-native-subsystem-maturity-v1",
-  "build": "0.66.9.0-RC2.9",
+  "build": "0.66.9.0-RC3.0",
   "ladder": [
     "UNKNOWN",
     "OBSERVED",
@@ -86,7 +86,7 @@
     {
       "id": "stage1-track-topology",
       "maturity": "BEHAVIOUR UNDERSTOOD",
-      "evidenceSummary": "Selectors 0-9, branching/linear templates, lateral fork rule and selector +5 terminal lifecycle causally proven. Higher-level directed graph/minimap representation remains to build.",
+      "evidenceSummary": "Selectors 0-9, branching/linear templates, lateral fork rule and selector +5 terminal lifecycle are causally proven. RC3.0 adds live course-follow mapping, player trajectory, entity/surface evidence and reconstructable exports; the authoritative directed graph/minimap remains the next research product.",
       "backend": "original/emulated",
       "replacementEnabled": false
     }

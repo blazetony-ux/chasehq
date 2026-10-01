@@ -1,6 +1,6 @@
 {
   "schema": "chq-handbook-v1",
-  "build": "0.66.9.0-RC2.9",
+  "build": "0.66.9.0-RC3.0",
   "title": "Chase H.Q. Native User & Research Handbook",
   "sections": [
     {
@@ -144,7 +144,7 @@
         {
           "id": "first-investigation",
           "title": "Your first reproducible investigation",
-          "summary": "A minimal checkpoint → action → capture → compare workflow.",
+          "summary": "A minimal checkpoint \u2192 action \u2192 capture \u2192 compare workflow.",
           "blocks": [
             {
               "type": "steps",
@@ -640,6 +640,44 @@
           "summary": "Quick definitions for common ChaseHQ-Native and research terms.",
           "generated": "glossary",
           "blocks": []
+        }
+      ]
+    },
+    {
+      "id": "course-mapping",
+      "title": "Course Mapping / Live Survey",
+      "pages": [
+        {
+          "id": "live-course-survey",
+          "title": "Run a controlled course-mapping survey",
+          "summary": "Use RC3.0 live autonomous driving and Track Recorder v2 from Workbench or Script Console without restarting the emulator.",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "The native closed-loop course follower is now a live research control. Start from stage1-gameplay-2064.chqstate, configure the follower, then use course.survey.start to hold time, optionally suppress the already-proven collision response, clear/start the shared recorder, and begin mapping."
+            },
+            {
+              "type": "code",
+              "language": "chqscript",
+              "title": "Minimal live survey",
+              "text": "api checkpoint.load file=stage1-gameplay-2064.chqstate run=false\napi course.follow.configure controller=hybrid lookahead=8 bias=0 speedControl=true\napi course.survey.start collisionResponse=false timerHold=true\napi track.record.sample\napi control.run-frames frames=60 timeout=900000\napi track.record.sample\napi track.map.export name=my-course-map\napi course.survey.stop"
+            },
+            {
+              "type": "callout",
+              "tone": "warning",
+              "title": "Semantic discipline",
+              "text": "The confirmed Stage-1 special target may be called a target car. Generic visible sprites remain UNCLASSIFIED_DYNAMIC_OBJECT. Raw surface signatures remain UNCLASSIFIED and must not be called asphalt/dirt until separate evidence supports that meaning."
+            },
+            {
+              "type": "list",
+              "items": [
+                "Road left/centre/right geometry and the player driven line are separate outputs.",
+                "Raw player lateral position/error remains authoritative; the SVG player line is a projection for map visualisation.",
+                "Use negative/positive bias surveys only as structural branch coverage; do not relabel candidate A/B as left/right without proof.",
+                "Run the 600-frame shakedown before the 3600-frame survey."
+              ]
+            }
+          ]
         }
       ]
     },

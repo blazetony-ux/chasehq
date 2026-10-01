@@ -1,0 +1,39 @@
+# name: Regression - v0.66.9.0 RC3.0 live course mapping/survey
+# category: regression
+# regression-version: 0.66.9.0-RC3.0
+# regression-scope: permanent
+# checkpoint: stage1-gameplay-2064.chqstate
+# purpose: Prove live course follower API parity, reversible survey orchestration, v2 recorder telemetry and mapping-dataset export.
+
+echo === RC3.0 live course mapping/survey regression ===
+api release.assert-version
+api schema action=course.follow.status
+api schema action=course.follow.configure
+api schema action=course.survey.start
+api schema action=track.map.export
+
+try
+  api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+  api course.follow.configure controller=hybrid lookahead=4 bias=0 speedControl=true
+  api course.follow.reset
+  api course.survey.start collisionResponse=false timerHold=true
+  api track.record.sample
+  api control.run-frames frames=30 timeout=900000
+  api track.record.sample
+  api control.run-frames frames=30 timeout=900000
+  api track.record.sample
+  api course.follow.status
+  api track.record.status
+  api track.map.export name=regression-rc30-course-map
+finally
+  api course.survey.stop
+  api course.follow.configure controller=hybrid lookahead=8 bias=0 speedControl=false
+  api patch.clear
+  api input.ioc.clear
+  api collision.response.reset
+  api timer.hold enabled=false
+  api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+end
+
+assert status frame=2064
+echo === RC3.0 live course mapping/survey regression complete ===

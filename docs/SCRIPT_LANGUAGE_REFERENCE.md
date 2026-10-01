@@ -25,7 +25,7 @@ Native CLI equivalents: `chqctl layer-offset get`, `chqctl layer-offset set bg0 
 
 The scripting language grammar is unchanged. New functionality is exposed through ordinary `api ACTION key=value` calls, notably the `game.*` and `tile.inspect` actions documented in the live API schema. Reusable turbo/HUD investigation scripts are now bundled under `research/scripts/graphics/` and `research/scripts/gameplay/`.
 
-# Research Script v2 Language Reference — v0.66.9.0-RC2.9
+# Research Script v2 Language Reference — v0.66.9.0-RC3.0
 > **Current validation baseline:** v0.66.9.0-RC2.8 (Windows/SDL proven). RC2.9 is the current source candidate; new RC2.9 interfaces remain candidate-only until focused Windows/SDL and Full Regression proof.
 
 
@@ -289,3 +289,8 @@ finally
     api timeline.reset
 end
 ```
+
+
+## RC3.0 course-mapping recipes
+
+Long course surveys should use the bundled scripts under `research/scripts/track/surveys/` rather than manually unrolled commands. `track.record.sample` now returns a compact result to Script Console runs while the shared recorder retains the complete dataset, preventing O(n²) console/evidence growth during long surveys. Use `track.map.export` for the reconstructable dataset.

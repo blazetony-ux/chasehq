@@ -1,6 +1,6 @@
 {
   "schema": "chq-semantic-objects-v1",
-  "build": "0.66.9.0-RC2.9",
+  "build": "0.66.9.0-RC3.0",
   "objects": [
     {
       "id": "player_car",

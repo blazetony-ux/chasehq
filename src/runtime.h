@@ -811,6 +811,7 @@ struct Options {
     double course_follow_lateral_kp = 0.0060; // signed steering units per lateral-error unit
     int course_follow_lateral_max = 48; // maximum absolute centring correction
     int course_follow_lateral_deadzone = 96; // ignore small centre error to avoid hunting
+    int course_follow_lateral_bias = 0; // live mapping target offset from geometric road centre, signed 16-bit course-lateral units
     std::string course_follow_controller = "hybrid"; // hybrid|predictive|legacy|profile
     double course_follow_lateral_kd = 0.012; // derivative damping gain
     int course_follow_slew = 8; // max steering-output change per frame

@@ -353,9 +353,11 @@ bool Video::process_events(
             }
         }
 
-        // RC2.9: immediate SDL pause/resume for manual research capture. Pause/Break
-        // is primary. Existing F-key diagnostics remain unchanged; API/script pause/resume remain available.
-        if (e.key.scancode == SDL_SCANCODE_PAUSE) {
+        // RC3.0: immediate SDL pause/resume for manual research capture. Pause/Break remains
+        // primary; Ctrl+P is a secondary fallback for compact keyboards without Pause.
+        // Existing F-key diagnostics remain unchanged; API/script pause/resume remain available.
+        if (e.key.scancode == SDL_SCANCODE_PAUSE ||
+            (e.key.scancode == SDL_SCANCODE_P && (e.key.mod & SDL_KMOD_CTRL))) {
             actions.toggle_pause = true; changed = true; continue;
         }
 

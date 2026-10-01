@@ -136,7 +136,7 @@ Write-Host 'v0.66.9.0-RC2.5 script lifecycle / action parity: PASS' -ForegroundC
 
 
 # v0.66.9.0-RC2.9: target-health promotion, research controls, SDL pause UX and long-run parity.
-if($nativeVersion -eq '0.66.9.0-RC2.9'){
+if($nativeVersion -in @('0.66.9.0-RC2.9','0.66.9.0-RC3.0')){
     foreach($cp in @(
         'stage1-target-immediate-pre-contact-5587.chqstate',
         'stage1-target-first-physical-contact-5588.chqstate',
@@ -152,4 +152,15 @@ if($nativeVersion -eq '0.66.9.0-RC2.9'){
     $gameplayDoc=Get-Content (Join-Path $root 'docs\chasehq\discoveries\gameplay-state.md') -Raw
     if($gameplayDoc -notmatch '0x1002AE' -or $gameplayDoc -notmatch 'FFFF'){throw 'Workbench validation failed: RC2.9 target-health documentation is stale'}
     Write-Host 'v0.66.9.0-RC2.9 target health / SDL UX / timeout parity: PASS' -ForegroundColor Green
+}
+
+
+# v0.66.9.0-RC3.0: live course-mapping / survey parity and evidence surfaces.
+if($nativeVersion -eq '0.66.9.0-RC3.0'){
+    foreach($needle in @("'course.follow.status'","'course.follow.configure'","'course.survey.start'","'course.survey.stop'","'track.map.export'",'Course Mapping / Live Survey','UNCLASSIFIED_DYNAMIC_OBJECT','surfaceSignature','carX','roadLeftX')){if($text -notmatch [regex]::Escape($needle)){throw "Workbench validation failed: RC3.0 mapping surface missing: $needle"}}
+    foreach($f in @('stage1-course-mapping-shakedown-600.chqscript','stage1-course-mapping-3600.chqscript','stage1-course-mapping-negative-bias.chqscript','stage1-course-mapping-positive-bias.chqscript')){if(-not(Test-Path (Join-Path $root ('research\scripts\track\surveys\'+$f)))){throw "Workbench validation failed: RC3.0 survey script missing: $f"}}
+    if(-not(Test-Path (Join-Path $root 'research\scripts\regression\regression-v06690-rc30-course-mapping-live-survey.chqscript'))){throw 'Workbench validation failed: RC3.0 focused regression missing'}
+    $apiDoc=Get-Content (Join-Path $root 'docs\API_REFERENCE.md') -Raw
+    if($apiDoc -notmatch 'course\.follow\.configure' -or $apiDoc -notmatch 'track\.map\.export'){throw 'Workbench validation failed: RC3.0 API documentation is stale'}
+    Write-Host 'v0.66.9.0-RC3.0 live course mapping / survey parity: PASS' -ForegroundColor Green
 }

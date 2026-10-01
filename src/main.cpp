@@ -509,7 +509,7 @@ int main(int argc, char* argv[]) {
         int course_follow_output = 0;
         int course_follow_profile_feedforward = 0;
         std::int64_t course_follow_profile_delta = 0;
-        std::uint16_t road_left_bound=0, road_right_bound=0, road_centre=0, car_lateral=0;
+        std::uint16_t road_left_bound=0, road_right_bound=0, road_centre=0, course_follow_target_lateral=0, car_lateral=0;
         int road_width=0; double lateral_error_norm=0.0;
         std::int16_t lateral_error=0;
         const char* lateral_side="CENTRE";
@@ -535,13 +535,13 @@ int main(int argc, char* argv[]) {
         std::ofstream input_trace;
         if (runtime && options.input_trace) { input_trace.open(options.logs / "input_trace.csv"); input_trace << "frame,port02,port03,steer_lo,steer_hi,reads02,reads03,reads0c,reads0d\n"; }
         std::ofstream gameplay_state;
-        if(runtime && options.gameplay_state_log){ gameplay_state.open(options.logs/"gameplay_state.csv"); gameplay_state<<"frame,speed_bcd,speed_kmh,speed_internal,distance_raw,distance,timer_bcd,score_bcd,steering_injected_raw,steering_injected_signed,steering_game_raw12,steering_game_signed,steering_processed_signed,autopilot_target_signed,autopilot_curve_now,autopilot_curve_ahead,autopilot_curve_predict,autopilot_feedforward,autopilot_p_term,autopilot_d_term,autopilot_error_rate,autopilot_lateral_correction,autopilot_speed_target,autopilot_accel_cmd,autopilot_brake_cmd,autopilot_controller,autopilot_mode,road_left_bound,road_centre,road_right_bound,road_width,car_lateral,lateral_error,lateral_error_normalized,lateral_side,accel,brake,turbo_active,turbos_left,brake_lamp,brake_lamp_pal64_pen13,brake_lamp_pal65_pen13,road_state,road_zone,road_flags,grade_state,grade_profile_signed\n"; }
+        if(runtime && options.gameplay_state_log){ gameplay_state.open(options.logs/"gameplay_state.csv"); gameplay_state<<"frame,speed_bcd,speed_kmh,speed_internal,distance_raw,distance,timer_bcd,score_bcd,steering_injected_raw,steering_injected_signed,steering_game_raw12,steering_game_signed,steering_processed_signed,autopilot_target_signed,autopilot_curve_now,autopilot_curve_ahead,autopilot_curve_predict,autopilot_feedforward,autopilot_p_term,autopilot_d_term,autopilot_error_rate,autopilot_lateral_correction,autopilot_speed_target,autopilot_accel_cmd,autopilot_brake_cmd,autopilot_controller,autopilot_mode,road_left_bound,road_centre,autopilot_target_lateral,autopilot_lateral_bias,road_right_bound,road_width,car_lateral,lateral_error,lateral_error_normalized,lateral_side,accel,brake,turbo_active,turbos_left,brake_lamp,brake_lamp_pal64_pen13,brake_lamp_pal65_pen13,road_state,road_zone,road_flags,grade_state,grade_profile_signed\n"; }
         std::ofstream handling_state, driver_profile;
         if(runtime && options.course_survey){
             handling_state.open(options.logs/"handling_state.csv");
             handling_state<<"frame,turn_state,table_index,speed_internal,forward_coeff,forward_coeff_ratio,lateral_coeff,lateral_coeff_ratio,applied_forward_coeff,applied_forward_ratio,applied_lateral_coeff,applied_lateral_ratio,forward_component,lateral_component,override_active,samples\n";
             driver_profile.open(options.logs/"driver_profile.csv");
-            driver_profile<<"frame,course_position,bank,record,curve_now,curve_predict,road_left,road_centre,road_right,road_width,car_lateral,lateral_error,lateral_error_normalized,steering_target,accel_cmd,brake_cmd,speed_target,controller,mode,profile_feedforward,profile_position_delta\n";
+            driver_profile<<"frame,course_position,bank,record,curve_now,curve_predict,road_left,road_centre,target_lateral,lateral_bias,road_right,road_width,car_lateral,lateral_error,lateral_error_normalized,steering_target,accel_cmd,brake_cmd,speed_target,controller,mode,profile_feedforward,profile_position_delta\n";
         }
         std::ofstream target_state, collision_events;
         bool target_contact_known=false, last_target_contact=false; std::uint16_t last_collision_timer=0; std::uint64_t last_suppressed_shoves=0, last_suppressed_lateral=0, last_suppressed_speed=0;
@@ -763,13 +763,13 @@ int main(int argc, char* argv[]) {
                     const auto c0=lower(a[0]); std::ostringstream o;
                     auto need=[&](std::size_t n)->bool{if(a.size()<n){o<<"ERR insufficient arguments";return false;}return true;};
                     auto fmt_hex=[](std::uint32_t v){std::ostringstream x;x<<"0x"<<std::hex<<std::uppercase<<v;return x.str();};
-                    if(c0=="help") return "OK commands: version | capabilities | status | pause | resume | timer status|freeze|resume | window status|top|fullscreen|scale|show|hide|minimize|restore ... | baseline save|restore | snapshot save|restore|list|remove NAME | run N | step frame [N] | step instr A|B | disasm A|B ADDR [COUNT] | read A|B ADDR WIDTH | readrange A|B ADDR LENGTH | write A|B ADDR WIDTH VALUE | regs A|B [REG] | reg read|write A|B REG [VALUE] | patch freeze|replace|suppress|list|remove|clear ... | watch add|remove|list|clear ... | trace start|stop|add|remove|list|clear ... | events tail|clear|save|limit ... | why mem A|B ADDR | changed A|B START:END [since FRAME] | input steering|xor|pulse|ports ... | palette trace start|status|tail|stop|clear ... | memory trace start|status|tail|stop|clear ... | target one-hit status|on|off | sprites tail|save ... | checkpoint save|load PATH | timeline start|stop|status|load|seek|next|prev|fork|unload PATH | screenshot [PATH] | graphics snapshot PATH | legacytrace status|reset|mem|pc|trigger|cpu|window|context|max|output|start|stop ... | provenance status|reset|follow|access|window|max|output|start|stop ...";
-                    if(c0=="version") return std::string("OK build=")+chq::kNativeVersion+" product=ChaseHQ-Native api=0.66.9.0-RC2.9 transport=localhost-tcp";
-                    if(c0=="capabilities") return "OK execution.pause execution.resume execution.step_frame execution.step_instruction snapshot.named baseline.save baseline.restore memory.read memory.read_range memory.write register.read register.write patch.freeze patch.replace patch.suppress patch.remove watch.memory_range watch.remove events.tail events.save events.limit query.why_memory query.changed_memory input.steering input.xor input.pulse input.ports cpu.disassemble tuning.handling palette.inspect palette.freeze palette.restore palette.trace memory.trace sprites.tail sprites.save sprites.list sprites.inspect sprites.override sprites.override.clear sprites.visual sprites.visual.clear checkpoint.save checkpoint.load timeline.record timeline.load timeline.seek timeline.fork timeline.write_history screenshot graphics.layered_snapshot timer.freeze graphics.layer_offsets graphics.tc0100_compare window.always_on_top window.fullscreen window.scale window.visibility window.minimize_restore legacytrace.dynamic provenance.dynamic";
+                    if(c0=="help") return "OK commands: version | capabilities | status | pause | resume | timer status|freeze|resume | window status|top|fullscreen|scale|show|hide|minimize|restore ... | baseline save|restore | snapshot save|restore|list|remove NAME | run N | step frame [N] | step instr A|B | disasm A|B ADDR [COUNT] | read A|B ADDR WIDTH | readrange A|B ADDR LENGTH | write A|B ADDR WIDTH VALUE | regs A|B [REG] | reg read|write A|B REG [VALUE] | patch freeze|replace|suppress|list|remove|clear ... | watch add|remove|list|clear ... | trace start|stop|add|remove|list|clear ... | events tail|clear|save|limit ... | why mem A|B ADDR | changed A|B START:END [since FRAME] | input steering|xor|pulse|ports ... | palette trace start|status|tail|stop|clear ... | memory trace start|status|tail|stop|clear ... | target one-hit status|on|off | course status|start|stop|reset|configure ... | sprites tail|save ... | checkpoint save|load PATH | timeline start|stop|status|load|seek|next|prev|fork|unload PATH | screenshot [PATH] | graphics snapshot PATH | legacytrace status|reset|mem|pc|trigger|cpu|window|context|max|output|start|stop ... | provenance status|reset|follow|access|window|max|output|start|stop ...";
+                    if(c0=="version") return std::string("OK build=")+chq::kNativeVersion+" product=ChaseHQ-Native api=0.66.9.0-RC3.0 transport=localhost-tcp";
+                    if(c0=="capabilities") return "OK execution.pause execution.resume execution.step_frame execution.step_instruction snapshot.named baseline.save baseline.restore memory.read memory.read_range memory.write register.read register.write patch.freeze patch.replace patch.suppress patch.remove watch.memory_range watch.remove events.tail events.save events.limit query.why_memory query.changed_memory input.steering input.xor input.pulse input.ports cpu.disassemble tuning.handling palette.inspect palette.freeze palette.restore palette.trace memory.trace sprites.tail sprites.save sprites.list sprites.inspect sprites.override sprites.override.clear sprites.visual sprites.visual.clear checkpoint.save checkpoint.load timeline.record timeline.load timeline.seek timeline.fork timeline.write_history screenshot graphics.layered_snapshot timer.freeze course.follow course.configure course.telemetry graphics.layer_offsets graphics.tc0100_compare window.always_on_top window.fullscreen window.scale window.visibility window.minimize_restore legacytrace.dynamic provenance.dynamic";
                     if(c0=="status"){
                         o<<"OK build="<<chq::kNativeVersion<<" frame="<<frame<<" paused="<<(debug_paused?1:0)<<" step_remaining="<<debug_step_remaining<<" research="<<(runtime->bus.research_enabled()?1:0)
                          <<" events="<<runtime->bus.research_events().size()<<" watches="<<runtime->bus.research_watches().size()<<" patches="<<runtime->bus.research_patches().size()
-                         <<" baseline="<<(workbench_have_pause_point?1:0)<<" source="<<(forensic_timeline_loaded?"timeline":"live")<<" timeline_recording="<<(forensic_timeline_recording?1:0)<<" timeline_loaded="<<(forensic_timeline_loaded?1:0)<<" timer_frozen="<<(timer_frozen?1:0)<<" always_on_top="<<(video.always_on_top()?1:0)<<" fullscreen="<<(video.fullscreen()?1:0)<<" window_visible="<<(video.window_visible()?1:0)<<" window_minimized="<<(video.window_minimized()?1:0)<<" window_scale="<<video.window_scale()<<" handling_override="<<((std::abs(runtime->handling_cornering_scale()-1.0)>1e-12||std::abs(runtime->handling_speed_retain()-1.0)>1e-12)?1:0)<<" target_one_hit="<<(runtime->target_one_hit()?1:0)<<" palette_overrides="<<live_palette_overrides.size()<<" fault="<<(runtime->fault.empty()?"none":runtime->fault); return o.str();
+                         <<" baseline="<<(workbench_have_pause_point?1:0)<<" source="<<(forensic_timeline_loaded?"timeline":"live")<<" timeline_recording="<<(forensic_timeline_recording?1:0)<<" timeline_loaded="<<(forensic_timeline_loaded?1:0)<<" timer_frozen="<<(timer_frozen?1:0)<<" always_on_top="<<(video.always_on_top()?1:0)<<" fullscreen="<<(video.fullscreen()?1:0)<<" window_visible="<<(video.window_visible()?1:0)<<" window_minimized="<<(video.window_minimized()?1:0)<<" window_scale="<<video.window_scale()<<" handling_override="<<((std::abs(runtime->handling_cornering_scale()-1.0)>1e-12||std::abs(runtime->handling_speed_retain()-1.0)>1e-12)?1:0)<<" target_one_hit="<<(runtime->target_one_hit()?1:0)<<" course_follow="<<(options.course_follow?1:0)<<" course_controller="<<options.course_follow_controller<<" course_bias="<<options.course_follow_lateral_bias<<" palette_overrides="<<live_palette_overrides.size()<<" fault="<<(runtime->fault.empty()?"none":runtime->fault); return o.str();
                     }
                     if(c0=="timer") {
                         const auto op=a.size()>1?lower(a[1]):"status";
@@ -778,6 +778,72 @@ int main(int argc, char* argv[]) {
                         if(op=="resume"||op=="off"||op=="unfreeze"){timer_frozen=false;changed=true;return "OK timer_frozen=0";}
                         if(op=="toggle"){if(!timer_frozen){frozen_timer_value=static_cast<std::uint8_t>(runtime->bus.peek(0x100200,1,chq::BusSpace::Main));frozen_timer_fraction=static_cast<std::uint8_t>(runtime->bus.peek(0x100201,1,chq::BusSpace::Main));timer_frozen=true;}else timer_frozen=false;changed=true;return std::string("OK timer_frozen=")+(timer_frozen?"1":"0");}
                         return "ERR timer expects status|freeze|resume|toggle";
+                    }
+                    if(c0=="course") {
+                        const auto op=a.size()>1?lower(a[1]):"status";
+                        auto course_status=[&](){
+                            std::ostringstream q;
+                            q<<"OK enabled="<<(options.course_follow?1:0)
+                             <<" controller="<<options.course_follow_controller
+                             <<" steer="<<options.course_follow_steer
+                             <<" deadzone="<<options.course_follow_deadzone
+                             <<" lookahead="<<options.course_follow_lookahead
+                             <<" lateral_kp="<<options.course_follow_lateral_kp
+                             <<" lateral_kd="<<options.course_follow_lateral_kd
+                             <<" lateral_max="<<options.course_follow_lateral_max
+                             <<" lateral_deadzone="<<options.course_follow_lateral_deadzone
+                             <<" lateral_bias="<<options.course_follow_lateral_bias
+                             <<" slew="<<options.course_follow_slew
+                             <<" speed_control="<<(options.course_follow_speed_control?1:0)
+                             <<" steering_target="<<course_follow_target
+                             <<" curve_now="<<course_follow_curve_now
+                             <<" curve_ahead="<<course_follow_curve_ahead
+                             <<" curve_predict="<<course_follow_curve_predict
+                             <<" feedforward="<<course_follow_feedforward
+                             <<" p_term="<<course_follow_p_term
+                             <<" d_term="<<course_follow_d_term
+                             <<" correction="<<course_follow_lateral_correction
+                             <<" speed_target="<<course_follow_speed_target
+                             <<" accel_cmd="<<(course_follow_accel_cmd?1:0)
+                             <<" brake_cmd="<<(course_follow_brake_cmd?1:0)
+                             <<" mode="<<course_follow_mode
+                             <<" road_left="<<fmt_hex(road_left_bound)
+                             <<" road_centre="<<fmt_hex(road_centre)
+                             <<" target_lateral="<<fmt_hex(course_follow_target_lateral)
+                             <<" road_right="<<fmt_hex(road_right_bound)
+                             <<" road_width="<<road_width
+                             <<" car_lateral="<<fmt_hex(car_lateral)
+                             <<" lateral_error="<<lateral_error
+                             <<" lateral_error_norm="<<lateral_error_norm
+                             <<" lateral_side="<<lateral_side;
+                            return q.str();
+                        };
+                        if(op=="status"||op=="get") return course_status();
+                        if(op=="start"||op=="on") { options.course_follow=true; course_follow_have_prev_error=false; course_follow_output=0; video.set_course_survey_assists(options.course_follow,options.infinite_time,options.unlimited_turbo,options.auto_turbo); changed=true; return course_status(); }
+                        if(op=="stop"||op=="off") { options.course_follow=false; course_follow_have_prev_error=false; course_follow_output=0; course_follow_target=0; runtime->bus.set_ioc_steering(0); video.set_course_survey_assists(options.course_follow,options.infinite_time,options.unlimited_turbo,options.auto_turbo); changed=true; return course_status(); }
+                        if(op=="reset") { course_follow_have_prev_error=false; course_follow_prev_error=0; course_follow_output=0; course_follow_target=0; course_follow_profile_feedforward=0; course_follow_profile_delta=0; runtime->bus.set_ioc_steering(0); changed=true; return course_status(); }
+                        if(op=="configure"||op=="set") {
+                            if(a.size()<4 || ((a.size()-2)%2)!=0) return "ERR course configure KEY VALUE [KEY VALUE ...]";
+                            try {
+                                for(std::size_t i=2;i+1<a.size();i+=2){
+                                    const auto k=lower(a[i]); const auto& v=a[i+1];
+                                    if(k=="controller"){const auto m=lower(v);if(m!="legacy"&&m!="predictive"&&m!="hybrid"&&m!="profile")return "ERR controller expects legacy|predictive|hybrid|profile";options.course_follow_controller=m;}
+                                    else if(k=="steer"){const int n=std::stoi(v);if(n<1||n>96)return "ERR steer expects 1..96";options.course_follow_steer=n;}
+                                    else if(k=="deadzone"){const int n=std::stoi(v);if(n<0||n>127)return "ERR deadzone expects 0..127";options.course_follow_deadzone=n;}
+                                    else if(k=="lookahead"){const int n=std::stoi(v);if(n<0||n>8)return "ERR lookahead expects 0..8";options.course_follow_lookahead=n;}
+                                    else if(k=="lateral-kp"||k=="kp"){const double n=std::stod(v);if(n<0.0||n>0.05)return "ERR lateral-kp expects 0..0.05";options.course_follow_lateral_kp=n;}
+                                    else if(k=="lateral-kd"||k=="kd"){const double n=std::stod(v);if(n<0.0||n>0.1)return "ERR lateral-kd expects 0..0.1";options.course_follow_lateral_kd=n;}
+                                    else if(k=="lateral-max"||k=="max"){const int n=std::stoi(v);if(n<1||n>96)return "ERR lateral-max expects 1..96";options.course_follow_lateral_max=n;}
+                                    else if(k=="lateral-deadzone"){const int n=std::stoi(v);if(n<0||n>4096)return "ERR lateral-deadzone expects 0..4096";options.course_follow_lateral_deadzone=n;}
+                                    else if(k=="bias"||k=="lateral-bias"){const int n=std::stoi(v);if(n<-8192||n>8192)return "ERR bias expects -8192..8192";options.course_follow_lateral_bias=n;}
+                                    else if(k=="slew"){const int n=std::stoi(v);if(n<1||n>96)return "ERR slew expects 1..96";options.course_follow_slew=n;}
+                                    else if(k=="speed-control"){const auto m=lower(v);if(m!="on"&&m!="off"&&m!="1"&&m!="0"&&m!="true"&&m!="false")return "ERR speed-control expects on|off";options.course_follow_speed_control=(m=="on"||m=="1"||m=="true");}
+                                    else return "ERR unknown course key: "+k;
+                                }
+                            } catch(const std::exception& e){return std::string("ERR course configure: ")+e.what();}
+                            course_follow_have_prev_error=false; course_follow_output=0; changed=true; return course_status();
+                        }
+                        return "ERR course expects status|start|stop|reset|configure";
                     }
                     if(c0=="layer-offset") {
                         const auto op=a.size()>1?lower(a[1]):"get";
@@ -1281,9 +1347,10 @@ int main(int argc, char* argv[]) {
                     road_left_bound=b0; road_right_bound=b1;
                     const auto delta=static_cast<std::int16_t>(static_cast<std::uint16_t>(b1-b0));
                     road_centre=static_cast<std::uint16_t>(b0 + delta/2);
+                    course_follow_target_lateral=static_cast<std::uint16_t>(int(road_centre) + options.course_follow_lateral_bias);
                     road_width=std::abs(int(delta));
                     car_lateral=static_cast<std::uint16_t>(runtime->bus.peek(0x10a044,2,chq::BusSpace::Main));
-                    lateral_error=static_cast<std::int16_t>(static_cast<std::uint16_t>(car_lateral-road_centre));
+                    lateral_error=static_cast<std::int16_t>(static_cast<std::uint16_t>(car_lateral-course_follow_target_lateral));
                     lateral_error_norm = road_width>0 ? double(lateral_error)/(double(road_width)*0.5) : 0.0;
                     lateral_side=(lateral_error < -options.course_follow_lateral_deadzone)?"LEFT":((lateral_error > options.course_follow_lateral_deadzone)?"RIGHT":"CENTRE");
                     const auto rf_pre=static_cast<unsigned>(runtime->bus.peek(0x10a048,1,chq::BusSpace::Main));
@@ -1442,12 +1509,12 @@ int main(int argc, char* argv[]) {
                     const auto p64=runtime->bus.palette[64*16+13], p65=runtime->bus.palette[65*16+13]; const bool lamp=((p64&0x7fff)>0x1000)||((p65&0x7fff)>0x1000);
                     const auto rf=static_cast<unsigned>(runtime->bus.peek(0x10a048,1,chq::BusSpace::Main)); const char* zone=(rf&0x04)?"OFF_ROAD":((rf&0x06)==0x02?"EDGE":"INTERIOR");
                     const auto cp_grade=runtime->bus.peek(0x10080e,4,chq::BusSpace::Sub); const unsigned gb=runtime->bus.peek(0x1021bc,1,chq::BusSpace::Sub)&0x0f; const unsigned goff=(cp_grade&0x3e000u)>>10; const auto ga=0x109000u+gb*0x100u+(goff&0xf8u); const int grade_signed=static_cast<std::int8_t>(runtime->bus.peek(ga+1,1,chq::BusSpace::Sub)); const char* grade_state=grade_signed>0?"INCLINE":(grade_signed<0?"DECLINE":"LEVEL");
-                    gameplay_state<<frame<<",0x"<<std::hex<<speed<<std::dec<<','<<bcd(speed)<<','<<runtime->bus.peek(0x10041c,2,chq::BusSpace::Main)<<','<<dist<<','<<(double(dist)/256.0)<<",0x"<<std::hex<<runtime->bus.peek(0x100200,1,chq::BusSpace::Main)<<",0x"<<runtime->bus.peek(0x100408,2,chq::BusSpace::Main)<<std::dec<<','<<injected<<','<<signed12(injected)<<','<<game_raw<<','<<signed12(game_raw)<<','<<static_cast<std::int16_t>(processed)<<','<<course_follow_target<<','<<course_follow_curve_now<<','<<course_follow_curve_ahead<<','<<course_follow_curve_predict<<','<<course_follow_feedforward<<','<<course_follow_p_term<<','<<course_follow_d_term<<','<<course_follow_error_rate<<','<<course_follow_lateral_correction<<','<<course_follow_speed_target<<','<<(course_follow_accel_cmd?1:0)<<','<<(course_follow_brake_cmd?1:0)<<','<<options.course_follow_controller<<','<<course_follow_mode<<",0x"<<std::hex<<road_left_bound<<",0x"<<road_centre<<",0x"<<road_right_bound<<std::dec<<','<<road_width<<",0x"<<std::hex<<car_lateral<<std::dec<<','<<lateral_error<<','<<lateral_error_norm<<','<<lateral_side<<','<<((runtime->bus.ioc_port_value(3)&0x20)?0:1)<<','<<((runtime->bus.ioc_port_value(2)&0x20)?0:1)<<','<<(runtime->bus.peek(0x100212,2,chq::BusSpace::Main)?1:0)<<','<<runtime->bus.peek(0x1003a2,2,chq::BusSpace::Main)<<','<<(lamp?1:0)<<",0x"<<std::hex<<p64<<",0x"<<p65<<std::dec<<','<<((rf&0x04)?"OFF_ROAD":"ON_ROAD")<<','<<zone<<",0x"<<std::hex<<rf<<std::dec<<','<<grade_state<<','<<grade_signed<<'\n';
+                    gameplay_state<<frame<<",0x"<<std::hex<<speed<<std::dec<<','<<bcd(speed)<<','<<runtime->bus.peek(0x10041c,2,chq::BusSpace::Main)<<','<<dist<<','<<(double(dist)/256.0)<<",0x"<<std::hex<<runtime->bus.peek(0x100200,1,chq::BusSpace::Main)<<",0x"<<runtime->bus.peek(0x100408,2,chq::BusSpace::Main)<<std::dec<<','<<injected<<','<<signed12(injected)<<','<<game_raw<<','<<signed12(game_raw)<<','<<static_cast<std::int16_t>(processed)<<','<<course_follow_target<<','<<course_follow_curve_now<<','<<course_follow_curve_ahead<<','<<course_follow_curve_predict<<','<<course_follow_feedforward<<','<<course_follow_p_term<<','<<course_follow_d_term<<','<<course_follow_error_rate<<','<<course_follow_lateral_correction<<','<<course_follow_speed_target<<','<<(course_follow_accel_cmd?1:0)<<','<<(course_follow_brake_cmd?1:0)<<','<<options.course_follow_controller<<','<<course_follow_mode<<",0x"<<std::hex<<road_left_bound<<",0x"<<road_centre<<",0x"<<course_follow_target_lateral<<std::dec<<','<<options.course_follow_lateral_bias<<",0x"<<std::hex<<road_right_bound<<std::dec<<','<<road_width<<",0x"<<std::hex<<car_lateral<<std::dec<<','<<lateral_error<<','<<lateral_error_norm<<','<<lateral_side<<','<<((runtime->bus.ioc_port_value(3)&0x20)?0:1)<<','<<((runtime->bus.ioc_port_value(2)&0x20)?0:1)<<','<<(runtime->bus.peek(0x100212,2,chq::BusSpace::Main)?1:0)<<','<<runtime->bus.peek(0x1003a2,2,chq::BusSpace::Main)<<','<<(lamp?1:0)<<",0x"<<std::hex<<p64<<",0x"<<p65<<std::dec<<','<<((rf&0x04)?"OFF_ROAD":"ON_ROAD")<<','<<zone<<",0x"<<std::hex<<rf<<std::dec<<','<<grade_state<<','<<grade_signed<<'\n';
                     if(options.course_survey){
                         const auto& hs=runtime->handling_snapshot();
                         if(handling_state && hs.valid) handling_state<<frame<<','<<hs.turn_state<<','<<hs.table_index<<','<<hs.speed_internal<<','<<hs.forward_coeff<<','<<(double(static_cast<std::int16_t>(hs.forward_coeff))/256.0)<<','<<hs.lateral_coeff<<','<<(double(static_cast<std::int16_t>(hs.lateral_coeff))/256.0)<<','<<hs.applied_forward_coeff<<','<<(double(static_cast<std::int16_t>(hs.applied_forward_coeff))/256.0)<<','<<hs.applied_lateral_coeff<<','<<(double(static_cast<std::int16_t>(hs.applied_lateral_coeff))/256.0)<<','<<hs.forward_component<<','<<hs.lateral_component<<','<<(hs.override_active?1:0)<<','<<hs.samples<<'\n';
                         const auto prof_cp=runtime->bus.peek(0x10080e,4,chq::BusSpace::Sub); const unsigned prof_bank=runtime->bus.peek(0x1021bc,1,chq::BusSpace::Sub)&0x0f; const unsigned prof_rec=((((prof_cp&0x3e000u)>>10)&0xffu)/8u);
-                        if(driver_profile) driver_profile<<frame<<",0x"<<std::hex<<prof_cp<<std::dec<<','<<prof_bank<<','<<prof_rec<<','<<course_follow_curve_now<<','<<course_follow_curve_predict<<",0x"<<std::hex<<road_left_bound<<",0x"<<road_centre<<",0x"<<road_right_bound<<std::dec<<','<<road_width<<",0x"<<std::hex<<car_lateral<<std::dec<<','<<lateral_error<<','<<lateral_error_norm<<','<<course_follow_target<<','<<(course_follow_accel_cmd?1:0)<<','<<(course_follow_brake_cmd?1:0)<<','<<course_follow_speed_target<<','<<options.course_follow_controller<<','<<course_follow_mode<<','<<course_follow_profile_feedforward<<','<<course_follow_profile_delta<<'\n';
+                        if(driver_profile) driver_profile<<frame<<",0x"<<std::hex<<prof_cp<<std::dec<<','<<prof_bank<<','<<prof_rec<<','<<course_follow_curve_now<<','<<course_follow_curve_predict<<",0x"<<std::hex<<road_left_bound<<",0x"<<road_centre<<",0x"<<course_follow_target_lateral<<std::dec<<','<<options.course_follow_lateral_bias<<",0x"<<std::hex<<road_right_bound<<std::dec<<','<<road_width<<",0x"<<std::hex<<car_lateral<<std::dec<<','<<lateral_error<<','<<lateral_error_norm<<','<<course_follow_target<<','<<(course_follow_accel_cmd?1:0)<<','<<(course_follow_brake_cmd?1:0)<<','<<course_follow_speed_target<<','<<options.course_follow_controller<<','<<course_follow_mode<<','<<course_follow_profile_feedforward<<','<<course_follow_profile_delta<<'\n';
                         const int skmh=bcd(speed); const auto cp=runtime->bus.peek(0x10080e,4,chq::BusSpace::Sub); const unsigned bank=runtime->bus.peek(0x1021bc,1,chq::BusSpace::Sub)&0x0f; const unsigned rec=(((cp&0x3e000u)>>10)&0xffu)/8u;
                         if((rf&0x04)!=0){ ++offroad_frames; if(!excursion_active){excursion_active=true;++excursion_id;excursion_start_frame=frame;excursion_start_cp=cp;excursion_start_bank=bank;excursion_start_record=rec;excursion_max_speed=skmh;excursion_start_lateral_error=lateral_error;excursion_max_abs_lateral_error=std::abs(int(lateral_error));} excursion_max_speed=std::max(excursion_max_speed,skmh); excursion_max_abs_lateral_error=std::max(excursion_max_abs_lateral_error,std::abs(int(lateral_error))); }
                         else { if((rf&0x06)==0x02) ++edge_frames; else ++interior_frames; if(excursion_active){ if(excursion_log) excursion_log<<excursion_id<<','<<excursion_start_frame<<','<<frame<<','<<(frame-excursion_start_frame)<<",0x"<<std::hex<<excursion_start_cp<<",0x"<<cp<<std::dec<<','<<excursion_start_bank<<','<<excursion_start_record<<','<<bank<<','<<rec<<','<<excursion_max_speed<<','<<excursion_start_lateral_error<<','<<excursion_max_abs_lateral_error<<'\n'; excursion_active=false; } }

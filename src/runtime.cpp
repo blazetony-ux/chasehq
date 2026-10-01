@@ -2612,6 +2612,7 @@ static void load_master_debug_config(Options& o, const std::filesystem::path& pa
             else if(k=="course_profile"||k=="course-profile") { o.course_profile_file=v; o.course_follow=true; o.course_follow_controller="profile"; }
             else if(k=="cornering_scale"||k=="cornering-scale") { o.cornering_scale=std::stod(v); }
             else if(k=="cornering_speed_retain"||k=="cornering-speed-retain") { o.cornering_speed_retain=std::stod(v); }
+            else if(k=="course_follow_lateral_bias"||k=="course-follow-lateral-bias") { o.course_follow_lateral_bias=std::stoi(v); }
             else if(k=="course_follow_lateral_kd"||k=="course-follow-lateral-kd") { o.course_follow_lateral_kd=std::stod(v); }
             else if(k=="course_follow_slew"||k=="course-follow-slew") { o.course_follow_slew=std::stoi(v); }
             else if(k=="course_follow_speed_control"||k=="course-follow-speed-control") { o.course_follow_speed_control=(v!="0"&&v!="false"&&v!="off"); }
@@ -3079,6 +3080,7 @@ static bool parse_diagnostic_option(Options& o, const std::string& arg, int& i, 
     else if (arg == "--course-follow-lateral-kp") { auto v=std::stod(value()); if(v<0.0||v>0.05) throw std::runtime_error("--course-follow-lateral-kp expects 0..0.05"); o.course_follow_lateral_kp=v; return true; }
     else if (arg == "--course-follow-lateral-max") { auto v=std::stoi(value()); if(v<1||v>96) throw std::runtime_error("--course-follow-lateral-max expects 1..96"); o.course_follow_lateral_max=v; return true; }
     else if (arg == "--course-follow-lateral-deadzone") { auto v=std::stoi(value()); if(v<0||v>4096) throw std::runtime_error("--course-follow-lateral-deadzone expects 0..4096"); o.course_follow_lateral_deadzone=v; return true; }
+    else if (arg == "--course-follow-lateral-bias") { auto v=std::stoi(value()); if(v<-8192||v>8192) throw std::runtime_error("--course-follow-lateral-bias expects -8192..8192"); o.course_follow_lateral_bias=v; return true; }
     else if (arg == "--course-follow-controller") { auto v=value(); if(v!="legacy"&&v!="predictive"&&v!="hybrid"&&v!="profile") throw std::runtime_error("--course-follow-controller expects legacy|predictive|hybrid|profile"); o.course_follow_controller=v; return true; }
     else if (arg == "--course-follow-lateral-kd") { auto v=std::stod(value()); if(v<0.0||v>0.1) throw std::runtime_error("--course-follow-lateral-kd expects 0..0.1"); o.course_follow_lateral_kd=v; return true; }
     else if (arg == "--course-follow-slew") { auto v=std::stoi(value()); if(v<1||v>96) throw std::runtime_error("--course-follow-slew expects 1..96"); o.course_follow_slew=v; return true; }
@@ -3250,6 +3252,7 @@ void print_help() {
         "  --course-follow-lateral-kp X proportional centring gain, 0..0.05 (default 0.006)\n"
         "  --course-follow-lateral-max N cap centring correction, 1..96 (default 48)\n"
         "  --course-follow-lateral-deadzone N ignore abs lateral error <= N (default 96)\n"
+        "  --course-follow-lateral-bias N signed target offset from road centre, -8192..8192 (default 0)\n"
         "  --course-follow-controller MODE legacy|predictive|hybrid|profile (default hybrid)\n  --course-profile FILE          replay driver_profile.csv as feed-forward + live centre correction\n  --cornering-scale X            scale proven lateral handling coefficient (1.0 = native)\n  --cornering-speed-retain X     scale proven forward handling coefficient (1.0 = native)\n"
         "  --course-follow-lateral-kd X derivative damping gain, 0..0.1 (default 0.012)\n"
         "  --course-follow-slew N       max steering-output change/frame, 1..96 (default 8)\n"

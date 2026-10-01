@@ -1,6 +1,6 @@
 {
   "schema": "chq-feature-manifest-v1",
-  "build": "0.66.9.0-RC2.9",
+  "build": "0.66.9.0-RC3.0",
   "policy": "New API/script features should ship with schema and regression coverage in the same build.",
   "features": [
     {
@@ -471,6 +471,34 @@
       "since": "0.66.9.0-RC2.9",
       "regression": "research/scripts/regression/regression-v06690-rc29-target-health-tooling.chqscript",
       "description": "control.run-frames accepts timeout=1000..3600000, default 900000 ms."
+    },
+    {
+      "id": "track.live-course-follower-api",
+      "status": "implemented-candidate",
+      "since": "0.66.9.0-RC3.0",
+      "regression": "research/scripts/regression/regression-v06690-rc30-course-mapping-live-survey.chqscript",
+      "description": "Existing native course follower is controllable live through Research API, Script Console and Workbench without emulator restart."
+    },
+    {
+      "id": "track.course-mapping-recorder-v2",
+      "status": "implemented-candidate",
+      "since": "0.66.9.0-RC3.0",
+      "regression": "research/scripts/regression/regression-v06690-rc30-course-mapping-live-survey.chqscript",
+      "description": "Track recorder v2 preserves road geometry, real player lateral state, projected driven trajectory, gameplay telemetry, follower telemetry and reconstructable mapping exports."
+    },
+    {
+      "id": "track.entity-evidence-census",
+      "status": "observational",
+      "since": "0.66.9.0-RC3.0",
+      "regression": "research/scripts/regression/regression-v06690-rc30-course-mapping-live-survey.chqscript",
+      "description": "Mapping samples preserve confirmed Stage-1 target-car position plus unclassified visible sprite/object evidence without prematurely assigning AI-car or obstacle semantics."
+    },
+    {
+      "id": "track.surface-signature-evidence",
+      "status": "observational",
+      "since": "0.66.9.0-RC3.0",
+      "regression": "research/scripts/regression/regression-v06690-rc30-course-mapping-live-survey.chqscript",
+      "description": "Mapping records a composite raw surface candidate signature from course-record selectors plus representative TC0150ROD control/body/gfx scanline state, while intentionally leaving asphalt/dirt/material semantics unclassified until proven."
     }
   ]
 }

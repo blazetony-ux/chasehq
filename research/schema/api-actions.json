@@ -1,6 +1,6 @@
 {
   "schema": "chq-script-api-actions-v1",
-  "build": "0.66.9.0-RC2.9",
+  "build": "0.66.9.0-RC3.0",
   "actions": {
     "status": {
       "params": [],
@@ -1150,6 +1150,68 @@
       ],
       "example": "api game.target.one-hit enabled=true",
       "description": "Enable/disable the Stage 1 special-target one-hit research cheat. When enabled, the confirmed 0x1002AE counter is armed to zero immediately before authentic damage PC 0xA112 so the genuine terminal underflow/defeat path executes."
+    },
+    "course.follow.status": {
+      "params": [],
+      "example": "api course.follow.status",
+      "description": "Read live autonomous course-follower configuration and closed-loop telemetry without restarting the emulator."
+    },
+    "course.follow.configure": {
+      "params": [
+        "controller=legacy|predictive|hybrid|profile optional",
+        "steer=1..96 optional",
+        "deadzone=0..127 optional",
+        "lookahead=0..8 optional",
+        "lateralKp=0..0.05 optional",
+        "lateralKd=0..0.1 optional",
+        "lateralMax=1..96 optional",
+        "lateralDeadzone=0..4096 optional",
+        "bias=-8192..8192 optional",
+        "slew=1..96 optional",
+        "speedControl=true|false optional"
+      ],
+      "example": "api course.follow.configure controller=hybrid lookahead=8 bias=0 speedControl=true",
+      "description": "Configure the existing native course follower live. Bias is a signed target offset from geometric road centre for controlled branch mapping."
+    },
+    "course.follow.start": {
+      "params": [],
+      "example": "api course.follow.start",
+      "description": "Enable native closed-loop course following live without process restart."
+    },
+    "course.follow.stop": {
+      "params": [],
+      "example": "api course.follow.stop",
+      "description": "Disable live course following and return injected steering to centre."
+    },
+    "course.follow.reset": {
+      "params": [],
+      "example": "api course.follow.reset",
+      "description": "Reset follower derivative/output history and centred injected steering."
+    },
+    "course.survey.status": {
+      "params": [],
+      "example": "api course.survey.status",
+      "description": "Read Workbench live survey orchestration state, follower telemetry and shared recorder status."
+    },
+    "course.survey.start": {
+      "params": [
+        "collisionResponse=true|false optional default false",
+        "timerHold=true|false optional default true"
+      ],
+      "example": "api course.survey.start collisionResponse=false timerHold=true",
+      "description": "Start reversible live course survey: follower on, shared recorder cleared/started, optional timer hold and proven collision-response suppression."
+    },
+    "course.survey.stop": {
+      "params": [],
+      "example": "api course.survey.stop",
+      "description": "Stop survey/recorder and restore timer, collision response and pre-existing follower enabled state."
+    },
+    "track.map.export": {
+      "params": [
+        "name=NAME optional"
+      ],
+      "example": "api track.map.export name=stage1-course-map",
+      "description": "Export v2 course-mapping dataset: master JSON, track samples, player trajectory, entity evidence, raw surface signatures and SVG."
     }
   }
 }

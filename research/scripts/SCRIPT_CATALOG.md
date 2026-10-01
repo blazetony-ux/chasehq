@@ -1,6 +1,6 @@
 # Script Catalog
 
-Generated from packaged `.chqscript` headers for v0.66.9.0-RC2.7. Headers are authoritative.
+Generated from packaged `.chqscript` headers for v0.66.9.0-RC3.0. Headers are authoritative.
 
 | Path | Name | Category | Purpose | Checkpoint | Regression | Scope |
 |---|---|---|---|---|---|---|
@@ -126,3 +126,10 @@ Generated from packaged `.chqscript` headers for v0.66.9.0-RC2.7. Headers are au
 ## RC2.9
 
 - `regression/regression-v06690-rc29-target-health-tooling.chqscript` — RC2.9 target-health/one-hit/tooling focused regression.
+
+| regression/regression-v06690-rc30-course-mapping-live-survey.chqscript | Regression - v0.66.9.0 RC3.0 live course mapping/survey | regression | Prove live course follower API parity, reversible survey orchestration, v2 recorder telemetry and mapping-dataset export. | stage1-gameplay-2064.chqstate | 0.66.9.0-RC3.0 | permanent |
+| track/surveys/stage1-course-mapping-shakedown-600.chqscript | Stage 1 Course Mapping - 600 frame shakedown | track | Fast prove-off of live course following, v2 recorder, trajectory, entity census, surface signatures and map export. | stage1-gameplay-2064.chqstate | 0.66.9.0-RC3.0 | survey |
+| track/surveys/stage1-course-mapping-3600.chqscript | Stage 1 Course Mapping - 3600 frame evidence survey | track | Controlled Stage 1 mapping with 15-frame structured samples, 60-frame screenshot/state landmarks and topology trace. | stage1-gameplay-2064.chqstate | 0.66.9.0-RC3.0 | survey |
+| track/surveys/stage1-course-mapping-negative-bias.chqscript | Stage 1 Course Mapping - negative lateral bias branch survey | track | Controlled structural branch-coverage survey with negative target bias; no left/right semantic claim. | stage1-gameplay-2064.chqstate | 0.66.9.0-RC3.0 | survey |
+| track/surveys/stage1-course-mapping-positive-bias.chqscript | Stage 1 Course Mapping - positive lateral bias branch survey | track | Controlled structural branch-coverage survey with positive target bias; no left/right semantic claim. | stage1-gameplay-2064.chqstate | 0.66.9.0-RC3.0 | survey |
+| track/surveys/current-state-course-mapping-1200.chqscript | Current State Course Mapping - 1200 frame reusable survey | track | Reusable mapping from the currently loaded gameplay state for later stages/checkpoints, retaining road/player/entity/surface evidence. | current live state | 0.66.9.0-RC3.0 | survey |

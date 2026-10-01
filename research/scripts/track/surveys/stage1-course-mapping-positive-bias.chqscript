@@ -1,0 +1,29 @@
+# name: Stage 1 Course Mapping - positive lateral bias branch survey
+# category: track
+# regression-version: 0.66.9.0-RC3.0
+# purpose: Experimental branch-coverage survey using a controlled positive lateral target bias while retaining closed-loop road following. Do not label the resulting structural branch left/right without separate semantic proof.
+
+api release.assert-version
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api course.follow.configure controller=hybrid lookahead=8 bias=768 speedControl=true
+api experiment.begin name=stage1-course-mapping-positive-bias
+try
+  api course.survey.start collisionResponse=false timerHold=true
+  api track.record.sample
+  repeat 40
+    repeat 4
+      api control.run-frames frames=15 timeout=900000
+      api track.record.sample
+    end
+    api experiment.capture label=landmark-${repeat_index} include=sprites,gameplay,track
+  end
+  api track.map.export name=stage1-course-mapping-positive-bias
+finally
+  api course.survey.stop
+  api experiment.end
+  api course.follow.configure bias=0
+  api collision.response.reset
+  api timer.hold enabled=false
+end
+
+echo === RC3.0 POSITIVE-BIAS BRANCH SURVEY COMPLETE ===

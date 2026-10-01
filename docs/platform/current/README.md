@@ -8,6 +8,6 @@ Adds Game Lab experiment controls, TC0100SCN RAM character inspection and the fo
 
 # Current platform documentation
 
-**Latest Windows/SDL-proven platform baseline: v0.66.9.0-RC2.8. Current source candidate: v0.66.9.0-RC2.9.**
+**Latest Windows/SDL-proven platform baseline: v0.66.9.0-RC2.9. Current source candidate: v0.66.9.0-RC3.0.**
 
 The live implementation remains authoritative. For current interfaces use `../../API_REFERENCE.md`, `../../SCRIPT_LANGUAGE_REFERENCE.md`, `../../FORENSIC_TIMELINE.md`, and `../../PROJECT_STATE.md`. Files in this directory document major platform milestones and remain useful architectural references; older version-titled documents are not claims that those versions are still current.

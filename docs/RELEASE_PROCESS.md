@@ -1,6 +1,9 @@
-# Current RC2.9 source handoff gate
+# Release process — current candidate 0.66.9.0-RC3.0
 
-Linux can produce the source candidate and run available native/JavaScript tests. Local `Build-Debug.bat` supplies SDL and ROMs via the preserved staging configuration. Source delivery and Windows promotion are separate claims. Run the bundled history/CLI-evidence CTest gates, the focused RC2.9 regression and Full Regression locally before calling this candidate proven. See `../VALIDATION_0.66.9.0-RC2.9.md`. The build wrapper may tolerate the one documented `cpu_bus_rom_tests (SEGFAULT)` signature only when it is the **sole** CTest failure; any additional failing test must make the build return non-zero.
+Linux may produce and validate a source candidate, but Windows/SDL promotion remains a separate claim. RC3.0 requires `Build-Debug.bat`, the focused `regression-v06690-rc30-course-mapping-live-survey.chqscript`, and Full Regression. The historical `cpu_bus_rom_tests (SEGFAULT)` exception remains narrow: it may be tolerated only as the sole exact known failure.
+
+
+Linux can produce the source candidate and run available native/JavaScript tests. Local `Build-Debug.bat` supplies SDL and ROMs via the preserved staging configuration. Source delivery and Windows promotion are separate claims. Run the bundled history/CLI-evidence CTest gates, the focused RC3.0 course-mapping regression and Full Regression locally before calling RC3.0 proven. See `../VALIDATION_0.66.9.0-RC3.0.md`. The build wrapper may tolerate the one documented `cpu_bus_rom_tests (SEGFAULT)` signature only when it is the **sole** CTest failure; any additional failing test must make the build return non-zero.
 
 ---
 ## v0.66.9.0-RC2.4 candidate gate

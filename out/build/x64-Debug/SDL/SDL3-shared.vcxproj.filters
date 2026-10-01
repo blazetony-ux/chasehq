@@ -1,1922 +1,1922 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\out\build\x64-Debug\SDL\CMakeFiles\SDL3-shared.dir\cmake_pch.cxx">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\out\build\x64-Debug\SDL\CMakeFiles\SDL3-shared.dir\cmake_pch.cxx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\out\build\x64-Debug\SDL\CMakeFiles\SDL3-shared.dir\cmake_pch.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\out\build\x64-Debug\SDL\CMakeFiles\SDL3-shared.dir\cmake_pch.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\SDL.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\SDL.c">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\SDL_assert.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\SDL_assert.c">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\SDL_error.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\SDL_error.c">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\SDL_guid.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\SDL_guid.c">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\SDL_hashtable.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\SDL_hashtable.c">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\SDL_hints.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\SDL_hints.c">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\SDL_list.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\SDL_list.c">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\SDL_log.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\SDL_log.c">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\SDL_properties.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\SDL_properties.c">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\SDL_utils.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\SDL_utils.c">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\atomic\SDL_atomic.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\atomic\SDL_atomic.c">
       <Filter>src\atomic</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\atomic\SDL_spinlock.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\atomic\SDL_spinlock.c">
       <Filter>src\atomic</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\audio\SDL_audio.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\audio\SDL_audio.c">
       <Filter>src\audio</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\audio\SDL_audiocvt.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\audio\SDL_audiocvt.c">
       <Filter>src\audio</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\audio\SDL_audiodev.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\audio\SDL_audiodev.c">
       <Filter>src\audio</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\audio\SDL_audioqueue.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\audio\SDL_audioqueue.c">
       <Filter>src\audio</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\audio\SDL_audioresample.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\audio\SDL_audioresample.c">
       <Filter>src\audio</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\audio\SDL_audiotypecvt.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\audio\SDL_audiotypecvt.c">
       <Filter>src\audio</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\audio\SDL_mixer.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\audio\SDL_mixer.c">
       <Filter>src\audio</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\audio\SDL_wave.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\audio\SDL_wave.c">
       <Filter>src\audio</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\camera\SDL_camera.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\camera\SDL_camera.c">
       <Filter>src\camera</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\core\SDL_core_unsupported.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\core\SDL_core_unsupported.c">
       <Filter>src\core</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\cpuinfo\SDL_cpuinfo.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\cpuinfo\SDL_cpuinfo.c">
       <Filter>src\cpuinfo</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\dynapi\SDL_dynapi.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\dynapi\SDL_dynapi.c">
       <Filter>src\dynapi</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\events\SDL_categories.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\events\SDL_categories.c">
       <Filter>src\events</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\events\SDL_clipboardevents.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\events\SDL_clipboardevents.c">
       <Filter>src\events</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\events\SDL_displayevents.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\events\SDL_displayevents.c">
       <Filter>src\events</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\events\SDL_dropevents.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\events\SDL_dropevents.c">
       <Filter>src\events</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\events\SDL_events.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\events\SDL_events.c">
       <Filter>src\events</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\events\SDL_eventwatch.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\events\SDL_eventwatch.c">
       <Filter>src\events</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\events\SDL_keyboard.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\events\SDL_keyboard.c">
       <Filter>src\events</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\events\SDL_keymap.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\events\SDL_keymap.c">
       <Filter>src\events</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\events\SDL_keysym_to_keycode.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\events\SDL_keysym_to_keycode.c">
       <Filter>src\events</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\events\SDL_keysym_to_scancode.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\events\SDL_keysym_to_scancode.c">
       <Filter>src\events</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\events\SDL_mouse.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\events\SDL_mouse.c">
       <Filter>src\events</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\events\SDL_pen.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\events\SDL_pen.c">
       <Filter>src\events</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\events\SDL_quit.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\events\SDL_quit.c">
       <Filter>src\events</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\events\SDL_scancode_tables.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\events\SDL_scancode_tables.c">
       <Filter>src\events</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\events\SDL_touch.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\events\SDL_touch.c">
       <Filter>src\events</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\events\SDL_windowevents.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\events\SDL_windowevents.c">
       <Filter>src\events</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\events\imKStoUCS.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\events\imKStoUCS.c">
       <Filter>src\events</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\filesystem\SDL_filesystem.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\filesystem\SDL_filesystem.c">
       <Filter>src\filesystem</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\gpu\SDL_gpu.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\gpu\SDL_gpu.c">
       <Filter>src\gpu</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\haptic\SDL_haptic.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\haptic\SDL_haptic.c">
       <Filter>src\haptic</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\hidapi\SDL_hidapi.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\hidapi\SDL_hidapi.c">
       <Filter>src\hidapi</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\io\SDL_asyncio.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\io\SDL_asyncio.c">
       <Filter>src\io</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\io\SDL_iostream.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\io\SDL_iostream.c">
       <Filter>src\io</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\io\generic\SDL_asyncio_generic.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\io\generic\SDL_asyncio_generic.c">
       <Filter>src\io\generic</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\joystick\SDL_gamepad.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\joystick\SDL_gamepad.c">
       <Filter>src\joystick</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\joystick\SDL_joystick.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\joystick\SDL_joystick.c">
       <Filter>src\joystick</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\joystick\SDL_steam_virtual_gamepad.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\joystick\SDL_steam_virtual_gamepad.c">
       <Filter>src\joystick</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\joystick\controller_type.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\joystick\controller_type.c">
       <Filter>src\joystick</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\locale\SDL_locale.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\locale\SDL_locale.c">
       <Filter>src\locale</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\main\SDL_main_callbacks.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\main\SDL_main_callbacks.c">
       <Filter>src\main</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\main\SDL_runapp.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\main\SDL_runapp.c">
       <Filter>src\main</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\misc\SDL_libusb.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\misc\SDL_libusb.c">
       <Filter>src\misc</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\misc\SDL_url.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\misc\SDL_url.c">
       <Filter>src\misc</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\power\SDL_power.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\power\SDL_power.c">
       <Filter>src\power</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\SDL_render.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\SDL_render.c">
       <Filter>src\render</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\SDL_render_unsupported.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\SDL_render_unsupported.c">
       <Filter>src\render</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\SDL_yuv_sw.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\SDL_yuv_sw.c">
       <Filter>src\render</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\direct3d\SDL_render_d3d.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\direct3d\SDL_render_d3d.c">
       <Filter>src\render\direct3d</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\direct3d\SDL_shaders_d3d.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\direct3d\SDL_shaders_d3d.c">
       <Filter>src\render\direct3d</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\direct3d11\SDL_render_d3d11.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\direct3d11\SDL_render_d3d11.c">
       <Filter>src\render\direct3d11</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\direct3d11\SDL_shaders_d3d11.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\direct3d11\SDL_shaders_d3d11.c">
       <Filter>src\render\direct3d11</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\direct3d12\SDL_render_d3d12.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\direct3d12\SDL_render_d3d12.c">
       <Filter>src\render\direct3d12</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\direct3d12\SDL_shaders_d3d12.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\direct3d12\SDL_shaders_d3d12.c">
       <Filter>src\render\direct3d12</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\gpu\SDL_pipeline_gpu.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\gpu\SDL_pipeline_gpu.c">
       <Filter>src\render\gpu</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\gpu\SDL_render_gpu.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\gpu\SDL_render_gpu.c">
       <Filter>src\render\gpu</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\gpu\SDL_shaders_gpu.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\gpu\SDL_shaders_gpu.c">
       <Filter>src\render\gpu</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\ngage\SDL_render_ngage.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\ngage\SDL_render_ngage.c">
       <Filter>src\render\ngage</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\opengl\SDL_render_gl.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\opengl\SDL_render_gl.c">
       <Filter>src\render\opengl</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\opengl\SDL_shaders_gl.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\opengl\SDL_shaders_gl.c">
       <Filter>src\render\opengl</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\opengles2\SDL_render_gles2.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\opengles2\SDL_render_gles2.c">
       <Filter>src\render\opengles2</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\opengles2\SDL_shaders_gles2.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\opengles2\SDL_shaders_gles2.c">
       <Filter>src\render\opengles2</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\ps2\SDL_render_ps2.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\ps2\SDL_render_ps2.c">
       <Filter>src\render\ps2</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\psp\SDL_render_psp.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\psp\SDL_render_psp.c">
       <Filter>src\render\psp</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\software\SDL_blendfillrect.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\software\SDL_blendfillrect.c">
       <Filter>src\render\software</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\software\SDL_blendline.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\software\SDL_blendline.c">
       <Filter>src\render\software</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\software\SDL_blendpoint.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\software\SDL_blendpoint.c">
       <Filter>src\render\software</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\software\SDL_drawline.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\software\SDL_drawline.c">
       <Filter>src\render\software</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\software\SDL_drawpoint.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\software\SDL_drawpoint.c">
       <Filter>src\render\software</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\software\SDL_render_sw.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\software\SDL_render_sw.c">
       <Filter>src\render\software</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\software\SDL_triangle.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\software\SDL_triangle.c">
       <Filter>src\render\software</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\vitagxm\SDL_render_vita_gxm.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\vitagxm\SDL_render_vita_gxm.c">
       <Filter>src\render\vitagxm</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\vitagxm\SDL_render_vita_gxm_memory.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\vitagxm\SDL_render_vita_gxm_memory.c">
       <Filter>src\render\vitagxm</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\vitagxm\SDL_render_vita_gxm_tools.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\vitagxm\SDL_render_vita_gxm_tools.c">
       <Filter>src\render\vitagxm</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\vulkan\SDL_render_vulkan.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\vulkan\SDL_render_vulkan.c">
       <Filter>src\render\vulkan</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\vulkan\SDL_shaders_vulkan.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\vulkan\SDL_shaders_vulkan.c">
       <Filter>src\render\vulkan</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\sensor\SDL_sensor.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\sensor\SDL_sensor.c">
       <Filter>src\sensor</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\stdlib\SDL_crc16.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\stdlib\SDL_crc16.c">
       <Filter>src\stdlib</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\stdlib\SDL_crc32.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\stdlib\SDL_crc32.c">
       <Filter>src\stdlib</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\stdlib\SDL_getenv.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\stdlib\SDL_getenv.c">
       <Filter>src\stdlib</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\stdlib\SDL_iconv.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\stdlib\SDL_iconv.c">
       <Filter>src\stdlib</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\stdlib\SDL_malloc.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\stdlib\SDL_malloc.c">
       <Filter>src\stdlib</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\stdlib\SDL_memcpy.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\stdlib\SDL_memcpy.c">
       <Filter>src\stdlib</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\stdlib\SDL_memmove.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\stdlib\SDL_memmove.c">
       <Filter>src\stdlib</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\stdlib\SDL_memset.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\stdlib\SDL_memset.c">
       <Filter>src\stdlib</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\stdlib\SDL_mslibc.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\stdlib\SDL_mslibc.c">
       <Filter>src\stdlib</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\stdlib\SDL_murmur3.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\stdlib\SDL_murmur3.c">
       <Filter>src\stdlib</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\stdlib\SDL_qsort.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\stdlib\SDL_qsort.c">
       <Filter>src\stdlib</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\stdlib\SDL_random.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\stdlib\SDL_random.c">
       <Filter>src\stdlib</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\stdlib\SDL_stdlib.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\stdlib\SDL_stdlib.c">
       <Filter>src\stdlib</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\stdlib\SDL_string.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\stdlib\SDL_string.c">
       <Filter>src\stdlib</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\stdlib\SDL_strtokr.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\stdlib\SDL_strtokr.c">
       <Filter>src\stdlib</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\storage\SDL_storage.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\storage\SDL_storage.c">
       <Filter>src\storage</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\thread\SDL_thread.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\thread\SDL_thread.c">
       <Filter>src\thread</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\time\SDL_time.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\time\SDL_time.c">
       <Filter>src\time</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\timer\SDL_timer.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\timer\SDL_timer.c">
       <Filter>src\timer</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\SDL_RLEaccel.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\SDL_RLEaccel.c">
       <Filter>src\video</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\SDL_blit.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\SDL_blit.c">
       <Filter>src\video</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\SDL_blit_0.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\SDL_blit_0.c">
       <Filter>src\video</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\SDL_blit_1.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\SDL_blit_1.c">
       <Filter>src\video</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\SDL_blit_A.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\SDL_blit_A.c">
       <Filter>src\video</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\SDL_blit_N.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\SDL_blit_N.c">
       <Filter>src\video</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\SDL_blit_auto.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\SDL_blit_auto.c">
       <Filter>src\video</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\SDL_blit_copy.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\SDL_blit_copy.c">
       <Filter>src\video</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\SDL_blit_slow.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\SDL_blit_slow.c">
       <Filter>src\video</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\SDL_bmp.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\SDL_bmp.c">
       <Filter>src\video</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\SDL_clipboard.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\SDL_clipboard.c">
       <Filter>src\video</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\SDL_egl.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\SDL_egl.c">
       <Filter>src\video</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\SDL_fillrect.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\SDL_fillrect.c">
       <Filter>src\video</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\SDL_pixels.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\SDL_pixels.c">
       <Filter>src\video</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\SDL_rect.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\SDL_rect.c">
       <Filter>src\video</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\SDL_rotate.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\SDL_rotate.c">
       <Filter>src\video</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\SDL_stb.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\SDL_stb.c">
       <Filter>src\video</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\SDL_stretch.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\SDL_stretch.c">
       <Filter>src\video</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\SDL_surface.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\SDL_surface.c">
       <Filter>src\video</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\SDL_video.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\SDL_video.c">
       <Filter>src\video</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\SDL_video_unsupported.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\SDL_video_unsupported.c">
       <Filter>src\video</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\SDL_vulkan_utils.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\SDL_vulkan_utils.c">
       <Filter>src\video</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\SDL_yuv.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\SDL_yuv.c">
       <Filter>src\video</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\yuv2rgb\yuv_rgb_lsx.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\yuv2rgb\yuv_rgb_lsx.c">
       <Filter>src\video\yuv2rgb</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\yuv2rgb\yuv_rgb_sse.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\yuv2rgb\yuv_rgb_sse.c">
       <Filter>src\video\yuv2rgb</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\yuv2rgb\yuv_rgb_std.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\yuv2rgb\yuv_rgb_std.c">
       <Filter>src\video\yuv2rgb</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\audio\dummy\SDL_dummyaudio.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\audio\dummy\SDL_dummyaudio.c">
       <Filter>src\audio\dummy</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\audio\disk\SDL_diskaudio.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\audio\disk\SDL_diskaudio.c">
       <Filter>src\audio\disk</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\camera\dummy\SDL_camera_dummy.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\camera\dummy\SDL_camera_dummy.c">
       <Filter>src\camera\dummy</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\joystick\virtual\SDL_virtualjoystick.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\joystick\virtual\SDL_virtualjoystick.c">
       <Filter>src\joystick\virtual</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\dummy\SDL_nullevents.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\dummy\SDL_nullevents.c">
       <Filter>src\video\dummy</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\dummy\SDL_nullframebuffer.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\dummy\SDL_nullframebuffer.c">
       <Filter>src\video\dummy</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\dummy\SDL_nullvideo.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\dummy\SDL_nullvideo.c">
       <Filter>src\video\dummy</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\core\windows\SDL_gameinput.cpp">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\core\windows\SDL_gameinput.cpp">
       <Filter>src\core\windows</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\core\windows\SDL_hid.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\core\windows\SDL_hid.c">
       <Filter>src\core\windows</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\core\windows\SDL_immdevice.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\core\windows\SDL_immdevice.c">
       <Filter>src\core\windows</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\core\windows\SDL_windows.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\core\windows\SDL_windows.c">
       <Filter>src\core\windows</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\core\windows\SDL_xinput.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\core\windows\SDL_xinput.c">
       <Filter>src\core\windows</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\core\windows\pch.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\core\windows\pch.c">
       <Filter>src\core\windows</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\core\windows\pch_cpp.cpp">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\core\windows\pch_cpp.cpp">
       <Filter>src\core\windows</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\main\windows\SDL_sysmain_runapp.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\main\windows\SDL_sysmain_runapp.c">
       <Filter>src\main\windows</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\io\windows\SDL_asyncio_windows_ioring.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\io\windows\SDL_asyncio_windows_ioring.c">
       <Filter>src\io\windows</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\misc\windows\SDL_sysurl.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\misc\windows\SDL_sysurl.c">
       <Filter>src\misc\windows</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\audio\directsound\SDL_directsound.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\audio\directsound\SDL_directsound.c">
       <Filter>src\audio\directsound</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\audio\wasapi\SDL_wasapi.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\audio\wasapi\SDL_wasapi.c">
       <Filter>src\audio\wasapi</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\windows\SDL_windowsclipboard.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\windows\SDL_windowsclipboard.c">
       <Filter>src\video\windows</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\windows\SDL_windowsevents.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\windows\SDL_windowsevents.c">
       <Filter>src\video\windows</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\windows\SDL_windowsframebuffer.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\windows\SDL_windowsframebuffer.c">
       <Filter>src\video\windows</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\windows\SDL_windowsgameinput.cpp">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\windows\SDL_windowsgameinput.cpp">
       <Filter>src\video\windows</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\windows\SDL_windowskeyboard.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\windows\SDL_windowskeyboard.c">
       <Filter>src\video\windows</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\windows\SDL_windowsmessagebox.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\windows\SDL_windowsmessagebox.c">
       <Filter>src\video\windows</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\windows\SDL_windowsmodes.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\windows\SDL_windowsmodes.c">
       <Filter>src\video\windows</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\windows\SDL_windowsmouse.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\windows\SDL_windowsmouse.c">
       <Filter>src\video\windows</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\windows\SDL_windowsopengl.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\windows\SDL_windowsopengl.c">
       <Filter>src\video\windows</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\windows\SDL_windowsopengles.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\windows\SDL_windowsopengles.c">
       <Filter>src\video\windows</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\windows\SDL_windowsrawinput.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\windows\SDL_windowsrawinput.c">
       <Filter>src\video\windows</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\windows\SDL_windowsshape.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\windows\SDL_windowsshape.c">
       <Filter>src\video\windows</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\windows\SDL_windowsvideo.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\windows\SDL_windowsvideo.c">
       <Filter>src\video\windows</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\windows\SDL_windowsvulkan.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\windows\SDL_windowsvulkan.c">
       <Filter>src\video\windows</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\windows\SDL_windowswindow.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\windows\SDL_windowswindow.c">
       <Filter>src\video\windows</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\thread\generic\SDL_syscond.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\thread\generic\SDL_syscond.c">
       <Filter>src\thread\generic</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\thread\generic\SDL_sysrwlock.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\thread\generic\SDL_sysrwlock.c">
       <Filter>src\thread\generic</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\thread\windows\SDL_syscond_cv.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\thread\windows\SDL_syscond_cv.c">
       <Filter>src\thread\windows</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\thread\windows\SDL_sysmutex.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\thread\windows\SDL_sysmutex.c">
       <Filter>src\thread\windows</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\thread\windows\SDL_sysrwlock_srw.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\thread\windows\SDL_sysrwlock_srw.c">
       <Filter>src\thread\windows</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\thread\windows\SDL_syssem.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\thread\windows\SDL_syssem.c">
       <Filter>src\thread\windows</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\thread\windows\SDL_systhread.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\thread\windows\SDL_systhread.c">
       <Filter>src\thread\windows</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\thread\windows\SDL_systls.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\thread\windows\SDL_systls.c">
       <Filter>src\thread\windows</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\sensor\windows\SDL_windowssensor.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\sensor\windows\SDL_windowssensor.c">
       <Filter>src\sensor\windows</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\power\windows\SDL_syspower.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\power\windows\SDL_syspower.c">
       <Filter>src\power\windows</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\locale\windows\SDL_syslocale.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\locale\windows\SDL_syslocale.c">
       <Filter>src\locale\windows</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\filesystem\windows\SDL_sysfilesystem.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\filesystem\windows\SDL_sysfilesystem.c">
       <Filter>src\filesystem\windows</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\filesystem\windows\SDL_sysfsops.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\filesystem\windows\SDL_sysfsops.c">
       <Filter>src\filesystem\windows</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\storage\generic\SDL_genericstorage.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\storage\generic\SDL_genericstorage.c">
       <Filter>src\storage\generic</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\storage\steam\SDL_steamstorage.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\storage\steam\SDL_steamstorage.c">
       <Filter>src\storage\steam</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\time\windows\SDL_systime.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\time\windows\SDL_systime.c">
       <Filter>src\time\windows</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\timer\windows\SDL_systimer.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\timer\windows\SDL_systimer.c">
       <Filter>src\timer\windows</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\loadso\windows\SDL_sysloadso.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\loadso\windows\SDL_sysloadso.c">
       <Filter>src\loadso\windows</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\tray\windows\SDL_tray.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\tray\windows\SDL_tray.c">
       <Filter>src\tray\windows</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\joystick\hidapi\SDL_hidapi_8bitdo.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\joystick\hidapi\SDL_hidapi_8bitdo.c">
       <Filter>src\joystick\hidapi</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\joystick\hidapi\SDL_hidapi_combined.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\joystick\hidapi\SDL_hidapi_combined.c">
       <Filter>src\joystick\hidapi</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\joystick\hidapi\SDL_hidapi_flydigi.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\joystick\hidapi\SDL_hidapi_flydigi.c">
       <Filter>src\joystick\hidapi</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\joystick\hidapi\SDL_hidapi_gamecube.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\joystick\hidapi\SDL_hidapi_gamecube.c">
       <Filter>src\joystick\hidapi</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\joystick\hidapi\SDL_hidapi_gip.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\joystick\hidapi\SDL_hidapi_gip.c">
       <Filter>src\joystick\hidapi</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\joystick\hidapi\SDL_hidapi_lg4ff.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\joystick\hidapi\SDL_hidapi_lg4ff.c">
       <Filter>src\joystick\hidapi</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\joystick\hidapi\SDL_hidapi_luna.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\joystick\hidapi\SDL_hidapi_luna.c">
       <Filter>src\joystick\hidapi</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\joystick\hidapi\SDL_hidapi_ps3.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\joystick\hidapi\SDL_hidapi_ps3.c">
       <Filter>src\joystick\hidapi</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\joystick\hidapi\SDL_hidapi_ps4.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\joystick\hidapi\SDL_hidapi_ps4.c">
       <Filter>src\joystick\hidapi</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\joystick\hidapi\SDL_hidapi_ps5.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\joystick\hidapi\SDL_hidapi_ps5.c">
       <Filter>src\joystick\hidapi</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\joystick\hidapi\SDL_hidapi_rumble.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\joystick\hidapi\SDL_hidapi_rumble.c">
       <Filter>src\joystick\hidapi</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\joystick\hidapi\SDL_hidapi_shield.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\joystick\hidapi\SDL_hidapi_shield.c">
       <Filter>src\joystick\hidapi</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\joystick\hidapi\SDL_hidapi_sinput.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\joystick\hidapi\SDL_hidapi_sinput.c">
       <Filter>src\joystick\hidapi</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\joystick\hidapi\SDL_hidapi_stadia.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\joystick\hidapi\SDL_hidapi_stadia.c">
       <Filter>src\joystick\hidapi</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\joystick\hidapi\SDL_hidapi_steam.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\joystick\hidapi\SDL_hidapi_steam.c">
       <Filter>src\joystick\hidapi</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\joystick\hidapi\SDL_hidapi_steam_hori.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\joystick\hidapi\SDL_hidapi_steam_hori.c">
       <Filter>src\joystick\hidapi</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\joystick\hidapi\SDL_hidapi_steam_triton.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\joystick\hidapi\SDL_hidapi_steam_triton.c">
       <Filter>src\joystick\hidapi</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\joystick\hidapi\SDL_hidapi_steamdeck.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\joystick\hidapi\SDL_hidapi_steamdeck.c">
       <Filter>src\joystick\hidapi</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\joystick\hidapi\SDL_hidapi_switch.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\joystick\hidapi\SDL_hidapi_switch.c">
       <Filter>src\joystick\hidapi</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\joystick\hidapi\SDL_hidapi_switch2.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\joystick\hidapi\SDL_hidapi_switch2.c">
       <Filter>src\joystick\hidapi</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\joystick\hidapi\SDL_hidapi_wii.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\joystick\hidapi\SDL_hidapi_wii.c">
       <Filter>src\joystick\hidapi</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\joystick\hidapi\SDL_hidapi_xbox360.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\joystick\hidapi\SDL_hidapi_xbox360.c">
       <Filter>src\joystick\hidapi</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\joystick\hidapi\SDL_hidapi_xbox360w.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\joystick\hidapi\SDL_hidapi_xbox360w.c">
       <Filter>src\joystick\hidapi</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\joystick\hidapi\SDL_hidapi_xboxone.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\joystick\hidapi\SDL_hidapi_xboxone.c">
       <Filter>src\joystick\hidapi</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\joystick\hidapi\SDL_hidapi_zuiki.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\joystick\hidapi\SDL_hidapi_zuiki.c">
       <Filter>src\joystick\hidapi</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\joystick\hidapi\SDL_hidapijoystick.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\joystick\hidapi\SDL_hidapijoystick.c">
       <Filter>src\joystick\hidapi</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\joystick\hidapi\SDL_report_descriptor.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\joystick\hidapi\SDL_report_descriptor.c">
       <Filter>src\joystick\hidapi</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\haptic\hidapi\SDL_hidapihaptic.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\haptic\hidapi\SDL_hidapihaptic.c">
       <Filter>src\haptic\hidapi</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\haptic\hidapi\SDL_hidapihaptic_lg4ff.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\haptic\hidapi\SDL_hidapihaptic_lg4ff.c">
       <Filter>src\haptic\hidapi</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\joystick\windows\SDL_dinputjoystick.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\joystick\windows\SDL_dinputjoystick.c">
       <Filter>src\joystick\windows</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\joystick\windows\SDL_rawinputjoystick.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\joystick\windows\SDL_rawinputjoystick.c">
       <Filter>src\joystick\windows</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\joystick\windows\SDL_windows_gaming_input.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\joystick\windows\SDL_windows_gaming_input.c">
       <Filter>src\joystick\windows</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\joystick\windows\SDL_windowsjoystick.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\joystick\windows\SDL_windowsjoystick.c">
       <Filter>src\joystick\windows</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\joystick\windows\SDL_xinputjoystick.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\joystick\windows\SDL_xinputjoystick.c">
       <Filter>src\joystick\windows</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\joystick\gdk\SDL_gameinputjoystick.cpp">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\joystick\gdk\SDL_gameinputjoystick.cpp">
       <Filter>src\joystick\gdk</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\haptic\windows\SDL_dinputhaptic.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\haptic\windows\SDL_dinputhaptic.c">
       <Filter>src\haptic\windows</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\haptic\windows\SDL_windowshaptic.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\haptic\windows\SDL_windowshaptic.c">
       <Filter>src\haptic\windows</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\camera\mediafoundation\SDL_camera_mediafoundation.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\camera\mediafoundation\SDL_camera_mediafoundation.c">
       <Filter>src\camera\mediafoundation</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\dialog\SDL_dialog.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\dialog\SDL_dialog.c">
       <Filter>src\dialog</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\dialog\SDL_dialog_utils.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\dialog\SDL_dialog_utils.c">
       <Filter>src\dialog</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\dialog\windows\SDL_windowsdialog.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\dialog\windows\SDL_windowsdialog.c">
       <Filter>src\dialog\windows</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\process\SDL_process.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\process\SDL_process.c">
       <Filter>src\process</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\process\windows\SDL_windowsprocess.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\process\windows\SDL_windowsprocess.c">
       <Filter>src\process\windows</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\offscreen\SDL_offscreenevents.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\offscreen\SDL_offscreenevents.c">
       <Filter>src\video\offscreen</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\offscreen\SDL_offscreenframebuffer.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\offscreen\SDL_offscreenframebuffer.c">
       <Filter>src\video\offscreen</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\offscreen\SDL_offscreenopengles.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\offscreen\SDL_offscreenopengles.c">
       <Filter>src\video\offscreen</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\offscreen\SDL_offscreenvideo.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\offscreen\SDL_offscreenvideo.c">
       <Filter>src\video\offscreen</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\offscreen\SDL_offscreenvulkan.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\offscreen\SDL_offscreenvulkan.c">
       <Filter>src\video\offscreen</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\offscreen\SDL_offscreenwindow.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\offscreen\SDL_offscreenwindow.c">
       <Filter>src\video\offscreen</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\tray\SDL_tray_utils.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\tray\SDL_tray_utils.c">
       <Filter>src\tray</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\gpu\d3d12\SDL_gpu_d3d12.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\gpu\d3d12\SDL_gpu_d3d12.c">
       <Filter>src\gpu\d3d12</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\gpu\vulkan\SDL_gpu_vulkan.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\gpu\vulkan\SDL_gpu_vulkan.c">
       <Filter>src\gpu\vulkan</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\main\generic\SDL_sysmain_callbacks.c">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\main\generic\SDL_sysmain_callbacks.c">
       <Filter>src\main\generic</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\SDL_assert_c.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\SDL_assert_c.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\SDL_error_c.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\SDL_error_c.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\SDL_hashtable.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\SDL_hashtable.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\SDL_hints_c.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\SDL_hints_c.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\SDL_internal.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\SDL_internal.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\SDL_list.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\SDL_list.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\SDL_log_c.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\SDL_log_c.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\SDL_properties_c.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\SDL_properties_c.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\SDL_utils_c.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\SDL_utils_c.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\audio\SDL_audio_c.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\audio\SDL_audio_c.h">
       <Filter>src\audio</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\audio\SDL_audio_channel_converters.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\audio\SDL_audio_channel_converters.h">
       <Filter>src\audio</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\audio\SDL_audiodev_c.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\audio\SDL_audiodev_c.h">
       <Filter>src\audio</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\audio\SDL_audioqueue.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\audio\SDL_audioqueue.h">
       <Filter>src\audio</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\audio\SDL_audioresample.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\audio\SDL_audioresample.h">
       <Filter>src\audio</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\audio\SDL_sysaudio.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\audio\SDL_sysaudio.h">
       <Filter>src\audio</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\audio\SDL_wave.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\audio\SDL_wave.h">
       <Filter>src\audio</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\camera\SDL_camera_c.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\camera\SDL_camera_c.h">
       <Filter>src\camera</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\camera\SDL_syscamera.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\camera\SDL_syscamera.h">
       <Filter>src\camera</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\core\SDL_core_unsupported.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\core\SDL_core_unsupported.h">
       <Filter>src\core</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\cpuinfo\SDL_cpuinfo_c.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\cpuinfo\SDL_cpuinfo_c.h">
       <Filter>src\cpuinfo</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\dynapi\SDL_dynapi.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\dynapi\SDL_dynapi.h">
       <Filter>src\dynapi</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\dynapi\SDL_dynapi_overrides.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\dynapi\SDL_dynapi_overrides.h">
       <Filter>src\dynapi</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\dynapi\SDL_dynapi_procs.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\dynapi\SDL_dynapi_procs.h">
       <Filter>src\dynapi</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\dynapi\SDL_dynapi_unsupported.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\dynapi\SDL_dynapi_unsupported.h">
       <Filter>src\dynapi</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\events\SDL_categories_c.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\events\SDL_categories_c.h">
       <Filter>src\events</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\events\SDL_clipboardevents_c.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\events\SDL_clipboardevents_c.h">
       <Filter>src\events</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\events\SDL_displayevents_c.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\events\SDL_displayevents_c.h">
       <Filter>src\events</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\events\SDL_dropevents_c.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\events\SDL_dropevents_c.h">
       <Filter>src\events</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\events\SDL_events_c.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\events\SDL_events_c.h">
       <Filter>src\events</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\events\SDL_eventwatch_c.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\events\SDL_eventwatch_c.h">
       <Filter>src\events</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\events\SDL_keyboard_c.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\events\SDL_keyboard_c.h">
       <Filter>src\events</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\events\SDL_keymap_c.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\events\SDL_keymap_c.h">
       <Filter>src\events</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\events\SDL_keysym_to_keycode_c.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\events\SDL_keysym_to_keycode_c.h">
       <Filter>src\events</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\events\SDL_keysym_to_scancode_c.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\events\SDL_keysym_to_scancode_c.h">
       <Filter>src\events</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\events\SDL_mouse_c.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\events\SDL_mouse_c.h">
       <Filter>src\events</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\events\SDL_pen_c.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\events\SDL_pen_c.h">
       <Filter>src\events</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\events\SDL_scancode_tables_c.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\events\SDL_scancode_tables_c.h">
       <Filter>src\events</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\events\SDL_touch_c.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\events\SDL_touch_c.h">
       <Filter>src\events</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\events\SDL_windowevents_c.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\events\SDL_windowevents_c.h">
       <Filter>src\events</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\events\blank_cursor.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\events\blank_cursor.h">
       <Filter>src\events</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\events\default_cursor.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\events\default_cursor.h">
       <Filter>src\events</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\events\imKStoUCS.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\events\imKStoUCS.h">
       <Filter>src\events</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\events\scancodes_darwin.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\events\scancodes_darwin.h">
       <Filter>src\events</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\events\scancodes_linux.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\events\scancodes_linux.h">
       <Filter>src\events</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\events\scancodes_windows.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\events\scancodes_windows.h">
       <Filter>src\events</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\events\scancodes_xfree86.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\events\scancodes_xfree86.h">
       <Filter>src\events</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\filesystem\SDL_filesystem_c.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\filesystem\SDL_filesystem_c.h">
       <Filter>src\filesystem</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\filesystem\SDL_sysfilesystem.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\filesystem\SDL_sysfilesystem.h">
       <Filter>src\filesystem</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\gpu\SDL_sysgpu.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\gpu\SDL_sysgpu.h">
       <Filter>src\gpu</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\haptic\SDL_haptic_c.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\haptic\SDL_haptic_c.h">
       <Filter>src\haptic</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\haptic\SDL_syshaptic.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\haptic\SDL_syshaptic.h">
       <Filter>src\haptic</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\hidapi\SDL_hidapi_android.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\hidapi\SDL_hidapi_android.h">
       <Filter>src\hidapi</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\hidapi\SDL_hidapi_c.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\hidapi\SDL_hidapi_c.h">
       <Filter>src\hidapi</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\hidapi\SDL_hidapi_ios.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\hidapi\SDL_hidapi_ios.h">
       <Filter>src\hidapi</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\hidapi\SDL_hidapi_libusb.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\hidapi\SDL_hidapi_libusb.h">
       <Filter>src\hidapi</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\hidapi\SDL_hidapi_linux.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\hidapi\SDL_hidapi_linux.h">
       <Filter>src\hidapi</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\hidapi\SDL_hidapi_mac.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\hidapi\SDL_hidapi_mac.h">
       <Filter>src\hidapi</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\hidapi\SDL_hidapi_netbsd.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\hidapi\SDL_hidapi_netbsd.h">
       <Filter>src\hidapi</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\hidapi\SDL_hidapi_steamxbox.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\hidapi\SDL_hidapi_steamxbox.h">
       <Filter>src\hidapi</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\hidapi\SDL_hidapi_windows.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\hidapi\SDL_hidapi_windows.h">
       <Filter>src\hidapi</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\io\SDL_asyncio_c.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\io\SDL_asyncio_c.h">
       <Filter>src\io</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\io\SDL_iostream_c.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\io\SDL_iostream_c.h">
       <Filter>src\io</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\io\SDL_sysasyncio.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\io\SDL_sysasyncio.h">
       <Filter>src\io</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\joystick\SDL_gamepad_c.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\joystick\SDL_gamepad_c.h">
       <Filter>src\joystick</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\joystick\SDL_gamepad_db.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\joystick\SDL_gamepad_db.h">
       <Filter>src\joystick</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\joystick\SDL_joystick_c.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\joystick\SDL_joystick_c.h">
       <Filter>src\joystick</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\joystick\SDL_steam_virtual_gamepad.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\joystick\SDL_steam_virtual_gamepad.h">
       <Filter>src\joystick</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\joystick\SDL_sysjoystick.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\joystick\SDL_sysjoystick.h">
       <Filter>src\joystick</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\joystick\controller_list.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\joystick\controller_list.h">
       <Filter>src\joystick</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\joystick\controller_type.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\joystick\controller_type.h">
       <Filter>src\joystick</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\joystick\usb_ids.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\joystick\usb_ids.h">
       <Filter>src\joystick</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\locale\SDL_syslocale.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\locale\SDL_syslocale.h">
       <Filter>src\locale</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\main\SDL_main_callbacks.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\main\SDL_main_callbacks.h">
       <Filter>src\main</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\misc\SDL_libusb.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\misc\SDL_libusb.h">
       <Filter>src\misc</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\misc\SDL_sysurl.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\misc\SDL_sysurl.h">
       <Filter>src\misc</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\power\SDL_syspower.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\power\SDL_syspower.h">
       <Filter>src\power</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\SDL_d3dmath.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\SDL_d3dmath.h">
       <Filter>src\render</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\SDL_render_debug_font.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\SDL_render_debug_font.h">
       <Filter>src\render</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\SDL_sysrender.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\SDL_sysrender.h">
       <Filter>src\render</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\SDL_yuv_sw_c.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\SDL_yuv_sw_c.h">
       <Filter>src\render</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\direct3d\D3D9_PixelShader_Palette.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\direct3d\D3D9_PixelShader_Palette.h">
       <Filter>src\render\direct3d</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\direct3d\D3D9_PixelShader_Palette_Linear.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\direct3d\D3D9_PixelShader_Palette_Linear.h">
       <Filter>src\render\direct3d</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\direct3d\D3D9_PixelShader_Palette_Nearest.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\direct3d\D3D9_PixelShader_Palette_Nearest.h">
       <Filter>src\render\direct3d</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\direct3d\D3D9_PixelShader_YUV.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\direct3d\D3D9_PixelShader_YUV.h">
       <Filter>src\render\direct3d</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\direct3d\SDL_shaders_d3d.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\direct3d\SDL_shaders_d3d.h">
       <Filter>src\render\direct3d</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\direct3d11\D3D11_PixelShader_Advanced.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\direct3d11\D3D11_PixelShader_Advanced.h">
       <Filter>src\render\direct3d11</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\direct3d11\D3D11_PixelShader_Colors.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\direct3d11\D3D11_PixelShader_Colors.h">
       <Filter>src\render\direct3d11</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\direct3d11\D3D11_PixelShader_Textures.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\direct3d11\D3D11_PixelShader_Textures.h">
       <Filter>src\render\direct3d11</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\direct3d11\D3D11_VertexShader.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\direct3d11\D3D11_VertexShader.h">
       <Filter>src\render\direct3d11</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\direct3d11\SDL_shaders_d3d11.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\direct3d11\SDL_shaders_d3d11.h">
       <Filter>src\render\direct3d11</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\direct3d12\D3D12_PixelShader_Advanced.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\direct3d12\D3D12_PixelShader_Advanced.h">
       <Filter>src\render\direct3d12</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\direct3d12\D3D12_PixelShader_Colors.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\direct3d12\D3D12_PixelShader_Colors.h">
       <Filter>src\render\direct3d12</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\direct3d12\D3D12_PixelShader_Textures.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\direct3d12\D3D12_PixelShader_Textures.h">
       <Filter>src\render\direct3d12</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\direct3d12\D3D12_RootSig_Advanced.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\direct3d12\D3D12_RootSig_Advanced.h">
       <Filter>src\render\direct3d12</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\direct3d12\D3D12_RootSig_Color.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\direct3d12\D3D12_RootSig_Color.h">
       <Filter>src\render\direct3d12</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\direct3d12\D3D12_RootSig_Texture.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\direct3d12\D3D12_RootSig_Texture.h">
       <Filter>src\render\direct3d12</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\direct3d12\D3D12_VertexShader_Advanced.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\direct3d12\D3D12_VertexShader_Advanced.h">
       <Filter>src\render\direct3d12</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\direct3d12\D3D12_VertexShader_Color.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\direct3d12\D3D12_VertexShader_Color.h">
       <Filter>src\render\direct3d12</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\direct3d12\D3D12_VertexShader_Texture.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\direct3d12\D3D12_VertexShader_Texture.h">
       <Filter>src\render\direct3d12</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\direct3d12\SDL_render_d3d12_xbox.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\direct3d12\SDL_render_d3d12_xbox.h">
       <Filter>src\render\direct3d12</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\direct3d12\SDL_shaders_d3d12.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\direct3d12\SDL_shaders_d3d12.h">
       <Filter>src\render\direct3d12</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\gpu\SDL_gpu_util.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\gpu\SDL_gpu_util.h">
       <Filter>src\render\gpu</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\gpu\SDL_pipeline_gpu.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\gpu\SDL_pipeline_gpu.h">
       <Filter>src\render\gpu</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\gpu\SDL_shaders_gpu.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\gpu\SDL_shaders_gpu.h">
       <Filter>src\render\gpu</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\metal\SDL_shaders_metal_ios.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\metal\SDL_shaders_metal_ios.h">
       <Filter>src\render\metal</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\metal\SDL_shaders_metal_iphonesimulator.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\metal\SDL_shaders_metal_iphonesimulator.h">
       <Filter>src\render\metal</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\metal\SDL_shaders_metal_macos.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\metal\SDL_shaders_metal_macos.h">
       <Filter>src\render\metal</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\metal\SDL_shaders_metal_tvos.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\metal\SDL_shaders_metal_tvos.h">
       <Filter>src\render\metal</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\metal\SDL_shaders_metal_tvsimulator.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\metal\SDL_shaders_metal_tvsimulator.h">
       <Filter>src\render\metal</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\ngage\SDL_render_ngage_c.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\ngage\SDL_render_ngage_c.h">
       <Filter>src\render\ngage</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\opengl\SDL_glfuncs.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\opengl\SDL_glfuncs.h">
       <Filter>src\render\opengl</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\opengl\SDL_shaders_gl.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\opengl\SDL_shaders_gl.h">
       <Filter>src\render\opengl</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\opengles2\SDL_gles2funcs.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\opengles2\SDL_gles2funcs.h">
       <Filter>src\render\opengles2</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\opengles2\SDL_shaders_gles2.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\opengles2\SDL_shaders_gles2.h">
       <Filter>src\render\opengles2</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\psp\SDL_render_psp_c.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\psp\SDL_render_psp_c.h">
       <Filter>src\render\psp</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\software\SDL_blendfillrect.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\software\SDL_blendfillrect.h">
       <Filter>src\render\software</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\software\SDL_blendline.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\software\SDL_blendline.h">
       <Filter>src\render\software</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\software\SDL_blendpoint.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\software\SDL_blendpoint.h">
       <Filter>src\render\software</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\software\SDL_draw.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\software\SDL_draw.h">
       <Filter>src\render\software</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\software\SDL_drawline.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\software\SDL_drawline.h">
       <Filter>src\render\software</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\software\SDL_drawpoint.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\software\SDL_drawpoint.h">
       <Filter>src\render\software</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\software\SDL_render_sw_c.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\software\SDL_render_sw_c.h">
       <Filter>src\render\software</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\software\SDL_triangle.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\software\SDL_triangle.h">
       <Filter>src\render\software</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\vitagxm\SDL_render_vita_gxm_memory.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\vitagxm\SDL_render_vita_gxm_memory.h">
       <Filter>src\render\vitagxm</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\vitagxm\SDL_render_vita_gxm_shaders.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\vitagxm\SDL_render_vita_gxm_shaders.h">
       <Filter>src\render\vitagxm</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\vitagxm\SDL_render_vita_gxm_tools.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\vitagxm\SDL_render_vita_gxm_tools.h">
       <Filter>src\render\vitagxm</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\vitagxm\SDL_render_vita_gxm_types.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\vitagxm\SDL_render_vita_gxm_types.h">
       <Filter>src\render\vitagxm</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\vulkan\SDL_shaders_vulkan.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\vulkan\SDL_shaders_vulkan.h">
       <Filter>src\render\vulkan</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\vulkan\VULKAN_PixelShader_Advanced.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\vulkan\VULKAN_PixelShader_Advanced.h">
       <Filter>src\render\vulkan</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\vulkan\VULKAN_PixelShader_Advanced_YUV.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\vulkan\VULKAN_PixelShader_Advanced_YUV.h">
       <Filter>src\render\vulkan</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\vulkan\VULKAN_PixelShader_Colors.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\vulkan\VULKAN_PixelShader_Colors.h">
       <Filter>src\render\vulkan</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\vulkan\VULKAN_PixelShader_Textures.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\vulkan\VULKAN_PixelShader_Textures.h">
       <Filter>src\render\vulkan</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\vulkan\VULKAN_PixelShader_Textures_YUV.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\vulkan\VULKAN_PixelShader_Textures_YUV.h">
       <Filter>src\render\vulkan</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\render\vulkan\VULKAN_VertexShader.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\render\vulkan\VULKAN_VertexShader.h">
       <Filter>src\render\vulkan</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\sensor\SDL_sensor_c.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\sensor\SDL_sensor_c.h">
       <Filter>src\sensor</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\sensor\SDL_syssensor.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\sensor\SDL_syssensor.h">
       <Filter>src\sensor</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\stdlib\SDL_casefolding.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\stdlib\SDL_casefolding.h">
       <Filter>src\stdlib</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\stdlib\SDL_getenv_c.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\stdlib\SDL_getenv_c.h">
       <Filter>src\stdlib</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\stdlib\SDL_sysstdlib.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\stdlib\SDL_sysstdlib.h">
       <Filter>src\stdlib</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\stdlib\SDL_vacopy.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\stdlib\SDL_vacopy.h">
       <Filter>src\stdlib</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\storage\SDL_sysstorage.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\storage\SDL_sysstorage.h">
       <Filter>src\storage</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\thread\SDL_systhread.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\thread\SDL_systhread.h">
       <Filter>src\thread</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\thread\SDL_thread_c.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\thread\SDL_thread_c.h">
       <Filter>src\thread</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\time\SDL_time_c.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\time\SDL_time_c.h">
       <Filter>src\time</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\timer\SDL_timer_c.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\timer\SDL_timer_c.h">
       <Filter>src\timer</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\SDL_RLEaccel_c.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\SDL_RLEaccel_c.h">
       <Filter>src\video</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\SDL_blit.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\SDL_blit.h">
       <Filter>src\video</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\SDL_blit_auto.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\SDL_blit_auto.h">
       <Filter>src\video</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\SDL_blit_copy.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\SDL_blit_copy.h">
       <Filter>src\video</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\SDL_blit_slow.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\SDL_blit_slow.h">
       <Filter>src\video</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\SDL_clipboard_c.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\SDL_clipboard_c.h">
       <Filter>src\video</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\SDL_egl_c.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\SDL_egl_c.h">
       <Filter>src\video</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\SDL_pixels_c.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\SDL_pixels_c.h">
       <Filter>src\video</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\SDL_rect_c.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\SDL_rect_c.h">
       <Filter>src\video</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\SDL_rect_impl.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\SDL_rect_impl.h">
       <Filter>src\video</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\SDL_rotate.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\SDL_rotate.h">
       <Filter>src\video</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\SDL_stb_c.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\SDL_stb_c.h">
       <Filter>src\video</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\SDL_surface_c.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\SDL_surface_c.h">
       <Filter>src\video</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\SDL_sysvideo.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\SDL_sysvideo.h">
       <Filter>src\video</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\SDL_video_c.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\SDL_video_c.h">
       <Filter>src\video</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\SDL_video_unsupported.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\SDL_video_unsupported.h">
       <Filter>src\video</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\SDL_vulkan_internal.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\SDL_vulkan_internal.h">
       <Filter>src\video</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\SDL_yuv_c.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\SDL_yuv_c.h">
       <Filter>src\video</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\miniz.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\miniz.h">
       <Filter>src\video</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\stb_image.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\stb_image.h">
       <Filter>src\video</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\yuv2rgb\yuv_rgb.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\yuv2rgb\yuv_rgb.h">
       <Filter>src\video\yuv2rgb</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\yuv2rgb\yuv_rgb_common.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\yuv2rgb\yuv_rgb_common.h">
       <Filter>src\video\yuv2rgb</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\yuv2rgb\yuv_rgb_internal.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\yuv2rgb\yuv_rgb_internal.h">
       <Filter>src\video\yuv2rgb</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\yuv2rgb\yuv_rgb_lsx.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\yuv2rgb\yuv_rgb_lsx.h">
       <Filter>src\video\yuv2rgb</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\yuv2rgb\yuv_rgb_lsx_func.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\yuv2rgb\yuv_rgb_lsx_func.h">
       <Filter>src\video\yuv2rgb</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\yuv2rgb\yuv_rgb_sse.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\yuv2rgb\yuv_rgb_sse.h">
       <Filter>src\video\yuv2rgb</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\yuv2rgb\yuv_rgb_sse_func.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\yuv2rgb\yuv_rgb_sse_func.h">
       <Filter>src\video\yuv2rgb</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\yuv2rgb\yuv_rgb_std.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\yuv2rgb\yuv_rgb_std.h">
       <Filter>src\video\yuv2rgb</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\yuv2rgb\yuv_rgb_std_func.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\yuv2rgb\yuv_rgb_std_func.h">
       <Filter>src\video\yuv2rgb</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\audio\dummy\SDL_dummyaudio.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\audio\dummy\SDL_dummyaudio.h">
       <Filter>src\audio\dummy</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\audio\disk\SDL_diskaudio.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\audio\disk\SDL_diskaudio.h">
       <Filter>src\audio\disk</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\joystick\virtual\SDL_virtualjoystick_c.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\joystick\virtual\SDL_virtualjoystick_c.h">
       <Filter>src\joystick\virtual</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\dummy\SDL_nullevents_c.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\dummy\SDL_nullevents_c.h">
       <Filter>src\video\dummy</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\dummy\SDL_nullframebuffer_c.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\dummy\SDL_nullframebuffer_c.h">
       <Filter>src\video\dummy</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\dummy\SDL_nullvideo.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\dummy\SDL_nullvideo.h">
       <Filter>src\video\dummy</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\core\windows\SDL_directx.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\core\windows\SDL_directx.h">
       <Filter>src\core\windows</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\core\windows\SDL_gameinput.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\core\windows\SDL_gameinput.h">
       <Filter>src\core\windows</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\core\windows\SDL_hid.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\core\windows\SDL_hid.h">
       <Filter>src\core\windows</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\core\windows\SDL_immdevice.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\core\windows\SDL_immdevice.h">
       <Filter>src\core\windows</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\core\windows\SDL_windows.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\core\windows\SDL_windows.h">
       <Filter>src\core\windows</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\core\windows\SDL_xinput.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\core\windows\SDL_xinput.h">
       <Filter>src\core\windows</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\audio\directsound\SDL_directsound.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\audio\directsound\SDL_directsound.h">
       <Filter>src\audio\directsound</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\audio\wasapi\SDL_wasapi.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\audio\wasapi\SDL_wasapi.h">
       <Filter>src\audio\wasapi</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\windows\SDL_msctf.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\windows\SDL_msctf.h">
       <Filter>src\video\windows</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\windows\SDL_windowsclipboard.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\windows\SDL_windowsclipboard.h">
       <Filter>src\video\windows</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\windows\SDL_windowsevents.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\windows\SDL_windowsevents.h">
       <Filter>src\video\windows</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\windows\SDL_windowsframebuffer.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\windows\SDL_windowsframebuffer.h">
       <Filter>src\video\windows</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\windows\SDL_windowsgameinput.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\windows\SDL_windowsgameinput.h">
       <Filter>src\video\windows</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\windows\SDL_windowskeyboard.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\windows\SDL_windowskeyboard.h">
       <Filter>src\video\windows</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\windows\SDL_windowsmessagebox.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\windows\SDL_windowsmessagebox.h">
       <Filter>src\video\windows</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\windows\SDL_windowsmodes.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\windows\SDL_windowsmodes.h">
       <Filter>src\video\windows</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\windows\SDL_windowsmouse.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\windows\SDL_windowsmouse.h">
       <Filter>src\video\windows</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\windows\SDL_windowsopengl.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\windows\SDL_windowsopengl.h">
       <Filter>src\video\windows</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\windows\SDL_windowsopengles.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\windows\SDL_windowsopengles.h">
       <Filter>src\video\windows</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\windows\SDL_windowsrawinput.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\windows\SDL_windowsrawinput.h">
       <Filter>src\video\windows</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\windows\SDL_windowsshape.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\windows\SDL_windowsshape.h">
       <Filter>src\video\windows</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\windows\SDL_windowsvideo.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\windows\SDL_windowsvideo.h">
       <Filter>src\video\windows</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\windows\SDL_windowsvulkan.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\windows\SDL_windowsvulkan.h">
       <Filter>src\video\windows</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\windows\SDL_windowswindow.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\windows\SDL_windowswindow.h">
       <Filter>src\video\windows</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\windows\wmmsg.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\windows\wmmsg.h">
       <Filter>src\video\windows</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\thread\generic\SDL_syscond_c.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\thread\generic\SDL_syscond_c.h">
       <Filter>src\thread\generic</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\thread\generic\SDL_sysrwlock_c.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\thread\generic\SDL_sysrwlock_c.h">
       <Filter>src\thread\generic</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\sensor\windows\SDL_windowssensor.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\sensor\windows\SDL_windowssensor.h">
       <Filter>src\sensor\windows</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\storage\steam\SDL_steamstorage_proc.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\storage\steam\SDL_steamstorage_proc.h">
       <Filter>src\storage\steam</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\joystick\windows\SDL_dinputjoystick_c.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\joystick\windows\SDL_dinputjoystick_c.h">
       <Filter>src\joystick\windows</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\joystick\windows\SDL_rawinputjoystick_c.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\joystick\windows\SDL_rawinputjoystick_c.h">
       <Filter>src\joystick\windows</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\joystick\windows\SDL_windowsjoystick_c.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\joystick\windows\SDL_windowsjoystick_c.h">
       <Filter>src\joystick\windows</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\joystick\windows\SDL_xinputjoystick_c.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\joystick\windows\SDL_xinputjoystick_c.h">
       <Filter>src\joystick\windows</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\haptic\windows\SDL_dinputhaptic_c.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\haptic\windows\SDL_dinputhaptic_c.h">
       <Filter>src\haptic\windows</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\haptic\windows\SDL_windowshaptic_c.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\haptic\windows\SDL_windowshaptic_c.h">
       <Filter>src\haptic\windows</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\offscreen\SDL_offscreenevents_c.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\offscreen\SDL_offscreenevents_c.h">
       <Filter>src\video\offscreen</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\offscreen\SDL_offscreenframebuffer_c.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\offscreen\SDL_offscreenframebuffer_c.h">
       <Filter>src\video\offscreen</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\offscreen\SDL_offscreenopengles.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\offscreen\SDL_offscreenopengles.h">
       <Filter>src\video\offscreen</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\offscreen\SDL_offscreenvideo.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\offscreen\SDL_offscreenvideo.h">
       <Filter>src\video\offscreen</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\offscreen\SDL_offscreenvulkan.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\offscreen\SDL_offscreenvulkan.h">
       <Filter>src\video\offscreen</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\video\offscreen\SDL_offscreenwindow.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\video\offscreen\SDL_offscreenwindow.h">
       <Filter>src\video\offscreen</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\gpu\d3d12\D3D12_Blit.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\gpu\d3d12\D3D12_Blit.h">
       <Filter>src\gpu\d3d12</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\gpu\vulkan\SDL_gpu_vulkan_vkfuncs.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\gpu\vulkan\SDL_gpu_vulkan_vkfuncs.h">
       <Filter>src\gpu\vulkan</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_assert.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_assert.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_asyncio.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_asyncio.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_atomic.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_atomic.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_audio.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_audio.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_begin_code.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_begin_code.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_bits.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_bits.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_blendmode.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_blendmode.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_camera.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_camera.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_clipboard.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_clipboard.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_close_code.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_close_code.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_copying.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_copying.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_cpuinfo.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_cpuinfo.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_dialog.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_dialog.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_dlopennote.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_dlopennote.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_egl.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_egl.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_endian.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_endian.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_error.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_error.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_events.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_events.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_filesystem.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_filesystem.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_gamepad.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_gamepad.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_gpu.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_gpu.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_guid.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_guid.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_haptic.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_haptic.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_hidapi.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_hidapi.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_hints.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_hints.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_init.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_init.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_intrin.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_intrin.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_iostream.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_iostream.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_joystick.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_joystick.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_keyboard.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_keyboard.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_keycode.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_keycode.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_loadso.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_loadso.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_locale.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_locale.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_log.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_log.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_main.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_main.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_main_impl.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_main_impl.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_messagebox.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_messagebox.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_metal.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_metal.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_misc.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_misc.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_mouse.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_mouse.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_mutex.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_mutex.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_oldnames.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_oldnames.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_opengl.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_opengl.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_opengl_glext.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_opengl_glext.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_opengles.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_opengles.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_opengles2.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_opengles2.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_opengles2_gl2.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_opengles2_gl2.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_opengles2_gl2ext.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_opengles2_gl2ext.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_opengles2_gl2platform.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_opengles2_gl2platform.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_opengles2_khrplatform.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_opengles2_khrplatform.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_pen.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_pen.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_pixels.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_pixels.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_platform.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_platform.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_platform_defines.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_platform_defines.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_power.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_power.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_process.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_process.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_properties.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_properties.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_rect.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_rect.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_render.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_render.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_scancode.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_scancode.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_sensor.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_sensor.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_stdinc.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_stdinc.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_storage.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_storage.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_surface.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_surface.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_system.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_system.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_thread.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_thread.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_time.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_time.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_timer.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_timer.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_touch.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_touch.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_tray.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_tray.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_version.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_version.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_video.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_video.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\include\SDL3\SDL_vulkan.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\include\SDL3\SDL_vulkan.h">
       <Filter>include\SDL3</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\out\build\x64-Debug\SDL\include-revision\SDL3\SDL_revision.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\out\build\x64-Debug\SDL\include-revision\SDL3\SDL_revision.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\out\build\x64-Debug\SDL\CMakeFiles\SDL3-shared.dir\Debug\cmake_pch.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\out\build\x64-Debug\SDL\CMakeFiles\SDL3-shared.dir\Debug\cmake_pch.h">
       <Filter>Precompile Header File</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\out\build\x64-Debug\SDL\CMakeFiles\SDL3-shared.dir\Debug\cmake_pch.hxx">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\out\build\x64-Debug\SDL\CMakeFiles\SDL3-shared.dir\Debug\cmake_pch.hxx">
       <Filter>Precompile Header File</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\out\build\x64-Debug\SDL\CMakeFiles\SDL3-shared.dir\Release\cmake_pch.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\out\build\x64-Debug\SDL\CMakeFiles\SDL3-shared.dir\Release\cmake_pch.h">
       <Filter>Precompile Header File</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\out\build\x64-Debug\SDL\CMakeFiles\SDL3-shared.dir\Release\cmake_pch.hxx">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\out\build\x64-Debug\SDL\CMakeFiles\SDL3-shared.dir\Release\cmake_pch.hxx">
       <Filter>Precompile Header File</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\out\build\x64-Debug\SDL\CMakeFiles\SDL3-shared.dir\MinSizeRel\cmake_pch.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\out\build\x64-Debug\SDL\CMakeFiles\SDL3-shared.dir\MinSizeRel\cmake_pch.h">
       <Filter>Precompile Header File</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\out\build\x64-Debug\SDL\CMakeFiles\SDL3-shared.dir\MinSizeRel\cmake_pch.hxx">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\out\build\x64-Debug\SDL\CMakeFiles\SDL3-shared.dir\MinSizeRel\cmake_pch.hxx">
       <Filter>Precompile Header File</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\out\build\x64-Debug\SDL\CMakeFiles\SDL3-shared.dir\RelWithDebInfo\cmake_pch.h">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\out\build\x64-Debug\SDL\CMakeFiles\SDL3-shared.dir\RelWithDebInfo\cmake_pch.h">
       <Filter>Precompile Header File</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\out\build\x64-Debug\SDL\CMakeFiles\SDL3-shared.dir\RelWithDebInfo\cmake_pch.hxx">
+    <ClInclude Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\out\build\x64-Debug\SDL\CMakeFiles\SDL3-shared.dir\RelWithDebInfo\cmake_pch.hxx">
       <Filter>Precompile Header File</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\CMakeLists.txt" />
+    <CustomBuild Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\SDL\src\core\windows\version.rc">
+    <ResourceCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\SDL\src\core\windows\version.rc">
       <Filter>src\core\windows</Filter>
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
-      <UniqueIdentifier>{EE4AF404-8A61-3270-A80B-40B253E35C54}</UniqueIdentifier>
+      <UniqueIdentifier>{CC042A52-A7A8-3FBF-9FC5-E8C025D94B63}</UniqueIdentifier>
     </Filter>
     <Filter Include="Precompile Header File">
-      <UniqueIdentifier>{32613358-1386-3186-BCF0-308ECCE6D74F}</UniqueIdentifier>
+      <UniqueIdentifier>{01E41710-7012-3D78-97ED-9C32A15EA258}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files">
-      <UniqueIdentifier>{8539D1C5-173A-3F38-A826-6BCE6C53D1B1}</UniqueIdentifier>
+      <UniqueIdentifier>{FA9A3992-06B6-322C-960D-7D80730BF06D}</UniqueIdentifier>
     </Filter>
     <Filter Include="include">
-      <UniqueIdentifier>{E4BAD2E5-988E-31BF-B572-C05782919F4A}</UniqueIdentifier>
+      <UniqueIdentifier>{057E79A1-05F5-3D66-BE5A-12D007D3D4FA}</UniqueIdentifier>
     </Filter>
     <Filter Include="include\SDL3">
-      <UniqueIdentifier>{06A0EE06-14CF-3526-904B-A090F4981047}</UniqueIdentifier>
+      <UniqueIdentifier>{FBB6F894-0EAB-301F-B9D4-8DFB2E53CB9B}</UniqueIdentifier>
     </Filter>
     <Filter Include="src">
-      <UniqueIdentifier>{6051DBA6-7189-3B50-BEDA-C7A68ACBC49E}</UniqueIdentifier>
+      <UniqueIdentifier>{58B2F783-174D-3BA0-96DF-7D4C58F54D2F}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\atomic">
-      <UniqueIdentifier>{E32626DC-7EA6-3B06-8E1D-2C5E087E39D8}</UniqueIdentifier>
+      <UniqueIdentifier>{06567F63-2B43-30F6-9673-24C6FF1644AD}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\audio">
-      <UniqueIdentifier>{7CF58CF5-6C49-3FFE-B0F6-113286895064}</UniqueIdentifier>
+      <UniqueIdentifier>{F1BBB8F5-0514-3A0E-9B72-F6D602B04487}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\audio\directsound">
-      <UniqueIdentifier>{67F8D6C7-6F04-310E-A659-550585A64E40}</UniqueIdentifier>
+      <UniqueIdentifier>{240C01D3-FEB6-318D-AB30-213ED60E7F3D}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\audio\disk">
-      <UniqueIdentifier>{AC40E001-5D27-3523-983E-BA9C397F9D30}</UniqueIdentifier>
+      <UniqueIdentifier>{99DF169C-0365-3CEF-8D90-E4280C917CA4}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\audio\dummy">
-      <UniqueIdentifier>{950AB845-AAC8-3C41-A0DA-1D4B3177954F}</UniqueIdentifier>
+      <UniqueIdentifier>{DE1C7726-5D45-351A-B4B1-5CD8D1583498}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\audio\wasapi">
-      <UniqueIdentifier>{4EB2FA95-26BB-3807-A90C-494A8C2F9AC9}</UniqueIdentifier>
+      <UniqueIdentifier>{094DFF19-B793-3A8C-8806-199BF4FD2218}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\camera">
-      <UniqueIdentifier>{C151C14A-048A-32D4-84FE-AA037B55BF8C}</UniqueIdentifier>
+      <UniqueIdentifier>{AB25DBB5-1C1D-323D-8963-DB5725F2BE92}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\camera\dummy">
-      <UniqueIdentifier>{48A765C7-C69E-34CB-836D-BA6CFD7262FE}</UniqueIdentifier>
+      <UniqueIdentifier>{6A59A114-FBFB-3D28-837C-82107399A8DB}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\camera\mediafoundation">
-      <UniqueIdentifier>{DD623945-887E-3797-9165-E05BA17A05D6}</UniqueIdentifier>
+      <UniqueIdentifier>{F8EB8B6C-D5B3-3D80-A8A8-8FDA7A4535A5}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\core">
-      <UniqueIdentifier>{B32466ED-3F6A-36B5-BABA-6A5D03454339}</UniqueIdentifier>
+      <UniqueIdentifier>{FCA7B383-430E-3072-8D1B-0777B44A5AD2}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\core\windows">
-      <UniqueIdentifier>{9D65E886-5ABC-3E04-AD90-BBF6D2F91100}</UniqueIdentifier>
+      <UniqueIdentifier>{9787FF95-D02C-3372-86F6-AF271C71F3F7}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\cpuinfo">
-      <UniqueIdentifier>{CB172D82-5B5A-36A8-9486-10A257C2EEF1}</UniqueIdentifier>
+      <UniqueIdentifier>{C378088A-72F1-3225-8432-59667EFC6327}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\dialog">
-      <UniqueIdentifier>{04F72B2A-D054-3C46-942D-7D7DD5BE6CD6}</UniqueIdentifier>
+      <UniqueIdentifier>{0A04D139-4DDC-3120-883D-9201E50F1FAD}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\dialog\windows">
-      <UniqueIdentifier>{C14C5BC3-3B21-3919-BE2B-885278645FA0}</UniqueIdentifier>
+      <UniqueIdentifier>{1C76BE5B-0DBE-3E69-9118-760054B0BDFB}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\dynapi">
-      <UniqueIdentifier>{B0C42541-002A-3826-B1E9-68522E9D6C35}</UniqueIdentifier>
+      <UniqueIdentifier>{D74B05E4-EC0E-310C-BF2E-71B48E02BD48}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\events">
-      <UniqueIdentifier>{BC8145DA-8C89-3FE5-8D51-A789C413523A}</UniqueIdentifier>
+      <UniqueIdentifier>{18500B26-640B-30AD-B8BC-2AB84F13F8EE}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\filesystem">
-      <UniqueIdentifier>{E179C1D8-566D-349B-A99B-2E495847863C}</UniqueIdentifier>
+      <UniqueIdentifier>{2897F599-5C47-38FF-BB14-7E3DB4FEBBAA}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\filesystem\windows">
-      <UniqueIdentifier>{68247048-0507-36C3-AD11-F0C19B011D2A}</UniqueIdentifier>
+      <UniqueIdentifier>{701F1FF2-2BE3-34E7-8E35-81BAB24DCAC4}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\gpu">
-      <UniqueIdentifier>{C6605A40-F311-3322-A228-A3F0BCD86930}</UniqueIdentifier>
+      <UniqueIdentifier>{AD61D765-BB79-3CA6-9414-57F41D8A2C7F}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\gpu\d3d12">
-      <UniqueIdentifier>{3DF9B828-760F-3481-AB51-4F68A06C4B64}</UniqueIdentifier>
+      <UniqueIdentifier>{66B71FA0-9845-3567-84D7-ABDADD439066}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\gpu\vulkan">
-      <UniqueIdentifier>{361CC65B-65C3-3D00-B6DD-8423AD877AE4}</UniqueIdentifier>
+      <UniqueIdentifier>{F43DB8EE-765F-357E-B720-7FDA8BEEA271}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\haptic">
-      <UniqueIdentifier>{D0260912-5367-3092-8B66-5B8F19D46D78}</UniqueIdentifier>
+      <UniqueIdentifier>{D5149892-AFF7-3713-A45F-0435D8D57127}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\haptic\hidapi">
-      <UniqueIdentifier>{BA0068C4-E043-3258-B4BE-863FF1540BF8}</UniqueIdentifier>
+      <UniqueIdentifier>{F3EF4585-2CA6-3DB3-AFE5-26DD2A21A86B}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\haptic\windows">
-      <UniqueIdentifier>{F92A6A7F-A05B-3C88-8F44-DBD9A51AD226}</UniqueIdentifier>
+      <UniqueIdentifier>{AB4312E4-7ED6-3459-BE01-5F70CC8D8460}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\hidapi">
-      <UniqueIdentifier>{829E03C8-D38E-3721-9484-2BFB683F0D30}</UniqueIdentifier>
+      <UniqueIdentifier>{52860DCE-C90F-30C5-8B86-1E533D919D3E}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\io">
-      <UniqueIdentifier>{E5F38928-3AF1-3486-BD43-F71AC15A32C2}</UniqueIdentifier>
+      <UniqueIdentifier>{BB9D7454-ECE6-3D02-A6E7-A37D18010753}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\io\generic">
-      <UniqueIdentifier>{CCD9C908-527A-36A8-9A14-D614862F2C06}</UniqueIdentifier>
+      <UniqueIdentifier>{F08B849F-A04D-330E-BECF-FF81DE4D5A5F}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\io\windows">
-      <UniqueIdentifier>{175F080D-186A-3B0C-9D56-8E7FB05FCF31}</UniqueIdentifier>
+      <UniqueIdentifier>{0753FB64-EAFB-3D74-BD83-4D8C98EF89F9}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\joystick">
-      <UniqueIdentifier>{067A5E29-D26B-3BB2-98CA-EF4D0F6E7FB4}</UniqueIdentifier>
+      <UniqueIdentifier>{E8941506-9D2E-31B5-9E8E-1BDA94D3296E}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\joystick\gdk">
-      <UniqueIdentifier>{062217F5-EBEF-31EE-AA81-5FC867829310}</UniqueIdentifier>
+      <UniqueIdentifier>{508F2437-353E-31D7-8292-066E685ADF77}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\joystick\hidapi">
-      <UniqueIdentifier>{FDDF63D6-2C40-3976-98F0-46C2C54236EF}</UniqueIdentifier>
+      <UniqueIdentifier>{430A5819-D2F9-3DAB-9ECB-77E20535A4AF}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\joystick\virtual">
-      <UniqueIdentifier>{D194887C-C61A-3B90-A29B-DBDF0544862C}</UniqueIdentifier>
+      <UniqueIdentifier>{7FCAF978-EDB9-3BC6-A3D7-51845441DEFD}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\joystick\windows">
-      <UniqueIdentifier>{5465E3E4-112C-3965-89E0-0E8E166055FD}</UniqueIdentifier>
+      <UniqueIdentifier>{D80AD7FF-5F81-3DEB-9A33-D7ABF2285177}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\loadso">
-      <UniqueIdentifier>{D603EE52-A4DC-3F04-93B3-830D31BB4933}</UniqueIdentifier>
+      <UniqueIdentifier>{5F6458AB-E7D1-3A37-BD62-9AEE345A8568}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\loadso\windows">
-      <UniqueIdentifier>{A435C6BB-E00A-38F8-BB14-B14FE9A474D5}</UniqueIdentifier>
+      <UniqueIdentifier>{C8434587-3DB3-3310-98E3-00DBCFD03632}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\locale">
-      <UniqueIdentifier>{E5AB1924-25F2-3BF3-B296-E91C34631064}</UniqueIdentifier>
+      <UniqueIdentifier>{B5F136CA-9449-397D-B811-443FA05471CF}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\locale\windows">
-      <UniqueIdentifier>{F3DA1213-4E6F-3D55-ADCF-7F08A3CF3CEB}</UniqueIdentifier>
+      <UniqueIdentifier>{A56AC7A8-A9D1-3C3C-8569-2778A25E947A}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\main">
-      <UniqueIdentifier>{DD2F477D-865F-3DCB-9287-7366444DE746}</UniqueIdentifier>
+      <UniqueIdentifier>{C29DFA0F-0550-395B-B343-FCC0C83C24B0}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\main\generic">
-      <UniqueIdentifier>{BD435341-84FB-395E-AC65-7C06E941913A}</UniqueIdentifier>
+      <UniqueIdentifier>{BD05DE7E-D2F7-3927-B0AE-0BD72672D7EF}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\main\windows">
-      <UniqueIdentifier>{7858D01E-4872-3DDF-8245-0AE2435F43D4}</UniqueIdentifier>
+      <UniqueIdentifier>{13F55100-F345-3BAE-9A73-DD51DE481C24}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\misc">
-      <UniqueIdentifier>{5EBC9648-95BD-3870-B996-1E43C220977D}</UniqueIdentifier>
+      <UniqueIdentifier>{C26D3778-576A-3510-A124-2B22E8B52ABF}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\misc\windows">
-      <UniqueIdentifier>{5B4734E4-C059-34F1-BF31-3EB6F8416247}</UniqueIdentifier>
+      <UniqueIdentifier>{7C8849F3-7200-3A3C-A680-E46870245A28}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\power">
-      <UniqueIdentifier>{9E95403F-3D08-38FA-B923-F91F295AAA24}</UniqueIdentifier>
+      <UniqueIdentifier>{4136F77D-DF5E-3009-9D7D-71B1B92BC348}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\power\windows">
-      <UniqueIdentifier>{0E9C79C5-68E3-334F-B04D-ACDFB44F4D39}</UniqueIdentifier>
+      <UniqueIdentifier>{8968137A-3163-3C56-BEB0-10A1A426FC65}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\process">
-      <UniqueIdentifier>{9CB55FB5-2A1B-3135-84C5-CC8C614235A9}</UniqueIdentifier>
+      <UniqueIdentifier>{3B3A05CF-6DE0-327D-98C3-DD43BF0466D5}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\process\windows">
-      <UniqueIdentifier>{1044E3FF-97B8-327B-9F4F-3029A61D5817}</UniqueIdentifier>
+      <UniqueIdentifier>{E1B688F6-1F61-370C-9515-F5ACF3D5332D}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\render">
-      <UniqueIdentifier>{8D4C0C1F-CF32-3F08-A405-DDF432CE6B73}</UniqueIdentifier>
+      <UniqueIdentifier>{32840EF0-7754-3C79-8A6A-810F7243441C}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\render\direct3d">
-      <UniqueIdentifier>{4876D43D-AF9A-3FF2-8E37-BFF10AB2DDA3}</UniqueIdentifier>
+      <UniqueIdentifier>{474A5FF5-3C26-3964-AAFB-AEDAB13E5E5E}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\render\direct3d11">
-      <UniqueIdentifier>{CDB9FAEC-7D7B-3213-ABAC-E96A9BBD31AA}</UniqueIdentifier>
+      <UniqueIdentifier>{2254122C-58B8-326D-80AA-4C9AB59C0911}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\render\direct3d12">
-      <UniqueIdentifier>{0139E3F3-DCE5-3FC3-8CFF-B6C4C158EFC8}</UniqueIdentifier>
+      <UniqueIdentifier>{D4F41717-7E66-3343-A9D5-227857AACEDB}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\render\gpu">
-      <UniqueIdentifier>{F7243881-01BC-34BE-B31D-1123AC1C54D9}</UniqueIdentifier>
+      <UniqueIdentifier>{E1A186CC-807A-3E91-B706-8F62A9E54825}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\render\metal">
-      <UniqueIdentifier>{AEAC845F-CABE-320B-B584-AA2B8C3374A1}</UniqueIdentifier>
+      <UniqueIdentifier>{8EE2A3CD-9659-31D3-B974-0CD4E5D1E65D}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\render\ngage">
-      <UniqueIdentifier>{98DE0EE5-1FC9-3787-BC07-C4E36448623B}</UniqueIdentifier>
+      <UniqueIdentifier>{500CEE3E-F9FE-3BAB-9C3D-7E4570BE547F}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\render\opengl">
-      <UniqueIdentifier>{E771F811-0487-3FD0-82E9-B3C568F78268}</UniqueIdentifier>
+      <UniqueIdentifier>{469C7DC7-F663-3F36-9544-C1AE0ADE025D}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\render\opengles2">
-      <UniqueIdentifier>{85C41B7D-4EB6-388C-809A-77B2EFFE32DA}</UniqueIdentifier>
+      <UniqueIdentifier>{359E861A-CC30-3415-AA55-F6790537133D}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\render\ps2">
-      <UniqueIdentifier>{9F34FDEE-B9CF-381A-BFE7-696B64945007}</UniqueIdentifier>
+      <UniqueIdentifier>{0C2748B7-A1DB-392F-BB38-A45F9703D7D7}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\render\psp">
-      <UniqueIdentifier>{22C0E612-6A19-35C6-AA27-6AD6BFCC1E08}</UniqueIdentifier>
+      <UniqueIdentifier>{E7053689-B2C6-3F63-9115-A57AAAF59E45}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\render\software">
-      <UniqueIdentifier>{6B32DA21-4639-34DC-A36B-B16A00001B7A}</UniqueIdentifier>
+      <UniqueIdentifier>{D79214EC-24F8-3B2A-B3D6-F859DE0E5DD4}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\render\vitagxm">
-      <UniqueIdentifier>{50082B64-9B6F-3FB5-ABCF-2CDE35C70A0A}</UniqueIdentifier>
+      <UniqueIdentifier>{C392850F-0F63-3FF5-B4CC-072A3E84650A}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\render\vulkan">
-      <UniqueIdentifier>{6E9E38F1-68B9-31DE-B9C4-11C6CC52D511}</UniqueIdentifier>
+      <UniqueIdentifier>{BB4C3DEC-305F-3B2A-AD5A-F9DDB1A0A7F6}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\sensor">
-      <UniqueIdentifier>{88C96C29-324F-3710-9C04-709EED939801}</UniqueIdentifier>
+      <UniqueIdentifier>{CF1C6180-B5FC-377E-AA70-AD1D8659F1BC}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\sensor\windows">
-      <UniqueIdentifier>{F5038332-8C05-3486-8301-2033C2515972}</UniqueIdentifier>
+      <UniqueIdentifier>{8EB8D4FD-2603-3E81-9B83-0A79F75102B7}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\stdlib">
-      <UniqueIdentifier>{61C56278-153F-3D89-9F83-026ACF35E9B0}</UniqueIdentifier>
+      <UniqueIdentifier>{D9E0A6E8-85EE-3B7B-9E36-F4F299272546}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\storage">
-      <UniqueIdentifier>{E4280937-D2AF-3E21-BA13-AAA951C3B394}</UniqueIdentifier>
+      <UniqueIdentifier>{A1B2B185-A55C-3D8E-B92A-3B07FF782E04}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\storage\generic">
-      <UniqueIdentifier>{DA0268E0-3B80-3C56-AE33-BD9653CC2594}</UniqueIdentifier>
+      <UniqueIdentifier>{5C2B4207-7800-3720-ADE5-C9FA256E38C2}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\storage\steam">
-      <UniqueIdentifier>{42AB0321-7438-3067-A346-C7862A0E2F08}</UniqueIdentifier>
+      <UniqueIdentifier>{5712E368-D510-31A4-B31D-8D56CE759E3E}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\thread">
-      <UniqueIdentifier>{3875AC47-241A-3028-A254-70864E3DC494}</UniqueIdentifier>
+      <UniqueIdentifier>{34F0E723-719A-3B02-AD7B-1CE64E18DDCD}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\thread\generic">
-      <UniqueIdentifier>{B1FC32CD-55C8-3B4F-B84B-11263E4373B0}</UniqueIdentifier>
+      <UniqueIdentifier>{BE324476-DEC7-3EC9-A232-166A643698AA}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\thread\windows">
-      <UniqueIdentifier>{1206DDE0-0F5E-3F81-87CC-91E935C9AC71}</UniqueIdentifier>
+      <UniqueIdentifier>{FAFEC6B3-F108-32FD-905A-11D8C9721525}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\time">
-      <UniqueIdentifier>{987E4398-6D41-31A7-BF9C-E2B12D314D35}</UniqueIdentifier>
+      <UniqueIdentifier>{C9A679D5-9EFB-396C-9F24-E5055195E9AD}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\time\windows">
-      <UniqueIdentifier>{57846299-856B-34B3-B438-BA1CA9446B79}</UniqueIdentifier>
+      <UniqueIdentifier>{8E42174C-2A1A-3569-ADB4-85D5C32C0AAD}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\timer">
-      <UniqueIdentifier>{FDCE33CF-376C-3328-9872-2BF334D163AE}</UniqueIdentifier>
+      <UniqueIdentifier>{B90AAF96-DEE3-36FE-B109-BF3964082AB5}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\timer\windows">
-      <UniqueIdentifier>{3272D27E-A7F8-3860-8014-56CA8110885B}</UniqueIdentifier>
+      <UniqueIdentifier>{56364774-EF4C-3A5D-BD32-0BAA81974B87}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\tray">
-      <UniqueIdentifier>{7C830C5B-A10C-3FDD-806A-54037F8EF6AE}</UniqueIdentifier>
+      <UniqueIdentifier>{8E72A6E2-A2FE-3A0A-A526-CF67E297BD6B}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\tray\windows">
-      <UniqueIdentifier>{BE5DAE0C-4D7C-36BB-9328-8ABB79601E5F}</UniqueIdentifier>
+      <UniqueIdentifier>{67F27C88-BD23-3713-B141-30ED4A8A43BB}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\video">
-      <UniqueIdentifier>{C96B8A30-5234-3AEE-9DB1-D2441A5D4E5C}</UniqueIdentifier>
+      <UniqueIdentifier>{3F065478-63B3-317D-A6BA-061A6563649D}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\video\dummy">
-      <UniqueIdentifier>{491FCF9C-8E2E-377E-876B-D1B0AADD85CE}</UniqueIdentifier>
+      <UniqueIdentifier>{889F7573-AE36-3B62-95F4-F86F770A2712}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\video\offscreen">
-      <UniqueIdentifier>{8E750B0F-A3AF-3B38-BC8F-1A1D489BF8C5}</UniqueIdentifier>
+      <UniqueIdentifier>{89EC6739-D088-3866-A734-6E3EDFFF5890}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\video\windows">
-      <UniqueIdentifier>{ACF27969-B88D-3DE6-B36C-E20A05416637}</UniqueIdentifier>
+      <UniqueIdentifier>{88DCAAB0-90F4-39E7-A47B-7952122E7F8D}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\video\yuv2rgb">
-      <UniqueIdentifier>{72C999B8-8430-3C8E-B48E-11D0402B618C}</UniqueIdentifier>
+      <UniqueIdentifier>{78863FF7-3D67-3EEA-BA6D-7F4F7B08B583}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

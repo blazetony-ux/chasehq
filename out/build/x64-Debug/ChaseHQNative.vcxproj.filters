@@ -1,25 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\src\main.cpp">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\src\machine.cpp">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\src\machine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\src\rom_loader.cpp">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\src\rom_loader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\src\video.cpp">
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\src\video.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC2.9\CMakeLists.txt" />
+    <CustomBuild Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.66.9.0-RC3.0\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Source Files">
-      <UniqueIdentifier>{8539D1C5-173A-3F38-A826-6BCE6C53D1B1}</UniqueIdentifier>
+      <UniqueIdentifier>{FA9A3992-06B6-322C-960D-7D80730BF06D}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
