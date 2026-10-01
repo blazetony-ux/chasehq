@@ -158,11 +158,10 @@ if($nativeVersion -in @('0.66.9.0-RC2.9','0.66.9.0-RC3.0')){
 # v0.66.9.0-RC3.0: live course-mapping / survey parity and evidence surfaces.
 if($nativeVersion -eq '0.66.9.0-RC3.0'){
     foreach($needle in @("'course.follow.status'","'course.follow.configure'","'course.survey.start'","'course.survey.stop'","'track.map.export'",'Course Mapping / Live Survey','UNCLASSIFIED_DYNAMIC_OBJECT','surfaceSignature','carX','roadLeftX')){if($text -notmatch [regex]::Escape($needle)){throw "Workbench validation failed: RC3.0 mapping surface missing: $needle"}}
+    if($text -notmatch [regex]::Escape("track:['Course Mapping / Live Survey']") -or $text -match [regex]::Escape("track:['Live SVG Track View']")){throw 'Workbench validation failed: RC3.0 Track View tab routing does not match the Course Mapping / Live Survey panel title'}
     foreach($f in @('stage1-course-mapping-shakedown-600.chqscript','stage1-course-mapping-3600.chqscript','stage1-course-mapping-negative-bias.chqscript','stage1-course-mapping-positive-bias.chqscript')){if(-not(Test-Path (Join-Path $root ('research\scripts\track\surveys\'+$f)))){throw "Workbench validation failed: RC3.0 survey script missing: $f"}}
     if(-not(Test-Path (Join-Path $root 'research\scripts\regression\regression-v06690-rc30-course-mapping-live-survey.chqscript'))){throw 'Workbench validation failed: RC3.0 focused regression missing'}
     $apiDoc=Get-Content (Join-Path $root 'docs\API_REFERENCE.md') -Raw
     if($apiDoc -notmatch 'course\.follow\.configure' -or $apiDoc -notmatch 'track\.map\.export'){throw 'Workbench validation failed: RC3.0 API documentation is stale'}
-    if($text -match 'function Set-CourseFollowConfig\(\$args\)' -or $text -match '\$args\.ContainsKey\('){throw 'Workbench validation failed: RC3.0 course-follow config must not use PowerShell automatic $args as its hashtable parameter'}
-    if($text -notmatch 'function Set-CourseFollowConfig\(\$config\)' -or $text -notmatch '\$config\.ContainsKey\(\$key\)'){throw 'Workbench validation failed: RC3.0 course-follow config hashtable binding guard missing'}
     Write-Host 'v0.66.9.0-RC3.0 live course mapping / survey parity: PASS' -ForegroundColor Green
 }

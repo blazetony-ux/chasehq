@@ -5,8 +5,5 @@ Baseline: Windows/SDL-proven RC2.9.
 Scope: live course-follower API/UI/script parity; lateral-bias branch mapping; Track Recorder v2; player trajectory; target/dynamic-object evidence; raw surface signatures; reconstructable mapping exports; survey scripts and permanent regression.
 
 ROMs and SDL are not bundled. Existing Windows build-local staging remains authoritative.
-Corrected replacement candidate:
-- First Windows focused regression exposed a PowerShell automatic-variable collision: Set-CourseFollowConfig($args) received System.Object[] semantics and failed at ContainsKey().
-- Fixed by renaming the hashtable parameter to $config and updating all lookups.
-- Validate-Workbench now explicitly rejects Set-CourseFollowConfig($args) / $args.ContainsKey recurrence.
-- Earlier RC3.0 archive is withdrawn; use only the corrected replacement archive/hash published with this package.
+
+Candidate correction: fixed Workbench Track View tab routing after the panel rename from "Live SVG Track View" to "Course Mapping / Live Survey". Backend course mapping was proven by the focused Windows regression; the blank tab was a frontend title-routing mismatch. Validate-Workbench now guards the exact mapping.

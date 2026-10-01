@@ -19,9 +19,7 @@ RC3.0 is the Course Mapping / Live Survey tooling release. It deliberately prece
 
 ## Validation state
 
-The first Windows focused-regression attempt exposed a packaging/runtime defect before the survey started: `Set-CourseFollowConfig($args)` collided with PowerShell's automatic `$args` array and failed at `ContainsKey()`. That archive is withdrawn. The corrected replacement uses `$config` and includes a validator guard against recurrence.
-
-Linux no-SDL compile/tests and package checks may be performed when producing the corrected candidate, but **RC3.0 must not be called Windows/SDL-proven until the corrected packaged `Build-Debug.bat`, focused RC3.0 regression and Full Regression pass on the user's Windows/SDL environment.**
+Linux no-SDL compile/tests and package checks may be performed when producing the candidate, but **RC3.0 must not be called Windows/SDL-proven until the packaged `Build-Debug.bat`, focused RC3.0 regression and Full Regression pass on the user's Windows/SDL environment.**
 
 ## Immediate next task
 

@@ -24,7 +24,7 @@ events:
       The output was:
       0
       MSBuild version 17.14.60+43b635718 for .NET Framework
-      Build started 01/10/2026 21:30:17.
+      Build started 01/10/2026 21:43:56.
       
       Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\3.31.6-msvc6\\CompilerIdC\\CompilerIdC.vcxproj" on node 1 (default targets).
       PrepareForBuild:
@@ -53,7 +53,7 @@ events:
           0 Warning(s)
           0 Error(s)
       
-      Time Elapsed 00:00:00.99
+      Time Elapsed 00:00:00.81
       
       
       Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "CompilerIdC.exe"
@@ -79,7 +79,7 @@ events:
       The output was:
       0
       MSBuild version 17.14.60+43b635718 for .NET Framework
-      Build started 01/10/2026 21:30:18.
+      Build started 01/10/2026 21:43:58.
       
       Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\3.31.6-msvc6\\CompilerIdCXX\\CompilerIdCXX.vcxproj" on node 1 (default targets).
       PrepareForBuild:
@@ -108,7 +108,7 @@ events:
           0 Warning(s)
           0 Error(s)
       
-      Time Elapsed 00:00:00.70
+      Time Elapsed 00:00:00.84
       
       
       Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.exe"
@@ -127,8 +127,8 @@ events:
     checks:
       - "Detecting C compiler ABI info"
     directories:
-      source: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-ski9b5"
-      binary: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-ski9b5"
+      source: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-0kiteu"
+      binary: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-0kiteu"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
       CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
@@ -137,40 +137,40 @@ events:
       variable: "CMAKE_C_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: 'C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-ski9b5'
+        Change Dir: 'C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-0kiteu'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_52786.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_ea0fa.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
         MSBuild version 17.14.60+43b635718 for .NET Framework
-        Build started 01/10/2026 21:30:19.
+        Build started 01/10/2026 21:43:59.
         
-        Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-ski9b5\\cmTC_52786.vcxproj" on node 1 (default targets).
+        Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-0kiteu\\cmTC_ea0fa.vcxproj" on node 1 (default targets).
         PrepareForBuild:
-          Creating directory "cmTC_52786.dir\\Debug\\".
+          Creating directory "cmTC_ea0fa.dir\\Debug\\".
           Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
-          Creating directory "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-ski9b5\\Debug\\".
-          Creating directory "cmTC_52786.dir\\Debug\\cmTC_52786.tlog\\".
+          Creating directory "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-0kiteu\\Debug\\".
+          Creating directory "cmTC_ea0fa.dir\\Debug\\cmTC_ea0fa.tlog\\".
         InitializeBuildStatus:
-          Creating "cmTC_52786.dir\\Debug\\cmTC_52786.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
-          Touching "cmTC_52786.dir\\Debug\\cmTC_52786.tlog\\unsuccessfulbuild".
+          Creating "cmTC_ea0fa.dir\\Debug\\cmTC_ea0fa.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_ea0fa.dir\\Debug\\cmTC_ea0fa.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_52786.dir\\Debug\\\\" /Fd"cmTC_52786.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-3.31\\Modules\\CMakeCCompilerABI.c"
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_ea0fa.dir\\Debug\\\\" /Fd"cmTC_ea0fa.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-3.31\\Modules\\CMakeCCompilerABI.c"
           Microsoft (R) C/C++ Optimizing Compiler Version 19.44.35229 for x64
           Copyright (C) Microsoft Corporation.  All rights reserved.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_52786.dir\\Debug\\\\" /Fd"cmTC_52786.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-3.31\\Modules\\CMakeCCompilerABI.c"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_ea0fa.dir\\Debug\\\\" /Fd"cmTC_ea0fa.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-3.31\\Modules\\CMakeCCompilerABI.c"
           CMakeCCompilerABI.c
         Link:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-ski9b5\\Debug\\cmTC_52786.exe" /INCREMENTAL /ILK:"cmTC_52786.dir\\Debug\\cmTC_52786.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-ski9b5/Debug/cmTC_52786.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-ski9b5/Debug/cmTC_52786.lib" /MACHINE:X64  /machine:x64 cmTC_52786.dir\\Debug\\CMakeCCompilerABI.obj
-          cmTC_52786.vcxproj -> C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-ski9b5\\Debug\\cmTC_52786.exe
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-0kiteu\\Debug\\cmTC_ea0fa.exe" /INCREMENTAL /ILK:"cmTC_ea0fa.dir\\Debug\\cmTC_ea0fa.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-0kiteu/Debug/cmTC_ea0fa.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-0kiteu/Debug/cmTC_ea0fa.lib" /MACHINE:X64  /machine:x64 cmTC_ea0fa.dir\\Debug\\CMakeCCompilerABI.obj
+          cmTC_ea0fa.vcxproj -> C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-0kiteu\\Debug\\cmTC_ea0fa.exe
         FinalizeBuildStatus:
-          Deleting file "cmTC_52786.dir\\Debug\\cmTC_52786.tlog\\unsuccessfulbuild".
-          Touching "cmTC_52786.dir\\Debug\\cmTC_52786.tlog\\cmTC_52786.lastbuildstate".
-        Done Building Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-ski9b5\\cmTC_52786.vcxproj" (default targets).
+          Deleting file "cmTC_ea0fa.dir\\Debug\\cmTC_ea0fa.tlog\\unsuccessfulbuild".
+          Touching "cmTC_ea0fa.dir\\Debug\\cmTC_ea0fa.tlog\\cmTC_ea0fa.lastbuildstate".
+        Done Building Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-0kiteu\\cmTC_ea0fa.vcxproj" (default targets).
         
         Build succeeded.
             0 Warning(s)
             0 Error(s)
         
-        Time Elapsed 00:00:00.67
+        Time Elapsed 00:00:00.70
         
       exitCode: 0
   -
@@ -210,8 +210,8 @@ events:
     checks:
       - "Detecting CXX compiler ABI info"
     directories:
-      source: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-4u2jke"
-      binary: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-4u2jke"
+      source: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-1r0m7p"
+      binary: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-1r0m7p"
     cmakeVariables:
       CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /EHsc"
       CMAKE_CXX_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
@@ -221,40 +221,40 @@ events:
       variable: "CMAKE_CXX_ABI_COMPILED"
       cached: true
       stdout: |
-        Change Dir: 'C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-4u2jke'
+        Change Dir: 'C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-1r0m7p'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_02e69.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_9f4ca.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
         MSBuild version 17.14.60+43b635718 for .NET Framework
-        Build started 01/10/2026 21:30:20.
+        Build started 01/10/2026 21:44:00.
         
-        Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-4u2jke\\cmTC_02e69.vcxproj" on node 1 (default targets).
+        Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-1r0m7p\\cmTC_9f4ca.vcxproj" on node 1 (default targets).
         PrepareForBuild:
-          Creating directory "cmTC_02e69.dir\\Debug\\".
+          Creating directory "cmTC_9f4ca.dir\\Debug\\".
           Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
-          Creating directory "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-4u2jke\\Debug\\".
-          Creating directory "cmTC_02e69.dir\\Debug\\cmTC_02e69.tlog\\".
+          Creating directory "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-1r0m7p\\Debug\\".
+          Creating directory "cmTC_9f4ca.dir\\Debug\\cmTC_9f4ca.tlog\\".
         InitializeBuildStatus:
-          Creating "cmTC_02e69.dir\\Debug\\cmTC_02e69.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
-          Touching "cmTC_02e69.dir\\Debug\\cmTC_02e69.tlog\\unsuccessfulbuild".
+          Creating "cmTC_9f4ca.dir\\Debug\\cmTC_9f4ca.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_9f4ca.dir\\Debug\\cmTC_9f4ca.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_02e69.dir\\Debug\\\\" /Fd"cmTC_02e69.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TP /errorReport:queue "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-3.31\\Modules\\CMakeCXXCompilerABI.cpp"
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_9f4ca.dir\\Debug\\\\" /Fd"cmTC_9f4ca.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TP /errorReport:queue "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-3.31\\Modules\\CMakeCXXCompilerABI.cpp"
           Microsoft (R) C/C++ Optimizing Compiler Version 19.44.35229 for x64
           Copyright (C) Microsoft Corporation.  All rights reserved.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_02e69.dir\\Debug\\\\" /Fd"cmTC_02e69.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TP /errorReport:queue "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-3.31\\Modules\\CMakeCXXCompilerABI.cpp"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_9f4ca.dir\\Debug\\\\" /Fd"cmTC_9f4ca.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TP /errorReport:queue "C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\Common7\\IDE\\CommonExtensions\\Microsoft\\CMake\\CMake\\share\\cmake-3.31\\Modules\\CMakeCXXCompilerABI.cpp"
           CMakeCXXCompilerABI.cpp
         Link:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-4u2jke\\Debug\\cmTC_02e69.exe" /INCREMENTAL /ILK:"cmTC_02e69.dir\\Debug\\cmTC_02e69.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-4u2jke/Debug/cmTC_02e69.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-4u2jke/Debug/cmTC_02e69.lib" /MACHINE:X64  /machine:x64 cmTC_02e69.dir\\Debug\\CMakeCXXCompilerABI.obj
-          cmTC_02e69.vcxproj -> C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-4u2jke\\Debug\\cmTC_02e69.exe
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-1r0m7p\\Debug\\cmTC_9f4ca.exe" /INCREMENTAL /ILK:"cmTC_9f4ca.dir\\Debug\\cmTC_9f4ca.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-1r0m7p/Debug/cmTC_9f4ca.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-1r0m7p/Debug/cmTC_9f4ca.lib" /MACHINE:X64  /machine:x64 cmTC_9f4ca.dir\\Debug\\CMakeCXXCompilerABI.obj
+          cmTC_9f4ca.vcxproj -> C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-1r0m7p\\Debug\\cmTC_9f4ca.exe
         FinalizeBuildStatus:
-          Deleting file "cmTC_02e69.dir\\Debug\\cmTC_02e69.tlog\\unsuccessfulbuild".
-          Touching "cmTC_02e69.dir\\Debug\\cmTC_02e69.tlog\\cmTC_02e69.lastbuildstate".
-        Done Building Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-4u2jke\\cmTC_02e69.vcxproj" (default targets).
+          Deleting file "cmTC_9f4ca.dir\\Debug\\cmTC_9f4ca.tlog\\unsuccessfulbuild".
+          Touching "cmTC_9f4ca.dir\\Debug\\cmTC_9f4ca.tlog\\cmTC_9f4ca.lastbuildstate".
+        Done Building Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-1r0m7p\\cmTC_9f4ca.vcxproj" (default targets).
         
         Build succeeded.
             0 Warning(s)
             0 Error(s)
         
-        Time Elapsed 00:00:00.68
+        Time Elapsed 00:00:00.72
         
       exitCode: 0
   -
@@ -304,38 +304,38 @@ events:
       stdout: |
         Change Dir: 'C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/SDL/CMakeFiles/CMakeTmp/SDL_detect_arch/CMakeFiles/CMakeTmp'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_31454.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_e37dc.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
         MSBuild version 17.14.60+43b635718 for .NET Framework
-        Build started 01/10/2026 21:30:21.
+        Build started 01/10/2026 21:44:01.
         
-        Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\SDL\\CMakeFiles\\CMakeTmp\\SDL_detect_arch\\CMakeFiles\\CMakeTmp\\cmTC_31454.vcxproj" on node 1 (default targets).
+        Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\SDL\\CMakeFiles\\CMakeTmp\\SDL_detect_arch\\CMakeFiles\\CMakeTmp\\cmTC_e37dc.vcxproj" on node 1 (default targets).
         PrepareForBuild:
-          Creating directory "cmTC_31454.dir\\Debug\\".
+          Creating directory "cmTC_e37dc.dir\\Debug\\".
           Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
           Creating directory "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\SDL\\CMakeFiles\\CMakeTmp\\SDL_detect_arch\\CMakeFiles\\CMakeTmp\\Debug\\".
-          Creating directory "cmTC_31454.dir\\Debug\\cmTC_31454.tlog\\".
+          Creating directory "cmTC_e37dc.dir\\Debug\\cmTC_e37dc.tlog\\".
         InitializeBuildStatus:
-          Creating "cmTC_31454.dir\\Debug\\cmTC_31454.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
-          Touching "cmTC_31454.dir\\Debug\\cmTC_31454.tlog\\unsuccessfulbuild".
+          Creating "cmTC_e37dc.dir\\Debug\\cmTC_e37dc.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_e37dc.dir\\Debug\\cmTC_e37dc.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_31454.dir\\Debug\\\\" /Fd"C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\SDL\\CMakeFiles\\CMakeTmp\\SDL_detect_arch\\CMakeFiles\\CMakeTmp\\Debug\\cmTC_31454.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\SDL\\CMakeFiles\\CMakeTmp\\SDL_detect_arch.c"
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_e37dc.dir\\Debug\\\\" /Fd"C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\SDL\\CMakeFiles\\CMakeTmp\\SDL_detect_arch\\CMakeFiles\\CMakeTmp\\Debug\\cmTC_e37dc.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\SDL\\CMakeFiles\\CMakeTmp\\SDL_detect_arch.c"
           Microsoft (R) C/C++ Optimizing Compiler Version 19.44.35229 for x64
           Copyright (C) Microsoft Corporation.  All rights reserved.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_31454.dir\\Debug\\\\" /Fd"C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\SDL\\CMakeFiles\\CMakeTmp\\SDL_detect_arch\\CMakeFiles\\CMakeTmp\\Debug\\cmTC_31454.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\SDL\\CMakeFiles\\CMakeTmp\\SDL_detect_arch.c"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_e37dc.dir\\Debug\\\\" /Fd"C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\SDL\\CMakeFiles\\CMakeTmp\\SDL_detect_arch\\CMakeFiles\\CMakeTmp\\Debug\\cmTC_e37dc.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\SDL\\CMakeFiles\\CMakeTmp\\SDL_detect_arch.c"
           SDL_detect_arch.c
         Lib:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\Lib.exe /OUT:"C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\SDL\\CMakeFiles\\CMakeTmp\\SDL_detect_arch\\CMakeFiles\\CMakeTmp\\Debug\\cmTC_31454.lib" /NOLOGO /MACHINE:X64  /machine:x64 cmTC_31454.dir\\Debug\\SDL_detect_arch.obj
-          cmTC_31454.vcxproj -> C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\SDL\\CMakeFiles\\CMakeTmp\\SDL_detect_arch\\CMakeFiles\\CMakeTmp\\Debug\\cmTC_31454.lib
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\Lib.exe /OUT:"C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\SDL\\CMakeFiles\\CMakeTmp\\SDL_detect_arch\\CMakeFiles\\CMakeTmp\\Debug\\cmTC_e37dc.lib" /NOLOGO /MACHINE:X64  /machine:x64 cmTC_e37dc.dir\\Debug\\SDL_detect_arch.obj
+          cmTC_e37dc.vcxproj -> C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\SDL\\CMakeFiles\\CMakeTmp\\SDL_detect_arch\\CMakeFiles\\CMakeTmp\\Debug\\cmTC_e37dc.lib
         FinalizeBuildStatus:
-          Deleting file "cmTC_31454.dir\\Debug\\cmTC_31454.tlog\\unsuccessfulbuild".
-          Touching "cmTC_31454.dir\\Debug\\cmTC_31454.tlog\\cmTC_31454.lastbuildstate".
-        Done Building Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\SDL\\CMakeFiles\\CMakeTmp\\SDL_detect_arch\\CMakeFiles\\CMakeTmp\\cmTC_31454.vcxproj" (default targets).
+          Deleting file "cmTC_e37dc.dir\\Debug\\cmTC_e37dc.tlog\\unsuccessfulbuild".
+          Touching "cmTC_e37dc.dir\\Debug\\cmTC_e37dc.tlog\\cmTC_e37dc.lastbuildstate".
+        Done Building Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\SDL\\CMakeFiles\\CMakeTmp\\SDL_detect_arch\\CMakeFiles\\CMakeTmp\\cmTC_e37dc.vcxproj" (default targets).
         
         Build succeeded.
             0 Warning(s)
             0 Error(s)
         
-        Time Elapsed 00:00:00.54
+        Time Elapsed 00:00:00.58
         
       exitCode: 0
   -
@@ -348,8 +348,8 @@ events:
     checks:
       - "Performing Test CAN_PRESEED"
     directories:
-      source: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-xklj4u"
-      binary: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-xklj4u"
+      source: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-yi8j5h"
+      binary: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-yi8j5h"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
       CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 "
@@ -359,40 +359,40 @@ events:
       variable: "CAN_PRESEED"
       cached: true
       stdout: |
-        Change Dir: 'C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-xklj4u'
+        Change Dir: 'C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-yi8j5h'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_841d6.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_539a5.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
         MSBuild version 17.14.60+43b635718 for .NET Framework
-        Build started 01/10/2026 21:30:22.
+        Build started 01/10/2026 21:44:02.
         
-        Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-xklj4u\\cmTC_841d6.vcxproj" on node 1 (default targets).
+        Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-yi8j5h\\cmTC_539a5.vcxproj" on node 1 (default targets).
         PrepareForBuild:
-          Creating directory "cmTC_841d6.dir\\Debug\\".
+          Creating directory "cmTC_539a5.dir\\Debug\\".
           Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
-          Creating directory "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-xklj4u\\Debug\\".
-          Creating directory "cmTC_841d6.dir\\Debug\\cmTC_841d6.tlog\\".
+          Creating directory "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-yi8j5h\\Debug\\".
+          Creating directory "cmTC_539a5.dir\\Debug\\cmTC_539a5.tlog\\".
         InitializeBuildStatus:
-          Creating "cmTC_841d6.dir\\Debug\\cmTC_841d6.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
-          Touching "cmTC_841d6.dir\\Debug\\cmTC_841d6.tlog\\unsuccessfulbuild".
+          Creating "cmTC_539a5.dir\\Debug\\cmTC_539a5.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_539a5.dir\\Debug\\cmTC_539a5.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D CAN_PRESEED /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_841d6.dir\\Debug\\\\" /Fd"cmTC_841d6.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-xklj4u\\src.c"
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D CAN_PRESEED /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_539a5.dir\\Debug\\\\" /Fd"cmTC_539a5.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-yi8j5h\\src.c"
           Microsoft (R) C/C++ Optimizing Compiler Version 19.44.35229 for x64
           Copyright (C) Microsoft Corporation.  All rights reserved.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D CAN_PRESEED /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_841d6.dir\\Debug\\\\" /Fd"cmTC_841d6.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-xklj4u\\src.c"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D CAN_PRESEED /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_539a5.dir\\Debug\\\\" /Fd"cmTC_539a5.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-yi8j5h\\src.c"
           src.c
         Link:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-xklj4u\\Debug\\cmTC_841d6.exe" /INCREMENTAL /ILK:"cmTC_841d6.dir\\Debug\\cmTC_841d6.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-xklj4u/Debug/cmTC_841d6.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-xklj4u/Debug/cmTC_841d6.lib" /MACHINE:X64  /machine:x64 cmTC_841d6.dir\\Debug\\src.obj
-          cmTC_841d6.vcxproj -> C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-xklj4u\\Debug\\cmTC_841d6.exe
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-yi8j5h\\Debug\\cmTC_539a5.exe" /INCREMENTAL /ILK:"cmTC_539a5.dir\\Debug\\cmTC_539a5.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-yi8j5h/Debug/cmTC_539a5.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-yi8j5h/Debug/cmTC_539a5.lib" /MACHINE:X64  /machine:x64 cmTC_539a5.dir\\Debug\\src.obj
+          cmTC_539a5.vcxproj -> C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-yi8j5h\\Debug\\cmTC_539a5.exe
         FinalizeBuildStatus:
-          Deleting file "cmTC_841d6.dir\\Debug\\cmTC_841d6.tlog\\unsuccessfulbuild".
-          Touching "cmTC_841d6.dir\\Debug\\cmTC_841d6.tlog\\cmTC_841d6.lastbuildstate".
-        Done Building Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-xklj4u\\cmTC_841d6.vcxproj" (default targets).
+          Deleting file "cmTC_539a5.dir\\Debug\\cmTC_539a5.tlog\\unsuccessfulbuild".
+          Touching "cmTC_539a5.dir\\Debug\\cmTC_539a5.tlog\\cmTC_539a5.lastbuildstate".
+        Done Building Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-yi8j5h\\cmTC_539a5.vcxproj" (default targets).
         
         Build succeeded.
             0 Warning(s)
             0 Error(s)
         
-        Time Elapsed 00:00:00.67
+        Time Elapsed 00:00:00.70
         
       exitCode: 0
   -
@@ -405,8 +405,8 @@ events:
     checks:
       - "Performing Test COMPILER_SUPPORTS_MMX"
     directories:
-      source: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-nsv7w9"
-      binary: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-nsv7w9"
+      source: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-2s78df"
+      binary: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-2s78df"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
       CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 "
@@ -416,40 +416,40 @@ events:
       variable: "COMPILER_SUPPORTS_MMX"
       cached: true
       stdout: |
-        Change Dir: 'C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-nsv7w9'
+        Change Dir: 'C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-2s78df'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_e0f14.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_f9dec.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
         MSBuild version 17.14.60+43b635718 for .NET Framework
-        Build started 01/10/2026 21:30:23.
+        Build started 01/10/2026 21:44:03.
         
-        Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-nsv7w9\\cmTC_e0f14.vcxproj" on node 1 (default targets).
+        Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-2s78df\\cmTC_f9dec.vcxproj" on node 1 (default targets).
         PrepareForBuild:
-          Creating directory "cmTC_e0f14.dir\\Debug\\".
+          Creating directory "cmTC_f9dec.dir\\Debug\\".
           Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
-          Creating directory "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-nsv7w9\\Debug\\".
-          Creating directory "cmTC_e0f14.dir\\Debug\\cmTC_e0f14.tlog\\".
+          Creating directory "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-2s78df\\Debug\\".
+          Creating directory "cmTC_f9dec.dir\\Debug\\cmTC_f9dec.tlog\\".
         InitializeBuildStatus:
-          Creating "cmTC_e0f14.dir\\Debug\\cmTC_e0f14.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
-          Touching "cmTC_e0f14.dir\\Debug\\cmTC_e0f14.tlog\\unsuccessfulbuild".
+          Creating "cmTC_f9dec.dir\\Debug\\cmTC_f9dec.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_f9dec.dir\\Debug\\cmTC_f9dec.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_MMX /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_e0f14.dir\\Debug\\\\" /Fd"cmTC_e0f14.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-nsv7w9\\src.c"
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_MMX /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_f9dec.dir\\Debug\\\\" /Fd"cmTC_f9dec.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-2s78df\\src.c"
           Microsoft (R) C/C++ Optimizing Compiler Version 19.44.35229 for x64
           Copyright (C) Microsoft Corporation.  All rights reserved.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_MMX /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_e0f14.dir\\Debug\\\\" /Fd"cmTC_e0f14.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-nsv7w9\\src.c"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_MMX /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_f9dec.dir\\Debug\\\\" /Fd"cmTC_f9dec.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-2s78df\\src.c"
           src.c
-        C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-nsv7w9\\src.c(15,25): error C2440: '=': cannot convert from 'int' to '__m64' [C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-nsv7w9\\cmTC_e0f14.vcxproj]
-        Done Building Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-nsv7w9\\cmTC_e0f14.vcxproj" (default targets) -- FAILED.
+        C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-2s78df\\src.c(15,25): error C2440: '=': cannot convert from 'int' to '__m64' [C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-2s78df\\cmTC_f9dec.vcxproj]
+        Done Building Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-2s78df\\cmTC_f9dec.vcxproj" (default targets) -- FAILED.
         
         Build FAILED.
         
-        "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-nsv7w9\\cmTC_e0f14.vcxproj" (default target) (1) ->
+        "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-2s78df\\cmTC_f9dec.vcxproj" (default target) (1) ->
         (ClCompile target) -> 
-          C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-nsv7w9\\src.c(15,25): error C2440: '=': cannot convert from 'int' to '__m64' [C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-nsv7w9\\cmTC_e0f14.vcxproj]
+          C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-2s78df\\src.c(15,25): error C2440: '=': cannot convert from 'int' to '__m64' [C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-2s78df\\cmTC_f9dec.vcxproj]
         
             0 Warning(s)
             1 Error(s)
         
-        Time Elapsed 00:00:00.41
+        Time Elapsed 00:00:00.43
         
       exitCode: 1
   -
@@ -462,8 +462,8 @@ events:
     checks:
       - "Performing Test COMPILER_SUPPORTS_SSE"
     directories:
-      source: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-2a72sh"
-      binary: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-2a72sh"
+      source: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-pht77x"
+      binary: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-pht77x"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
       CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 "
@@ -473,40 +473,40 @@ events:
       variable: "COMPILER_SUPPORTS_SSE"
       cached: true
       stdout: |
-        Change Dir: 'C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-2a72sh'
+        Change Dir: 'C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-pht77x'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_367ec.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_54938.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
         MSBuild version 17.14.60+43b635718 for .NET Framework
-        Build started 01/10/2026 21:30:23.
+        Build started 01/10/2026 21:44:03.
         
-        Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-2a72sh\\cmTC_367ec.vcxproj" on node 1 (default targets).
+        Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-pht77x\\cmTC_54938.vcxproj" on node 1 (default targets).
         PrepareForBuild:
-          Creating directory "cmTC_367ec.dir\\Debug\\".
+          Creating directory "cmTC_54938.dir\\Debug\\".
           Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
-          Creating directory "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-2a72sh\\Debug\\".
-          Creating directory "cmTC_367ec.dir\\Debug\\cmTC_367ec.tlog\\".
+          Creating directory "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-pht77x\\Debug\\".
+          Creating directory "cmTC_54938.dir\\Debug\\cmTC_54938.tlog\\".
         InitializeBuildStatus:
-          Creating "cmTC_367ec.dir\\Debug\\cmTC_367ec.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
-          Touching "cmTC_367ec.dir\\Debug\\cmTC_367ec.tlog\\unsuccessfulbuild".
+          Creating "cmTC_54938.dir\\Debug\\cmTC_54938.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_54938.dir\\Debug\\cmTC_54938.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_SSE /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_367ec.dir\\Debug\\\\" /Fd"cmTC_367ec.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-2a72sh\\src.c"
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_SSE /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_54938.dir\\Debug\\\\" /Fd"cmTC_54938.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-pht77x\\src.c"
           Microsoft (R) C/C++ Optimizing Compiler Version 19.44.35229 for x64
           Copyright (C) Microsoft Corporation.  All rights reserved.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_SSE /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_367ec.dir\\Debug\\\\" /Fd"cmTC_367ec.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-2a72sh\\src.c"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_SSE /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_54938.dir\\Debug\\\\" /Fd"cmTC_54938.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-pht77x\\src.c"
           src.c
         Link:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-2a72sh\\Debug\\cmTC_367ec.exe" /INCREMENTAL /ILK:"cmTC_367ec.dir\\Debug\\cmTC_367ec.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-2a72sh/Debug/cmTC_367ec.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-2a72sh/Debug/cmTC_367ec.lib" /MACHINE:X64  /machine:x64 cmTC_367ec.dir\\Debug\\src.obj
-          cmTC_367ec.vcxproj -> C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-2a72sh\\Debug\\cmTC_367ec.exe
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-pht77x\\Debug\\cmTC_54938.exe" /INCREMENTAL /ILK:"cmTC_54938.dir\\Debug\\cmTC_54938.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-pht77x/Debug/cmTC_54938.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-pht77x/Debug/cmTC_54938.lib" /MACHINE:X64  /machine:x64 cmTC_54938.dir\\Debug\\src.obj
+          cmTC_54938.vcxproj -> C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-pht77x\\Debug\\cmTC_54938.exe
         FinalizeBuildStatus:
-          Deleting file "cmTC_367ec.dir\\Debug\\cmTC_367ec.tlog\\unsuccessfulbuild".
-          Touching "cmTC_367ec.dir\\Debug\\cmTC_367ec.tlog\\cmTC_367ec.lastbuildstate".
-        Done Building Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-2a72sh\\cmTC_367ec.vcxproj" (default targets).
+          Deleting file "cmTC_54938.dir\\Debug\\cmTC_54938.tlog\\unsuccessfulbuild".
+          Touching "cmTC_54938.dir\\Debug\\cmTC_54938.tlog\\cmTC_54938.lastbuildstate".
+        Done Building Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-pht77x\\cmTC_54938.vcxproj" (default targets).
         
         Build succeeded.
             0 Warning(s)
             0 Error(s)
         
-        Time Elapsed 00:00:00.68
+        Time Elapsed 00:00:00.71
         
       exitCode: 0
   -
@@ -519,8 +519,8 @@ events:
     checks:
       - "Performing Test COMPILER_SUPPORTS_SSE2"
     directories:
-      source: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-wehebl"
-      binary: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-wehebl"
+      source: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-n9nuwd"
+      binary: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-n9nuwd"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
       CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 "
@@ -530,40 +530,40 @@ events:
       variable: "COMPILER_SUPPORTS_SSE2"
       cached: true
       stdout: |
-        Change Dir: 'C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-wehebl'
+        Change Dir: 'C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-n9nuwd'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_f309f.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_888db.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
         MSBuild version 17.14.60+43b635718 for .NET Framework
-        Build started 01/10/2026 21:30:24.
+        Build started 01/10/2026 21:44:04.
         
-        Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-wehebl\\cmTC_f309f.vcxproj" on node 1 (default targets).
+        Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-n9nuwd\\cmTC_888db.vcxproj" on node 1 (default targets).
         PrepareForBuild:
-          Creating directory "cmTC_f309f.dir\\Debug\\".
+          Creating directory "cmTC_888db.dir\\Debug\\".
           Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
-          Creating directory "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-wehebl\\Debug\\".
-          Creating directory "cmTC_f309f.dir\\Debug\\cmTC_f309f.tlog\\".
+          Creating directory "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-n9nuwd\\Debug\\".
+          Creating directory "cmTC_888db.dir\\Debug\\cmTC_888db.tlog\\".
         InitializeBuildStatus:
-          Creating "cmTC_f309f.dir\\Debug\\cmTC_f309f.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
-          Touching "cmTC_f309f.dir\\Debug\\cmTC_f309f.tlog\\unsuccessfulbuild".
+          Creating "cmTC_888db.dir\\Debug\\cmTC_888db.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_888db.dir\\Debug\\cmTC_888db.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_SSE2 /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_f309f.dir\\Debug\\\\" /Fd"cmTC_f309f.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-wehebl\\src.c"
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_SSE2 /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_888db.dir\\Debug\\\\" /Fd"cmTC_888db.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-n9nuwd\\src.c"
           Microsoft (R) C/C++ Optimizing Compiler Version 19.44.35229 for x64
           Copyright (C) Microsoft Corporation.  All rights reserved.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_SSE2 /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_f309f.dir\\Debug\\\\" /Fd"cmTC_f309f.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-wehebl\\src.c"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_SSE2 /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_888db.dir\\Debug\\\\" /Fd"cmTC_888db.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-n9nuwd\\src.c"
           src.c
         Link:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-wehebl\\Debug\\cmTC_f309f.exe" /INCREMENTAL /ILK:"cmTC_f309f.dir\\Debug\\cmTC_f309f.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-wehebl/Debug/cmTC_f309f.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-wehebl/Debug/cmTC_f309f.lib" /MACHINE:X64  /machine:x64 cmTC_f309f.dir\\Debug\\src.obj
-          cmTC_f309f.vcxproj -> C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-wehebl\\Debug\\cmTC_f309f.exe
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-n9nuwd\\Debug\\cmTC_888db.exe" /INCREMENTAL /ILK:"cmTC_888db.dir\\Debug\\cmTC_888db.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-n9nuwd/Debug/cmTC_888db.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-n9nuwd/Debug/cmTC_888db.lib" /MACHINE:X64  /machine:x64 cmTC_888db.dir\\Debug\\src.obj
+          cmTC_888db.vcxproj -> C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-n9nuwd\\Debug\\cmTC_888db.exe
         FinalizeBuildStatus:
-          Deleting file "cmTC_f309f.dir\\Debug\\cmTC_f309f.tlog\\unsuccessfulbuild".
-          Touching "cmTC_f309f.dir\\Debug\\cmTC_f309f.tlog\\cmTC_f309f.lastbuildstate".
-        Done Building Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-wehebl\\cmTC_f309f.vcxproj" (default targets).
+          Deleting file "cmTC_888db.dir\\Debug\\cmTC_888db.tlog\\unsuccessfulbuild".
+          Touching "cmTC_888db.dir\\Debug\\cmTC_888db.tlog\\cmTC_888db.lastbuildstate".
+        Done Building Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-n9nuwd\\cmTC_888db.vcxproj" (default targets).
         
         Build succeeded.
             0 Warning(s)
             0 Error(s)
         
-        Time Elapsed 00:00:00.68
+        Time Elapsed 00:00:00.70
         
       exitCode: 0
   -
@@ -576,8 +576,8 @@ events:
     checks:
       - "Performing Test COMPILER_SUPPORTS_SSE3"
     directories:
-      source: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-981gzx"
-      binary: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-981gzx"
+      source: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-m4zwvp"
+      binary: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-m4zwvp"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
       CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 "
@@ -587,40 +587,40 @@ events:
       variable: "COMPILER_SUPPORTS_SSE3"
       cached: true
       stdout: |
-        Change Dir: 'C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-981gzx'
+        Change Dir: 'C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-m4zwvp'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_df78f.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_999f4.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
         MSBuild version 17.14.60+43b635718 for .NET Framework
-        Build started 01/10/2026 21:30:25.
+        Build started 01/10/2026 21:44:05.
         
-        Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-981gzx\\cmTC_df78f.vcxproj" on node 1 (default targets).
+        Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-m4zwvp\\cmTC_999f4.vcxproj" on node 1 (default targets).
         PrepareForBuild:
-          Creating directory "cmTC_df78f.dir\\Debug\\".
+          Creating directory "cmTC_999f4.dir\\Debug\\".
           Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
-          Creating directory "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-981gzx\\Debug\\".
-          Creating directory "cmTC_df78f.dir\\Debug\\cmTC_df78f.tlog\\".
+          Creating directory "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-m4zwvp\\Debug\\".
+          Creating directory "cmTC_999f4.dir\\Debug\\cmTC_999f4.tlog\\".
         InitializeBuildStatus:
-          Creating "cmTC_df78f.dir\\Debug\\cmTC_df78f.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
-          Touching "cmTC_df78f.dir\\Debug\\cmTC_df78f.tlog\\unsuccessfulbuild".
+          Creating "cmTC_999f4.dir\\Debug\\cmTC_999f4.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_999f4.dir\\Debug\\cmTC_999f4.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_SSE3 /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_df78f.dir\\Debug\\\\" /Fd"cmTC_df78f.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-981gzx\\src.c"
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_SSE3 /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_999f4.dir\\Debug\\\\" /Fd"cmTC_999f4.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-m4zwvp\\src.c"
           Microsoft (R) C/C++ Optimizing Compiler Version 19.44.35229 for x64
           Copyright (C) Microsoft Corporation.  All rights reserved.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_SSE3 /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_df78f.dir\\Debug\\\\" /Fd"cmTC_df78f.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-981gzx\\src.c"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_SSE3 /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_999f4.dir\\Debug\\\\" /Fd"cmTC_999f4.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-m4zwvp\\src.c"
           src.c
         Link:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-981gzx\\Debug\\cmTC_df78f.exe" /INCREMENTAL /ILK:"cmTC_df78f.dir\\Debug\\cmTC_df78f.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-981gzx/Debug/cmTC_df78f.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-981gzx/Debug/cmTC_df78f.lib" /MACHINE:X64  /machine:x64 cmTC_df78f.dir\\Debug\\src.obj
-          cmTC_df78f.vcxproj -> C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-981gzx\\Debug\\cmTC_df78f.exe
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-m4zwvp\\Debug\\cmTC_999f4.exe" /INCREMENTAL /ILK:"cmTC_999f4.dir\\Debug\\cmTC_999f4.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-m4zwvp/Debug/cmTC_999f4.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-m4zwvp/Debug/cmTC_999f4.lib" /MACHINE:X64  /machine:x64 cmTC_999f4.dir\\Debug\\src.obj
+          cmTC_999f4.vcxproj -> C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-m4zwvp\\Debug\\cmTC_999f4.exe
         FinalizeBuildStatus:
-          Deleting file "cmTC_df78f.dir\\Debug\\cmTC_df78f.tlog\\unsuccessfulbuild".
-          Touching "cmTC_df78f.dir\\Debug\\cmTC_df78f.tlog\\cmTC_df78f.lastbuildstate".
-        Done Building Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-981gzx\\cmTC_df78f.vcxproj" (default targets).
+          Deleting file "cmTC_999f4.dir\\Debug\\cmTC_999f4.tlog\\unsuccessfulbuild".
+          Touching "cmTC_999f4.dir\\Debug\\cmTC_999f4.tlog\\cmTC_999f4.lastbuildstate".
+        Done Building Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-m4zwvp\\cmTC_999f4.vcxproj" (default targets).
         
         Build succeeded.
             0 Warning(s)
             0 Error(s)
         
-        Time Elapsed 00:00:00.66
+        Time Elapsed 00:00:00.72
         
       exitCode: 0
   -
@@ -633,8 +633,8 @@ events:
     checks:
       - "Performing Test COMPILER_SUPPORTS_SSE4_1"
     directories:
-      source: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-f5ib9i"
-      binary: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-f5ib9i"
+      source: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-0v7pb8"
+      binary: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-0v7pb8"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
       CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 "
@@ -644,40 +644,40 @@ events:
       variable: "COMPILER_SUPPORTS_SSE4_1"
       cached: true
       stdout: |
-        Change Dir: 'C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-f5ib9i'
+        Change Dir: 'C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-0v7pb8'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_01e4b.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_9fd50.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
         MSBuild version 17.14.60+43b635718 for .NET Framework
-        Build started 01/10/2026 21:30:26.
+        Build started 01/10/2026 21:44:06.
         
-        Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-f5ib9i\\cmTC_01e4b.vcxproj" on node 1 (default targets).
+        Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-0v7pb8\\cmTC_9fd50.vcxproj" on node 1 (default targets).
         PrepareForBuild:
-          Creating directory "cmTC_01e4b.dir\\Debug\\".
+          Creating directory "cmTC_9fd50.dir\\Debug\\".
           Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
-          Creating directory "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-f5ib9i\\Debug\\".
-          Creating directory "cmTC_01e4b.dir\\Debug\\cmTC_01e4b.tlog\\".
+          Creating directory "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-0v7pb8\\Debug\\".
+          Creating directory "cmTC_9fd50.dir\\Debug\\cmTC_9fd50.tlog\\".
         InitializeBuildStatus:
-          Creating "cmTC_01e4b.dir\\Debug\\cmTC_01e4b.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
-          Touching "cmTC_01e4b.dir\\Debug\\cmTC_01e4b.tlog\\unsuccessfulbuild".
+          Creating "cmTC_9fd50.dir\\Debug\\cmTC_9fd50.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_9fd50.dir\\Debug\\cmTC_9fd50.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_SSE4_1 /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_01e4b.dir\\Debug\\\\" /Fd"cmTC_01e4b.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-f5ib9i\\src.c"
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_SSE4_1 /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_9fd50.dir\\Debug\\\\" /Fd"cmTC_9fd50.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-0v7pb8\\src.c"
           Microsoft (R) C/C++ Optimizing Compiler Version 19.44.35229 for x64
           Copyright (C) Microsoft Corporation.  All rights reserved.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_SSE4_1 /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_01e4b.dir\\Debug\\\\" /Fd"cmTC_01e4b.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-f5ib9i\\src.c"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_SSE4_1 /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_9fd50.dir\\Debug\\\\" /Fd"cmTC_9fd50.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-0v7pb8\\src.c"
           src.c
         Link:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-f5ib9i\\Debug\\cmTC_01e4b.exe" /INCREMENTAL /ILK:"cmTC_01e4b.dir\\Debug\\cmTC_01e4b.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-f5ib9i/Debug/cmTC_01e4b.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-f5ib9i/Debug/cmTC_01e4b.lib" /MACHINE:X64  /machine:x64 cmTC_01e4b.dir\\Debug\\src.obj
-          cmTC_01e4b.vcxproj -> C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-f5ib9i\\Debug\\cmTC_01e4b.exe
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-0v7pb8\\Debug\\cmTC_9fd50.exe" /INCREMENTAL /ILK:"cmTC_9fd50.dir\\Debug\\cmTC_9fd50.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-0v7pb8/Debug/cmTC_9fd50.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-0v7pb8/Debug/cmTC_9fd50.lib" /MACHINE:X64  /machine:x64 cmTC_9fd50.dir\\Debug\\src.obj
+          cmTC_9fd50.vcxproj -> C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-0v7pb8\\Debug\\cmTC_9fd50.exe
         FinalizeBuildStatus:
-          Deleting file "cmTC_01e4b.dir\\Debug\\cmTC_01e4b.tlog\\unsuccessfulbuild".
-          Touching "cmTC_01e4b.dir\\Debug\\cmTC_01e4b.tlog\\cmTC_01e4b.lastbuildstate".
-        Done Building Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-f5ib9i\\cmTC_01e4b.vcxproj" (default targets).
+          Deleting file "cmTC_9fd50.dir\\Debug\\cmTC_9fd50.tlog\\unsuccessfulbuild".
+          Touching "cmTC_9fd50.dir\\Debug\\cmTC_9fd50.tlog\\cmTC_9fd50.lastbuildstate".
+        Done Building Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-0v7pb8\\cmTC_9fd50.vcxproj" (default targets).
         
         Build succeeded.
             0 Warning(s)
             0 Error(s)
         
-        Time Elapsed 00:00:00.67
+        Time Elapsed 00:00:00.72
         
       exitCode: 0
   -
@@ -690,8 +690,8 @@ events:
     checks:
       - "Performing Test COMPILER_SUPPORTS_SSE4_2"
     directories:
-      source: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-vxndiu"
-      binary: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-vxndiu"
+      source: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-4kzjvt"
+      binary: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-4kzjvt"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
       CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 "
@@ -701,40 +701,40 @@ events:
       variable: "COMPILER_SUPPORTS_SSE4_2"
       cached: true
       stdout: |
-        Change Dir: 'C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-vxndiu'
+        Change Dir: 'C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-4kzjvt'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_3a3c3.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_e15ef.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
         MSBuild version 17.14.60+43b635718 for .NET Framework
-        Build started 01/10/2026 21:30:27.
+        Build started 01/10/2026 21:44:07.
         
-        Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-vxndiu\\cmTC_3a3c3.vcxproj" on node 1 (default targets).
+        Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-4kzjvt\\cmTC_e15ef.vcxproj" on node 1 (default targets).
         PrepareForBuild:
-          Creating directory "cmTC_3a3c3.dir\\Debug\\".
+          Creating directory "cmTC_e15ef.dir\\Debug\\".
           Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
-          Creating directory "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-vxndiu\\Debug\\".
-          Creating directory "cmTC_3a3c3.dir\\Debug\\cmTC_3a3c3.tlog\\".
+          Creating directory "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-4kzjvt\\Debug\\".
+          Creating directory "cmTC_e15ef.dir\\Debug\\cmTC_e15ef.tlog\\".
         InitializeBuildStatus:
-          Creating "cmTC_3a3c3.dir\\Debug\\cmTC_3a3c3.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
-          Touching "cmTC_3a3c3.dir\\Debug\\cmTC_3a3c3.tlog\\unsuccessfulbuild".
+          Creating "cmTC_e15ef.dir\\Debug\\cmTC_e15ef.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_e15ef.dir\\Debug\\cmTC_e15ef.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_SSE4_2 /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_3a3c3.dir\\Debug\\\\" /Fd"cmTC_3a3c3.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-vxndiu\\src.c"
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_SSE4_2 /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_e15ef.dir\\Debug\\\\" /Fd"cmTC_e15ef.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-4kzjvt\\src.c"
           Microsoft (R) C/C++ Optimizing Compiler Version 19.44.35229 for x64
           Copyright (C) Microsoft Corporation.  All rights reserved.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_SSE4_2 /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_3a3c3.dir\\Debug\\\\" /Fd"cmTC_3a3c3.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-vxndiu\\src.c"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_SSE4_2 /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_e15ef.dir\\Debug\\\\" /Fd"cmTC_e15ef.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-4kzjvt\\src.c"
           src.c
         Link:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-vxndiu\\Debug\\cmTC_3a3c3.exe" /INCREMENTAL /ILK:"cmTC_3a3c3.dir\\Debug\\cmTC_3a3c3.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-vxndiu/Debug/cmTC_3a3c3.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-vxndiu/Debug/cmTC_3a3c3.lib" /MACHINE:X64  /machine:x64 cmTC_3a3c3.dir\\Debug\\src.obj
-          cmTC_3a3c3.vcxproj -> C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-vxndiu\\Debug\\cmTC_3a3c3.exe
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-4kzjvt\\Debug\\cmTC_e15ef.exe" /INCREMENTAL /ILK:"cmTC_e15ef.dir\\Debug\\cmTC_e15ef.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-4kzjvt/Debug/cmTC_e15ef.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-4kzjvt/Debug/cmTC_e15ef.lib" /MACHINE:X64  /machine:x64 cmTC_e15ef.dir\\Debug\\src.obj
+          cmTC_e15ef.vcxproj -> C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-4kzjvt\\Debug\\cmTC_e15ef.exe
         FinalizeBuildStatus:
-          Deleting file "cmTC_3a3c3.dir\\Debug\\cmTC_3a3c3.tlog\\unsuccessfulbuild".
-          Touching "cmTC_3a3c3.dir\\Debug\\cmTC_3a3c3.tlog\\cmTC_3a3c3.lastbuildstate".
-        Done Building Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-vxndiu\\cmTC_3a3c3.vcxproj" (default targets).
+          Deleting file "cmTC_e15ef.dir\\Debug\\cmTC_e15ef.tlog\\unsuccessfulbuild".
+          Touching "cmTC_e15ef.dir\\Debug\\cmTC_e15ef.tlog\\cmTC_e15ef.lastbuildstate".
+        Done Building Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-4kzjvt\\cmTC_e15ef.vcxproj" (default targets).
         
         Build succeeded.
             0 Warning(s)
             0 Error(s)
         
-        Time Elapsed 00:00:00.68
+        Time Elapsed 00:00:00.70
         
       exitCode: 0
   -
@@ -747,8 +747,8 @@ events:
     checks:
       - "Performing Test COMPILER_SUPPORTS_AVX"
     directories:
-      source: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-xoitum"
-      binary: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-xoitum"
+      source: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-jrdp5h"
+      binary: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-jrdp5h"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
       CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 "
@@ -758,40 +758,40 @@ events:
       variable: "COMPILER_SUPPORTS_AVX"
       cached: true
       stdout: |
-        Change Dir: 'C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-xoitum'
+        Change Dir: 'C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-jrdp5h'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_c6b97.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_e62ec.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
         MSBuild version 17.14.60+43b635718 for .NET Framework
-        Build started 01/10/2026 21:30:28.
+        Build started 01/10/2026 21:44:08.
         
-        Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-xoitum\\cmTC_c6b97.vcxproj" on node 1 (default targets).
+        Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-jrdp5h\\cmTC_e62ec.vcxproj" on node 1 (default targets).
         PrepareForBuild:
-          Creating directory "cmTC_c6b97.dir\\Debug\\".
+          Creating directory "cmTC_e62ec.dir\\Debug\\".
           Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
-          Creating directory "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-xoitum\\Debug\\".
-          Creating directory "cmTC_c6b97.dir\\Debug\\cmTC_c6b97.tlog\\".
+          Creating directory "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-jrdp5h\\Debug\\".
+          Creating directory "cmTC_e62ec.dir\\Debug\\cmTC_e62ec.tlog\\".
         InitializeBuildStatus:
-          Creating "cmTC_c6b97.dir\\Debug\\cmTC_c6b97.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
-          Touching "cmTC_c6b97.dir\\Debug\\cmTC_c6b97.tlog\\unsuccessfulbuild".
+          Creating "cmTC_e62ec.dir\\Debug\\cmTC_e62ec.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_e62ec.dir\\Debug\\cmTC_e62ec.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_AVX /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_c6b97.dir\\Debug\\\\" /Fd"cmTC_c6b97.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-xoitum\\src.c"
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_AVX /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_e62ec.dir\\Debug\\\\" /Fd"cmTC_e62ec.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-jrdp5h\\src.c"
           Microsoft (R) C/C++ Optimizing Compiler Version 19.44.35229 for x64
           Copyright (C) Microsoft Corporation.  All rights reserved.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_AVX /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_c6b97.dir\\Debug\\\\" /Fd"cmTC_c6b97.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-xoitum\\src.c"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_AVX /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_e62ec.dir\\Debug\\\\" /Fd"cmTC_e62ec.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-jrdp5h\\src.c"
           src.c
         Link:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-xoitum\\Debug\\cmTC_c6b97.exe" /INCREMENTAL /ILK:"cmTC_c6b97.dir\\Debug\\cmTC_c6b97.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-xoitum/Debug/cmTC_c6b97.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-xoitum/Debug/cmTC_c6b97.lib" /MACHINE:X64  /machine:x64 cmTC_c6b97.dir\\Debug\\src.obj
-          cmTC_c6b97.vcxproj -> C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-xoitum\\Debug\\cmTC_c6b97.exe
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-jrdp5h\\Debug\\cmTC_e62ec.exe" /INCREMENTAL /ILK:"cmTC_e62ec.dir\\Debug\\cmTC_e62ec.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-jrdp5h/Debug/cmTC_e62ec.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-jrdp5h/Debug/cmTC_e62ec.lib" /MACHINE:X64  /machine:x64 cmTC_e62ec.dir\\Debug\\src.obj
+          cmTC_e62ec.vcxproj -> C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-jrdp5h\\Debug\\cmTC_e62ec.exe
         FinalizeBuildStatus:
-          Deleting file "cmTC_c6b97.dir\\Debug\\cmTC_c6b97.tlog\\unsuccessfulbuild".
-          Touching "cmTC_c6b97.dir\\Debug\\cmTC_c6b97.tlog\\cmTC_c6b97.lastbuildstate".
-        Done Building Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-xoitum\\cmTC_c6b97.vcxproj" (default targets).
+          Deleting file "cmTC_e62ec.dir\\Debug\\cmTC_e62ec.tlog\\unsuccessfulbuild".
+          Touching "cmTC_e62ec.dir\\Debug\\cmTC_e62ec.tlog\\cmTC_e62ec.lastbuildstate".
+        Done Building Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-jrdp5h\\cmTC_e62ec.vcxproj" (default targets).
         
         Build succeeded.
             0 Warning(s)
             0 Error(s)
         
-        Time Elapsed 00:00:00.69
+        Time Elapsed 00:00:00.72
         
       exitCode: 0
   -
@@ -804,8 +804,8 @@ events:
     checks:
       - "Performing Test COMPILER_SUPPORTS_AVX2"
     directories:
-      source: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-v1gnjj"
-      binary: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-v1gnjj"
+      source: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-8sofpe"
+      binary: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-8sofpe"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
       CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 "
@@ -815,40 +815,40 @@ events:
       variable: "COMPILER_SUPPORTS_AVX2"
       cached: true
       stdout: |
-        Change Dir: 'C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-v1gnjj'
+        Change Dir: 'C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-8sofpe'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_397f3.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_b0d58.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
         MSBuild version 17.14.60+43b635718 for .NET Framework
-        Build started 01/10/2026 21:30:29.
+        Build started 01/10/2026 21:44:09.
         
-        Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-v1gnjj\\cmTC_397f3.vcxproj" on node 1 (default targets).
+        Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-8sofpe\\cmTC_b0d58.vcxproj" on node 1 (default targets).
         PrepareForBuild:
-          Creating directory "cmTC_397f3.dir\\Debug\\".
+          Creating directory "cmTC_b0d58.dir\\Debug\\".
           Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
-          Creating directory "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-v1gnjj\\Debug\\".
-          Creating directory "cmTC_397f3.dir\\Debug\\cmTC_397f3.tlog\\".
+          Creating directory "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-8sofpe\\Debug\\".
+          Creating directory "cmTC_b0d58.dir\\Debug\\cmTC_b0d58.tlog\\".
         InitializeBuildStatus:
-          Creating "cmTC_397f3.dir\\Debug\\cmTC_397f3.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
-          Touching "cmTC_397f3.dir\\Debug\\cmTC_397f3.tlog\\unsuccessfulbuild".
+          Creating "cmTC_b0d58.dir\\Debug\\cmTC_b0d58.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_b0d58.dir\\Debug\\cmTC_b0d58.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_AVX2 /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_397f3.dir\\Debug\\\\" /Fd"cmTC_397f3.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-v1gnjj\\src.c"
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_AVX2 /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_b0d58.dir\\Debug\\\\" /Fd"cmTC_b0d58.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-8sofpe\\src.c"
           Microsoft (R) C/C++ Optimizing Compiler Version 19.44.35229 for x64
           Copyright (C) Microsoft Corporation.  All rights reserved.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_AVX2 /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_397f3.dir\\Debug\\\\" /Fd"cmTC_397f3.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-v1gnjj\\src.c"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_AVX2 /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_b0d58.dir\\Debug\\\\" /Fd"cmTC_b0d58.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-8sofpe\\src.c"
           src.c
         Link:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-v1gnjj\\Debug\\cmTC_397f3.exe" /INCREMENTAL /ILK:"cmTC_397f3.dir\\Debug\\cmTC_397f3.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-v1gnjj/Debug/cmTC_397f3.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-v1gnjj/Debug/cmTC_397f3.lib" /MACHINE:X64  /machine:x64 cmTC_397f3.dir\\Debug\\src.obj
-          cmTC_397f3.vcxproj -> C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-v1gnjj\\Debug\\cmTC_397f3.exe
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-8sofpe\\Debug\\cmTC_b0d58.exe" /INCREMENTAL /ILK:"cmTC_b0d58.dir\\Debug\\cmTC_b0d58.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-8sofpe/Debug/cmTC_b0d58.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-8sofpe/Debug/cmTC_b0d58.lib" /MACHINE:X64  /machine:x64 cmTC_b0d58.dir\\Debug\\src.obj
+          cmTC_b0d58.vcxproj -> C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-8sofpe\\Debug\\cmTC_b0d58.exe
         FinalizeBuildStatus:
-          Deleting file "cmTC_397f3.dir\\Debug\\cmTC_397f3.tlog\\unsuccessfulbuild".
-          Touching "cmTC_397f3.dir\\Debug\\cmTC_397f3.tlog\\cmTC_397f3.lastbuildstate".
-        Done Building Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-v1gnjj\\cmTC_397f3.vcxproj" (default targets).
+          Deleting file "cmTC_b0d58.dir\\Debug\\cmTC_b0d58.tlog\\unsuccessfulbuild".
+          Touching "cmTC_b0d58.dir\\Debug\\cmTC_b0d58.tlog\\cmTC_b0d58.lastbuildstate".
+        Done Building Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-8sofpe\\cmTC_b0d58.vcxproj" (default targets).
         
         Build succeeded.
             0 Warning(s)
             0 Error(s)
         
-        Time Elapsed 00:00:00.69
+        Time Elapsed 00:00:00.72
         
       exitCode: 0
   -
@@ -861,8 +861,8 @@ events:
     checks:
       - "Performing Test COMPILER_SUPPORTS_AVX512F"
     directories:
-      source: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-bdq6fn"
-      binary: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-bdq6fn"
+      source: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-l525wq"
+      binary: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-l525wq"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
       CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 "
@@ -872,90 +872,34 @@ events:
       variable: "COMPILER_SUPPORTS_AVX512F"
       cached: true
       stdout: |
-        Change Dir: 'C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-bdq6fn'
+        Change Dir: 'C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-l525wq'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_9076a.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_79fee.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
         MSBuild version 17.14.60+43b635718 for .NET Framework
-        Build started 01/10/2026 21:30:30.
+        Build started 01/10/2026 21:44:10.
         
-        Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-bdq6fn\\cmTC_9076a.vcxproj" on node 1 (default targets).
+        Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-l525wq\\cmTC_79fee.vcxproj" on node 1 (default targets).
         PrepareForBuild:
-          Creating directory "cmTC_9076a.dir\\Debug\\".
+          Creating directory "cmTC_79fee.dir\\Debug\\".
           Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
-          Creating directory "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-bdq6fn\\Debug\\".
-          Creating directory "cmTC_9076a.dir\\Debug\\cmTC_9076a.tlog\\".
+          Creating directory "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-l525wq\\Debug\\".
+          Creating directory "cmTC_79fee.dir\\Debug\\cmTC_79fee.tlog\\".
         InitializeBuildStatus:
-          Creating "cmTC_9076a.dir\\Debug\\cmTC_9076a.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
-          Touching "cmTC_9076a.dir\\Debug\\cmTC_9076a.tlog\\unsuccessfulbuild".
+          Creating "cmTC_79fee.dir\\Debug\\cmTC_79fee.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_79fee.dir\\Debug\\cmTC_79fee.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_AVX512F /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_9076a.dir\\Debug\\\\" /Fd"cmTC_9076a.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-bdq6fn\\src.c"
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_AVX512F /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_79fee.dir\\Debug\\\\" /Fd"cmTC_79fee.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-l525wq\\src.c"
           Microsoft (R) C/C++ Optimizing Compiler Version 19.44.35229 for x64
           Copyright (C) Microsoft Corporation.  All rights reserved.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_AVX512F /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_9076a.dir\\Debug\\\\" /Fd"cmTC_9076a.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-bdq6fn\\src.c"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D COMPILER_SUPPORTS_AVX512F /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_79fee.dir\\Debug\\\\" /Fd"cmTC_79fee.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-l525wq\\src.c"
           src.c
         Link:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-bdq6fn\\Debug\\cmTC_9076a.exe" /INCREMENTAL /ILK:"cmTC_9076a.dir\\Debug\\cmTC_9076a.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-bdq6fn/Debug/cmTC_9076a.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-bdq6fn/Debug/cmTC_9076a.lib" /MACHINE:X64  /machine:x64 cmTC_9076a.dir\\Debug\\src.obj
-          cmTC_9076a.vcxproj -> C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-bdq6fn\\Debug\\cmTC_9076a.exe
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-l525wq\\Debug\\cmTC_79fee.exe" /INCREMENTAL /ILK:"cmTC_79fee.dir\\Debug\\cmTC_79fee.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-l525wq/Debug/cmTC_79fee.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-l525wq/Debug/cmTC_79fee.lib" /MACHINE:X64  /machine:x64 cmTC_79fee.dir\\Debug\\src.obj
+          cmTC_79fee.vcxproj -> C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-l525wq\\Debug\\cmTC_79fee.exe
         FinalizeBuildStatus:
-          Deleting file "cmTC_9076a.dir\\Debug\\cmTC_9076a.tlog\\unsuccessfulbuild".
-          Touching "cmTC_9076a.dir\\Debug\\cmTC_9076a.tlog\\cmTC_9076a.lastbuildstate".
-        Done Building Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-bdq6fn\\cmTC_9076a.vcxproj" (default targets).
-        
-        Build succeeded.
-            0 Warning(s)
-            0 Error(s)
-        
-        Time Elapsed 00:00:00.69
-        
-      exitCode: 0
-  -
-    kind: "try_compile-v1"
-    backtrace:
-      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.31/Modules/CheckSymbolExists.cmake:163 (try_compile)"
-      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.31/Modules/CheckSymbolExists.cmake:68 (__CHECK_SYMBOL_EXISTS_IMPL)"
-      - "SDL/CMakeLists.txt:1116 (check_symbol_exists)"
-    checks:
-      - "Looking for _copysign"
-    directories:
-      source: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-qjb3rr"
-      binary: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-qjb3rr"
-    cmakeVariables:
-      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
-      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 "
-      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
-      CMAKE_MODULE_PATH: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/SDL/cmake"
-    buildResult:
-      variable: "LIBC_HAS__COPYSIGN"
-      cached: true
-      stdout: |
-        Change Dir: 'C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-qjb3rr'
-        
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_296fe.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
-        MSBuild version 17.14.60+43b635718 for .NET Framework
-        Build started 01/10/2026 21:30:31.
-        
-        Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-qjb3rr\\cmTC_296fe.vcxproj" on node 1 (default targets).
-        PrepareForBuild:
-          Creating directory "cmTC_296fe.dir\\Debug\\".
-          Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
-          Creating directory "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-qjb3rr\\Debug\\".
-          Creating directory "cmTC_296fe.dir\\Debug\\cmTC_296fe.tlog\\".
-        InitializeBuildStatus:
-          Creating "cmTC_296fe.dir\\Debug\\cmTC_296fe.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
-          Touching "cmTC_296fe.dir\\Debug\\cmTC_296fe.tlog\\unsuccessfulbuild".
-        ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_296fe.dir\\Debug\\\\" /Fd"cmTC_296fe.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-qjb3rr\\CheckSymbolExists.c"
-          Microsoft (R) C/C++ Optimizing Compiler Version 19.44.35229 for x64
-          Copyright (C) Microsoft Corporation.  All rights reserved.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_296fe.dir\\Debug\\\\" /Fd"cmTC_296fe.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-qjb3rr\\CheckSymbolExists.c"
-          CheckSymbolExists.c
-        Link:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-qjb3rr\\Debug\\cmTC_296fe.exe" /INCREMENTAL /ILK:"cmTC_296fe.dir\\Debug\\cmTC_296fe.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-qjb3rr/Debug/cmTC_296fe.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-qjb3rr/Debug/cmTC_296fe.lib" /MACHINE:X64  /machine:x64 cmTC_296fe.dir\\Debug\\CheckSymbolExists.obj
-          cmTC_296fe.vcxproj -> C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-qjb3rr\\Debug\\cmTC_296fe.exe
-        FinalizeBuildStatus:
-          Deleting file "cmTC_296fe.dir\\Debug\\cmTC_296fe.tlog\\unsuccessfulbuild".
-          Touching "cmTC_296fe.dir\\Debug\\cmTC_296fe.tlog\\cmTC_296fe.lastbuildstate".
-        Done Building Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-qjb3rr\\cmTC_296fe.vcxproj" (default targets).
+          Deleting file "cmTC_79fee.dir\\Debug\\cmTC_79fee.tlog\\unsuccessfulbuild".
+          Touching "cmTC_79fee.dir\\Debug\\cmTC_79fee.tlog\\cmTC_79fee.lastbuildstate".
+        Done Building Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-l525wq\\cmTC_79fee.vcxproj" (default targets).
         
         Build succeeded.
             0 Warning(s)
@@ -971,10 +915,66 @@ events:
       - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.31/Modules/CheckSymbolExists.cmake:68 (__CHECK_SYMBOL_EXISTS_IMPL)"
       - "SDL/CMakeLists.txt:1116 (check_symbol_exists)"
     checks:
+      - "Looking for _copysign"
+    directories:
+      source: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-hoze0d"
+      binary: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-hoze0d"
+    cmakeVariables:
+      CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
+      CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 "
+      CMAKE_EXE_LINKER_FLAGS: "/machine:x64"
+      CMAKE_MODULE_PATH: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/SDL/cmake"
+    buildResult:
+      variable: "LIBC_HAS__COPYSIGN"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-hoze0d'
+        
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_3f54f.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        MSBuild version 17.14.60+43b635718 for .NET Framework
+        Build started 01/10/2026 21:44:11.
+        
+        Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-hoze0d\\cmTC_3f54f.vcxproj" on node 1 (default targets).
+        PrepareForBuild:
+          Creating directory "cmTC_3f54f.dir\\Debug\\".
+          Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+          Creating directory "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-hoze0d\\Debug\\".
+          Creating directory "cmTC_3f54f.dir\\Debug\\cmTC_3f54f.tlog\\".
+        InitializeBuildStatus:
+          Creating "cmTC_3f54f.dir\\Debug\\cmTC_3f54f.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_3f54f.dir\\Debug\\cmTC_3f54f.tlog\\unsuccessfulbuild".
+        ClCompile:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_3f54f.dir\\Debug\\\\" /Fd"cmTC_3f54f.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-hoze0d\\CheckSymbolExists.c"
+          Microsoft (R) C/C++ Optimizing Compiler Version 19.44.35229 for x64
+          Copyright (C) Microsoft Corporation.  All rights reserved.
+          cl /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_3f54f.dir\\Debug\\\\" /Fd"cmTC_3f54f.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-hoze0d\\CheckSymbolExists.c"
+          CheckSymbolExists.c
+        Link:
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-hoze0d\\Debug\\cmTC_3f54f.exe" /INCREMENTAL /ILK:"cmTC_3f54f.dir\\Debug\\cmTC_3f54f.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-hoze0d/Debug/cmTC_3f54f.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-hoze0d/Debug/cmTC_3f54f.lib" /MACHINE:X64  /machine:x64 cmTC_3f54f.dir\\Debug\\CheckSymbolExists.obj
+          cmTC_3f54f.vcxproj -> C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-hoze0d\\Debug\\cmTC_3f54f.exe
+        FinalizeBuildStatus:
+          Deleting file "cmTC_3f54f.dir\\Debug\\cmTC_3f54f.tlog\\unsuccessfulbuild".
+          Touching "cmTC_3f54f.dir\\Debug\\cmTC_3f54f.tlog\\cmTC_3f54f.lastbuildstate".
+        Done Building Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-hoze0d\\cmTC_3f54f.vcxproj" (default targets).
+        
+        Build succeeded.
+            0 Warning(s)
+            0 Error(s)
+        
+        Time Elapsed 00:00:00.76
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.31/Modules/CheckSymbolExists.cmake:163 (try_compile)"
+      - "C:/Program Files/Microsoft Visual Studio/2022/Community/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/share/cmake-3.31/Modules/CheckSymbolExists.cmake:68 (__CHECK_SYMBOL_EXISTS_IMPL)"
+      - "SDL/CMakeLists.txt:1116 (check_symbol_exists)"
+    checks:
       - "Looking for _fseeki64"
     directories:
-      source: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-yff4p0"
-      binary: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-yff4p0"
+      source: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-rj2upy"
+      binary: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-rj2upy"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
       CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 "
@@ -984,40 +984,40 @@ events:
       variable: "LIBC_HAS__FSEEKI64"
       cached: true
       stdout: |
-        Change Dir: 'C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-yff4p0'
+        Change Dir: 'C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-rj2upy'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_09dcf.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_dc279.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
         MSBuild version 17.14.60+43b635718 for .NET Framework
-        Build started 01/10/2026 21:30:32.
+        Build started 01/10/2026 21:44:12.
         
-        Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-yff4p0\\cmTC_09dcf.vcxproj" on node 1 (default targets).
+        Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-rj2upy\\cmTC_dc279.vcxproj" on node 1 (default targets).
         PrepareForBuild:
-          Creating directory "cmTC_09dcf.dir\\Debug\\".
+          Creating directory "cmTC_dc279.dir\\Debug\\".
           Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
-          Creating directory "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-yff4p0\\Debug\\".
-          Creating directory "cmTC_09dcf.dir\\Debug\\cmTC_09dcf.tlog\\".
+          Creating directory "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-rj2upy\\Debug\\".
+          Creating directory "cmTC_dc279.dir\\Debug\\cmTC_dc279.tlog\\".
         InitializeBuildStatus:
-          Creating "cmTC_09dcf.dir\\Debug\\cmTC_09dcf.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
-          Touching "cmTC_09dcf.dir\\Debug\\cmTC_09dcf.tlog\\unsuccessfulbuild".
+          Creating "cmTC_dc279.dir\\Debug\\cmTC_dc279.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_dc279.dir\\Debug\\cmTC_dc279.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_09dcf.dir\\Debug\\\\" /Fd"cmTC_09dcf.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-yff4p0\\CheckSymbolExists.c"
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_dc279.dir\\Debug\\\\" /Fd"cmTC_dc279.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-rj2upy\\CheckSymbolExists.c"
           Microsoft (R) C/C++ Optimizing Compiler Version 19.44.35229 for x64
           Copyright (C) Microsoft Corporation.  All rights reserved.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_09dcf.dir\\Debug\\\\" /Fd"cmTC_09dcf.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-yff4p0\\CheckSymbolExists.c"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_dc279.dir\\Debug\\\\" /Fd"cmTC_dc279.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-rj2upy\\CheckSymbolExists.c"
           CheckSymbolExists.c
         Link:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-yff4p0\\Debug\\cmTC_09dcf.exe" /INCREMENTAL /ILK:"cmTC_09dcf.dir\\Debug\\cmTC_09dcf.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-yff4p0/Debug/cmTC_09dcf.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-yff4p0/Debug/cmTC_09dcf.lib" /MACHINE:X64  /machine:x64 cmTC_09dcf.dir\\Debug\\CheckSymbolExists.obj
-          cmTC_09dcf.vcxproj -> C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-yff4p0\\Debug\\cmTC_09dcf.exe
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-rj2upy\\Debug\\cmTC_dc279.exe" /INCREMENTAL /ILK:"cmTC_dc279.dir\\Debug\\cmTC_dc279.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-rj2upy/Debug/cmTC_dc279.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-rj2upy/Debug/cmTC_dc279.lib" /MACHINE:X64  /machine:x64 cmTC_dc279.dir\\Debug\\CheckSymbolExists.obj
+          cmTC_dc279.vcxproj -> C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-rj2upy\\Debug\\cmTC_dc279.exe
         FinalizeBuildStatus:
-          Deleting file "cmTC_09dcf.dir\\Debug\\cmTC_09dcf.tlog\\unsuccessfulbuild".
-          Touching "cmTC_09dcf.dir\\Debug\\cmTC_09dcf.tlog\\cmTC_09dcf.lastbuildstate".
-        Done Building Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-yff4p0\\cmTC_09dcf.vcxproj" (default targets).
+          Deleting file "cmTC_dc279.dir\\Debug\\cmTC_dc279.tlog\\unsuccessfulbuild".
+          Touching "cmTC_dc279.dir\\Debug\\cmTC_dc279.tlog\\cmTC_dc279.lastbuildstate".
+        Done Building Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-rj2upy\\cmTC_dc279.vcxproj" (default targets).
         
         Build succeeded.
             0 Warning(s)
             0 Error(s)
         
-        Time Elapsed 00:00:00.71
+        Time Elapsed 00:00:00.75
         
       exitCode: 0
   -
@@ -1029,8 +1029,8 @@ events:
     checks:
       - "Performing Test HAVE_GAMEINPUT_H"
     directories:
-      source: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-gf2hmu"
-      binary: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-gf2hmu"
+      source: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-5j23mw"
+      binary: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-5j23mw"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
       CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 "
@@ -1040,40 +1040,40 @@ events:
       variable: "HAVE_GAMEINPUT_H"
       cached: true
       stdout: |
-        Change Dir: 'C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-gf2hmu'
+        Change Dir: 'C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-5j23mw'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_70c1d.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_2db9e.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
         MSBuild version 17.14.60+43b635718 for .NET Framework
-        Build started 01/10/2026 21:30:33.
+        Build started 01/10/2026 21:44:13.
         
-        Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-gf2hmu\\cmTC_70c1d.vcxproj" on node 1 (default targets).
+        Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-5j23mw\\cmTC_2db9e.vcxproj" on node 1 (default targets).
         PrepareForBuild:
-          Creating directory "cmTC_70c1d.dir\\Debug\\".
+          Creating directory "cmTC_2db9e.dir\\Debug\\".
           Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
-          Creating directory "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-gf2hmu\\Debug\\".
-          Creating directory "cmTC_70c1d.dir\\Debug\\cmTC_70c1d.tlog\\".
+          Creating directory "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-5j23mw\\Debug\\".
+          Creating directory "cmTC_2db9e.dir\\Debug\\cmTC_2db9e.tlog\\".
         InitializeBuildStatus:
-          Creating "cmTC_70c1d.dir\\Debug\\cmTC_70c1d.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
-          Touching "cmTC_70c1d.dir\\Debug\\cmTC_70c1d.tlog\\unsuccessfulbuild".
+          Creating "cmTC_2db9e.dir\\Debug\\cmTC_2db9e.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_2db9e.dir\\Debug\\cmTC_2db9e.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D HAVE_GAMEINPUT_H /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_70c1d.dir\\Debug\\\\" /Fd"cmTC_70c1d.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-gf2hmu\\src.c"
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D HAVE_GAMEINPUT_H /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_2db9e.dir\\Debug\\\\" /Fd"cmTC_2db9e.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-5j23mw\\src.c"
           Microsoft (R) C/C++ Optimizing Compiler Version 19.44.35229 for x64
           Copyright (C) Microsoft Corporation.  All rights reserved.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D HAVE_GAMEINPUT_H /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_70c1d.dir\\Debug\\\\" /Fd"cmTC_70c1d.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-gf2hmu\\src.c"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D HAVE_GAMEINPUT_H /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_2db9e.dir\\Debug\\\\" /Fd"cmTC_2db9e.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-5j23mw\\src.c"
           src.c
         Link:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-gf2hmu\\Debug\\cmTC_70c1d.exe" /INCREMENTAL /ILK:"cmTC_70c1d.dir\\Debug\\cmTC_70c1d.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-gf2hmu/Debug/cmTC_70c1d.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-gf2hmu/Debug/cmTC_70c1d.lib" /MACHINE:X64  /machine:x64 cmTC_70c1d.dir\\Debug\\src.obj
-          cmTC_70c1d.vcxproj -> C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-gf2hmu\\Debug\\cmTC_70c1d.exe
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-5j23mw\\Debug\\cmTC_2db9e.exe" /INCREMENTAL /ILK:"cmTC_2db9e.dir\\Debug\\cmTC_2db9e.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-5j23mw/Debug/cmTC_2db9e.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-5j23mw/Debug/cmTC_2db9e.lib" /MACHINE:X64  /machine:x64 cmTC_2db9e.dir\\Debug\\src.obj
+          cmTC_2db9e.vcxproj -> C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-5j23mw\\Debug\\cmTC_2db9e.exe
         FinalizeBuildStatus:
-          Deleting file "cmTC_70c1d.dir\\Debug\\cmTC_70c1d.tlog\\unsuccessfulbuild".
-          Touching "cmTC_70c1d.dir\\Debug\\cmTC_70c1d.tlog\\cmTC_70c1d.lastbuildstate".
-        Done Building Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-gf2hmu\\cmTC_70c1d.vcxproj" (default targets).
+          Deleting file "cmTC_2db9e.dir\\Debug\\cmTC_2db9e.tlog\\unsuccessfulbuild".
+          Touching "cmTC_2db9e.dir\\Debug\\cmTC_2db9e.tlog\\cmTC_2db9e.lastbuildstate".
+        Done Building Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-5j23mw\\cmTC_2db9e.vcxproj" (default targets).
         
         Build succeeded.
             0 Warning(s)
             0 Error(s)
         
-        Time Elapsed 00:00:00.91
+        Time Elapsed 00:00:00.97
         
       exitCode: 0
   -
@@ -1084,8 +1084,8 @@ events:
     checks:
       - "Looking for dxgi1_5.h"
     directories:
-      source: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-mquqrk"
-      binary: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-mquqrk"
+      source: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-hhwt01"
+      binary: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-hhwt01"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
       CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 "
@@ -1095,40 +1095,40 @@ events:
       variable: "HAVE_DXGI1_5_H"
       cached: true
       stdout: |
-        Change Dir: 'C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-mquqrk'
+        Change Dir: 'C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-hhwt01'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_cc645.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_2590d.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
         MSBuild version 17.14.60+43b635718 for .NET Framework
-        Build started 01/10/2026 21:30:34.
+        Build started 01/10/2026 21:44:14.
         
-        Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-mquqrk\\cmTC_cc645.vcxproj" on node 1 (default targets).
+        Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-hhwt01\\cmTC_2590d.vcxproj" on node 1 (default targets).
         PrepareForBuild:
-          Creating directory "cmTC_cc645.dir\\Debug\\".
+          Creating directory "cmTC_2590d.dir\\Debug\\".
           Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
-          Creating directory "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-mquqrk\\Debug\\".
-          Creating directory "cmTC_cc645.dir\\Debug\\cmTC_cc645.tlog\\".
+          Creating directory "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-hhwt01\\Debug\\".
+          Creating directory "cmTC_2590d.dir\\Debug\\cmTC_2590d.tlog\\".
         InitializeBuildStatus:
-          Creating "cmTC_cc645.dir\\Debug\\cmTC_cc645.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
-          Touching "cmTC_cc645.dir\\Debug\\cmTC_cc645.tlog\\unsuccessfulbuild".
+          Creating "cmTC_2590d.dir\\Debug\\cmTC_2590d.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_2590d.dir\\Debug\\cmTC_2590d.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_cc645.dir\\Debug\\\\" /Fd"cmTC_cc645.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-mquqrk\\CheckIncludeFile.c"
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_2590d.dir\\Debug\\\\" /Fd"cmTC_2590d.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-hhwt01\\CheckIncludeFile.c"
           Microsoft (R) C/C++ Optimizing Compiler Version 19.44.35229 for x64
           Copyright (C) Microsoft Corporation.  All rights reserved.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_cc645.dir\\Debug\\\\" /Fd"cmTC_cc645.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-mquqrk\\CheckIncludeFile.c"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_2590d.dir\\Debug\\\\" /Fd"cmTC_2590d.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-hhwt01\\CheckIncludeFile.c"
           CheckIncludeFile.c
         Link:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-mquqrk\\Debug\\cmTC_cc645.exe" /INCREMENTAL /ILK:"cmTC_cc645.dir\\Debug\\cmTC_cc645.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-mquqrk/Debug/cmTC_cc645.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-mquqrk/Debug/cmTC_cc645.lib" /MACHINE:X64  /machine:x64 cmTC_cc645.dir\\Debug\\CheckIncludeFile.obj
-          cmTC_cc645.vcxproj -> C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-mquqrk\\Debug\\cmTC_cc645.exe
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-hhwt01\\Debug\\cmTC_2590d.exe" /INCREMENTAL /ILK:"cmTC_2590d.dir\\Debug\\cmTC_2590d.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-hhwt01/Debug/cmTC_2590d.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-hhwt01/Debug/cmTC_2590d.lib" /MACHINE:X64  /machine:x64 cmTC_2590d.dir\\Debug\\CheckIncludeFile.obj
+          cmTC_2590d.vcxproj -> C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-hhwt01\\Debug\\cmTC_2590d.exe
         FinalizeBuildStatus:
-          Deleting file "cmTC_cc645.dir\\Debug\\cmTC_cc645.tlog\\unsuccessfulbuild".
-          Touching "cmTC_cc645.dir\\Debug\\cmTC_cc645.tlog\\cmTC_cc645.lastbuildstate".
-        Done Building Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-mquqrk\\cmTC_cc645.vcxproj" (default targets).
+          Deleting file "cmTC_2590d.dir\\Debug\\cmTC_2590d.tlog\\unsuccessfulbuild".
+          Touching "cmTC_2590d.dir\\Debug\\cmTC_2590d.tlog\\cmTC_2590d.lastbuildstate".
+        Done Building Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-hhwt01\\cmTC_2590d.vcxproj" (default targets).
         
         Build succeeded.
             0 Warning(s)
             0 Error(s)
         
-        Time Elapsed 00:00:00.93
+        Time Elapsed 00:00:00.98
         
       exitCode: 0
   -
@@ -1139,8 +1139,8 @@ events:
     checks:
       - "Looking for dxgi1_6.h"
     directories:
-      source: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-qcfx4z"
-      binary: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-qcfx4z"
+      source: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-i4i64y"
+      binary: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-i4i64y"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
       CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 "
@@ -1150,40 +1150,40 @@ events:
       variable: "HAVE_DXGI1_6_H"
       cached: true
       stdout: |
-        Change Dir: 'C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-qcfx4z'
+        Change Dir: 'C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-i4i64y'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_ecfa2.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_dd359.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
         MSBuild version 17.14.60+43b635718 for .NET Framework
-        Build started 01/10/2026 21:30:35.
+        Build started 01/10/2026 21:44:16.
         
-        Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-qcfx4z\\cmTC_ecfa2.vcxproj" on node 1 (default targets).
+        Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-i4i64y\\cmTC_dd359.vcxproj" on node 1 (default targets).
         PrepareForBuild:
-          Creating directory "cmTC_ecfa2.dir\\Debug\\".
+          Creating directory "cmTC_dd359.dir\\Debug\\".
           Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
-          Creating directory "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-qcfx4z\\Debug\\".
-          Creating directory "cmTC_ecfa2.dir\\Debug\\cmTC_ecfa2.tlog\\".
+          Creating directory "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-i4i64y\\Debug\\".
+          Creating directory "cmTC_dd359.dir\\Debug\\cmTC_dd359.tlog\\".
         InitializeBuildStatus:
-          Creating "cmTC_ecfa2.dir\\Debug\\cmTC_ecfa2.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
-          Touching "cmTC_ecfa2.dir\\Debug\\cmTC_ecfa2.tlog\\unsuccessfulbuild".
+          Creating "cmTC_dd359.dir\\Debug\\cmTC_dd359.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_dd359.dir\\Debug\\cmTC_dd359.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_ecfa2.dir\\Debug\\\\" /Fd"cmTC_ecfa2.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-qcfx4z\\CheckIncludeFile.c"
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_dd359.dir\\Debug\\\\" /Fd"cmTC_dd359.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-i4i64y\\CheckIncludeFile.c"
           Microsoft (R) C/C++ Optimizing Compiler Version 19.44.35229 for x64
           Copyright (C) Microsoft Corporation.  All rights reserved.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_ecfa2.dir\\Debug\\\\" /Fd"cmTC_ecfa2.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-qcfx4z\\CheckIncludeFile.c"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_dd359.dir\\Debug\\\\" /Fd"cmTC_dd359.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-i4i64y\\CheckIncludeFile.c"
           CheckIncludeFile.c
         Link:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-qcfx4z\\Debug\\cmTC_ecfa2.exe" /INCREMENTAL /ILK:"cmTC_ecfa2.dir\\Debug\\cmTC_ecfa2.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-qcfx4z/Debug/cmTC_ecfa2.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-qcfx4z/Debug/cmTC_ecfa2.lib" /MACHINE:X64  /machine:x64 cmTC_ecfa2.dir\\Debug\\CheckIncludeFile.obj
-          cmTC_ecfa2.vcxproj -> C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-qcfx4z\\Debug\\cmTC_ecfa2.exe
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-i4i64y\\Debug\\cmTC_dd359.exe" /INCREMENTAL /ILK:"cmTC_dd359.dir\\Debug\\cmTC_dd359.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-i4i64y/Debug/cmTC_dd359.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-i4i64y/Debug/cmTC_dd359.lib" /MACHINE:X64  /machine:x64 cmTC_dd359.dir\\Debug\\CheckIncludeFile.obj
+          cmTC_dd359.vcxproj -> C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-i4i64y\\Debug\\cmTC_dd359.exe
         FinalizeBuildStatus:
-          Deleting file "cmTC_ecfa2.dir\\Debug\\cmTC_ecfa2.tlog\\unsuccessfulbuild".
-          Touching "cmTC_ecfa2.dir\\Debug\\cmTC_ecfa2.tlog\\cmTC_ecfa2.lastbuildstate".
-        Done Building Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-qcfx4z\\cmTC_ecfa2.vcxproj" (default targets).
+          Deleting file "cmTC_dd359.dir\\Debug\\cmTC_dd359.tlog\\unsuccessfulbuild".
+          Touching "cmTC_dd359.dir\\Debug\\cmTC_dd359.tlog\\cmTC_dd359.lastbuildstate".
+        Done Building Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-i4i64y\\cmTC_dd359.vcxproj" (default targets).
         
         Build succeeded.
             0 Warning(s)
             0 Error(s)
         
-        Time Elapsed 00:00:00.92
+        Time Elapsed 00:00:00.98
         
       exitCode: 0
   -
@@ -1195,8 +1195,8 @@ events:
     checks:
       - "Performing Test HAVE_MFAPI_H"
     directories:
-      source: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-xxe9v0"
-      binary: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-xxe9v0"
+      source: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-8sj0bf"
+      binary: "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-8sj0bf"
     cmakeVariables:
       CMAKE_C_FLAGS: "/DWIN32 /D_WINDOWS"
       CMAKE_C_FLAGS_DEBUG: "/Zi /Ob0 "
@@ -1206,40 +1206,40 @@ events:
       variable: "HAVE_MFAPI_H"
       cached: true
       stdout: |
-        Change Dir: 'C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-xxe9v0'
+        Change Dir: 'C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-8sj0bf'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_4aafa.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_808ec.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:n
         MSBuild version 17.14.60+43b635718 for .NET Framework
-        Build started 01/10/2026 21:30:36.
+        Build started 01/10/2026 21:44:17.
         
-        Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-xxe9v0\\cmTC_4aafa.vcxproj" on node 1 (default targets).
+        Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-8sj0bf\\cmTC_808ec.vcxproj" on node 1 (default targets).
         PrepareForBuild:
-          Creating directory "cmTC_4aafa.dir\\Debug\\".
+          Creating directory "cmTC_808ec.dir\\Debug\\".
           Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
-          Creating directory "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-xxe9v0\\Debug\\".
-          Creating directory "cmTC_4aafa.dir\\Debug\\cmTC_4aafa.tlog\\".
+          Creating directory "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-8sj0bf\\Debug\\".
+          Creating directory "cmTC_808ec.dir\\Debug\\cmTC_808ec.tlog\\".
         InitializeBuildStatus:
-          Creating "cmTC_4aafa.dir\\Debug\\cmTC_4aafa.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
-          Touching "cmTC_4aafa.dir\\Debug\\cmTC_4aafa.tlog\\unsuccessfulbuild".
+          Creating "cmTC_808ec.dir\\Debug\\cmTC_808ec.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_808ec.dir\\Debug\\cmTC_808ec.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D HAVE_MFAPI_H /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_4aafa.dir\\Debug\\\\" /Fd"cmTC_4aafa.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-xxe9v0\\src.c"
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D HAVE_MFAPI_H /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_808ec.dir\\Debug\\\\" /Fd"cmTC_808ec.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-8sj0bf\\src.c"
           Microsoft (R) C/C++ Optimizing Compiler Version 19.44.35229 for x64
           Copyright (C) Microsoft Corporation.  All rights reserved.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D HAVE_MFAPI_H /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_4aafa.dir\\Debug\\\\" /Fd"cmTC_4aafa.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-xxe9v0\\src.c"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _GNU_SOURCE=1 /D HAVE_MFAPI_H /D "CMAKE_INTDIR=\\"Debug\\"" /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"cmTC_808ec.dir\\Debug\\\\" /Fd"cmTC_808ec.dir\\Debug\\vc143.pdb" /external:W1 /Gd /TC /errorReport:queue "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-8sj0bf\\src.c"
           src.c
         Link:
-          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-xxe9v0\\Debug\\cmTC_4aafa.exe" /INCREMENTAL /ILK:"cmTC_4aafa.dir\\Debug\\cmTC_4aafa.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-xxe9v0/Debug/cmTC_4aafa.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-xxe9v0/Debug/cmTC_4aafa.lib" /MACHINE:X64  /machine:x64 cmTC_4aafa.dir\\Debug\\src.obj
-          cmTC_4aafa.vcxproj -> C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-xxe9v0\\Debug\\cmTC_4aafa.exe
+          C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe /ERRORREPORT:QUEUE /OUT:"C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-8sj0bf\\Debug\\cmTC_808ec.exe" /INCREMENTAL /ILK:"cmTC_808ec.dir\\Debug\\cmTC_808ec.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-8sj0bf/Debug/cmTC_808ec.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/out/build/x64-Debug/CMakeFiles/CMakeScratch/TryCompile-8sj0bf/Debug/cmTC_808ec.lib" /MACHINE:X64  /machine:x64 cmTC_808ec.dir\\Debug\\src.obj
+          cmTC_808ec.vcxproj -> C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-8sj0bf\\Debug\\cmTC_808ec.exe
         FinalizeBuildStatus:
-          Deleting file "cmTC_4aafa.dir\\Debug\\cmTC_4aafa.tlog\\unsuccessfulbuild".
-          Touching "cmTC_4aafa.dir\\Debug\\cmTC_4aafa.tlog\\cmTC_4aafa.lastbuildstate".
-        Done Building Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-xxe9v0\\cmTC_4aafa.vcxproj" (default targets).
+          Deleting file "cmTC_808ec.dir\\Debug\\cmTC_808ec.tlog\\unsuccessfulbuild".
+          Touching "cmTC_808ec.dir\\Debug\\cmTC_808ec.tlog\\cmTC_808ec.lastbuildstate".
+        Done Building Project "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.66.9.0-RC3.0\\out\\build\\x64-Debug\\CMakeFiles\\CMakeScratch\\TryCompile-8sj0bf\\cmTC_808ec.vcxproj" (default targets).
         
         Build succeeded.
             0 Warning(s)
             0 Error(s)
         
-        Time Elapsed 00:00:00.98
+        Time Elapsed 00:00:01.02
         
       exitCode: 0
 ...

@@ -9,5 +9,3 @@ Do not assign AI-car/obstacle/material semantics without evidence. Do not reopen
 ## Immediate next task
 
 Build RC3.0 on Windows, run the focused RC3.0 mapping regression and Full Regression, then run the 600-frame mapping shakedown before any lengthy survey.
-
-RC3.0 corrected-candidate note: the first RC3.0 archive is withdrawn because the focused Windows regression failed at `course.follow.configure`; `Set-CourseFollowConfig($args)` collided with PowerShell automatic `$args` (`System.Object[]`) and failed on `ContainsKey()`. The corrected replacement uses `$config` and adds a validator guard. Re-run the focused regression before surveys.

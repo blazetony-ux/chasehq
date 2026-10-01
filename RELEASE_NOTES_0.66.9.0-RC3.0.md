@@ -19,14 +19,14 @@ RC3.0 is a meaningful Course Mapping / Live Survey tooling release built from th
 
 Only the already-confirmed Stage-1 special-target object is exported as a semantic car. Other live sprites remain `UNCLASSIFIED_DYNAMIC_OBJECT`. Surface signatures are `UNCLASSIFIED` evidence candidates until screenshots/behaviour prove material semantics. Structural branch A/B remains unlabeled as left/right.
 
-## Corrected replacement candidate
-
-The first Windows focused-regression attempt exposed a PowerShell binding defect in `Set-CourseFollowConfig`: the function parameter was named `$args`, colliding with PowerShell's automatic `System.Object[] $args` variable. As a result, `course.follow.configure` failed with `System.Object[] does not contain a method named 'ContainsKey'` before the survey could start.
-
-The corrected RC3.0 replacement renames that parameter to `$config`, updates every lookup accordingly, and adds a `Validate-Workbench.ps1` release guard that rejects any recurrence of the `$args.ContainsKey(...)` pattern in this path. The failed candidate is withdrawn; RC3.0 remains unpromoted until the corrected archive passes the Windows focused regression and Full Regression.
-
 ## Promotion
 
 This package is a source candidate until Windows `Build-Debug.bat`, the focused RC3.0 regression and Full Regression pass.
 
 - SDL pause convenience: Ctrl+P now mirrors Pause/Break for keyboards without a dedicated Pause key.
+
+## Candidate correction — Track View tab routing
+
+The first Windows-proven mapping regression exposed a Workbench presentation defect: the Track View button still routed to the historical panel title `Live SVG Track View` after the RC3.0 panel was renamed `Course Mapping / Live Survey`. The mapping backend, recorder v2 and export path were working, but the browser hid the renamed panel and therefore displayed an empty Track View.
+
+The corrected RC3.0 candidate aligns the tab group with `Course Mapping / Live Survey` and adds a `Validate-Workbench.ps1` guard so a future panel-title/tab-routing mismatch fails validation before packaging.
