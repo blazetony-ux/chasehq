@@ -1,0 +1,123 @@
+﻿{
+    "schema":  "chq-tc0100scn-character-v1",
+    "build":  "0.67.0.0-RC6.3.33",
+    "source":  "TC0100SCN RAM text character",
+    "code":  124,
+    "codeHex":  "0x7C",
+    "address":  "0xC067C0",
+    "bytes":  [
+                  "00",
+                  "00",
+                  "00",
+                  "0F",
+                  "07",
+                  "10",
+                  "08",
+                  "20",
+                  "10",
+                  "21",
+                  "10",
+                  "22",
+                  "11",
+                  "22",
+                  "10",
+                  "29"
+              ],
+    "paletteBank":  0,
+    "paletteRaw":  [
+                       "0x0000",
+                       "0x7BDE",
+                       "0x0000",
+                       "0x001E"
+                   ],
+    "transparentPen":  0,
+    "width":  8,
+    "height":  8,
+    "bpp":  2,
+    "scale":  8,
+    "pens":  [
+                 [
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0,
+                     0
+                 ],
+                 [
+                     0,
+                     0,
+                     0,
+                     0,
+                     2,
+                     2,
+                     2,
+                     2
+                 ],
+                 [
+                     0,
+                     0,
+                     0,
+                     2,
+                     0,
+                     1,
+                     1,
+                     1
+                 ],
+                 [
+                     0,
+                     0,
+                     2,
+                     0,
+                     1,
+                     0,
+                     0,
+                     0
+                 ],
+                 [
+                     0,
+                     0,
+                     2,
+                     1,
+                     0,
+                     0,
+                     0,
+                     2
+                 ],
+                 [
+                     0,
+                     0,
+                     2,
+                     1,
+                     0,
+                     0,
+                     2,
+                     0
+                 ],
+                 [
+                     0,
+                     0,
+                     2,
+                     1,
+                     0,
+                     0,
+                     2,
+                     1
+                 ],
+                 [
+                     0,
+                     0,
+                     2,
+                     1,
+                     2,
+                     0,
+                     0,
+                     2
+                 ]
+             ],
+    "png":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\tile-inspect\\tc0100scn-text-7C-p000-f002064.png",
+    "pensFile":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\tile-inspect\\tc0100scn-text-7C-p000-f002064-pens.txt",
+    "metadata":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\tile-inspect\\tc0100scn-text-7C-p000-f002064.json"
+}

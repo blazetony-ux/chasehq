@@ -22,3 +22,13 @@ v0.66.9.0-RC2.5 adds `regression-v06690-rc25-script-safety.chqscript` for `try/f
 
 RC2.6.1 adds the explicitly version-labelled `regression-v06690-rc261-sprite-bitplane-significance.chqscript`. It is the focused Script Console integration regression for the RC2.6 shared sprite-decoder correction and is included before the Full Regression terminal COMPLETE marker. `Test-SpriteGfx.bat` remains the exhaustive all-16-pen native assertion; `graphics/sprite-bitplane-significance-proveoff.chqscript` remains the visual/structured no-override prove-off.
 
+## v0.66.9.0-RC3.2
+
+`regression-v06690-rc32.chqscript` is the mandatory whole-release focused regression for RC3.2. It is intentionally distinct from `regression-v06690-rc32-script-parameters.chqscript`, which remains the narrower parameter-compatibility regression.
+
+The release regression checks current build identity, parameter expansion, a bounded legacy trace, checkpoint save/load provenance and final canonical-state restoration. LAN/mobile transport cannot be proved by `.chqscript` alone; `Start-ChaseHQ.ps1` therefore performs a host-side authenticated `/api/health` + `/console` smoke whenever the default LAN mode is active.
+
+Release rule: every meaningful candidate must ship one obvious version-specific `regression-v...-rcX.chqscript`, Full Regression must include it, and `Validate-Release.ps1` must reject a package that omits it.
+
+
+- `regression-v06690-rc33.chqscript` — RC3.3 definitive release qualification/runtime identity and evidence-closure gate.

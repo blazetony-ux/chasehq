@@ -1,0 +1,13 @@
+{
+  "schema": "chq-native-layer-compare-v1",
+  "build": "0.67.0.0-RC6.3.33",
+  "subsystem": "sprites",
+  "frame": 2068,
+  "pixelMismatches": 0,
+  "ownerMismatches": 0,
+  "firstX": -1,
+  "firstY": -1,
+  "original": "original.png",
+  "native": "native.png",
+  "diff": "diff.png"
+}

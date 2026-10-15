@@ -1,6 +1,6 @@
 # name: Stage 1 Course Mapping - negative lateral bias branch survey
 # category: track
-# regression-version: 0.66.9.0-RC3.0
+# regression-version: 0.66.9.0-RC3.1
 # purpose: Experimental branch-coverage survey using a controlled negative lateral target bias while retaining closed-loop road following. Do not label the resulting structural branch left/right without separate semantic proof.
 
 api release.assert-version
@@ -26,4 +26,4 @@ finally
   api timer.hold enabled=false
 end
 
-echo === RC3.0 NEGATIVE-BIAS BRANCH SURVEY COMPLETE ===
+echo === RC3.1 NEGATIVE-BIAS BRANCH SURVEY COMPLETE ===

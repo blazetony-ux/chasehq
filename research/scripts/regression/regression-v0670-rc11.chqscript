@@ -1,0 +1,74 @@
+# regression-version: 0.67.0.0-RC1.1
+# name: v0.67.0-RC1.1 Native Sprite Forensic Coverage Corrective
+# category: regression
+# purpose: Carry forward the first native implementation milestone and lock Original-equivalent sprite overlap-density evidence under the Native default while retaining zero-diff TC0100SCN text/HUD Shadow coverage.
+
+echo === v0.67.0-RC1.1 native sprite forensic coverage corrective ===
+api release.assert-version
+
+try
+  api sprite.override.clear
+  api sprite.visual.clear
+  api sprite.map-override.clear
+  api sprite.asset-replace.clear
+  api patch.clear
+  api hud.layout.reset
+  api layer.offsets.reset layer=all
+
+  echo === NATIVE SPRITE DEFAULT / PROMOTED PATH ===
+  api backend.sprite.set mode=native
+  api backend.sprite.get
+  api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+  api control.run-frames frames=8
+  api checkpoint.load file=stage2-gameplay-7500.chqstate run=false
+  api control.run-frames frames=8
+  api backend.sprite.get
+
+
+  echo === NATIVE SPRITE FORENSIC OVERLAP COVERAGE ===
+  api checkpoint.load file=stage1-driving-2352.chqstate run=false
+  api frame.snapshot name=rc11-native-sprite-ownership
+  api sprite.visual slot=82 mode=solo
+  api frame.snapshot name=rc11-native-sprite-body-solo
+  api sprite.visual slot=81 mode=solo
+  api frame.snapshot name=rc11-native-sprite-shadow-solo
+  api sprite.visual.clear
+  api frame.snapshot.assert-overlap name=rc11-native-sprite-ownership front=82 back=81 frontSolo=rc11-native-sprite-body-solo backSolo=rc11-native-sprite-shadow-solo
+
+  echo === TC0100SCN TEXT SHADOW BRING-UP ===
+  api backend.text.reset-verification
+  api backend.text.set mode=shadow
+
+  api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+  api control.run-frames frames=8
+  api backend.text.get
+
+  api checkpoint.load file=stage1-driving-2352.chqstate run=false
+  api control.run-frames frames=8
+  api backend.text.get
+
+  api checkpoint.load file=stage2-gameplay-7500.chqstate run=false
+  api control.run-frames frames=8
+  api backend.text.get
+
+  echo === ZERO OUTPUT REFERENCE ===
+  api checkpoint.load file=stage1-end-level-9988.chqstate run=false
+  api control.run-frames frames=2
+  api backend.text.get
+
+  echo === v0.67.0-RC1.1 regression body complete ===
+finally
+  api sprite.override.clear
+  api sprite.visual.clear
+  api sprite.map-override.clear
+  api sprite.asset-replace.clear
+  api patch.clear
+  api hud.layout.reset
+  api layer.offsets.reset layer=all
+  api backend.sprite.set mode=native
+  api backend.text.set mode=shadow
+  api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+  api status
+end
+
+echo === v0.67.0-RC1.1 native sprite forensic coverage corrective complete ===

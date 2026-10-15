@@ -1,6 +1,6 @@
 {
   "schema": "chq-script-api-actions-v1",
-  "build": "0.66.9.0-RC3.0",
+  "build": "0.67.0.0-RC6.3.33",
   "actions": {
     "status": {
       "params": [],
@@ -47,22 +47,23 @@
         "address=HEX required",
         "length=COUNT optional default 1",
         "width=8|16|32|any optional default any",
-        "limit=64..1000000 optional default 4096"
+        "limit=64..1000000 optional default 4096",
+        "access=write|read|rw optional default write"
       ],
-      "example": "api memory.trace.start cpu=A address=0x100303 length=1 width=any limit=256",
-      "description": "Start bounded generic memory-write tracing for an address or range; width filters the originating write transaction width, while range overlap determines address matches. Use width=any when tracing a byte that may be written by a wider transaction."
+      "example": "api memory.trace.start cpu=A address=0x10A084 length=2 width=16 limit=256 access=read",
+      "description": "Start bounded generic memory access provenance; captures exact frame, CPU, PC, access type, width/value and sequence."
     },
     "memory.trace.status": {
       "params": [],
       "example": "api memory.trace.status",
-      "description": "Read generic memory-write trace configuration, event count and limit"
+      "description": "Read generic memory-access trace configuration, access mode, event count and limit."
     },
     "memory.trace.tail": {
       "params": [
         "count=N optional default 20"
       ],
       "example": "api memory.trace.tail count=50",
-      "description": "Return recent matching generic memory-write events, including unchanged writes"
+      "description": "Return recent matching memory read/write provenance events with access type, frame, CPU, PC and sequence."
     },
     "memory.trace.stop": {
       "params": [],
@@ -234,7 +235,7 @@
     "sprites.list": {
       "params": [],
       "example": "api sprites.list",
-      "description": "Return current live composed sprite records as structured JSON"
+      "description": "Return current live composed sprite records as structured JSON, including authentic source map/palette and effective presentation map/palette/override provenance."
     },
     "sprites.maps": {
       "params": [],
@@ -251,7 +252,7 @@
         "slot=N required"
       ],
       "example": "api sprite.inspect slot=44",
-      "description": "Inspect one currently active sprite slot"
+      "description": "Inspect one currently active sprite slot, reporting authentic source map/palette plus effective presentation map/palette and override provenance when map/slot/asset replacement is active."
     },
     "sprite.map.inspect": {
       "params": [
@@ -265,6 +266,14 @@
       "params": [],
       "example": "api schema.all",
       "description": "Return every Script API action contract from the authoritative in-process schema"
+    },
+    "script.run": {
+      "params": [
+        "file=RELATIVE.chqscript required",
+        "additional key=value pairs must match declared # param names"
+      ],
+      "example": "api script.run file=track/surveys/current-state-course-mapping-parameterized.chqscript frames=1200",
+      "description": "Run a compatible library script through the declared-parameter resolver. Selected values feed ordinary ${name} substitution and are retained in run evidence."
     },
     "script.schema": {
       "params": [],
@@ -584,7 +593,7 @@
     "track.state": {
       "params": [],
       "example": "api track.state",
-      "description": "Return current authoritative track/road state"
+      "description": "Return current authoritative track/road state including conservative stable surface candidate key plus raw TC0150 renderer evidence; no material semantic is implied."
     },
     "next-steps": {
       "params": [],
@@ -660,9 +669,11 @@
       "description": "Return audio channel/source descriptors from the audio research profile"
     },
     "audio.events": {
-      "params": [],
-      "example": "api audio.events",
-      "description": "Return current audio-event foundation status; runtime capture is intentionally not enabled yet"
+      "params": [
+        "count=N optional default 100"
+      ],
+      "example": "api audio.events count=100",
+      "description": "Return structured writes to the currently stubbed 0x820000..03 sound command interface; does not claim real sound CPU/mixer/PCM runtime."
     },
     "audio.waveform.plan": {
       "params": [],
@@ -739,12 +750,12 @@
     "track.record.status": {
       "params": [],
       "example": "api track.record.status",
-      "description": "Return recorder enabled state, sample/segment counts, frame range and spatial bounds"
+      "description": "Return Track Recorder v3 state, sample/segment counts, stable surface candidate/segment counts, raw renderer variant count, raw sprite-row count, heuristic object-candidate track count, frame range and spatial bounds."
     },
     "track.record.sample": {
       "params": [],
       "example": "api track.record.sample",
-      "description": "Append one deterministic authoritative track.state sample to the shared recorder"
+      "description": "Append one deterministic Track Recorder v3 sample including road geometry, player trajectory telemetry, stable/raw surface evidence, confirmed target state, raw visible sprites and heuristic screen-space object candidates."
     },
     "track.svg.export": {
       "params": [
@@ -878,7 +889,7 @@
       "params": [
         "limit=N optional default 25 max 100",
         "offset=N optional default 0",
-        "status=PASS|FAIL|CANCELLED optional",
+        "status=PASS|FAIL|CANCELLED|FINALIZATION_FAILED optional",
         "version=VERSION optional",
         "session=SESSION optional"
       ],
@@ -1034,7 +1045,7 @@
         "value=0..65535 required"
       ],
       "example": "api game.speed.set value=602",
-      "description": "Set raw internal/physics speed CPU-A 0x10041C once while preserving prior run/pause state. HUD speed at 0x100400 is separate packed-BCD display state."
+      "description": "Set internal/physics speed once by writing the confirmed 32-bit fixed-point field CPU-A 0x10041C as value<<16 while preserving prior run/pause state. HUD speed at 0x100400 is separate packed-BCD display state."
     },
     "game.speed.freeze": {
       "params": [
@@ -1042,7 +1053,7 @@
         "value=0..65535 optional; current internal speed used when omitted"
       ],
       "example": "api game.speed.freeze enabled=true value=700",
-      "description": "Freeze/unfreeze raw internal/physics speed CPU-A 0x10041C while preserving prior run/pause state."
+      "description": "Freeze/unfreeze the confirmed 32-bit fixed-point internal/physics speed CPU-A 0x10041C using value<<16 while preserving prior run/pause state."
     },
     "game.speed.clear": {
       "params": [],
@@ -1211,7 +1222,323 @@
         "name=NAME optional"
       ],
       "example": "api track.map.export name=stage1-course-map",
-      "description": "Export v2 course-mapping dataset: master JSON, track samples, player trajectory, entity evidence, raw surface signatures and SVG."
+      "description": "Export v2 course-mapping dataset: master JSON + summary, track samples, player trajectory, raw sprite/entity evidence, heuristic object-candidate tracks, stable surface candidates/segments, raw renderer evidence and SVG."
+    },
+    "sprite.shadow.compare": {
+      "params": [
+        "scope=visible|slot optional default visible",
+        "slot=N required when scope=slot",
+        "failOnMismatch=true|false optional default false",
+        "output=NAME.json optional"
+      ],
+      "example": "api sprite.shadow.compare scope=visible failOnMismatch=true",
+      "description": "Read-only live-vs-independent sprite 4bpp decoder comparison over current active sprite tiles; optionally persist structured evidence."
+    },
+    "query.runtime": {
+      "params": [
+        "function=QUERY required"
+      ],
+      "example": "api query.runtime function=getmaps()",
+      "description": "Evaluate a supported API-backed get* query at execution time, after any preceding checkpoint/state mutation."
+    },
+    "corpus.run": {
+      "params": [
+        "checkpoints=A,B required 1..32",
+        "action=ACTION required",
+        "remaining key=value forwarded to nested action"
+      ],
+      "example": "api corpus.run checkpoints=stage1-driving-2352.chqstate,stage1-gameplay-2064.chqstate action=sprite.shadow.compare scope=visible",
+      "description": "Run one Script API action across a packaged checkpoint corpus and restore caller machine state afterward."
+    },
+    "script.run.verify": {
+      "params": [
+        "runId=ID required"
+      ],
+      "example": "api script.run.verify runId=001",
+      "description": "Verify SHA-256 and byte-length records for a finalized authoritative run bundle in the current session."
+    },
+    "collision.events": {
+      "params": [
+        "count=N optional default 50"
+      ],
+      "example": "api collision.events count=50",
+      "description": "Return structured proven collision-response events, including player lateral/speed response writes and target-local target_contact events from PC 0xA13C -> 0x10A084."
+    },
+    "collision.events.clear": {
+      "params": [],
+      "example": "api collision.events.clear",
+      "description": "Clear structured collision-response event history and reset its per-history sequence."
+    },
+    "sprite.layer-shadow.compare": {
+      "params": [
+        "failOnMismatch=true|false optional",
+        "output=NAME.json optional"
+      ],
+      "example": "api sprite.layer-shadow.compare failOnMismatch=true",
+      "description": "Compare authoritative raw placed sprite source against an independent renderer that parses raw sprite RAM/spritemap/4bpp/palette/zoom/flips/clipping/ownership without authoritative placement/decode helpers."
+    },
+    "audio.events.clear": {
+      "params": [],
+      "example": "api audio.events.clear",
+      "description": "Clear captured sound-command-interface events."
+    },
+    "game.beacon.get": {
+      "params": [],
+      "example": "api game.beacon.get",
+      "description": "Read the evidence-backed police-beacon phase/timer/palette/request state plus the current experimental override mode."
+    },
+    "game.beacon.override": {
+      "params": [
+        "mode=authentic|on|off required"
+      ],
+      "example": "api game.beacon.override mode=on",
+      "description": "Research intervention coupling beacon phase CPU-A 0x101854 with contextual deployment request 0x108082. Runs004-007 prove causal descriptor generation/suppression; visible sprite presentation follows the authentic staged 0x1027xx -> D00000 pipeline latency rather than necessarily the next frame."
+    },
+    "hud.layout.get": {
+      "params": [],
+      "example": "api hud.layout.get",
+      "description": "Read presentation-only semantic HUD visibility and pixel offsets for HIGH SCORE, TIME, DISTANCE, SCORE, SPEED, TURBO and STAGE/CREDIT."
+    },
+    "hud.layout.set": {
+      "params": [
+        "element=high-score|time|distance|score|speed|turbo|stage required",
+        "visible=true|false optional default true",
+        "dx=-320..320 optional default 0",
+        "dy=-240..240 optional default 0"
+      ],
+      "example": "api hud.layout.set element=time visible=true dx=16 dy=0",
+      "description": "Hide/show and reposition one mapped TC0100SCN HUD group without changing emulated text/tile RAM."
+    },
+    "hud.layout.reset": {
+      "params": [],
+      "example": "api hud.layout.reset",
+      "description": "Restore authentic HUD presentation for every mapped semantic group."
+    },
+    "hud.layout.preset": {
+      "params": [
+        "name=authentic|minimal|none required"
+      ],
+      "example": "api hud.layout.preset name=minimal",
+      "description": "Apply a presentation-only HUD preset. Minimal keeps TIME, DISTANCE and TURBO markers; none hides every mapped HUD group."
+    },
+    "backend.sprite.get": {
+      "params": [],
+      "example": "api backend.sprite.get",
+      "description": "Read sprite renderer backend plus Shadow verification, native-only hard-disable, fallback/blocking, first-divergence evidence and performance counters."
+    },
+    "backend.sprite.set": {
+      "params": [
+        "mode=original|shadow|native|native-only required"
+      ],
+      "example": "api backend.sprite.set mode=native-only",
+      "description": "Select Original, Shadow, Native, or Native-only. Native-only hard-disables Original fallback and is the promotion-independence gate."
+    },
+    "backend.sprite.reset-verification": {
+      "params": [],
+      "example": "api backend.sprite.reset-verification",
+      "description": "Reset accumulated sprite Shadow/native-only promotion counters and first-divergence record."
+    },
+    "sprite.map-override": {
+      "params": [
+        "source=0..2047 required",
+        "target=0..2047 required",
+        "palette=-1..255 optional default -1"
+      ],
+      "example": "api sprite.map-override source=516 target=522 palette=-1",
+      "description": "Presentation-only global existing-asset substitution following one sprite map across transient slots."
+    },
+    "sprite.map-override.clear": {
+      "params": [],
+      "example": "api sprite.map-override.clear",
+      "description": "Clear all presentation-only global sprite map substitutions."
+    },
+    "text.charset.export": {
+      "params": [
+        "palette=0..255 optional default 0",
+        "scale=1..8 optional default 2"
+      ],
+      "example": "api text.charset.export palette=0 scale=2",
+      "description": "Export all 256 live TC0100SCN RAM text characters as atlas/individual PNGs, raw 4096-byte dump, usage metadata and ZIP."
+    },
+    "sprite.asset-replace": {
+      "params": [
+        "source=0..2047 OR object=player_car.body (exactly one required)",
+        "target=0..2047 required",
+        "format=preserve|obj-a|obj-b64|obj-b32 required",
+        "palette=-1..255 optional default -1",
+        "flipx=-1|0|1 optional default -1",
+        "flipy=-1|0|1 optional default -1",
+        "dx=-512..512 optional default 0",
+        "dy=-512..512 optional default 0"
+      ],
+      "example": "api sprite.asset-replace object=player_car.body target=190 format=obj-b64 palette=73 flipx=1 dx=0 dy=0",
+      "description": "RC3.1.2 format-aware native asset replacement. Semantic player_car.body replacement persists across the known player body map family while exact source-map replacement remains available; Native sprite backend is selected automatically."
+    },
+    "sprite.asset-replace.clear": {
+      "params": [],
+      "example": "api sprite.asset-replace.clear",
+      "description": "Clear all RC3 format-aware native sprite asset replacements."
+    },
+    "frame.snapshot.parity": {
+      "params": [
+        "name=NAME optional",
+        "require=true|false optional default false"
+      ],
+      "example": "api frame.snapshot.parity name=asset-check require=true",
+      "description": "Capture the actual SDL framebuffer and a structured layered snapshot at the same paused instant, compare them pixel-for-pixel, persist a parity manifest, and optionally fail when require=true and pixels differ."
+    },
+    "sprite.asset-resolve": {
+      "params": [],
+      "example": "api sprite.asset-resolve",
+      "description": "Inspect live sprite source maps/palettes against semantic object families and show active map/asset replacement rule state."
+    },
+    "events.clear": {
+      "params": [],
+      "example": "api events.clear",
+      "description": "Clear generic research event history so subsequent events.tail output can be scoped to the current experiment phase."
+    },
+    "sprite.rom-atlas.export": {
+      "params": [
+        "start=0..2047 required",
+        "end=START..2047 required; max 512 maps per export",
+        "format=all|obj-a|obj-b64|obj-b32 optional default all",
+        "palette=0..255 optional default 65",
+        "name=filesystem-safe export name optional default rom-atlas"
+      ],
+      "example": "api sprite.rom-atlas.export start=450 end=620 format=all palette=65 name=vehicle-range",
+      "description": "Decode spritemap definitions directly from the loaded b52-38.34 ROM against OBJ-A/OBJ-B graphics without requiring live sprite RAM; export native-size raw-pen/palette PNGs, CSV provenance, labelled contact-sheet cell metadata, manifest and ZIP under evidence."
+    },
+    "native.progress": {
+      "params": [],
+      "example": "api native.progress",
+      "description": "Return machine-readable native subsystem maturity plus live native-only/promotion coverage."
+    },
+    "native.promotion.status": {
+      "params": [
+        "subsystem=sprites optional default sprites"
+      ],
+      "example": "api native.promotion.status subsystem=sprites",
+      "description": "Read live promotion counters for an independently implemented subsystem. Sprites report Shadow parity, native-only frames, blocked states and Original fallbacks."
+    },
+    "native.promotion.reset": {
+      "params": [
+        "subsystem=sprites optional default sprites"
+      ],
+      "example": "api native.promotion.reset subsystem=sprites",
+      "description": "Reset live native promotion/verification counters for the selected subsystem."
+    },
+    "native.promotion.assert": {
+      "params": [
+        "subsystem=sprites optional default sprites",
+        "minShadowFrames=N optional default 1",
+        "minNativeOnlyFrames=N optional default 1"
+      ],
+      "example": "api native.promotion.assert subsystem=sprites minShadowFrames=60 minNativeOnlyFrames=60",
+      "description": "Fail closed unless clean Shadow comparison and Native-only hard-disable coverage meet the requested minimums with zero mismatches, blocked frames or Original fallbacks."
+    },
+    "native.layer.capture": {
+      "params": [
+        "subsystem=sprites optional default sprites",
+        "name=artifact name optional"
+      ],
+      "example": "api native.layer.capture subsystem=sprites name=stage1-check",
+      "description": "Capture same-state Original sprite layer, independent Native sprite layer and exact diff without advancing emulation."
+    },
+    "backend.text.get": {
+      "params": [],
+      "example": "api backend.text.get",
+      "description": "Read independent TC0100SCN text/HUD backend mode and Shadow/native verification counters."
+    },
+    "backend.text.set": {
+      "params": [
+        "mode=original|shadow|native|native-only required"
+      ],
+      "example": "api backend.text.set mode=shadow",
+      "description": "Select Original, Shadow, Native or Native-only TC0100SCN text/HUD rendering."
+    },
+    "backend.text.reset-verification": {
+      "params": [],
+      "example": "api backend.text.reset-verification",
+      "description": "Reset TC0100SCN text/HUD Shadow/native verification counters."
+    },
+    "backend.bg.get": {
+      "params": [],
+      "example": "api backend.bg.get",
+      "description": "Read independent TC0100SCN BG0/BG1 backend mode and per-layer Shadow/native verification counters."
+    },
+    "backend.bg.set": {
+      "params": [
+        "mode=original|shadow|native|native-only required"
+      ],
+      "example": "api backend.bg.set mode=shadow",
+      "description": "Select Original, Shadow, Native or Native-only TC0100SCN BG0/BG1 rendering."
+    },
+    "backend.bg.reset-verification": {
+      "params": [],
+      "example": "api backend.bg.reset-verification",
+      "description": "Reset TC0100SCN BG0/BG1 Shadow/native verification counters."
+    },
+    "rea.reports": {
+      "params": [],
+      "example": "api rea.reports",
+      "description": "Read local reviewed REA/Ghidra/ROM census crosswalk reports without altering emulator state."
+    },
+    "rea.crosswalk": {
+      "params": [
+        "name=STAGED_NAME required (ASCII basename)"
+      ],
+      "example": "api rea.crosswalk name=stage1-contact",
+      "description": "Run offline reviewed static-to-census intersection on files in research/rea/imports, save report to evidence and copy into current script-run artifacts."
+    },
+    "rea.functions": {
+      "params": [
+        "report=NAME required"
+      ],
+      "example": "api rea.functions report=stage1-contact",
+      "description": "Inspect candidate function records and per-PC observed execution hits from a stored crosswalk."
+    },
+    "rea.function.inspect": {
+      "params": [
+        "report=NAME required",
+        "function=EXACT_FUNCTION_NAME_OR_ROM_START required"
+      ],
+      "example": "api rea.function.inspect report=stage1-contact function=projection_clip_candidate",
+      "description": "Inspect one static function candidate with ROM offsets and exact instruction-hit provenance."
+    },
+    "ghidra.status": {
+      "params": [],
+      "example": "api ghidra.status",
+      "description": "Read local Ghidra setup and the last asynchronous analysis job; no emulator changes."
+    },
+    "ghidra.start": {
+      "params": [],
+      "example": "api ghidra.start",
+      "description": "Run bundled, fixed-script local 68000 Ghidra headless analysis in background; no arbitrary command parameters."
+    },
+    "ghidra.results": {
+      "params": [],
+      "example": "api ghidra.results",
+      "description": "Read static Ghidra instruction and XREF findings after successful job; all auto function boundaries are hypotheses."
+    },
+    "ghidra.import": {
+      "params": [],
+      "example": "api ghidra.import",
+      "description": "Correlate completed Ghidra candidate windows with existing operator-staged real ROM PC census TSV and copy into evidence."
+    },
+    "ghidra.wait": {
+      "params": [
+        "timeout=1000..30000 ms optional; desktop browser supports 900000",
+        "poll=250..10000 ms optional"
+      ],
+      "example": "api ghidra.wait timeout=30000 poll=1000",
+      "description": "Wait for Ghidra PASS, fail or bounded timeout with no emulator changes. Browser client runs long wait without blocking the Workbench host."
+    },
+    "ghidra.evidence.attach": {
+      "params": [
+        "include=all|diagnostics optional"
+      ],
+      "example": "api ghidra.evidence.attach include=all",
+      "description": "Attach Ghidra status/logs/findings from fixed local job paths to script evidence, including failed analysis logs."
     }
   }
 }

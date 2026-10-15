@@ -1,9 +1,11 @@
 #include "machine.h"
+#include "content_pack.h"
 #include "version.h"
 #include "video.h"
 #include "runtime.h"
 #include "debug_api.h"
 #include "sprite_gfx.h"
+#include "sprite_gfx_shadow.h"
 #include <chrono>
 #include <iostream>
 #include <thread>
@@ -218,6 +220,86 @@ static void export_tile_atlas(const std::filesystem::path& path,const std::vecto
     save_png_rgba(path,cols*cell,rows*cell,img); std::ofstream meta(path.string()+".txt"); meta<<label<<" tiles="<<tiles<<" grid="<<cols<<"x"<<rows<<" tile=16x16\n";
 }
 static void blit_variant(std::vector<std::uint32_t>& dst,int dw,int dh,int ox,int oy,int tw,int th,const std::vector<std::uint8_t>& gfx,std::uint16_t code,const chq::Bus& bus,std::uint8_t color){blit_tile(dst,dw,dh,ox,oy,tw,th,gfx,code,false,false,bus,color);}
+
+struct RomSpriteAtlasSummary {
+    std::size_t interpretations=0, nonempty=0, invalid=0, files=0;
+    std::filesystem::path root, manifest;
+};
+
+static RomSpriteAtlasSummary export_rom_sprite_atlas(const chq::Machine& machine,const chq::Runtime& runtime,
+        unsigned first_map,unsigned last_map,const std::string& format_selector,unsigned palette,
+        const std::filesystem::path& root){
+    RomSpriteAtlasSummary sum{};sum.root=root;sum.manifest=root/"manifest.json";
+    std::filesystem::create_directories(root);
+    struct Fmt{const char* id;int cols;std::size_t offset;int shift;const std::vector<std::uint8_t>* gfx;const char* gfxname;};
+    const std::array<Fmt,3> formats{{
+        {"obj-a",8,0x00000,6,&machine.sprites_a(),"OBJ-A"},
+        {"obj-b64",4,0x20000,5,&machine.sprites_b(),"OBJ-B"},
+        {"obj-b32",2,0x30000,4,&machine.sprites_b(),"OBJ-B"}
+    }};
+    auto selected=[&](const Fmt& f){
+        std::string q=format_selector;for(char&c:q)c=(char)std::tolower((unsigned char)c);
+        return q.empty()||q=="all"||q=="auto"||q==f.id||(q=="obja"&&std::string(f.id)=="obj-a")||(q=="objb64"&&std::string(f.id)=="obj-b64")||(q=="objb32"&&std::string(f.id)=="obj-b32");
+    };
+    std::ofstream csv(root/"index.csv");
+    csv<<"map,format,gfx,width,height,spritemap_word_base,spritemap_byte_base,tile_count,opaque_pixels,invalid_chunks,ffff_chunks,zero_chunks,bbox_left,bbox_top,bbox_right,bbox_bottom,raw_png,palette_png,status\n";
+    std::ofstream html(root/"index.html");
+    html<<"<!doctype html><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width\"><title>ChaseHQ ROM Sprite Atlas</title>"
+        <<"<style>body{font:14px system-ui;background:#0b0f14;color:#e5e7eb;margin:18px}h1,h2{color:#fff}.note{max-width:1000px;color:#aab4c3}.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}.card{background:#121923;border:1px solid #334155;border-radius:6px;padding:7px}.card img{width:100%;height:128px;object-fit:contain;image-rendering:pixelated;background:#000}.meta{font:11px ui-monospace,monospace;color:#9ca3af}a{color:#93c5fd}</style>"
+        <<"<h1>ChaseHQ-Native "<<chq::kNativeVersion<<" ROM Sprite / Vehicle Atlas</h1>"
+        <<"<p class=\"note\">Direct ROM decode. Raw-pen geometry is palette-independent; palette "<<palette<<" is a viewing aid. Visual similarity is not semantic identity: use runtime evidence before promoting a map to a gameplay object.</p>";
+    struct Contact{std::string fmt;std::vector<std::vector<std::uint32_t>> thumbs;std::vector<unsigned> maps;int width=0;};
+    std::vector<Contact> contacts;
+    for(const auto& f:formats)if(selected(f))contacts.push_back({f.id,{},{},f.cols*16});
+    const std::size_t smap_words=machine.spritemap().size()/2u;
+    for(const auto& f:formats){
+        if(!selected(f))continue;
+        auto cit=std::find_if(contacts.begin(),contacts.end(),[&](const auto& x){return x.fmt==f.id;});
+        const auto tile_count=(f.gfx->size()*8u)/1024u;
+        const auto fmt_dir=root/f.id;std::filesystem::create_directories(fmt_dir);
+        html<<"<h2>"<<f.id<<"</h2><div class=\"grid\">";
+        for(unsigned map=first_map;map<=last_map;++map){
+            ++sum.interpretations;
+            const int w=f.cols*16,h=128;std::vector<std::uint32_t> raw((std::size_t)w*h,0),pal((std::size_t)w*h,0);
+            const std::size_t base=f.offset+(static_cast<std::size_t>(map)<<f.shift);const std::size_t chunks=(std::size_t)f.cols*8u;
+            unsigned invalid=0,ffff=0,zero=0;bool map_oob=(base+chunks>smap_words);
+            if(map_oob) invalid=(unsigned)chunks;
+            else for(int y=0;y<8;++y)for(int x=0;x<f.cols;++x){
+                const auto word=machine.spritemap_word(base+(std::size_t)(y*f.cols+x));
+                if(word==0xffffu){++ffff;continue;}
+                const auto code=static_cast<std::uint16_t>(word&0x3fffu);if(code==0)++zero;
+                if(code>=tile_count){++invalid;continue;}
+                blit_tile_raw_pen(raw,w,h,x*16,y*16,16,16,*f.gfx,code,false,false);
+                blit_tile(pal,w,h,x*16,y*16,16,16,*f.gfx,code,false,false,runtime.bus,(std::uint8_t)(palette&255u));
+            }
+            std::size_t opaque=0;int l=w,t=h,r=-1,b=-1;
+            for(int y=0;y<h;++y)for(int x=0;x<w;++x)if(raw[(std::size_t)y*w+x]>>24){++opaque;l=std::min(l,x);t=std::min(t,y);r=std::max(r,x);b=std::max(b,y);}
+            if(opaque)++sum.nonempty;if(invalid)++sum.invalid;
+            std::ostringstream stem;stem<<"map_"<<std::setw(4)<<std::setfill('0')<<map;
+            const auto rawp=fmt_dir/(stem.str()+"_raw.png"), palp=fmt_dir/(stem.str()+"_pal"+std::to_string(palette)+".png");
+            save_png_rgba(rawp,w,h,raw);save_png_rgba(palp,w,h,pal);sum.files+=2;
+            const std::string status=map_oob?"spritemap_oob":invalid?"invalid_tiles":opaque?"nonempty":"empty";
+            csv<<map<<','<<f.id<<','<<f.gfxname<<','<<w<<','<<h<<','<<base<<','<<(base*2)<<','<<tile_count<<','<<opaque<<','<<invalid<<','<<ffff<<','<<zero<<','
+               <<(opaque?l:-1)<<','<<(opaque?t:-1)<<','<<r<<','<<b<<','<<rawp.filename().string()<<','<<palp.filename().string()<<','<<status<<"\n";
+            html<<"<div class=\"card\"><b>map "<<map<<"</b><img loading=\"lazy\" src=\""<<f.id<<"/"<<palp.filename().string()<<"\"><div class=\"meta\">"<<f.id<<" "<<w<<"x"<<h<<" | opaque "<<opaque<<" | "<<status<<"</div><div class=\"meta\"><a href=\""<<f.id<<"/"<<rawp.filename().string()<<"\">raw pens</a></div></div>";
+            if(cit!=contacts.end()){cit->thumbs.push_back(std::move(pal));cit->maps.push_back(map);}
+            if(map==last_map)break; // avoid unsigned wrap at 2047
+        }
+        html<<"</div>";
+    }
+    std::ofstream cellcsv(root/"contact-sheet-cells.csv");cellcsv<<"format,map,column,row,x,y,width,height\n";
+    for(auto& c:contacts){
+        if(c.thumbs.empty())continue;const int cols=8,cell=136,rows=(int)((c.thumbs.size()+cols-1)/cols);std::vector<std::uint32_t> sheet((std::size_t)cols*cell*rows*cell,0);
+        for(std::size_t i=0;i<c.thumbs.size();++i){const int ox=(int)(i%cols)*cell,oy=(int)(i/cols)*cell,xoff=(128-c.width)/2;const auto& im=c.thumbs[i];for(int y=0;y<128;++y)for(int x=0;x<c.width;++x){auto px=im[(std::size_t)y*c.width+x];if(px)sheet[(std::size_t)(oy+y+4)*cols*cell+(ox+x+xoff+4)]=px;}cellcsv<<c.fmt<<','<<c.maps[i]<<','<<(i%cols)<<','<<(i/cols)<<','<<(ox+4)<<','<<(oy+4)<<','<<c.width<<",128\n";}
+        const auto cp=root/(std::string("contact_sheet_")+c.fmt+"_pal"+std::to_string(palette)+".png");save_png_rgba(cp,cols*cell,rows*cell,sheet);++sum.files;
+    }
+    std::ofstream manifest(sum.manifest);manifest<<"{\n  \"schema\": \"chq-rom-sprite-atlas-v1\",\n  \"build\": \""<<chq::kNativeVersion<<"\",\n  \"source\": {\"spritemap\":\"b52-38.34\",\"objA\":[\"b52-34.5\",\"b52-35.7\",\"b52-36.9\",\"b52-37.11\"],\"objB\":[\"b52-30.4\",\"b52-31.6\",\"b52-32.8\",\"b52-33.10\"]},\n  \"range\": {\"start\":"<<first_map<<",\"end\":"<<last_map<<"},\n  \"format\": \""<<json_escape(format_selector)<<"\",\n  \"palette\": "<<palette<<",\n  \"interpretations\": "<<sum.interpretations<<",\n  \"nonempty\": "<<sum.nonempty<<",\n  \"invalid\": "<<sum.invalid<<",\n  \"index\": \"index.csv\",\n  \"contactSheetCells\": \"contact-sheet-cells.csv\",\n  \"contactSheets\": [";
+    bool first=true;for(const auto& c:contacts){if(c.thumbs.empty())continue;if(!first)manifest<<',';first=false;manifest<<"\"contact_sheet_"<<c.fmt<<"_pal"<<palette<<".png\"";}manifest<<"]\n}\n";++sum.files;
+    std::ofstream readme(root/"README.txt");readme<<"ChaseHQ-Native "<<chq::kNativeVersion<<" ROM sprite-map atlas\nDirectly decoded from the locally supplied Chase H.Q. spritemap and OBJ graphics ROM regions; no live sprite-RAM occurrence is required.\nFormats are explicit interpretations: OBJ-A 128x128 (8x8 chunks), OBJ-B64 64x128 (4x8), OBJ-B32 32x128 (2x8). Raw-pen PNGs are palette-independent; palN PNGs use the current runtime TC0110PCR palette bank only as a viewing aid.\nSemantic identity is not inferred from ROM appearance alone; correlate with runtime evidence before promotion.\n";
+    html<<"<hr><p class=\"note\">Machine-readable provenance: <a href=\"index.csv\">index.csv</a> | <a href=\"contact-sheet-cells.csv\">contact-sheet-cells.csv</a> | <a href=\"manifest.json\">manifest.json</a></p>";
+    sum.files+=4; // README + index.csv + contact-sheet-cells.csv + index.html; manifest counted above
+    return sum;
+}
 static void export_sprite_assets(const chq::Machine& machine,const chq::Runtime& runtime,const chq::Options& options,unsigned frame){
     const auto* sr=find_region_named(runtime.bus,"sprites");if(!sr)return;auto root=options.logs/("sprite_export_frame_"+std::to_string(frame));std::filesystem::create_directories(root);std::vector<ExportSprite> all;
     for(std::size_t off=0;off+7<sr->bytes.size();off+=8){ExportSprite q;q.slot=(unsigned)(off/8);for(int i=0;i<4;++i)q.w[i]=be16_at(sr->bytes,off+i*2);int y=q.w[0]&0x1ff;if((q.w[3]&0x7ff)==0)continue;q.zy=((q.w[0]>>9)&0x7f)+1;q.zx=(q.w[1]&0x7f)+1;q.x=q.w[2]&0x1ff;if(q.x>0x140)q.x-=0x200;q.y=y+7;if(q.y>0x140)q.y-=0x200;q.color=(q.w[1]&0x7f80)>>7;q.fx=q.w[2]&0x4000;q.fy=q.w[2]&0x8000;auto fmt=chq::Machine::format_for_zoomx(q.zx);if(fmt==chq::SpriteFormat::Invalid)continue;if(fmt==chq::SpriteFormat::Obj128x128){q.cols=8;q.base=(std::size_t)(q.w[3]&0x7ff)<<6;q.gfx=&machine.sprites_a();q.gfxname="A";}else if(fmt==chq::SpriteFormat::Obj64x128){q.cols=4;q.base=((std::size_t)(q.w[3]&0x7ff)<<5)+0x20000;q.gfx=&machine.sprites_b();q.gfxname="B";}else{q.cols=2;q.base=((std::size_t)(q.w[3]&0x7ff)<<4)+0x30000;q.gfx=&machine.sprites_b();q.gfxname="B";}if(options.sprite_debug_large_only&&q.cols<4)continue;if(options.sprite_debug_index>=0&&options.sprite_debug_index!=(int)q.slot)continue;all.push_back(q);}
@@ -372,13 +454,25 @@ int main(int argc, char* argv[]) {
 
         std::cout << console_stamp(process_start) << chq::kWindowProduct << " " << chq::kNativeVersion << " - " << chq::kNativePlatform << "\n";
 
+        chq::ContentPack content_pack;
+        const bool use_content_pack = !options.content_pack.empty();
+        if (use_content_pack) { std::string err; if (!content_pack.load(options.content_pack, &err)) throw std::runtime_error("Content pack: " + err); std::cout << "[CHQPACK] loaded " << options.content_pack.string() << " entries=" << content_pack.entry_count() << "\n"; }
+        if (!options.content_overlays.empty() && !use_content_pack) throw std::runtime_error("Content overlays require --content-pack");
+        for (const auto& path : options.content_overlays) {
+            chq::ContentPack overlay; std::string err;
+            if (!overlay.load(path, &err) || !chq::apply_content_overlay(content_pack, overlay, &err))
+                throw std::runtime_error("Content overlay " + path.string() + ": " + err);
+            std::cout << "[CHQOVERLAY] applied " << path.string() << " entries=" << overlay.entry_count() << "\n";
+        }
+        auto pack_required = [&](const char* name) -> chq::Bytes { auto* p=content_pack.find(name); if(!p) throw std::runtime_error(std::string("Content pack missing ")+name); return *p; };
+
         std::unique_ptr<chq::Runtime> runtime;
         unsigned loaded_checkpoint_frame = 0;
         bool checkpoint_loaded = false;
         if (!options.scene_only) {
             runtime = std::make_unique<chq::Runtime>(
-                chq::load_main_rom(options.roms),
-                chq::load_sub_rom(options.roms));
+                use_content_pack ? pack_required("cpu/main.bin") : chq::load_main_rom(options.roms),
+                use_content_pack ? pack_required("cpu/sub.bin") : chq::load_sub_rom(options.roms));
             std::filesystem::create_directories(options.logs);
             runtime->bus.open_log(options.logs / "bus.log", 20000, options.all);
             runtime->enable_boot_debug(options.boot_debug, options.loop_samples);
@@ -415,7 +509,7 @@ int main(int argc, char* argv[]) {
         }
 
         chq::Machine machine;
-        if (!machine.load_roms(options.roms)) return 1;
+        if (use_content_pack ? !machine.load_content_pack(content_pack) : !machine.load_roms(options.roms)) return 1;
 
         chq::Video video;
         video.configure_proms(machine);
@@ -763,13 +857,62 @@ int main(int argc, char* argv[]) {
                     const auto c0=lower(a[0]); std::ostringstream o;
                     auto need=[&](std::size_t n)->bool{if(a.size()<n){o<<"ERR insufficient arguments";return false;}return true;};
                     auto fmt_hex=[](std::uint32_t v){std::ostringstream x;x<<"0x"<<std::hex<<std::uppercase<<v;return x.str();};
-                    if(c0=="help") return "OK commands: version | capabilities | status | pause | resume | timer status|freeze|resume | window status|top|fullscreen|scale|show|hide|minimize|restore ... | baseline save|restore | snapshot save|restore|list|remove NAME | run N | step frame [N] | step instr A|B | disasm A|B ADDR [COUNT] | read A|B ADDR WIDTH | readrange A|B ADDR LENGTH | write A|B ADDR WIDTH VALUE | regs A|B [REG] | reg read|write A|B REG [VALUE] | patch freeze|replace|suppress|list|remove|clear ... | watch add|remove|list|clear ... | trace start|stop|add|remove|list|clear ... | events tail|clear|save|limit ... | why mem A|B ADDR | changed A|B START:END [since FRAME] | input steering|xor|pulse|ports ... | palette trace start|status|tail|stop|clear ... | memory trace start|status|tail|stop|clear ... | target one-hit status|on|off | course status|start|stop|reset|configure ... | sprites tail|save ... | checkpoint save|load PATH | timeline start|stop|status|load|seek|next|prev|fork|unload PATH | screenshot [PATH] | graphics snapshot PATH | legacytrace status|reset|mem|pc|trigger|cpu|window|context|max|output|start|stop ... | provenance status|reset|follow|access|window|max|output|start|stop ...";
-                    if(c0=="version") return std::string("OK build=")+chq::kNativeVersion+" product=ChaseHQ-Native api=0.66.9.0-RC3.0 transport=localhost-tcp";
-                    if(c0=="capabilities") return "OK execution.pause execution.resume execution.step_frame execution.step_instruction snapshot.named baseline.save baseline.restore memory.read memory.read_range memory.write register.read register.write patch.freeze patch.replace patch.suppress patch.remove watch.memory_range watch.remove events.tail events.save events.limit query.why_memory query.changed_memory input.steering input.xor input.pulse input.ports cpu.disassemble tuning.handling palette.inspect palette.freeze palette.restore palette.trace memory.trace sprites.tail sprites.save sprites.list sprites.inspect sprites.override sprites.override.clear sprites.visual sprites.visual.clear checkpoint.save checkpoint.load timeline.record timeline.load timeline.seek timeline.fork timeline.write_history screenshot graphics.layered_snapshot timer.freeze course.follow course.configure course.telemetry graphics.layer_offsets graphics.tc0100_compare window.always_on_top window.fullscreen window.scale window.visibility window.minimize_restore legacytrace.dynamic provenance.dynamic";
+                    if(c0=="help") return "OK commands: version | capabilities | status | backend sprites|text|bg status|set original|shadow|native|native-only|reset-verify|promotion-status|capture NAME | pause | resume | timer status|freeze|resume | window status|top|fullscreen|scale|show|hide|minimize|restore ... | baseline save|restore | snapshot save|restore|list|remove NAME | run N | step frame [N] | step instr A|B | disasm A|B ADDR [COUNT] | read A|B ADDR WIDTH | readrange A|B ADDR LENGTH | write A|B ADDR WIDTH VALUE | regs A|B [REG] | reg read|write A|B REG [VALUE] | patch freeze|replace|suppress|list|remove|clear ... | watch add|remove|list|clear ... | trace start|stop|add|remove|list|clear ... | events tail|clear|save|limit ... | why mem A|B ADDR | changed A|B START:END [since FRAME] | input steering|xor|pulse|ports ... | palette trace start|status|tail|stop|clear ... | memory trace start|status|tail|stop|clear ... | target one-hit status|on|off | beacon override authentic|on|off | hud status|set|reset|preset ... | course status|start|stop|reset|configure ... | sprites tail|save|rom-atlas ... | checkpoint save|load PATH | timeline start|stop|status|load|seek|next|prev|fork|unload PATH | screenshot [PATH] | graphics snapshot PATH | legacytrace status|reset|mem|pc|trigger|cpu|window|context|max|output|start|stop ... | provenance status|reset|follow|access|window|max|output|start|stop ...";
+                    if(c0=="version") return std::string("OK build=")+chq::kNativeVersion+" product=ChaseHQ-Native api=0.66.9.0-RC3.4.9 transport=localhost-tcp";
+                    if(c0=="capabilities") return "OK execution.pause execution.resume execution.step_frame execution.step_instruction snapshot.named baseline.save baseline.restore memory.read memory.read_range memory.write register.read register.write patch.freeze patch.replace patch.suppress patch.remove watch.memory_range watch.remove events.tail events.save events.limit query.why_memory query.changed_memory input.steering input.xor input.pulse input.ports cpu.disassemble tuning.handling collision.events sound.command_events palette.inspect palette.freeze palette.restore palette.trace memory.trace sprites.tail sprites.save sprites.list sprites.inspect sprites.override sprites.override.clear sprites.map_override sprites.map_override.clear sprites.asset_replace sprites.asset_replace.clear sprites.visual sprites.visual.clear sprites.shadow_compare sprites.layer_shadow_compare sprites.rom_atlas backend.sprite backend.text backend.bg native.promotion game.beacon_override hud.layout checkpoint.save checkpoint.load timeline.record timeline.load timeline.seek timeline.fork timeline.write_history screenshot graphics.layered_snapshot timer.freeze course.follow course.configure course.telemetry graphics.layer_offsets graphics.tc0100_compare window.always_on_top window.fullscreen window.scale window.visibility window.minimize_restore legacytrace.dynamic provenance.dynamic";
                     if(c0=="status"){
+                        bool beacon_live_present=false;for(const auto& sp:video.debug_sprites()){const bool bm=sp.map==518||sp.map==519||sp.map==520||sp.map==540||sp.map==617;const bool bp=sp.palette==71||sp.palette==78;if(bm&&bp){beacon_live_present=true;break;}}
                         o<<"OK build="<<chq::kNativeVersion<<" frame="<<frame<<" paused="<<(debug_paused?1:0)<<" step_remaining="<<debug_step_remaining<<" research="<<(runtime->bus.research_enabled()?1:0)
                          <<" events="<<runtime->bus.research_events().size()<<" watches="<<runtime->bus.research_watches().size()<<" patches="<<runtime->bus.research_patches().size()
-                         <<" baseline="<<(workbench_have_pause_point?1:0)<<" source="<<(forensic_timeline_loaded?"timeline":"live")<<" timeline_recording="<<(forensic_timeline_recording?1:0)<<" timeline_loaded="<<(forensic_timeline_loaded?1:0)<<" timer_frozen="<<(timer_frozen?1:0)<<" always_on_top="<<(video.always_on_top()?1:0)<<" fullscreen="<<(video.fullscreen()?1:0)<<" window_visible="<<(video.window_visible()?1:0)<<" window_minimized="<<(video.window_minimized()?1:0)<<" window_scale="<<video.window_scale()<<" handling_override="<<((std::abs(runtime->handling_cornering_scale()-1.0)>1e-12||std::abs(runtime->handling_speed_retain()-1.0)>1e-12)?1:0)<<" target_one_hit="<<(runtime->target_one_hit()?1:0)<<" course_follow="<<(options.course_follow?1:0)<<" course_controller="<<options.course_follow_controller<<" course_bias="<<options.course_follow_lateral_bias<<" palette_overrides="<<live_palette_overrides.size()<<" fault="<<(runtime->fault.empty()?"none":runtime->fault); return o.str();
+                         <<" baseline="<<(workbench_have_pause_point?1:0)<<" source="<<(forensic_timeline_loaded?"timeline":"live")<<" timeline_recording="<<(forensic_timeline_recording?1:0)<<" timeline_loaded="<<(forensic_timeline_loaded?1:0)<<" timer_frozen="<<(timer_frozen?1:0)<<" always_on_top="<<(video.always_on_top()?1:0)<<" fullscreen="<<(video.fullscreen()?1:0)<<" window_visible="<<(video.window_visible()?1:0)<<" window_minimized="<<(video.window_minimized()?1:0)<<" window_scale="<<video.window_scale()<<" handling_override="<<((std::abs(runtime->handling_cornering_scale()-1.0)>1e-12||std::abs(runtime->handling_speed_retain()-1.0)>1e-12)?1:0)<<" target_one_hit="<<(runtime->target_one_hit()?1:0)<<" beacon_override="<<runtime->beacon_override_name()<<" beacon_phase="<<fmt_hex(runtime->bus.peek(0x101854,2,chq::BusSpace::Main))<<" beacon_live_present="<<(beacon_live_present?1:0)<<" hud_custom="<<(chq::hud_layout_active(video.hud_layout())?1:0)<<" hud_speed_region_pixels="<<video.hud_speed_region_visible_pixels()<<" hud_speed_region_empty="<<(video.hud_speed_region_visible_pixels()==0?1:0)<<" sprite_backend="<<video.sprite_backend_name()<<" text_backend="<<video.text_backend_name()<<" bg_backend="<<video.bg_backend_name()<<" sprite_map_overrides="<<video.runtime_sprite_map_override_count()<<" sprite_asset_overrides="<<video.runtime_sprite_asset_override_count()<<" sprite_asset_visible_pixels="<<video.runtime_sprite_asset_visible_pixels()<<" sprite_asset_visible="<<(video.runtime_sprite_asset_visible_pixels()>0?1:0)<<" course_follow="<<(options.course_follow?1:0)<<" course_controller="<<options.course_follow_controller<<" course_bias="<<options.course_follow_lateral_bias<<" palette_overrides="<<live_palette_overrides.size()<<" fault="<<(runtime->fault.empty()?"none":runtime->fault); return o.str();
+                    }
+                    if(c0=="backend") {
+                        if(a.size()<2) return "ERR backend sprites|text|bg status|set MODE|reset-verify|promotion-status|capture NAME";
+                        const auto subsystem=lower(a[1]);
+                        const auto op=a.size()>2?lower(a[2]):"status";
+                        if(subsystem=="text"||subsystem=="text-hud"||subsystem=="tc0100text"){
+                            if(op=="status"||op=="get") return std::string("OK ")+video.text_backend_status();
+                            if(op=="set"){
+                                if(a.size()<4)return "ERR backend text set original|shadow|native|native-only";
+                                if(!video.set_text_backend(a[3]))return "ERR text backend must be original|shadow|native|native-only";
+                                changed=true;return std::string("OK ")+video.text_backend_status();
+                            }
+                            if(op=="reset-verify"||op=="reset_verify"||op=="clear"){
+                                video.reset_text_backend_verification();return std::string("OK ")+video.text_backend_status();
+                            }
+                            if(op=="promotion-status"||op=="promotion_status") return std::string("OK ")+video.text_backend_status();
+                            return "ERR backend text status|set MODE|reset-verify|promotion-status";
+                        }
+                        if(subsystem=="bg"||subsystem=="background"||subsystem=="tc0100bg"){
+                            if(op=="status"||op=="get") return std::string("OK ")+video.bg_backend_status();
+                            if(op=="set"){
+                                if(a.size()<4)return "ERR backend bg set original|shadow|native|native-only";
+                                if(!video.set_bg_backend(a[3]))return "ERR bg backend must be original|shadow|native|native-only";
+                                changed=true;return std::string("OK ")+video.bg_backend_status();
+                            }
+                            if(op=="reset-verify"||op=="reset_verify"||op=="clear"){
+                                video.reset_bg_backend_verification();return std::string("OK ")+video.bg_backend_status();
+                            }
+                            if(op=="promotion-status"||op=="promotion_status") return std::string("OK ")+video.bg_backend_status();
+                            return "ERR backend bg status|set MODE|reset-verify|promotion-status";
+                        }
+                        if(subsystem!="sprites") return "ERR backend sprites|text|bg status|set MODE|reset-verify|promotion-status|capture NAME";
+                        if(op=="status"||op=="get") return std::string("OK ")+video.sprite_backend_status();
+                        if(op=="set"){
+                            if(a.size()<4)return "ERR backend sprites set original|shadow|native|native-only";
+                            if(!video.set_sprite_backend(a[3]))return "ERR sprite backend must be original|shadow|native|native-only";
+                            changed=true;return std::string("OK ")+video.sprite_backend_status();
+                        }
+                        if(op=="reset-verify"||op=="reset_verify"||op=="clear"){
+                            video.reset_sprite_backend_verification();return std::string("OK ")+video.sprite_backend_status();
+                        }
+                        if(op=="promotion-status"||op=="promotion_status") return std::string("OK ")+video.native_promotion_status();
+                        if(op=="capture"||op=="capture-compare"||op=="capture_compare"){
+                            const std::string name=a.size()>3?a[3]:"sprites"; std::string path;
+                            if(!video.export_sprite_backend_comparison(machine,*runtime,scene,frame,name,&path))return "ERR native sprite layer capture failed; clear presentation overrides/filters first";
+                            return std::string("OK subsystem=sprites frame=")+std::to_string(frame)+" path="+path;
+                        }
+                        return "ERR backend sprites status|set MODE|reset-verify|promotion-status|capture NAME";
                     }
                     if(c0=="timer") {
                         const auto op=a.size()>1?lower(a[1]):"status";
@@ -911,24 +1054,26 @@ int main(int argc, char* argv[]) {
                              <<" cpu="<<(runtime->bus.memory_trace_space()==chq::BusSpace::Main?'A':'B')
                              <<" address="<<fmt_hex(runtime->bus.memory_trace_address())
                              <<" length="<<runtime->bus.memory_trace_length()
-                             <<" width="<<(runtime->bus.memory_trace_width()?std::to_string(runtime->bus.memory_trace_width()*8):std::string("any"));
+                             <<" width="<<(runtime->bus.memory_trace_width()?std::to_string(runtime->bus.memory_trace_width()*8):std::string("any"))
+                             <<" access="<<(runtime->bus.memory_trace_reads()?(runtime->bus.memory_trace_writes()?"rw":"read"):"write");
                             return o.str();
                         }
                         if(sub=="clear"){runtime->bus.memory_trace_clear();return "OK memory trace events cleared";}
                         if(sub=="stop"){runtime->bus.memory_trace_stop();return "OK memory trace stopped events="+std::to_string(runtime->bus.memory_trace_events().size());}
                         if(sub=="start"){
-                            if(a.size()<5)return "ERR memory trace start A|B ADDRESS [LENGTH] [WIDTH|any] [LIMIT]";
-                            chq::BusSpace sp{}; std::uint32_t addr=0,len=1,lim=4096; unsigned width=0;
+                            if(a.size()<5)return "ERR memory trace start A|B ADDRESS [LENGTH] [WIDTH|any] [LIMIT] [write|read|rw]";
+                            chq::BusSpace sp{}; std::uint32_t addr=0,len=1,lim=4096; unsigned width=0; bool reads=false,writes=true;
                             if(!parse_api_space(a[3],sp)||!parse_api_hex_u32(a[4],addr))return "ERR bad memory trace CPU/address";
                             if(a.size()>5&&(!parse_api_u32(a[5],len)||len<1||len>0x1000000u))return "ERR memory trace length 1..16777216";
                             if(a.size()>6&&lower(a[6])!="any"&&a[6]!="0"&&!parse_api_width(a[6],width))return "ERR memory trace width 8|16|32|any";
                             if(a.size()>7&&(!parse_api_u32(a[7],lim)||lim<64||lim>1000000))return "ERR memory trace limit 64..1000000";
-                            runtime->bus.memory_trace_clear();runtime->bus.memory_trace_start(sp,addr,len,width,lim);runtime->bus.research_enable(true);
-                            o<<"OK memory trace started cpu="<<(sp==chq::BusSpace::Main?'A':'B')<<" address="<<fmt_hex(addr)<<" length="<<len<<" width="<<(width?std::to_string(width*8):std::string("any"))<<" limit="<<lim;return o.str();
+                            if(a.size()>8){const auto mode=lower(a[8]);if(mode=="read"||mode=="r"){reads=true;writes=false;}else if(mode=="rw"||mode=="both"){reads=true;writes=true;}else if(mode!="write"&&mode!="w")return "ERR memory trace access write|read|rw";}
+                            runtime->bus.memory_trace_clear();runtime->bus.memory_trace_start(sp,addr,len,width,lim,reads,writes);runtime->bus.research_enable(true);
+                            o<<"OK memory trace started cpu="<<(sp==chq::BusSpace::Main?'A':'B')<<" address="<<fmt_hex(addr)<<" length="<<len<<" width="<<(width?std::to_string(width*8):std::string("any"))<<" limit="<<lim<<" access="<<(reads?(writes?"rw":"read"):"write");return o.str();
                         }
                         if(sub=="tail"){
                             std::uint32_t n=20;if(a.size()>3&&!parse_api_u32(a[3],n))return "ERR bad count";const auto&e=runtime->bus.memory_trace_events();const auto start=e.size()>n?e.size()-n:0;
-                            o<<"OK memory_events="<<(e.size()-start);for(std::size_t i=start;i<e.size();++i){const auto&x=e[i];o<<"\nframe="<<x.frame<<" CPU="<<(x.space==chq::BusSpace::Main?'A':'B')<<" pc="<<fmt_hex(x.pc)<<" address="<<fmt_hex(x.address)<<" width="<<(x.size*8)<<" old="<<fmt_hex(x.old_value)<<" new="<<fmt_hex(x.new_value)<<" changed="<<(x.changed?1:0)<<" write_count="<<x.write_count;}return o.str();
+                            o<<"OK memory_events="<<(e.size()-start);for(std::size_t i=start;i<e.size();++i){const auto&x=e[i];o<<"\nframe="<<x.frame<<" access="<<x.access<<" CPU="<<(x.space==chq::BusSpace::Main?'A':'B')<<" pc="<<fmt_hex(x.pc)<<" address="<<fmt_hex(x.address)<<" width="<<(x.size*8)<<" old="<<fmt_hex(x.old_value)<<" new="<<fmt_hex(x.new_value)<<" changed="<<(x.changed?1:0)<<" sequence="<<x.write_count;}return o.str();
                         }
                         return "ERR memory trace expects start|status|tail|stop|clear";
                     }
@@ -957,7 +1102,7 @@ int main(int argc, char* argv[]) {
                     }
                     if(c0=="patch"){
                         if(!need(2))return o.str();const auto op=lower(a[1]);if(forensic_timeline_loaded&&op!="list")return "ERR timeline source is read-only; use timeline fork before patching";
-                        if(op=="clear"){runtime->bus.research_clear_patches();return "OK patches cleared";}
+                        if(op=="clear"){runtime->set_beacon_override(chq::Runtime::BeaconOverrideMode::Authentic);runtime->bus.research_clear_patches();return "OK patches cleared beacon_override=authentic";}
                         if(op=="remove"||op=="delete"){if(a.size()<3)return "ERR patch remove ID";std::uint32_t id;if(!parse_api_u32(a[2],id))return "ERR bad patch id";return runtime->bus.research_remove_patch(id)?"OK patch removed id="+std::to_string(id):"ERR patch id not found";}
                         if(op=="list"){o<<"OK patches="<<runtime->bus.research_patches().size();for(const auto&p:runtime->bus.research_patches())o<<"\n"<<p.id<<" CPU="<<(p.space==chq::BusSpace::Main?'A':'B')<<" addr="<<fmt_hex(p.address)<<" width="<<(p.size*8)<<" value="<<fmt_hex(p.value)<<" mode="<<(p.mode==chq::LivePatchMode::Freeze?"freeze":p.mode==chq::LivePatchMode::Replace?"replace":"suppress")<<" hits="<<p.interceptions<<" last_pc="<<fmt_hex(p.last_pc);return o.str();}
                         if(op=="freeze"){if(a.size()<6)return "ERR patch freeze A|B ADDR WIDTH VALUE";chq::BusSpace sp;std::uint32_t addr,val;unsigned sz;if(!parse_api_space(a[2],sp)||!parse_api_hex_u32(a[3],addr)||!parse_api_width(a[4],sz)||!parse_api_hex_u32(a[5],val))return "ERR bad patch arguments";debug_paused=true;runtime->bus.debug_write(addr,val,sz,sp);auto id=runtime->bus.research_add_patch(sp,addr,sz,val,chq::LivePatchMode::Freeze);o<<"OK patch id="<<id;return o.str();}
@@ -1035,6 +1180,53 @@ int main(int argc, char* argv[]) {
                         if(op=="off"||op=="0"||op=="false") { runtime->set_target_one_hit(false); return "OK target_one_hit=0"; }
                         return "ERR target one-hit expects status|on|off";
                     }
+                    if(c0=="beacon"){
+                        const auto op=a.size()>1?lower(a[1]):"status";
+                        if(op=="status"||op=="get"){
+                            o<<"OK mode="<<runtime->beacon_override_name()
+                             <<" phase="<<fmt_hex(runtime->bus.peek(0x101854,2,chq::BusSpace::Main))
+                             <<" timer="<<fmt_hex(runtime->bus.peek(0x101856,2,chq::BusSpace::Main))
+                             <<" palette_state="<<fmt_hex(runtime->bus.peek(0x101858,2,chq::BusSpace::Main))
+                             <<" request="<<fmt_hex(runtime->bus.peek(0x108082,2,chq::BusSpace::Main));
+                            return o.str();
+                        }
+                        if(op=="override"||op=="set"){
+                            if(a.size()<3)return "ERR beacon override authentic|on|off";
+                            const auto mode=lower(a[2]);
+                            if(mode=="authentic"||mode=="auto"||mode=="reset")runtime->set_beacon_override(chq::Runtime::BeaconOverrideMode::Authentic);
+                            else if(mode=="on"||mode=="force-on"||mode=="force_on")runtime->set_beacon_override(chq::Runtime::BeaconOverrideMode::ForceOn);
+                            else if(mode=="off"||mode=="force-off"||mode=="force_off")runtime->set_beacon_override(chq::Runtime::BeaconOverrideMode::ForceOff);
+                            else return "ERR beacon override authentic|on|off";
+                            changed=true;
+                            return std::string("OK beacon_override=")+runtime->beacon_override_name()+" phase="+fmt_hex(runtime->bus.peek(0x101854,2,chq::BusSpace::Main));
+                        }
+                        return "ERR beacon expects status|override";
+                    }
+                    if(c0=="hud"){
+                        const auto op=a.size()>1?lower(a[1]):"status";
+                        if(op=="status"||op=="get") return std::string("OK ")+video.hud_layout_status();
+                        if(op=="reset"||op=="authentic"){
+                            video.reset_hud_layout();changed=true;return std::string("OK ")+video.hud_layout_status();
+                        }
+                        if(op=="preset"){
+                            if(a.size()<3)return "ERR hud preset authentic|minimal|none";
+                            if(!video.set_hud_preset(lower(a[2])))return "ERR unknown HUD preset";
+                            changed=true;return std::string("OK ")+video.hud_layout_status();
+                        }
+                        if(op=="set"){
+                            if(a.size()<6)return "ERR hud set ELEMENT visible|hidden DX DY";
+                            const auto visibility=lower(a[3]);
+                            bool visible=false;
+                            if(visibility=="visible"||visibility=="on"||visibility=="1"||visibility=="true")visible=true;
+                            else if(visibility=="hidden"||visibility=="off"||visibility=="0"||visibility=="false")visible=false;
+                            else return "ERR HUD visibility must be visible|hidden";
+                            int dx=0,dy=0;
+                            try{dx=std::stoi(a[4]);dy=std::stoi(a[5]);}catch(...){return "ERR HUD offsets must be signed integers";}
+                            if(!video.set_hud_element(a[2],visible,dx,dy))return "ERR unknown HUD element or offset outside screen bounds";
+                            changed=true;return std::string("OK ")+video.hud_layout_status();
+                        }
+                        return "ERR hud expects status|set|reset|preset";
+                    }
                     if(c0=="collision"){
                         const auto op=a.size()>1?lower(a[1]):"state";
                         if(op=="state"||op=="status"||op=="get"){
@@ -1044,6 +1236,26 @@ int main(int argc, char* argv[]) {
                              <<" suppressed_lateral="<<runtime->bus.suppressed_collision_lateral()
                              <<" suppressed_speed="<<runtime->bus.suppressed_collision_speed()
                              <<" scope=proven_response_writes detection_preserved=1";return o.str();
+                        }
+                        if(op=="events"){
+                            const auto sub=a.size()>2?lower(a[2]):"tail";
+                            if(sub=="clear"){runtime->bus.clear_collision_response_events();return "OK collision response events cleared";}
+                            if(sub=="status"){o<<"OK events="<<runtime->bus.collision_response_events().size();return o.str();}
+                            if(sub=="tail"){
+                                std::uint32_t n=50;if(a.size()>3&&!parse_api_u32(a[3],n))return "ERR bad count";
+                                const auto&e=runtime->bus.collision_response_events();const auto start=e.size()>n?e.size()-n:0;
+                                o<<"OK collision_events="<<(e.size()-start);
+                                for(std::size_t i=start;i<e.size();++i){const auto&x=e[i];
+                                    o<<"\nframe="<<x.frame<<" sequence="<<x.sequence<<" CPU="<<(x.space==chq::BusSpace::Main?'A':'B')
+                                     <<" pc="<<fmt_hex(x.pc)<<" class="<<(x.target_contact?"target_contact":(x.lateral?"lateral":"speed"))
+                                     <<" address="<<fmt_hex(x.address)<<" width="<<(x.size*8)
+                                     <<" old="<<fmt_hex(x.old_value)<<" attempted="<<fmt_hex(x.attempted_value)
+                                     <<" applied="<<fmt_hex(x.applied_value)<<" suppressed="<<(x.suppressed?1:0)
+                                     <<" interaction_type="<<fmt_hex(x.interaction_type)
+                                     <<" object_reference="<<fmt_hex(x.object_reference);
+                                }return o.str();
+                            }
+                            return "ERR collision events expects tail [N]|status|clear";
                         }
                         if(op=="response"){
                             const auto sub=a.size()>2?lower(a[2]):"get";
@@ -1064,7 +1276,24 @@ int main(int argc, char* argv[]) {
                             return "ERR collision response expects get|set|reset";
                         }
                         if(op=="reset"||op=="restore"){runtime->bus.set_suppress_collision_shove(false);return "OK collision response enabled=1 detection_preserved=1";}
-                        return "ERR collision expects state|response|reset";
+                        return "ERR collision expects state|events|response|reset";
+                    }
+                    if(c0=="sound"){
+                        const auto op=a.size()>1?lower(a[1]):"events";
+                        if(op=="events"){
+                            const auto sub=a.size()>2?lower(a[2]):"tail";
+                            if(sub=="clear"){runtime->bus.clear_sound_command_events();return "OK sound command events cleared";}
+                            if(sub=="status"){o<<"OK runtime_audio=0 sound_stub=1 command_events="<<runtime->bus.sound_command_events().size();return o.str();}
+                            if(sub=="tail"){
+                                std::uint32_t n=100;if(a.size()>3&&!parse_api_u32(a[3],n))return "ERR bad count";
+                                const auto&e=runtime->bus.sound_command_events();const auto start=e.size()>n?e.size()-n:0;
+                                o<<"OK sound_events="<<(e.size()-start)<<" runtime_audio=0 sound_stub=1";
+                                for(std::size_t i=start;i<e.size();++i){const auto&x=e[i];o<<"\nframe="<<x.frame<<" sequence="<<x.sequence<<" CPU="<<(x.space==chq::BusSpace::Main?'A':'B')<<" pc="<<fmt_hex(x.pc)<<" address="<<fmt_hex(x.address)<<" width="<<(x.size*8)<<" value="<<fmt_hex(x.value);}
+                                return o.str();
+                            }
+                            return "ERR sound events expects tail [N]|status|clear";
+                        }
+                        return "ERR sound expects events";
                     }
                     if(c0=="handling"||c0=="tuning"){
                         const auto op=a.size()>1?lower(a[1]):"get";
@@ -1110,7 +1339,7 @@ int main(int argc, char* argv[]) {
                     }
                     if(c0=="input"){
                         if(a.size()<2)return "ERR input steering|xor|pulse|ports ...";const auto op=lower(a[1]);
-                        if(op=="steering"){if(a.size()==2||lower(a[2])=="get"){o<<"OK steering="<<fmt_hex(runtime->bus.ioc_steering());return o.str();}std::size_t vi=lower(a[2])=="set"?3:2;if(a.size()<=vi)return "ERR input steering set VALUE";std::uint32_t v;if(!parse_api_hex_u32(a[vi],v)||v>0xffff)return "ERR bad steering value";runtime->bus.set_ioc_steering(static_cast<std::uint16_t>(v));return "OK steering="+fmt_hex(v);}
+                        if(op=="steering"){if(a.size()==2||lower(a[2])=="get"){o<<"OK steering="<<fmt_hex(runtime->bus.ioc_steering());return o.str();}std::size_t vi=lower(a[2])=="set"?3:2;if(a.size()<=vi)return "ERR input steering set VALUE";std::uint32_t v;if(!parse_api_hex_u32(a[vi],v)||v>0x0fff)return "ERR steering value must be signed-12-bit raw 0000..0FFF (proven full right=0060, full left=0FA0)";runtime->bus.set_ioc_steering(static_cast<std::uint16_t>(v));return "OK steering="+fmt_hex(v);}
                         if(op=="ports"){o<<"OK";for(unsigned i=0;i<16;++i){const auto p=static_cast<std::uint8_t>(i);o<<" port"<<i<<"="<<fmt_hex(runtime->bus.ioc_port_value(p))<<" xor="<<fmt_hex(runtime->bus.ioc_input_xor_mask(p))<<" scenario="<<fmt_hex(runtime->bus.ioc_scenario_xor_mask(p))<<" effective_xor="<<fmt_hex(runtime->bus.ioc_effective_xor_mask(p))<<" reads="<<runtime->bus.ioc_read_count(p);}return o.str();}
                         if(op=="xor"){if(a.size()<3)return "ERR input xor get|set|clear ...";const auto sub=lower(a[2]);if(sub=="clear"){runtime->bus.clear_ioc_input_overrides();live_ioc_pulses.clear();return "OK input xor overrides cleared";}if(a.size()<4)return "ERR input xor get PORT | set PORT MASK";std::uint32_t port;if(!parse_api_u32(a[3],port)||port>15)return "ERR bad IOC port";if(sub=="get"){return "OK port="+std::to_string(port)+" xor="+fmt_hex(runtime->bus.ioc_input_xor_mask(static_cast<std::uint8_t>(port)));}if(sub=="set"){if(a.size()<5)return "ERR input xor set PORT MASK";std::uint32_t mask;if(!parse_api_hex_u32(a[4],mask)||mask>0xff)return "ERR bad xor mask";runtime->bus.set_ioc_input_xor_mask(static_cast<std::uint8_t>(port),static_cast<std::uint8_t>(mask));return "OK port="+std::to_string(port)+" xor="+fmt_hex(mask);}return "ERR input xor expects get|set|clear";}
                         if(op=="pulse"){if(a.size()<5)return "ERR input pulse PORT MASK FRAMES";std::uint32_t port,mask,n;if(!parse_api_u32(a[2],port)||port>15||!parse_api_hex_u32(a[3],mask)||mask>0xff||!parse_api_u32(a[4],n)||n<1)return "ERR bad pulse arguments";const auto pp=static_cast<std::uint8_t>(port);const auto prior=runtime->bus.ioc_input_xor_mask(pp);runtime->bus.set_ioc_input_xor_mask(pp,static_cast<std::uint8_t>(prior^mask));live_ioc_pulses.push_back({pp,static_cast<std::uint8_t>(mask),prior,frame+static_cast<unsigned>(n)});o<<"OK pulse port="<<port<<" mask="<<fmt_hex(mask)<<" start="<<frame<<" end="<<(frame+n);return o.str();}
@@ -1120,16 +1349,25 @@ int main(int argc, char* argv[]) {
                         if(!need(2))return o.str();const auto op=lower(a[1]);
                         if(op=="tail"){std::uint32_t n=20;if(a.size()>2&&!parse_api_u32(a[2],n))return "ERR bad count";bool semantic=false;for(const auto&q:a)if(lower(q)=="semantic")semantic=true;std::vector<const chq::SpriteChangeEvent*> v;for(const auto&e:video.sprite_change_events())if(!semantic||e.semantic)v.push_back(&e);const auto start=v.size()>n?v.size()-n:0;o<<"OK sprite_events="<<(v.size()-start);for(std::size_t i=start;i<v.size();++i){auto&e=*v[i];o<<"\nframe="<<e.frame<<" slot="<<e.slot<<" semantic="<<e.semantic<<" map="<<e.old_map<<"->"<<e.new_map<<" pal="<<unsigned(e.old_palette)<<"->"<<unsigned(e.new_palette)<<" pos="<<e.old_x<<','<<e.old_y<<"->"<<e.new_x<<','<<e.new_y<<" writer_pc="<<fmt_hex(e.writer_pc);}return o.str();}
                         if(op=="save"){if(a.size()<3)return "ERR sprites save PATH";std::ofstream f(a[2]);if(!f)return "ERR could not open output";f<<"frame,slot,semantic,old_map,new_map,old_palette,new_palette,old_x,old_y,new_x,new_y,old_visible,new_visible,writer_pc\n";for(const auto&e:video.sprite_change_events())f<<e.frame<<','<<e.slot<<','<<(e.semantic?1:0)<<','<<e.old_map<<','<<e.new_map<<','<<unsigned(e.old_palette)<<','<<unsigned(e.new_palette)<<','<<e.old_x<<','<<e.old_y<<','<<e.new_x<<','<<e.new_y<<','<<(e.old_visible?1:0)<<','<<(e.new_visible?1:0)<<",0x"<<std::hex<<e.writer_pc<<std::dec<<'\n';return "OK sprites saved "+a[2];}
+                        if(op=="rom-atlas"||op=="rom_atlas"){
+                            if(a.size()<7)return "ERR sprites rom-atlas START END all|obj-a|obj-b64|obj-b32 PALETTE PATH";
+                            std::uint32_t first=0,last=0,pal=0;if(!parse_api_u32(a[2],first)||!parse_api_u32(a[3],last)||first>2047||last>2047||last<first)return "ERR atlas range must be 0..2047 with END>=START";
+                            if(last-first+1>512)return "ERR atlas range limited to 512 map IDs per export";
+                            const auto fmt=lower(a[4]);if(fmt!="all"&&fmt!="auto"&&fmt!="obj-a"&&fmt!="obja"&&fmt!="obj-b64"&&fmt!="objb64"&&fmt!="obj-b32"&&fmt!="objb32")return "ERR atlas format must be all|obj-a|obj-b64|obj-b32";
+                            if(!parse_api_u32(a[5],pal)||pal>255)return "ERR atlas palette must be 0..255";
+                            const std::filesystem::path out=a[6];auto r=export_rom_sprite_atlas(machine,*runtime,first,last,fmt,pal,out);
+                            o<<"OK schema=chq-rom-sprite-atlas-v1 start="<<first<<" end="<<last<<" format="<<fmt<<" palette="<<pal<<" interpretations="<<r.interpretations<<" nonempty="<<r.nonempty<<" invalid="<<r.invalid<<" files="<<r.files<<" root="<<r.root.string()<<" manifest="<<r.manifest.string();return o.str();
+                        }
                         if(op=="list"){
                             video.draw_runtime(machine,*runtime,scene,frame,debug_paused,timer_frozen);
                             const auto& v=video.debug_sprites();o<<"OK sprites="<<v.size();
-                            for(const auto& q:v)o<<"\nslot="<<q.slot<<" map="<<q.map<<" palette="<<unsigned(q.palette)<<" x="<<q.x<<" y="<<q.y<<" width="<<q.width<<" height="<<q.height<<" priority="<<q.priority<<" visible_pixels="<<q.visible_pixels<<" visible_left="<<q.visible_left<<" visible_top="<<q.visible_top<<" visible_right="<<q.visible_right<<" visible_bottom="<<q.visible_bottom;
+                            for(const auto& q:v){auto pr=video.runtime_sprite_presentation(q.slot,(std::uint16_t)q.map,q.palette);o<<"\nslot="<<q.slot<<" map="<<q.map<<" palette="<<unsigned(q.palette)<<" source_map="<<pr.source_map<<" source_palette="<<unsigned(pr.source_palette)<<" effective_map="<<pr.effective_map<<" effective_palette="<<unsigned(pr.effective_palette)<<" effective_visible="<<pr.effective_visible<<" override_active="<<((pr.slot_override||pr.map_override||pr.asset_override)?1:0)<<" slot_override="<<(pr.slot_override?1:0)<<" map_override="<<(pr.map_override?1:0)<<" asset_override="<<(pr.asset_override?1:0)<<" x="<<q.x<<" y="<<q.y<<" width="<<q.width<<" height="<<q.height<<" priority="<<q.priority<<" visible_pixels="<<q.visible_pixels<<" visible_left="<<q.visible_left<<" visible_top="<<q.visible_top<<" visible_right="<<q.visible_right<<" visible_bottom="<<q.visible_bottom;}
                             return o.str();
                         }
                         if(op=="inspect"){
                             if(a.size()<3)return "ERR sprites inspect SLOT";std::uint32_t slot=0;if(!parse_api_u32(a[2],slot))return "ERR bad slot";
                             video.draw_runtime(machine,*runtime,scene,frame,debug_paused,timer_frozen);
-                            for(const auto& q:video.debug_sprites())if(q.slot==slot){o<<"OK slot="<<q.slot<<" map="<<q.map<<" palette="<<unsigned(q.palette)<<" x="<<q.x<<" y="<<q.y<<" width="<<q.width<<" height="<<q.height<<" priority="<<q.priority<<" visible_pixels="<<q.visible_pixels<<" visible_left="<<q.visible_left<<" visible_top="<<q.visible_top<<" visible_right="<<q.visible_right<<" visible_bottom="<<q.visible_bottom;return o.str();}
+                            for(const auto& q:video.debug_sprites())if(q.slot==slot){auto pr=video.runtime_sprite_presentation(q.slot,(std::uint16_t)q.map,q.palette);o<<"OK slot="<<q.slot<<" map="<<q.map<<" palette="<<unsigned(q.palette)<<" source_map="<<pr.source_map<<" source_palette="<<unsigned(pr.source_palette)<<" effective_map="<<pr.effective_map<<" effective_palette="<<unsigned(pr.effective_palette)<<" effective_visible="<<pr.effective_visible<<" override_active="<<((pr.slot_override||pr.map_override||pr.asset_override)?1:0)<<" slot_override="<<(pr.slot_override?1:0)<<" map_override="<<(pr.map_override?1:0)<<" asset_override="<<(pr.asset_override?1:0)<<" x="<<q.x<<" y="<<q.y<<" width="<<q.width<<" height="<<q.height<<" priority="<<q.priority<<" visible_pixels="<<q.visible_pixels<<" visible_left="<<q.visible_left<<" visible_top="<<q.visible_top<<" visible_right="<<q.visible_right<<" visible_bottom="<<q.visible_bottom;return o.str();}
                             return "ERR sprite slot not active";
                         }
                         if(op=="order"){
@@ -1148,6 +1386,61 @@ int main(int argc, char* argv[]) {
                             video.set_sprite_tie_break_higher(mode=="higher-slot");changed=true;
                             return std::string("OK tie_break=")+(video.sprite_tie_break_higher()?"higher-slot":"lower-slot");
                         }
+                        if(op=="shadow-compare"||op=="shadow_compare"){
+                            video.draw_runtime(machine,*runtime,scene,frame,debug_paused,timer_frozen);
+                            bool only_slot=false;std::uint32_t wanted_slot=0;
+                            if(a.size()>=3){
+                                const auto scope=lower(a[2]);
+                                if(scope=="slot"){
+                                    if(a.size()<4||!parse_api_u32(a[3],wanted_slot))return "ERR sprites shadow-compare slot SLOT";
+                                    only_slot=true;
+                                } else if(scope!="visible") {
+                                    if(!parse_api_u32(a[2],wanted_slot))return "ERR sprites shadow-compare [visible|slot SLOT]";
+                                    only_slot=true;
+                                }
+                            }
+                            const auto* sr=find_region_named(runtime->bus,"sprites");if(!sr)return "ERR sprite RAM unavailable";
+                            std::set<std::pair<char,std::uint16_t>> unique_tiles;
+                            std::size_t slots=0,chunks=0,pixels=0,mismatches=0,invalid_tiles=0;
+                            int first_slot=-1,first_chunk=-1,first_x=-1,first_y=-1;std::uint16_t first_tile=0;std::uint8_t first_live=0,first_shadow=0;char first_gfx='?';
+                            for(const auto& q:video.debug_sprites()){
+                                if(only_slot&&q.slot!=wanted_slot)continue;
+                                const std::size_t off=(std::size_t)q.slot*8u;if(off+7>=sr->bytes.size())continue;
+                                const auto w1=be16_at(sr->bytes,off+2),w3=be16_at(sr->bytes,off+6);const int zx=(w1&0x7f)+1;
+                                auto fmt=chq::Machine::format_for_zoomx(zx);int cols=0;std::size_t base=0;const std::vector<std::uint8_t>* gfx=nullptr;char gfxname='?';
+                                if(fmt==chq::SpriteFormat::Obj128x128){cols=8;base=(std::size_t)(w3&0x7ff)<<6;gfx=&machine.sprites_a();gfxname='A';}
+                                else if(fmt==chq::SpriteFormat::Obj64x128){cols=4;base=((std::size_t)(w3&0x7ff)<<5)+0x20000;gfx=&machine.sprites_b();gfxname='B';}
+                                else if(fmt==chq::SpriteFormat::Obj32x128){cols=2;base=((std::size_t)(w3&0x7ff)<<4)+0x30000;gfx=&machine.sprites_b();gfxname='B';}
+                                else continue;
+                                ++slots;const auto tile_count=(gfx->size()*8u)/1024u;
+                                for(int my=0;my<8;++my)for(int mx=0;mx<cols;++mx){
+                                    const int chunk=my*cols+mx;const auto mi=base+(std::size_t)chunk;const auto raw=machine.spritemap_word(mi);const auto code=static_cast<std::uint16_t>(raw&0x3fff);++chunks;
+                                    if(code>=tile_count){++invalid_tiles;continue;}
+                                    unique_tiles.insert({gfxname,code});
+                                    const auto cmp=chq::compare_sprite_decoder_4bpp(*gfx,code,1);pixels+=cmp.pixels;mismatches+=cmp.mismatches;
+                                    if(cmp.mismatches&&first_slot<0){first_slot=(int)q.slot;first_chunk=chunk;first_tile=code;first_x=cmp.first_x;first_y=cmp.first_y;first_live=cmp.live_pen;first_shadow=cmp.shadow_pen;first_gfx=gfxname;}
+                                }
+                            }
+                            if(only_slot&&slots==0)return "ERR sprite slot not active";
+                            o<<"OK scope="<<(only_slot?"slot":"visible")<<" slots="<<slots<<" chunks="<<chunks<<" unique_tiles="<<unique_tiles.size()<<" pixels="<<pixels<<" mismatches="<<mismatches<<" invalid_tiles="<<invalid_tiles;
+                            if(first_slot>=0)o<<" first_slot="<<first_slot<<" first_chunk="<<first_chunk<<" first_gfx="<<first_gfx<<" first_tile="<<first_tile<<" first_x="<<first_x<<" first_y="<<first_y<<" live_pen="<<unsigned(first_live)<<" shadow_pen="<<unsigned(first_shadow);
+                            return o.str();
+                        }
+                        if(op=="layer-shadow-compare"||op=="layer_shadow_compare"){
+                            try {
+                                const auto cmp=video.compare_runtime_sprite_layer_shadow(machine,*runtime,scene);
+                                o<<"OK scope=placed-source pixels="<<cmp.pixels
+                                 <<" pixel_mismatches="<<cmp.pixel_mismatches
+                                 <<" owner_mismatches="<<cmp.owner_mismatches
+                                 <<" exact="<<((cmp.pixel_mismatches==0&&cmp.owner_mismatches==0)?1:0);
+                                if(cmp.first_x>=0)o<<" first_x="<<cmp.first_x<<" first_y="<<cmp.first_y
+                                    <<" authoritative_pixel="<<fmt_hex(cmp.authoritative_pixel)
+                                    <<" shadow_pixel="<<fmt_hex(cmp.shadow_pixel)
+                                    <<" authoritative_owner="<<cmp.authoritative_owner
+                                    <<" shadow_owner="<<cmp.shadow_owner;
+                                return o.str();
+                            } catch(const std::exception& e) { return std::string("ERR ")+e.what(); }
+                        }
                         if(op=="map-inspect"){
                             if(a.size()<3)return "ERR sprites map-inspect SLOT";std::uint32_t slot=0;if(!parse_api_u32(a[2],slot))return "ERR bad slot";
                             const auto* sr=find_region_named(runtime->bus,"sprites"); if(!sr)return "ERR sprite RAM unavailable"; const std::size_t off=(std::size_t)slot*8u; if(off+7>=sr->bytes.size())return "ERR slot out of range";
@@ -1165,11 +1458,40 @@ int main(int argc, char* argv[]) {
                             int map=std::stoi(a[3]),pal=std::stoi(a[4]),vis=std::stoi(a[5]);video.set_runtime_sprite_override(slot,map,pal,vis);changed=true;return "OK sprite override slot="+std::to_string(slot)+" map="+std::to_string(map)+" palette="+std::to_string(pal)+" visible="+std::to_string(vis);
                         }
                         if(op=="override-clear"||op=="clear-overrides"){video.clear_runtime_sprite_overrides();changed=true;return "OK sprite overrides cleared";}
+                        if(op=="map-override"||op=="map_override"){
+                            if(a.size()<4)return "ERR sprites map-override SOURCE_MAP TARGET_MAP [PALETTE|-1]";
+                            std::uint32_t source=0,target=0;if(!parse_api_u32(a[2],source)||!parse_api_u32(a[3],target))return "ERR bad map id";
+                            int pal=-1;if(a.size()>4)pal=std::stoi(a[4]);
+                            if(!video.set_runtime_sprite_map_override(source,target,pal))return "ERR map 0..2047 and palette -1..255 required";
+                            changed=true;return std::string("OK ")+video.runtime_sprite_map_overrides_status();
+                        }
+                        if(op=="map-override-status"||op=="map_override_status")return std::string("OK ")+video.runtime_sprite_map_overrides_status();
+                        if(op=="map-override-clear"||op=="map_override_clear"){video.clear_runtime_sprite_map_overrides();changed=true;return "OK sprite map overrides cleared";}
+                        if(op=="asset-override"||op=="asset_override"){
+                            if(a.size()<5)return "ERR sprites asset-override SOURCE_MAP TARGET_MAP FORMAT [PALETTE|-1] [FLIPX|-1] [FLIPY|-1] [DX] [DY]";
+                            std::uint32_t source=0,target=0;if(!parse_api_u32(a[2],source)||!parse_api_u32(a[3],target))return "ERR bad map id";
+                            const auto fmt=lower(a[4]); int pal=-1,fx=-1,fy=-1,dx=0,dy=0;
+                            if(a.size()>5)pal=std::stoi(a[5]);if(a.size()>6)fx=std::stoi(a[6]);if(a.size()>7)fy=std::stoi(a[7]);if(a.size()>8)dx=std::stoi(a[8]);if(a.size()>9)dy=std::stoi(a[9]);
+                            if(!video.set_runtime_sprite_asset_override(source,target,fmt,pal,fx,fy,dx,dy))return "ERR asset override requires maps 0..2047, format preserve|obj-a|obj-b64|obj-b32, palette -1..255, flip -1..1, offsets -512..512";
+                            if(video.sprite_backend()!=chq::Video::SpriteBackend::Native)video.set_sprite_backend("native");
+                            changed=true;return std::string("OK backend=native ")+video.runtime_sprite_asset_overrides_status();
+                        }
+                        if(op=="asset-override-player"||op=="asset_override_player"){
+                            if(a.size()<4)return "ERR sprites asset-override-player TARGET_MAP FORMAT [PALETTE|-1] [FLIPX|-1] [FLIPY|-1] [DX] [DY]";
+                            std::uint32_t target=0;if(!parse_api_u32(a[2],target))return "ERR bad target map id";
+                            const auto fmt=lower(a[3]); int pal=-1,fx=-1,fy=-1,dx=0,dy=0;
+                            if(a.size()>4)pal=std::stoi(a[4]);if(a.size()>5)fx=std::stoi(a[5]);if(a.size()>6)fy=std::stoi(a[6]);if(a.size()>7)dx=std::stoi(a[7]);if(a.size()>8)dy=std::stoi(a[8]);
+                            if(!video.set_runtime_sprite_asset_override_object("player_car.body",target,fmt,pal,fx,fy,dx,dy))return "ERR player asset override requires map 0..2047, format preserve|obj-a|obj-b64|obj-b32, palette -1..255, flip -1..1, offsets -512..512";
+                            if(video.sprite_backend()!=chq::Video::SpriteBackend::Native)video.set_sprite_backend("native");
+                            changed=true;return std::string("OK backend=native ")+video.runtime_sprite_asset_overrides_status();
+                        }
+                        if(op=="asset-override-status"||op=="asset_override_status")return std::string("OK ")+video.runtime_sprite_asset_overrides_status();
+                        if(op=="asset-override-clear"||op=="asset_override_clear"){video.clear_runtime_sprite_asset_overrides();changed=true;return "OK sprite asset overrides cleared";}
                         if(op=="visual"){
                             if(a.size()<4)return "ERR sprites visual SLOT solo|hide|flash";std::uint32_t slot=0;if(!parse_api_u32(a[2],slot))return "ERR bad slot";auto mode=lower(a[3]);if(mode!="solo"&&mode!="hide"&&mode!="flash")return "ERR visual mode must be solo|hide|flash";video.set_runtime_sprite_visual(slot,mode);changed=true;return "OK sprite visual slot="+std::to_string(slot)+" mode="+mode;
                         }
                         if(op=="visual-clear"){video.clear_runtime_sprite_visual();changed=true;return "OK sprite visual cleared";}
-                        return "ERR sprites expects tail|save|list|inspect|order|tie-break|map-inspect|override|override-clear|visual|visual-clear";
+                        return "ERR sprites expects tail|save|list|inspect|order|tie-break|map-inspect|shadow-compare|layer-shadow-compare|override|override-clear|map-override|map-override-status|map-override-clear|asset-override|asset-override-player|asset-override-status|asset-override-clear|visual|visual-clear";
                     }
                     if(c0=="prompt"){
                         if(a.size()<2)return "ERR prompt show|status|clear [MESSAGE]"; const auto op=lower(a[1]);
@@ -1194,7 +1516,20 @@ int main(int argc, char* argv[]) {
                     if(c0=="checkpoint"){
                         if(a.size()<3)return "ERR checkpoint save|load PATH";const auto op=lower(a[1]);if(op=="save"){runtime->save_checkpoint(a[2],frame);return "OK checkpoint saved frame="+std::to_string(frame)+" path="+a[2];}if(op=="load"){frame=runtime->load_checkpoint(a[2]);debug_paused=true;debug_step_remaining=0;changed=true;return "OK checkpoint loaded frame="+std::to_string(frame)+" path="+a[2];}return "ERR checkpoint expects save|load";
                     }
-                    if(c0=="screenshot"){std::filesystem::path p=a.size()>1?std::filesystem::path(a[1]):options.logs/(std::string("api_screenshot_f")+std::to_string(frame)+"_"+timestamp_name()+".png");video.draw_runtime(machine,*runtime,scene,frame,debug_paused,timer_frozen);if(!video.save_current_screenshot(p))return "ERR screenshot failed";return "OK screenshot "+p.string();}
+                    if(c0=="screenshot"){
+                        std::filesystem::path p=a.size()>1?std::filesystem::path(a[1]):options.logs/(std::string("api_screenshot_f")+std::to_string(frame)+"_"+timestamp_name()+".png");
+                        // Compositor parity compares two independent rendering paths, but neither
+                        // must include user-only F1/F12 overlays, diagnostic backgrounds or
+                        // temporary probe visualisations. Keep ordinary screenshots unchanged.
+                        const bool composited=a.size()==3 && lower(a[2])=="composited";
+                        if(a.size()>2&&!composited)return "ERR screenshot expects PATH [composited]";
+                        video.draw_runtime(machine,*runtime,scene,frame,debug_paused,timer_frozen,composited);
+                        const bool saved=video.save_current_screenshot(p);
+                        // Do not alter the user's SDL presentation as a side effect of parity.
+                        if(composited)video.draw_runtime(machine,*runtime,scene,frame,debug_paused,timer_frozen);
+                        if(!saved)return "ERR screenshot failed";
+                        return std::string("OK screenshot ")+p.string()+(composited?" capture=composited":" capture=presented");
+                    }
                     if(c0=="graphics") {
                         if(a.size()<2)return "ERR graphics snapshot PATH"; const auto op=lower(a[1]);
                         if(op=="snapshot") { if(a.size()<3)return "ERR graphics snapshot PATH"; std::filesystem::path p=a[2]; if(!video.save_layered_snapshot(p,machine,*runtime,scene,frame))return "ERR layered snapshot failed"; return "OK graphics_snapshot frame="+std::to_string(frame)+" path="+p.string(); }

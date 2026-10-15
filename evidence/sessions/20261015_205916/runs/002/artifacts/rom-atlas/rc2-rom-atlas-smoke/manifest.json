@@ -1,0 +1,14 @@
+{
+  "schema": "chq-rom-sprite-atlas-v1",
+  "build": "0.67.0.0-RC6.3.33",
+  "source": {"spritemap":"b52-38.34","objA":["b52-34.5","b52-35.7","b52-36.9","b52-37.11"],"objB":["b52-30.4","b52-31.6","b52-32.8","b52-33.10"]},
+  "range": {"start":516,"end":520},
+  "format": "obj-b64",
+  "palette": 65,
+  "interpretations": 5,
+  "nonempty": 5,
+  "invalid": 0,
+  "index": "index.csv",
+  "contactSheetCells": "contact-sheet-cells.csv",
+  "contactSheets": ["contact_sheet_obj-b64_pal65.png"]
+}

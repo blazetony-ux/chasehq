@@ -11,10 +11,25 @@ param(
     [string]$Roms = '.\roms\chasehq',
 
     [Parameter(ParameterSetName='Start')]
+    [string]$ContentPack = '',
+
+    [Parameter(ParameterSetName='Start')]
     [int]$Port = 37600,
 
     [Parameter(ParameterSetName='Start')]
     [int]$HttpPort = 37680,
+
+    [Parameter(ParameterSetName='Start')]
+    [switch]$LanAccess,
+
+    [Parameter(ParameterSetName='Start')]
+    [switch]$LocalOnly,
+
+    [Parameter(ParameterSetName='Start')]
+    [string]$LanAddress = '',
+
+    [Parameter(ParameterSetName='Start')]
+    [string]$AccessToken = '',
 
     [Parameter(ParameterSetName='Start')]
     [switch]$NoWeb,
@@ -55,6 +70,41 @@ Set-Location $root
 $runtimeDir = Join-Path $root '.chq'
 $sessionFile = Join-Path $runtimeDir 'active-session.json'
 $startupFile = Join-Path $runtimeDir 'startup-session.json'
+$versionHeaderPath=Join-Path $root 'src\version.h'
+$versionHeaderText=Get-Content $versionHeaderPath -Raw
+$versionMatch=[regex]::Match($versionHeaderText,'kNativeVersion\s*=\s*"([^"]+)"')
+if(-not $versionMatch.Success){throw 'Could not determine ChaseHQ build identity from src/version.h'}
+$projectBuildVersion=$versionMatch.Groups[1].Value
+
+
+function Resolve-ChaseHQLanAddress([string]$Requested) {
+    $candidate=[string]$Requested
+    if([string]::IsNullOrWhiteSpace($candidate)){
+        try{
+            if(Get-Command Get-NetIPConfiguration -ErrorAction SilentlyContinue){
+                foreach($cfg in @(Get-NetIPConfiguration -ErrorAction Stop | Where-Object{$_.IPv4DefaultGateway -and $_.IPv4Address})){
+                    foreach($addr in @($cfg.IPv4Address)){
+                        $ip=[string]$addr.IPAddress
+                        if($ip -and $ip -notmatch '^(127\.|169\.254\.|0\.)'){$candidate=$ip;break}
+                    }
+                    if($candidate){break}
+                }
+            }
+        }catch{}
+    }
+    if([string]::IsNullOrWhiteSpace($candidate)){
+        try{
+            foreach($addr in @([Net.Dns]::GetHostAddresses([Net.Dns]::GetHostName()))){
+                if($addr.AddressFamily -eq [Net.Sockets.AddressFamily]::InterNetwork -and -not [Net.IPAddress]::IsLoopback($addr) -and $addr.IPAddressToString -notmatch '^169\.254\.'){$candidate=$addr.IPAddressToString;break}
+            }
+        }catch{}
+    }
+    if([string]::IsNullOrWhiteSpace($candidate)){throw 'Could not resolve a LAN IPv4 address automatically. Supply -LanAddress explicitly or use -LocalOnly.'}
+    $parsed=$null
+    if(-not[Net.IPAddress]::TryParse($candidate,[ref]$parsed)){throw "LAN address '$candidate' is not a numeric IPv4 address."}
+    if($parsed.AddressFamily -ne [Net.Sockets.AddressFamily]::InterNetwork -or [Net.IPAddress]::IsLoopback($parsed)){throw "LAN address '$candidate' must be a non-loopback IPv4 address."}
+    return $candidate
+}
 
 function Stop-RecordedProcess([object]$Id, [string]$Label) {
     # PowerShell unwraps Nullable[int] values to plain System.Int32 objects, so
@@ -160,11 +210,14 @@ function New-SupportBundle {
       foreach($f in @('active-session.json','startup-session.json','web-startup.log','web-listener.log','web-stdout.log','web-stderr.log','web-command-diagnostics.log','web-frontend-errors.log','frontend-ready.json')){$src=Join-Path $runtimeDir $f;if(Test-Path $src){Copy-Item $src (Join-Path $tmp $f) -Force}}
       foreach($f in @('build-local.json','research\feature-manifest.json','src\version.h')){$src=Join-Path $root $f;if(Test-Path $src){$dst=Join-Path $tmp (($f -replace '[\\/]','_'));Copy-Item $src $dst -Force}}
       $s=Read-RecordedSession;if($null -eq $s -and (Test-Path $startupFile)){try{$s=Get-Content $startupFile -Raw|ConvertFrom-Json}catch{}}
-      if($s -and $s.PSObject.Properties.Name -contains 'evidence' -and $s.evidence -and (Test-Path $s.evidence)){foreach($f in @('native-stdout.log','native-stderr.log','session.json','run_phase.txt')){$src=Join-Path ([string]$s.evidence) $f;if(Test-Path $src){Copy-Item $src (Join-Path $tmp $f) -Force}}}
+      if($s -and $s.PSObject.Properties.Name -contains 'evidence' -and $s.evidence -and (Test-Path $s.evidence)){foreach($f in @('native-stdout.log','native-stderr.log','session.json')){$src=Join-Path ([string]$s.evidence) $f;if(Test-Path $src){Copy-Item $src (Join-Path $tmp $f) -Force}};$phaseSrc=Join-Path ([string]$s.evidence) 'run_phase.txt';if(Test-Path $phaseSrc){Copy-Item $phaseSrc (Join-Path $tmp 'native-startup-phase.txt') -Force}}
       $ports=[ordered]@{native37600=(Test-TcpPortOpen 37600);web37680=(Test-TcpPortOpen 37680);backend37681=(Test-TcpPortOpen 37681);created=(Get-Date).ToString('o')};$ports|ConvertTo-Json|Set-Content (Join-Path $tmp 'ports.json') -Encoding UTF8
       $zip=Join-Path $outDir ('support-bundle-'+$stamp+'.zip');Compress-Archive -Path (Join-Path $tmp '*') -DestinationPath $zip -Force;Write-Host "Support bundle: $zip" -ForegroundColor Green;return $zip
     }finally{Remove-Item $tmp -Recurse -Force -ErrorAction SilentlyContinue}
 }
+
+if ($LanAccess -and $LocalOnly) { throw '-LanAccess and -LocalOnly cannot be used together.' }
+$effectiveLanAccess = (-not $NoWeb -and -not $LocalOnly)
 
 if ($PSCmdlet.ParameterSetName -eq 'Stop') { Stop-RecordedSession | Out-Null; exit 0 }
 if ($PSCmdlet.ParameterSetName -eq 'Health') { Show-SessionHealth; exit 0 }
@@ -187,6 +240,19 @@ if ($Port -lt 1 -or $Port -gt 65535) { throw '-Port must be 1..65535.' }
 if ($HttpPort -lt 1 -or $HttpPort -gt 65534) { throw '-HttpPort must be 1..65534 (v0.65.0 reserves HttpPort+1 for the private Web backend).' }
 if ($Port -eq $HttpPort) { throw '-Port and -HttpPort must be different.' }
 if ($Port -eq ($HttpPort + 1)) { throw '-Port must not equal HttpPort+1 (reserved for the private Web backend).' }
+
+
+$resolvedLanAddress=''
+$resolvedAccessToken=''
+if($effectiveLanAccess){
+    $resolvedLanAddress=Resolve-ChaseHQLanAddress $LanAddress
+    $resolvedAccessToken=[string]$AccessToken
+    if([string]::IsNullOrWhiteSpace($resolvedAccessToken)){$resolvedAccessToken=([guid]::NewGuid().ToString('N')+[guid]::NewGuid().ToString('N')).Substring(0,40)}
+    if($resolvedAccessToken.Length -lt 16){throw '-AccessToken must contain at least 16 characters.'}
+    $lanSetup=Join-Path $root 'scripts\Ensure-ChaseHQLanAccess.ps1'
+    if(-not(Test-Path $lanSetup -PathType Leaf)){throw "Missing LAN prerequisite helper: $lanSetup"}
+    & $lanSetup -LanAddress $resolvedLanAddress -HttpPort $HttpPort
+}
 
 $modeCheckpoints = @{
     Gameplay           = '.\checkpoints\stage1-gameplay-2064.chqstate'
@@ -214,6 +280,7 @@ $researchArgs = @{
     NoShell     = $true
     Port        = $Port
     Roms        = $Roms
+    ContentPack = $ContentPack
     SessionName = ('launcher-' + $Mode.ToLowerInvariant())
     StartupRecordPath = $startupFile
 }
@@ -226,8 +293,9 @@ Write-Host ''
 Write-Host '=== ChaseHQ Native one-command launcher ===' -ForegroundColor Cyan
 Write-Host "Mode:       $Mode"
 if ($selectedCheckpoint) { Write-Host "Checkpoint: $selectedCheckpoint" } else { Write-Host 'Checkpoint: none (boot)' }
+if ($ContentPack) { Write-Host "Content:    $ContentPack (CHQPACK)" } else { Write-Host "Content:    $Roms (ROM oracle)" }
 Write-Host "Native API: http://127.0.0.1:$Port"
-if (-not $NoWeb) { Write-Host "Workbench:  http://127.0.0.1:$HttpPort/" }
+if (-not $NoWeb) { Write-Host "Local Workbench: http://127.0.0.1:$HttpPort/"; if($effectiveLanAccess){Write-Host "LAN Workbench:   http://$resolvedLanAddress`:$HttpPort/?token=$resolvedAccessToken" -ForegroundColor Green;Write-Host "Mobile console:  http://$resolvedLanAddress`:$HttpPort/console?token=$resolvedAccessToken" -ForegroundColor Green}else{Write-Host 'LAN/mobile:      disabled by -LocalOnly' -ForegroundColor DarkYellow} }
 Write-Host ''
 
 Remove-Item $startupFile -Force -ErrorAction SilentlyContinue
@@ -267,6 +335,7 @@ if (-not $NoWeb) {
         if ($latestSession) { $sessionRoot = $latestSession.FullName }
     }
     $webArgs = @('-NoLogo','-NoProfile','-ExecutionPolicy','Bypass','-File',$web,'-Port',[string]$Port,'-HttpPort',[string]$HttpPort)
+    if($effectiveLanAccess){$webArgs += @('-LanAccess','-LanAddress',$resolvedLanAddress,'-AccessToken',$resolvedAccessToken)}
     if ($sessionRoot) { $webArgs += @('-SessionRoot',$sessionRoot,'-EvidenceRoot',(Join-Path $sessionRoot 'evidence')) }
     $wp = Start-Process -FilePath 'powershell.exe' -ArgumentList $webArgs -WorkingDirectory $root -WindowStyle Hidden -RedirectStandardOutput $webStdout -RedirectStandardError $webStderr -PassThru
     $webPid = [int]$wp.Id
@@ -297,6 +366,15 @@ if (-not $NoWeb) {
         throw "Web Workbench failed to stay ready on port $HttpPort.`n--- stdout ---`n$out`n--- stderr ---`n$err"
     }
     Write-Host "Web Workbench ready (PID $webPid)." -ForegroundColor Green
+    if($effectiveLanAccess){
+        try{
+            $lanBase="http://$resolvedLanAddress`:$HttpPort"
+            $lanHealth=Invoke-WebRequest -UseBasicParsing -Uri ($lanBase+'/api/health?token='+$resolvedAccessToken) -TimeoutSec 3
+            $lanConsole=Invoke-WebRequest -UseBasicParsing -Uri ($lanBase+'/console?token='+$resolvedAccessToken) -TimeoutSec 3
+            if($lanHealth.StatusCode -ne 200 -or $lanConsole.StatusCode -ne 200){throw 'LAN health/console returned a non-200 status.'}
+            Write-Host "LAN/mobile host smoke: PASS ($resolvedLanAddress`:$HttpPort)" -ForegroundColor Green
+        }catch{throw "LAN/mobile host smoke failed for $resolvedLanAddress`:$HttpPort. $($_.Exception.Message)"}
+    }
     try{if(Test-Path $startupFile){$sr=Get-Content $startupFile -Raw|ConvertFrom-Json;$sr.phase='WEB_READY';$sr.updated=(Get-Date).ToString('o');$sr|ConvertTo-Json -Depth 8|Set-Content $startupFile -Encoding UTF8}}catch{}
 }
 } catch {
@@ -306,7 +384,7 @@ if (-not $NoWeb) {
 New-Item -ItemType Directory -Path $runtimeDir -Force | Out-Null
 [ordered]@{
     schema = 'chq-active-session-v1'
-    build = '0.66.9.0'
+    build = $projectBuildVersion
     state = 'ready'
     phase = 'READY'
     started = (Get-Date).ToString('o')
@@ -314,6 +392,8 @@ New-Item -ItemType Directory -Path $runtimeDir -Force | Out-Null
     checkpoint = $selectedCheckpoint
     nativePort = $Port
     httpPort = if ($NoWeb) { $null } else { $HttpPort }
+    lanAccess = [bool]$effectiveLanAccess
+    lanAddress = $(if($effectiveLanAccess){$resolvedLanAddress}else{$null})
     emulatorPid = $emulatorPid
     webPid = $webPid
     evidence = $(if(Test-Path $startupFile){try{(Get-Content $startupFile -Raw|ConvertFrom-Json).evidence}catch{$null}}else{$null})
@@ -322,7 +402,7 @@ New-Item -ItemType Directory -Path $runtimeDir -Force | Out-Null
 if (-not $NoWeb -and -not $NoBrowser) {
     $bootstrapNonce=[DateTimeOffset]::UtcNow.ToUnixTimeMilliseconds(); Start-Process "http://127.0.0.1:$HttpPort/?bootstrap=$bootstrapNonce"
     Write-Host 'Waiting for browser frontend bootstrap self-test...' -ForegroundColor Yellow
-    $frontReady=$false;$frontDeadline=(Get-Date).AddSeconds(20)
+    $frontReady=$false;$frontDeadline=(Get-Date).AddSeconds(60)
     while((Get-Date)-lt $frontDeadline){try{$h=(Invoke-WebRequest -UseBasicParsing -Uri "http://127.0.0.1:$HttpPort/api/health" -TimeoutSec 1).Content|ConvertFrom-Json;if($h.frontendBootstrap -eq 'ready'){$frontReady=$true;break}}catch{};Start-Sleep -Milliseconds 300}
     if(-not $frontReady){Write-Host 'FRONTEND BOOTSTRAP DID NOT REPORT READY.' -ForegroundColor Red;$ff=Join-Path $runtimeDir 'web-frontend-errors.log';if(Test-Path $ff){Write-Host '--- frontend errors ---' -ForegroundColor Yellow;Get-Content $ff -Tail 50};try{$ar=Get-Content $sessionFile -Raw|ConvertFrom-Json;$ar.state='failed';$ar.phase='FRONTEND_BOOTSTRAP';$ar|Add-Member -NotePropertyName message -NotePropertyValue 'Browser frontend bootstrap did not report ready' -Force;$ar|ConvertTo-Json -Depth 8|Set-Content $sessionFile -Encoding UTF8}catch{};Write-Host 'Run .\Start-ChaseHQ.ps1 -Diagnostics for the full snapshot.' -ForegroundColor Yellow;New-SupportBundle|Out-Null;throw 'Workbench server started, but browser frontend bootstrap self-test failed or timed out.'}
     Write-Host 'Browser frontend bootstrap: READY' -ForegroundColor Green
@@ -333,7 +413,7 @@ Write-Host ''
 Write-Host 'READY' -ForegroundColor Green
 Write-Host "  Emulator:   $(if($emulatorPid){'PID ' + $emulatorPid}else{'attached/existing'})"
 Write-Host "  Native API: 127.0.0.1:$Port"
-if (-not $NoWeb) { Write-Host "  Workbench:  http://127.0.0.1:$HttpPort/" }
+if (-not $NoWeb) { Write-Host "  Local:      http://127.0.0.1:$HttpPort/"; if($effectiveLanAccess){Write-Host "  LAN:        http://$resolvedLanAddress`:$HttpPort/?token=$resolvedAccessToken" -ForegroundColor Green;Write-Host "  Mobile:     http://$resolvedLanAddress`:$HttpPort/console?token=$resolvedAccessToken" -ForegroundColor Green}else{Write-Host '  LAN/mobile: disabled (-LocalOnly)' -ForegroundColor DarkYellow} }
 Write-Host "  Mode:       $Mode"
 if ($selectedCheckpoint) { Write-Host "  Checkpoint: $selectedCheckpoint" }
 Write-Host ''

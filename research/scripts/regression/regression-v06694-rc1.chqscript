@@ -1,0 +1,83 @@
+# name: v0.66.9.4-RC1 Beacon + Semantic HUD Layout Regression
+# category: regression
+# regression-version: 0.66.9.4-RC1
+# regression-scope: release
+# purpose: Prove the v0.66.9.4-RC1 experimental police-beacon intervention, presentation-only semantic HUD layout API, snapshot provenance and carried-forward sprite-layer shadow parity with deterministic cleanup.
+# checkpoint: stage1-gameplay-2064.chqstate
+
+echo === ChaseHQ v0.66.9.4-RC1 Beacon + HUD Regression: BEGIN ===
+api release.assert-version
+api schema action=game.beacon.get
+api schema action=game.beacon.override
+api schema action=hud.layout.get
+api schema action=hud.layout.set
+api schema action=hud.layout.reset
+api schema action=hud.layout.preset
+api schema action=sprite.layer-shadow.compare
+
+# Clean deterministic gameplay start.
+api patch.clear
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api game.beacon.get
+api hud.layout.reset
+api hud.layout.get
+
+# Beacon override is authoritative state intervention, not a visual sprite override.
+api game.beacon.override mode=on
+if memory cpu=A address=101854 width=16 value = 0006
+    echo PASS beacon Force ON holds deployed phase 6
+else
+    echo FAIL beacon Force ON phase incorrect
+end
+api game.beacon.get
+
+api game.beacon.override mode=off
+if memory cpu=A address=101854 width=16 value = 0000
+    echo PASS beacon Force OFF holds phase 0
+else
+    echo FAIL beacon Force OFF phase incorrect
+end
+api game.beacon.get
+
+api game.beacon.override mode=authentic
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api game.beacon.get
+
+# Semantic HUD presentation controls. These must not mutate emulated TC0100SCN source RAM.
+api memory.read-range cpu=A address=C04000 length=64
+api hud.layout.set element=high-score visible=false dx=0 dy=0
+api hud.layout.set element=time visible=true dx=16 dy=0
+api hud.layout.set element=distance visible=true dx=-8 dy=8
+api hud.layout.get
+api frame.snapshot name=v06694-rc1-hud-custom
+api memory.read-range cpu=A address=C04000 length=64
+
+api hud.layout.preset name=minimal
+api hud.layout.get
+api frame.snapshot name=v06694-rc1-hud-minimal
+
+api hud.layout.preset name=none
+api hud.layout.get
+
+api hud.layout.reset
+api hud.layout.get
+
+# Carry forward the independent placed sprite-source shadow gate.
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api sprite.layer-shadow.compare failOnMismatch=true output=v06694-rc1-sprite-layer-shadow.json
+
+# Final cleanup: no intervention may survive the focused regression.
+api game.beacon.override mode=authentic
+api hud.layout.reset
+api memory.trace.clear
+api collision.response.reset
+api input.ioc.clear
+api input.steering.set value=0000
+api sprite.visual.clear
+api sprite.override.clear
+api patch.clear
+api palette.overrides.clear
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api status
+
+echo === ChaseHQ v0.66.9.4-RC1 Beacon + HUD Regression: COMPLETE ===

@@ -1,0 +1,5 @@
+ChaseHQ-Native Preview POC — SYNTHETIC ROM-FREE VALIDATION (not RC5)
+case 0: road=true source=true sprite=true mismatches=0 selected=53 records=10
+case 1: road=true source=true sprite=true mismatches=0 selected=55 records=11
+case 2: road=true source=true sprite=true mismatches=0 selected=59 records=12
+case 3: road=true source=true sprite=true mismatches=0 selected=62 records=13

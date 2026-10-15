@@ -17,3 +17,10 @@ The checkpoint corpus is intentionally semantic: keep states that anchor reprodu
 - `stage1-end-level-9988.chqstate` — confirmed Stage-1 end/intermission reference.
 
 CHQSTATE v1 remains the restore format. The 6333/6334 pair supersedes older lost/non-bundled 7060/9495 references for target-damage causality.
+
+## Stage 2 provisional references (v0.66.9.4-RC2)
+
+- `stage2-gameplay-7500.chqstate` — user-supplied general Stage 2 gameplay reference. Semantics remain provisional until classified live.
+- `stage2-enemy-10514.chqstate` — user-supplied Stage 2 state with an enemy vehicle present. Use for sprite-family/object research; do not infer damage/contact semantics from the filename.
+
+Both preserve their original upload hashes in adjacent JSON metadata and expand the canonical research corpus beyond Stage 1 without overstating semantics.

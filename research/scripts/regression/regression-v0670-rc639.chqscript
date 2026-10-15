@@ -1,0 +1,23 @@
+# name: Regression - v0.67.0.0 RC6.3.9 Genuine CPU-B Ghidra Discovery and Generator
+# category: regression
+# purpose: Research Workbench release and Ghidra/REA API smoke; real CPU-B Ghidra SHA/CRC analysis and generated library are qualified by the opt-in consolidated native reconstruct --cpu-b-discover command, not by this script. Guard RC6.3.9 version and Ghidra/REA research APIs; authentic shared-dispatch and CPU-B opcode/edge parity verified separately by CTest/Go and ROM-backed native reconstruct acceptance. Six-digit/8-digit PC normalization is tested separately by Go integration regression with the uploaded Windows evidence.
+# checkpoint: stage1-gameplay-2064.chqstate
+# version: 0.67.0.0-RC6.3.9
+# regression-version: 0.67.0.0-RC6.3.9
+# regression-scope: release
+# safety: Read-only API checks; no native replacement in this Workbench script.
+# cleanup: No gameplay state changes.
+echo === RC6.3.9 CPU-B GHIDRA DISCOVERY REGRESSION BEGIN ===
+try
+  api release.assert-version
+  api schema action=ghidra.status
+  api schema action=ghidra.results
+  api schema action=ghidra.import
+  api schema action=rea.crosswalk
+  api schema action=rea.function.inspect
+  api ghidra.status
+  api rea.reports
+  echo === RC6.3.9 CPU-B GHIDRA DISCOVERY REGRESSION PASS ===
+finally
+  echo === RC6.3.9 RELEASE SMOKE PRESERVED LIVE SESSION ===
+end

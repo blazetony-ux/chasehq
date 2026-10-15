@@ -1,0 +1,10 @@
+{"sequence":1,"sourceLine":10,"context":"","command":"echo === RC6.3.33 RELEASE SMOKE BEGIN ===","clientRecord":false,"at":"2026-10-15T20:59:38.0689738+01:00"}
+{"sequence":2,"sourceLine":12,"context":"","command":"api release.assert-version","clientRecord":false,"at":"2026-10-15T20:59:40.8531506+01:00"}
+{"sequence":3,"sourceLine":13,"context":"","command":"api schema action=ghidra.status","clientRecord":false,"at":"2026-10-15T20:59:44.1400208+01:00"}
+{"sequence":4,"sourceLine":14,"context":"","command":"api schema action=ghidra.results","clientRecord":false,"at":"2026-10-15T20:59:45.4723215+01:00"}
+{"sequence":5,"sourceLine":15,"context":"","command":"api schema action=rea.crosswalk","clientRecord":false,"at":"2026-10-15T20:59:46.1666548+01:00"}
+{"sequence":6,"sourceLine":16,"context":"","command":"api schema action=rea.function.inspect","clientRecord":false,"at":"2026-10-15T20:59:46.9251348+01:00"}
+{"sequence":7,"sourceLine":17,"context":"","command":"api ghidra.status","clientRecord":false,"at":"2026-10-15T20:59:47.4248371+01:00"}
+{"sequence":8,"sourceLine":18,"context":"","command":"api rea.reports","clientRecord":false,"at":"2026-10-15T20:59:47.6290749+01:00"}
+{"sequence":9,"sourceLine":19,"context":"","command":"echo === RC6.3.33 RELEASE SMOKE PASS ===","clientRecord":false,"at":"2026-10-15T20:59:47.6886239+01:00"}
+{"sequence":10,"sourceLine":21,"context":"","command":"echo === RC6.3.33 RELEASE SMOKE PRESERVED SESSION ===","clientRecord":false,"at":"2026-10-15T20:59:48.4732767+01:00"}

@@ -1,9 +1,19 @@
-tc0100scn_geometry_tests 1 0.518103
-sprite_priority_tests 1 0.551423
-sprite_gfx_tests 1 0.490748
-authoritative_history_tests 1 3.69163
-sprite_snapshot_assertions 1 4.95222
-cpu_bus_rom_tests 0 0
-cli_evidence_tests 1 16.1036
+native_steering_reference_193 1 0.0868912
+live_candidate_shadow_tests 1 0.0914777
+native_sprite_clear_tests 1 0.125099
+native_candidates_tests 1 0.0687903
+projection_shadow_tests 1 0.0785232
+native_execution_tests 1 0.113398
+content_pack_tests 1 0.122067
+tc0100scn_geometry_tests 1 0.0733585
+sprite_priority_tests 1 0.0788452
+sprite_gfx_tests 1 0.0959899
+sprite_layer_shadow_tests 1 0.0789434
+hud_layout_tests 1 0.0872374
+tc0100scn_text_native_tests 1 0.0806908
+tc0100scn_bg_native_tests 1 0.0767046
+authoritative_history_tests 1 7.45154
+sprite_snapshot_assertions 1 8.49029
+cpu_bus_rom_tests 1 1.44856
+cli_evidence_tests 1 19.8283
 ---
-cpu_bus_rom_tests

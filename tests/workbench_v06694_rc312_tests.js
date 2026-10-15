@@ -1,0 +1,13 @@
+const fs=require('fs'),path=require('path');
+const root=path.resolve(__dirname,'..'),read=p=>fs.readFileSync(path.join(root,p),'utf8');
+const ok=(v,m)=>{if(!v)throw new Error(m)};
+const cfg=JSON.parse(read('chqdev.json')), web=read('Start-ChaseHQWeb.ps1'), hud=read('src/hud_layout.h'), shadow=read('src/sprite_layer_shadow.h'), reg=read('research/scripts/regression/regression-v06694-rc312.chqscript');
+ok(cfg.release==='0.66.9.4-RC3.1.2','RC3.1.2 release identity missing');
+ok(cfg.focusedRegression.endsWith('regression-v06694-rc312.chqscript'),'RC3.1.2 focused regression not wired');
+ok(web.includes('sprites asset-override-player 190 obj-b64 73 1 -1'),'Native Lab yellow-target preset is not semantic-player based');
+ok(web.includes("object=player_car.body"),'Script API semantic object contract missing');
+ok(shadow.includes('shadow_player_car_body_match')&&shadow.includes('case 522')&&shadow.includes('palette == 64u || palette == 65u'),'semantic player body family matching missing');
+ok(hud.includes('tx >= 32 && tx <= 41'),'complete live SPEED destination footprint missing');
+ok(reg.includes('input.steering.set value=0060')&&reg.includes('input.steering.set value=0FA0'),'steering persistence proof missing');
+ok(reg.indexOf('frame.snapshot name=v06694-rc312-speed-hidden-after-acceleration') < reg.indexOf('assert status hud_speed_region_empty=1'),'HUD failure evidence must be captured before assertion');
+console.log('Workbench v0.66.9.4-RC3.1.2 semantic replacement / dynamic HUD contracts: PASS');

@@ -1,0 +1,114 @@
+{
+  "schema": "chqhq-baseline-promotion-v1",
+  "project": "ChaseHQ-Native",
+  "promotedBaseline": "0.67.0.0-RC4.6",
+  "promotionDate": "2026-10-10",
+  "previousPromotedBaseline": {
+    "release": "0.67.0.0-RC4.5",
+    "archiveSha256": "443ffe623a38de4813691c436e05d6f92d9e113a8abae0219824fcc77e9aae11"
+  },
+  "archive": "ChaseHQ-Native-v0.67.0.0-RC4.6.zip",
+  "archiveSha256": "9e76a107e19f3e28a54a8a8b3bdaed630511e02f1da3e3e7ae274c07d863580f",
+  "archiveSizeBytes": 23911449,
+  "archiveImmutability": "Exact Windows-qualified archive unchanged; promotion documentation is external overlay, not repackaged source",
+  "qualification": {
+    "schema": "chqdev-qualification-v2",
+    "release": "0.67.0.0-RC4.6",
+    "toolVersion": "0.5.13",
+    "updatedUtc": "2026-10-10T14:46:08.1039321Z",
+    "archive": "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC4.6\\dist\\ChaseHQ-Native-v0.67.0.0-RC4.6.zip",
+    "archiveSha256": "9e76a107e19f3e28a54a8a8b3bdaed630511e02f1da3e3e7ae274c07d863580f",
+    "stages": {
+      "build": "PASS",
+      "clean": "PASS",
+      "doctor": "PASS",
+      "focused": "PASS",
+      "full": "PASS",
+      "package": "PASS",
+      "preflight": "PASS",
+      "promotable": "PASS",
+      "run-history": "PASS",
+      "runtime": "PASS",
+      "test": "PASS"
+    }
+  },
+  "qualificationProvenance": "User-pasted Windows out/chqdev/qualification.json, faithfully transcribed in supplement and matched to verified exact archive hash, all 11 stages PASS",
+  "regressionBundles": [
+    {
+      "filename": "bundle(20261010-144017).zip",
+      "sha256": "ee677e0485617c3b298c111f63adb2fa5551a64c9261f5eaa1a948b665b8c129",
+      "sessionId": "20261010_153856",
+      "runId": "001",
+      "name": "0.67.0.0-RC4.6 focused release regression",
+      "status": "PASS",
+      "commands": 13,
+      "durationMs": 6064,
+      "bundleIntegrityVerified": true,
+      "bundleCheckedFiles": 10
+    },
+    {
+      "filename": "bundle(20261010-144623).zip",
+      "sha256": "4de93d115fcf3246fffbcd4e32cd233fd09a52e224e26c948773fe3b2ad82b9d",
+      "sessionId": "20261010_153856",
+      "runId": "002",
+      "name": "Full Regression Suite",
+      "status": "PASS",
+      "commands": 1153,
+      "durationMs": 358680,
+      "bundleIntegrityVerified": true,
+      "bundleCheckedFiles": 3180
+    }
+  ],
+  "ghidraResearch": {
+    "jobId": "ghidra-20261010-161350-586bf542",
+    "state": "PASS",
+    "romSha256": "5cf1c9e786a39795ebd8e99c8e8be0d2398cc4f74221067cf2844945308d6c5a",
+    "staticExport": "8 hypothesis windows, two unreviewed Ghidra function candidates, no verified function ownership",
+    "evidenceArchive": "ghidra-rea-run032-20261010-161351-650.zip",
+    "evidenceSha256": "87c8b0d061058bc4d9750bee1d3e8ff4ef09c2075988c66d812bfa01d1bfaad3",
+    "run035": {
+      "filename": "bundle(20261010-152600).zip",
+      "sha256": "ca2e63d49e590d3a5536a74dacaf40b8702de867a5a0bb13f8d87e83d23a0886",
+      "sessionId": "20261010_160542",
+      "runId": "009",
+      "name": "Run 035 - Genuine Ghidra Static and Runtime Crosswalk",
+      "status": "PASS",
+      "commands": 19,
+      "durationMs": 1859,
+      "bundleIntegrityVerified": true,
+      "bundleCheckedFiles": 11
+    }
+  },
+  "promotionAuthorization": "User explicitly authorised formal RC4.6 promotion after Windows qualification and completed Ghidra/REA crosswalk",
+  "promotionPolicy": "Frozen exact tested RC4.6 ZIP, no version rename or code change; new docs are distinct overlay and should be applied only to a working extraction",
+  "currentCapabilities": {
+    "ghidraWorkbench": "asynchronous local headless jobs in Native Lab subpanel",
+    "reaResearchAPI": [
+      "rea.reports",
+      "rea.crosswalk",
+      "rea.functions",
+      "rea.function.inspect"
+    ],
+    "ghidraAPI": [
+      "ghidra.status",
+      "ghidra.start",
+      "ghidra.results",
+      "ghidra.import"
+    ],
+    "staticInput": "CPU-A Motorola 68000 big-endian, base 0, hash guarded",
+    "directReaAgent": false,
+    "capstoneIncluded": false,
+    "fullNativeCpuReplacement": false
+  },
+  "nextPriority": "Top-level Static Analysis / REA Workbench tab plus job preflight/wait/evidence/results corrections, not an RC4.6 feature",
+  "openLimitations": [
+    "Results path from Ghidra PASS job incorrect in RC4.6",
+    "Initial Ghidra import 0 when prior census TSVs not staged",
+    "Java/Jython preflight truthfulness and environment inheritance",
+    "No ghidra.wait + one-run complete Ghidra evidence",
+    "REA/Ghidra UI confined to narrow Native Lab column",
+    "Capstone bridge not yet included",
+    "No live Workbench ROM census",
+    "Go Full Regression structural command-budget test still out of target"
+  ]
+}

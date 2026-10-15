@@ -1,6 +1,6 @@
 # name: Current State Course Mapping - 1200 frame reusable survey
 # category: track
-# regression-version: 0.66.9.0-RC3.0
+# regression-version: 0.66.9.0-RC3.1
 # purpose: Reusable course-mapping survey from the currently loaded paused gameplay state, intended for later stages/checkpoints without baking Stage-1 assumptions into the script. Captures dense road/player/entity/surface evidence plus periodic screenshots.
 
 api release.assert-version
@@ -36,4 +36,4 @@ finally
   api input.ioc.clear
 end
 
-echo === RC3.0 CURRENT-STATE COURSE MAPPING 1200 COMPLETE ===
+echo === RC3.1 CURRENT-STATE COURSE MAPPING 1200 COMPLETE ===

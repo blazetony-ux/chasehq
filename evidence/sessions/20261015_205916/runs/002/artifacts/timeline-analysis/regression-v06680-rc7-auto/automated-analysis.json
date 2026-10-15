@@ -1,0 +1,623 @@
+﻿{
+    "schema":  "chq-timeline-auto-analysis-v1",
+    "timeline":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.31\\evidence\\sessions\\20261015_193345\\runs\\002\\artifacts\\timelines\\regression-v06680-rc7-auto.chqtimeline",
+    "analysisRoot":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\timeline-analysis\\regression-v06680-rc7-auto",
+    "triggerFrame":  2065,
+    "stopFrame":  2067,
+    "window":  1,
+    "changedByteAddresses":  781,
+    "writerGroups":  448,
+    "topCandidates":  [
+                          {
+                              "cpu":  "A",
+                              "address":  "0x108AFF",
+                              "width":  8,
+                              "changes":  256,
+                              "changedFrames":  2,
+                              "firstFrame":  2065,
+                              "lastFrame":  2067,
+                              "firstDelta":  0,
+                              "lastDelta":  0,
+                              "edgeMatch":  true,
+                              "initial":  "0xFF",
+                              "final":  "0xFF",
+                              "triggerHits":  128,
+                              "stopHits":  128,
+                              "writers":  "0x40e9e 0x40f60",
+                              "writerCount":  2,
+                              "classification":  "edge-bounded-restored",
+                              "knownSemantic":  "",
+                              "score":  4850
+                          },
+                          {
+                              "cpu":  "A",
+                              "address":  "0x102DF7",
+                              "width":  8,
+                              "changes":  170,
+                              "changedFrames":  5,
+                              "firstFrame":  2064,
+                              "lastFrame":  2068,
+                              "firstDelta":  1,
+                              "lastDelta":  1,
+                              "edgeMatch":  true,
+                              "initial":  "0x0",
+                              "final":  "0x0",
+                              "triggerHits":  102,
+                              "stopHits":  102,
+                              "writers":  "0x108a 0x216a 0x2172 0x4f52 0x4f56 0x4fa6 0x4fb0 0x5880 0x5892 0x7da8 0x7dac 0x7e74 0x7e76 0x8216 0x8236 0x823a 0x823e 0x8250 0x8262 0x8266 0x826a 0x826e 0x8272 0x8276 0x827a 0x827e 0x8282 0x8286 0x828a 0x828e 0x8298 0x829c 0x9504 0x9be2 0x9be8 0x9bea",
+                              "writerCount":  36,
+                              "classification":  "edge-bounded-restored",
+                              "knownSemantic":  "",
+                              "score":  3940
+                          },
+                          {
+                              "cpu":  "A",
+                              "address":  "0x101840",
+                              "width":  8,
+                              "changes":  102,
+                              "changedFrames":  2,
+                              "firstFrame":  2065,
+                              "lastFrame":  2067,
+                              "firstDelta":  0,
+                              "lastDelta":  0,
+                              "edgeMatch":  true,
+                              "initial":  "0x3A",
+                              "final":  "0x3E",
+                              "triggerHits":  51,
+                              "stopHits":  51,
+                              "writers":  "0x40dc6 0x40e38 0x44300 0x4438e 0x46de0 0x470a4",
+                              "writerCount":  6,
+                              "classification":  "edge-bounded-state",
+                              "knownSemantic":  "",
+                              "score":  2175
+                          },
+                          {
+                              "cpu":  "A",
+                              "address":  "0x101843",
+                              "width":  8,
+                              "changes":  102,
+                              "changedFrames":  2,
+                              "firstFrame":  2065,
+                              "lastFrame":  2067,
+                              "firstDelta":  0,
+                              "lastDelta":  0,
+                              "edgeMatch":  true,
+                              "initial":  "0x2F",
+                              "final":  "0x32",
+                              "triggerHits":  51,
+                              "stopHits":  51,
+                              "writers":  "0x40e12 0x40e34 0x4430c 0x4439a 0x46dec 0x470b0",
+                              "writerCount":  6,
+                              "classification":  "edge-bounded-state",
+                              "knownSemantic":  "",
+                              "score":  2175
+                          },
+                          {
+                              "cpu":  "A",
+                              "address":  "0x102DF3",
+                              "width":  8,
+                              "changes":  85,
+                              "changedFrames":  5,
+                              "firstFrame":  2064,
+                              "lastFrame":  2068,
+                              "firstDelta":  1,
+                              "lastDelta":  1,
+                              "edgeMatch":  true,
+                              "initial":  "0x0",
+                              "final":  "0x0",
+                              "triggerHits":  50,
+                              "stopHits":  52,
+                              "writers":  "0x108a 0x219e 0x21a4 0x644e 0x812c 0x84b4 0x84ba 0x85d8 0x871a 0x871e 0x8722 0x8726 0x872a 0x872e 0x874a 0x8786 0x87e4 0x96e0 0x9c00 0x9d0a",
+                              "writerCount":  20,
+                              "classification":  "edge-bounded-restored",
+                              "knownSemantic":  "",
+                              "score":  2150
+                          },
+                          {
+                              "cpu":  "A",
+                              "address":  "0x100101",
+                              "width":  8,
+                              "changes":  80,
+                              "changedFrames":  5,
+                              "firstFrame":  2064,
+                              "lastFrame":  2068,
+                              "firstDelta":  1,
+                              "lastDelta":  1,
+                              "edgeMatch":  true,
+                              "initial":  "0xF0",
+                              "final":  "0xF0",
+                              "triggerHits":  48,
+                              "stopHits":  48,
+                              "writers":  "0x1034",
+                              "writerCount":  1,
+                              "classification":  "edge-bounded-restored",
+                              "knownSemantic":  "",
+                              "score":  2050
+                          },
+                          {
+                              "cpu":  "B",
+                              "address":  "0x1007EB",
+                              "width":  8,
+                              "changes":  71,
+                              "changedFrames":  5,
+                              "firstFrame":  2064,
+                              "lastFrame":  2068,
+                              "firstDelta":  1,
+                              "lastDelta":  1,
+                              "edgeMatch":  true,
+                              "initial":  "0x70",
+                              "final":  "0x54",
+                              "triggerHits":  47,
+                              "stopHits":  47,
+                              "writers":  "0x1e4e 0x1e9c 0x1ea2 0x1ea8 0x1eae 0x1eb4 0x1eba 0x1ec0 0x1ec6 0x1ecc 0x1ed2 0x1ed8 0x1ede 0x1ee4 0x1eea 0x1ef0 0x1ef6 0x201c 0x2028 0x2034 0x2040 0x204c 0x2058 0x4b6c",
+                              "writerCount":  24,
+                              "classification":  "edge-bounded-state",
+                              "knownSemantic":  "",
+                              "score":  2035
+                          },
+                          {
+                              "cpu":  "B",
+                              "address":  "0x1007F7",
+                              "width":  8,
+                              "changes":  77,
+                              "changedFrames":  5,
+                              "firstFrame":  2064,
+                              "lastFrame":  2068,
+                              "firstDelta":  1,
+                              "lastDelta":  1,
+                              "edgeMatch":  true,
+                              "initial":  "0x7C",
+                              "final":  "0xBC",
+                              "triggerHits":  46,
+                              "stopHits":  46,
+                              "writers":  "0x1db4 0x25aa 0x339e 0x33a2 0x33a6 0x33aa 0x3c70 0x3c74 0x41b8 0x49b8 0x49bc 0x49c0 0x49c4 0x4f70 0x4f74 0x4f78 0xada 0xade",
+                              "writerCount":  18,
+                              "classification":  "edge-bounded-state",
+                              "knownSemantic":  "",
+                              "score":  2000
+                          }
+                      ],
+    "disassembly":  [
+                        {
+                            "cpu":  "A",
+                            "pc":  "0x828e",
+                            "file":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\timeline-analysis\\regression-v06680-rc7-auto\\disassembly\\A-828e.txt",
+                            "ok":  true
+                        },
+                        {
+                            "cpu":  "A",
+                            "pc":  "0x4f52",
+                            "file":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\timeline-analysis\\regression-v06680-rc7-auto\\disassembly\\A-4f52.txt",
+                            "ok":  true
+                        },
+                        {
+                            "cpu":  "A",
+                            "pc":  "0x40f60",
+                            "file":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\timeline-analysis\\regression-v06680-rc7-auto\\disassembly\\A-40f60.txt",
+                            "ok":  true
+                        },
+                        {
+                            "cpu":  "A",
+                            "pc":  "0x8786",
+                            "file":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\timeline-analysis\\regression-v06680-rc7-auto\\disassembly\\A-8786.txt",
+                            "ok":  true
+                        },
+                        {
+                            "cpu":  "B",
+                            "pc":  "0x41b8",
+                            "file":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\timeline-analysis\\regression-v06680-rc7-auto\\disassembly\\B-41b8.txt",
+                            "ok":  true
+                        },
+                        {
+                            "cpu":  "A",
+                            "pc":  "0x7e76",
+                            "file":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\timeline-analysis\\regression-v06680-rc7-auto\\disassembly\\A-7e76.txt",
+                            "ok":  true
+                        },
+                        {
+                            "cpu":  "A",
+                            "pc":  "0x874a",
+                            "file":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\timeline-analysis\\regression-v06680-rc7-auto\\disassembly\\A-874a.txt",
+                            "ok":  true
+                        },
+                        {
+                            "cpu":  "A",
+                            "pc":  "0x644e",
+                            "file":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\timeline-analysis\\regression-v06680-rc7-auto\\disassembly\\A-644e.txt",
+                            "ok":  true
+                        },
+                        {
+                            "cpu":  "A",
+                            "pc":  "0x4438e",
+                            "file":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\timeline-analysis\\regression-v06680-rc7-auto\\disassembly\\A-4438e.txt",
+                            "ok":  true
+                        },
+                        {
+                            "cpu":  "A",
+                            "pc":  "0x1034",
+                            "file":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\timeline-analysis\\regression-v06680-rc7-auto\\disassembly\\A-1034.txt",
+                            "ok":  true
+                        },
+                        {
+                            "cpu":  "B",
+                            "pc":  "0x3c74",
+                            "file":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\timeline-analysis\\regression-v06680-rc7-auto\\disassembly\\B-3c74.txt",
+                            "ok":  true
+                        },
+                        {
+                            "cpu":  "B",
+                            "pc":  "0x33aa",
+                            "file":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\timeline-analysis\\regression-v06680-rc7-auto\\disassembly\\B-33aa.txt",
+                            "ok":  true
+                        },
+                        {
+                            "cpu":  "B",
+                            "pc":  "0x201c",
+                            "file":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\timeline-analysis\\regression-v06680-rc7-auto\\disassembly\\B-201c.txt",
+                            "ok":  true
+                        },
+                        {
+                            "cpu":  "A",
+                            "pc":  "0x4fb0",
+                            "file":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\timeline-analysis\\regression-v06680-rc7-auto\\disassembly\\A-4fb0.txt",
+                            "ok":  true
+                        },
+                        {
+                            "cpu":  "A",
+                            "pc":  "0x827a",
+                            "file":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\timeline-analysis\\regression-v06680-rc7-auto\\disassembly\\A-827a.txt",
+                            "ok":  true
+                        },
+                        {
+                            "cpu":  "A",
+                            "pc":  "0x9d0a",
+                            "file":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\timeline-analysis\\regression-v06680-rc7-auto\\disassembly\\A-9d0a.txt",
+                            "ok":  true
+                        },
+                        {
+                            "cpu":  "B",
+                            "pc":  "0x1ef6",
+                            "file":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\timeline-analysis\\regression-v06680-rc7-auto\\disassembly\\B-1ef6.txt",
+                            "ok":  true
+                        },
+                        {
+                            "cpu":  "A",
+                            "pc":  "0x8250",
+                            "file":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\timeline-analysis\\regression-v06680-rc7-auto\\disassembly\\A-8250.txt",
+                            "ok":  true
+                        },
+                        {
+                            "cpu":  "A",
+                            "pc":  "0x8298",
+                            "file":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\timeline-analysis\\regression-v06680-rc7-auto\\disassembly\\A-8298.txt",
+                            "ok":  true
+                        },
+                        {
+                            "cpu":  "A",
+                            "pc":  "0x9be8",
+                            "file":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\timeline-analysis\\regression-v06680-rc7-auto\\disassembly\\A-9be8.txt",
+                            "ok":  true
+                        },
+                        {
+                            "cpu":  "B",
+                            "pc":  "0x4f74",
+                            "file":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\timeline-analysis\\regression-v06680-rc7-auto\\disassembly\\B-4f74.txt",
+                            "ok":  true
+                        },
+                        {
+                            "cpu":  "B",
+                            "pc":  "0x2034",
+                            "file":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\timeline-analysis\\regression-v06680-rc7-auto\\disassembly\\B-2034.txt",
+                            "ok":  true
+                        },
+                        {
+                            "cpu":  "B",
+                            "pc":  "0xada",
+                            "file":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\timeline-analysis\\regression-v06680-rc7-auto\\disassembly\\B-ada.txt",
+                            "ok":  true
+                        },
+                        {
+                            "cpu":  "A",
+                            "pc":  "0x8236",
+                            "file":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\timeline-analysis\\regression-v06680-rc7-auto\\disassembly\\A-8236.txt",
+                            "ok":  true
+                        }
+                    ],
+    "milestones":  [
+                       {
+                           "role":  "before",
+                           "frame":  2064,
+                           "state":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\timeline-analysis\\regression-v06680-rc7-auto\\milestones\\before-f2064.json",
+                           "snapshot":  "regression-v06680-rc7-auto-before-f2064",
+                           "snapshotPath":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\frame-snapshots\\regression-v06680-rc7-auto-before-f2064"
+                       },
+                       {
+                           "role":  "active",
+                           "frame":  2065,
+                           "state":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\timeline-analysis\\regression-v06680-rc7-auto\\milestones\\active-f2065.json",
+                           "snapshot":  "regression-v06680-rc7-auto-active-f2065",
+                           "snapshotPath":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\frame-snapshots\\regression-v06680-rc7-auto-active-f2065"
+                       },
+                       {
+                           "role":  "mid",
+                           "frame":  2066,
+                           "state":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\timeline-analysis\\regression-v06680-rc7-auto\\milestones\\mid-f2066.json",
+                           "snapshot":  "regression-v06680-rc7-auto-mid-f2066",
+                           "snapshotPath":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\frame-snapshots\\regression-v06680-rc7-auto-mid-f2066"
+                       },
+                       {
+                           "role":  "expiry",
+                           "frame":  2067,
+                           "state":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\timeline-analysis\\regression-v06680-rc7-auto\\milestones\\expiry-f2067.json",
+                           "snapshot":  "regression-v06680-rc7-auto-expiry-f2067",
+                           "snapshotPath":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\frame-snapshots\\regression-v06680-rc7-auto-expiry-f2067"
+                       },
+                       {
+                           "role":  "after",
+                           "frame":  2068,
+                           "state":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\timeline-analysis\\regression-v06680-rc7-auto\\milestones\\after-f2068.json",
+                           "snapshot":  "regression-v06680-rc7-auto-after-f2068",
+                           "snapshotPath":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\frame-snapshots\\regression-v06680-rc7-auto-after-f2068"
+                       }
+                   ],
+    "graphicsCorrelations":  [
+                                 {
+                                     "pair":  "before-vs-active",
+                                     "hud":  "normal",
+                                     "result":  {
+                                                    "a":  "regression-v06680-rc7-auto-before-f2064",
+                                                    "b":  "regression-v06680-rc7-auto-active-f2065",
+                                                    "region":  "HUD_TURBO",
+                                                    "hud":  "normal",
+                                                    "pixels":  11200,
+                                                    "changedPixels":  0,
+                                                    "changedPixelsRgb":  0,
+                                                    "changedPixelsRgba":  0,
+                                                    "alphaChangedPixels":  0,
+                                                    "occupancyChangedPixels":  0,
+                                                    "changedPercent":  0,
+                                                    "changedPercentRgba":  0,
+                                                    "meanAbsRgb":  0,
+                                                    "identical":  true,
+                                                    "rgbaIdentical":  true,
+                                                    "boundingBox":  null,
+                                                    "rgbaBoundingBox":  null,
+                                                    "diffPath":  null
+                                                }
+                                 },
+                                 {
+                                     "pair":  "before-vs-active",
+                                     "hud":  "only",
+                                     "result":  {
+                                                    "a":  "regression-v06680-rc7-auto-before-f2064",
+                                                    "b":  "regression-v06680-rc7-auto-active-f2065",
+                                                    "region":  "HUD_TURBO",
+                                                    "hud":  "only",
+                                                    "pixels":  11200,
+                                                    "changedPixels":  0,
+                                                    "changedPixelsRgb":  0,
+                                                    "changedPixelsRgba":  0,
+                                                    "alphaChangedPixels":  0,
+                                                    "occupancyChangedPixels":  0,
+                                                    "changedPercent":  0,
+                                                    "changedPercentRgba":  0,
+                                                    "meanAbsRgb":  0,
+                                                    "identical":  true,
+                                                    "rgbaIdentical":  true,
+                                                    "boundingBox":  null,
+                                                    "rgbaBoundingBox":  null,
+                                                    "diffPath":  null
+                                                }
+                                 },
+                                 {
+                                     "pair":  "before-vs-active",
+                                     "hud":  "hidden",
+                                     "result":  {
+                                                    "a":  "regression-v06680-rc7-auto-before-f2064",
+                                                    "b":  "regression-v06680-rc7-auto-active-f2065",
+                                                    "region":  "HUD_TURBO",
+                                                    "hud":  "hidden",
+                                                    "pixels":  11200,
+                                                    "changedPixels":  0,
+                                                    "changedPixelsRgb":  0,
+                                                    "changedPixelsRgba":  0,
+                                                    "alphaChangedPixels":  0,
+                                                    "occupancyChangedPixels":  0,
+                                                    "changedPercent":  0,
+                                                    "changedPercentRgba":  0,
+                                                    "meanAbsRgb":  0,
+                                                    "identical":  true,
+                                                    "rgbaIdentical":  true,
+                                                    "boundingBox":  null,
+                                                    "rgbaBoundingBox":  null,
+                                                    "diffPath":  null
+                                                }
+                                 },
+                                 {
+                                     "pair":  "active-vs-expiry",
+                                     "hud":  "normal",
+                                     "result":  {
+                                                    "a":  "regression-v06680-rc7-auto-active-f2065",
+                                                    "b":  "regression-v06680-rc7-auto-expiry-f2067",
+                                                    "region":  "HUD_TURBO",
+                                                    "hud":  "normal",
+                                                    "pixels":  11200,
+                                                    "changedPixels":  24,
+                                                    "changedPixelsRgb":  24,
+                                                    "changedPixelsRgba":  24,
+                                                    "alphaChangedPixels":  0,
+                                                    "occupancyChangedPixels":  0,
+                                                    "changedPercent":  0.2143,
+                                                    "changedPercentRgba":  0.2143,
+                                                    "meanAbsRgb":  0.3175,
+                                                    "identical":  false,
+                                                    "rgbaIdentical":  false,
+                                                    "boundingBox":  {
+                                                                        "x":  44,
+                                                                        "y":  228,
+                                                                        "w":  8,
+                                                                        "h":  8
+                                                                    },
+                                                    "rgbaBoundingBox":  {
+                                                                            "x":  44,
+                                                                            "y":  228,
+                                                                            "w":  8,
+                                                                            "h":  8
+                                                                        },
+                                                    "diffPath":  null
+                                                }
+                                 },
+                                 {
+                                     "pair":  "active-vs-expiry",
+                                     "hud":  "only",
+                                     "result":  {
+                                                    "a":  "regression-v06680-rc7-auto-active-f2065",
+                                                    "b":  "regression-v06680-rc7-auto-expiry-f2067",
+                                                    "region":  "HUD_TURBO",
+                                                    "hud":  "only",
+                                                    "pixels":  11200,
+                                                    "changedPixels":  12,
+                                                    "changedPixelsRgb":  12,
+                                                    "changedPixelsRgba":  24,
+                                                    "alphaChangedPixels":  20,
+                                                    "occupancyChangedPixels":  20,
+                                                    "changedPercent":  0.1071,
+                                                    "changedPercentRgba":  0.2143,
+                                                    "meanAbsRgb":  0.2646,
+                                                    "identical":  false,
+                                                    "rgbaIdentical":  false,
+                                                    "boundingBox":  {
+                                                                        "x":  46,
+                                                                        "y":  229,
+                                                                        "w":  6,
+                                                                        "h":  7
+                                                                    },
+                                                    "rgbaBoundingBox":  {
+                                                                            "x":  44,
+                                                                            "y":  228,
+                                                                            "w":  8,
+                                                                            "h":  8
+                                                                        },
+                                                    "diffPath":  null
+                                                }
+                                 },
+                                 {
+                                     "pair":  "active-vs-expiry",
+                                     "hud":  "hidden",
+                                     "result":  {
+                                                    "a":  "regression-v06680-rc7-auto-active-f2065",
+                                                    "b":  "regression-v06680-rc7-auto-expiry-f2067",
+                                                    "region":  "HUD_TURBO",
+                                                    "hud":  "hidden",
+                                                    "pixels":  11200,
+                                                    "changedPixels":  0,
+                                                    "changedPixelsRgb":  0,
+                                                    "changedPixelsRgba":  0,
+                                                    "alphaChangedPixels":  0,
+                                                    "occupancyChangedPixels":  0,
+                                                    "changedPercent":  0,
+                                                    "changedPercentRgba":  0,
+                                                    "meanAbsRgb":  0,
+                                                    "identical":  true,
+                                                    "rgbaIdentical":  true,
+                                                    "boundingBox":  null,
+                                                    "rgbaBoundingBox":  null,
+                                                    "diffPath":  null
+                                                }
+                                 },
+                                 {
+                                     "pair":  "expiry-vs-after",
+                                     "hud":  "normal",
+                                     "result":  {
+                                                    "a":  "regression-v06680-rc7-auto-expiry-f2067",
+                                                    "b":  "regression-v06680-rc7-auto-after-f2068",
+                                                    "region":  "HUD_TURBO",
+                                                    "hud":  "normal",
+                                                    "pixels":  11200,
+                                                    "changedPixels":  24,
+                                                    "changedPixelsRgb":  24,
+                                                    "changedPixelsRgba":  24,
+                                                    "alphaChangedPixels":  0,
+                                                    "occupancyChangedPixels":  0,
+                                                    "changedPercent":  0.2143,
+                                                    "changedPercentRgba":  0.2143,
+                                                    "meanAbsRgb":  0.3175,
+                                                    "identical":  false,
+                                                    "rgbaIdentical":  false,
+                                                    "boundingBox":  {
+                                                                        "x":  44,
+                                                                        "y":  228,
+                                                                        "w":  8,
+                                                                        "h":  8
+                                                                    },
+                                                    "rgbaBoundingBox":  {
+                                                                            "x":  44,
+                                                                            "y":  228,
+                                                                            "w":  8,
+                                                                            "h":  8
+                                                                        },
+                                                    "diffPath":  null
+                                                }
+                                 },
+                                 {
+                                     "pair":  "expiry-vs-after",
+                                     "hud":  "only",
+                                     "result":  {
+                                                    "a":  "regression-v06680-rc7-auto-expiry-f2067",
+                                                    "b":  "regression-v06680-rc7-auto-after-f2068",
+                                                    "region":  "HUD_TURBO",
+                                                    "hud":  "only",
+                                                    "pixels":  11200,
+                                                    "changedPixels":  12,
+                                                    "changedPixelsRgb":  12,
+                                                    "changedPixelsRgba":  24,
+                                                    "alphaChangedPixels":  20,
+                                                    "occupancyChangedPixels":  20,
+                                                    "changedPercent":  0.1071,
+                                                    "changedPercentRgba":  0.2143,
+                                                    "meanAbsRgb":  0.2646,
+                                                    "identical":  false,
+                                                    "rgbaIdentical":  false,
+                                                    "boundingBox":  {
+                                                                        "x":  46,
+                                                                        "y":  229,
+                                                                        "w":  6,
+                                                                        "h":  7
+                                                                    },
+                                                    "rgbaBoundingBox":  {
+                                                                            "x":  44,
+                                                                            "y":  228,
+                                                                            "w":  8,
+                                                                            "h":  8
+                                                                        },
+                                                    "diffPath":  null
+                                                }
+                                 },
+                                 {
+                                     "pair":  "expiry-vs-after",
+                                     "hud":  "hidden",
+                                     "result":  {
+                                                    "a":  "regression-v06680-rc7-auto-expiry-f2067",
+                                                    "b":  "regression-v06680-rc7-auto-after-f2068",
+                                                    "region":  "HUD_TURBO",
+                                                    "hud":  "hidden",
+                                                    "pixels":  11200,
+                                                    "changedPixels":  0,
+                                                    "changedPixelsRgb":  0,
+                                                    "changedPixelsRgba":  0,
+                                                    "alphaChangedPixels":  0,
+                                                    "occupancyChangedPixels":  0,
+                                                    "changedPercent":  0,
+                                                    "changedPercentRgba":  0,
+                                                    "meanAbsRgb":  0,
+                                                    "identical":  true,
+                                                    "rgbaIdentical":  true,
+                                                    "boundingBox":  null,
+                                                    "rgbaBoundingBox":  null,
+                                                    "diffPath":  null
+                                                }
+                                 }
+                             ],
+    "source":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\timeline-analysis\\regression-v06680-rc7-auto\\source.json",
+    "report":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\timeline-analysis\\regression-v06680-rc7-auto\\report.html"
+}

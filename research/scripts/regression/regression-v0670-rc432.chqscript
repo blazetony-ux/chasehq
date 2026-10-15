@@ -1,0 +1,11 @@
+# regression-version: 0.67.0.0-RC4.3.2
+# name: RC4.3.2 Native Asset and Execution Foundation
+# category: regression
+# purpose: Confirm release identity and preserved canonical baseline. Native asset/CPU instrumentation contracts are tested by chqdev Go and native CTest suites, not faked by emulated Script API actions.
+
+echo === RC4.3 Native foundation: BEGIN ===
+api release.assert-version
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api status
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+echo === RC4.3 Native foundation: COMPLETE ===

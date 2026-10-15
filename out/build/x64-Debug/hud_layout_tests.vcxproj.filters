@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.67.0.0-RC6.3.33\tests\hud_layout_tests.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.67.0.0-RC6.3.33\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{49FAFF37-D80E-3BAE-9FBA-83CC524246F1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

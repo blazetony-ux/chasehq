@@ -49,6 +49,75 @@ static chq::Bytes call_program() {
     return rom;
 }
 
+// RC4.4: synthetic original-PC instruction-hook fixture; deliberately not
+// a fake ROM-level parity claim. It proves that shadow sees Musashi A2/PC.
+static chq::Bytes projection_hook_program(bool lookup) {
+    chq::Bytes rom(0x80000);
+    word(rom,0,0x0011);word(rom,2,0x0000);
+    word(rom,4,0x0004);word(rom,6,0x34ee);
+    // LEA $54040.L,A2 followed by JMP to original lookup/exit PC.
+    for(unsigned i=0;i<6;++i) word(rom,0x434ee + i*2,
+        std::array<unsigned,6>{0x45f9,0x0005,0x4040,0x4ef9,0x0004,lookup ? 0x351cu : 0x0f5au}[i]);
+    word(rom,lookup?0x4351c:0x40f5a,0x4e72);word(rom,(lookup?0x4351c:0x40f5a)+2,0x2700);
+    return rom;
+}
+
+// Synthetic micro-op fixture. It only validates execution dispatch semantics;
+// it is NOT evidence that the authentic game ROM or complete steering function
+// has been reconstructed.
+static chq::Bytes steering_move_fixture() {
+    auto rom=main_program();
+    word(rom,0x820c,0x3b50);word(rom,0x820e,0x8300); // MOVE.W (A0),(-0x7D00,A5)
+    word(rom,0x8210,0x4e72);word(rom,0x8212,0x2700); // STOP after the candidate
+    word(rom,0x3132c,0); // verified normal-mode input 0 => output 0
+    return rom;
+}
+
+// Synthetic RC6.3.2 health function + caller. The caller writes W32 at
+// 0x102DE0 immediately after the authentic RTS. This reproduces the exact
+// bus-trace ownership hazard seen in Windows RC6.3.1 evidence; it is NOT a
+// substitute for the independent actual-game-ROM differential acceptance.
+static chq::Bytes health_return_boundary_fixture() {
+    auto rom=main_program();
+    const std::array<unsigned,20> opcodes={
+        0x4a6d,0x812e, // A10C TST.W (-0x7ED2,A5)
+        0x660e,        // A110 BNE.B A120
+        0x536d,0x82ae, // A112 SUBQ.W #1,(-0x7D52,A5)
+        0x6a08,        // A116 BPL.B A120
+        0x3b7c,0x1400,0x82d8, // A118 MOVE.W #$1400,(-0x7D28,A5)
+        0x6008,        // A11E BRA.B A128
+        0x302d,0x82ba, // A120 MOVE.W (-0x7D46,A5),D0
+        0xd16d,0x82d8, // A124 ADD.W D0,(-0x7D28,A5)
+        0x4e75,        // A128 RTS
+        0x4e71,0x4e71,0x4e71,0x4e71,0x4e71 // padding
+    };
+    for (std::size_t i=0;i<opcodes.size();++i)word(rom,0xa10c+static_cast<unsigned>(i*2),opcodes[i]);
+    word(rom,0xa09c,0x2f3c);word(rom,0xa09e,0x0000);word(rom,0xa0a0,0xa0a0); // MOVE.L #$A0A0,-(SP)
+    word(rom,0xa0a2,0x4e72);word(rom,0xa0a4,0x2700); // STOP
+    return rom;
+}
+
+// RC6.3.5 synthetic *enclosing routine* call: BSR.B A080 from A09A,
+// followed by a JMP into the native candidate tail A10C. Both original and
+// generated substitution must preserve real call provenance; this fixture
+// must never be mistaken for evidence about the authentic game-ROM caller.
+// RC6.3.6 synthetic original CPU-A copy block. This proves Musashi hook
+// semantics only; authentic ROM parity remains a separate Windows gate.
+static chq::Bytes native_copy_fixture(){
+    auto rom=main_program();
+    for(unsigned i=0;i<16;++i)word(rom,0x40540u+2u*i,0x22d8u); // MOVE.L (A0)+,(A1)+
+    word(rom,0x40560,0x4e72);word(rom,0x40562,0x2700); // STOP
+    return rom;
+}
+
+static chq::Bytes health_enclosing_caller_fixture() {
+    auto rom=health_return_boundary_fixture();
+    word(rom,0xa09a,0x61e4); // BSR.B A080; return A09C
+    word(rom,0xa080,0x4ef9); word(rom,0xa082,0x0000);
+    word(rom,0xa084,0xa10c); // JMP absolute-long into function tail
+    return rom;
+}
+
 static chq::Bytes sub_program() {
     chq::Bytes rom(0x20000);
     word(rom, 0, 0x0010); word(rom, 2, 0x4000); // SP 0x104000
@@ -62,6 +131,20 @@ static chq::Bytes sub_program() {
                    0x4e72,0x2700}) {
         word(rom, pc, v); pc += 2;
     }
+    return rom;
+}
+
+// RC6.3.10 synthetic CPU-B ROM fixture: BEQ.B at 4DE, both outcomes.
+// This checks hook/clock/state semantics only, not original Chase H.Q. ROM.
+static chq::Bytes cpu_b_branch_fixture(bool taken) {
+    chq::Bytes rom(0x20000);
+    word(rom,0,0x0010);word(rom,2,0x4000);
+    word(rom,4,0);word(rom,6,0x04d8);
+    word(rom,0x4d8,taken?0x4a00:0x7001); // TST.B D0 (Z=1) or MOVEQ #1,D0 (Z=0)
+    word(rom,0x4da,0x4e71); // NOP
+    word(rom,0x4dc,0x4e71); // NOP
+    word(rom,0x4de,0x67f8); // BEQ.B 4D8
+    word(rom,0x4e0,0x4e72);word(rom,0x4e2,0x2700); // STOP on not-taken
     return rom;
 }
 
@@ -93,6 +176,447 @@ int main() {
         sub_lanes[0].pop_back();
         rejects([&] { chq::interleave_sub(sub_lanes); }, "short sub lane accepted");
 
+#if defined(CHQ_CPU_B_TEST_LIBRARY_PATH)
+        // Real Musashi CPU-B substitution; the stand-in library is test-only.
+        // Original/native/fallback must agree on both branch outcomes and
+        // mapped data-bus activity (zero for BEQ), CPU state and cycles.
+        for(bool taken : {false,true}) {
+            std::array<std::string,3> traces{},busTraces{},audits{},reports{};
+            std::array<std::uint32_t,3> pc{},sr{};
+            std::array<std::uint64_t,3> ticks{};
+            for(int mode=0;mode<3;++mode) {
+                auto emulator=std::make_unique<chq::Runtime>(main_program(),cpu_b_branch_fixture(taken));
+                auto path=std::filesystem::temp_directory_path()/("chq-rc6310-cpu-b-"+std::to_string(taken)+"-"+std::to_string(mode));
+                std::filesystem::create_directories(path);
+                if(mode)emulator->load_native_cpu_b_library(CHQ_CPU_B_TEST_LIBRARY_PATH);
+                if(mode)emulator->enable_native_cpu_b_replacement(mode==2);
+                emulator->enable_native_cpu_b_capture(path/"native-cpu-b-state.tsv");
+                emulator->enable_native_dispatch_audit(path/"native-dispatch.tsv");
+                emulator->reset();
+                emulator->run(10000);
+                emulator->write_native_execution_evidence(path,"synthetic-CPU-B-BEQ");
+                pc[mode]=emulator->debug_get_register(chq::BusSpace::Sub,"PC");
+                sr[mode]=emulator->debug_get_register(chq::BusSpace::Sub,"SR");
+                ticks[mode]=emulator->cycles_b;
+                emulator.reset();
+                auto read=[&](const char* filename) {std::ifstream in(path/filename,std::ios::binary);
+                  return std::string(std::istreambuf_iterator<char>(in),{});};
+                traces[mode]=read("native-cpu-b-state.tsv");
+                busTraces[mode]=read("native-cpu-b-bus.tsv");
+                reports[mode]=read("native-cpu-b-report.json");
+                audits[mode]=read("native-dispatch.tsv");
+                std::filesystem::remove_all(path);
+            }
+            check(!traces[0].empty(),"synthetic CPU-B branch never executed");
+            check(busTraces[0].empty(),"synthetic original BEQ data-bus contract incorrect");
+            check(reports[1].find("\"commits\":0")==std::string::npos,"synthetic generated CPU-B not committed");
+            check(reports[2].find("\"rollbacks\":1")!=std::string::npos,"synthetic CPU-B generated rejection absent");
+            check(audits[1].find("B:000004DE-000004E0")!=std::string::npos,"shared dispatcher missed CPU-B route");
+            for(int mode=1;mode<3;++mode) {
+                if(traces[mode]!=traces[0]) {
+                   std::cerr<<"CPU-B PARITY DIAG taken="<<taken<<" mode="<<mode
+                     <<" original="<<traces[0].substr(0,400)<<" native="<<traces[mode].substr(0,400)
+                     <<" sizes="<<traces[0].size()<<"/"<<traces[mode].size()<<"\n";
+                }
+                check(traces[mode]==traces[0],"CPU-B original/native/rollback state or cycles diverged");
+                check(busTraces[mode]==busTraces[0],"CPU-B original/native/rollback data bus diverged");
+                check(pc[mode]==pc[0]&&sr[mode]==sr[0]&&ticks[mode]==ticks[0],"CPU-B emulator final register/cycle parity failed");
+            }
+        }
+        std::cout << "[test] RC6.3.10 CPU-B synthetic two-branch ROM/native/fallback equivalence PASS\n";
+        // RC6.3.11: the previous trace falsely labelled Musashi interrupt
+        // vector/stack effects as BEQ's data bus accesses because trace_pc
+        // remained at 0x4DE until the next instruction callback. Exercise a
+        // real interrupt ACK + vector/stack sequence in the synthetic CPU.
+        {
+            std::array<std::string,3> irq{},data{};
+            for (int mode=0;mode<3;++mode) {
+                auto sub=cpu_b_branch_fixture(true);
+                word(sub,0x70,0); word(sub,0x72,0x474); // IRQ4 autovector -> RTE
+                word(sub,0x474,0x4e73);
+                auto emulator=std::make_unique<chq::Runtime>(main_program(),std::move(sub));
+                auto dir=std::filesystem::temp_directory_path()/("chq-rc6311-irq-phase-"+std::to_string(mode));
+                std::filesystem::create_directories(dir);
+                if(mode)emulator->load_native_cpu_b_library(CHQ_CPU_B_TEST_LIBRARY_PATH);
+                if(mode)emulator->enable_native_cpu_b_replacement(mode==2);
+                emulator->enable_native_cpu_b_capture(dir/"native-cpu-b-state.tsv");
+                emulator->reset();
+                emulator->run(1000);
+                check(emulator->debug_set_register(chq::BusSpace::Sub,"SR",0x2004u),"cannot unmask CPU-B synthetic IRQ");
+                emulator->irq4();
+                emulator->run(2000);
+                emulator.reset();
+                auto read=[&](const char* name){std::ifstream in(dir/name,std::ios::binary);
+                    return std::string(std::istreambuf_iterator<char>(in),{});};
+                irq[mode]=read("native-cpu-b-irq.tsv");
+                data[mode]=read("native-cpu-b-bus.tsv");
+                std::filesystem::remove_all(dir);
+            }
+            check(irq[0].find("\tA\t")!=std::string::npos,"no real CPU-B interrupt ACK captured");
+            check(irq[0].find("\tR\t70\t474\t4")!=std::string::npos,"IRQ vector read not separately captured");
+            check(irq[0].find("\tW\t")!=std::string::npos,"IRQ stack writes not separately captured");
+            check(data[0].empty(),"interrupt effects incorrectly assigned to BEQ branch data bus");
+            for(int mode=1;mode<3;++mode) {
+                check(data[mode]==data[0],"synthetic interrupt BEQ data bus not preserved");
+                check(irq[mode]==irq[0],"synthetic interrupt ACK/vector/stack trace not preserved");
+            }
+        }
+        std::cout << "[test] RC6.3.11 Musashi IRQ transaction ownership/rollback PASS\n";
+#endif
+#if defined(CHQ_CPU_B_PAIR_TEST_LIBRARY_PATH)
+        // RC6.3.13: genuine Musashi CPU-B two-opcode TST.W abs.long + BEQ,
+        // with one mapped data read, flags, cycles and forced ROM fallback.
+        for(bool zero : {false,true}) {
+            std::array<std::string,3> state{},data{},report{},irq{};
+            std::array<std::uint64_t,3> ticks{};
+            for(int mode=0;mode<3;++mode) {
+                chq::Bytes rom(0x20000);
+                word(rom,0,0x0010);word(rom,2,0x4000);
+                word(rom,4,0);word(rom,6,0x04d8);
+                word(rom,0x4d8,0x4a79);word(rom,0x4da,0x0010);word(rom,0x4dc,0x0804);
+                word(rom,0x4de,0x67f8);word(rom,0x4e0,0x4e72);word(rom,0x4e2,0x2700);
+                auto em=std::make_unique<chq::Runtime>(main_program(),std::move(rom));
+                const auto dir=std::filesystem::temp_directory_path()/("chq-rc6313-pair-"+std::to_string(zero)+"-"+std::to_string(mode));
+                std::filesystem::create_directories(dir);
+                if(mode)em->load_native_cpu_b_pair_library(CHQ_CPU_B_PAIR_TEST_LIBRARY_PATH);
+                if(mode)em->enable_native_cpu_b_pair_replacement(mode==2);
+                em->enable_native_cpu_b_pair_capture(dir/"native-cpu-b-pair-state.tsv");
+                em->enable_native_dispatch_audit(dir/"native-dispatch.tsv");
+                em->reset();
+                if(!zero)em->bus.debug_write(0x100804,1,2,chq::BusSpace::Sub);
+                em->run(10000);em->write_native_execution_evidence(dir,"synthetic-CPU-B-TST-BEQ-pair");
+                ticks[mode]=em->cycles_b;em.reset();
+                auto read=[&](const char* name){std::ifstream f(dir/name,std::ios::binary);return std::string(std::istreambuf_iterator<char>(f),{});};
+                state[mode]=read("native-cpu-b-pair-state.tsv");data[mode]=read("native-cpu-b-pair-bus.tsv");
+                report[mode]=read("native-cpu-b-pair-report.json");irq[mode]=read("native-cpu-b-pair-irq.tsv");
+                std::filesystem::remove_all(dir);
+            }
+            check(!state[0].empty()&&!data[0].empty(),"CPU-B pair missing original state or mapped R16");
+            check(report[1].find("\"commits\":0")==std::string::npos,"generated CPU-B pair never committed");
+            check(report[2].find("\"rollbacks\":1")!=std::string::npos,"generated CPU-B pair deliberate rollback absent");
+            for(int m=1;m<3;++m) {
+                if(state[m]!=state[0])std::cerr<<"LENS="<<state[0].size()<<"/"<<state[m].size()<<" FIRST="<<state[0].find_first_not_of(state[m])<<" "<<"RC6313 PAIR STATE DIAG zero="<<zero<<" mode="<<m<<" ROM="<<state[0].substr(0,250)<<" NATIVE="<<state[m].substr(0,250)<<"\n";
+                check(state[m]==state[0],"CPU-B pair return register/flags/cycles not equal");
+                check(data[m]==data[0],"CPU-B pair original/native R16 stream differs");
+                check(irq[m]==irq[0],"CPU-B pair IRQ stream differs");
+                check(ticks[m]==ticks[0],"CPU-B pair total CPU cycles differ");
+            }
+        }
+        std::cout << "[test] RC6.3.13 real Musashi CPU-B TST.W+BEQ original/native/fallback PASS\n";
+#endif
+        // RC6.3.7: independent ORIGINAL CPU-B ROM-PC graph. Observe opcode
+        // fingerprints and actual next-hook PCs, not a guessed function CFG.
+        {
+            auto cpu=std::make_unique<chq::Runtime>(main_program(),sub_program());
+            auto folder=std::filesystem::temp_directory_path()/"chq-rc637-cpu-b-edges";
+            std::filesystem::create_directories(folder);
+            cpu->enable_rom_execution_census();
+            cpu->enable_cpu_b_edge_probe();
+            cpu->reset();
+            cpu->run(6000);
+            cpu->write_native_execution_evidence(folder,"synthetic-original-cpu-b-edges");
+            auto read=[&](const char* f){std::ifstream in(folder/f,std::ios::binary);
+                return std::string(std::istreambuf_iterator<char>(in),{});};
+            const auto edges=read("cpu-b-observed-edges.tsv");
+            const auto counts=read("rom-execution-pc-counts.tsv");
+            check(!edges.empty(),"CPU-B edge observation absent");
+            check(edges.find("100\t106\t3039\t")!=std::string::npos,
+                  "CPU-B ROM opcode/next-PC fingerprint does not match actual 68000 instruction");
+            check(counts.find("CPU-B")!=std::string::npos,"original CPU-B census absent");
+            std::filesystem::remove_all(folder);
+        }
+        // RC6.2.4: prove the hook actually skips CPU-A ROM MOVE.W and updates
+        // SR/RAM/PC/cycles, rather than merely overlaying the final value.
+        // A forced mismatch must preserve bus state and execute original ROM without speculative writes.
+        {
+            std::array<std::string,3> reports, stateRecords, busRecords;
+            std::array<std::uint32_t,3> ram{},sr{},pc{};
+            std::array<std::uint64_t,3> cycles{};
+            for (int mode=0;mode<3;++mode) {
+                auto runtime=std::make_unique<chq::Runtime>(steering_move_fixture(),sub_program());
+                if(mode==0)runtime->enable_native_steering_shadow();
+                else runtime->enable_native_steering_replacement(mode==2);
+                const auto d=std::filesystem::temp_directory_path()/("chq-rc626-steering-"+std::to_string(mode));
+                std::filesystem::create_directories(d);
+                runtime->enable_native_steering_state_capture(d/"native-steering-state.tsv");
+                runtime->enable_native_steering_bus_capture(d/"native-steering-bus.tsv");
+                runtime->reset();
+                check(runtime->debug_set_register(chq::BusSpace::Main,"PC",0x820c),"cannot set synthetic steering PC");
+                check(runtime->debug_set_register(chq::BusSpace::Main,"A0",0x3132c),"cannot set synthetic steering A0");
+                check(runtime->debug_set_register(chq::BusSpace::Main,"A5",0x108000),"cannot set synthetic steering A5");
+                check(runtime->debug_set_register(chq::BusSpace::Main,"D0",0),"cannot initialise synthetic steering D0");
+                runtime->bus.write(0x100300,0,2,chq::BusSpace::Main);
+                runtime->bus.write(0x10012e,0,2,chq::BusSpace::Main);
+                runtime->run(500);
+                runtime->write_native_execution_evidence(d,"synthetic-move-step");
+                std::ifstream f(d/"native-steering-shadow.json");
+                reports[mode]=std::string(std::istreambuf_iterator<char>(f),{});
+                f.close();
+                ram[mode]=runtime->bus.peek(0x100300,2,chq::BusSpace::Main);
+                sr[mode]=runtime->debug_get_register(chq::BusSpace::Main,"SR");
+                pc[mode]=runtime->debug_get_register(chq::BusSpace::Main,"PC");
+                cycles[mode]=runtime->cycles_a;
+                runtime.reset(); // flush actual instruction/state and ordered bus records
+                std::ifstream stateFile(d/"native-steering-state.tsv",std::ios::binary);
+                stateRecords[mode]=std::string(std::istreambuf_iterator<char>(stateFile),{});
+                std::ifstream busFile(d/"native-steering-bus.tsv",std::ios::binary);
+                busRecords[mode]=std::string(std::istreambuf_iterator<char>(busFile),{});
+                stateFile.close(); busFile.close();std::filesystem::remove_all(d);
+            }
+            check(reports[0].find("\"commits\":0")!=std::string::npos,"original ROM falsely reported native commits");
+            check(reports[1].find("\"commits\":1")!=std::string::npos,"native MOVE.W was not actually executed");
+            check(reports[2].find("\"rollbacks\":1")!=std::string::npos,"mutated native MOVE.W did not roll back");
+            check(!stateRecords[0].empty(),"original ROM did not emit CPU return boundary");
+            check(stateRecords[0].find("008210")!=std::string::npos,"wrong native CPU boundary");
+            check(reports[1].find("\"compared\":1")!=std::string::npos,"native shadow still pending after skipped CPU hook");
+            check(reports[1].find("\"incomplete\":0")!=std::string::npos,"native shadow incorrectly marked incomplete");
+            for(int mode=1;mode<3;++mode) {
+                check(stateRecords[mode]==stateRecords[0],"actual return-state snapshots differ from original ROM");
+                check(busRecords[mode]==busRecords[0],"ordered bus effects differ from original ROM");
+                check(ram[mode]==ram[0],"native / rollback RAM diverged from original");
+                check(sr[mode]==sr[0],"native / rollback CPU SR diverged from original");
+                check(pc[mode]==pc[0],"native / rollback CPU PC diverged from original");
+                check(cycles[mode]==cycles[0],"native / rollback CPU cycles diverged from original");
+            }
+        }
+#if defined(CHQ_COPY_TEST_LIBRARY_PATH)
+        // Different instruction family from the branched health tail. Verify
+        // every 68000 longword bus operation, final CPU flags, original PC,
+        // and forced rollback with NO speculative RAM side effects.
+        {
+            std::array<std::string,3> busRecord,stateRecord,report,dispatch;
+            std::array<std::uint32_t,3> pc{},a0{},a1{},sr{},cycles{};
+            std::array<std::array<std::uint32_t,16>,3> output{};
+            for(int mode=0;mode<3;++mode){
+                auto emulator=std::make_unique<chq::Runtime>(native_copy_fixture(),sub_program());
+                auto dir=std::filesystem::temp_directory_path()/("chq-rc636-copy-"+std::to_string(mode));
+                std::filesystem::create_directories(dir);
+                if(mode){
+                    emulator->load_native_copy_library(CHQ_COPY_TEST_LIBRARY_PATH);
+                    emulator->enable_native_copy_replacement(mode==2);
+                }
+                emulator->reset();
+                check(emulator->debug_set_register(chq::BusSpace::Main,"PC",0x40540),"copy fixture PC");
+                check(emulator->debug_set_register(chq::BusSpace::Main,"A0",0x100500),"copy fixture A0");
+                check(emulator->debug_set_register(chq::BusSpace::Main,"A1",0x100700),"copy fixture A1");
+                check(emulator->debug_set_register(chq::BusSpace::Main,"D0",0),"copy fixture D0");
+                for(unsigned i=0;i<16;++i)emulator->bus.write(0x100500+4*i,0x82340000u+i*119u,4,chq::BusSpace::Main);
+                emulator->enable_native_copy_capture(dir/"native-copy-state.tsv");
+                emulator->enable_native_dispatch_audit(dir/"native-dispatch.tsv");
+                emulator->run(6000);
+                pc[mode]=emulator->debug_get_register(chq::BusSpace::Main,"PC");
+                a0[mode]=emulator->debug_get_register(chq::BusSpace::Main,"A0");
+                a1[mode]=emulator->debug_get_register(chq::BusSpace::Main,"A1");
+                sr[mode]=emulator->debug_get_register(chq::BusSpace::Main,"SR");
+                cycles[mode]=emulator->cycles_a;
+                for(unsigned i=0;i<16;++i)output[mode][i]=emulator->bus.peek(0x100700+4*i,4,chq::BusSpace::Main);
+                emulator->write_native_execution_evidence(dir,"synthetic-rc636-copy");
+                emulator.reset();
+                auto load=[&](const char* n){std::ifstream f(dir/n,std::ios::binary);return std::string(std::istreambuf_iterator<char>(f),{});};
+                busRecord[mode]=load("native-copy-bus.tsv");
+                stateRecord[mode]=load("native-copy-state.tsv");
+                dispatch[mode]=load("native-dispatch.tsv");
+                if(mode)report[mode]=load("native-copy-report.json");
+                std::filesystem::remove_all(dir);
+            }
+            std::cerr<<"COPY_TRACE: size="<<busRecord[0].size()<<" count="<<std::count(busRecord[0].begin(),busRecord[0].end(),'\n')<<" first="<<busRecord[0].substr(0,600)<<" state="<<stateRecord[0].substr(0,400)<<"\n";
+            check(std::count(busRecord[0].begin(),busRecord[0].end(),'\n')==32,"original ROM copy bus transaction count not 32");
+            check(!stateRecord[0].empty(),"original ROM copy block exit state missing");
+            check(report[1].find("\"commits\":1")!=std::string::npos,"native copy not committed");
+            check(dispatch[0].find("A:00040540-00040560\t40540\toriginal-rom")!=std::string::npos,"original copy not audited by shared dispatcher");
+            check(dispatch[1].find("A:00040540-00040560\t40540\tnative-commit")!=std::string::npos,"generated copy not committed via shared dispatcher");
+            check(dispatch[2].find("A:00040540-00040560\t40540\toriginal-fallback")!=std::string::npos,"copy fault not rejected via shared dispatcher");
+            check(report[2].find("\"rollbacks\":1")!=std::string::npos,"copy mismatch did not roll back");
+            check(report[2].find("\"commits\":0")!=std::string::npos,"copy fallback wrote speculative data");
+            for(int mode=1;mode<3;++mode){
+                check(busRecord[mode]==busRecord[0],"copy ordered original/native/rollback bus differs");
+                auto clean=[](std::string x){auto pos=x.find("\trom\t");if(pos!=std::string::npos)x.replace(pos,5,"\tlabel\t");
+                    pos=x.find("\tnative\t");if(pos!=std::string::npos)x.replace(pos,8,"\tlabel\t");return x;};
+                check(clean(stateRecord[mode])==clean(stateRecord[0]),"copy block original/native CPU return state differs");
+                check(output[mode]==output[0],"copy contents diverged");
+                check(pc[mode]==pc[0]&&a0[mode]==a0[0]&&a1[mode]==a1[0]&&sr[mode]==sr[0]&&cycles[mode]==cycles[0],"copy CPU state/cycles diverged");
+            }
+            std::cout<<"[test] RC6.3.6 genuine 68000 copy block synthetic original/native/rollback PASS\n";
+        }
+#endif
+        // RC6.3.2: real emulator execution with a deliberately synthetic ROM
+        // and test-only DLL. Compare original/native/rollback traces without
+        // trimming post-return transactions. The caller stack write must stay
+        // OUT of all function-scoped bus traces, even when the native hook
+        // redirects PC before Musashi invokes another instruction hook.
+#if defined(CHQ_HEALTH_TEST_LIBRARY_PATH)
+        {
+            std::array<std::string,3> healthStates,healthBus,healthReports;
+            std::array<std::uint32_t,3> cpuSR{},cpuPC{},cpuD0{},memScore{},stackValue{};
+            for(int mode=0;mode<3;++mode){
+                auto r=std::make_unique<chq::Runtime>(health_return_boundary_fixture(),sub_program());
+                const auto folder=std::filesystem::temp_directory_path()/("chq-rc632-health-"+std::to_string(mode));
+                std::filesystem::create_directories(folder);
+                if(mode){
+                    r->load_native_health_library(CHQ_HEALTH_TEST_LIBRARY_PATH);
+                    r->enable_native_health_replacement(mode==2);
+                }
+                r->reset();
+                check(r->debug_set_register(chq::BusSpace::Main,"PC",0xa10c),"health fixture PC");
+                check(r->debug_set_register(chq::BusSpace::Main,"A5",0x108000),"health fixture A5");
+                check(r->debug_set_register(chq::BusSpace::Main,"SP",0x102de0),"health fixture SP");
+                check(r->debug_set_register(chq::BusSpace::Main,"D0",0),"health fixture D0");
+                r->bus.write(0x102de0,0xa09c,4,chq::BusSpace::Main);
+                r->bus.write(0x10012e,1,2,chq::BusSpace::Main);
+                r->bus.write(0x1002ae,14,2,chq::BusSpace::Main);
+                r->bus.write(0x1002ba,0x155,2,chq::BusSpace::Main);
+                r->bus.write(0x1002d8,0,2,chq::BusSpace::Main);
+                r->enable_native_health_state_capture(folder/"native-health-state.tsv");
+                r->enable_native_dispatch_audit(folder/"native-dispatch.tsv");
+                r->run(800);
+                cpuSR[mode]=r->debug_get_register(chq::BusSpace::Main,"SR");
+                cpuPC[mode]=r->debug_get_register(chq::BusSpace::Main,"PC");
+                cpuD0[mode]=r->debug_get_register(chq::BusSpace::Main,"D0");
+                memScore[mode]=r->bus.peek(0x1002d8,2,chq::BusSpace::Main);
+                stackValue[mode]=r->bus.peek(0x102de0,4,chq::BusSpace::Main);
+                r->write_native_execution_evidence(folder,"synthetic-health-return-boundary");
+                r.reset();
+                auto load=[&](const char* name){std::ifstream f(folder/name,std::ios::binary);
+                    return std::string(std::istreambuf_iterator<char>(f),{});};
+                healthStates[mode]=load("native-health-state.tsv");
+                const auto dispatcher=load("native-dispatch.tsv");
+                const auto want=mode==0?"original-rom":(mode==1?"native-commit":"original-fallback");
+                check(dispatcher.find(std::string("A:0000A10C-0000A12A\ta10c\t")+want)!=std::string::npos,
+                      "health result not audited by common dispatcher");
+                healthBus[mode]=load("native-health-bus.tsv");
+                if(mode) healthReports[mode]=load("native-health-report.json");
+                std::filesystem::remove_all(folder);
+            }
+            check(!healthBus[0].empty(),"synthetic original health bus trace absent");
+            check(healthBus[0].find("\tW\t102de0\t")==std::string::npos,"authentic caller write was attributed to health function");
+            check(healthBus[0]==healthBus[1],"native health trace falsely includes caller stack write (or lost real bus access)");
+            check(healthBus[0]==healthBus[2],"rollback health bus transaction parity failed");
+            check(healthReports[1].find("\"commits\":1")!=std::string::npos,"synthetic generated native function did not commit");
+            check(healthReports[2].find("\"rollbacks\":1")!=std::string::npos,"forced native mismatch did not roll back");
+            check(healthReports[2].find("\"commits\":0")!=std::string::npos,"rollback committed speculative candidate");
+            for(int mode=1;mode<3;++mode){
+                check(cpuSR[mode]==cpuSR[0],"health synthetic CPU SR diverged");
+                check(cpuPC[mode]==cpuPC[0],"health synthetic CPU PC diverged");
+                check(cpuD0[mode]==cpuD0[0],"health synthetic CPU D0 diverged");
+                check(memScore[mode]==memScore[0],"health synthetic score diverged");
+                check(stackValue[mode]==stackValue[0],"caller stack write result diverged");
+            }
+            std::cout<<"[test] RC6.3.2 live hook caller-stack ownership, native and rollback PASS\n";
+        }
+        // RC6.3.5: capture actual CPU-A BSR target and the executed path
+        // into the candidate tail, with strict original/native/rollback parity.
+        {
+            std::array<std::string,3> paths;
+            for(int mode=0;mode<3;++mode) {
+                auto r=std::make_unique<chq::Runtime>(health_enclosing_caller_fixture(),sub_program());
+                const auto dir=std::filesystem::temp_directory_path()/("chq-rc635-real-caller-"+std::to_string(mode));
+                std::filesystem::create_directories(dir);
+                if(mode) {
+                    r->load_native_health_library(CHQ_HEALTH_TEST_LIBRARY_PATH);
+                    r->enable_native_health_replacement(mode==2);
+                }
+                r->reset();
+                check(r->debug_set_register(chq::BusSpace::Main,"PC",0xa09a),"RC635 BSR PC");
+                check(r->debug_set_register(chq::BusSpace::Main,"SP",0x102de4),"RC635 caller SP");
+                check(r->debug_set_register(chq::BusSpace::Main,"A5",0x108000),"RC635 A5");
+                check(r->debug_set_register(chq::BusSpace::Main,"D0",0),"RC635 D0");
+                r->bus.write(0x10012e,1,2,chq::BusSpace::Main);
+                r->bus.write(0x1002ae,14,2,chq::BusSpace::Main);
+                r->bus.write(0x1002ba,0x155,2,chq::BusSpace::Main);
+                r->bus.write(0x1002d8,0,2,chq::BusSpace::Main);
+                r->enable_native_health_state_capture(dir/"native-health-state.tsv");
+                r->run(900);
+                r.reset();
+                std::ifstream in(dir/"native-health-caller-path.tsv",std::ios::binary);
+                paths[mode]=std::string(std::istreambuf_iterator<char>(in),{});
+                in.close();
+                std::filesystem::remove_all(dir);
+            }
+            check(paths[0].find("\ta09c\ta09a\ta080\ta09a,a080,a10c\n")!=std::string::npos,
+                "true CPU-A BSR-to-earlier-entry path not captured");
+            check(paths[1]==paths[0],"native altered pre-entry CPU-A call path");
+            check(paths[2]==paths[0],"rollback altered pre-entry CPU-A call path");
+            std::cout<<"[test] RC6.3.5 actual BSR-to-larger-function tail tracing PASS\n";
+        }
+        // RC6.3.3: real Musashi instruction-hook paths must reflect the
+        // debugger-controlled entry state, NOT a predicted fixture label.
+        // Synthetic ROM only: ROM-backed Windows equivalence is a distinct gate.
+        for(const auto& testcase:std::array<std::pair<const char*,const char*>,4>{{
+            {"bypass","a10c,a110,a120,a124,a128"},
+            {"nonterminal","a10c,a110,a112,a116,a120,a124,a128"},
+            {"terminal","a10c,a110,a112,a116,a118,a11e,a128"},
+            {"overflow","a10c,a110,a112,a116,a120,a124,a128"}
+        }}){
+            auto r=std::make_unique<chq::Runtime>(health_return_boundary_fixture(),sub_program());
+            const auto folder=std::filesystem::temp_directory_path()/(std::string("chq-rc633-")+testcase.first);
+            std::filesystem::create_directories(folder);
+            r->reset();
+            check(r->debug_set_register(chq::BusSpace::Main,"PC",0xa10c),"synthetic health entry");
+            check(r->debug_set_register(chq::BusSpace::Main,"A5",0x108000),"synthetic A5");
+            check(r->debug_set_register(chq::BusSpace::Main,"SP",0x102de0),"synthetic SP");
+            check(r->debug_set_register(chq::BusSpace::Main,"D0",0),"synthetic D0");
+            r->bus.write(0x102de0,0xa09c,4,chq::BusSpace::Main);
+            r->set_native_health_case(testcase.first);
+            r->enable_native_health_state_capture(folder/"native-health-state.tsv");
+            r->run(800);
+            r.reset();
+            auto load=[&](const char* name){std::ifstream f(folder/name,std::ios::binary);
+                return std::string(std::istreambuf_iterator<char>(f),{});};
+            const auto path=load("native-health-path.tsv");
+            const auto seed=load("native-health-seed.tsv");
+            check(path.find(std::string("\trom\t")+testcase.first+"\t"+testcase.second)!=std::string::npos,
+                "actual Musashi health branch trace inconsistent with entry case");
+            check(seed.find(std::string("\t")+testcase.first+"\t10012e\t")!=std::string::npos,
+                "controlled RAM intervention missing evidence");
+            std::filesystem::remove_all(folder);
+        }
+        std::cout<<"[test] RC6.3.3 controlled entry cases/actual ROM paths PASS\n";
+#endif
+        // RC4.3 integration: instruction census and entry observation must be
+        // attached to the real Musashi dispatch, not only tested standalone.
+        {
+            auto emulator = std::make_unique<chq::Runtime>(call_program(), sub_program());
+            emulator->enable_rom_execution_census();
+            emulator->observe_native_entry(chq::BusSpace::Main, 0x100, "test-bsr");
+            emulator->reset();
+            emulator->run(10000);
+            const auto d = std::filesystem::temp_directory_path() / "chq-rc43-runtime-census-test";
+            std::filesystem::create_directories(d);
+            emulator->write_native_execution_evidence(d, "unit-test-M68K");
+            std::ifstream in(d / "rom-execution-census.json");
+            const std::string json((std::istreambuf_iterator<char>(in)), std::istreambuf_iterator<char>());
+            check(json.find("\"romInstructionHits\": 0") == std::string::npos,
+                  "census did not count real 68000 instructions");
+            in.close();
+            std::ifstream bridge(d / "native-execution-bridge.json");
+            const std::string observed((std::istreambuf_iterator<char>(bridge)), std::istreambuf_iterator<char>());
+            check(observed.find("\"hits\":1") != std::string::npos,
+                  "bridge did not observe actual Musashi entry");
+            bridge.close();
+            std::filesystem::remove_all(d);
+        }
+        // Instrument the actual Musashi PC hook at original selector/lookup
+        // addresses using small synthetic programs and controlled RAM.
+        for (bool accepted : {true,false}) {
+            auto emulator=std::make_unique<chq::Runtime>(projection_hook_program(accepted),sub_program());
+            emulator->enable_native_projection_shadow();
+            emulator->reset();
+            check(emulator->debug_set_register(chq::BusSpace::Main,"A1",0x10a080),"cannot seed A1");
+            check(emulator->debug_set_register(chq::BusSpace::Main,"D2",0xffff7a00),"cannot seed D2");
+            check(emulator->debug_set_register(chq::BusSpace::Main,"A5",0x108000),"cannot seed A5");
+            emulator->bus.write(0x101a00,0x00158b87,4,chq::BusSpace::Main);
+            emulator->bus.write(0x101a80,accepted?0x00158a07:0x00158a06,4,chq::BusSpace::Main);
+            emulator->run(10000);
+            const auto d=std::filesystem::temp_directory_path()/"chq-rc44-projection-hook-test";
+            std::filesystem::create_directories(d);
+            emulator->write_native_execution_evidence(d,"synthetic-instruction-path");
+            std::ifstream in(d/"native-projection-shadow.json");
+            check(bool(in),"live native projection shadow evidence missing");
+            const std::string text((std::istreambuf_iterator<char>(in)),std::istreambuf_iterator<char>());
+            check(text.find("\"matched\":1")!=std::string::npos,"projection shadow Musashi hook did not match");
+            check(text.find("\"mismatched\":0")!=std::string::npos,"projection shadow Musashi hook mismatch");
+            in.close();std::filesystem::remove_all(d);
+        }
         std::cout << "[test] dual bus maps\n";
         auto bus = std::make_unique<chq::Bus>(main_program(), sub_program());
         bus->write(0x108010, 0xface, 2, chq::BusSpace::Main);
@@ -144,6 +668,67 @@ int main() {
         bus->write(0x100303,0x00,1,chq::BusSpace::Main);
         check(bus->memory_trace_events().size()==2,"memory trace stop");
         bus->memory_trace_clear(); check(bus->memory_trace_events().empty(),"memory trace clear");
+
+        std::cout << "[test] RC4 bounded memory read provenance\n";
+        bus->set_trace_pc(chq::BusSpace::Main,0x00cafe);
+        bus->set_ioc_debug_frame(89);
+        bus->memory_trace_start(chq::BusSpace::Main,0x108010,2,2,64,true,false);
+        const auto traced_read=bus->read(0x108010,2,chq::BusSpace::Main);
+        check(traced_read==0xface,"memory read provenance returned value");
+        check(bus->memory_trace_events().size()==1,"memory read provenance event");
+        { const auto& e=bus->memory_trace_events().back(); check(e.access=='R' && e.frame==89 && e.pc==0x00cafe,"memory read provenance identity"); check(e.address==0x108010 && e.size==2 && e.old_value==0xface && e.new_value==0xface,"memory read provenance value"); }
+        bus->write(0x108010,0xbeef,2,chq::BusSpace::Main);
+        check(bus->memory_trace_events().size()==1,"read-only provenance excludes writes");
+        bus->memory_trace_clear();
+        bus->memory_trace_start(chq::BusSpace::Main,0x108010,2,2,64,true,true);
+        (void)bus->read(0x108010,2,chq::BusSpace::Main);
+        bus->write(0x108010,0xabcd,2,chq::BusSpace::Main);
+        check(bus->memory_trace_events().size()==2 && bus->memory_trace_events()[0].access=='R' && bus->memory_trace_events()[1].access=='W',"rw provenance ordering");
+        bus->memory_trace_stop(); bus->memory_trace_clear();
+
+        std::cout << "[test] RC4 structured collision response events\n";
+        bus->write(0x10042e,0x0001,2,chq::BusSpace::Main);
+        bus->write(0x100420,0x0010a4c0,4,chq::BusSpace::Main);
+        bus->write(0x10a044,0x9000,2,chq::BusSpace::Main);
+        bus->set_trace_pc(chq::BusSpace::Main,0x00a1be);
+        bus->set_ioc_debug_frame(2125);
+        bus->write(0x10a044,0x8f00,2,chq::BusSpace::Main);
+        check(bus->collision_response_events().size()==1,"collision lateral event captured");
+        { const auto& e=bus->collision_response_events().back(); check(e.frame==2125 && e.pc==0x00a1be && e.lateral && !e.speed,"collision lateral identity"); check(e.interaction_type==1 && e.object_reference==0x0010a4c0,"collision interaction context"); check(e.old_value==0x9000 && e.attempted_value==0x8f00 && e.applied_value==0x8f00 && !e.suppressed,"collision authentic values"); }
+        bus->set_trace_pc(chq::BusSpace::Main,0x008700);
+        bus->write(0x10041c,0x00100000,4,chq::BusSpace::Main);
+        const auto before_speed=bus->peek(0x10041c,4,chq::BusSpace::Main);
+        bus->set_suppress_collision_shove(true);
+        bus->set_trace_pc(chq::BusSpace::Main,0x00a200);
+        bus->write(0x10041c,0x000c0000,4,chq::BusSpace::Main);
+        check(bus->collision_response_events().size()==2,"collision speed event captured");
+        { const auto& e=bus->collision_response_events().back(); check(e.speed && e.suppressed,"collision suppressed speed class"); check(e.old_value==before_speed && e.attempted_value==0x000c0000 && e.applied_value==before_speed,"collision suppressed values"); }
+        check(bus->peek(0x10041c,4,chq::BusSpace::Main)==before_speed,"collision suppression preserves speed");
+        bus->set_suppress_collision_shove(false); bus->clear_collision_response_events();
+        check(bus->collision_response_events().empty(),"collision event clear");
+
+        // v0.66.9.5-RC1.1: target-local physical overlap response is a distinct
+        // structured class and is intentionally observational (not suppressed by
+        // collision.response). Run010 proved PC A13C -> 0x10A084.
+        bus->write(0x10a084,0x808a,2,chq::BusSpace::Main);
+        bus->set_trace_pc(chq::BusSpace::Main,0x00a13c);
+        bus->set_ioc_debug_frame(5588);
+        bus->set_suppress_collision_shove(true);
+        bus->write(0x10a084,0x80d5,2,chq::BusSpace::Main);
+        check(bus->collision_response_events().size()==1,"target contact event captured");
+        { const auto& e=bus->collision_response_events().back(); check(e.target_contact && !e.lateral && !e.speed,"target contact event class"); check(!e.suppressed && e.old_value==0x808a && e.applied_value==0x80d5,"target contact remains authentic under player-response suppression"); }
+        check(bus->peek(0x10a084,2,chq::BusSpace::Main)==0x80d5,"target contact write applied");
+        bus->set_suppress_collision_shove(false); bus->clear_collision_response_events();
+
+        std::cout << "[test] RC4 sound command-interface events\n";
+        bus->set_trace_pc(chq::BusSpace::Main,0x001234);
+        bus->set_ioc_debug_frame(3000);
+        bus->write(0x820000,0x5a,1,chq::BusSpace::Main);
+        check(bus->sound_command_events().size()==1,"sound command event captured");
+        { const auto& e=bus->sound_command_events().back(); check(e.frame==3000 && e.pc==0x001234 && e.address==0x820000 && e.size==1 && e.value==0x5a,"sound command event identity"); }
+        bus->write(0x810000,0x11,1,chq::BusSpace::Main);
+        check(bus->sound_command_events().size()==1,"sound command range filter");
+        bus->clear_sound_command_events(); check(bus->sound_command_events().empty(),"sound command clear");
 
         std::cout << "[test] v0.60 Research Workbench memory interventions\n";
         bus->research_enable(true);
@@ -335,14 +920,52 @@ int main() {
         }
 
         {
+            std::cout << "[test] v0.66.9.4 police beacon override lifecycle\n";
+            const auto state_path = std::filesystem::temp_directory_path() / "chq_beacon_override_test.chqstate";
+            std::filesystem::remove(state_path);
+            auto runtime = std::make_unique<chq::Runtime>(main_program(), sub_program());
+            runtime->reset();
+            runtime->bus.debug_write(0x101854, 0x0002, 2, chq::BusSpace::Main);
+            runtime->bus.debug_write(0x108082, 0x1234, 2, chq::BusSpace::Main);
+            runtime->save_checkpoint(state_path, 77);
+
+            runtime->set_beacon_override(chq::Runtime::BeaconOverrideMode::ForceOn);
+            check(runtime->beacon_override()==chq::Runtime::BeaconOverrideMode::ForceOn, "beacon force-on mode");
+            check(runtime->bus.peek(0x101854,2,chq::BusSpace::Main)==0x0006, "beacon force-on immediate phase");
+            check(runtime->bus.peek(0x108082,2,chq::BusSpace::Main)==0xffff, "beacon force-on deployment request");
+            runtime->bus.write(0x101854,0x0003,2,chq::BusSpace::Main);
+            runtime->bus.write(0x108082,0x0000,2,chq::BusSpace::Main);
+            check(runtime->bus.peek(0x101854,2,chq::BusSpace::Main)==0x0006, "beacon force-on write interception");
+            check(runtime->bus.peek(0x108082,2,chq::BusSpace::Main)==0xffff, "beacon force-on request interception");
+
+            runtime->set_beacon_override(chq::Runtime::BeaconOverrideMode::ForceOff);
+            check(runtime->bus.peek(0x101854,2,chq::BusSpace::Main)==0x0000, "beacon force-off immediate phase");
+            check(runtime->bus.peek(0x108082,2,chq::BusSpace::Main)==0x0000, "beacon force-off deployment request");
+            runtime->bus.write(0x101854,0x0006,2,chq::BusSpace::Main);
+            check(runtime->bus.peek(0x101854,2,chq::BusSpace::Main)==0x0000, "beacon force-off write interception");
+
+            runtime->set_beacon_override(chq::Runtime::BeaconOverrideMode::Authentic);
+            runtime->bus.write(0x101854,0x0004,2,chq::BusSpace::Main);
+            check(runtime->bus.peek(0x101854,2,chq::BusSpace::Main)==0x0004, "beacon authentic mode must not intercept");
+
+            runtime->set_beacon_override(chq::Runtime::BeaconOverrideMode::ForceOn);
+            const auto restored = runtime->load_checkpoint(state_path);
+            check(restored==77, "beacon checkpoint restore frame");
+            check(runtime->beacon_override()==chq::Runtime::BeaconOverrideMode::Authentic, "checkpoint load must clear beacon override");
+            check(runtime->bus.peek(0x101854,2,chq::BusSpace::Main)==0x0002, "checkpoint load restored authentic beacon phase");
+            check(runtime->bus.peek(0x108082,2,chq::BusSpace::Main)==0x1234, "checkpoint load restored authentic beacon request");
+            std::filesystem::remove(state_path);
+        }
+
+        {
             std::cout << "[test] dual CPU scheduler/shared RAM\n";
-            chq::Runtime runtime(main_program(), sub_program());
-            runtime.reset();
-            runtime.run(5000);
-            check(runtime.bus.peek(0x108000, 2) == 0x1234, "CPU A shared write");
-            check(runtime.bus.peek(0x108002, 2) == 0x1235, "CPU B shared communication");
-            check(runtime.bus.peek(0x800000, 2, chq::BusSpace::Sub) == 0xbeef, "CPU B road write");
-            check(runtime.instructions_a > 0 && runtime.instructions_b > 0, "both CPUs executed");
+            auto runtime = std::make_unique<chq::Runtime>(main_program(), sub_program());
+            runtime->reset();
+            runtime->run(5000);
+            check(runtime->bus.peek(0x108000, 2) == 0x1234, "CPU A shared write");
+            check(runtime->bus.peek(0x108002, 2) == 0x1235, "CPU B shared communication");
+            check(runtime->bus.peek(0x800000, 2, chq::BusSpace::Sub) == 0xbeef, "CPU B road write");
+            check(runtime->instructions_a > 0 && runtime->instructions_b > 0, "both CPUs executed");
         }
 
         {
@@ -350,10 +973,10 @@ int main() {
             const auto state_path = std::filesystem::temp_directory_path() / "chq_checkpoint_resume_test.chqstate";
             std::filesystem::remove(state_path);
             {
-                chq::Runtime first(main_program(), sub_program());
-                first.reset();
-                first.run(5000);
-                first.save_checkpoint(state_path, 123);
+                auto first = std::make_unique<chq::Runtime>(main_program(), sub_program());
+                first->reset();
+                first->run(5000);
+                first->save_checkpoint(state_path, 123);
             }
             // Simulate loading the checkpoint in another ASLR process by deliberately
             // poisoning the host-process pointers serialized inside both Musashi v1 contexts.
@@ -383,13 +1006,13 @@ int main() {
                 check(bool(f), "checkpoint poison write");
             }
             {
-                chq::Runtime resumed(main_program(), sub_program());
-                resumed.reset();
-                const auto restored_frame = resumed.load_checkpoint(state_path);
+                auto resumed = std::make_unique<chq::Runtime>(main_program(), sub_program());
+                resumed->reset();
+                const auto restored_frame = resumed->load_checkpoint(state_path);
                 check(restored_frame == 123, "checkpoint frame restore");
-                resumed.run(5000);
-                check(resumed.fault.empty(), "checkpoint resume fault");
-                check(resumed.instructions_a > 0, "checkpoint CPU A did not resume");
+                resumed->run(5000);
+                check(resumed->fault.empty(), "checkpoint resume fault");
+                check(resumed->instructions_a > 0, "checkpoint CPU A did not resume");
             }
             std::filesystem::remove(state_path);
         }
@@ -399,7 +1022,7 @@ int main() {
             const auto trace_path = std::filesystem::temp_directory_path() / "chq_v026_trace_test.log";
             std::filesystem::remove(trace_path);
             {
-                chq::Runtime traced(main_program(), sub_program());
+                auto traced = std::make_unique<chq::Runtime>(main_program(), sub_program());
                 chq::TraceConfig cfg;
                 cfg.cpu_mask = 2;
                 cfg.max_lines = 1000;
@@ -408,12 +1031,13 @@ int main() {
                 cfg.mem_ranges.push_back({0x108002, 0x108003, false, true, false});
                 cfg.pc_ranges.push_back({0x100, 0x120});
                 cfg.triggers.push_back({0x108002, 0x108003, chq::TraceTriggerKind::Write});
-                traced.configure_generic_trace(cfg, trace_path);
-                traced.reset();
-                traced.run(5000);
+                traced->configure_generic_trace(cfg, trace_path);
+                traced->reset();
+                traced->run(5000);
             }
             std::ifstream tf(trace_path);
             const std::string text((std::istreambuf_iterator<char>(tf)), std::istreambuf_iterator<char>());
+            tf.close();
             check(text.find("MEM_W frame=0 cpu=B") != std::string::npos, "generic memory trace missing");
             check(text.find("TRIGGER frame=0 cpu=B") != std::string::npos, "generic trigger missing");
             check(text.find("EXEC frame=0 cpu=B") != std::string::npos, "generic PC trace missing");
@@ -425,18 +1049,19 @@ int main() {
             const auto trace_path = std::filesystem::temp_directory_path() / "chq_v0262_mem_pc_trace_test.log";
             std::filesystem::remove(trace_path);
             {
-                chq::Runtime traced(main_program(), sub_program());
+                auto traced = std::make_unique<chq::Runtime>(main_program(), sub_program());
                 chq::TraceConfig cfg;
                 cfg.cpu_mask = 2;
                 cfg.max_lines = 1000;
                 cfg.mem_ranges.push_back({0x108002, 0x108003, false, true, false});
                 cfg.mem_pc_ranges.push_back({0x100, 0x107}); // excludes CPU-B write at 0x108
-                traced.configure_generic_trace(cfg, trace_path);
-                traced.reset();
-                traced.run(5000);
+                traced->configure_generic_trace(cfg, trace_path);
+                traced->reset();
+                traced->run(5000);
             }
             std::ifstream tf(trace_path);
             const std::string text((std::istreambuf_iterator<char>(tf)), std::istreambuf_iterator<char>());
+            tf.close();
             check(text.find("MEM_W frame=0 cpu=B") == std::string::npos, "memory PC gate failed to suppress out-of-range write");
             check(text.find("# MEM_PC 000100-000107") != std::string::npos, "memory PC gate header missing");
             std::filesystem::remove(trace_path);
@@ -447,18 +1072,19 @@ int main() {
             const auto trace_path = std::filesystem::temp_directory_path() / "chq_v0262_mem_pc_trace_match_test.log";
             std::filesystem::remove(trace_path);
             {
-                chq::Runtime traced(main_program(), sub_program());
+                auto traced = std::make_unique<chq::Runtime>(main_program(), sub_program());
                 chq::TraceConfig cfg;
                 cfg.cpu_mask = 2;
                 cfg.max_lines = 1000;
                 cfg.mem_ranges.push_back({0x108002, 0x108003, false, true, false});
                 cfg.mem_pc_ranges.push_back({0x108, 0x10d});
-                traced.configure_generic_trace(cfg, trace_path);
-                traced.reset();
-                traced.run(5000);
+                traced->configure_generic_trace(cfg, trace_path);
+                traced->reset();
+                traced->run(5000);
             }
             std::ifstream tf(trace_path);
             const std::string text((std::istreambuf_iterator<char>(tf)), std::istreambuf_iterator<char>());
+            tf.close();
             check(text.find("MEM_W frame=0 cpu=B") != std::string::npos, "memory PC gate suppressed matching write");
             std::filesystem::remove(trace_path);
         }
@@ -468,21 +1094,22 @@ int main() {
             const auto trace_path = std::filesystem::temp_directory_path() / "chq_v027_arm_trace_test.log";
             std::filesystem::remove(trace_path);
             {
-                chq::Runtime traced(main_program(), sub_program());
+                auto traced = std::make_unique<chq::Runtime>(main_program(), sub_program());
                 chq::TraceConfig cfg;
                 cfg.cpu_mask = 1;
                 cfg.max_lines = 100;
                 cfg.mem_ranges.push_back({0x100080, 0x100081, false, true, false, false});
                 cfg.arm_mem_writes.push_back({0x100172, 0x3800});
-                traced.configure_generic_trace(cfg, trace_path);
-                traced.set_trace_frame(42);
-                traced.bus.set_trace_pc(chq::BusSpace::Main, 0x2000);
-                traced.bus.write(0x100080, 0x1111, 2, chq::BusSpace::Main); // must be silent
-                traced.bus.write(0x100172, 0x3800, 4, chq::BusSpace::Main); // arms
-                traced.bus.write(0x100080, 0x2222, 2, chq::BusSpace::Main); // logged
+                traced->configure_generic_trace(cfg, trace_path);
+                traced->set_trace_frame(42);
+                traced->bus.set_trace_pc(chq::BusSpace::Main, 0x2000);
+                traced->bus.write(0x100080, 0x1111, 2, chq::BusSpace::Main); // must be silent
+                traced->bus.write(0x100172, 0x3800, 4, chq::BusSpace::Main); // arms
+                traced->bus.write(0x100080, 0x2222, 2, chq::BusSpace::Main); // logged
             }
             std::ifstream tf(trace_path);
             const std::string text((std::istreambuf_iterator<char>(tf)), std::istreambuf_iterator<char>());
+            tf.close();
             check(text.find("TRACE_ARM frame=42") != std::string::npos, "memory arm event missing");
             check(text.find("value=2222") != std::string::npos, "post-arm memory write missing");
             check(text.find("value=1111") == std::string::npos, "pre-arm memory write leaked");
@@ -494,18 +1121,19 @@ int main() {
             const auto trace_path = std::filesystem::temp_directory_path() / "chq_v027_change_trace_test.log";
             std::filesystem::remove(trace_path);
             {
-                chq::Runtime traced(main_program(), sub_program());
+                auto traced = std::make_unique<chq::Runtime>(main_program(), sub_program());
                 chq::TraceConfig cfg;
                 cfg.cpu_mask = 1;
                 cfg.max_lines = 100;
                 cfg.mem_ranges.push_back({0x100080, 0x100081, false, true, false, true});
-                traced.configure_generic_trace(cfg, trace_path);
-                traced.bus.set_trace_pc(chq::BusSpace::Main, 0x2000);
-                traced.bus.write(0x100080, 1, 2, chq::BusSpace::Main);
-                traced.bus.write(0x100080, 1, 2, chq::BusSpace::Main);
+                traced->configure_generic_trace(cfg, trace_path);
+                traced->bus.set_trace_pc(chq::BusSpace::Main, 0x2000);
+                traced->bus.write(0x100080, 1, 2, chq::BusSpace::Main);
+                traced->bus.write(0x100080, 1, 2, chq::BusSpace::Main);
             }
             std::ifstream tf(trace_path);
             const std::string text((std::istreambuf_iterator<char>(tf)), std::istreambuf_iterator<char>());
+            tf.close();
             const auto first = text.find("MEM_W frame=0");
             check(first != std::string::npos, "change-only first change missing");
             check(text.find("MEM_W frame=0", first + 1) == std::string::npos, "change-only logged unchanged rewrite");
@@ -517,20 +1145,21 @@ int main() {
             const auto trace_path = std::filesystem::temp_directory_path() / "chq_v027_task_trace_test.log";
             std::filesystem::remove(trace_path);
             {
-                chq::Runtime traced(main_program(), sub_program());
+                auto traced = std::make_unique<chq::Runtime>(main_program(), sub_program());
                 chq::TraceConfig cfg;
                 cfg.cpu_mask = 1;
                 cfg.max_lines = 100;
                 cfg.task_slots.push_back(0x100080);
-                traced.configure_generic_trace(cfg, trace_path);
-                traced.set_trace_frame(77);
-                traced.bus.set_trace_pc(chq::BusSpace::Main, 0x1096);
-                traced.bus.write(0x100080, 1, 2, chq::BusSpace::Main);
-                traced.bus.write(0x100080, 1, 2, chq::BusSpace::Main);
-                traced.bus.write(0x100080, 0, 2, chq::BusSpace::Main);
+                traced->configure_generic_trace(cfg, trace_path);
+                traced->set_trace_frame(77);
+                traced->bus.set_trace_pc(chq::BusSpace::Main, 0x1096);
+                traced->bus.write(0x100080, 1, 2, chq::BusSpace::Main);
+                traced->bus.write(0x100080, 1, 2, chq::BusSpace::Main);
+                traced->bus.write(0x100080, 0, 2, chq::BusSpace::Main);
             }
             std::ifstream tf(trace_path);
             const std::string text((std::istreambuf_iterator<char>(tf)), std::istreambuf_iterator<char>());
+            tf.close();
             check(text.find("TASK_STATE frame=77 slot=100080 old=0000 new=0001") != std::string::npos, "task activation missing");
             check(text.find("TASK_STATE frame=77 slot=100080 old=0001 new=0000") != std::string::npos, "task termination missing");
             std::filesystem::remove(trace_path);
@@ -552,19 +1181,20 @@ int main() {
             const auto dir = std::filesystem::temp_directory_path() / "chq_v042_provenance";
             std::filesystem::remove_all(dir);
             {
-                chq::Runtime traced(main_program(), sub_program());
+                auto traced = std::make_unique<chq::Runtime>(main_program(), sub_program());
                 chq::ProvenanceConfig cfg;
                 cfg.follow_ranges.push_back({0x108002,0x108003});
                 cfg.trace_callstack = true;
                 cfg.trace_callgraph = true;
                 cfg.profile_functions = true;
-                traced.configure_provenance(cfg, dir);
-                traced.reset();
-                traced.run(5000);
-                traced.write_provenance_reports();
+                traced->configure_provenance(cfg, dir);
+                traced->reset();
+                traced->run(5000);
+                traced->write_provenance_reports();
             }
             std::ifstream pf(dir / "provenance_address_flow.csv");
             const std::string ptext((std::istreambuf_iterator<char>(pf)), std::istreambuf_iterator<char>());
+            pf.close();
             check(ptext.find("108002") != std::string::npos, "provenance address flow missing watched access");
             check(std::filesystem::exists(dir / "provenance_callgraph.csv"), "provenance callgraph missing");
             check(std::filesystem::exists(dir / "provenance_functions.csv"), "provenance function profile missing");
@@ -576,17 +1206,18 @@ int main() {
             const auto dir = std::filesystem::temp_directory_path() / "chq_v042_callgraph";
             std::filesystem::remove_all(dir);
             {
-                chq::Runtime traced(call_program(), sub_program());
+                auto traced = std::make_unique<chq::Runtime>(call_program(), sub_program());
                 chq::ProvenanceConfig cfg;
                 cfg.follow_ranges.push_back({0x108020,0x108021});
                 cfg.trace_callstack=true; cfg.trace_callgraph=true; cfg.profile_functions=true;
-                traced.configure_provenance(cfg, dir);
-                traced.reset();
-                traced.run(1000);
-                traced.write_provenance_reports();
+                traced->configure_provenance(cfg, dir);
+                traced->reset();
+                traced->run(1000);
+                traced->write_provenance_reports();
             }
             std::ifstream cf(dir / "provenance_callgraph.csv");
             const std::string ctext((std::istreambuf_iterator<char>(cf)), std::istreambuf_iterator<char>());
+            cf.close();
             check(ctext.find("000100,000120") != std::string::npos, "dynamic callgraph did not resolve BSR target");
             std::filesystem::remove_all(dir);
         }
@@ -701,58 +1332,58 @@ int main() {
             std::cout << "[test] v0.47 checkpoint round-trip\n";
             const auto path = std::filesystem::temp_directory_path() / "chq_v047_checkpoint.chqstate";
             std::filesystem::remove(path);
-            chq::Runtime r(main_program(), sub_program());
-            r.reset();
-            r.bus.write(0x100080, 0x1234, 2, chq::BusSpace::Main);
-            r.save_checkpoint(path, 321);
-            r.bus.write(0x100080, 0xabcd, 2, chq::BusSpace::Main);
-            const auto restored_frame=r.load_checkpoint(path);
+            auto r = std::make_unique<chq::Runtime>(main_program(), sub_program());
+            r->reset();
+            r->bus.write(0x100080, 0x1234, 2, chq::BusSpace::Main);
+            r->save_checkpoint(path, 321);
+            r->bus.write(0x100080, 0xabcd, 2, chq::BusSpace::Main);
+            const auto restored_frame=r->load_checkpoint(path);
             check(restored_frame==321, "checkpoint frame round-trip");
-            check(r.bus.peek(0x100080,2,chq::BusSpace::Main)==0x1234, "checkpoint RAM round-trip");
+            check(r->bus.peek(0x100080,2,chq::BusSpace::Main)==0x1234, "checkpoint RAM round-trip");
             std::filesystem::remove(path);
         }
 
         {
             std::cout << "[test] v0.60.2 research watch IDs, removal, replace patch, event limit, registers\n";
-            chq::Runtime r(main_program(), sub_program());
-            r.reset();
-            r.bus.research_enable(true);
-            r.bus.research_set_event_limit(64);
-            check(r.bus.research_event_limit()==64, "research event limit set");
+            auto r = std::make_unique<chq::Runtime>(main_program(), sub_program());
+            r->reset();
+            r->bus.research_enable(true);
+            r->bus.research_set_event_limit(64);
+            check(r->bus.research_event_limit()==64, "research event limit set");
             chq::ResearchWatch w{}; w.space=chq::BusSpace::Main; w.start=0x100080; w.end=0x100083; w.writes=true; w.change_only=true;
-            const auto wid=r.bus.research_add_watch(w);
-            check(wid!=0 && r.bus.research_watches().size()==1, "research watch id");
-            r.bus.write(0x100080,0x1111,2,chq::BusSpace::Main);
-            check(!r.bus.research_events().empty(), "research range watch event");
-            check(r.bus.research_remove_watch(wid) && r.bus.research_watches().empty(), "research watch removal");
-            r.bus.debug_write(0x100080,0x2222,2,chq::BusSpace::Main);
-            const auto pid=r.bus.research_add_patch(chq::BusSpace::Main,0x100080,2,0x3333,chq::LivePatchMode::Replace);
-            r.bus.write(0x100080,0x4444,2,chq::BusSpace::Main);
-            check(r.bus.peek(0x100080,2,chq::BusSpace::Main)==0x3333, "replace-on-write intervention");
-            check(r.bus.research_remove_patch(pid) && r.bus.research_patches().empty(), "research patch removal");
-            const auto pc=r.debug_get_register(chq::BusSpace::Main,"PC");
-            check(r.debug_set_register(chq::BusSpace::Main,"D0",0x12345678), "register set accepted");
-            check(r.debug_get_register(chq::BusSpace::Main,"D0")==0x12345678, "register read/write round trip");
-            check(r.debug_get_register(chq::BusSpace::Main,"PC")==pc, "register edit preserves PC");
+            const auto wid=r->bus.research_add_watch(w);
+            check(wid!=0 && r->bus.research_watches().size()==1, "research watch id");
+            r->bus.write(0x100080,0x1111,2,chq::BusSpace::Main);
+            check(!r->bus.research_events().empty(), "research range watch event");
+            check(r->bus.research_remove_watch(wid) && r->bus.research_watches().empty(), "research watch removal");
+            r->bus.debug_write(0x100080,0x2222,2,chq::BusSpace::Main);
+            const auto pid=r->bus.research_add_patch(chq::BusSpace::Main,0x100080,2,0x3333,chq::LivePatchMode::Replace);
+            r->bus.write(0x100080,0x4444,2,chq::BusSpace::Main);
+            check(r->bus.peek(0x100080,2,chq::BusSpace::Main)==0x3333, "replace-on-write intervention");
+            check(r->bus.research_remove_patch(pid) && r->bus.research_patches().empty(), "research patch removal");
+            const auto pc=r->debug_get_register(chq::BusSpace::Main,"PC");
+            check(r->debug_set_register(chq::BusSpace::Main,"D0",0x12345678), "register set accepted");
+            check(r->debug_get_register(chq::BusSpace::Main,"D0")==0x12345678, "register read/write round trip");
+            check(r->debug_get_register(chq::BusSpace::Main,"PC")==pc, "register edit preserves PC");
         }
 
         {
             std::cout << "[test] v0.66.8 forensic timeline full-write sink\n";
-            chq::Runtime r(main_program(), sub_program());
-            r.reset();
+            auto r = std::make_unique<chq::Runtime>(main_program(), sub_program());
+            r->reset();
             std::vector<chq::MemoryWriteTraceEvent> events;
-            r.bus.set_timeline_write_sink([&](const chq::MemoryWriteTraceEvent& e){ events.push_back(e); });
-            r.bus.write(0x100080,0x1234,2,chq::BusSpace::Main);
-            r.bus.write(0x108020,0x56,1,chq::BusSpace::Sub);
+            r->bus.set_timeline_write_sink([&](const chq::MemoryWriteTraceEvent& e){ events.push_back(e); });
+            r->bus.write(0x100080,0x1234,2,chq::BusSpace::Main);
+            r->bus.write(0x108020,0x56,1,chq::BusSpace::Sub);
             check(events.size()==2, "timeline sink records all normal bus writes");
             check(events[0].space==chq::BusSpace::Main && events[0].address==0x100080 && events[0].size==2, "timeline sink main write metadata");
             check(events[0].old_value==0 && events[0].new_value==0x1234 && events[0].changed, "timeline sink old/new values");
             check(events[1].space==chq::BusSpace::Sub && events[1].address==0x108020 && events[1].size==1, "timeline sink sub write metadata");
             const auto before=events.size();
-            r.bus.debug_write(0x100080,0xabcd,2,chq::BusSpace::Main);
+            r->bus.debug_write(0x100080,0xabcd,2,chq::BusSpace::Main);
             check(events.size()==before, "timeline sink excludes research-internal debug writes");
-            r.bus.clear_timeline_write_sink();
-            r.bus.write(0x100082,0xbeef,2,chq::BusSpace::Main);
+            r->bus.clear_timeline_write_sink();
+            r->bus.write(0x100082,0xbeef,2,chq::BusSpace::Main);
             check(events.size()==before, "timeline sink stops cleanly");
         }
 
@@ -761,11 +1392,11 @@ int main() {
             const auto dir = std::filesystem::temp_directory_path() / "chq_v043_focused_provenance";
             std::filesystem::remove_all(dir);
             {
-                chq::Runtime traced(call_program(), sub_program());
+                auto traced = std::make_unique<chq::Runtime>(call_program(), sub_program());
                 chq::ProvenanceConfig cfg;
                 cfg.follow_ranges.push_back({0x108020,0x108021});
-                traced.configure_provenance(cfg, dir);
-                traced.reset(); traced.run(1000); traced.write_provenance_reports();
+                traced->configure_provenance(cfg, dir);
+                traced->reset(); traced->run(1000); traced->write_provenance_reports();
             }
             check(std::filesystem::exists(dir / "provenance_address_flow.csv"), "focused provenance flow missing");
             check(!std::filesystem::exists(dir / "provenance_callgraph.csv"), "focused provenance unexpectedly emitted global callgraph");
@@ -778,10 +1409,10 @@ int main() {
             auto main_reset = main_program();
             // replace release value with zero so CPU B is held in reset after A runs
             word(main_reset, 0x10a, 0x0000);
-            chq::Runtime held(main_reset, sub_program());
-            held.reset();
-            held.run(5000);
-            check(!held.bus.sub_enabled(), "CPU B reset not asserted");
+            auto held = std::make_unique<chq::Runtime>(main_reset, sub_program());
+            held->reset();
+            held->run(5000);
+            check(!held->bus.sub_enabled(), "CPU B reset not asserted");
         }
 
         std::cout << "PASS: dual ROMs, maps, TC0040IOC + input injection, tracer gates, scheduler, provenance, shared RAM, road RAM, CPU B reset control\n";

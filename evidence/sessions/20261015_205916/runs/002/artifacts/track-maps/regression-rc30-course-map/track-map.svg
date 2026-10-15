@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="280.00 280.00 140.00 260.00" width="1400" height="1040">
+ <rect x="280.00" y="280.00" width="140.00" height="260.00" fill="#080b10"/>
+ <path d="M 332.00 470.00 L 332.00 410.00 L 332.00 350.00" fill="none" stroke="#94a3b8" stroke-width="1.5" opacity="0.70"/>
+ <path d="M 368.00 470.00 L 368.00 410.00 L 368.00 350.00" fill="none" stroke="#94a3b8" stroke-width="1.5" opacity="0.70"/>
+ <path d="M 350.00 470.00 L 350.00 410.00 L 350.00 350.00" fill="none" stroke="#6b7280" stroke-width="1.5" opacity="0.35"/>
+  <line x1="350.00" y1="470.00" x2="350.00" y2="410.00" stroke="#d1d5db" stroke-width="4" stroke-linecap="round"><title>frame 2094 page 0/0 record #0 curve=0 surface=roadproc:00 speed=58km/h road=ON_ROAD</title></line>
+  <line x1="350.00" y1="410.00" x2="350.00" y2="350.00" stroke="#d1d5db" stroke-width="4" stroke-linecap="round"><title>frame 2124 page 0/0 record #0 curve=0 surface=roadproc:00 speed=118km/h road=ON_ROAD</title></line>
+ <path d="M 368.00 470.00 L 367.42 410.00 L 365.95 350.00" fill="none" stroke="#facc15" stroke-width="2.25" opacity="0.95"><title>Player driven trajectory projection</title></path>
+ <circle cx="365.95" cy="350.00" r="6" fill="#f8fafc"/>
+</svg>

@@ -1,0 +1,10 @@
+echo === RC6.3.33 RELEASE SMOKE BEGIN ===
+api release.assert-version
+api schema action=ghidra.status
+api schema action=ghidra.results
+api schema action=rea.crosswalk
+api schema action=rea.function.inspect
+api ghidra.status
+api rea.reports
+echo === RC6.3.33 RELEASE SMOKE PASS ===
+echo === RC6.3.33 RELEASE SMOKE PRESERVED SESSION ===

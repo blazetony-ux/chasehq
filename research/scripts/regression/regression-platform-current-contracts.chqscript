@@ -1,0 +1,39 @@
+# name: Current Platform Contracts Regression
+# category: regression
+# regression-version: current
+# regression-scope: permanent
+# purpose: Consolidated current-build proof for release identity, script/checkpoint schema, legacytrace lifecycle, checkpoint evidence closure, track/checkpoint semantics, authoritative run history, and deterministic final player-gameplay restoration. Supersedes repeated execution of historical RC3.2-RC3.4.x/v0.66.9.1/v0.66.9.2 release-tail scripts without reducing their unique contract coverage.
+# checkpoint: stage1-gameplay-2064.chqstate
+
+echo === ChaseHQ Current Platform Contracts: BEGIN ===
+api release.assert-version
+api schema action=script.run
+api schema action=checkpoint.save
+api status
+
+# One canonical legacytrace/checkpoint lifecycle replaces the same flow repeated by historical RC3.2-RC3.4.4 release scripts.
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api gameplay.registry
+api track.state
+legacytrace reset
+legacytrace cpu A
+legacytrace mem 10A04A:10A04B r
+legacytrace context 0 0
+legacytrace max 256
+legacytrace output evidence\regression-current-platform-trace.log
+legacytrace start
+api control.run-frames frames=4
+legacytrace stop
+api checkpoint.save file=regression-current-platform-checkpoint.chqstate
+api checkpoint.list
+api script.runs limit=5
+
+# Preserve the v0.66.9.2 checkpoint-context / track-schema contract and restore genuine player gameplay.
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api gameplay.registry
+api track.state
+api track.records before=1 after=1
+api script.runs limit=5
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api status
+echo === ChaseHQ Current Platform Contracts: COMPLETE ===

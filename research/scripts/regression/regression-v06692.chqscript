@@ -1,0 +1,16 @@
+# name: v0.66.9.2 Final Release Identity and Provenance Regression
+# category: regression
+# regression-version: 0.66.9.2
+# regression-scope: historical
+# purpose: Prove final v0.66.9.2 runtime identity and retain the RC4 complete-source/authoritative-command-count evidence contract.
+# checkpoint: stage1-gameplay-2064.chqstate
+
+echo === ChaseHQ v0.66.9.2 Final Release Regression: BEGIN ===
+api release.assert-version
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api gameplay.registry
+api track.state
+api script.runs limit=5
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api status
+echo === ChaseHQ v0.66.9.2 Final Release Regression: COMPLETE ===

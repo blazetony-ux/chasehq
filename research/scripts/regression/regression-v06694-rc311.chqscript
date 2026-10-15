@@ -1,0 +1,74 @@
+# name: v0.66.9.4-RC3.1.1 Cross-Format Asset + Dynamic HUD Corrective Regression
+# category: regression
+# regression-version: 0.66.9.4-RC3.1.1
+# regression-scope: release
+# purpose: Fail closed on the RC3.1 corrective fixes: cross-format player replacement must render visible target pixels, SPEED must stay visually empty while accelerator-driven live values change, Native shadow parity must remain exact, and cleanup must restore authentic state.
+# checkpoint: stage1-gameplay-2064.chqstate
+
+echo === ChaseHQ v0.66.9.4-RC3.1.1 Corrective Regression: BEGIN ===
+api release.assert-version
+api schema action=sprite.asset-replace
+api schema action=backend.sprite.set
+
+api patch.clear
+api input.ioc.clear
+api input.steering.set value=0000
+api sprite.visual.clear
+api sprite.override.clear
+api sprite.map-override.clear
+api sprite.asset-replace.clear
+api hud.layout.reset
+api backend.sprite.set mode=original
+
+# Cross-format vehicle replacement must produce actual visible replacement pixels.
+api checkpoint.load file=stage2-gameplay-7500.chqstate run=false
+api control.run-frames frames=4
+api frame.capture name=v06694-rc31-player-authentic
+api checkpoint.load file=stage2-gameplay-7500.chqstate run=false
+api sprite.asset-replace source=516 target=190 format=obj-b64 palette=73 flipx=1 dx=0 dy=0
+api control.run-frames frames=4
+assert status sprite_backend=native
+assert status sprite_asset_overrides=1
+assert status sprite_asset_visible=1
+api frame.capture name=v06694-rc31-player-yellow-target
+
+# Independent raw sprite renderer must still match after the experiment is cleared.
+api sprite.asset-replace.clear
+api backend.sprite.set mode=original
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api sprite.layer-shadow.compare failOnMismatch=true output=v06694-rc31-stage1-shadow.json
+
+# SPEED hide must suppress the true destination cells while authentic dynamic
+# character RAM continues changing under accelerator input.
+api hud.layout.set element=speed visible=false dx=0 dy=0
+api input.ioc.xor port=3 mask=20
+api control.run-frames frames=120
+api input.ioc.clear
+assert status hud_speed_region_empty=1
+api frame.snapshot name=v06694-rc31-speed-hidden-after-acceleration
+api hud.layout.get
+
+# Full live TC0100SCN export remains available.
+api text.charset.export palette=0 scale=1
+
+# Deterministic cleanup.
+api backend.sprite.set mode=original
+api backend.sprite.reset-verification
+api sprite.asset-replace.clear
+api sprite.map-override.clear
+api game.beacon.override mode=authentic
+api hud.layout.reset
+api memory.trace.clear
+api collision.response.reset
+api input.ioc.clear
+api input.steering.set value=0000
+api sprite.visual.clear
+api sprite.override.clear
+api patch.clear
+api palette.overrides.clear
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+assert status sprite_backend=original
+assert status sprite_asset_overrides=0
+api status
+
+echo === ChaseHQ v0.66.9.4-RC3.1.1 Corrective Regression: COMPLETE ===

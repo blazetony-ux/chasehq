@@ -1,0 +1,10 @@
+# name: Sprite 4bpp Canonical Corpus Shadow Verification
+# category: graphics
+# purpose: Compare the independent sprite 4bpp decoder with the authoritative live decoder across the canonical attract, gameplay, target-event and end-level checkpoints. Read-only; collects all checkpoint results without changing renderer behavior.
+# checkpoint: stage1-gameplay-2064.chqstate
+
+api release.assert-version
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api corpus.run checkpoints=stage1-driving-2352.chqstate,stage1-gameplay-2064.chqstate,stage1-target-immediate-pre-damage-6333.chqstate,stage1-target-post-final-hit-9548.chqstate,stage1-end-level-9988.chqstate action=sprite.shadow.compare scope=visible failOnMismatch=false
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api status

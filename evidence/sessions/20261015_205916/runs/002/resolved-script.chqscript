@@ -1,0 +1,1900 @@
+# name: Full Regression Suite
+# category: regression
+# purpose: Run the complete permanent ChaseHQ-Native regression suite for the current build.
+# regression-version: current
+# regression-scope: permanent
+# ChaseHQ Native - Full Regression
+# Target: current build
+# Purpose: broad, deterministic Workbench/API smoke + intervention regression
+# Safe baseline: stage1-driving-2352.chqstate (ATTRACT graphics reference)
+#
+# Notes:
+# - Designed to finish in a known paused/checkpoint-restored state.
+# - Mutating tests use known values and restore via checkpoint reload.
+# - Keep "Stop on error" enabled when running this script.
+echo === ChaseHQ Full Regression: BEGIN ===
+
+# ----------------------------------------------------------------------
+# 1. Core discovery / metadata
+# ----------------------------------------------------------------------
+api status
+api capabilities
+api actions
+api schema
+api schema action=memory.read
+api schema action=memory.read-range
+api schema action=memory.write
+api schema action=cpu.disassemble
+api schema action=control.run-frames
+api schema action=checkpoint.load
+api schema action=checkpoint.save
+api schema action=patch.freeze
+api schema action=patch.replace
+api schema action=patch.suppress
+api schema action=patch.list
+api schema action=patch.remove
+api schema action=patch.clear
+api schema action=register.read
+api schema action=register.write
+api schema action=frame.capture
+api schema action=track.state
+api schema action=gameplay.registry
+api schema action=evidence.capture
+
+# ----------------------------------------------------------------------
+# 2. Restore canonical deterministic baseline
+# ----------------------------------------------------------------------
+api patch.clear
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api status
+
+# Known canonical baseline assertions
+if memory cpu=A address=10A04A width=16 value = 000E
+    echo PASS baseline player render selector 0x10A04A = 0x000E
+else
+    echo FAIL baseline player render selector unexpected
+end
+
+if memory cpu=A address=10A076 width=16 value = 000E
+    echo PASS baseline cached render selector 0x10A076 = 0x000E
+else
+    echo FAIL baseline cached render selector unexpected
+end
+
+# ----------------------------------------------------------------------
+# 3. Read-only debugger/API coverage
+# ----------------------------------------------------------------------
+api memory.read cpu=A address=10A040 width=32
+api memory.read cpu=A address=10A044 width=16
+api memory.read cpu=A address=10A048 width=8
+api memory.read cpu=A address=10A05A width=16
+api memory.read cpu=A address=10A05C width=32
+api memory.read-range cpu=A address=109000 length=64
+api cpu.disassemble cpu=A address=008C2A count=32
+api track.state
+api gameplay.registry
+api input.ports
+api events.tail
+api sprites.tail
+api logs.list
+api evidence.list
+
+# ----------------------------------------------------------------------
+# 4. Deterministic execution / step coverage
+# ----------------------------------------------------------------------
+api control.step-frame
+api status
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+
+api control.step-instruction
+api status
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+
+# Short run-frames watchdog regression.
+# This is intentionally small: it must complete quickly.
+api control.run-frames frames=2
+api status
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+
+# ----------------------------------------------------------------------
+# 5. memory.write regression
+# ----------------------------------------------------------------------
+api memory.read cpu=A address=10A04A width=16
+api memory.write cpu=A address=10A04A width=16 value=000E expect=000E
+api memory.read cpu=A address=10A04A width=16
+
+if memory cpu=A address=10A04A width=16 value = 000E
+    echo PASS memory.write compare-before-write/idempotent path
+else
+    echo FAIL memory.write idempotent path
+end
+
+# Deliberate write then restore via checkpoint
+api memory.write cpu=A address=10A04A width=16 value=0011 expect=000E
+if memory cpu=A address=10A04A width=16 value = 0011
+    echo PASS memory.write changed value
+else
+    echo FAIL memory.write changed value
+end
+
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+if memory cpu=A address=10A04A width=16 value = 000E
+    echo PASS checkpoint reload restored mutated memory
+else
+    echo FAIL checkpoint reload did not restore memory
+end
+
+# ----------------------------------------------------------------------
+# 6. patch.freeze enforcement regression
+# ----------------------------------------------------------------------
+api patch.clear
+api patch.freeze cpu=A address=10A04A width=16 value=0011
+api patch.freeze cpu=A address=10A076 width=16 value=0011
+api patch.list
+
+# Game normally rewrites these fields; a working freeze must survive.
+api control.run-frames frames=2
+
+api memory.read cpu=A address=10A04A width=16
+api memory.read cpu=A address=10A076 width=16
+api patch.list
+
+if memory cpu=A address=10A04A width=16 value = 0011
+    echo PASS patch.freeze enforced 0x10A04A
+else
+    echo FAIL patch.freeze did not enforce 0x10A04A
+end
+
+if memory cpu=A address=10A076 width=16 value = 0011
+    echo PASS patch.freeze enforced 0x10A076
+else
+    echo FAIL patch.freeze did not enforce 0x10A076
+end
+
+api patch.clear
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+
+# ----------------------------------------------------------------------
+# 7. Screenshot / evidence uniqueness regression
+# ----------------------------------------------------------------------
+api frame.capture
+wait 50
+api frame.capture
+wait 50
+api frame.capture
+
+# Three captures made within the same second must still have unique names.
+api evidence.list
+
+# ----------------------------------------------------------------------
+# 8. Track mapping sampling regression
+# ----------------------------------------------------------------------
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api track.state
+
+repeat 4
+    api control.run-frames frames=2
+    api track.state
+end
+
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+
+# ----------------------------------------------------------------------
+# 9. Checkpoint save/load regression
+# ----------------------------------------------------------------------
+api checkpoint.save file=regression-temp.chqstate
+api checkpoint.list
+api control.step-frame
+api checkpoint.load file=regression-temp.chqstate run=false
+api status
+
+# Return to packaged canonical state rather than leaving temp state active.
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+
+# ----------------------------------------------------------------------
+# 10. Current intervention/control schemas
+# ----------------------------------------------------------------------
+api schema action=control.abort
+api schema action=register.read
+api schema action=register.write
+api schema action=patch.freeze
+api schema action=patch.replace
+api schema action=patch.suppress
+
+# ----------------------------------------------------------------------
+# 11. Final cleanup and final-state verification
+# ----------------------------------------------------------------------
+api patch.clear
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api status
+
+if memory cpu=A address=10A04A width=16 value = 000E
+    echo PASS final baseline 0x10A04A restored
+else
+    echo FAIL final baseline 0x10A04A incorrect
+end
+
+if memory cpu=A address=10A076 width=16 value = 000E
+    echo PASS final baseline 0x10A076 restored
+else
+    echo FAIL final baseline 0x10A076 incorrect
+end
+
+# v0.64.9 structured graphics snapshot smoke
+api frame.snapshot name=regression-graphics-snapshot
+api frame.snapshot.list
+
+
+# 17. v0.66.0.3 command transport regression
+echo === v0.66.0.3 command transport regression ===
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+repeat 5
+  api control.run-frames frames=5
+  api status
+  api track.state
+end
+echo === v0.66.0.3 command transport regression complete ===
+
+
+
+# ----------------------------------------------------------------------
+# 12. v0.65.0 API-backed query and live graphics surface
+# ----------------------------------------------------------------------
+getregions()
+getmaps()
+getpalettes()
+getpaletteentries(bank=75)
+getcheckpoints()
+getcapabilities()
+api regions.list
+api sprites.list
+api sprites.maps
+api sprites.palettes
+api palette.entries bank=75
+api state.snapshot include=sprites,regions,gameplay,track
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api control.run-frames frames=30
+api sprite.inspect slot=44
+api sprite.visual slot=44 mode=solo
+api sprite.visual.clear
+api sprite.override slot=44 map=182
+api sprite.override.clear
+api schema action=sprites.list
+api schema action=sprite.override
+api schema action=state.snapshot
+echo === v0.65.0 query/live-graphics regression complete ===
+
+
+# ----------------------------------------------------------------------
+# 13. v0.65.1 profile metadata regression (read-only)
+# ----------------------------------------------------------------------
+echo === v0.65.1 profile metadata regression ===
+getprofiles()
+api profiles.list
+api profile.get id=chasehq
+api profile.get id=sci
+api schema action=profiles.list
+api schema action=profile.get
+echo === v0.65.1 profile metadata regression complete ===
+
+# 14. v0.66.0 platform/introspection surface
+echo === v0.66.0 introspection regression ===
+api platform.info
+api features.list
+api script.functions
+getregistry()
+gettrackrecords(before=1,after=2)
+getobjects()
+getaudiochannels()
+echo === v0.66.0 introspection regression complete ===
+
+# 15. v0.66.0 audio foundation (read-only)
+echo === v0.66.0 audio foundation regression ===
+api audio.capabilities
+api audio.events
+api audio.waveform.plan
+api audio.export.plan
+api audio.inject.plan
+echo === v0.66.0 audio foundation regression complete ===
+
+
+# 16. v0.66.0.2 diagnostics/log round-trip
+echo === v0.66.0.2 diagnostics regression ===
+api logs.list
+api logs.tail file=@runtime/web-listener.log lines=20
+api schema action=logs.tail
+api track.state
+echo === v0.66.0.2 diagnostics regression complete ===
+
+
+
+
+
+# included regression/regression-v0661-collision-api.chqscript
+# purpose: Execute Regression - v0.66.1 collision response API as a documented ChaseHQ-Native research script.
+# name: Regression - v0.66.1 collision response API
+# category: Regression
+# regression-version: 0.66.1
+# regression-scope: permanent
+echo === collision API regression ===
+api collision.state
+api collision.response.get
+api collision.response.set enabled=false
+api collision.state
+api collision.response.reset
+api collision.response.get
+echo === collision API regression complete ===
+
+
+# included regression/regression-v0661-sprite-order.chqscript
+# purpose: Execute Regression - v0.66.1 sprite priority provenance as a documented ChaseHQ-Native research script.
+# name: Regression - v0.66.1 sprite priority provenance
+# category: Regression
+# regression-version: 0.66.1
+# regression-scope: permanent
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api sprites.list
+api sprite.inspect slot=46
+echo === sprite priority provenance complete ===
+
+
+# included regression/regression-v0661-manifest-version.chqscript
+# purpose: Execute Regression - v0.66.1 manifest/runtime consistency as a documented ChaseHQ-Native research script.
+# name: Regression - v0.66.1 manifest/runtime consistency
+# category: Regression
+# regression-version: 0.66.1
+# regression-scope: permanent
+api platform.info
+api features.list
+echo === manifest/runtime consistency complete ===
+
+
+
+# v0.66.1.2 resilience/diagnostics hotfix checks
+# included regression/regression-v06612-resilience-hotfix.chqscript
+# name: Regression - v0.66.1.2 resilience hotfix
+# category: Regression
+# regression-version: 0.66.1.2
+# regression-scope: version
+# purpose: Verify runtime log aliases, manifest/runtime version consistency, and basic runner diagnostics surface.
+echo === v0.66.1.2 resilience hotfix regression ===
+api platform.info
+api features.list
+api logs.list
+api logs.tail file=@runtime/web-listener.log lines=20
+api schema action=logs.tail
+echo === v0.66.1.2 resilience hotfix regression complete ===
+
+
+# v0.66.2 authoritative steering controls
+# included regression/regression-v0662-steering-controls.chqscript
+# name: Regression - v0.66.2 steering controls
+# category: regression
+# regression-version: 0.66.2
+# regression-scope: permanent
+# purpose: Confirm authentic signed-12-bit steering path and processed game-side steering.
+echo === v0.66.2 steering controls regression ===
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api input.ioc.clear
+api input.steering.set value=0000
+api input.ioc.xor port=3 mask=20
+api control.run-frames frames=5
+if memory cpu=A address=100300 width=16 value = 0000
+  echo PASS steering centre processed=0
+else
+  echo FAIL steering centre
+end
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api input.steering.set value=0060
+api input.ioc.xor port=3 mask=20
+api control.run-frames frames=60
+if memory cpu=A address=100300 width=16 value = 0060
+  echo PASS steering right +96
+else
+  echo FAIL steering right
+end
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api input.steering.set value=0FA0
+api input.ioc.xor port=3 mask=20
+api control.run-frames frames=60
+if memory cpu=A address=100300 width=16 value = FFA0
+  echo PASS steering left -96
+else
+  echo FAIL steering left
+end
+api input.ioc.clear
+api input.steering.set value=0000
+echo === v0.66.2 steering controls regression complete ===
+
+
+# v0.66.3 contract/provenance coverage
+# included regression/regression-v0663-contracts.chqscript
+# name: Regression - v0.66.3 research contracts and sprite provenance
+# category: regression
+# purpose: Verify API/script contracts and sprite-map provenance tooling introduced in v0.66.3.
+# regression-version: 0.66.3
+# regression-scope: permanent
+echo === v0.66.3 contracts / provenance regression ===
+api platform.info
+api schema.all
+api script.schema
+api schema action=sprite.map.inspect
+api schema action=ui.prompt
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api control.run-frames frames=5
+api sprite.inspect slot=45
+api sprite.map.inspect slot=45
+echo === v0.66.3 contracts / provenance regression complete ===
+
+
+# v0.66.3.1 workbench reliability
+# included regression/regression-v06631-workbench-reliability.chqscript
+# name: Regression - v0.66.3.1 workbench reliability
+# category: regression
+# purpose: Smoke-test current build identity, documented schema, deterministic snapshot creation and run-owned artifact paths.
+# regression-version: 0.66.3.1
+# regression-scope: permanent
+
+echo === v0.66.3.1 workbench reliability regression ===
+api platform.info
+api schema.all
+api script.schema
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api control.run-frames frames=5
+api frame.snapshot name=regression-v06631-artifact-path
+api frame.snapshot.list
+echo === v0.66.3.1 workbench reliability regression complete ===
+
+
+# v0.66.4 palette-write trace + release reliability
+# included regression/regression-v0664-palette-trace.chqscript
+# name: Regression - v0.66.4 palette write trace
+# category: regression
+# purpose: Verify semantic TC0110PCR palette-write tracing, schema exposure, bounded history, stop/clear behavior and the known Stage 1 brake-lamp entries.
+# regression-version: 0.66.4
+# regression-scope: palette trace API and Script Console integration
+
+echo === v0.66.4 palette write trace regression ===
+api schema action=palette.trace.start
+api schema action=palette.trace.status
+api schema action=palette.trace.tail
+api schema action=palette.trace.stop
+api schema action=palette.trace.clear
+api palette.trace.clear
+api palette.trace.start indices=1037,1053 limit=128
+api palette.trace.status
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api control.run-frames frames=5
+api input.ioc.xor port=2 mask=20
+api control.run-frames frames=8
+api palette.trace.tail count=20
+api input.ioc.clear
+api control.run-frames frames=8
+api palette.trace.tail count=40
+api palette.trace.stop
+api palette.trace.status
+api palette.trace.clear
+api palette.trace.tail count=10
+echo === v0.66.4 palette write trace regression complete ===
+
+
+# v0.66.5 generic memory-write trace
+# included regression/regression-v0665-memory-trace.chqscript
+# name: Regression - v0.66.5 generic memory write trace
+# category: regression
+# purpose: Verify generic memory-write tracing with range-overlap matching independent of originating transaction width, plus schema/status/tail/stop/clear behavior.
+# regression-version: 0.66.5
+# regression-scope: memory trace API and Script Console integration
+
+echo === v0.66.5 generic memory write trace regression ===
+api schema action=memory.trace.start
+api schema action=memory.trace.status
+api schema action=memory.trace.tail
+api schema action=memory.trace.stop
+api schema action=memory.trace.clear
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api memory.trace.clear
+api memory.trace.start cpu=A address=0x100303 length=1 width=any limit=128
+api memory.trace.status
+api control.run-frames frames=5
+api input.ioc.xor port=2 mask=20
+api control.run-frames frames=6
+api memory.trace.tail count=20
+api input.ioc.clear
+api control.run-frames frames=6
+api memory.trace.tail count=40
+api memory.trace.stop
+api memory.trace.status
+api memory.trace.clear
+api memory.trace.tail count=10
+echo === v0.66.5 generic memory write trace regression complete ===
+
+
+# v0.66.5.1 shared Track View recorder + scripted SVG export
+# included regression/regression-v06651-track-recorder.chqscript
+# name: Regression - v0.66.5.1 shared track recorder scripting
+# category: regression
+# purpose: Verify the shared Track View recorder can be cleared, started, sampled deterministically, stopped, inspected and exported to SVG entirely from Research Script.
+# regression-version: 0.66.5.1
+# regression-scope: track recorder API, Script Console integration and SVG export
+
+echo === v0.66.5.1 shared track recorder regression ===
+api schema action=track.record.start
+api schema action=track.record.stop
+api schema action=track.record.clear
+api schema action=track.record.status
+api schema action=track.record.sample
+api schema action=track.svg.export
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api track.record.clear
+api track.record.start
+api track.record.sample
+api control.run-frames frames=30
+api track.record.sample
+api control.run-frames frames=30
+api track.record.sample
+api track.record.stop
+api track.record.status
+api track.svg.export name=regression-v06651-track
+api track.record.clear
+api track.record.status
+echo === v0.66.5.1 shared track recorder regression complete ===
+
+
+# v0.66.6.1 reconstructable layered frame snapshot + HUD isolation
+# included regression/regression-v06661-layered-frame-snapshot.chqscript
+# name: Regression - v0.66.6.1 layered frame snapshot / HUD isolation
+# category: regression
+# purpose: Verify v2 reconstructable frame capture, snapshot listing, and source-aware HUD compare/diff modes.
+# regression-version: 0.66.6.1
+# regression-scope: frame.snapshot v2, layered graphics export, HUD isolation, image compare/diff
+
+echo === v0.66.6.1 layered frame snapshot regression ===
+api schema action=frame.snapshot
+api schema action=image.compare
+api schema action=image.diff
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api frame.snapshot name=regression-v06661-layered
+api frame.snapshot.list
+api image.compare a=regression-v06661-layered b=regression-v06661-layered region=FULL hud=normal
+api image.compare a=regression-v06661-layered b=regression-v06661-layered region=FULL hud=hidden
+api image.compare a=regression-v06661-layered b=regression-v06661-layered region=FULL hud=only
+api image.diff a=regression-v06661-layered b=regression-v06661-layered region=FULL hud=hidden output=regression-v06661-hud-hidden-self-diff
+echo === v0.66.6.1 layered frame snapshot regression complete ===
+
+
+# v0.66.7.5 User Handbook / live-reference regression
+# included regression/regression-v06675-user-handbook.chqscript
+# name: Regression - v0.66.7.5 User Handbook / Live Reference
+# purpose: Prove the built-in user handbook, handbook API/script access, generated API/script references, documentation export, SDL controls and per-sprite snapshot path.
+# category: regression
+# regression-version: 0.66.7.5
+# regression-scope: current
+# status: awaiting-windows-proof
+# requires: stage1-driving-2352.chqstate
+
+echo === v0.66.7.5 User Handbook / Live Reference ===
+api schema action=docs.handbook
+api schema action=docs.page
+api docs.handbook
+api docs.page id=api-overview
+api docs.page id=graphics-lab-guide
+api schema.all
+api script.schema
+api docs.search query=frame.snapshot
+api docs.handover
+api window.status
+api window.fullscreen enabled=false
+api window.scale scale=3
+api window.restore
+api window.show
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api frame.snapshot name=regression-v06675-user-handbook
+api frame.snapshot.list
+api docs.export format=html evidence=key output=regression-v06675-user-handbook
+api window.status
+echo === v0.66.7.5 regression complete ===
+
+
+# v0.66.7.6 documentation/search/export consolidation
+# included regression/regression-v06676-docs-consolidation.chqscript
+# name: Regression - v0.66.7.6 Docs / Knowledge Consolidation
+# purpose: Prove article-body search, handbook/live schema access, article-aware export and carried-forward SDL/snapshot control paths.
+# category: regression
+# regression-version: 0.66.7.6
+# regression-scope: current
+# status: awaiting-windows-proof
+# requires: stage1-driving-2352.chqstate
+
+echo === v0.66.7.6 Docs / Knowledge Consolidation ===
+api docs.handbook
+api docs.search query=context
+api docs.search query=producer
+api docs.search query=opacity
+api knowledge.search query=context
+api docs.get id=memory-write-tracing
+api docs.get id=processed-brake-input
+api docs.get id=individual-sprite-forensics
+api docs.handover
+api schema.all
+api script.schema
+api window.status
+api window.fullscreen enabled=false
+api window.scale scale=3
+api window.restore
+api window.show
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api frame.snapshot name=regression-v06676-docs-consolidation
+api frame.snapshot.list
+api docs.export format=html evidence=key output=regression-v06676-docs-consolidation
+api window.status
+echo === v0.66.7.6 regression complete ===
+
+
+# v0.66.7.7 authoritative run-history + completed-run snapshot discovery
+# included regression/regression-v06677-run-history-snapshot-discovery.chqscript
+# name: Regression - v0.66.7.7 Run History / Snapshot Discovery
+# purpose: Verify authoritative on-disk run discovery and structured snapshot listing contracts.
+# category: regression
+# regression-version: 0.66.7.7
+# regression-scope: current
+
+echo === v0.66.7.7 Run History / Snapshot Discovery ===
+api schema action=script.runs
+api script.runs limit=25
+api frame.snapshot.list
+echo === v0.66.7.7 persistence/discovery regression complete ===
+
+
+# included regression/regression-v06678-discovery-performance.chqscript
+# name: Regression - v0.66.7.8 Discovery Performance
+# category: regression
+# purpose: prove authoritative run history and completed-run snapshot discovery remain responsive after the v0.66.7.7 integration regression
+# regression-version: 0.66.7.8
+# regression-scope: run-history snapshot-discovery responsiveness
+
+echo === v0.66.7.8 discovery performance ===
+api status
+api script.runs limit=25
+api frame.snapshot.list
+api status
+echo === v0.66.7.8 discovery performance complete ===
+
+echo --- v0.66.7.8 run finalization ---
+# included regression/regression-v06678-run-finalization.chqscript
+# name: Regression - v0.66.7.8 Run Finalization
+# category: regression
+# purpose: exercise a multi-command run with predicates so one parent run is finalized and bundled exactly once
+# regression-version: 0.66.7.8
+# regression-scope: script-run lifecycle transient predicates single final bundle
+
+echo === v0.66.7.8 run finalization ===
+api status
+if capability execution.pause
+  echo capability predicate transient PASS
+else
+  echo capability predicate not reported
+end
+if memory cpu=A address=0x100303 width=8 value >= 0x00
+  echo memory predicate transient PASS
+else
+  echo memory predicate evaluated false
+end
+api window.status
+api frame.snapshot.list
+api script.runs limit=25
+echo === v0.66.7.8 run finalization complete ===
+
+
+# v0.66.7.9 research recovery / corrected turbo knowledge
+# included regression/regression-v06679-research-recovery.chqscript
+# name: Regression - v0.66.7.9 Research Recovery
+# category: regression
+# purpose: Prove the recovery/research handoff surfaces and corrected turbo-state knowledge are available before returning to substantive gameplay research.
+# regression-version: 0.66.7.9
+# regression-scope: permanent
+echo === v0.66.7.9 research recovery regression ===
+api platform.info
+api status
+api docs.get id=turbo-hud-investigation
+api schema action=gameplay.registry
+api schema action=frame.snapshot
+api schema action=image.compare
+api schema action=memory.trace.start
+api regions.list
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api gameplay.registry
+api memory.read cpu=A address=0x100303 width=8
+api memory.read cpu=A address=0x10040F width=8
+api memory.read cpu=A address=0x1003A2 width=16
+api memory.read cpu=A address=0x100414 width=16
+echo === v0.66.7.9 research recovery regression complete ===
+
+
+# v0.66.8.0 Forensic Timeline v1
+# included regression/regression-v06680-forensic-timeline.chqscript
+# name: Regression - v0.66.8.0 Forensic Timeline v1
+# category: regression
+# purpose: Prove per-frame timeline recording, write provenance, script import, ordinary API inspection of a recorded frame, seek navigation and restoration to the prior live state.
+# regression-version: 0.66.8.0
+# regression-scope: permanent
+
+echo === v0.66.8.0 Forensic Timeline regression ===
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api input.ioc.clear
+api timeline.record.start name=regression-v06680-timeline
+api control.run-frames frames=3
+api timeline.record.stop
+api timeline.list
+api timeline.load name=regression-v06680-timeline
+assert status source=timeline
+api timeline.status
+api timeline.frames
+api timeline.seek frame=2065
+api memory.read cpu=A address=0x100303 width=8
+api register.read cpu=A name=PC
+api sprites.list
+api gameplay.registry
+api timeline.next
+api timeline.prev
+api timeline.unload
+assert status source=live
+api status
+api timeline.scan.memory name=regression-v06680-timeline triggerFrame=2064 stopFrame=2067 window=1
+api schema action=timeline.scan.memory
+api schema action=timeline.trim.event
+api audio.capabilities
+echo === v0.66.8.0 Forensic Timeline regression complete ===
+
+
+# v0.66.8.0 RC7 portable automated timeline analysis
+# included regression/regression-v06680-rc7-portable-auto-analysis.chqscript
+# name: Regression - v0.66.8.0 RC7 Portable Automated Timeline Analysis
+# category: regression
+# purpose: Prove portable current-run timeline analysis, automatic writer disassembly, milestone snapshots, HUD correlation and paced SDL timeline playback on a short deterministic recording.
+# regression-version: 0.66.8.0
+# regression-scope: current
+
+echo === v0.66.8.0 RC7 Portable Automated Timeline Analysis ===
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api input.ioc.clear
+api timeline.record.start name=regression-v06680-rc7-auto
+api input.ioc.xor port=3 mask=21
+api control.run-frames frames=2
+api input.ioc.clear
+api control.run-frames frames=3
+api timeline.record.stop
+api timeline.analyze.auto name=regression-v06680-rc7-auto triggerFrame=2065 stopFrame=2067 window=1 top=8
+api timeline.play name=regression-v06680-rc7-auto from=2064 to=2069 fps=60
+api timeline.status
+api timeline.unload
+api status
+echo === v0.66.8.0 RC7 Portable Automated Timeline Analysis complete ===
+
+# included regression/regression-v06680-rc74-bounded-history.chqscript
+# name: Regression - v0.66.8.0 RC7.4 Bounded History Discovery
+# purpose: Prove script-run discovery is bounded and summary-only so long regression history cannot exhaust browser memory.
+# category: regression
+# regression-version: 0.66.8.0
+# regression-scope: current
+echo === v0.66.8.0 RC7.4 Bounded History Discovery ===
+api schema action=script.runs
+api script.runs limit=10
+echo === v0.66.8.0 RC7.4 bounded history discovery complete ===
+
+
+# v0.66.9.0 focused Game Lab + TC0100SCN character-inspector regression
+# included regression/regression-v06690-game-lab-tile-inspector.chqscript
+# name: Regression - v0.66.9.0 Game Lab and Tile Inspector
+# category: regression
+# purpose: Prove reversible Chase H.Q. Game Lab controls and TC0100SCN RAM character inspection/export without disturbing unrelated patches.
+# regression-version: 0.66.9.0
+# regression-scope: current
+
+echo === v0.66.9.0 Game Lab / Tile Inspector regression ===
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api game.experiment.status
+api game.turbo.remaining.set value=3
+api game.turbo.stock enabled=true value=3
+api game.turbo.stock enabled=false
+api game.speed.set value=602
+api game.speed.freeze enabled=true value=602
+api game.speed.clear
+api tile.inspect code=7C palette=0 scale=8
+api tile.inspect code=0C palette=0 scale=8
+api game.experiment.status
+echo === v0.66.9.0 Game Lab / Tile Inspector regression complete ===
+
+
+# v0.66.9.0 RC2 sprite-order / speed-semantics regression
+# included regression/regression-v06690-rc2-sprite-order-speed-semantics.chqscript
+# name: Regression - v0.66.9.0 RC2 Sprite Order and Speed Semantics
+# category: regression
+# purpose: Prove sprite map lookup/order controls, frame-safe tile outputs, script ERR handling surface, and Game Lab speed state semantics.
+# regression-version: 0.66.9.0
+# regression-scope: version
+echo === v0.66.9.0 RC2 sprite order / speed regression ===
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api game.experiment.status
+api sprite.order.inspect
+api sprite.map.inspect map=475
+api game.sprite.order.set mode=lower-slot
+api sprite.order.inspect
+api game.sprite.order.set mode=higher-slot
+api sprite.order.inspect
+api tile.inspect code=0C palette=0 scale=4
+api game.speed.set value=602
+api game.experiment.status
+api game.speed.freeze enabled=true value=602
+api game.experiment.status
+api game.speed.clear
+api game.experiment.status
+echo === v0.66.9.0 RC2 sprite order / speed regression complete ===
+
+
+# v0.66.9.0 RC2.2 MAME-reference sprite-order default regression
+# included regression/regression-v06690-rc22-mame-sprite-order.chqscript
+# name: Regression - v0.66.9.0 RC2.2 MAME Sprite Order Default
+# category: regression
+# purpose: Smoke-test reversible sprite traversal controls; pixel ownership is asserted by regression-sprite-ownership.chqscript.
+# regression-version: 0.66.9.0
+# regression-scope: version
+
+echo === v0.66.9.0 RC2.2 MAME sprite-order regression ===
+api sprite.order.inspect
+api sprite.order.set mode=higher-slot
+api sprite.order.inspect
+api sprite.order.set mode=lower-slot
+api sprite.order.inspect
+echo === v0.66.9.0 RC2.2 MAME sprite-order regression complete ===
+
+
+# v0.66.9.0 RC2.4.3 assertive current-run snapshot discovery
+# included regression/regression-v06690-rc243-snapshot-discovery.chqscript
+# name: Regression - v0.66.9.0 RC2.4.3 Snapshot Discovery
+# category: regression
+# purpose: Prove that a snapshot created inside the current script run is returned immediately by frame.snapshot.list, then exercise exact reconstruction comparisons.
+# checkpoint: stage1-gameplay-2064.chqstate
+# regression-version: 0.66.9.0
+# regression-scope: current
+
+echo === RC2.4.3 snapshot discovery regression ===
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api control.step-frame
+api frame.snapshot name=regression-rc243-snapshot-discovery sprites=individual
+api frame.snapshot.list require=regression-rc243-snapshot-discovery
+api image.compare a=regression-rc243-snapshot-discovery b=regression-rc243-snapshot-discovery region=FULL hud=normal
+api image.compare a=regression-rc243-snapshot-discovery b=regression-rc243-snapshot-discovery region=FULL hud=hidden
+echo === RC2.4.3 snapshot discovery regression complete ===
+
+
+# included regression/regression-sprite-ownership.chqscript
+# name: Regression - Sprite Ownership and Export Coordinates
+# category: regression
+# purpose: Assert front body ownership, uncovered black shadow, overlap coverage and per-sprite/live coordinate agreement at canonical frame 2352.
+# target: stage1-driving-2352.chqstate; body slot 82/map 475 and shadow slot 81/map 575.
+# method: Capture aggregate plus body/shadow solo snapshots under descending traversal and assert overlap ownership/export coordinates.
+# expected: Nonzero overlap is never owned by slot 81, body-owned overlap is nonzero, shadow remains visible outside body, and exportCoordinatesExact=true.
+# cleanup: Restore lower-slot traversal and clear sprite visual/override state even if capture/assertion fails.
+# regression-version: 0.66.9.0
+# regression-scope: version
+
+api sprite.visual.clear
+api sprite.override.clear
+api sprite.order.set mode=lower-slot
+
+try
+    api checkpoint.load file=stage1-driving-2352.chqstate run=false
+    assert status frame=2352
+    api sprite.order.inspect
+    api frame.snapshot name=regression-sprite-ownership
+    api sprite.visual slot=82 mode=solo
+    api frame.snapshot name=regression-sprite-body-solo
+    api sprite.visual slot=81 mode=solo
+    api frame.snapshot name=regression-sprite-shadow-solo
+    api sprite.visual.clear
+    api frame.snapshot.assert-overlap name=regression-sprite-ownership front=82 back=81 frontSolo=regression-sprite-body-solo backSolo=regression-sprite-shadow-solo
+finally
+    api sprite.visual.clear
+    api sprite.override.clear
+    api sprite.order.set mode=lower-slot
+end
+
+echo === Sprite ownership and export coordinate assertions COMPLETE ===
+
+
+# v0.66.9.0 RC2.5 safe experiment lifecycle / timeline cleanup
+# included regression/regression-v06690-rc25-script-safety.chqscript
+# name: Regression - v0.66.9.0 RC2.5 Script Safety
+# purpose: Prove timeline.reset restores the pre-load live checkpoint after a timeline seek/fork and exercise the try/finally cleanup path.
+# category: regression
+# target: self-contained two-frame timeline recorded from stage1-driving-2352 plus canonical stage1-gameplay-2064 live state.
+# method: Create the timeline fixture in this run, establish frame 2064, load/seek/fork frame 2352 inside try, then restore with timeline.reset in finally.
+# expected: The fork reaches frame 2352 and cleanup returns the live emulator to frame 2064 before the terminal COMPLETE marker.
+# cleanup: timeline.reset is called before and in finally; sprite visual/override state is cleared defensively.
+# regression-version: 0.66.9.0-RC2.5
+# regression-scope: permanent
+
+api timeline.reset
+api sprite.visual.clear
+api sprite.override.clear
+
+# Permanent regressions must create their own timeline fixture rather than
+# depending on a prior research run or another regression's artifacts.
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+assert status frame=2352
+api timeline.record.start name=regression-v06690-rc25-script-safety
+api control.run-frames frames=1
+api timeline.record.stop
+
+# Establish the live state that timeline.reset must restore after load/seek/fork.
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+assert status frame=2064
+
+try
+    api timeline.load name=regression-v06690-rc25-script-safety
+    api timeline.seek frame=2352
+    api timeline.fork-live
+    assert status frame=2352
+finally
+    api sprite.visual.clear
+    api sprite.override.clear
+    api timeline.reset
+end
+
+assert status frame=2064
+echo === v0.66.9.0 RC2.5 Script Safety: COMPLETE ===
+
+
+# v0.66.9.0 RC2.6.1 sprite bitplane significance integration regression
+# included regression/regression-v06690-rc261-sprite-bitplane-significance.chqscript
+# name: Regression - v0.66.9.0 RC2.6.1 Sprite Bitplane Significance
+# category: regression
+# purpose: Exercise the RC2.6 shared sprite decoder at canonical Map 405 and require a current-run structured snapshot with no palette overrides.
+# checkpoint: stage1-driving-2352.chqstate
+# target: Stage 1 frame 2352 / Map 405 / palette bank 175.
+# method: Clear palette overrides, load the canonical frame, inspect Map 405, capture an individual-sprite snapshot, require immediate discovery, and self-compare the final frame.
+# expected: Frame 2352 is retained, the named snapshot is discoverable in the current run, and the self-comparison is exact. The exhaustive 16-pen decoder invariant is asserted separately by Test-SpriteGfx.bat.
+# cleanup: Palette overrides are cleared in finally; canonical frame 2352 remains loaded.
+# regression-version: 0.66.9.0-RC2.6.1
+# regression-scope: current
+
+echo === v0.66.9.0 RC2.6.1 Sprite Bitplane Significance regression ===
+
+api palette.overrides.clear
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+assert status frame=2352
+
+try
+    api sprite.map.inspect map=405
+    api frame.snapshot name=regression-rc261-map405-bitplane sprites=individual
+    api frame.snapshot.list require=regression-rc261-map405-bitplane
+    api image.compare a=regression-rc261-map405-bitplane b=regression-rc261-map405-bitplane region=FULL hud=normal
+finally
+    api palette.overrides.clear
+end
+
+assert status frame=2352
+echo === v0.66.9.0 RC2.6.1 Sprite Bitplane Significance regression COMPLETE ===
+
+
+# included regression/regression-v06690-rc28-tc0100-reliability.chqscript
+# name: Regression - v0.66.9.0 RC2.8 TC0100SCN and Reliability
+# category: regression
+# purpose: Assert release identity, reversible layer offsets and exact old/corrected canonical captures.
+# target: All four canonical Stage 1 checkpoints; sprite-heavy frame 2352.
+# method: Keep CPU state fixed while changing only the diagnostic X model; assert snapshot reconstruction and no-sprites output.
+# expected: Full release version parity, layer set/get/reset parity, exact captures and non-empty sprite difference at 2352.
+# cleanup: Corrected mode and zero layer offsets restored even on failure.
+# regression-version: 0.66.9.0-RC2.8
+# regression-scope: current
+
+api release.assert-version
+api timeline.reset
+api sprite.visual.clear
+api sprite.override.clear
+api layer.offsets.reset
+try
+    api layer.offsets.set layer=bg0 x=7 y=-3
+    api layer.offsets.get
+    api layer.offsets.assert layer=bg0 x=7 y=-3
+    api layer.offsets.reset layer=bg0
+    api layer.offsets.assert layer=bg0 x=0 y=0
+    set checkpoints = stage1-gameplay-2064,stage1-driving-2352,stage1-target-post-final-hit-9548,stage1-end-level-9988
+    for checkpoint in checkpoints
+        api checkpoint.load file=${checkpoint}.chqstate run=false
+        api tc0100.mode mode=legacy
+        api frame.snapshot name=rc28-${checkpoint}-legacy
+        api frame.snapshot.list require=rc28-${checkpoint}-legacy
+        api frame.snapshot.assert-exact name=rc28-${checkpoint}-legacy
+        api tc0100.mode mode=corrected
+        api frame.snapshot name=rc28-${checkpoint}-corrected
+        api frame.snapshot.list require=rc28-${checkpoint}-corrected
+        api frame.snapshot.assert-exact name=rc28-${checkpoint}-corrected
+        api image.compare a=rc28-${checkpoint}-legacy b=rc28-${checkpoint}-corrected region=FULL hud=hidden
+    end
+    api checkpoint.load file=stage1-driving-2352.chqstate run=false
+    assert status frame=2352
+    api frame.snapshot name=rc28-scene-no-sprites sprites=individual
+    api frame.snapshot.assert-scene-no-sprites name=rc28-scene-no-sprites
+    api frame.snapshot.assert-exact name=rc28-scene-no-sprites requireColumnZero=true
+finally
+    api tc0100.mode mode=corrected
+    api layer.offsets.reset
+    api sprite.visual.clear
+    api sprite.override.clear
+    api timeline.reset
+end
+echo === RC2.8 TC0100SCN and Reliability regression COMPLETE ===
+
+# included regression/regression-v06690-rc28-radar-hud-endstate.chqscript
+# name: Regression - v0.66.9.0 RC2.8 Radar, HUD and End State
+# category: regression
+# purpose: Capture deterministic driving and end-level radar/HUD states and verify exact structured-frame reconstruction.
+# checkpoint: stage1-driving-2352.chqstate
+# tags: rc28 radar hud tc0100scn end-results regression
+# regression-version: 0.66.9.0-RC2.8
+# regression-scope: current
+
+api release.assert-version
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api frame.snapshot name=rc28-radar-hud-driving sprites=individual
+api frame.snapshot.assert-exact name=rc28-radar-hud-driving requireColumnZero=true
+api frame.snapshot.assert-scene-no-sprites name=rc28-radar-hud-driving
+api checkpoint.load file=stage1-end-level-9988.chqstate run=false
+api frame.snapshot name=rc28-radar-hud-end-results sprites=individual
+api frame.snapshot.assert-exact name=rc28-radar-hud-end-results
+api frame.snapshot.assert-scene-no-sprites name=rc28-radar-hud-end-results
+api registry.list
+echo === RC2.8 radar/HUD/end-state captures complete ===
+
+# v0.66.9.0 RC2.9 confirmed target health + one-hit/tooling
+# included regression/regression-v06690-rc29-target-health-tooling.chqscript
+# name: Regression - v0.66.9.0 RC2.9 target health/tooling
+# category: regression
+# regression-version: 0.66.9.0-RC2.9
+# regression-scope: permanent
+# checkpoint: stage1-target-immediate-pre-damage-6333.chqstate
+# purpose: Prove native one-hit target toggle on a known authentic damage frame and exercise RC2.9 API contracts.
+
+echo === RC2.9 target health/tooling regression ===
+api release.assert-version
+api schema action=game.target.one-hit
+api schema action=control.run-frames
+
+try
+  api game.target.one-hit enabled=false
+  api checkpoint.load file=stage1-target-immediate-pre-damage-6333.chqstate run=false
+
+  if memory cpu=A address=1002AE width=16 value = 000E
+    echo PASS canonical 6333 target counter = 000E
+  else
+    echo FAIL canonical 6333 target counter mismatch
+  end
+
+  api game.target.one-hit enabled=true
+  api control.run-frames frames=2 timeout=900000
+
+  if memory cpu=A address=1002AE width=16 value = FFFF
+    echo PASS one-hit preserved authentic terminal underflow
+  else
+    echo FAIL one-hit terminal underflow
+  end
+
+  api control.run-frames frames=14 timeout=900000
+  if memory cpu=A address=10018D width=8 value = 05
+    echo PASS one-hit entered authentic defeat mode
+  else
+    echo FAIL one-hit defeat mode
+  end
+
+  api game.experiment.status
+finally
+  api game.target.one-hit enabled=false
+  api patch.clear
+  api input.ioc.clear
+  api collision.response.reset
+  api checkpoint.load file=stage1-driving-2352.chqstate run=false
+end
+
+assert status frame=2352
+echo === RC2.9 target health/tooling regression complete ===
+
+
+# included regression/regression-v06690-rc30-course-mapping-live-survey.chqscript
+# name: Regression - v0.66.9.0 RC3.0 live course mapping/survey
+# category: regression
+# regression-version: 0.66.9.0-RC3.0
+# regression-scope: permanent
+# checkpoint: stage1-gameplay-2064.chqstate
+# purpose: Prove live course follower API parity, reversible survey orchestration, v2 recorder telemetry and mapping-dataset export.
+
+echo === RC3.0 live course mapping/survey regression ===
+api release.assert-version
+api schema action=course.follow.status
+api schema action=course.follow.configure
+api schema action=course.survey.start
+api schema action=track.map.export
+
+try
+  api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+  api course.follow.configure controller=hybrid lookahead=4 bias=0 speedControl=true
+  api course.follow.reset
+  api course.survey.start collisionResponse=false timerHold=true
+  api track.record.sample
+  api control.run-frames frames=30 timeout=900000
+  api track.record.sample
+  api control.run-frames frames=30 timeout=900000
+  api track.record.sample
+  api course.follow.status
+  api track.record.status
+  api track.map.export name=regression-rc30-course-map
+finally
+  api course.survey.stop
+  api course.follow.configure controller=hybrid lookahead=8 bias=0 speedControl=false
+  api patch.clear
+  api input.ioc.clear
+  api collision.response.reset
+  api timer.hold enabled=false
+  api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+end
+
+assert status frame=2064
+echo === RC3.0 live course mapping/survey regression complete ===
+
+
+# v0.66.9.0 RC3.1 surface stability + candidate object tracking
+# included regression/regression-v06690-rc31-course-mapping-quality.chqscript
+# name: Regression - v0.66.9.0 RC3.1 course mapping data quality
+# category: regression
+# regression-version: 0.66.9.0-RC3.1
+# regression-scope: permanent
+# checkpoint: stage1-gameplay-2064.chqstate
+# purpose: Prove RC3.1 carries RC3.0 live survey fixes forward and emits stable surface candidates, raw renderer variants, heuristic object tracks and v2 mapping exports.
+
+echo === RC3.1 course mapping data-quality regression ===
+api release.assert-version
+api schema action=course.follow.configure
+api schema action=course.survey.start
+api schema action=track.map.export
+
+try
+  api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+  api course.follow.configure controller=hybrid lookahead=4 bias=0 speedControl=true
+  api course.follow.reset
+  api course.survey.start collisionResponse=false timerHold=true
+  api track.record.sample
+  api control.run-frames frames=30 timeout=900000
+  api track.record.sample
+  api control.run-frames frames=30 timeout=900000
+  api track.record.sample
+  api track.record.status
+  api track.map.export name=regression-rc31-course-map-quality
+finally
+  api course.survey.stop
+  api course.follow.configure controller=hybrid lookahead=8 bias=0 speedControl=false
+  api patch.clear
+  api input.ioc.clear
+  api collision.response.reset
+  api timer.hold enabled=false
+  api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+end
+
+assert status frame=2064
+echo === RC3.1 course mapping data-quality regression complete ===
+
+
+# Current platform/release contracts consolidated from historical RC3.2-RC3.4.x/v0.66.9.1/v0.66.9.2 release-tail scripts.
+# See docs/REGRESSION_COVERAGE_MAP.md for explicit coverage equivalence.
+# included regression/regression-platform-current-contracts.chqscript
+# name: Current Platform Contracts Regression
+# category: regression
+# regression-version: current
+# regression-scope: permanent
+# purpose: Consolidated current-build proof for release identity, script/checkpoint schema, legacytrace lifecycle, checkpoint evidence closure, track/checkpoint semantics, authoritative run history, and deterministic final player-gameplay restoration. Supersedes repeated execution of historical RC3.2-RC3.4.x/v0.66.9.1/v0.66.9.2 release-tail scripts without reducing their unique contract coverage.
+# checkpoint: stage1-gameplay-2064.chqstate
+
+echo === ChaseHQ Current Platform Contracts: BEGIN ===
+api release.assert-version
+api schema action=script.run
+api schema action=checkpoint.save
+api status
+
+# One canonical legacytrace/checkpoint lifecycle replaces the same flow repeated by historical RC3.2-RC3.4.4 release scripts.
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api gameplay.registry
+api track.state
+legacytrace reset
+legacytrace cpu A
+legacytrace mem 10A04A:10A04B r
+legacytrace context 0 0
+legacytrace max 256
+legacytrace output evidence\regression-current-platform-trace.log
+legacytrace start
+api control.run-frames frames=4
+legacytrace stop
+api checkpoint.save file=regression-current-platform-checkpoint.chqstate
+api checkpoint.list
+api script.runs limit=5
+
+# Preserve the v0.66.9.2 checkpoint-context / track-schema contract and restore genuine player gameplay.
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api gameplay.registry
+api track.state
+api track.records before=1 after=1
+api script.runs limit=5
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api status
+echo === ChaseHQ Current Platform Contracts: COMPLETE ===
+
+
+# v0.66.9.3-RC3 research-tooling hardening
+# included regression/regression-v06693-rc3.chqscript
+# name: v0.66.9.3-RC3 Research Tooling Hardening Regression
+# category: regression
+# regression-version: 0.66.9.3-RC3
+# regression-scope: release
+# purpose: Final tooling-hardening probe before a diagnosis-heavy work period: authoritative source-line provenance, client-side wait evidence parity, resolved-source capture, portable/navigable evidence bundles, structured corpus results, runtime queries, tuple iteration and deterministic gameplay restoration. No intentional emulation/game behavior changes.
+# checkpoint: stage1-gameplay-2064.chqstate
+
+echo === ChaseHQ v0.66.9.3-RC3 Tooling Regression: BEGIN ===
+api release.assert-version
+api schema action=sprite.shadow.compare
+api schema action=query.runtime
+api schema action=corpus.run
+api schema action=script.run.verify
+api script.schema
+
+# Client-only wait must still appear in authoritative console/resolved-command evidence.
+wait 25
+
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api sprite.shadow.compare scope=visible failOnMismatch=false
+
+# Nested expansion must preserve the authored line of the API command below.
+repeat 1
+  for address,width in [(1002AE,16),(1002D8,16)]
+    api memory.read cpu=A address=${address} width=${width}
+  end
+end
+
+# try/finally source provenance must also remain absolute.
+try
+  api query.runtime function=getmaps()
+  api query.runtime function=getregistry()
+finally
+  api status
+end
+
+# Corpus rows must remain typed JSON objects and caller state must be restored.
+api corpus.run checkpoints=stage1-driving-2352.chqstate,stage1-gameplay-2064.chqstate action=sprite.shadow.compare scope=visible failOnMismatch=false
+api query.runtime function=gettrackrecords(before=1,after=1)
+api script.runs limit=5
+
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api status
+echo === ChaseHQ v0.66.9.3-RC3 Tooling Regression: COMPLETE ===
+
+
+# v0.66.9.3 final promoted capability contract (supersedes RC5 in the automatic tail)
+# included regression/regression-v06693.chqscript
+# name: v0.66.9.3 Final Release Capability Regression
+# category: regression
+# regression-version: 0.66.9.3
+# regression-scope: release
+# purpose: Prove final v0.66.9.3 independent placed-sprite-layer shadow parity across canonical checkpoints plus read-provenance, structured collision/audio event actions, promoted gameplay registry and safe deterministic cleanup.
+# checkpoint: stage1-gameplay-2064.chqstate
+
+echo === ChaseHQ v0.66.9.3 Final Release Capability Regression: BEGIN ===
+api release.assert-version
+api schema action=sprite.layer-shadow.compare
+api schema action=memory.trace.start
+api schema action=collision.events
+api schema action=audio.events
+api schema action=input.steering.set
+api schema action=gameplay.registry
+
+# Independent placed sprite-source shadow over the canonical corpus.
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api sprite.layer-shadow.compare failOnMismatch=true output=v06693-shadow-2352.json
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api sprite.layer-shadow.compare failOnMismatch=true output=v06693-shadow-2064.json
+api checkpoint.load file=stage1-target-immediate-pre-contact-5587.chqstate run=false
+api sprite.layer-shadow.compare failOnMismatch=true output=v06693-shadow-5587.json
+api checkpoint.load file=stage1-target-first-physical-contact-5588.chqstate run=false
+api sprite.layer-shadow.compare failOnMismatch=true output=v06693-shadow-5588.json
+api checkpoint.load file=stage1-target-immediate-pre-damage-6333.chqstate run=false
+api sprite.layer-shadow.compare failOnMismatch=true output=v06693-shadow-6333.json
+api checkpoint.load file=stage1-target-first-damage-6334.chqstate run=false
+api sprite.layer-shadow.compare failOnMismatch=true output=v06693-shadow-6334.json
+api checkpoint.load file=stage1-target-post-final-hit-9548.chqstate run=false
+api sprite.layer-shadow.compare failOnMismatch=true output=v06693-shadow-9548.json
+api checkpoint.load file=stage1-end-level-9988.chqstate run=false
+api sprite.layer-shadow.compare failOnMismatch=true output=v06693-shadow-9988.json
+
+# New research surfaces must be callable and leave no active intervention.
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api memory.trace.clear
+api memory.trace.start cpu=A address=100200 length=2 width=any limit=128 access=read
+api control.run-frames frames=2
+api memory.trace.status
+api memory.trace.tail count=20
+api memory.trace.stop
+api memory.trace.clear
+
+api collision.events.clear
+api collision.events count=10
+api audio.events.clear
+api audio.events count=10
+api gameplay.registry
+api objects.list
+api audio.capabilities
+
+api input.ioc.clear
+api input.steering.set value=0000
+api sprite.visual.clear
+api sprite.override.clear
+api patch.clear
+api palette.overrides.clear
+api collision.response.reset
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api status
+
+echo === ChaseHQ v0.66.9.3 Final Release Capability Regression: COMPLETE ===
+
+
+# v0.66.9.4 final promoted native-graphics / semantic HUD contract; RC3.1.3 remains historical promotion evidence
+# included regression/regression-v06694.chqscript
+# name: v0.66.9.4 Final Release Native Graphics + Dynamic HUD Regression
+# category: regression
+# regression-version: 0.66.9.4
+# regression-scope: release
+# purpose: Final v0.66.9.4 release contract: semantic player replacement must render visible target pixels and persist through left/right steering map changes, SPEED must stay visually empty while accelerator-driven live values change, Native shadow parity must remain exact, and cleanup must restore authentic state.
+# checkpoint: stage1-gameplay-2064.chqstate
+
+echo === ChaseHQ v0.66.9.4 Final Release Regression: BEGIN ===
+api release.assert-version
+api schema action=sprite.asset-replace
+
+api patch.clear
+api input.ioc.clear
+api input.steering.set value=0000
+api sprite.visual.clear
+api sprite.override.clear
+api sprite.map-override.clear
+api sprite.asset-replace.clear
+api hud.layout.reset
+api backend.sprite.set mode=original
+
+# Cross-format vehicle replacement must produce actual visible replacement pixels.
+api checkpoint.load file=stage2-gameplay-7500.chqstate run=false
+api control.run-frames frames=4
+api frame.capture name=v06694-final-player-authentic
+api checkpoint.load file=stage2-gameplay-7500.chqstate run=false
+api sprite.asset-replace object=player_car.body target=190 format=obj-b64 palette=73 flipx=1 dx=0 dy=0
+api control.run-frames frames=4
+assert status sprite_backend=native
+assert status sprite_asset_overrides=1
+assert status sprite_asset_visible=1
+api frame.capture name=v06694-final-player-yellow-target-straight
+
+# Semantic replacement must survive authentic player body-map changes while steering.
+api input.steering.set value=0060
+api control.run-frames frames=30
+assert status sprite_asset_visible=1
+api frame.capture name=v06694-final-player-yellow-target-steer-right
+api input.steering.set value=0FA0
+api control.run-frames frames=60
+assert status sprite_asset_visible=1
+api frame.capture name=v06694-final-player-yellow-target-steer-left
+api input.steering.set value=0000
+
+# Independent raw sprite renderer must still match after the experiment is cleared.
+api sprite.asset-replace.clear
+api backend.sprite.set mode=original
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api sprite.layer-shadow.compare failOnMismatch=true output=v06694-final-stage1-shadow.json
+
+# SPEED hide must suppress the true destination cells while authentic dynamic
+# character RAM continues changing under accelerator input.
+api hud.layout.set element=speed visible=false dx=0 dy=0
+api input.ioc.xor port=3 mask=20
+api control.run-frames frames=120
+api input.ioc.clear
+api frame.snapshot name=v06694-final-speed-hidden-after-acceleration
+assert status hud_speed_region_empty=1
+
+# Full live TC0100SCN export remains available.
+api text.charset.export palette=0 scale=1
+
+# Deterministic cleanup.
+api backend.sprite.set mode=original
+api sprite.asset-replace.clear
+api sprite.map-override.clear
+api game.beacon.override mode=authentic
+api hud.layout.reset
+api input.steering.set value=0000
+api patch.clear
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+assert status sprite_backend=original
+assert status sprite_asset_overrides=0
+api status
+
+echo === ChaseHQ v0.66.9.4 Final Release Regression: COMPLETE ===
+
+
+# v0.66.9.5-RC1.1 evidence-backed corrective contract
+# included regression/regression-v06695-rc11.chqscript
+# name: v0.66.9.5-RC1.1 Snapshot/Resolver/Speed/Beacon/Collision Corrective Regression
+# category: regression
+# regression-version: 0.66.9.5-RC1.1
+# safe: true
+# purpose: Lock the evidence-backed fixes from v0.66.9.4 Runs005-010: live/snapshot semantic-asset parity, map509 semantic player coverage, 32-bit fixed-point speed freeze, coupled beacon phase/request override, target-contact structured collision instrumentation, and clean telemetry/reset behavior.
+
+echo === ChaseHQ v0.66.9.5-RC1.1 Corrective Regression: BEGIN ===
+api release.assert-version
+
+try
+  api memory.trace.clear
+  api events.clear
+  api collision.response.reset
+  api collision.events.clear
+  api game.target.one-hit enabled=false
+  api game.speed.clear
+  api sprite.asset-replace.clear
+  api sprite.map-override.clear
+  api sprite.override.clear
+  api sprite.visual.clear
+  api patch.clear
+  api palette.overrides.clear
+  api hud.layout.reset
+  api game.beacon.override mode=authentic
+  api input.ioc.clear
+  api input.steering.set value=0000
+  api backend.sprite.set mode=original
+
+  echo === RC1 A: SEMANTIC ASSET LIVE/SNAPSHOT PARITY ===
+  api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+  api backend.sprite.set mode=native
+  api sprite.asset-replace source=516 target=190 format=obj-b64 palette=73 flipx=1 dx=0 dy=0
+  api control.run-frames frames=5
+  assert status sprite_asset_visible=1
+  api frame.snapshot.parity name=rc1-player-asset-parity require=true
+  api sprite.asset-resolve
+  api sprite.asset-replace.clear
+  assert status sprite_asset_visible=0
+
+  echo === RC1 B: MAP509 SEMANTIC PLAYER FAMILY ===
+  api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+  api game.speed.freeze enabled=true value=602
+  api input.steering.set value=0060
+  api sprite.asset-replace object=player_car.body target=190 format=obj-b64 palette=73 flipx=1 dx=0 dy=0
+  api control.run-frames frames=12
+  assert status sprite_asset_visible=1
+  api sprite.asset-resolve
+  api frame.snapshot.parity name=rc1-player-map509-semantic-parity require=true
+  api sprite.asset-replace.clear
+  api game.speed.clear
+  api input.steering.set value=0000
+
+  echo === RC1 C: 32-BIT FIXED-POINT SPEED FREEZE ===
+  api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+  api game.speed.freeze enabled=true value=602
+  api control.run-frames frames=4
+  if memory cpu=A address=10041C width=32 value = 025A0000
+    echo PASS game.speed.freeze holds 0x025A0000 across game writer
+  else
+    echo FAIL game.speed.freeze did not hold 32-bit fixed-point speed
+  end
+  api patch.list
+  api game.speed.clear
+
+  echo === RC1 D: COUPLED BEACON PHASE/REQUEST OVERRIDE ===
+  api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+  api game.beacon.override mode=on
+  if memory cpu=A address=101854 width=16 value = 0006
+    echo PASS beacon Force ON phase=6
+  else
+    echo FAIL beacon Force ON phase incorrect
+  end
+  if memory cpu=A address=108082 width=16 value = FFFF
+    echo PASS beacon Force ON request=FFFF
+  else
+    echo FAIL beacon Force ON request incorrect
+  end
+  api control.run-frames frames=1
+  api game.beacon.get
+
+  api checkpoint.load file=stage1-target-immediate-pre-damage-6333.chqstate run=false
+  api game.beacon.override mode=off
+  if memory cpu=A address=101854 width=16 value = 0000
+    echo PASS beacon Force OFF phase=0
+  else
+    echo FAIL beacon Force OFF phase incorrect
+  end
+  if memory cpu=A address=108082 width=16 value = 0000
+    echo PASS beacon Force OFF request=0
+  else
+    echo FAIL beacon Force OFF request incorrect
+  end
+  api control.run-frames frames=1
+  api game.beacon.get
+  api game.beacon.override mode=authentic
+
+  echo === RC1 E: TARGET-CONTACT STRUCTURED EVENT SURFACE ===
+  api checkpoint.load file=stage1-target-immediate-pre-contact-5587.chqstate run=false
+  api collision.events.clear
+  api control.run-frames frames=4
+  api collision.events count=50
+
+  echo === RC1 F: CLEANUP CONTRACT ===
+finally
+  api memory.trace.clear
+  api collision.response.reset
+  api collision.events.clear
+  api game.target.one-hit enabled=false
+  api game.speed.clear
+  api sprite.asset-replace.clear
+  api sprite.map-override.clear
+  api sprite.override.clear
+  api sprite.visual.clear
+  api patch.clear
+  api palette.overrides.clear
+  api hud.layout.reset
+  api game.beacon.override mode=authentic
+  api input.ioc.clear
+  api input.steering.set value=0000
+  api backend.sprite.set mode=original
+  api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+  api status
+end
+
+echo === ChaseHQ v0.66.9.5-RC1.1 Corrective Regression: COMPLETE ===
+
+
+# v0.66.9.5-RC2 ROM atlas / semantic vehicle / latency-aware beacon contract
+# included regression/regression-v06695-rc2.chqscript
+# name: v0.66.9.5-RC2 ROM Atlas / Vehicle Semantics / Beacon Pipeline Regression
+# category: regression
+# regression-version: 0.66.9.5-RC2
+# safe: true
+# purpose: Lock RC2 direct-ROM atlas export, source/effective sprite inspection, expanded player semantic coverage, and latency-aware beacon presentation while retaining RC1.1 corrective contracts.
+
+echo === ChaseHQ v0.66.9.5-RC2 Focused Regression: BEGIN ===
+api release.assert-version
+
+try
+  api memory.trace.clear
+  api events.clear
+  api collision.response.reset
+  api collision.events.clear
+  api game.target.one-hit enabled=false
+  api game.speed.clear
+  api game.beacon.override mode=authentic
+  api sprite.asset-replace.clear
+  api sprite.map-override.clear
+  api sprite.override.clear
+  api sprite.visual.clear
+  api patch.clear
+  api palette.overrides.clear
+  api hud.layout.reset
+  api input.ioc.clear
+  api input.steering.set value=0000
+  api backend.sprite.set mode=original
+
+  echo === RC2 A: DIRECT ROM ATLAS EXPORT ===
+  api sprite.rom-atlas.export start=516 end=520 format=obj-b64 palette=65 name=rc2-rom-atlas-smoke
+
+  echo === RC2 B: SOURCE / EFFECTIVE SPRITE INSPECTION ===
+  api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+  api sprite.override slot=45 map=522 palette=65
+  api sprite.inspect slot=45
+  api sprites.list
+  api sprite.override.clear
+
+  echo === RC2 C: PLAYER POSITIVE-BAND SEMANTIC COVERAGE ===
+  api checkpoint.load file=stage1-driving-2352.chqstate run=false
+  api control.run-frames frames=300
+  api sprite.asset-replace object=player_car.body target=190 format=obj-b64 palette=73 flipx=1 dx=0 dy=0
+  api control.run-frames frames=1
+  assert status sprite_asset_visible=1
+  api sprite.asset-resolve
+  api sprite.asset-replace.clear
+
+  echo === RC2 D: BEACON FORCE-ON AUTHENTIC PIPELINE LATENCY ===
+  api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+  api game.beacon.override mode=on
+  api control.run-frames frames=4
+  assert status beacon_live_present=1
+  api game.beacon.get
+
+  echo === RC2 E: BEACON FORCE-OFF AUTHENTIC PIPELINE LATENCY ===
+  api checkpoint.load file=stage1-target-immediate-pre-damage-6333.chqstate run=false
+  api game.beacon.override mode=off
+  api control.run-frames frames=3
+  assert status beacon_live_present=0
+  api game.beacon.get
+  api game.beacon.override mode=authentic
+
+  echo === RC2 F: RC1.1 CORRECTIVE CONTRACT CARRY-FORWARD ===
+  api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+  api game.speed.freeze enabled=true value=602
+  api control.run-frames frames=4
+  if memory cpu=A address=10041C width=32 value = 025A0000
+    echo PASS game.speed.freeze still holds 0x025A0000
+  else
+    echo FAIL game.speed.freeze regressed
+  end
+  api game.speed.clear
+
+  api checkpoint.load file=stage1-target-immediate-pre-contact-5587.chqstate run=false
+  api collision.events.clear
+  api control.run-frames frames=4
+  api collision.events count=50
+
+  echo === ChaseHQ v0.66.9.5-RC2 Focused Regression: BODY COMPLETE ===
+finally
+  api memory.trace.clear
+  api events.clear
+  api collision.response.reset
+  api collision.events.clear
+  api game.target.one-hit enabled=false
+  api game.speed.clear
+  api game.beacon.override mode=authentic
+  api sprite.asset-replace.clear
+  api sprite.map-override.clear
+  api sprite.override.clear
+  api sprite.visual.clear
+  api patch.clear
+  api palette.overrides.clear
+  api hud.layout.reset
+  api input.ioc.clear
+  api input.steering.set value=0000
+  api backend.sprite.set mode=original
+  api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+  api status
+end
+
+echo === ChaseHQ v0.66.9.5-RC2 Focused Regression: COMPLETE ===
+
+
+# v0.66.9.5-RC3 final native-promotion tooling contract
+# included regression/regression-v06695-rc3.chqscript
+# name: v0.66.9.5-RC3 Native Promotion Framework Regression
+# category: regression
+# regression-version: 0.66.9.5-RC3
+# regression-scope: release
+# purpose: Lock Native-only hard-disable, promotion counters/assertion, same-state layer capture, first-divergence-ready backend status and Native Progress schema while preserving deterministic cleanup.
+
+echo === ChaseHQ v0.66.9.5-RC3 Focused Regression: BEGIN ===
+api release.assert-version
+
+try
+  api sprite.override.clear
+  api sprite.visual.clear
+  api sprite.map-override.clear
+  api sprite.asset-replace.clear
+  api patch.clear
+  api input.ioc.clear
+  api input.steering.set value=0000
+  api game.beacon.override mode=authentic
+
+  echo === RC3 PROMOTION API / SHADOW ===
+  api backend.sprite.reset-verification
+  api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+  api backend.sprite.set mode=shadow
+  api control.run-frames frames=4
+  api backend.sprite.get
+  api native.promotion.status subsystem=sprites
+  api native.layer.capture subsystem=sprites name=rc3-focused-stage1
+
+  echo === RC3 NATIVE-ONLY HARD DISABLE ===
+  api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+  api backend.sprite.set mode=native-only
+  api control.run-frames frames=4
+  api backend.sprite.get
+  api native.promotion.status subsystem=sprites
+  api native.promotion.assert subsystem=sprites minShadowFrames=4 minNativeOnlyFrames=4
+  api native.progress
+
+  echo === RC3 STAGE2 NATIVE-ONLY SMOKE ===
+  api checkpoint.load file=stage2-gameplay-7500.chqstate run=false
+  api backend.sprite.set mode=native-only
+  api control.run-frames frames=4
+  api backend.sprite.get
+  api native.promotion.assert subsystem=sprites minShadowFrames=4 minNativeOnlyFrames=8
+
+  echo === ChaseHQ v0.66.9.5-RC3 Focused Regression: BODY COMPLETE ===
+finally
+  api backend.sprite.set mode=original
+  api sprite.override.clear
+  api sprite.visual.clear
+  api sprite.map-override.clear
+  api sprite.asset-replace.clear
+  api patch.clear
+  api input.ioc.clear
+  api input.steering.set value=0000
+  api game.beacon.override mode=authentic
+  api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+  api status
+end
+
+echo === ChaseHQ v0.66.9.5-RC3 Focused Regression: COMPLETE ===
+
+
+# v0.67.0.0-RC1.1 native sprite forensic coverage corrective; carries forward RC1 implementation milestone
+# included regression/regression-v0670-rc11.chqscript
+# regression-version: 0.67.0.0-RC1.1
+# name: v0.67.0-RC1.1 Native Sprite Forensic Coverage Corrective
+# category: regression
+# purpose: Carry forward the first native implementation milestone and lock Original-equivalent sprite overlap-density evidence under the Native default while retaining zero-diff TC0100SCN text/HUD Shadow coverage.
+
+echo === v0.67.0-RC1.1 native sprite forensic coverage corrective ===
+api release.assert-version
+
+try
+  api sprite.override.clear
+  api sprite.visual.clear
+  api sprite.map-override.clear
+  api sprite.asset-replace.clear
+  api patch.clear
+  api hud.layout.reset
+  api layer.offsets.reset layer=all
+
+  echo === NATIVE SPRITE DEFAULT / PROMOTED PATH ===
+  api backend.sprite.set mode=native
+  api backend.sprite.get
+  api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+  api control.run-frames frames=8
+  api checkpoint.load file=stage2-gameplay-7500.chqstate run=false
+  api control.run-frames frames=8
+  api backend.sprite.get
+
+
+  echo === NATIVE SPRITE FORENSIC OVERLAP COVERAGE ===
+  api checkpoint.load file=stage1-driving-2352.chqstate run=false
+  api frame.snapshot name=rc11-native-sprite-ownership
+  api sprite.visual slot=82 mode=solo
+  api frame.snapshot name=rc11-native-sprite-body-solo
+  api sprite.visual slot=81 mode=solo
+  api frame.snapshot name=rc11-native-sprite-shadow-solo
+  api sprite.visual.clear
+  api frame.snapshot.assert-overlap name=rc11-native-sprite-ownership front=82 back=81 frontSolo=rc11-native-sprite-body-solo backSolo=rc11-native-sprite-shadow-solo
+
+  echo === TC0100SCN TEXT SHADOW BRING-UP ===
+  api backend.text.reset-verification
+  api backend.text.set mode=shadow
+
+  api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+  api control.run-frames frames=8
+  api backend.text.get
+
+  api checkpoint.load file=stage1-driving-2352.chqstate run=false
+  api control.run-frames frames=8
+  api backend.text.get
+
+  api checkpoint.load file=stage2-gameplay-7500.chqstate run=false
+  api control.run-frames frames=8
+  api backend.text.get
+
+  echo === ZERO OUTPUT REFERENCE ===
+  api checkpoint.load file=stage1-end-level-9988.chqstate run=false
+  api control.run-frames frames=2
+  api backend.text.get
+
+  echo === v0.67.0-RC1.1 regression body complete ===
+finally
+  api sprite.override.clear
+  api sprite.visual.clear
+  api sprite.map-override.clear
+  api sprite.asset-replace.clear
+  api patch.clear
+  api hud.layout.reset
+  api layer.offsets.reset layer=all
+  api backend.sprite.set mode=native
+  api backend.text.set mode=shadow
+  api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+  api status
+end
+
+echo === v0.67.0-RC1.1 native sprite forensic coverage corrective complete ===
+
+
+# v0.67.0.0-RC2.1 TC0100SCN BG opaque pen-0 corrective
+# Historical RC2.1 BG Shadow body superseded by the identical current RC4.2.1 corpus below.
+
+# Historical RC3.2 BG Shadow body superseded by the identical current RC4.2.1 corpus below.
+
+# RC4.2.1 latest BG Shadow contract (identical API/condition body to RC2.1 and RC3.2)
+# included regression/regression-v0670-rc421.chqscript
+# regression-version: 0.67.0.0-RC4.2.3
+# name: v0.67.0-RC4.2.1 CHQPACK Content Boundary
+# category: regression
+# purpose: Re-run the canonical BG0/BG1 Shadow corpus after correcting opaque bottom-layer pen-0 pixel semantics; Native sprites/text remain the normal runtime paths.
+
+echo === v0.67.0-RC4.2.1 CHQPACK content boundary ===
+api release.assert-version
+
+try
+  api sprite.override.clear
+  api sprite.visual.clear
+  api sprite.map-override.clear
+  api sprite.asset-replace.clear
+  api patch.clear
+  api hud.layout.reset
+  api layer.offsets.reset layer=all
+
+  echo === PROMOTED NATIVE DISPLAY PATHS ===
+  api backend.sprite.set mode=native
+  api backend.text.set mode=native
+  api backend.sprite.get
+  api backend.text.get
+
+  echo === TC0100SCN BG SHADOW ===
+  api backend.bg.reset-verification
+  api backend.bg.set mode=shadow
+
+  # Straight gameplay reference.
+  api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+  api control.run-frames frames=8
+  api backend.bg.get
+
+  # Known rowscroll/cloud geometry reference.
+  api checkpoint.load file=stage1-driving-2352.chqstate run=false
+  api control.run-frames frames=8
+  api backend.bg.get
+
+  # Target/damage phase exercises alternate HUD + scene state while BG stays live.
+  api checkpoint.load file=stage1-target-first-damage-6334.chqstate run=false
+  api control.run-frames frames=8
+  api backend.bg.get
+
+  # Cross-stage proof.
+  api checkpoint.load file=stage2-gameplay-7500.chqstate run=false
+  api control.run-frames frames=8
+  api backend.bg.get
+
+  api checkpoint.load file=stage2-enemy-10514.chqstate run=false
+  api control.run-frames frames=8
+  api backend.bg.get
+
+  echo === STRUCTURED FRAME WITH NATIVE SPRITES/TEXT + BG SHADOW ===
+  api frame.snapshot name=rc2-native-display-bg-shadow-stage2
+  api frame.snapshot.assert-exact name=rc2-native-display-bg-shadow-stage2
+
+  echo === v0.67.0-RC4.2.1 regression body complete ===
+finally
+  api sprite.override.clear
+  api sprite.visual.clear
+  api sprite.map-override.clear
+  api sprite.asset-replace.clear
+  api patch.clear
+  api hud.layout.reset
+  api layer.offsets.reset layer=all
+  api backend.sprite.set mode=native
+  api backend.text.set mode=native
+  api backend.bg.set mode=shadow
+  api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+  api status
+end
+
+echo === v0.67.0-RC4.2.1 CHQPACK content boundary complete ===
+
+
+# RC4.3 release identity; native asset/CPU instrumentation verified in CTest/Go.
+# included regression/regression-v0670-rc432.chqscript
+# regression-version: 0.67.0.0-RC4.3.2
+# name: RC4.3.2 Native Asset and Execution Foundation
+# category: regression
+# purpose: Confirm release identity and preserved canonical baseline. Native asset/CPU instrumentation contracts are tested by chqdev Go and native CTest suites, not faked by emulated Script API actions.
+
+echo === RC4.3 Native foundation: BEGIN ===
+api release.assert-version
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api status
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+echo === RC4.3 Native foundation: COMPLETE ===
+
+
+echo === ChaseHQ Full Regression: COMPLETE ===
+

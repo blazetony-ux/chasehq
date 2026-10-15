@@ -1,0 +1,2 @@
+Native Windows PE import list:
+DLL Name: kernel32.dll

@@ -1,0 +1,146 @@
+﻿[
+    {
+        "cpu":  "A",
+        "pc":  "0x828e",
+        "file":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\timeline-analysis\\regression-v06680-rc7-auto\\disassembly\\A-828e.txt",
+        "ok":  true
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x4f52",
+        "file":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\timeline-analysis\\regression-v06680-rc7-auto\\disassembly\\A-4f52.txt",
+        "ok":  true
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x40f60",
+        "file":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\timeline-analysis\\regression-v06680-rc7-auto\\disassembly\\A-40f60.txt",
+        "ok":  true
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x8786",
+        "file":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\timeline-analysis\\regression-v06680-rc7-auto\\disassembly\\A-8786.txt",
+        "ok":  true
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x41b8",
+        "file":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\timeline-analysis\\regression-v06680-rc7-auto\\disassembly\\B-41b8.txt",
+        "ok":  true
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x7e76",
+        "file":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\timeline-analysis\\regression-v06680-rc7-auto\\disassembly\\A-7e76.txt",
+        "ok":  true
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x874a",
+        "file":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\timeline-analysis\\regression-v06680-rc7-auto\\disassembly\\A-874a.txt",
+        "ok":  true
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x644e",
+        "file":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\timeline-analysis\\regression-v06680-rc7-auto\\disassembly\\A-644e.txt",
+        "ok":  true
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x4438e",
+        "file":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\timeline-analysis\\regression-v06680-rc7-auto\\disassembly\\A-4438e.txt",
+        "ok":  true
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x1034",
+        "file":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\timeline-analysis\\regression-v06680-rc7-auto\\disassembly\\A-1034.txt",
+        "ok":  true
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x3c74",
+        "file":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\timeline-analysis\\regression-v06680-rc7-auto\\disassembly\\B-3c74.txt",
+        "ok":  true
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x33aa",
+        "file":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\timeline-analysis\\regression-v06680-rc7-auto\\disassembly\\B-33aa.txt",
+        "ok":  true
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x201c",
+        "file":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\timeline-analysis\\regression-v06680-rc7-auto\\disassembly\\B-201c.txt",
+        "ok":  true
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x4fb0",
+        "file":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\timeline-analysis\\regression-v06680-rc7-auto\\disassembly\\A-4fb0.txt",
+        "ok":  true
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x827a",
+        "file":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\timeline-analysis\\regression-v06680-rc7-auto\\disassembly\\A-827a.txt",
+        "ok":  true
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x9d0a",
+        "file":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\timeline-analysis\\regression-v06680-rc7-auto\\disassembly\\A-9d0a.txt",
+        "ok":  true
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x1ef6",
+        "file":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\timeline-analysis\\regression-v06680-rc7-auto\\disassembly\\B-1ef6.txt",
+        "ok":  true
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x8250",
+        "file":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\timeline-analysis\\regression-v06680-rc7-auto\\disassembly\\A-8250.txt",
+        "ok":  true
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x8298",
+        "file":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\timeline-analysis\\regression-v06680-rc7-auto\\disassembly\\A-8298.txt",
+        "ok":  true
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x9be8",
+        "file":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\timeline-analysis\\regression-v06680-rc7-auto\\disassembly\\A-9be8.txt",
+        "ok":  true
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x4f74",
+        "file":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\timeline-analysis\\regression-v06680-rc7-auto\\disassembly\\B-4f74.txt",
+        "ok":  true
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x2034",
+        "file":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\timeline-analysis\\regression-v06680-rc7-auto\\disassembly\\B-2034.txt",
+        "ok":  true
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0xada",
+        "file":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\timeline-analysis\\regression-v06680-rc7-auto\\disassembly\\B-ada.txt",
+        "ok":  true
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x8236",
+        "file":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\timeline-analysis\\regression-v06680-rc7-auto\\disassembly\\A-8236.txt",
+        "ok":  true
+    }
+]

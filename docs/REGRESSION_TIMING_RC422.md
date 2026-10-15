@@ -1,0 +1,7 @@
+# RC4.2.3 regression timing instrumentation
+
+The authoritative Go Script Console runner now records a `chqdev-command-timings.json` sidecar in `evidence/sessions/<session>/runs/<run>/` on PASS and FAIL (when the run identity exists). The sidecar includes a versioned schema, elapsed time, every executed command in order, source line, elapsed milliseconds, failure flag, and aggregates sorted by total elapsed time for each command category. It does not skip or modify commands, change command limits, or remove any regression assertions.
+
+**Interpretation:** timing measures the client-side wall clock around each command, including HTTP transport, server work and local `wait` commands. It is not an isolated emulator CPU benchmark. Categories are grouped by API action, not by scenario; scenario attribution can be reconstructed from source line and the resolved script. Timings may be influenced by warm-up and cache effects. The sidecar is written before run finalisation and is not guaranteed to be included in an already-generated server evidence ZIP; use the run directory if absent from the bundle.
+
+**Next audit:** run the exact Windows Full Regression, inspect `byCategory` and individual command timings, correlate high-cost commands with assertions/evidence and only then propose coverage-preserving reductions. The structural count remains **1,170** and the existing `<850` budget gate remains failing. This build is diagnostic instrumentation, not a regression consolidation or qualification claim.

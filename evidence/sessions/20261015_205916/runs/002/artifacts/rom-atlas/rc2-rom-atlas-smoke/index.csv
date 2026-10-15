@@ -1,0 +1,6 @@
+map,format,gfx,width,height,spritemap_word_base,spritemap_byte_base,tile_count,opaque_pixels,invalid_chunks,ffff_chunks,zero_chunks,bbox_left,bbox_top,bbox_right,bbox_bottom,raw_png,palette_png,status
+516,obj-b64,OBJ-B,64,128,147584,295168,16384,1547,0,0,0,12,16,50,62,map_0516_raw.png,map_0516_pal65.png,nonempty
+517,obj-b64,OBJ-B,64,128,147616,295232,16384,37,0,0,0,43,15,46,28,map_0517_raw.png,map_0517_pal65.png,nonempty
+518,obj-b64,OBJ-B,64,128,147648,295296,16384,57,0,0,0,41,9,46,26,map_0518_raw.png,map_0518_pal65.png,nonempty
+519,obj-b64,OBJ-B,64,128,147680,295360,16384,49,0,0,0,39,11,45,26,map_0519_raw.png,map_0519_pal65.png,nonempty
+520,obj-b64,OBJ-B,64,128,147712,295424,16384,14,0,0,0,39,12,41,17,map_0520_raw.png,map_0520_pal65.png,nonempty

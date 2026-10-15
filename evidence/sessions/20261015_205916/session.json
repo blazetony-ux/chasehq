@@ -1,0 +1,17 @@
+﻿{
+    "schema":  "chq-research-session-v1",
+    "build":  "0.67.0.0-RC6.3.33",
+    "created":  "2026-10-15T20:59:19.7411992+01:00",
+    "session":  "launcher-gameplay",
+    "port":  37600,
+    "evidence":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\.\\evidence\\sessions\\20261015_205916",
+    "roms":  ".\\roms\\chasehq",
+    "checkpoint":  ".\\checkpoints\\stage1-gameplay-2064.chqstate",
+    "experiment":  "",
+    "emulatorArgs":  [
+
+                     ],
+    "primeCommands":  [
+
+                      ]
+}

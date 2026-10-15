@@ -1,0 +1,25 @@
+OK cpu=B start=0x1EF6 count=24
+0x1EF6  jsr     $1efe.l
+0x1EFC  rts
+0x1EFE  move.w  (A1), D1
+0x1F00  sub.w   D0, D1
+0x1F02  swap    D1
+0x1F04  clr.w   D1
+0x1F06  asr.l   #4, D1
+0x1F08  beq     $1f84
+0x1F0C  swap    D0
+0x1F0E  clr.w   D0
+0x1F10  add.l   D1, D0
+0x1F12  move.l  D0, D4
+0x1F14  add.l   D1, D0
+0x1F16  swap    D0
+0x1F18  move.w  D0, D4
+0x1F1A  swap    D0
+0x1F1C  move.l  D4, (A0)+
+0x1F1E  add.l   D1, D0
+0x1F20  move.l  D0, D4
+0x1F22  add.l   D1, D0
+0x1F24  swap    D0
+0x1F26  move.w  D0, D4
+0x1F28  swap    D0
+0x1F2A  move.l  D4, (A0)+

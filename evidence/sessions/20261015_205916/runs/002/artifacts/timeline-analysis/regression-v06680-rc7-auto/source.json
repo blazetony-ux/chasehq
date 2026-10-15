@@ -1,0 +1,14 @@
+﻿{
+    "schema":  "chq-timeline-analysis-source-v1",
+    "timeline":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.31\\evidence\\sessions\\20261015_193345\\runs\\002\\artifacts\\timelines\\regression-v06680-rc7-auto.chqtimeline",
+    "timelineName":  "regression-v06680-rc7-auto",
+    "analysisBuild":  "0.67.0.0-RC6.3.33",
+    "created":  "2026-10-15T21:03:57.5936093+01:00",
+    "triggerFrame":  2065,
+    "stopFrame":  2067,
+    "scanStartFrame":  2064,
+    "scanEndFrame":  2068,
+    "window":  1,
+    "manifestSha256":  "2903FBA2E8AEF081B727F39BE1655D7960679FE9135FC758D7A763F4F8E8E9EC",
+    "writesSha256":  "3A38B8A66D5061F6196A550B2301CFA82110C3AFC4EB5146EFBF88C0269C5CE4"
+}

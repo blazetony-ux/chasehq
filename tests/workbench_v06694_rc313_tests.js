@@ -1,0 +1,18 @@
+const fs=require('fs'),path=require('path');
+const root=path.resolve(__dirname,'..'),read=p=>fs.readFileSync(path.join(root,p),'utf8'),ok=(v,m)=>{if(!v)throw Error(m)};
+const cfg=JSON.parse(read('chqdev.json'));
+const runtime=read('tools/chqdev/runtime.go'),life=read('tools/chqdev/runtime_lifecycle.go'),qualify=read('tools/chqdev/qualify.go'),main=read('tools/chqdev/main.go'),full=read('research/scripts/regression/full-regression.chqscript');
+ok(cfg.release==='0.66.9.4-RC3.1.3','RC3.1.3 release identity missing');
+ok(cfg.focusedRegression.endsWith('regression-v06694-rc313.chqscript'),'RC3.1.3 focused regression not wired');
+ok(main.includes('const toolVersion = "0.5.8"'),'chqdev v0.5.8 identity missing');
+ok(runtime.includes('func runtimeStartupCheck')&&runtime.includes('func runtimeHistoryCheck')&&runtime.includes('runtimeHistoryHTTPTimeout = 30 * time.Second'),'split startup/history readiness implementation missing');
+const startup=runtime.match(/func runtimeStartupCheck[\s\S]*?\n}\n\n\/\/ runtimeHistoryCheck/);
+ok(startup&&!startup[0].includes('/api/v1/script/runs'),'startup readiness must not enumerate authoritative run history');
+ok(life.includes('runtimeStartupCheck(root, cfg, "")')&&!life.includes('rr := runtimeCheck(root, cfg, "")'),'runtime lifecycle still depends on comprehensive history check');
+const fullComplete=qualify.indexOf('Full Regression COMPLETE');
+const historyStart=qualify.indexOf('Authoritative run-history gate START');
+ok(fullComplete>=0&&historyStart>fullComplete,'authoritative history gate must run after Full Regression');
+ok(qualify.includes('readinessFailureDetail(ready)')&&qualify.includes('printQualificationChecks("Runtime readiness"'),'per-component qualification readiness diagnostics missing');
+ok(full.includes('regression-v06694-rc313.chqscript')&&!full.includes('include "regression/regression-v06694-rc312.chqscript"'),'Full Regression current release tail is stale');
+ok(fs.existsSync(path.join(root,'docs','DOCUMENTATION_AUDIT_0.66.9.4-RC3.1.3.md')),'RC3.1.3 documentation audit missing');
+console.log('Workbench v0.66.9.4-RC3.1.3 qualification orchestration contracts: PASS');

@@ -81,6 +81,12 @@ bool Machine::load_roms(const std::filesystem::path& directory) {
     return true;
 }
 
+bool Machine::load_content_pack(const ContentPack& pack) {
+    auto take=[&](const char* name, std::vector<std::uint8_t>& dst)->bool { auto* p=pack.find(name); if(!p){std::cerr<<"[CHQPACK] missing "<<name<<"\n"; return false;} dst=*p; return true; };
+    if(!take("graphics/obj-a.bin",sprites_a_) || !take("graphics/obj-b.bin",sprites_b_) || !take("graphics/spritemap.bin",spritemap_) || !take("graphics/road.bin",road_gfx_) || !take("graphics/tc0100scn.bin",tile_gfx_) || !take("prom/mixer-b52-01.bin",priority_prom_) || !take("prom/road-b52-06.bin",road_priority_prom_)) return false;
+    std::cout<<"[CHQPACK] graphics/PROM runtime regions loaded\n"; return true;
+}
+
 std::uint16_t Machine::spritemap_word(std::size_t word_index) const {
     const std::size_t b = word_index * 2;
     if (b + 1 >= spritemap_.size())

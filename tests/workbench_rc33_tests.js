@@ -1,0 +1,14 @@
+const fs=require('fs'); const path=require('path'); const root=path.resolve(__dirname,'..');
+const read=p=>fs.readFileSync(path.join(root,p),'utf8'); const ok=(v,m)=>{if(!v)throw new Error(m)};
+const v=read('src/version.h'), qual=read('tools/chqdev/qualify.go'), cfg=JSON.parse(read('chqdev.json')), rp=read('docs/RELEASE_PROCESS.md'), vr=read('Validate-Release.ps1'), full=read('research/scripts/regression/full-regression.chqscript'), reg=read('research/scripts/regression/regression-v06690-rc33.chqscript'), catalog=read('research/scripts/SCRIPT_CATALOG.md');
+const coverage=read('docs/REGRESSION_COVERAGE_MAP.md'),historicalCatalog=read('research/scripts/SCRIPT_CATALOG.md');
+ok(v.includes('0.66.9.3-RC3'),'RC3.3 release-engineering carry-forward identity missing');
+ok(qual.includes('chqdev-qualification-v2')&&qual.includes('ArchiveSHA')&&qual.includes('promotable'),'machine-readable immutable qualification provenance missing');
+ok(qual.includes('cleanFreshState')&&qual.includes('reportFailureDetail'),'fail-closed fresh qualification propagation missing');
+ok(!fs.readdirSync(root).some(x=>/^Qualify-.*\.bat$/i.test(x)),'version-specific qualification BAT wrapper returned');
+ok(rp.includes('NON-NEGOTIABLE')&&rp.includes('MUST NOT')&&rp.includes('exact immutable ZIP')&&rp.includes('chqdev'),'strong mandatory release contract/current authoritative entry point missing');
+ok(vr.includes('regression-v06690-rc33')&&vr.includes('Single canonical chqdev qualification pipeline'),'release validator current qualification wiring missing');
+ok(!full.includes('regression-v06690-rc33.chqscript')&&historicalCatalog.includes('regression/regression-v06690-rc33.chqscript')&&historicalCatalog.includes('historical')&&coverage.includes('regression-v06690-rc33.chqscript')&&reg.includes('0.66.9.0-RC3.3'),'historical regression-v06690-rc33.chqscript must remain cataloged/mapped while duplicate Full Regression execution stays removed');
+ok(catalog.includes('regression/regression-v06690-rc33.chqscript'),'RC3.3 regression missing from exact script catalog path');
+ok(cfg.release==='0.66.9.3-RC3','current chqdev identity mismatch');
+console.log('Workbench RC3.3 release-engineering carry-forward tests: PASS');

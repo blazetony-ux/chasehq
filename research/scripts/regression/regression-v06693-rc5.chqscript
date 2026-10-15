@@ -1,0 +1,63 @@
+# name: v0.66.9.3-RC5 Research Capability Promotion Regression
+# category: regression
+# regression-version: 0.66.9.3-RC5
+# regression-scope: release
+# purpose: Prove RC5 independent placed-sprite-layer shadow parity across canonical checkpoints plus read-provenance, structured collision/audio event actions, promoted gameplay registry and safe deterministic cleanup.
+# checkpoint: stage1-gameplay-2064.chqstate
+
+echo === ChaseHQ v0.66.9.3-RC5 Capability Promotion Regression: BEGIN ===
+api release.assert-version
+api schema action=sprite.layer-shadow.compare
+api schema action=memory.trace.start
+api schema action=collision.events
+api schema action=audio.events
+api schema action=input.steering.set
+api schema action=gameplay.registry
+
+# Independent placed sprite-source shadow over the canonical corpus.
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api sprite.layer-shadow.compare failOnMismatch=true output=rc5-shadow-2352.json
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api sprite.layer-shadow.compare failOnMismatch=true output=rc5-shadow-2064.json
+api checkpoint.load file=stage1-target-immediate-pre-contact-5587.chqstate run=false
+api sprite.layer-shadow.compare failOnMismatch=true output=rc5-shadow-5587.json
+api checkpoint.load file=stage1-target-first-physical-contact-5588.chqstate run=false
+api sprite.layer-shadow.compare failOnMismatch=true output=rc5-shadow-5588.json
+api checkpoint.load file=stage1-target-immediate-pre-damage-6333.chqstate run=false
+api sprite.layer-shadow.compare failOnMismatch=true output=rc5-shadow-6333.json
+api checkpoint.load file=stage1-target-first-damage-6334.chqstate run=false
+api sprite.layer-shadow.compare failOnMismatch=true output=rc5-shadow-6334.json
+api checkpoint.load file=stage1-target-post-final-hit-9548.chqstate run=false
+api sprite.layer-shadow.compare failOnMismatch=true output=rc5-shadow-9548.json
+api checkpoint.load file=stage1-end-level-9988.chqstate run=false
+api sprite.layer-shadow.compare failOnMismatch=true output=rc5-shadow-9988.json
+
+# New research surfaces must be callable and leave no active intervention.
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api memory.trace.clear
+api memory.trace.start cpu=A address=100200 length=2 width=any limit=128 access=read
+api control.run-frames frames=2
+api memory.trace.status
+api memory.trace.tail count=20
+api memory.trace.stop
+api memory.trace.clear
+
+api collision.events.clear
+api collision.events count=10
+api audio.events.clear
+api audio.events count=10
+api gameplay.registry
+api objects.list
+api audio.capabilities
+
+api input.ioc.clear
+api input.steering.set value=0000
+api sprite.visual.clear
+api sprite.override.clear
+api patch.clear
+api palette.overrides.clear
+api collision.response.reset
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api status
+
+echo === ChaseHQ v0.66.9.3-RC5 Capability Promotion Regression: COMPLETE ===

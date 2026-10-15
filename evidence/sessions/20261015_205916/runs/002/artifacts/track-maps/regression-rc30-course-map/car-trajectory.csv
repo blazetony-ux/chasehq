@@ -1,0 +1,4 @@
+﻿"frame","coursePosition","displaySpeed","lateralPosition","lateralError","lateralErrorNormalized","steeringProcessed","roadState","carX","carY","courseFollowMode","courseFollowTarget","courseFollowBias"
+"2064","128","0","34544","2368","1","0","ON_ROAD","368","470","IDLE","0","0"
+"2094","1989","58","34468","2292","0.967905","-12","ON_ROAD","367.4223","410","HYBRID_HARD_RECOVERY","-32","0"
+"2124","6734","118","34274","2098","0.88598","-9","ON_ROAD","365.9476","350","HYBRID_HARD_RECOVERY","-29","0"

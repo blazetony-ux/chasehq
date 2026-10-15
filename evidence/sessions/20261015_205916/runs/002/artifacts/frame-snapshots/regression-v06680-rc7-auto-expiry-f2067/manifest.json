@@ -1,0 +1,30 @@
+﻿{
+    "schema":  "chq-frame-snapshot-v2",
+    "name":  "regression-v06680-rc7-auto-expiry-f2067",
+    "created":  "2026-10-15T21:04:14.3875152+01:00",
+    "build":  "0.67.0.0-RC6.3.33",
+    "frame":  2067,
+    "paused":  1,
+    "screenshot":  "final.png",
+    "hudHidden":  "final-no-hud.png",
+    "hudOnly":  "hud-only.png",
+    "layers":  "layers/",
+    "sources":  "sources/",
+    "reconstruction":  "reconstruction.json",
+    "palette":  "palette.csv",
+    "spriteOwnership":  "sprite-ownership.csv",
+    "sprites":  "sprites.csv",
+    "spriteTail":  "sprites-tail.txt",
+    "spriteDetails":  "sprites/sprites.json",
+    "sceneNoSprites":  "scene-no-sprites.png",
+    "captureResult":  "OK graphics_snapshot frame=2067 path=C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\frame-snapshots\\regression-v06680-rc7-auto-expiry-f2067",
+    "spriteSaveResult":  "OK sprites saved C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\frame-snapshots\\regression-v06680-rc7-auto-expiry-f2067\\sprites.csv",
+    "compositor":  "prom-mask",
+    "hudModel":  "tc0100scn-text-layer",
+    "notes":  [
+                  "Layer contribution PNGs use alpha and reconstruct the selected compositor output in manifest order.",
+                  "HUD isolation suppresses the TC0100SCN text layer at source; no fixed rectangle mask is used.",
+                  "Raw source PNGs are forensic views and are separate from exact reconstruction contribution layers.",
+                  "Per-sprite cropped transparent assets are exploratory forensic views; aggregate sprites layer remains authoritative for exact reconstruction."
+              ]
+}

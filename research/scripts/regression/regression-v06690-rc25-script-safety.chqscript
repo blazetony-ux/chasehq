@@ -1,8 +1,8 @@
-# name: Regression - v0.66.9.0 RC2.5 Script Safety
+﻿# name: Regression - v0.66.9.0 RC2.5 Script Safety
 # purpose: Prove timeline.reset restores the pre-load live checkpoint after a timeline seek/fork and exercise the try/finally cleanup path.
 # category: regression
-# target: canonical stage1-gameplay-2064 live state and car-shadow-layer-investigation frame 2352.
-# method: Establish frame 2064, load/seek/fork frame 2352 inside try, then restore with timeline.reset in finally.
+# target: self-contained two-frame timeline recorded from stage1-driving-2352 plus canonical stage1-gameplay-2064 live state.
+# method: Create the timeline fixture in this run, establish frame 2064, load/seek/fork frame 2352 inside try, then restore with timeline.reset in finally.
 # expected: The fork reaches frame 2352 and cleanup returns the live emulator to frame 2064 before the terminal COMPLETE marker.
 # cleanup: timeline.reset is called before and in finally; sprite visual/override state is cleared defensively.
 # regression-version: 0.66.9.0-RC2.5
@@ -11,15 +11,22 @@
 api timeline.reset
 api sprite.visual.clear
 api sprite.override.clear
+
+# Permanent regressions must create their own timeline fixture rather than
+# depending on a prior research run or another regression's artifacts.
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+assert status frame=2352
+api timeline.record.start name=regression-v06690-rc25-script-safety
+api control.run-frames frames=1
+api timeline.record.stop
+
+# Establish the live state that timeline.reset must restore after load/seek/fork.
 api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
 assert status frame=2064
 
 try
-    api timeline.load name=car-shadow-layer-investigation
-    set frames = 2352
-    for target_frame in frames
-        api timeline.seek frame=${target_frame}
-    end
+    api timeline.load name=regression-v06690-rc25-script-safety
+    api timeline.seek frame=2352
     api timeline.fork-live
     assert status frame=2352
 finally

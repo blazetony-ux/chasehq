@@ -2,13 +2,15 @@ $ErrorActionPreference='Stop'
 Set-StrictMode -Version Latest
 $root=Split-Path $PSScriptRoot -Parent
 $text=Get-Content (Join-Path $root 'Start-ChaseHQWeb.ps1') -Raw
-$fn=[regex]::Match($text,'(?s)function Get-AuthoritativeScriptRuns\(\)\{.*?(?=\r?\nfunction\s+)').Value
+$fn=[regex]::Match($text,'(?s)function\s+Get-AuthoritativeScriptRuns\s*\([^)]*\)\s*\{.*?(?=\r?\nfunction\s+)').Value
 if(-not $fn){throw 'Authoritative history function absent'}
 $temp=Join-Path ([IO.Path]::GetTempPath()) ('chq-history-'+[guid]::NewGuid().ToString('N'))
 $script:AuthoritativeRunHistoryCache=$null
 $script:AuthoritativeRunHistoryCacheAt=$null
 function Prop($o,$name,$default){if($o.PSObject.Properties[$name]){return $o.$name};return $default}
 function Get-KnownEvidenceSessionRoots { return $temp }
+function Get-SessionId { return 'active' }
+$script:evidenceSessionsRoot=$temp
 . ([scriptblock]::Create($fn))
 try {
     # Over 250 records, reverse filesystem names and mtime ordering, offsets,
@@ -31,8 +33,11 @@ try {
     }
     $page=@($all|Select-Object -Skip 5 -First 7)
     if($page.Count -ne 7 -or [string]$page[0]['runId'] -ne '005'){throw 'Pagination does not select the newest matching records'}
+    # New fast-path parameter introduced in RC4.3.1; retain the original all-session checks.
+    $sessionOnly=@(Get-AuthoritativeScriptRuns 'active')
+    if($sessionOnly.Count -ne 3 -or @($sessionOnly|Where-Object {$_.session -ne 'active'}).Count -ne 0){throw 'Current-session fast path lost runs or leaked another session'}
     $active=@($all|Where-Object {$_.session -eq 'active'}|Select-Object -First 2)
     if($active.Count -ne 2 -or [string]$active[0]['runId'] -ne '317'){throw 'Session filtering lost records outside the first global page'}
     if(@($all|Where-Object {$_.version -eq '0.66.9.0-RC2.7'}).Count -ne 320){throw 'Full release version lost'}
-    Write-Host 'Authoritative ordering, pagination, session and version tests: PASS'
+    Write-Host 'Authoritative ordering, pagination, current-session fast path and version tests: PASS'
 } finally { Remove-Item $temp -Recurse -Force -ErrorAction SilentlyContinue }

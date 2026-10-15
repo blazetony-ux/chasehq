@@ -1,0 +1,25 @@
+OK cpu=A start=0x8250 count=24
+0x8250  bsr     $8460
+0x8254  btst    #$4, ($10f,A4)
+0x825A  beq     $8262
+0x825C  bsr     $83ac
+0x8260  bra     $8272
+0x8262  bsr     $84e8
+0x8266  bsr     $8592
+0x826A  bsr     $85d8
+0x826E  bsr     $85f4
+0x8272  bsr     $86b4
+0x8276  bsr     $8700
+0x827A  bsr     $8716
+0x827E  bsr     $82b6
+0x8282  bsr     $873e
+0x8286  bsr     $876a
+0x828A  bsr     $87e4
+0x828E  bsr     $aa56
+0x8292  move.w  ($1a,A3), ($140,A4)
+0x8298  bsr     $7ff4
+0x829C  bsr     $8c2a
+0x82A0  move.l  ($188,A4), D0
+0x82A4  andi.l  #$fffffff0, D0
+0x82AA  move.l  D0, ($108,A4)
+0x82AE  move.l  ($0,A4), ($4,A4)

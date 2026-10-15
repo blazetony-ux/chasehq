@@ -1,0 +1,18 @@
+{
+  "format_version": 1,
+  "name": "stage2-gameplay-7500",
+  "game": "Chase H.Q.",
+  "frame": 7500,
+  "description": "User-supplied Stage 2 gameplay checkpoint. Packaged as a provisional general Stage 2 reference pending semantic classification in Workbench.",
+  "validated_with": ["0.66.9.4-RC2"],
+  "checkpoint_format": "v1 binary .chqstate",
+  "notes": [
+    "Original uploaded filename: snapshot_stage2.chqstate.",
+    "Semantics are intentionally conservative until live registry/sprite/course inspection classifies the state more precisely.",
+    "Useful for cross-stage native-renderer, charset and sprite-family validation."
+  ],
+  "sha256": "bc277c87fc0170cde3b849face20527e6917f5a19e6caeae1fa22120f7a6dc18",
+  "size_bytes": 250488,
+  "role": "stage2_gameplay_provisional",
+  "recommended_use": "Cross-stage rendering/native-backend checks and Stage 2 gameplay research."
+}

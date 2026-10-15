@@ -1,0 +1,19 @@
+# name: Run 033 - Start Headless Ghidra From Workbench
+# category: native-reconstruction
+# purpose: Launch independent local Motorola 68000 Ghidra static analysis asynchronously without stopping live SDL gameplay or uploading ROM bytes.
+# version: 0.67.0.0-RC4.6
+# research-status: unreviewed-static-function-candidates
+# method: Inspect local readiness; start one fixed-script background job; return immediately.
+# safety: No emulator memory changes, no external ROM upload, no direct REA agent call; Ghidra prerequisite and ROM SHA enforced by the server.
+# expected-output: Structured Ghidra job ID, RUNNING state and automatic background evidence.
+# cleanup: Leave live emulator and active checkpoint unchanged.
+echo === RUN033 START HEADLESS GHIDRA ===
+try
+  api release.assert-version
+  api ghidra.status
+  api ghidra.start
+  api ghidra.status
+finally
+  echo === RUN033 NO EMULATOR STATE CHANGES ===
+end
+echo === RUN033 START REQUEST COMPLETE ===

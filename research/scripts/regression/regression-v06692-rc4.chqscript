@@ -1,0 +1,16 @@
+# name: v0.66.9.2-RC4 Run Provenance and Command Count Regression
+# category: regression
+# regression-version: 0.66.9.2-RC4
+# regression-scope: historical
+# purpose: Prove current RC4 runtime identity and create a multi-command authoritative run whose bundle must preserve this complete source and non-zero command count.
+# checkpoint: stage1-gameplay-2064.chqstate
+
+echo === ChaseHQ v0.66.9.2-RC4 Run Provenance Regression: BEGIN ===
+api release.assert-version
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api gameplay.registry
+api track.state
+api script.runs limit=5
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api status
+echo === ChaseHQ v0.66.9.2-RC4 Run Provenance Regression: COMPLETE ===

@@ -1,0 +1,23 @@
+# regression-version: 0.67.0.0-RC4.6
+# name: RC4.6 Headless Ghidra Research API smoke
+# category: regression
+# purpose: Validate independent local Ghidra job API registration and status with no external Ghidra/ROM requirement; preserve REA API and emulator checkpoint.
+# checkpoint: stage1-gameplay-2064.chqstate
+# safety: Does not start Ghidra, mutate ROM, or change the original emulator except checkpoint restoration.
+# cleanup: Stage 1 gameplay frame 2064 paused.
+echo === RC46 GHIDRA RESEARCH API SMOKE BEGIN ===
+try
+  api release.assert-version
+  api schema action=ghidra.status
+  api schema action=ghidra.start
+  api schema action=ghidra.results
+  api schema action=ghidra.import
+  api ghidra.status
+  api schema action=rea.reports
+  api rea.reports
+  api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+  api status
+finally
+  api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+end
+echo === RC46 GHIDRA RESEARCH API SMOKE COMPLETE ===

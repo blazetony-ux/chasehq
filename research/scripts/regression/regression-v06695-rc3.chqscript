@@ -1,0 +1,60 @@
+# name: v0.66.9.5-RC3 Native Promotion Framework Regression
+# category: regression
+# regression-version: 0.66.9.5-RC3
+# regression-scope: release
+# purpose: Lock Native-only hard-disable, promotion counters/assertion, same-state layer capture, first-divergence-ready backend status and Native Progress schema while preserving deterministic cleanup.
+
+echo === ChaseHQ v0.66.9.5-RC3 Focused Regression: BEGIN ===
+api release.assert-version
+
+try
+  api sprite.override.clear
+  api sprite.visual.clear
+  api sprite.map-override.clear
+  api sprite.asset-replace.clear
+  api patch.clear
+  api input.ioc.clear
+  api input.steering.set value=0000
+  api game.beacon.override mode=authentic
+
+  echo === RC3 PROMOTION API / SHADOW ===
+  api backend.sprite.reset-verification
+  api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+  api backend.sprite.set mode=shadow
+  api control.run-frames frames=4
+  api backend.sprite.get
+  api native.promotion.status subsystem=sprites
+  api native.layer.capture subsystem=sprites name=rc3-focused-stage1
+
+  echo === RC3 NATIVE-ONLY HARD DISABLE ===
+  api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+  api backend.sprite.set mode=native-only
+  api control.run-frames frames=4
+  api backend.sprite.get
+  api native.promotion.status subsystem=sprites
+  api native.promotion.assert subsystem=sprites minShadowFrames=4 minNativeOnlyFrames=4
+  api native.progress
+
+  echo === RC3 STAGE2 NATIVE-ONLY SMOKE ===
+  api checkpoint.load file=stage2-gameplay-7500.chqstate run=false
+  api backend.sprite.set mode=native-only
+  api control.run-frames frames=4
+  api backend.sprite.get
+  api native.promotion.assert subsystem=sprites minShadowFrames=4 minNativeOnlyFrames=8
+
+  echo === ChaseHQ v0.66.9.5-RC3 Focused Regression: BODY COMPLETE ===
+finally
+  api backend.sprite.set mode=original
+  api sprite.override.clear
+  api sprite.visual.clear
+  api sprite.map-override.clear
+  api sprite.asset-replace.clear
+  api patch.clear
+  api input.ioc.clear
+  api input.steering.set value=0000
+  api game.beacon.override mode=authentic
+  api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+  api status
+end
+
+echo === ChaseHQ v0.66.9.5-RC3 Focused Regression: COMPLETE ===

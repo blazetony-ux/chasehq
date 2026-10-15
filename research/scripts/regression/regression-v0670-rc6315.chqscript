@@ -1,0 +1,22 @@
+# name: RC6.3.15 Function Dossier and Side-Effect Attribution Smoke
+# category: regression
+# purpose: Assert current release/Workbench Ghidra/REA APIs; true ROM function dossier, attribution, and CPU parity require chqdev native reconstruct --cpu-b-live, not this smoke.
+# checkpoint: stage1-gameplay-2064.chqstate
+# version: 0.67.0.0-RC6.3.15
+# regression-version: 0.67.0.0-RC6.3.15
+# regression-scope: release
+# safety: no mutations; does not promote any native function
+# cleanup: no session changes
+echo === RC6.3.15 RELEASE SMOKE BEGIN ===
+try
+  api release.assert-version
+  api schema action=ghidra.status
+  api schema action=ghidra.results
+  api schema action=rea.crosswalk
+  api schema action=rea.function.inspect
+  api ghidra.status
+  api rea.reports
+  echo === RC6.3.15 RELEASE SMOKE PASS ===
+finally
+  echo === RC6.3.15 RELEASE SMOKE PRESERVED SESSION ===
+end

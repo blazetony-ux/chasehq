@@ -1,0 +1,102 @@
+# name: v0.66.9.5-RC2 ROM Atlas / Vehicle Semantics / Beacon Pipeline Regression
+# category: regression
+# regression-version: 0.66.9.5-RC2
+# safe: true
+# purpose: Lock RC2 direct-ROM atlas export, source/effective sprite inspection, expanded player semantic coverage, and latency-aware beacon presentation while retaining RC1.1 corrective contracts.
+
+echo === ChaseHQ v0.66.9.5-RC2 Focused Regression: BEGIN ===
+api release.assert-version
+
+try
+  api memory.trace.clear
+  api events.clear
+  api collision.response.reset
+  api collision.events.clear
+  api game.target.one-hit enabled=false
+  api game.speed.clear
+  api game.beacon.override mode=authentic
+  api sprite.asset-replace.clear
+  api sprite.map-override.clear
+  api sprite.override.clear
+  api sprite.visual.clear
+  api patch.clear
+  api palette.overrides.clear
+  api hud.layout.reset
+  api input.ioc.clear
+  api input.steering.set value=0000
+  api backend.sprite.set mode=original
+
+  echo === RC2 A: DIRECT ROM ATLAS EXPORT ===
+  api sprite.rom-atlas.export start=516 end=520 format=obj-b64 palette=65 name=rc2-rom-atlas-smoke
+
+  echo === RC2 B: SOURCE / EFFECTIVE SPRITE INSPECTION ===
+  api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+  api sprite.override slot=45 map=522 palette=65
+  api sprite.inspect slot=45
+  api sprites.list
+  api sprite.override.clear
+
+  echo === RC2 C: PLAYER POSITIVE-BAND SEMANTIC COVERAGE ===
+  api checkpoint.load file=stage1-driving-2352.chqstate run=false
+  api control.run-frames frames=300
+  api sprite.asset-replace object=player_car.body target=190 format=obj-b64 palette=73 flipx=1 dx=0 dy=0
+  api control.run-frames frames=1
+  assert status sprite_asset_visible=1
+  api sprite.asset-resolve
+  api sprite.asset-replace.clear
+
+  echo === RC2 D: BEACON FORCE-ON AUTHENTIC PIPELINE LATENCY ===
+  api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+  api game.beacon.override mode=on
+  api control.run-frames frames=4
+  assert status beacon_live_present=1
+  api game.beacon.get
+
+  echo === RC2 E: BEACON FORCE-OFF AUTHENTIC PIPELINE LATENCY ===
+  api checkpoint.load file=stage1-target-immediate-pre-damage-6333.chqstate run=false
+  api game.beacon.override mode=off
+  api control.run-frames frames=3
+  assert status beacon_live_present=0
+  api game.beacon.get
+  api game.beacon.override mode=authentic
+
+  echo === RC2 F: RC1.1 CORRECTIVE CONTRACT CARRY-FORWARD ===
+  api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+  api game.speed.freeze enabled=true value=602
+  api control.run-frames frames=4
+  if memory cpu=A address=10041C width=32 value = 025A0000
+    echo PASS game.speed.freeze still holds 0x025A0000
+  else
+    echo FAIL game.speed.freeze regressed
+  end
+  api game.speed.clear
+
+  api checkpoint.load file=stage1-target-immediate-pre-contact-5587.chqstate run=false
+  api collision.events.clear
+  api control.run-frames frames=4
+  api collision.events count=50
+
+  echo === ChaseHQ v0.66.9.5-RC2 Focused Regression: BODY COMPLETE ===
+finally
+  api memory.trace.clear
+  api events.clear
+  api collision.response.reset
+  api collision.events.clear
+  api game.target.one-hit enabled=false
+  api game.speed.clear
+  api game.beacon.override mode=authentic
+  api sprite.asset-replace.clear
+  api sprite.map-override.clear
+  api sprite.override.clear
+  api sprite.visual.clear
+  api patch.clear
+  api palette.overrides.clear
+  api hud.layout.reset
+  api input.ioc.clear
+  api input.steering.set value=0000
+  api backend.sprite.set mode=original
+  api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+  api status
+end
+
+echo === ChaseHQ v0.66.9.5-RC2 Focused Regression: COMPLETE ===

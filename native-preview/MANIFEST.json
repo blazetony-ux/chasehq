@@ -1,0 +1,137 @@
+{
+  "artifact": "RC5-Native-Preview-POC-Windows-x64",
+  "not_official_rc5": true,
+  "files": [
+    {
+      "path": "BUILD-STATUS.md",
+      "bytes": 2692,
+      "sha256": "449489a7a8e324f473abb78f7881884fd3e14395f863c7439f162d63ddca8d56"
+    },
+    {
+      "path": "NEXT-STEPS.json",
+      "bytes": 1384,
+      "sha256": "9708ee8d2710acdb2f78c0e9698633e7410fc8e6bd97c0df4a8185352bf47533"
+    },
+    {
+      "path": "RC5_Native_Preview_Release_Contract.md",
+      "bytes": 9197,
+      "sha256": "49aace72c5f7d63c008f6e6e89075896a0b5a972fe76858954bfd628a37310b5"
+    },
+    {
+      "path": "README.md",
+      "bytes": 4889,
+      "sha256": "59ad72ebdef1953cdcc93b292145bda21d2cb6fb065f9f85eea1f8b90576d99a"
+    },
+    {
+      "path": "core/models.go",
+      "bytes": 3755,
+      "sha256": "80357bdea2126464560e64fcd816809a91054ad214ddff595fae1e68f893dd4d"
+    },
+    {
+      "path": "dist/ChaseHQ-Native-Preview.exe",
+      "bytes": 2018304,
+      "sha256": "f02a0cbf4943a9037a6eda0bb999c0cb62d9fd67992c596bd59719ad56cdef1d"
+    },
+    {
+      "path": "go.mod",
+      "bytes": 43,
+      "sha256": "9776de5bbb2e664cac95aa97116888b0e43046633e0e90d502caae640beb04be"
+    },
+    {
+      "path": "golden.go",
+      "bytes": 2541,
+      "sha256": "7a84f5a5024d01b68aaa07c09368881d932fd0744eb171a213d8a4773016cde1"
+    },
+    {
+      "path": "golden.json",
+      "bytes": 13805,
+      "sha256": "8f4e5935e31315b59185900cbc17c20ffd47db400eb3802cd304ed34d99602eb"
+    },
+    {
+      "path": "main_linux.go",
+      "bytes": 512,
+      "sha256": "0fb5e04e6519b41d32793b7b2c8569e0790ff1535f353ea3a6c8377adb7ce78a"
+    },
+    {
+      "path": "main_windows.go",
+      "bytes": 12418,
+      "sha256": "e0e3d3eb2d96e2f543bfab6b2db10f3b6ddb554f827db1827b490e8302f1d6b6"
+    },
+    {
+      "path": "models_test.go",
+      "bytes": 1066,
+      "sha256": "c0f3fbbc98ceb29696c3db2247237c3c3e6b41254dc6a39cb3466c53d453f125"
+    },
+    {
+      "path": "qualification/exe.sha256",
+      "bytes": 98,
+      "sha256": "79f425631b21e155be6ad0aac9a18830e57e96f1a8d3145f29be99bbae8a8f3c"
+    },
+    {
+      "path": "qualification/go-vet.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "qualification/pe-imports.txt",
+      "bytes": 54,
+      "sha256": "5f5537d9ef4ff99dc50e8f53c1c19a32b32219ef3c45fc59088bcdb8418fb185"
+    },
+    {
+      "path": "qualification/road-cpp-offline.txt",
+      "bytes": 582,
+      "sha256": "3bf74231b9769fe8279dba49cef73e9b67db2fe9dae1d15f96defb5403e11d70"
+    },
+    {
+      "path": "qualification/sprite-cpp-offline.txt",
+      "bytes": 630,
+      "sha256": "6e3013cb5d33b2e47be38855cc65a76f08e5f9e9487e2592b5c2ec007c73de15"
+    },
+    {
+      "path": "qualification/synthetic-cli-run.txt",
+      "bytes": 383,
+      "sha256": "8f176025f3b7e45ec971edd4c884ea83b2aae1e16a6d19703596575ca7d1acd3"
+    },
+    {
+      "path": "qualification/synthetic-go-tests.txt",
+      "bytes": 92,
+      "sha256": "a3d9e837743e5749e846c33e1d0da26a38a6c975c6a6249bcc4949a80aaffe32"
+    },
+    {
+      "path": "reference/make_golden.py",
+      "bytes": 1382,
+      "sha256": "ceab43f9a2dcd1c2574ecd98f6bd7786d66b5af12ee33fff4c722a19b91c88aa"
+    },
+    {
+      "path": "references/cpp/road/CMakeLists.txt",
+      "bytes": 334,
+      "sha256": "6002fde4e5b35ac478a33e9d0e4053627620186068ecc43466b2bdea4c207e79"
+    },
+    {
+      "path": "references/cpp/road/road_buffer_model.cpp",
+      "bytes": 5047,
+      "sha256": "e56d601a083f8967e3666444245cebc8e93dbc0e9b2568d8bbeb8cbd95169987"
+    },
+    {
+      "path": "references/cpp/road/verify_road.py",
+      "bytes": 2445,
+      "sha256": "2af887fc62208f6105f719ad79fd2602916f0ad700531efb5381e3a440ad2329"
+    },
+    {
+      "path": "references/cpp/sprite/shadow_tests.cpp",
+      "bytes": 5839,
+      "sha256": "068d4b2a723dcd107c3775efbb09fc20624b0a9367905f2b12675c1bab6b5735"
+    },
+    {
+      "path": "references/cpp/sprite/snapshot_shadow_tests.cpp",
+      "bytes": 5242,
+      "sha256": "7be4d6e1ad2be263bfdf888e051579fd5b65136eec26acfc14291014a6b771a4"
+    },
+    {
+      "path": "references/cpp/sprite/sprite_transfer_model.hpp",
+      "bytes": 2561,
+      "sha256": "2a3f7a704f31740dd4ecbf4f013dab455c7df9359cd30463241b9851352ab0b5"
+    }
+  ],
+  "artifactStatus": "Embedded in 0.67.0.0-RC5 unqualified source candidate; synthetic Windows GUI, original ROM runtime not connected"
+}

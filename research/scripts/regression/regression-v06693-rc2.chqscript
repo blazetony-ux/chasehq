@@ -1,0 +1,33 @@
+# name: v0.66.9.3-RC2 Research Tooling Hardening Regression
+# category: regression
+# regression-version: 0.66.9.3-RC2
+# regression-scope: release
+# purpose: Focused proof of RC2 evidence finalization, browser/client command counting, source-line preservation, structured corpus results, sprite shadow comparison, execution-time queries, tuple iteration and deterministic player-gameplay restoration. No intentional emulation/game behavior changes.
+# checkpoint: stage1-gameplay-2064.chqstate
+
+echo === ChaseHQ v0.66.9.3-RC2 Tooling Regression: BEGIN ===
+api release.assert-version
+api schema action=sprite.shadow.compare
+api schema action=query.runtime
+api schema action=corpus.run
+api script.schema
+wait 25
+
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api sprite.shadow.compare scope=visible failOnMismatch=false
+api query.runtime function=getmaps()
+api query.runtime function=getregistry()
+api query.runtime function=gettrackrecords(before=1,after=1)
+
+# Tuple-expanded commands must retain this authored source line in console/error provenance.
+for address,width in [(1002AE,16),(1002D8,16)]
+  api memory.read cpu=A address=${address} width=${width}
+end
+
+# Corpus rows must expose parsed result objects for JSON-returning actions and restore caller state.
+api corpus.run checkpoints=stage1-driving-2352.chqstate,stage1-gameplay-2064.chqstate action=sprite.shadow.compare scope=visible failOnMismatch=false
+api script.runs limit=5
+
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api status
+echo === ChaseHQ v0.66.9.3-RC2 Tooling Regression: COMPLETE ===

@@ -1,8 +1,8 @@
 {
   "schema": "chq-audio-research-capabilities-v1",
-  "build": "0.66.9.0-RC2.8",
-  "status": "FOUNDATION_ONLY",
-  "guardrail": "No runtime audio injection is enabled until native Windows/SDL audio timing and mixer behavior are validated.",
+  "build": "0.67.0.0-RC6.3.33",
+  "status": "COMMAND_EVENT_INSTRUMENTED",
+  "guardrail": "v0.66.9.3 captures writes to the currently stubbed 0x820000..03 sound interface as structured command events. No sound CPU, chip emulation, mixer output or runtime audio injection is claimed or enabled.",
   "channels": [
     {
       "id": "mixed_output",
@@ -13,8 +13,8 @@
     {
       "id": "sound_cpu_commands",
       "kind": "event-stream",
-      "status": "planned",
-      "description": "Commands written toward the sound CPU / sound subsystem"
+      "status": "runtime-instrumented",
+      "description": "Structured frame/CPU-PC/address/value events for writes to the currently mapped 0x820000..03 sound command stub; sound CPU interpretation remains open."
     },
     {
       "id": "sample_voice",
@@ -91,7 +91,7 @@
     "schema": "chq-timeline-audio-capability-v1",
     "runtimeAudioAvailable": false,
     "soundStubCaptured": true,
-    "status": "blocked-by-audio-runtime",
-    "description": "Forensic Timeline v1 checkpoints the current sound_stub bus region but cannot capture real sound CPU/chip/PCM state because the native audio runtime is not yet implemented."
+    "status": "command-events-available-no-audio-runtime",
+    "description": "v0.66.9.3 can record structured sound-command-interface writes and checkpoints the sound_stub bus region, but real sound CPU/chip/PCM state remains unavailable until native audio runtime implementation."
   }
 }

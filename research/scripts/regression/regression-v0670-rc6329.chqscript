@@ -1,0 +1,22 @@
+# name: RC6.3.29 CPU-B Original-ROM BNE Branch Decision Frontier Smoke
+# category: regression
+# purpose: Assert corrected release/Workbench Ghidra/REA APIs; repaired Ghidra BTST 0x050E PC-format comparison validated against authentic failed RC6.3.19 Windows evidence, original-ROM JSR/RTS five-case return chain and static-only BNE alternative, Ghidra continuation crosswalk, observed frontier and risk prioritisation, bounded original-ROM IRQ/RTE six-byte RAM snapshot and immediate post-return PC/SR/SP gate (chqdev native reconstruct only), true ROM edge audit, portfolio reconciliation and CPU parity require chqdev native reconstruct --cpu-b-live, not this smoke.
+# checkpoint: stage1-gameplay-2064.chqstate
+# version: 0.67.0.0-RC6.3.29
+# regression-version: 0.67.0.0-RC6.3.29
+# regression-scope: release
+# safety: no mutations; does not promote any native function
+# cleanup: no session changes
+echo === RC6.3.29 RELEASE SMOKE BEGIN ===
+try
+  api release.assert-version
+  api schema action=ghidra.status
+  api schema action=ghidra.results
+  api schema action=rea.crosswalk
+  api schema action=rea.function.inspect
+  api ghidra.status
+  api rea.reports
+  echo === RC6.3.29 RELEASE SMOKE PASS ===
+finally
+  echo === RC6.3.29 RELEASE SMOKE PRESERVED SESSION ===
+end

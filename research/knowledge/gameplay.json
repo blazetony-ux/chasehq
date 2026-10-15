@@ -1,5 +1,9 @@
 {
   "schema": "chq.knowledge.gameplay/1",
   "variables": [],
-  "status_values": ["hypothesis", "probable", "confirmed"]
+  "status_values": [
+    "hypothesis",
+    "probable",
+    "confirmed"
+  ]
 }

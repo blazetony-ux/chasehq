@@ -1,0 +1,22 @@
+{
+  "schema": "chq-ghidra-static-findings-v1",
+  "cpu": "A",
+  "rawRomSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "romBase": "0x000000",
+  "romEndExclusive": "0x080000",
+  "sites": [
+    {
+      "pc": "0x00820C",
+      "nearbyInstructions": [
+        {
+          "pc": "0x00820C",
+          "length": 2
+        },
+        {
+          "pc": "0x00820E",
+          "length": 2
+        }
+      ]
+    }
+  ]
+}

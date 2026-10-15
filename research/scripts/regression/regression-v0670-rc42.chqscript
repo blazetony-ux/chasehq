@@ -1,0 +1,72 @@
+# regression-version: 0.67.0.0-RC4.2
+# name: v0.67.0-RC4 CHQPACK Content Boundary
+# category: regression
+# purpose: Re-run the canonical BG0/BG1 Shadow corpus after correcting opaque bottom-layer pen-0 pixel semantics; Native sprites/text remain the normal runtime paths.
+
+echo === v0.67.0-RC4 CHQPACK content boundary ===
+api release.assert-version
+
+try
+  api sprite.override.clear
+  api sprite.visual.clear
+  api sprite.map-override.clear
+  api sprite.asset-replace.clear
+  api patch.clear
+  api hud.layout.reset
+  api layer.offsets.reset layer=all
+
+  echo === PROMOTED NATIVE DISPLAY PATHS ===
+  api backend.sprite.set mode=native
+  api backend.text.set mode=native
+  api backend.sprite.get
+  api backend.text.get
+
+  echo === TC0100SCN BG SHADOW ===
+  api backend.bg.reset-verification
+  api backend.bg.set mode=shadow
+
+  # Straight gameplay reference.
+  api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+  api control.run-frames frames=8
+  api backend.bg.get
+
+  # Known rowscroll/cloud geometry reference.
+  api checkpoint.load file=stage1-driving-2352.chqstate run=false
+  api control.run-frames frames=8
+  api backend.bg.get
+
+  # Target/damage phase exercises alternate HUD + scene state while BG stays live.
+  api checkpoint.load file=stage1-target-first-damage-6334.chqstate run=false
+  api control.run-frames frames=8
+  api backend.bg.get
+
+  # Cross-stage proof.
+  api checkpoint.load file=stage2-gameplay-7500.chqstate run=false
+  api control.run-frames frames=8
+  api backend.bg.get
+
+  api checkpoint.load file=stage2-enemy-10514.chqstate run=false
+  api control.run-frames frames=8
+  api backend.bg.get
+
+  echo === STRUCTURED FRAME WITH NATIVE SPRITES/TEXT + BG SHADOW ===
+  api frame.snapshot name=rc2-native-display-bg-shadow-stage2
+  api frame.snapshot.assert-exact name=rc2-native-display-bg-shadow-stage2
+
+  echo === v0.67.0-RC4 regression body complete ===
+finally
+  api sprite.override.clear
+  api sprite.visual.clear
+  api sprite.map-override.clear
+  api sprite.asset-replace.clear
+  api patch.clear
+  api hud.layout.reset
+  api layer.offsets.reset layer=all
+  api backend.sprite.set mode=native
+  api backend.text.set mode=native
+  api backend.bg.set mode=shadow
+  api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+  api status
+end
+
+echo === v0.67.0-RC4 CHQPACK content boundary complete ===

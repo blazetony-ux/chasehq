@@ -1,0 +1,44 @@
+# name: v0.66.9.3-RC3 Research Tooling Hardening Regression
+# category: regression
+# regression-version: 0.66.9.3-RC3
+# regression-scope: release
+# purpose: Final tooling-hardening probe before a diagnosis-heavy work period: authoritative source-line provenance, client-side wait evidence parity, resolved-source capture, portable/navigable evidence bundles, structured corpus results, runtime queries, tuple iteration and deterministic gameplay restoration. No intentional emulation/game behavior changes.
+# checkpoint: stage1-gameplay-2064.chqstate
+
+echo === ChaseHQ v0.66.9.3-RC3 Tooling Regression: BEGIN ===
+api release.assert-version
+api schema action=sprite.shadow.compare
+api schema action=query.runtime
+api schema action=corpus.run
+api schema action=script.run.verify
+api script.schema
+
+# Client-only wait must still appear in authoritative console/resolved-command evidence.
+wait 25
+
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api sprite.shadow.compare scope=visible failOnMismatch=false
+
+# Nested expansion must preserve the authored line of the API command below.
+repeat 1
+  for address,width in [(1002AE,16),(1002D8,16)]
+    api memory.read cpu=A address=${address} width=${width}
+  end
+end
+
+# try/finally source provenance must also remain absolute.
+try
+  api query.runtime function=getmaps()
+  api query.runtime function=getregistry()
+finally
+  api status
+end
+
+# Corpus rows must remain typed JSON objects and caller state must be restored.
+api corpus.run checkpoints=stage1-driving-2352.chqstate,stage1-gameplay-2064.chqstate action=sprite.shadow.compare scope=visible failOnMismatch=false
+api query.runtime function=gettrackrecords(before=1,after=1)
+api script.runs limit=5
+
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api status
+echo === ChaseHQ v0.66.9.3-RC3 Tooling Regression: COMPLETE ===

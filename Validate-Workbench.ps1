@@ -1,4 +1,4 @@
-﻿[CmdletBinding()]
+[CmdletBinding()]
 param()
 $ErrorActionPreference='Stop'
 $root=$PSScriptRoot
@@ -13,6 +13,11 @@ $versionText=Get-Content (Join-Path $root 'src\version.h') -Raw
 $m=[regex]::Match($versionText,'kNativeVersion\s*=\s*"([^"]+)"');if(-not$m.Success){throw 'Could not read native version'}
 $nativeVersion=$m.Groups[1].Value
 if([string]$manifest.build -ne $nativeVersion){throw "Version mismatch: feature manifest=$($manifest.build), native=$nativeVersion"}
+
+
+# Windows PowerShell parser/encoding/constant/read-only variable safety is centralized in
+# Validate-WindowsPreflight.ps1. Prepare-Project.ps1 and Validate-Release.ps1 both invoke it
+# before this deeper Workbench contract validator, so these rules cannot drift independently.
 
 if($text -notmatch "@runtime/web-listener\.log"){throw 'Workbench validation failed: runtime web-listener alias missing'}
 if($text -match "logs\.tail file=@runtime/web-stdout\.log"){throw 'Workbench validation failed: stale web-stdout logs.tail example remains'}
@@ -56,6 +61,16 @@ if($text -notmatch '/api/v1/docs/handbook' -or $text -notmatch '/api/v1/schema/a
 $handover=Get-Content (Join-Path $root 'docs\CHATGPT_HANDOVER_PROMPT.md') -Raw
 if($handover -notmatch [regex]::Escape('v'+$nativeVersion)){throw 'ChatGPT handover version is stale'}
 
+# RC3.1 cumulative local-proveoff guards: production dictionaries, deterministic sampling, export-key uniqueness and launcher args.
+if($text -notmatch [regex]::Escape('if($o -is [System.Collections.IDictionary])')){throw 'Workbench validation failed: production OrderedDictionary Prop() support missing'}
+if($text -notmatch [regex]::Escape('surfaceSegmentsCsv=$surfaceSegmentCsv') -or $text -match [regex]::Escape('surfaceSegments=$surfaceSegmentCsv')){throw 'Workbench validation failed: surfaceSegments CSV/count key collision regression'}
+if($text -notmatch [regex]::Escape('if(trackRecording&&!scriptRunning)sampleTrack()')){throw 'Workbench validation failed: Track View scripted-survey sample isolation missing'}
+if($text -notmatch 'duplicateFrameSuppressed' -or $text -notmatch [regex]::Escape('Prop $prev ''frame'' -1')){throw 'Workbench validation failed: same-frame Track Recorder suppression missing'}
+$researchLauncher=Get-Content (Join-Path $root 'Start-ChaseHQResearch.ps1') -Raw
+$expectedResearchArgLine='$argLine = (($nativeLaunchArgs | ForEach-Object { Quote-Arg $_ }) -join '' '')'
+$forbiddenResearchArgLine='$argLine = (($EmulatorArgs | ForEach-Object { Quote-Arg $_ }) -join '' '')'
+if($researchLauncher -notmatch [regex]::Escape('$nativeLaunchArgs = @(') -or $researchLauncher -notmatch [regex]::Escape($expectedResearchArgLine) -or $researchLauncher -match [regex]::Escape($forbiddenResearchArgLine) -or $researchLauncher -match [regex]::Escape('$emulatorArgs += $EmulatorArgs')){throw 'Workbench validation failed: Research launcher argument-vector regression'}
+
 # v0.66.7.7 handbook/search/export consolidation checks.
 if(([regex]::Matches($text,'(?m)^(?:async )?function showHandbookPage\(id\)\{')).Count -ne 1){throw 'Workbench validation failed: showHandbookPage must have exactly one implementation'}
 if($text -notmatch 'searchText' -or $text -notmatch 'New-KnowledgeArticleHtml' -or $text -notmatch 'docsKnowledgeCard'){throw 'Workbench validation failed: consolidated knowledge search/export/landing wiring is incomplete'}
@@ -82,6 +97,7 @@ $scanFn=[regex]::Match($text,'(?s)function Analyze-ForensicTimelineWrites\(.*?(?
 if([string]::IsNullOrWhiteSpace($trimFn) -or $trimFn -notmatch '\[IO\.File\]::OpenText\(\$writes\)' -or $trimFn -match 'Remove-Item \$fp' -or $trimFn -match 'Export-Csv \$writes' -or $trimFn -match '\$rows\s*\+='){throw 'Workbench validation failed: timeline event-window implementation is not streaming/non-destructive'}
 if([string]::IsNullOrWhiteSpace($scanFn) -or $scanFn -notmatch '\[IO\.File\]::OpenText\(\$csv\)' -or $scanFn -match '@\(Import-Csv \$csv\)'){throw 'Workbench validation failed: timeline memory analysis is not streaming'}
 
+Write-Host 'Windows PowerShell source preflight: centralized in Validate-WindowsPreflight.ps1' -ForegroundColor Green
 Write-Host 'Script includes: PASS' -ForegroundColor Green
 Write-Host 'Script metadata: PASS' -ForegroundColor Green
 Write-Host 'Session/run layout: PASS' -ForegroundColor Green
@@ -136,7 +152,7 @@ Write-Host 'v0.66.9.0-RC2.5 script lifecycle / action parity: PASS' -ForegroundC
 
 
 # v0.66.9.0-RC2.9: target-health promotion, research controls, SDL pause UX and long-run parity.
-if($nativeVersion -in @('0.66.9.0-RC2.9','0.66.9.0-RC3.0')){
+if($nativeVersion -in @('0.66.9.0-RC2.9','0.66.9.0-RC3.0','0.66.9.0-RC3.2','0.66.9.0-RC3.3','0.66.9.0-RC3.4','0.66.9.0-RC3.4.1','0.66.9.0-RC3.4.2','0.66.9.0-RC3.4.3','0.66.9.0-RC3.4.4','0.66.9.0-RC3.4.5','0.66.9.0-RC3.4.9')){
     foreach($cp in @(
         'stage1-target-immediate-pre-contact-5587.chqstate',
         'stage1-target-first-physical-contact-5588.chqstate',
@@ -156,7 +172,7 @@ if($nativeVersion -in @('0.66.9.0-RC2.9','0.66.9.0-RC3.0')){
 
 
 # v0.66.9.0-RC3.0: live course-mapping / survey parity and evidence surfaces.
-if($nativeVersion -eq '0.66.9.0-RC3.0'){
+if($nativeVersion -in @('0.66.9.0-RC3.0','0.66.9.0-RC3.2','0.66.9.0-RC3.3','0.66.9.0-RC3.4','0.66.9.0-RC3.4.1','0.66.9.0-RC3.4.2','0.66.9.0-RC3.4.3','0.66.9.0-RC3.4.4','0.66.9.0-RC3.4.5','0.66.9.0-RC3.4.9')){
     foreach($needle in @("'course.follow.status'","'course.follow.configure'","'course.survey.start'","'course.survey.stop'","'track.map.export'",'Course Mapping / Live Survey','UNCLASSIFIED_DYNAMIC_OBJECT','surfaceSignature','carX','roadLeftX')){if($text -notmatch [regex]::Escape($needle)){throw "Workbench validation failed: RC3.0 mapping surface missing: $needle"}}
     if($text -notmatch [regex]::Escape("track:['Course Mapping / Live Survey']") -or $text -match [regex]::Escape("track:['Live SVG Track View']")){throw 'Workbench validation failed: RC3.0 Track View tab routing does not match the Course Mapping / Live Survey panel title'}
     if($text -match [regex]::Escape('function Set-CourseFollowConfig($args)') -or $text -match [regex]::Escape('$args.ContainsKey($key)')){throw 'Workbench validation failed: RC3.0 course-follow configuration bridge uses reserved automatic $args instead of the config hashtable'}
@@ -167,3 +183,37 @@ if($nativeVersion -eq '0.66.9.0-RC3.0'){
     if($apiDoc -notmatch 'course\.follow\.configure' -or $apiDoc -notmatch 'track\.map\.export'){throw 'Workbench validation failed: RC3.0 API documentation is stale'}
     Write-Host 'v0.66.9.0-RC3.0 live course mapping / survey parity: PASS' -ForegroundColor Green
 }
+
+# v0.66.9.0-RC3.2: survey-data quality before long course mapping runs.
+if($nativeVersion -in @('0.66.9.0-RC3.2','0.66.9.0-RC3.3','0.66.9.0-RC3.4','0.66.9.0-RC3.4.1','0.66.9.0-RC3.4.2','0.66.9.0-RC3.4.3','0.66.9.0-RC3.4.4','0.66.9.0-RC3.4.5','0.66.9.0-RC3.4.9')){
+    foreach($needle in @('chq-track-recorder-v3','surfaceStableSignature','rawSurfaceRenderVariantCount','UNCLASSIFIED_OBJECT_CANDIDATE','track-object-candidates.csv','track-surface-segments.csv','chq-course-map-v2')){if($text -notmatch [regex]::Escape($needle)){throw "Workbench validation failed: RC3.1 mapping-quality surface missing: $needle"}}
+    if($text -notmatch 'New-TrackSpriteCandidates' -or $text -match 'function Group-TrackSprites'){throw 'Workbench validation failed: RC3.1 conservative sprite-candidate tracking policy is missing or unsafe proximity grouping was reintroduced'}
+    if($text -notmatch 'Get-TrackObjectCandidates' -or $text -notmatch [regex]::Escape('$candidateGroups=@(New-TrackSpriteCandidates -sprites $sprites)') -or $text -notmatch [regex]::Escape('$objectCandidates=@(Get-TrackObjectCandidates -sprites $sprites)')){throw 'Workbench validation failed: RC3.1 object-candidate array preservation fix is missing'}
+    foreach($candidateField in @('memberCount','sourceSlot','sourceMap','sourcePalette','left','top','right','bottom','centreX','centreY','visiblePixels')){if($text -notmatch [regex]::Escape($candidateField+'=[int')){if($candidateField -notin @('centreX','centreY','visiblePixels')){throw "Workbench validation failed: RC3.1 explicit object-candidate evidence field missing: $candidateField"}}}
+    if($text -notmatch 'persistentObjectCandidateTrackCount'){throw 'Workbench validation failed: RC3.1 persistent object-candidate quality metric missing'}
+    if($text -match '(?im)\$pid\s*='){throw 'Workbench validation failed: RC3.1 object tracking assigns to PowerShell automatic read-only $PID variable'}
+    $candidateTest=Join-Path $root 'tests\workbench_object_candidate_tests.ps1';if(-not(Test-Path $candidateTest -PathType Leaf)){throw 'Workbench validation failed: RC3.1 object-candidate PowerShell runtime regression test missing'};& $candidateTest
+    $signed16Test=Join-Path $root 'tests\workbench_track_signed16_tests.ps1';if(-not(Test-Path $signed16Test -PathType Leaf)){throw 'Workbench validation failed: RC3.1 track signed-16 PowerShell runtime regression test missing'};& $signed16Test
+    if($text -match '\[int16\]\s*\([^\r\n]*-band\s+0xFFFF'){throw 'Workbench validation failed: unsafe direct [int16] reinterpret cast remains in masked 16-bit track arithmetic'}
+    if($text -notmatch [regex]::Escape('$delta=Signed16 (($roadRight-$roadLeft)-band 0xFFFF)') -or $text -notmatch [regex]::Escape('$latErr=Signed16 (($lateral-$roadCentre)-band 0xFFFF)')){throw 'Workbench validation failed: RC3.1 track signed arithmetic is not routed through Signed16'}
+    if($text -notmatch [regex]::Escape('$surfaceSignature=$courseSurface')){throw 'Workbench validation failed: RC3.1 stable surface candidate key is not separated from raw TC0150 renderer evidence'}
+    if($text -match 'surfaceSignature=\$courseSurface\+''\|''\+\$roadRenderSignature'){throw 'Workbench validation failed: RC3.1 reintroduced volatile composite surface segmentation'}
+    if($text -notmatch [regex]::Escape('function Set-CourseFollowConfig($config)') -or $text -notmatch [regex]::Escape('$config.ContainsKey($key)')){throw 'Workbench validation failed: RC3.1 did not carry forward the RC3.0 course-follow config bridge fix'}
+    if($text -notmatch [regex]::Escape("track:['Course Mapping / Live Survey']") -or $text -match [regex]::Escape("track:['Live SVG Track View']")){throw 'Workbench validation failed: RC3.1 did not carry forward the RC3.0 Track View routing fix'}
+    $video=Get-Content (Join-Path $root 'src\video.cpp') -Raw
+    if($video -notmatch 'SDL_SCANCODE_PAUSE' -or $video -notmatch 'SDL_SCANCODE_P' -or $video -notmatch 'SDL_KMOD_CTRL'){throw 'Workbench validation failed: RC3.1 did not carry forward Pause/Break + Ctrl+P SDL pause controls'}
+    foreach($f in @('current-state-material-object-survey-1200.chqscript','stage1-course-mapping-shakedown-600.chqscript','stage1-course-mapping-3600.chqscript','stage1-course-mapping-negative-bias.chqscript','stage1-course-mapping-positive-bias.chqscript')){if(-not(Test-Path (Join-Path $root ('research\scripts\track\surveys\'+$f)))){throw "Workbench validation failed: RC3.1 survey script missing: $f"}}
+    if(-not(Test-Path (Join-Path $root 'research\scripts\regression\regression-v06690-rc31-course-mapping-quality.chqscript'))){throw 'Workbench validation failed: RC3.1 focused regression missing'}
+    if($full -notmatch 'regression-v06690-rc31-course-mapping-quality\.chqscript'){throw 'Workbench validation failed: RC3.1 focused regression is not permanently included in Full Regression'}
+    $courseDoc=Get-Content (Join-Path $root 'docs\COURSE_MAPPING_SURVEY.md') -Raw
+    if($courseDoc -notmatch 'stable surface' -or $courseDoc -notmatch 'object candidate' -or $courseDoc -notmatch 'track-object-candidates\.csv'){throw 'Workbench validation failed: RC3.1 course-mapping documentation is stale'}
+    foreach($needle in @('Get-ChqScriptParameterDefinitions','Resolve-ChqScriptParameters','renderScriptParameters','scriptResolvedPreview','Collect-LegacyTraceArtifact',"resolvedCommands='resolved-commands.txt'","'script.run'","'/console'",'TokenMatches','chq_token')){if($text -notmatch [regex]::Escape($needle)){throw "Workbench validation failed: RC3.2 parameter/evidence/LAN surface missing: $needle"}}
+    $launcher=Get-Content (Join-Path $root 'Start-ChaseHQ.ps1') -Raw
+    if($launcher -notmatch '\[switch\]\$LocalOnly' -or $launcher -notmatch '\$effectiveLanAccess' -or $launcher -notmatch 'Resolve-ChaseHQLanAddress' -or $launcher -notmatch 'Ensure-ChaseHQLanAccess\.ps1' -or $launcher -notmatch 'LAN/mobile host smoke: PASS'){throw 'Workbench validation failed: RC3.2 default LAN/mobile launcher plumbing missing'}
+    if(-not(Test-Path (Join-Path $root 'scripts\Ensure-ChaseHQLanAccess.ps1'))){throw 'Workbench validation failed: RC3.2 LAN prerequisite helper missing'}
+    if(-not(Test-Path (Join-Path $root 'research\scripts\regression\regression-v06690-rc32-script-parameters.chqscript'))){throw 'Workbench validation failed: RC3.2 parameter regression missing'}
+    if(-not(Test-Path (Join-Path $root 'research\scripts\regression\regression-v06690-rc32.chqscript'))){throw 'Workbench validation failed: RC3.2 whole-release regression missing'}
+    if($full -notmatch 'regression-v06690-rc32\.chqscript'){throw 'Workbench validation failed: RC3.2 whole-release regression is not permanently included in Full Regression'}
+    Write-Host 'v0.66.9.0-RC3.2 survey / parameters / evidence / LAN carried-forward fixes: PASS' -ForegroundColor Green
+}
+

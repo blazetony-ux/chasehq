@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="Win32-MSBuild"
+	tests="18"
+	failures="0"
+	disabled="0"
+	skipped="0"
+	hostname="DESKTOP-1H61R6I"
+	time="38"
+	timestamp="2026-10-15T20:57:39"
+	>
+	<testcase name="native_steering_reference_193" classname="native_steering_reference_193" time="0.0868912" status="run">
+		<properties/>
+		<system-out>PASS: 193/193 reference entries, clamp extremes, fail-closed alternate mode
+</system-out>
+	</testcase>
+	<testcase name="live_candidate_shadow_tests" classname="live_candidate_shadow_tests" time="0.0914777" status="run">
+		<properties/>
+		<system-out>PASS: sprite compare deferred until 0x40174; bulk-only check at 0x40576; clear/no-clear, failure, evidence, incomplete, invalid inputs, reset, read-only
+</system-out>
+	</testcase>
+	<testcase name="native_sprite_clear_tests" classname="native_sprite_clear_tests" time="0.125099" status="run">
+		<properties/>
+		<system-out>PASS: guarded native clear-loop substitution; all failure cases fall back before mutation
+</system-out>
+	</testcase>
+	<testcase name="native_candidates_tests" classname="native_candidates_tests" time="0.0687903" status="run">
+		<properties/>
+		<system-out>PASS: native candidates, bounds, reset, byte order, deliberate mismatch
+</system-out>
+	</testcase>
+	<testcase name="projection_shadow_tests" classname="projection_shadow_tests" time="0.0785232" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="native_execution_tests" classname="native_execution_tests" time="0.113398" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="content_pack_tests" classname="content_pack_tests" time="0.122067" status="run">
+		<properties/>
+		<system-out></system-out>
+	</testcase>
+	<testcase name="tc0100scn_geometry_tests" classname="tc0100scn_geometry_tests" time="0.0733585" status="run">
+		<properties/>
+		<system-out>TC0100SCN geometry PASS
+</system-out>
+	</testcase>
+	<testcase name="sprite_priority_tests" classname="sprite_priority_tests" time="0.0788452" status="run">
+		<properties/>
+		<system-out>PASS sprite ownership, masking, coverage, black pens and visible coordinates
+</system-out>
+	</testcase>
+	<testcase name="sprite_gfx_tests" classname="sprite_gfx_tests" time="0.0959899" status="run">
+		<properties/>
+		<system-out>PASS Chase H.Q. sprite 4bpp plane significance (all 16 pens)
+</system-out>
+	</testcase>
+	<testcase name="sprite_layer_shadow_tests" classname="sprite_layer_shadow_tests" time="0.0789434" status="run">
+		<properties/>
+		<system-out>PASS independent whole placed sprite-layer shadow primitives
+</system-out>
+	</testcase>
+	<testcase name="hud_layout_tests" classname="hud_layout_tests" time="0.0872374" status="run">
+		<properties/>
+		<system-out>[test] semantic HUD cell map
+[test] HUD presets and naming
+hud_layout_tests PASS
+</system-out>
+	</testcase>
+	<testcase name="tc0100scn_text_native_tests" classname="tc0100scn_text_native_tests" time="0.0806908" status="run">
+		<properties/>
+		<system-out>tc0100scn_text_native_tests: PASS
+</system-out>
+	</testcase>
+	<testcase name="tc0100scn_bg_native_tests" classname="tc0100scn_bg_native_tests" time="0.0767046" status="run">
+		<properties/>
+		<system-out>tc0100scn_bg_native_tests: PASS
+</system-out>
+	</testcase>
+	<testcase name="authoritative_history_tests" classname="authoritative_history_tests" time="7.45154" status="run">
+		<properties/>
+		<system-out>Authoritative ordering, pagination, current-session fast path and version tests: PASS
+</system-out>
+	</testcase>
+	<testcase name="sprite_snapshot_assertions" classname="sprite_snapshot_assertions" time="8.49029" status="run">
+		<properties/>
+		<system-out>PASS snapshot assertions: positive ownership, opaque black, wrong owner, missing coverage, 16-line coordinate regression
+</system-out>
+	</testcase>
+	<testcase name="cpu_bus_rom_tests" classname="cpu_bus_rom_tests" time="1.44856" status="run">
+		<properties/>
+		<system-out>[test] TC0100SCN Y-scroll geometry
+[test] ROM reconstruction
+[RESET A] SP=0x110000 PC=0x100
+[RESET B] SP=0x104000 PC=0x4d8 enabled=yes
+[RESET A] SP=0x110000 PC=0x100
+[RESET B] SP=0x104000 PC=0x4d8 enabled=yes
+[RESET A] SP=0x110000 PC=0x100
+[RESET B] SP=0x104000 PC=0x4d8 enabled=yes
+[RESET A] SP=0x110000 PC=0x100
+[RESET B] SP=0x104000 PC=0x4d8 enabled=yes
+[RESET A] SP=0x110000 PC=0x100
+[RESET B] SP=0x104000 PC=0x4d8 enabled=yes
+[RESET A] SP=0x110000 PC=0x100
+[RESET B] SP=0x104000 PC=0x4d8 enabled=yes
+[test] RC6.3.10 CPU-B synthetic two-branch ROM/native/fallback equivalence PASS
+[RESET A] SP=0x110000 PC=0x100
+[RESET B] SP=0x104000 PC=0x4d8 enabled=yes
+[RESET A] SP=0x110000 PC=0x100
+[RESET B] SP=0x104000 PC=0x4d8 enabled=yes
+[RESET A] SP=0x110000 PC=0x100
+[RESET B] SP=0x104000 PC=0x4d8 enabled=yes
+[test] RC6.3.11 Musashi IRQ transaction ownership/rollback PASS
+[RESET A] SP=0x110000 PC=0x100
+[RESET B] SP=0x104000 PC=0x4d8 enabled=yes
+[RESET A] SP=0x110000 PC=0x100
+[RESET B] SP=0x104000 PC=0x4d8 enabled=yes
+[RESE...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+	<testcase name="cli_evidence_tests" classname="cli_evidence_tests" time="19.8283" status="run">
+		<properties/>
+		<system-out>[20:58:00.441 | +0.001] Chase H.Q. Native 0.67.0.0-RC6.3.33 - v0.67 Native Reconstruction Milestone + CHQPACK Runtime Content + Native Rendering + chqdev v0.5.52
+[CPU ROM] OK b52-132.39
+[CPU ROM] OK b52-133.55
+[CPU ROM] OK b52-130.36
+[CPU ROM] OK b52-136.29
+[CPU ROM] OK b52-131.37
+[CPU ROM] OK b52-129.30
+[RESET A] SP=0x103f00 PC=0x140
+[RESET B] SP=0x100400 PC=0x402 enabled=yes
+ROM directory:
+  C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.67.0.0-RC6.3.33\roms\chasehq
+
+[ROM] OK      b52-34.5
+[ROM] OK      b52-35.7
+[ROM] OK      b52-36.9
+[ROM] OK      b52-37.11
+[ROM] OK      b52-30.4
+[ROM] OK      b52-31.6
+[ROM] OK      b52-32.8
+[ROM] OK      b52-33.10
+[ROM] OK      b52-38.34
+[ROM] OK      b52-28.4
+[ROM] OK      b52-29.27
+[ROM] OK      b52-01.7
+[ROM] OK      b52-06.24
+
+Assembled graphics hardware data:
+  OBJ A graphics : 2097152 bytes
+  OBJ B graphics : 2097152 bytes
+  Spritemap      : 524288 bytes
+  TC0150ROD ROM  : 524288 bytes
+  TC0100SCN ROM  : 524288 bytes
+  B52-01 MIX PROM: 256 bytes
+  B52-06 ROD ...
+[This part of the test output was removed since it exceeds the threshold of 1024 bytes.]
+</system-out>
+	</testcase>
+</testsuite>

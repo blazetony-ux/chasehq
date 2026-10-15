@@ -4,7 +4,7 @@
 # regression-version: current
 # regression-scope: permanent
 # ChaseHQ Native - Full Regression
-# Target: v0.64.8.4+
+# Target: current build
 # Purpose: broad, deterministic Workbench/API smoke + intervention regression
 # Safe baseline: stage1-driving-2352.chqstate (ATTRACT graphics reference)
 #
@@ -12,9 +12,6 @@
 # - Designed to finish in a known paused/checkpoint-restored state.
 # - Mutating tests use known values and restore via checkpoint reload.
 # - Keep "Stop on error" enabled when running this script.
-# regression-version: legacy
-# regression-scope: permanent
-
 echo === ChaseHQ Full Regression: BEGIN ===
 
 # ----------------------------------------------------------------------
@@ -394,4 +391,44 @@ include "regression/regression-v06690-rc29-target-health-tooling.chqscript"
 
 include "regression/regression-v06690-rc30-course-mapping-live-survey.chqscript"
 
+# v0.66.9.0 RC3.1 surface stability + candidate object tracking
+include "regression/regression-v06690-rc31-course-mapping-quality.chqscript"
+
+# Current platform/release contracts consolidated from historical RC3.2-RC3.4.x/v0.66.9.1/v0.66.9.2 release-tail scripts.
+# See docs/REGRESSION_COVERAGE_MAP.md for explicit coverage equivalence.
+include "regression/regression-platform-current-contracts.chqscript"
+
+# v0.66.9.3-RC3 research-tooling hardening
+include "regression/regression-v06693-rc3.chqscript"
+
+# v0.66.9.3 final promoted capability contract (supersedes RC5 in the automatic tail)
+include "regression/regression-v06693.chqscript"
+
+# v0.66.9.4 final promoted native-graphics / semantic HUD contract; RC3.1.3 remains historical promotion evidence
+include "regression/regression-v06694.chqscript"
+
+# v0.66.9.5-RC1.1 evidence-backed corrective contract
+include "regression/regression-v06695-rc11.chqscript"
+
+# v0.66.9.5-RC2 ROM atlas / semantic vehicle / latency-aware beacon contract
+include "regression/regression-v06695-rc2.chqscript"
+
+# v0.66.9.5-RC3 final native-promotion tooling contract
+include "regression/regression-v06695-rc3.chqscript"
+
+# v0.67.0.0-RC1.1 native sprite forensic coverage corrective; carries forward RC1 implementation milestone
+include "regression/regression-v0670-rc11.chqscript"
+
+# v0.67.0.0-RC2.1 TC0100SCN BG opaque pen-0 corrective
+# Historical RC2.1 BG Shadow body superseded by the identical current RC4.2.1 corpus below.
+
+# Historical RC3.2 BG Shadow body superseded by the identical current RC4.2.1 corpus below.
+
+# RC4.2.1 latest BG Shadow contract (identical API/condition body to RC2.1 and RC3.2)
+include "regression/regression-v0670-rc421.chqscript"
+
+# RC4.3 release identity; native asset/CPU instrumentation verified in CTest/Go.
+include "regression/regression-v0670-rc432.chqscript"
+
 echo === ChaseHQ Full Regression: COMPLETE ===
+

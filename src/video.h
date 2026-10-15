@@ -1,6 +1,10 @@
 #pragma once
 #include "machine.h"
 #include "runtime.h"
+#include "sprite_layer_shadow.h"
+#include "hud_layout.h"
+#include "tc0100scn_text_native.h"
+#include "tc0100scn_bg_native.h"
 
 #include <array>
 #include <cstdint>
@@ -96,8 +100,70 @@ public:
     void set_tc0100scn_legacy_x(bool enabled) { tc0100scn_legacy_x_ = enabled; }
     bool tc0100scn_legacy_x() const { return tc0100scn_legacy_x_; }
     void configure_sprite_tie_break(const Options& options);
+    const HudLayoutState& hud_layout() const { return hud_layout_; }
+    bool set_hud_element(const std::string& element, bool visible, int dx, int dy);
+    bool set_hud_preset(const std::string& preset);
+    void reset_hud_layout() { hud_layout_reset(hud_layout_); }
+    std::string hud_layout_status() const { return chq::hud_layout_status(hud_layout_); }
     void set_sprite_tie_break_higher(bool higher) { sprite_tie_break_higher_ = higher; }
     bool sprite_tie_break_higher() const { return sprite_tie_break_higher_; }
+
+    // v0.66.9.4-RC2 native-reconstruction backend switch. Original remains
+    // the default/oracle; Shadow displays Original while comparing the
+    // independent renderer; Native displays the independent renderer.
+    enum class SpriteBackend { Original, Shadow, Native, NativeOnly };
+    enum class TextBackend { Original, Shadow, Native, NativeOnly };
+    enum class BgBackend { Original, Shadow, Native, NativeOnly };
+    bool set_sprite_backend(const std::string& mode);
+    SpriteBackend sprite_backend() const { return sprite_backend_; }
+    const char* sprite_backend_name() const;
+    std::string sprite_backend_status() const;
+    void reset_sprite_backend_verification();
+
+    SpriteLayerShadowCompare compare_runtime_sprite_layer_shadow(const Machine& machine, const Runtime& runtime, const SceneState& scene,
+        std::vector<std::uint32_t>* authoritative_pixels = nullptr,
+        std::vector<std::uint32_t>* native_pixels = nullptr,
+        std::vector<std::uint16_t>* authoritative_owners = nullptr,
+        std::vector<std::uint16_t>* native_owners = nullptr);
+    bool export_sprite_backend_comparison(const Machine& machine, const Runtime& runtime, const SceneState& scene, unsigned frame, const std::string& name, std::string* path_out = nullptr);
+    std::string native_promotion_status() const;
+
+    bool set_text_backend(const std::string& mode);
+    TextBackend text_backend() const { return text_backend_; }
+    const char* text_backend_name() const;
+    std::string text_backend_status() const;
+    void reset_text_backend_verification();
+    Tc0100TextNativeCompare compare_runtime_text_layer_shadow(const Runtime& runtime,
+        std::vector<std::uint32_t>* original_pixels = nullptr,
+        std::vector<std::uint32_t>* native_pixels = nullptr);
+
+    bool set_bg_backend(const std::string& mode);
+    BgBackend bg_backend() const { return bg_backend_; }
+    const char* bg_backend_name() const;
+    std::string bg_backend_status() const;
+    void reset_bg_backend_verification();
+    Tc0100BgNativeCompare compare_runtime_bg_layer_shadow(const Machine& machine, const Runtime& runtime, int layer, bool opaque,
+        std::vector<std::uint32_t>* original_pixels = nullptr,
+        std::vector<std::uint32_t>* native_pixels = nullptr);
+
+    // Presentation-only global map substitution. Unlike slot overrides this
+    // follows a sprite map wherever the game places it, making it useful for
+    // asset-family/billboard/car substitution experiments using existing OBJ art.
+    bool set_runtime_sprite_map_override(unsigned source_map, unsigned target_map, int palette=-1);
+    void clear_runtime_sprite_map_overrides();
+    std::string runtime_sprite_map_overrides_status() const;
+    std::size_t runtime_sprite_map_override_count() const { return runtime_sprite_map_overrides_.size(); }
+
+    // RC3 format-aware native asset replacement. Unlike map-only overrides, the
+    // replacement carries its own OBJ format and may therefore transplant art
+    // across OBJ-A/OBJ-B while inheriting the source object's placement box.
+    bool set_runtime_sprite_asset_override(unsigned source_map, unsigned target_map, const std::string& format, int palette=-1, int flip_x=-1, int flip_y=-1, int dx=0, int dy=0);
+    bool set_runtime_sprite_asset_override_object(const std::string& object, unsigned target_map, const std::string& format, int palette=-1, int flip_x=-1, int flip_y=-1, int dx=0, int dy=0);
+    void clear_runtime_sprite_asset_overrides();
+    std::string runtime_sprite_asset_overrides_status() const;
+    std::size_t runtime_sprite_asset_override_count() const { return runtime_sprite_asset_overrides_.size(); }
+    std::uint64_t runtime_sprite_asset_visible_pixels() const { return runtime_sprite_asset_visible_pixels_; }
+    std::uint64_t hud_speed_region_visible_pixels() const { return hud_speed_region_visible_pixels_; }
     void configure_tc0100scn_trace(const Options& options);
     void shutdown();
 
@@ -105,7 +171,7 @@ public:
     void update_fast_forward_status(unsigned frame, unsigned target);
 
     void draw_scene(const Machine& machine, const SceneState& scene);
-    void draw_runtime(const Machine& machine, const Runtime& runtime, const SceneState& scene, unsigned frame, bool paused = false, bool timer_frozen = false);
+    void draw_runtime(const Machine& machine, const Runtime& runtime, const SceneState& scene, unsigned frame, bool paused = false, bool timer_frozen = false, bool compositor_capture = false);
     bool save_current_screenshot(const std::filesystem::path& path) const;
     bool save_layered_snapshot(const std::filesystem::path& root, const Machine& machine, const Runtime& runtime, const SceneState& scene, unsigned frame);
     bool debug_overlay_visible() const { return debug_overlay_; }
@@ -130,6 +196,17 @@ public:
     int selected_sprite() const { return selected_sprite_; }
     const std::deque<SpriteChangeEvent>& sprite_change_events() const { return sprite_change_events_; }
     const std::vector<DebugSpriteInfo>& debug_sprites() const { return debug_sprites_; }
+    struct RuntimeSpritePresentationInfo {
+        std::uint16_t source_map = 0;
+        std::uint8_t source_palette = 0;
+        std::uint16_t effective_map = 0;
+        std::uint8_t effective_palette = 0;
+        int effective_visible = 1;
+        bool slot_override = false;
+        bool map_override = false;
+        bool asset_override = false;
+    };
+    RuntimeSpritePresentationInfo runtime_sprite_presentation(unsigned slot, std::uint16_t source_map, std::uint8_t source_palette) const;
     void set_runtime_sprite_override(unsigned slot, int map, int palette, int visible);
     void clear_runtime_sprite_overrides();
     void set_runtime_sprite_visual(unsigned slot, const std::string& mode);
@@ -201,11 +278,43 @@ private:
         std::uint8_t layer_bit,
         bool opaque);
 
+    void draw_runtime_tile_native(
+        std::vector<std::uint32_t>& pixels,
+        std::vector<std::uint8_t>& layer_mask,
+        const Machine& machine,
+        const Bus& bus,
+        int layer,
+        std::uint8_t layer_bit,
+        bool opaque);
+
+    void draw_runtime_tile_selected(
+        std::vector<std::uint32_t>& pixels,
+        std::vector<std::uint8_t>& layer_mask,
+        const Machine& machine,
+        const Runtime& runtime,
+        int layer,
+        std::uint8_t layer_bit,
+        bool opaque,
+        unsigned frame);
+
     void draw_runtime_text_layer(
         std::vector<std::uint32_t>& pixels,
         std::vector<std::uint8_t>& layer_mask,
         const Bus& bus,
         std::uint8_t layer_bit);
+
+    void draw_runtime_text_native(
+        std::vector<std::uint32_t>& pixels,
+        std::vector<std::uint8_t>& layer_mask,
+        const Bus& bus,
+        std::uint8_t layer_bit);
+
+    void draw_runtime_text_selected(
+        std::vector<std::uint32_t>& pixels,
+        std::vector<std::uint8_t>& layer_mask,
+        const Runtime& runtime,
+        std::uint8_t layer_bit,
+        unsigned frame);
 
     static void draw_scaled_chunk(
         std::vector<std::uint32_t>& pixels,
@@ -268,6 +377,38 @@ private:
         std::vector<std::uint16_t>* sprite_owner = nullptr,
         std::vector<std::uint16_t>* sprite_coverage = nullptr,
         bool ascending_order = false);
+
+    unsigned draw_runtime_sprites_native(
+        std::vector<std::uint32_t>& pixels,
+        std::vector<std::uint8_t>& layer_mask,
+        std::vector<std::uint8_t>& prom_addr,
+        std::vector<std::uint8_t>& prom_out,
+        std::vector<std::uint8_t>& prom_source,
+        const Machine& machine,
+        const Bus& bus,
+        bool use_prom_mixer,
+        std::uint8_t input_mask,
+        bool reference_priority = false,
+        std::vector<std::uint16_t>* sprite_owner = nullptr,
+        std::vector<std::uint16_t>* sprite_coverage = nullptr,
+        bool ascending_order = false,
+        bool allow_original_fallback = true);
+
+    unsigned draw_runtime_sprites_selected(
+        std::vector<std::uint32_t>& pixels,
+        std::vector<std::uint8_t>& layer_mask,
+        std::vector<std::uint8_t>& prom_addr,
+        std::vector<std::uint8_t>& prom_out,
+        std::vector<std::uint8_t>& prom_source,
+        const Machine& machine,
+        const Runtime& runtime,
+        bool use_prom_mixer,
+        std::uint8_t input_mask,
+        bool reference_priority = false,
+        std::vector<std::uint16_t>* sprite_owner = nullptr,
+        std::vector<std::uint16_t>* sprite_coverage = nullptr,
+        bool ascending_order = false,
+        unsigned frame = 0);
 
     static std::uint8_t road_prom_address(std::uint16_t ctl, std::uint8_t pen, bool road_b, std::uint8_t input_mask);
     static std::uint8_t sprite_prom_address(const SpriteInstance& sprite, std::uint16_t raw_attr, std::uint8_t input_mask);
@@ -397,6 +538,11 @@ private:
     std::vector<Options::SpriteSelector> sprite_hide_;
     struct RuntimeSpriteOverride { unsigned slot=0; int map=-1; int palette=-1; int visible=-1; };
     std::vector<RuntimeSpriteOverride> runtime_sprite_overrides_;
+    struct RuntimeSpriteMapOverride { std::uint16_t source=0; std::uint16_t target=0; int palette=-1; };
+    std::vector<RuntimeSpriteMapOverride> runtime_sprite_map_overrides_;
+    std::vector<SpriteLayerShadowOverride> runtime_sprite_asset_overrides_;
+    std::uint64_t runtime_sprite_asset_visible_pixels_ = 0;
+    std::uint64_t hud_speed_region_visible_pixels_ = 0;
     int runtime_visual_slot_ = -1;
     std::string runtime_visual_mode_;
     unsigned runtime_visual_frame_ = 0;
@@ -406,9 +552,61 @@ private:
     Options::LayerOffset layer_offset_bg0_{};
     Options::LayerOffset layer_offset_bg1_{};
     Options::LayerOffset layer_offset_text_{};
+    HudLayoutState hud_layout_{};
     Options::LayerOffset layer_offset_sprites_{};
     Options::LayerOffset layer_offset_road_{};
     bool sprite_tie_break_higher_ = false;
+    SpriteBackend sprite_backend_ = SpriteBackend::Native;
+    TextBackend text_backend_ = TextBackend::Native;
+    BgBackend bg_backend_ = BgBackend::Shadow;
+    std::uint64_t sprite_backend_compared_frames_ = 0;
+    std::uint64_t sprite_backend_mismatch_frames_ = 0;
+    unsigned sprite_backend_first_mismatch_frame_ = 0;
+    bool sprite_backend_have_first_mismatch_ = false;
+    SpriteLayerShadowCompare sprite_backend_last_compare_{};
+    SpriteLayerShadowCompare sprite_backend_first_compare_{};
+    std::uint64_t sprite_backend_original_frames_ = 0;
+    std::uint64_t sprite_backend_native_frames_ = 0;
+    std::uint64_t sprite_backend_native_only_frames_ = 0;
+    std::uint64_t sprite_backend_native_only_blocked_frames_ = 0;
+    std::uint64_t sprite_backend_original_fallbacks_ = 0;
+    std::uint64_t sprite_backend_original_us_ = 0;
+    std::uint64_t sprite_backend_native_us_ = 0;
+    std::uint64_t sprite_backend_shadow_compare_us_ = 0;
+    std::uint64_t sprite_backend_shadow_compare_frames_ = 0;
+    std::string sprite_backend_first_evidence_path_;
+    std::uint64_t text_backend_compared_frames_ = 0;
+    std::uint64_t text_backend_mismatch_frames_ = 0;
+    unsigned text_backend_first_mismatch_frame_ = 0;
+    bool text_backend_have_first_mismatch_ = false;
+    Tc0100TextNativeCompare text_backend_last_compare_{};
+    Tc0100TextNativeCompare text_backend_first_compare_{};
+    std::uint64_t text_backend_original_frames_ = 0;
+    std::uint64_t text_backend_native_frames_ = 0;
+    std::uint64_t text_backend_native_only_frames_ = 0;
+    std::uint64_t text_backend_native_only_blocked_frames_ = 0;
+    std::uint64_t text_backend_original_us_ = 0;
+    std::uint64_t text_backend_native_us_ = 0;
+    std::uint64_t text_backend_shadow_compare_us_ = 0;
+    std::uint64_t text_backend_shadow_compare_frames_ = 0;
+    std::uint64_t bg_backend_compared_layers_ = 0;
+    std::uint64_t bg_backend_mismatch_layers_ = 0;
+    std::uint64_t bg_backend_bg0_compared_ = 0;
+    std::uint64_t bg_backend_bg1_compared_ = 0;
+    std::uint64_t bg_backend_bg0_mismatch_ = 0;
+    std::uint64_t bg_backend_bg1_mismatch_ = 0;
+    unsigned bg_backend_first_mismatch_frame_ = 0;
+    int bg_backend_first_mismatch_layer_ = -1;
+    bool bg_backend_have_first_mismatch_ = false;
+    Tc0100BgNativeCompare bg_backend_last_compare_{};
+    Tc0100BgNativeCompare bg_backend_first_compare_{};
+    std::uint64_t bg_backend_original_layers_ = 0;
+    std::uint64_t bg_backend_native_layers_ = 0;
+    std::uint64_t bg_backend_native_only_layers_ = 0;
+    std::uint64_t bg_backend_native_only_blocked_ = 0;
+    std::uint64_t bg_backend_original_us_ = 0;
+    std::uint64_t bg_backend_native_us_ = 0;
+    std::uint64_t bg_backend_shadow_compare_us_ = 0;
     bool tc0100scn_trace_ = false;
     unsigned tc0100scn_trace_from_ = 0, tc0100scn_trace_to_ = 0;
     unsigned tc0100scn_scan_from_ = 0, tc0100scn_scan_to_ = 239, tc0100scn_scan_step_ = 8;

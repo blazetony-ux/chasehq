@@ -1,0 +1,25 @@
+OK cpu=A start=0x9BE8 count=24
+0x9BE8  bsr     $9bf0
+0x9BEA  bsr     $9c56
+0x9BEE  rts
+0x9BF0  btst    #$0, ($7,A5)
+0x9BF6  beq     $9c54
+0x9BFA  moveq   #$0, D7
+0x9BFC  lea     ($2080,A5), A6
+0x9C00  bsr     $9c08
+0x9C02  lea     ($2100,A5), A6
+0x9C06  moveq   #$3, D7
+0x9C08  btst    #$0, ($8,A6)
+0x9C0E  beq     $9c4c
+0x9C10  move.l  #$1000280, D0
+0x9C16  move.w  D0, D3
+0x9C18  move.w  ($4,A3), D1
+0x9C1C  sub.w   ($4,A6), D1
+0x9C20  cmp.w   D0, D1
+0x9C22  bcs     $9c2a
+0x9C24  neg.w   D0
+0x9C26  cmp.w   D0, D1
+0x9C28  bcs     $9c4c
+0x9C2A  move.l  ($0,A3), D2
+0x9C2E  sub.l   ($0,A6), D2
+0x9C32  swap    D0

@@ -1,0 +1,22 @@
+# name: Run 036 - One Script Ghidra Analysis and Evidence
+# category: native-reconstruction
+# purpose: Launch genuine Ghidra analysis, await completion, inspect independent static evidence and attach all logs/results to the single Research Script bundle.
+# version: 0.67.0.0-RC4.7
+# research-status: unreviewed-ghidra-static-hypotheses
+# safety: Fixed local headless scripts and SHA-verified ROM. No emulator writes or restarts.
+# cleanup: Preserve live game session; bundle Ghidra diagnostics even on failure.
+echo === RUN036 GHIDRA WORKFLOW BEGIN ===
+try
+  api release.assert-version
+  api ghidra.status
+  api ghidra.start
+  api ghidra.wait timeout=600000 poll=2000
+  api ghidra.results
+  api ghidra.import
+  api ghidra.evidence.attach include=all
+  api rea.reports
+  echo === RUN036 COMPLETE ===
+finally
+  api ghidra.evidence.attach include=diagnostics
+  echo === RUN036 LIVE EMULATOR UNCHANGED ===
+end

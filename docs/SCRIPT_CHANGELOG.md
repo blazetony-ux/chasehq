@@ -145,3 +145,8 @@ The v0.66.7.1 Windows regression passed the substantive Docs/Knowledge, SDL cont
 
 ## v0.66.9.0-RC2.3
 - Corrected Full Regression integration ordering so the RC2.2 sprite-order regression executes before the suite's terminal COMPLETE marker. No `.chqscript` grammar change.
+
+## 0.66.9.0-RC3.2
+- Added additive `# param NAME type=...` metadata with `string`, `int`, `bool` and `select` validation.
+- Added a parameterized current-state survey and RC3.2 parameter regression; legacy survey scripts remain bundled.
+- Full Regression includes the RC3.2 parameter regression using declared defaults.

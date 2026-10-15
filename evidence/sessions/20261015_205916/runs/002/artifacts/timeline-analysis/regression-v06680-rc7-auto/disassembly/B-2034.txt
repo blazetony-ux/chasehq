@@ -1,0 +1,25 @@
+OK cpu=B start=0x2034 count=24
+0x2034  jsr     $2092.l
+0x203A  move.w  #$1f, D6
+0x203E  move.b  (A4)+, D7
+0x2040  jsr     $2092.l
+0x2046  move.w  #$1f, D6
+0x204A  move.b  (A4)+, D7
+0x204C  jsr     $2092.l
+0x2052  move.w  #$1f, D6
+0x2056  move.b  (A4)+, D7
+0x2058  jsr     $2092.l
+0x205E  rts
+0x2060  move.w  #$1f, D6
+0x2064  move.b  (A4)+, D7
+0x2066  jsr     $2092.l
+0x206C  move.b  (A4)+, D7
+0x206E  move.w  #$1f, D6
+0x2072  jsr     $2092.l
+0x2078  move.l  $10080e.l, D6
+0x207E  andi.w  #$1f00, D6
+0x2082  beq     $2090
+0x2084  lsr.w   #8, D6
+0x2086  subq.w  #1, D6
+0x2088  move.b  (A4)+, D7
+0x208A  jsr     $2092.l

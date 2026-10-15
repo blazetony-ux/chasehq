@@ -1,0 +1,14 @@
+{
+  "schema": "chq-forensic-timeline-v1",
+  "build": "0.67.0.0-RC6.3.33",
+  "state": "complete",
+  "startFrame": 2352,
+  "endFrame": 2353,
+  "frameCount": 2,
+  "writeCount": 3572,
+  "storage": "per-frame-chqstate",
+  "seekable": true,
+  "forkLive": true,
+  "captures": {"cpuA":true,"cpuB":true,"mutableMemory":true,"palette":true,"ioc":true,"spritesRaw":true,"tilemapRaw":true,"roadRaw":true,"writeProvenance":true,"audioRuntime":false,"audioStub":true},
+  "notes": ["Sprite/object RAM, tilemap, palette and road state are checkpointed every frame and can be inspected through the normal live APIs after timeline.seek.","The current native runtime has only sound_stub; real sound CPU/chip/PCM capture is not yet available and is explicitly not claimed by this timeline version.","timeline fork keeps the selected checkpoint loaded and returns control to the live emulator for counterfactual experiments."]
+}

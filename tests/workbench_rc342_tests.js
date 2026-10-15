@@ -1,0 +1,16 @@
+const fs=require('fs'),path=require('path');
+const root=path.resolve(__dirname,'..'),read=p=>fs.readFileSync(path.join(root,p),'utf8'),ok=(v,m)=>{if(!v)throw Error(m)};
+const version=read('src/version.h'),handover=read('docs/CHATGPT_HANDOVER_PROMPT.md'),vr=read('Validate-Release.ps1'),rp=read('docs/RELEASE_PROCESS.md'),goPreflight=read('tools/chqdev/preflight.go'),full=read('research/scripts/regression/full-regression.chqscript'),reg=read('research/scripts/regression/regression-v06690-rc342.chqscript'),catalog=read('research/scripts/SCRIPT_CATALOG.md');
+const coverage=read('docs/REGRESSION_COVERAGE_MAP.md'),historicalCatalog=read('research/scripts/SCRIPT_CATALOG.md');
+const current='0.66.9.3-RC3';
+function handoverContract(text,ver){text=text.replace(/\r\n/g,'\n').replace(/\r/g,'\n');return text.includes('v'+ver)&&/^## +Authoritative continuation *$/im.test(text)&&/^## +Immediate next task *$/im.test(text)}
+ok(version.includes(current),'current release identity missing'); ok(handoverContract(handover,current),'current ChatGPT handover contract is stale');
+const good=`# Continue from v${current}\n## Authoritative continuation\nCurrent continuation.\n## Immediate next task\nRun next gate.\n`,missingContinuation=`# Continue from v${current}\n## Immediate next task\nRun next gate.\n`,missingNext=`# Continue from v${current}\n## Authoritative continuation\nCurrent continuation.\n`,stale=`# Continue from v0.0.0-stale\n## Authoritative continuation\nCurrent continuation.\n## Immediate next task\nRun next gate.\n`;
+const goodCrLf=good.replace(/\n/g,'\r\n'),goodCr=good.replace(/\n/g,'\r'); ok(handoverContract(good,current)&&handoverContract(goodCrLf,current)&&handoverContract(goodCr,current)&&!handoverContract(missingContinuation,current)&&!handoverContract(missingNext,current)&&!handoverContract(stale,current),'handover contract negative self-test failed');
+ok(vr.includes('function Test-ChatGptHandoverContract')&&vr.includes('ChatGPT handover contract self-test')&&vr.includes('Test-ChatGptHandoverContract $handover $native'),'release validator generic handover contract/self-test missing');
+ok(vr.includes('RC3.4.2 handover-contract fail-closed policy'),'release validator does not require independent RC3.4.2 handover guard');
+ok(vr.includes('$catalogExtras')&&vr.includes('$catalogDuplicates')&&vr.includes('$catalogPaths.Count -eq $scriptPaths.Count'),'release validator exact script-catalog row parity missing');
+ok(goPreflight.includes('selfTestHandover')&&goPreflight.includes('handover-self-test'),'authoritative chqdev handover negative-fixture guard missing');
+ok(!full.includes('regression-v06690-rc342.chqscript')&&historicalCatalog.includes('regression/regression-v06690-rc342.chqscript')&&historicalCatalog.includes('historical')&&coverage.includes('regression-v06690-rc342.chqscript')&&reg.includes('0.66.9.0-RC3.4.2'),'historical regression-v06690-rc342.chqscript must remain cataloged/mapped while duplicate Full Regression execution stays removed');
+ok(rp.includes('handover contract')&&rp.includes('Authoritative continuation')&&rp.includes('Immediate next task')&&rp.includes('Test-ChatGptHandoverContract'),'release-process handover contract rule missing');
+console.log('Workbench RC3.4.2 handover-contract / release-guard tests: PASS');

@@ -1,0 +1,17 @@
+﻿{
+    "schema":  "chq-startup-session-v1",
+    "build":  "0.67.0.0-RC6.3.33",
+    "updated":  "2026-10-15T20:59:29.8745598+01:00",
+    "state":  "ready",
+    "phase":  "READY",
+    "nativePort":  37600,
+    "emulatorPid":  20760,
+    "evidence":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\.\\evidence\\sessions\\20261015_205916",
+    "roms":  ".\\roms\\chasehq",
+    "checkpoint":  ".\\checkpoints\\stage1-gameplay-2064.chqstate",
+    "message":  "",
+    "exitCode":  null,
+    "diagnosticZip":  "",
+    "webPid":  21444,
+    "httpPort":  37680
+}

@@ -1,0 +1,17 @@
+const fs=require('fs'),crypto=require('crypto');
+const read=p=>fs.readFileSync(p,'utf8'),ok=(v,m)=>{if(!v)throw Error(m)};
+const v=read('src/version.h'),web=read('Start-ChaseHQWeb.ps1'),qrText=read('research/web/qr-v8.js'),full=read('research/scripts/regression/full-regression.chqscript'),reg=read('research/scripts/regression/regression-v06690-rc34.chqscript'),catalog=read('research/scripts/SCRIPT_CATALOG.md'),vr=read('Validate-Release.ps1'),qual=read('tools/chqdev/qualify.go');
+const coverage=read('docs/REGRESSION_COVERAGE_MAP.md'),historicalCatalog=read('research/scripts/SCRIPT_CATALOG.md');
+ok(v.includes('0.66.9.3-RC3'),'current release identity missing while testing RC3.4 mobile/history carry-forward');
+ok(web.includes('/api/v1/mobile/pairing')&&web.includes('Mobile pairing details are available only from the local Workbench.'),'local-only pairing descriptor missing');
+ok(web.includes('ck.HttpOnly=true')&&web.includes('history.replaceState')&&web.includes("location.replace('/console')")&&web.includes('Referrer-Policy'),'HttpOnly token capture/history-clean redirect missing');
+ok(web.includes('ChaseHQQr.svg')&&web.includes('Mobile Console Pairing'),'desktop QR pairing UI missing');
+ok(web.includes('Recent Script Runs')&&web.includes("'/api/v1/script/runs?")&&web.includes('historyCurrentOnly')&&web.includes('historyMore'),'mobile authoritative history/paging UI missing');
+ok(web.includes("'/api/v1/mobile/pairing'=[ordered]")&&web.includes("'/api/v1/mobile/pairing','/api/v1/game/action'"),'pairing endpoint missing from API discovery/schema');
+ok(!qrText.includes('fetch(')&&!qrText.includes('XMLHttpRequest')&&!qrText.includes('import('),'QR encoder must be self-contained/offline and make no network request');
+const qr=require('../research/web/qr-v8.js'),url='http://192.168.1.123:32100/console?token=0123456789abcdef0123456789abcdef',bits=qr.matrix(url).map(r=>r.map(x=>x?'1':'0').join('')).join(''),hash=crypto.createHash('sha256').update(bits).digest('hex');
+ok(hash==='c5f21e472498fb8e241e2c2e50e690d681bb6ac0c5f14140380f99c26d1d95e7','QR matrix regression changed');
+ok(!full.includes('regression-v06690-rc34.chqscript')&&historicalCatalog.includes('regression/regression-v06690-rc34.chqscript')&&historicalCatalog.includes('historical')&&coverage.includes('regression-v06690-rc34.chqscript')&&reg.includes('0.66.9.0-RC3.4'),'historical regression-v06690-rc34.chqscript must remain cataloged/mapped while duplicate Full Regression execution stays removed');
+ok(catalog.includes('regression/regression-v06690-rc34.chqscript'),'RC3.4 regression missing from catalog');
+ok(vr.includes('RC3.4 QR pairing/mobile history parity')&&qual.includes('promotable'),'RC3.4 feature/current chqdev release gate missing');
+console.log('Workbench RC3.4 mobile pairing/history parity tests: PASS');

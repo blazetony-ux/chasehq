@@ -1,0 +1,2194 @@
+﻿[
+    {
+        "cpu":  "A",
+        "pc":  "0x40e9e",
+        "changedWrites":  127,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x108afe"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x40ae",
+        "changedWrites":  104,
+        "changedFrames":  1,
+        "addressCount":  104,
+        "addresses":  "0x101618 0x10161a 0x10161c 0x10161e 0x101620 0x101622 0x101624 0x101626 0x101628 0x10162a 0x10162c 0x10162e 0x101630 0x101632 0x101634 0x101636 0x101638 0x10163a 0x10163c 0x10163e 0x101640 0x101642 0x101644 0x101646 0x101648 0x10164a 0x10164c 0x10164e 0x101650 0x101652 0x101654 0x101656 0x101658 0x10165a 0x10165c 0x10165e 0x101660 0x101662 0x101664 0x101666 0x101668 0x10166a 0x10166c 0x10166e 0x101670 0x101672 0x101674 0x101676 0x101678 0x10167a 0x10167c 0x10167e 0x101680 0x101682 0x101684 0x101686 0x101688 0x10168a 0x10168c 0x10168e 0x101690 0x101692 0x101694 0x101696 0x101698 0x10169a 0x10169c 0x10169e 0x1016a0 0x1016a2 0x1016a4 0x1016a6 0x1016a8 0x1016aa 0x1016ac 0x1016ae 0x1016b0 0x1016b2 0x1016b4 0x1016b6 0x1016b8 0x1016ba 0x1016bc 0x1016be 0x1016c0 0x1016c2 0x1016c4 0x1016c6 0x1016c8 0x1016ca 0x1016cc 0x1016ce 0x1016d0 0x1016d2 0x1016d4 0x1016d6 0x1016d8 0x1016da 0x1016dc 0x1016de 0x1016e0 0x1016e2 0x1016e4 0x1016e6"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x40b2",
+        "changedWrites":  104,
+        "changedFrames":  1,
+        "addressCount":  104,
+        "addresses":  "0x101618 0x10161a 0x10161c 0x10161e 0x101620 0x101622 0x101624 0x101626 0x101628 0x10162a 0x10162c 0x10162e 0x101630 0x101632 0x101634 0x101636 0x101638 0x10163a 0x10163c 0x10163e 0x101640 0x101642 0x101644 0x101646 0x101648 0x10164a 0x10164c 0x10164e 0x101650 0x101652 0x101654 0x101656 0x101658 0x10165a 0x10165c 0x10165e 0x101660 0x101662 0x101664 0x101666 0x101668 0x10166a 0x10166c 0x10166e 0x101670 0x101672 0x101674 0x101676 0x101678 0x10167a 0x10167c 0x10167e 0x101680 0x101682 0x101684 0x101686 0x101688 0x10168a 0x10168c 0x10168e 0x101690 0x101692 0x101694 0x101696 0x101698 0x10169a 0x10169c 0x10169e 0x1016a0 0x1016a2 0x1016a4 0x1016a6 0x1016a8 0x1016aa 0x1016ac 0x1016ae 0x1016b0 0x1016b2 0x1016b4 0x1016b6 0x1016b8 0x1016ba 0x1016bc 0x1016be 0x1016c0 0x1016c2 0x1016c4 0x1016c6 0x1016c8 0x1016ca 0x1016cc 0x1016ce 0x1016d0 0x1016d2 0x1016d4 0x1016d6 0x1016d8 0x1016da 0x1016dc 0x1016de 0x1016e0 0x1016e2 0x1016e4 0x1016e6"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x40b6",
+        "changedWrites":  104,
+        "changedFrames":  1,
+        "addressCount":  104,
+        "addresses":  "0x101548 0x10154a 0x10154c 0x10154e 0x101550 0x101552 0x101554 0x101556 0x101558 0x10155a 0x10155c 0x10155e 0x101560 0x101562 0x101564 0x101566 0x101568 0x10156a 0x10156c 0x10156e 0x101570 0x101572 0x101574 0x101576 0x101578 0x10157a 0x10157c 0x10157e 0x101580 0x101582 0x101584 0x101586 0x101588 0x10158a 0x10158c 0x10158e 0x101590 0x101592 0x101594 0x101596 0x101598 0x10159a 0x10159c 0x10159e 0x1015a0 0x1015a2 0x1015a4 0x1015a6 0x1015a8 0x1015aa 0x1015ac 0x1015ae 0x1015b0 0x1015b2 0x1015b4 0x1015b6 0x1015b8 0x1015ba 0x1015bc 0x1015be 0x1015c0 0x1015c2 0x1015c4 0x1015c6 0x1015c8 0x1015ca 0x1015cc 0x1015ce 0x1015d0 0x1015d2 0x1015d4 0x1015d6 0x1015d8 0x1015da 0x1015dc 0x1015de 0x1015e0 0x1015e2 0x1015e4 0x1015e6 0x1015e8 0x1015ea 0x1015ec 0x1015ee 0x1015f0 0x1015f2 0x1015f4 0x1015f6 0x1015f8 0x1015fa 0x1015fc 0x1015fe 0x101600 0x101602 0x101604 0x101606 0x101608 0x10160a 0x10160c 0x10160e 0x101610 0x101612 0x101614 0x101616"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x40ba",
+        "changedWrites":  104,
+        "changedFrames":  1,
+        "addressCount":  104,
+        "addresses":  "0x101548 0x10154a 0x10154c 0x10154e 0x101550 0x101552 0x101554 0x101556 0x101558 0x10155a 0x10155c 0x10155e 0x101560 0x101562 0x101564 0x101566 0x101568 0x10156a 0x10156c 0x10156e 0x101570 0x101572 0x101574 0x101576 0x101578 0x10157a 0x10157c 0x10157e 0x101580 0x101582 0x101584 0x101586 0x101588 0x10158a 0x10158c 0x10158e 0x101590 0x101592 0x101594 0x101596 0x101598 0x10159a 0x10159c 0x10159e 0x1015a0 0x1015a2 0x1015a4 0x1015a6 0x1015a8 0x1015aa 0x1015ac 0x1015ae 0x1015b0 0x1015b2 0x1015b4 0x1015b6 0x1015b8 0x1015ba 0x1015bc 0x1015be 0x1015c0 0x1015c2 0x1015c4 0x1015c6 0x1015c8 0x1015ca 0x1015cc 0x1015ce 0x1015d0 0x1015d2 0x1015d4 0x1015d6 0x1015d8 0x1015da 0x1015dc 0x1015de 0x1015e0 0x1015e2 0x1015e4 0x1015e6 0x1015e8 0x1015ea 0x1015ec 0x1015ee 0x1015f0 0x1015f2 0x1015f4 0x1015f6 0x1015f8 0x1015fa 0x1015fc 0x1015fe 0x101600 0x101602 0x101604 0x101606 0x101608 0x10160a 0x10160c 0x10160e 0x101610 0x101612 0x101614 0x101616"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x108a",
+        "changedWrites":  56,
+        "changedFrames":  3,
+        "addressCount":  20,
+        "addresses":  "0x102cc0 0x102cc2 0x102cf4 0x102cf6 0x102cf8 0x102cfa 0x102dcc 0x102dce 0x102de4 0x102de6 0x102dec 0x102dee 0x102df0 0x102df2 0x102df4 0x102df6 0x102df8 0x102dfa 0x102ef8 0x102efa"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x474",
+        "changedWrites":  54,
+        "changedFrames":  3,
+        "addressCount":  18,
+        "addresses":  "0x1003be 0x1003c0 0x1003c4 0x1003ca 0x1003cc 0x1003d0 0x1003d2 0x1003d4 0x1003d8 0x1003dc 0x1003e0 0x1003e4 0x1003e6 0x1003e8 0x1003ec 0x1003f0 0x1003f6 0x1003f8"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x1034",
+        "changedWrites":  48,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x100100"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x44300",
+        "changedWrites":  29,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x101840"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x4430c",
+        "changedWrites":  29,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x101842"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x1042",
+        "changedWrites":  18,
+        "changedFrames":  3,
+        "addressCount":  6,
+        "addresses":  "0x100000 0x100040 0x100050 0x100060 0x100070 0x1000f0"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x1096",
+        "changedWrites":  18,
+        "changedFrames":  3,
+        "addressCount":  6,
+        "addresses":  "0x100000 0x100040 0x100050 0x100060 0x100070 0x1000f0"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0xff6",
+        "changedWrites":  16,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0xa00002"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x4438e",
+        "changedWrites":  15,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x101840"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x4439a",
+        "changedWrites":  15,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x101842"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x644e",
+        "changedWrites":  4,
+        "changedFrames":  3,
+        "addressCount":  2,
+        "addresses":  "0x102cf8 0x102df0"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x6458",
+        "changedWrites":  4,
+        "changedFrames":  3,
+        "addressCount":  2,
+        "addresses":  "0x102cf4 0x102dec"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x8bc6",
+        "changedWrites":  4,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x100186"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x196e",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102cfc"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x198e",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102cfc"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x199a",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102cfc"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x1ada",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x100202"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x1ade",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x100201"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x1b40",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x100217"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x1b42",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x100216"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x1c34",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102df8"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x216a",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102df4"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x2172",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102df4"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x21a4",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102df0"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x26e",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x103eba"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x290",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x103eba"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x29c",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x10171c"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x2b28",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x103eb6"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x2b6c",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x103eb6"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x2b9c",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x103eb6"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x2ba0",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x103eb6"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x2c0",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x103eba"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x2c4",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x103eba"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x2ca",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x103eba"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x2ce",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x108000"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x2d2",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x108004"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x2d6",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x103eba"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x2d8",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x103eba"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x2da8",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x103eb2"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x2de0",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x103eb2"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x2e4",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x10171c"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x2ee",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x1001f4"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x2f4",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x103eba"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x2fa",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x1001f4"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x40038",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x101802"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x4003c",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x10803c"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x4864",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102dfc"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x4868",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102dfc"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x486a",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102dfc"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x486e",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102dfc"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x4872",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102dfc"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x4876",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102dfc"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x487a",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102dfc"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x4880",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102dfc"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x4a18",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102ffc"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x4a38",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102ffc"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x4a3c",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102ffc"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x4f22",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x10a092"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x4f52",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102df4"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x4f56",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102df4"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x5640",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x1002e6"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x6032",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102efc"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x6038",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102efc"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x6122",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102ef8"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x6136",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102ef8"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x6144",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102ef8"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x616c",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102ef8"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x6172",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102ef8"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x6174",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102ef8"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x7da8",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102df4"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x7dac",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102df4"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x7e10",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102df8"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x7e2e",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x1001f8"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x7e32",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102df8"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x7e36",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102df8"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x7e3a",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102df8"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x7e3e",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102df8"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x7e42",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102df8"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x7e46",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102df8"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x7e4a",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102df8"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x7e4e",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102df8"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x7e74",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102df4"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x7e76",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102df4"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x812c",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102df0"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x8216",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102df4"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x8236",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102df4"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x823a",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102df4"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x823e",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102df4"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x8250",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102df4"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x8262",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102df4"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x8266",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102df4"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x826a",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102df4"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x826e",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102df4"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x8272",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102df4"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x8276",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102df4"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x827a",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102df4"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x827e",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102df4"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x8282",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102df4"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x8286",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102df4"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x828a",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102df4"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x828e",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102df4"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x8298",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102df4"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x829c",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102df4"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x85d8",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102df0"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x871a",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102df0"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x871e",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102df0"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x8722",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102df0"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x8726",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102df0"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x872a",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102df0"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x872e",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102df0"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x874a",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102df0"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x8786",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102df0"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x879e",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x100186"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x87e4",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102df0"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x8882",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102dec"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x8924",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102dec"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x9504",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102df4"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x96e0",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102df0"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x9be2",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102df4"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x9be8",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102df4"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x9bea",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102df4"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x9d0a",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x102df0"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0xaf0",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x100610"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0xc64",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x103eb6"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x25aa",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x1007f4"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x2bd8",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x1007f0"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x339e",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x1007f4"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x33a2",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x1007f4"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x33a6",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x1007f4"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x33aa",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x1007f4"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x33c2",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x1007f0"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x33e0",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x1007f0"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x3c70",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x1007f4"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x3c74",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x1007f4"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x41b8",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x1007f4"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x41c2",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x101a5c"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x422a",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x101a5e"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x447c",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x1007f0"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x478",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x100808"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x47e",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x1080a6"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x49b8",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x1007f4"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x49bc",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x1007f4"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x49c0",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x1007f4"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x49c4",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x1007f4"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x4b86",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x1007ec"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x4ba",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x801ffe"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x4bfe",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x1007f0"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x4c02",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x1007f0"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x4c06",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x1007f0"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x4c0a",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x1007f0"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x4c4",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x101a5a"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x4ca",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x100804"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x4e0",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x100804"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x4e22",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x1007ec"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x4e6",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x10080a"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x7de",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x1007f8"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x7e4",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x1007f8"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x7f4",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x1007f8"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x7fa",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x1007f8"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x800",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x1007f8"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x806",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x1007f8"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x80c",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x1007f8"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x88e",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x101a58"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x894",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x101a5a"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0xada",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x1007f4"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0xade",
+        "changedWrites":  3,
+        "changedFrames":  3,
+        "addressCount":  1,
+        "addresses":  "0x1007f4"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x4015c",
+        "changedWrites":  2,
+        "changedFrames":  1,
+        "addressCount":  2,
+        "addresses":  "0x103eb2 0x103eb4"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x5864",
+        "changedWrites":  2,
+        "changedFrames":  1,
+        "addressCount":  2,
+        "addresses":  "0x102df8 0x102dfa"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x8be2",
+        "changedWrites":  2,
+        "changedFrames":  1,
+        "addressCount":  2,
+        "addresses":  "0x100188 0x100189"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x268",
+        "changedWrites":  2,
+        "changedFrames":  2,
+        "addressCount":  1,
+        "addresses":  "0x108012"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x4a2a",
+        "changedWrites":  2,
+        "changedFrames":  2,
+        "addressCount":  1,
+        "addresses":  "0x102ffc"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x4c2c",
+        "changedWrites":  2,
+        "changedFrames":  2,
+        "addressCount":  1,
+        "addresses":  "0x10a092"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x9c00",
+        "changedWrites":  2,
+        "changedFrames":  2,
+        "addressCount":  1,
+        "addresses":  "0x102df0"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x1db4",
+        "changedWrites":  2,
+        "changedFrames":  2,
+        "addressCount":  1,
+        "addresses":  "0x1007f4"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x1dde",
+        "changedWrites":  2,
+        "changedFrames":  2,
+        "addressCount":  1,
+        "addresses":  "0x1007f0"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x1dea",
+        "changedWrites":  2,
+        "changedFrames":  2,
+        "addressCount":  1,
+        "addresses":  "0x1007f0"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x1dee",
+        "changedWrites":  2,
+        "changedFrames":  2,
+        "addressCount":  1,
+        "addresses":  "0x1007f0"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x1df2",
+        "changedWrites":  2,
+        "changedFrames":  2,
+        "addressCount":  1,
+        "addresses":  "0x1007f0"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x1e1e",
+        "changedWrites":  2,
+        "changedFrames":  2,
+        "addressCount":  1,
+        "addresses":  "0x1007ec"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x1e4e",
+        "changedWrites":  2,
+        "changedFrames":  2,
+        "addressCount":  1,
+        "addresses":  "0x1007e8"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x1e76",
+        "changedWrites":  2,
+        "changedFrames":  2,
+        "addressCount":  1,
+        "addresses":  "0x1007ec"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x1e9c",
+        "changedWrites":  2,
+        "changedFrames":  2,
+        "addressCount":  1,
+        "addresses":  "0x1007e8"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x1ea2",
+        "changedWrites":  2,
+        "changedFrames":  2,
+        "addressCount":  1,
+        "addresses":  "0x1007e8"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x1ea8",
+        "changedWrites":  2,
+        "changedFrames":  2,
+        "addressCount":  1,
+        "addresses":  "0x1007e8"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x1eae",
+        "changedWrites":  2,
+        "changedFrames":  2,
+        "addressCount":  1,
+        "addresses":  "0x1007e8"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x1eb4",
+        "changedWrites":  2,
+        "changedFrames":  2,
+        "addressCount":  1,
+        "addresses":  "0x1007e8"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x1eba",
+        "changedWrites":  2,
+        "changedFrames":  2,
+        "addressCount":  1,
+        "addresses":  "0x1007e8"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x1ec0",
+        "changedWrites":  2,
+        "changedFrames":  2,
+        "addressCount":  1,
+        "addresses":  "0x1007e8"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x1ec6",
+        "changedWrites":  2,
+        "changedFrames":  2,
+        "addressCount":  1,
+        "addresses":  "0x1007e8"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x1ecc",
+        "changedWrites":  2,
+        "changedFrames":  2,
+        "addressCount":  1,
+        "addresses":  "0x1007e8"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x1ed2",
+        "changedWrites":  2,
+        "changedFrames":  2,
+        "addressCount":  1,
+        "addresses":  "0x1007e8"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x1ed8",
+        "changedWrites":  2,
+        "changedFrames":  2,
+        "addressCount":  1,
+        "addresses":  "0x1007e8"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x1ede",
+        "changedWrites":  2,
+        "changedFrames":  2,
+        "addressCount":  1,
+        "addresses":  "0x1007e8"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x1ee4",
+        "changedWrites":  2,
+        "changedFrames":  2,
+        "addressCount":  1,
+        "addresses":  "0x1007e8"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x1eea",
+        "changedWrites":  2,
+        "changedFrames":  2,
+        "addressCount":  1,
+        "addresses":  "0x1007e8"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x1ef0",
+        "changedWrites":  2,
+        "changedFrames":  2,
+        "addressCount":  1,
+        "addresses":  "0x1007e8"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x1ef6",
+        "changedWrites":  2,
+        "changedFrames":  2,
+        "addressCount":  1,
+        "addresses":  "0x1007e8"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x1fbe",
+        "changedWrites":  2,
+        "changedFrames":  2,
+        "addressCount":  1,
+        "addresses":  "0x1007ec"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x1fc2",
+        "changedWrites":  2,
+        "changedFrames":  2,
+        "addressCount":  1,
+        "addresses":  "0x1007ec"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x201c",
+        "changedWrites":  2,
+        "changedFrames":  2,
+        "addressCount":  1,
+        "addresses":  "0x1007e8"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x2028",
+        "changedWrites":  2,
+        "changedFrames":  2,
+        "addressCount":  1,
+        "addresses":  "0x1007e8"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x2034",
+        "changedWrites":  2,
+        "changedFrames":  2,
+        "addressCount":  1,
+        "addresses":  "0x1007e8"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x2040",
+        "changedWrites":  2,
+        "changedFrames":  2,
+        "addressCount":  1,
+        "addresses":  "0x1007e8"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x204c",
+        "changedWrites":  2,
+        "changedFrames":  2,
+        "addressCount":  1,
+        "addresses":  "0x1007e8"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x2058",
+        "changedWrites":  2,
+        "changedFrames":  2,
+        "addressCount":  1,
+        "addresses":  "0x1007e8"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x102e",
+        "changedWrites":  1,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x103eb2"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x288",
+        "changedWrites":  1,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x103eba"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x28c",
+        "changedWrites":  1,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x103eba"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x40044",
+        "changedWrites":  1,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x10180a"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x4006a",
+        "changedWrites":  1,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x101814"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x4006e",
+        "changedWrites":  1,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x103eb6"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x40076",
+        "changedWrites":  1,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x108012"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x400be",
+        "changedWrites":  1,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x103eb6"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x400c2",
+        "changedWrites":  1,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x108012"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x405bc",
+        "changedWrites":  1,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x103eb2"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x405c0",
+        "changedWrites":  1,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x103eb2"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x405c4",
+        "changedWrites":  1,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x103eb2"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x405c8",
+        "changedWrites":  1,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x103eb2"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x405cc",
+        "changedWrites":  1,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x103eb2"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x405d0",
+        "changedWrites":  1,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x103eb2"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x405d4",
+        "changedWrites":  1,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x103eb2"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x405d8",
+        "changedWrites":  1,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x103eb2"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x405dc",
+        "changedWrites":  1,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x103eb2"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x405e0",
+        "changedWrites":  1,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x103eb2"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x405e4",
+        "changedWrites":  1,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x103eb2"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x406e8",
+        "changedWrites":  1,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x103eae"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x4087e",
+        "changedWrites":  1,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x103eaa"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x408ae",
+        "changedWrites":  1,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x103eaa"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x40dc6",
+        "changedWrites":  1,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x101840"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x40e12",
+        "changedWrites":  1,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x101842"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x40e34",
+        "changedWrites":  1,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x101842"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x40e38",
+        "changedWrites":  1,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x101840"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x40f60",
+        "changedWrites":  1,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x108afe"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x41086",
+        "changedWrites":  1,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x101814"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x42b98",
+        "changedWrites":  1,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x103eae"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x42b9c",
+        "changedWrites":  1,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x103eae"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x42baa",
+        "changedWrites":  1,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x103eaa"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x46de0",
+        "changedWrites":  1,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x101840"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x46dec",
+        "changedWrites":  1,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x101842"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x470a4",
+        "changedWrites":  1,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x101840"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x470b0",
+        "changedWrites":  1,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x101842"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x499e",
+        "changedWrites":  1,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0xa00000"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x4efa",
+        "changedWrites":  1,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x10a0a8"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x5880",
+        "changedWrites":  1,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x102df4"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0x5892",
+        "changedWrites":  1,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x102df4"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0xaf8",
+        "changedWrites":  1,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x100610"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0xeda",
+        "changedWrites":  1,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x103eb6"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0xf14",
+        "changedWrites":  1,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x103eb6"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0xf18",
+        "changedWrites":  1,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x103eb6"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0xf1c",
+        "changedWrites":  1,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x103eb6"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0xf68",
+        "changedWrites":  1,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x103eb6"
+    },
+    {
+        "cpu":  "A",
+        "pc":  "0xf7c",
+        "changedWrites":  1,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x103eb6"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x3ca0",
+        "changedWrites":  1,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x1007f0"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x3cbc",
+        "changedWrites":  1,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x1007f0"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x3cc0",
+        "changedWrites":  1,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x1007f0"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x3cc4",
+        "changedWrites":  1,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x1007f0"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x3cc8",
+        "changedWrites":  1,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x1007f0"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x3ccc",
+        "changedWrites":  1,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x1007f0"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x3d14",
+        "changedWrites":  1,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x1007ec"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x3ed2",
+        "changedWrites":  1,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x1007ec"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x4014",
+        "changedWrites":  1,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x1007ec"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x4b6c",
+        "changedWrites":  1,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x1007e8"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x4de",
+        "changedWrites":  1,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x1003fc"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x4f70",
+        "changedWrites":  1,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x1007f4"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x4f74",
+        "changedWrites":  1,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x1007f4"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x4f78",
+        "changedWrites":  1,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x1007f4"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0x8a6",
+        "changedWrites":  1,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x1007f8"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0xb1a",
+        "changedWrites":  1,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x1007f0"
+    },
+    {
+        "cpu":  "B",
+        "pc":  "0xb5e",
+        "changedWrites":  1,
+        "changedFrames":  1,
+        "addressCount":  1,
+        "addresses":  "0x1007ec"
+    }
+]

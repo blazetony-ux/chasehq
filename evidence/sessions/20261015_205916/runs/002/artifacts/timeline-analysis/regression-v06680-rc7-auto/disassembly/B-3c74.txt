@@ -1,0 +1,25 @@
+OK cpu=B start=0x3C74 count=24
+0x3C74  bsr     $4120
+0x3C78  rts
+0x3C7A  tst.w   $102ce0.l
+0x3C80  bne     $3c8e
+0x3C82  btst    #$0, $10080b.l
+0x3C8A  bne     $3cda
+0x3C8E  lea     $101a62.l, A1
+0x3C94  lea     $1021c9.l, A0
+0x3C9A  lea     $10221c.l, A2
+0x3CA0  bsr     $4b5a
+0x3CA4  tst.w   (A2)
+0x3CA6  beq     $3cbc
+0x3CAA  tst.w   $102ba6.l
+0x3CB0  bne     $3cbc
+0x3CB2  tst.w   $102ce2.l
+0x3CB8  bne     $3cbc
+0x3CBA  bra     $3ccc
+0x3CBC  bsr     $3eb2
+0x3CC0  bsr     $3fa6
+0x3CC4  bsr     $40c4
+0x3CC8  bsr     $3d14
+0x3CCC  bsr     $3d12
+0x3CD0  tst.w   $102ce0.l
+0x3CD6  bne     $3cda

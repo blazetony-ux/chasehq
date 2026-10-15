@@ -1,0 +1,12 @@
+﻿{
+    "schema":  "chq-placed-sprite-layer-shadow-v1",
+    "build":  "0.67.0.0-RC6.3.33",
+    "frame":  9548,
+    "scope":  "placed-source",
+    "pixelsCompared":  76800,
+    "pixelMismatchCount":  0,
+    "ownerMismatchCount":  0,
+    "exact":  true,
+    "raw":  "OK scope=placed-source pixels=76800 pixel_mismatches=0 owner_mismatches=0 exact=1",
+    "artifact":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\v06693-shadow-9548.json"
+}

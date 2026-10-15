@@ -1,4 +1,4 @@
-
+﻿
 ## RC2.7 public contracts
 
 The full release label comes from `src/version.h`. These actions share native control paths and are exposed in the Script Console allow-list and authoritative schema. Layer offsets are presentation overrides, default zero, bounded -4096..4096, and do not change hardware RAM. `tc0100.mode` is an old/corrected diagnostic, not shadow verification.
@@ -168,3 +168,11 @@ No API action names changed. The default value of sprite ordering changed: `spri
 - Preserve order-control names/traversal; correct first-nontransparent sprite occupancy independently of layer masks. Add explicit ownership semantics to order inspection.
 - Snapshots export sprite-stage owner/coverage CSV and corrected individual visible-raster coordinates.
 - Add `frame.snapshot.assert-overlap` with offline PowerShell parity and focused regression. No language grammar or release-version change.
+
+## 0.66.9.0-RC3.2
+- Added `script.run file=... key=value` for declared parameter values on compatible library scripts.
+- Workbench script execution accepts a parameter map and stores selected values plus resolved commands in run evidence.
+- Run evidence now retains legacy-trace output and checkpoint save/load provenance.
+- Added opt-in token-authenticated LAN front access and `/console`; native/private backend binding remains loopback-only.
+
+- RC3.2 LAN launch correction: `Start-ChaseHQ.ps1` now enables authenticated LAN/mobile access by default, auto-resolves the LAN IPv4 address, performs one-time URL-ACL/firewall prerequisite setup, prints usable URLs, and accepts `-LocalOnly` as the explicit opt-out.

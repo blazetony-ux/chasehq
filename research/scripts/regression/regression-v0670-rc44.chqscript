@@ -1,0 +1,15 @@
+# regression-version: 0.67.0.0-RC4.4
+# name: RC4.4 Projection Shadow and Evidence Adapter Safeguards
+# category: regression
+# purpose: Smoke-test release identity and canonical Workbench checkpoint restoration; projection-shadow arithmetic/original instruction comparison and REA crosswalk are separately tested in native CTest/Go tests.
+# checkpoint: stage1-gameplay-2064.chqstate
+# safety: No gameplay RAM modifications.
+echo === RC4.4 PROJECTION SHADOW SMOKE BEGIN ===
+try
+  api release.assert-version
+  api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+  api status
+finally
+  api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+end
+echo === RC4.4 PROJECTION SHADOW SMOKE COMPLETE ===

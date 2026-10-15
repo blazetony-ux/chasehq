@@ -1,0 +1,20 @@
+# regression-version: 0.67.0.0-RC4.5
+# name: RC4.5 REA Research API and checkpoint-safe smoke
+# category: regression
+# purpose: Smoke-test release identity, available REA script actions, zero-dependency report enumeration and safe checkpoint restore without requiring operator-supplied raw ROM mapping.
+# checkpoint: stage1-gameplay-2064.chqstate
+# safety: Read-only REA inspection; no gameplay RAM modifications; try/finally cleanup.
+echo === RC45 REA RESEARCH API SMOKE BEGIN ===
+try
+  api release.assert-version
+  api schema action=rea.reports
+  api schema action=rea.crosswalk
+  api schema action=rea.functions
+  api schema action=rea.function.inspect
+  api rea.reports
+  api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+  api status
+finally
+  api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+end
+echo === RC45 REA RESEARCH API SMOKE COMPLETE ===

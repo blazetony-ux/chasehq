@@ -1,0 +1,12 @@
+const fs=require('fs'),path=require('path');
+const root=path.resolve(__dirname,'..'),read=p=>fs.readFileSync(path.join(root,p),'utf8'),ok=(v,m)=>{if(!v)throw Error(m)};
+const current='0.66.9.3-RC3',version=read('src/version.h'),runner=read('tools/chqdev/script_runner.go'),regctl=read('tools/chqdev/regression.go'),qual=read('tools/chqdev/qualify.go'),doc=read('docs/CHQDEV.md'),rp=read('docs/RELEASE_PROCESS.md'),full=read('research/scripts/regression/full-regression.chqscript'),reg=read('research/scripts/regression/regression-v06690-rc347.chqscript'),catalog=read('research/scripts/SCRIPT_CATALOG.md');
+const coverage=read('docs/REGRESSION_COVERAGE_MAP.md'),historicalCatalog=read('research/scripts/SCRIPT_CATALOG.md');
+ok(version.includes(current)&&version.includes('chqdev v0.5.5'),'current build no longer carries chqdev v0.4 runner family');
+ok(runner.includes('expandScriptIncludes')&&runner.includes('compileScriptLines')&&runner.includes('try requires finally')&&runner.includes('predicate')&&runner.includes('finalize'),'RC3.4.7 Go Script Console runner control-flow/include/finalization regressed');
+ok(regctl.includes('runScriptWithGoRunner')&&!regctl.includes('"script": string(src)'),'regression orchestration regressed to whole-source server posting');
+ok(qual.includes('mode == "fresh"')&&qual.includes('cleanFreshState')&&qual.includes('runtimeLifecycle(root, cfg, "restart",')&&qual.includes('regressionCommand(root, cfg, "full"')&&qual.includes('promotable'),'single-command fresh qualification state machine regressed');
+ok(/qualify --fresh/i.test(doc)&&/canonical fresh/i.test(doc)&&/go-side script console/i.test(doc),'CHQDEV fresh/Go-runner documentation missing');
+ok(/qualify --fresh/i.test(rp)&&/reduced server/i.test(rp),'release-process fresh/runner contract missing');
+ok(!full.includes('regression-v06690-rc347.chqscript')&&historicalCatalog.includes('regression/regression-v06690-rc347.chqscript')&&historicalCatalog.includes('historical')&&coverage.includes('regression-v06690-rc347.chqscript')&&reg.includes('0.66.9.0-RC3.4.7'),'historical regression-v06690-rc347.chqscript must remain cataloged/mapped while duplicate Full Regression execution stays removed');
+console.log('Workbench RC3.4.7 chqdev v0.4 fresh qualification / Go regression runner carry-forward tests: PASS');

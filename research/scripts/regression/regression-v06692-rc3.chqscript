@@ -1,0 +1,24 @@
+# name: v0.66.9.2-RC3 Track Semantics and Evidence Isolation Regression
+# category: regression
+# regression-version: 0.66.9.2-RC3
+# regression-scope: historical
+# purpose: Prove current RC3 runtime identity, explicit checkpoint contexts, Track View semantic surface, legacytrace reset safety and final player-gameplay restoration.
+# checkpoint: stage1-gameplay-2064.chqstate
+
+echo === ChaseHQ v0.66.9.2-RC3 Track Semantics Regression: BEGIN ===
+api release.assert-version
+
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api gameplay.registry
+api track.state
+
+legacytrace reset
+
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api gameplay.registry
+api track.state
+api track.records before=1 after=1
+
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api status
+echo === ChaseHQ v0.66.9.2-RC3 Track Semantics Regression: COMPLETE ===

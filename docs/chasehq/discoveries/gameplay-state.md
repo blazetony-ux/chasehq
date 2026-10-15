@@ -1,44 +1,41 @@
-# Discovery record — gameplay state
+# Discovery record - gameplay state
 
-**Status:** mixed CONFIRMED / OPEN
+**Status:** core Stage-1 state substantially CONFIRMED; remaining producer/semantic questions listed below.
 
-## Outcome
-Evidence-backed gameplay values currently include:
+| State | Source / encoding | Confidence |
+|---|---|---|
+| Display speed | CPU-A `0x100400`, packed BCD | CONFIRMED |
+| Internal/physics speed | CPU-A `0x10041C`, raw fixed/internal value | CONFIRMED |
+| Authoritative score | CPU-A `0x100488`, packed-BCD-like score state | CONFIRMED |
+| Immediate display score | CPU-A `0x100408`; tested `0x1234 -> 0x1230` from authoritative source | CONFIRMED |
+| Distance | CPU-A `0x102FC0`, 24.8 fixed point | CONFIRMED |
+| Player lateral | CPU-A `0x10A044` | CONFIRMED |
+| Road-side state | CPU-A `0x10A048`: `01` ON, `03` RIGHT, `05` LEFT, `07` EXTREME | CONFIRMED |
+| Processed turbo input | `0x100303 bit0` | CONFIRMED |
+| Turbo active | `0x10040F bit1` | CONFIRMED |
+| Turbos remaining | `0x1003A2` | CONFIRMED |
+| Turbo timer | `0x100414` | CONFIRMED |
+| Authentic Brake | IOC **P2:20** | CONFIRMED |
+| Processed Brake/upstream state | CPU-A `0x100302`; forced `0x0014` reproduces braking physics + lamp path | CONFIRMED |
+| Brake lamp | palette banks64/65 pen13 `0x000E -> 0x18DE` | CONFIRMED |
+| Raw steering | signed 12-bit IOC; centre `0000`, right `0060`, left `0FA0` | CONFIRMED |
+| Track grade | current record `+1`; positive INCLINE/uphill, negative DECLINE/downhill, zero level | CONFIRMED |
+| Race timer | CPU-A `0x100200/0x100201`; authentic `01 -> 00` at PC `0x1AE0` leads TIME UP then CONTINUE | CONFIRMED |
+| Collision interaction type | CPU-A `0x10042E`; target damage observed `000A`, off-road scenery/object collision `0001` | CONFIRMED at observed classes |
+| Collision object reference | CPU-A `0x100420`; Run020 type0001 wrote `0x0010A4C0` | HIGH CONFIDENCE semantic pointer/reference |
+| Target remaining hits | CPU-A `0x1002AE`; PC `0xA112` decrement, `FFFF` terminal sentinel | CONFIRMED |
+| Target object record | CPU-A `0x10A080-0x10A0BF`, lateral `+4` at `0x10A084` | CONFIRMED |
 
-| State | Source | Encoding | Confidence |
-|---|---|---|---|
-| Display speed | CPU-A `0x100400` | 16-bit packed BCD | CONFIRMED |
-| Internal speed / physics | CPU-A `0x10041C` | 16-bit raw | CONFIRMED |
-| Score | CPU-A `0x100408` | 32-bit packed BCD payload | CONFIRMED |
-| Distance | CPU-A `0x102FC0` | 32-bit 24.8 fixed point, divide by 256 | CONFIRMED |
-| Road classification | CPU-A `0x10A048` | flags; bit `0x04` = OFF_ROAD, `(flags & 0x06)==0x02` = EDGE, otherwise INTERIOR | CONFIRMED |
-| Road boundaries | CPU-A `0x10A05C` | two 16-bit wrap-safe lateral bounds | CONFIRMED |
-| Player lateral coordinate | CPU-A `0x10A044` | 16-bit wrap-safe coordinate | CONFIRMED |
-| Processed turbo input | CPU-A `0x100303` bit 0 | boolean bit | CONFIRMED |
-| Turbo active | CPU-A `0x10040F` bit 1 | boolean bit | CONFIRMED |
-| Turbos remaining | CPU-A `0x1003A2` | 16-bit count | CONFIRMED |
-| Turbo active-duration counter | CPU-A `0x100414` | 16-bit frame counter | CONFIRMED |
-| Turbo expiry threshold | `0x00D2` in the tested canonical Stage-1 configuration | 210 emulated frames | CONFIRMED for tested configuration |
-| Brake-lamp visual state | processed brake `0x100303` -> palette banks 64/65 pen 13 | `0x18DE` braking / `0x000E` released | CONFIRMED |
-| Raw steering input | CPU-A 0x10014C | IOC signed 12-bit / byte-swapped RAM representation | CONFIRMED |
-| Processed steering | CPU-A 0x100300 | signed 16-bit; centre 0, left negative, right positive | CONFIRMED |
-| Target remaining-hit / damage counter | CPU-A `0x1002AE` | 16-bit decrement; `FFFF` terminal sentinel | CONFIRMED |
+## Exact road-side classifier on canonical straight geometry
 
-## Current IOC P3 control map
-- `0x01` — TURBO — CONFIRMED. The processed bit appears at `0x100303` bit 0; code at `0x00846E` tests it and `0x008486` sets bit 1 of `0x10040F`.
-- `0x02` — triggers TILT — CONFIRMED. Do not over-name the physical cabinet signal beyond the observed game behaviour.
-- `0x10` — BRAKE — HIGH CONFIDENCE from controlled accelerator+brake suppression.
-- `0x20` — ACCELERATOR — CONFIRMED.
-- `0x04`, `0x08`, `0x40`, `0x80` — no steering effect observed in the tested Stage-1 conditions; not proven globally unused.
+With `roadLeft=0x7470`, `roadRight=0x86F0`, the decoded classifier is: `x<=0x7090` EXTREME, `0x7091..0x7190` LEFT, `0x7191..0x89D0` ON/INTERIOR, `0x89D1..0x8AD0` RIGHT, `x>=0x8AD1` EXTREME. This explains why merely crossing the visible road edge does not immediately set off-road state.
 
-## Turbo causal validation
-From `stage1-gameplay-2064.chqstate`, turbo activation changed `0x1003A2` from 3 to 2, set `0x10040F` to `0x02`, and started `0x100414`. The counter then incremented exactly one tick per emulated frame. At `0x00D2` the active state expired. A second activation changed the remaining count from 2 to 1 and restarted the counter. This establishes the count/active/timer semantics directly rather than inferring them from HUD graphics.
+## Causal notes
 
-## Important distinction
-A displayed/HUD value is not automatically the authoritative gameplay value. Display speed and internal speed are deliberately documented separately. The Workbench Gameplay Registry exposes source/confidence so visual proxies do not silently become authoritative state.
+Run018 proved grade sign by sustained controlled patches: negative grade increased speed/progress relative to neutral, positive grade reduced it. Run018 also proved `0x100488 -> 0x100408 -> text HUD`; forcing `0x100408` alone was sufficient for the exact HUD result. Run020 proved the timer is authentic gameplay state even though direct same-frame freezes do not immediately redraw the text HUD; its display path is tick/state driven.
 
-## Next tests
-Steering, target health/damage, target defeat handoff, brake-lamp mechanism and Stage-1 branch/selector mechanics are now causally established. Next gameplay/road priority is turning the proven topology tables into a directed Stage-1 course graph/minimap; palette/compositor parity remains separate graphics work.
+The first mapped target physical response after initial contact occurs at frame5664: PC `0xA1BE` changes lateral state and PC `0xA200` applies exact 0.75 speed retention. On the deterministic right off-road path, interaction type `0001` first triggers the same mapped response at frame2125.
 
-## v0.66.9.0-RC2 speed-control clarification
-The Workbench Game Lab now displays both fields together. `0x100400` is the 16-bit packed-BCD HUD/display speed; `0x10041C` is the 16-bit raw internal/physics speed. Setting/freezing `0x10041C` is a physics experiment and is not expected to make the HUD show the same decimal number. The actual top-speed clamp/target remains unresolved.
+## Remaining gameplay-state work
+
+The main open states are exact collision-object semantic typing, deeper timer/text producer state, top-speed clamp/target logic and broader later-stage state. The police-beacon primary lifecycle is behaviour-understood; use read provenance/structured events rather than screenshot inference for remaining work.

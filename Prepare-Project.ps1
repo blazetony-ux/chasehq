@@ -1,4 +1,4 @@
-[CmdletBinding()]
+﻿[CmdletBinding()]
 param([switch]$Check,[string]$Roms,[string]$Sdl)
 $ErrorActionPreference='Stop'
 Set-StrictMode -Version 2.0
@@ -22,6 +22,8 @@ function Assert-Roms([string]$Path,[string]$Label){
 }
 Log '  - Unblocking PowerShell scripts...'
 Get-ChildItem -LiteralPath $root -Recurse -Filter *.ps1 -File -ErrorAction SilentlyContinue|Unblock-File
+Log '  - Authoritative source/release preflight...'
+& (Join-Path $root 'Validate-Release.ps1') -SkipBuild
 $config=Join-Path $root 'build-local.json';$cfg=$null
 if(Test-Path $config){$cfg=Get-Content $config -Raw|ConvertFrom-Json}
 if(-not $Roms){$Roms=$env:CHASEHQ_ROM_SOURCE};if(-not $Roms -and $cfg){$Roms=[string]$cfg.romSource}
@@ -38,6 +40,4 @@ if($Sdl){
 }else{Log 'SDL source: not configured (using existing .\SDL tree)';if(-not(Test-Path (Join-Path $root 'SDL\CMakeLists.txt'))){throw 'Existing .\SDL tree is missing CMakeLists.txt and no SDL source is configured.'}}
 Log '  - Preparation CMake check...'
 $find=(Join-Path $root 'Find-CMake.bat');cmd.exe /d /v:on /s /c "call `"$find`" ^&^& `"!CMAKE_EXE!`" --version";if($LASTEXITCODE -ne 0){exit $LASTEXITCODE}
-& (Join-Path $root 'Validate-Workbench.ps1')
-if($LASTEXITCODE -ne 0){exit $LASTEXITCODE}
 if($Check){Log '  - CHECK ONLY - no files copied.';Log '  - Project checks complete.'}else{Log '  - Dependency staging complete.';Log '  - Project ready.'}

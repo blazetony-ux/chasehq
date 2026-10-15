@@ -1,0 +1,30 @@
+# name: RC3.3 Definitive Release Qualification Regression
+# category: regression
+# regression-version: 0.66.9.0-RC3.3
+# regression-scope: historical
+# purpose: Prove current RC3.3 runtime identity, canonical checkpoint restoration, run-local evidence closure, and safe final state. Host qualification/provenance/LAN gates are enforced separately by the definitive qualification pipeline.
+# checkpoint: stage1-driving-2352.chqstate
+# param frames type=select values=2,4,8,16 default=4
+
+echo === ChaseHQ RC3.3 Definitive Release Regression: BEGIN ===
+api release.assert-version
+api schema action=script.run
+api status
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+
+echo RC33_PARAMETER_FRAMES=${frames}
+legacytrace reset
+legacytrace cpu A
+legacytrace mem 10A04A:10A04B r
+legacytrace context 0 0
+legacytrace max 256
+legacytrace output evidence\regression-rc33-release-trace.log
+legacytrace start
+api control.run-frames frames=${frames}
+legacytrace stop
+api checkpoint.save file=regression-rc33-release-checkpoint.chqstate
+api checkpoint.list
+api script.runs limit=5
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api status
+echo === ChaseHQ RC3.3 Definitive Release Regression: COMPLETE ===

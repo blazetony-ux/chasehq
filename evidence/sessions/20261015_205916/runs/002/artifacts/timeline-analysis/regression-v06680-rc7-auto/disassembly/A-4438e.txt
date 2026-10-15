@@ -1,0 +1,25 @@
+OK cpu=A start=0x4438E count=24
+0x4438E  add.w   D4, (-$67c0,A5)
+0x44392  bcs     $40f64
+0x44396  move.l  D5, -(A4)
+0x44398  move.l  D6, -(A4)
+0x4439A  addq.w  #1, (-$67be,A5)
+0x4439E  lea     ($6,A3), A3
+0x443A2  dbra    D7, $4431c
+0x443A6  bra     $40f5a
+0x443AA  move.b  ($32,A1), D0
+0x443AE  andi.b  #$e0, D0
+0x443B2  cmp.b   (-$67a6,A5), D0
+0x443B6  bne     $40f5a
+0x443BA  move.l  ($38,A1), D1
+0x443BE  ble     $40f5a
+0x443C2  sub.l   (-$6600,A5), D1
+0x443C6  move.l  D1, D3
+0x443C8  bmi     $443e0
+0x443CC  cmpi.l  #$8000, D1
+0x443D2  bcc     $40f5a
+0x443D6  cmpi.l  #$a00, D1
+0x443DC  bcc     $443f2
+0x443E0  sub.l   (-$674e,A5), D3
+0x443E4  bmi     $40f5a
+0x443E8  cmpi.l  #$100, D3

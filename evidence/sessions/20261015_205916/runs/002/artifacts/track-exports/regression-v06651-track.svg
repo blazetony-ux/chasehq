@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="280.00 283.81 158.87 256.19" width="1400" height="1040">
+ <rect x="280.00" y="283.81" width="158.87" height="256.19" fill="#080b10"/>
+ <path d="M 332.00 470.00 L 351.79 407.38 L 341.54 356.68" fill="none" stroke="#94a3b8" stroke-width="1.5" opacity="0.70"/>
+ <path d="M 368.00 470.00 L 385.96 418.71 L 377.09 350.94" fill="none" stroke="#94a3b8" stroke-width="1.5" opacity="0.70"/>
+ <path d="M 350.00 470.00 L 368.87 413.05 L 359.31 353.81" fill="none" stroke="#6b7280" stroke-width="1.5" opacity="0.35"/>
+  <line x1="350.00" y1="470.00" x2="368.87" y2="413.05" stroke="#60a5fa" stroke-width="4" stroke-linecap="round"><title>frame 2382 page 5/0 record #22 curve=20 surface=roadproc:00 speed=205km/h road=ON_ROAD</title></line>
+  <line x1="368.87" y1="413.05" x2="359.31" y2="353.81" stroke="#60a5fa" stroke-width="4" stroke-linecap="round"><title>frame 2412 page 5/0 record #24 curve=-30 surface=roadproc:00 speed=221km/h road=ON_ROAD</title></line>
+ <path d="M 354.64 470.00 L 363.93 411.41 L 344.94 356.13" fill="none" stroke="#facc15" stroke-width="2.25" opacity="0.95"><title>Player driven trajectory projection</title></path>
+ <circle cx="344.94" cy="356.13" r="6" fill="#f8fafc"/>
+</svg>

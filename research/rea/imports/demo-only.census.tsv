@@ -1,0 +1,5 @@
+cpu	pc	instructionHits
+CPU-A	0x00A112	9
+CPU-A	0x0434EE	5
+CPU-A	0x043502	3
+CPU-B	0x000F00	100

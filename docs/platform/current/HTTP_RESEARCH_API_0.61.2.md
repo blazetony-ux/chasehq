@@ -1,3 +1,5 @@
+> **Historical process note for v0.66.9.1:** This document describes the historical PowerShell host implementation. Current release/lifecycle authority is `chqdev`; the host may remain an internal bridge but does not define the release process.
+
 # HTTP Research API bridge — v0.61.2
 
 `Start-ChaseHQWeb.ps1` is now both the Web Debugger host and a localhost-only HTTP automation bridge. It deliberately consumes the native debugger API through `chqctl`; the emulator remains authoritative.

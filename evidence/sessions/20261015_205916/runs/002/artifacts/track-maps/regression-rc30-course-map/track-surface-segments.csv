@@ -1,0 +1,2 @@
+﻿"segment","signature","semantic","confidence","sampleCount","firstFrame","lastFrame","firstCoursePosition","lastCoursePosition","trackRoute","trackPage","recordIndexFirst","recordIndexLast","rawRenderVariantCount","renderCandidateVariantCount","renderCandidateExamples"
+"0","roadproc:00","UNCLASSIFIED_ROAD_MATERIAL","PROVEN_ROAD_PROCESSING_SELECTOR","3","2064","2124","128","6734","0","0","0","0","3","1","tc0150-class:0000:Aattr-02:Battr-02"

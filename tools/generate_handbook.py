@@ -9,6 +9,8 @@ version = re.search(r'kNativeVersion\s*=\s*"([^"]+)"', (root / 'src/version.h').
 handbook = json.loads((root / 'research/knowledge/handbook.json').read_text())
 knowledge = json.loads((root / 'research/knowledge/documentation.json').read_text())
 api = json.loads((root / 'research/schema/api-actions.json').read_text())
+release_cfg = json.loads((root / 'chqdev.json').read_text())
+release_label = 'RELEASE CANDIDATE · exact-archive Windows qualification pending' if '-RC' in version.upper() else 'PROMOTED RELEASE'
 esc = lambda value: html.escape(str(value))
 body, nav = [], []
 
@@ -52,7 +54,7 @@ for entry in knowledge['entries']:
 body.append('</section>')
 nav.append('<a href="#knowledge">Knowledge and findings</a>')
 css = 'body{margin:0;background:#0b1018;color:#e8f0fa;font:15px/1.55 system-ui}header{padding:32px;background:#152236;border-bottom:8px solid #e13039}header small{color:#85ccff}.layout{display:grid;grid-template-columns:240px minmax(0,1fr)}nav{padding:20px;position:sticky;top:0;height:90vh;overflow:auto}nav a{display:block;color:#8ed2ff;margin:12px 0}main{padding:24px;max-width:1200px}article{padding:18px;margin:16px 0;background:#121c29;border:1px solid #2c4058}h2{color:#8ed2ff}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#080d14;padding:12px}table{border-collapse:collapse;width:100%;font-size:12px}td,th{padding:8px;border:1px solid #33465d;text-align:left;overflow-wrap:anywhere}.callout{border-left:4px solid #e13039;padding:12px;background:#22202a}small{color:#a9bacd}@media(max-width:850px){.layout{display:block}nav{position:static;height:auto}table{display:block;overflow:auto}}'
-out = '<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>ChaseHQ-Native Handbook ' + esc(version) + '</title><style>' + css + '</style><header><h1>CHASE H.Q. — Native Research Handbook</h1><small>' + esc(version) + ' · SOURCE CANDIDATE · Windows promotion pending</small></header><div class="layout"><nav>' + ''.join(nav) + '</nav><main>' + ''.join(body) + '</main></div></html>'
+out = '<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>ChaseHQ-Native Handbook ' + esc(version) + '</title><style>' + css + '</style><header><h1>CHASE H.Q. — Native Research Handbook</h1><small>' + esc(version) + ' · ' + esc(release_label) + '</small></header><div class="layout"><nav>' + ''.join(nav) + '</nav><main>' + ''.join(body) + '</main></div></html>'
 target = root / 'docs/handbook/ChaseHQ-Native-Documentation-Handbook.html'
 target.write_text(out)
 print('Generated', target.relative_to(root))

@@ -1,47 +1,373 @@
-# RC3.0 active roadmap
+> **CURRENT AUTHORITATIVE — ChaseHQ-Native 0.67.0.0-RC6.3.33 / chqdev v0.5.52 / REAL CHECKPOINT GENUINE NATIVE DIFFERENTIAL (2026-10-15).** Qualified immutable RC6.3.32 source SHA256 `3f72489f25b144cda5ca7d7416670b02e7f7fa02b70fc32811320943b75bccb6`; Windows dist SHA256 `cb4582d8abcac2f615de51a99065fb54f45d1f06cbed271135e146fe4f7e4c9e` reported by qualifying tool only. RC6.3.33 extends synthetic replay with independent **GENUINE ROM** checkpoint processes: original, real Ghidra-generated CPU-B two-opcode native substitution and forced rollback at frames 6337 and 6340. Each captures five semantic streams (CPU flags/registers/cycles, mapped R16 bus, IRQ events, machine state and raw bus). All signals must match; native commit and explicit fallback must be observed. Fresh high-frame replay verifies determinism, hashes pin checkpoint/executable/DLL. Unexpected divergence invokes genuine-subprocess prefix reduction and leaves a first-difference witness. An independent mutation of a COPIED trace is separately labelled CONTROLLED NEGATIVE, not genuine gameplay. No whole-function CFG/0x0518/producer coverage/native promotion. **Source candidate: fresh RC6.3.33 Windows ROM acceptance/Full Regression PENDING.** See `docs/RC6.3.33_GENUINE_SUBPROCESS_REPLAY_AND_ROLLBACK.md`. Previous current headers are historical.
 
-## Proven baseline
+> **AUTHORITATIVE CURRENT — ChaseHQ-Native 0.67.0.0-RC6.3.32 CHECKPOINT REPLAY REDUCTION AND CPU-B FUNCTION-CONFIDENCE (2026-10-15).** Exact immutable fully Windows-qualified RC6.3.31 source SHA256 `8ca40c81ba661a0a3274ce4203dd541fe34d39743cc914c2a63b07b037061cd4`; qualifier-reported Windows dist SHA256 `004f00ae527e5bacc8cb0791840808ff4e5e4da352c72fb2e37cd9ac8a6bfc76` separate and not independently hashed. Genuine CHQ6331 original-ROM evidence captures CPU-B PC 0x04A8 writing byte 0x80 at address 0x100802 seven times per case (35 total, zero bit7 transitions), then BTST at 0x050E and BNE at 0x0516→0x052C; 0x0518 remains unobserved. RC6.3.32 introduces actual paired original/native executable checkpoint replay via chqdev native minimize --plan JSON --out NEW_DIR: isolated ordered traces, executable/checkpoint hashes, bounded frame-prefix bisection, fresh confirmation reruns and fail-closed errors. The automatic native-reconstruct smoke uses **SYNTHETIC process fixtures only**; no full-function original/native gameplay replay certified locally. A genuine writer dependency report preserves incomplete producer history, function entry/CFG/exits/callers and scheduler uncertainty; nativePromotionAllowed=false. Windows acceptance CHQ6332.zip and fresh qualify PENDING; `chqdev v0.5.51`. See `docs/RC6.3.32_CHECKPOINT_REPLAY_AND_FUNCTION_BOUNDARY_CONFIDENCE.md`. Earlier banners below historical.
 
-v0.66.9.0-RC2.9 is the current Windows/SDL-proven baseline. Target-health/damage, brake-lamp response and Stage-1 topology/selector mechanics are not to be reopened absent regression evidence.
+> **AUTHORITATIVE CURRENT — ChaseHQ-Native 0.67.0.0-RC6.3.31 MULTI-SOURCE FUNCTION FRONTIER AND DIAGNOSIS (2026-10-15).** Exact immutable fully Windows-qualified RC6.3.30 source ZIP SHA256 `24e7cf0fa32741f584d74908b7b707afc02797a699f9d40e1ab5c8dd32313a82`; Windows qualifier-reported `dist` SHA256 `51067d3a2dd9a8d370886619e18c6a0427c207d9f9517ece241e5ed374065ea1` separate, not independently hashed. Genuine CHQ6330.zip proves 35/35 sampled CPU-B 0x050E byte=0x80, bit7=1 -> SR.Z=0 -> 0x0516->0x052C; 0x0518 still unobserved. RC6.3.31 adds opt-in read-only CPU-A/B postcommit Bus::write witnesses overlapping 0x100802 (records zero honestly), plus automatic cross-case Ghidra/observed-edge function blocker dossier. New trace-witness CLI diagnoses the first differing original/native evidence row and shows SHA-pinned context, **not** verified deterministic scenario/input minimization. Fresh Windows writer capture `CHQ6331.zip` and `qualify --fresh` PENDING; local fixtures for NEW capture synthetic-only. Whole-function CFG, unobserved 0x0518, CPU-A/B scheduling and function-native promotion BLOCKED. `chqdev v0.5.50`. See `docs/RC6.3.31_AUTONOMOUS_FUNCTION_BLOCKERS_AND_DIAGNOSIS.md`. Older current labels below historical.
 
-## Implemented in RC3.0 candidate
+> **AUTHORITATIVE CURRENT — ChaseHQ-Native 0.67.0.0-RC6.3.30 CPU-B 0x050E BTST UPSTREAM SOURCE / 0x0516 BNE (2026-10-15).** Built from immutable fully Windows-qualified RC6.3.29 source ZIP SHA256 `087e973345581eb8603bba99ae69907a3403885449a21d4b9063e745eb094615`; Windows qualifier-reported `dist` SHA256 `4e2150384994fbb05876ff03b666fce6542cafc38ebdf1a2868ce1287bc3c6e8` is not independently byte-verified. Genuine CHQ6329.zip proves 35/35 original-ROM 0x050E instruction hooks immediately preceding 0x0516 BNE and 35 0x0516 Z-clear->0x052C branches (5 checkpoints). RC6.3.30 introduces **NEW original-ROM byte capture** from 0x100802 immediately before Ghidra `BTST.B #7,(0x00100802).L` at 0x050E; verifies bit7 against 0x0516 SR.Z, ordered hooks and actual BNE next PC. New-byte observations **synthetic-only in local fixtures**; fresh Windows ROM evidence `CHQ6330.zip` and `qualify --fresh` PENDING. Unmodified original evidence vs controlled data always distinct. `0x0518` remains unobserved, full CFG and native whole-function promotion BLOCKED. `chqdev v0.5.49`. Read `docs/RC6.3.30_CPU_B_BTST_UPSTREAM_BIT7_SOURCE.md`. Older banners below historical.
 
-- Expose the mature native course follower live through native debugger, Research API, Script Console and Workbench; no restart is required.
-- Add signed lateral target bias for controlled structural branch coverage while retaining closed-loop road following.
-- Add reversible live survey orchestration with timer hold and proven collision-response suppression/restoration.
-- Upgrade Track Recorder to v2: road left/centre/right, authoritative lateral state, player driven-line projection, speed/steering/follower telemetry.
-- Preserve the confirmed Stage-1 target-car record plus generic unclassified visible-sprite evidence for later traffic/obstacle promotion.
-- Preserve composite raw surface signatures from course records plus representative TC0150ROD renderer state; do not call them asphalt/dirt until proven.
-- Export reconstructable mapping datasets (JSON + CSVs + SVG).
-- Add 600-frame shakedown, 3600-frame centre survey and signed-bias branch surveys.
-- Add permanent focused RC3.0 mapping regression and Full Regression wiring.
-- Add Ctrl+P as a secondary SDL pause shortcut for keyboards without Pause/Break.
+> **AUTHORITATIVE CURRENT — ChaseHQ-Native 0.67.0.0-RC6.3.29 CPU-B BNE EQUAL-CLOCK CORRECTIVE SOURCE CANDIDATE (2026-10-15).** Source comes from immutable RC6.3.28 ZIP SHA256 `18b2a4a5c32aa750e57eb525fc6b29697b7db77acca420268e084f7ce8a3ab4f` (Windows MSVC build PASS but native BNE decision audit FAIL on legitimate equal `cyclesB`). Genuine original-ROM `CHQ6328.zip` verified 1007/1007 and isolated corrected complete Ghidra/branch audit PASS: 35 real per-visit `0x0516` Z-clear BNE next-PCs `0x052C`, 35 equal-clock pairs, no `0x0518`. RC6.3.29 preserves strict lower-cycle rejection, opcode, flag, ordinal and original-ROM edge checks, plus new optional genuine-evidence regression. Latest fully Windows-qualified immutable baseline remains **RC6.3.27**, source SHA256 `deaf140c0ee129804785ee2c9026af240d7ee9d5806c77095eead93795932b39`; RC6.3.28 FAILED, RC6.3.29 Windows native+fresh qualify **PENDING**. New focused Run001 and 1153-command Full Regression required on Windows, one evidence ZIP `C:\Projects\Evidence\CHQ6329.zip`. Complete CPU-B function CFG, alternative `0x0518` execution, hardware timing and whole-function native promotion remain BLOCKED. See `docs/RC6.3.29_CPU_B_EQUAL_CYCLE_CORRECTIVE.md`. Older banners are historical.
 
-## RC3.0 release gate
+> **AUTHORITATIVE CURRENT — ChaseHQ-Native 0.67.0.0-RC6.3.28 RC6.3.28 CPU-B ORIGINAL-ROM BNE CONDITION/IMMEDIATE NEXT-PC SOURCE CANDIDATE (2026-10-15).** Immutable fully Windows-qualified RC6.3.27 source SHA256 `deaf140c0ee129804785ee2c9026af240d7ee9d5806c77095eead93795932b39`; qualifier-reported Windows distribution SHA256 `828876f06979ce6f08b3970374e796abbc03b1980d561f7e09c32602ea5e5604` (actual Windows `dist` archive not independently supplied). Genuine `CHQ6327.zip` passed the previous IRQ bus gate and 18/18 Windows CTests; focused Run001 10 commands, Full Regression Run002 1,153 commands PASS. Genuine five-case original-ROM CPU-B 0x0516 BNE visits: 7 per case, 35 total, all SR.Z clear and observed aggregate successor 0x052C; **0x0518 was never visited**. RC6.3.28 independently records each BNE's original-ROM pre-branch SR/ordinal/frame and immediately succeeding CPU-B instruction PC, crosschecks original-ROM hook and Ghidra/edge evidence, and fails closed on mismatched flags/targets, dropped records or newly observed 0x0518 requiring separate review. **New per-visit successor capture is synthetic-only in local tests, real RC6.3.27 SR/edge prerequisites verified; fresh RC6.3.28 Windows ROM acceptance and `qualify --fresh` PENDING.** Function CFG/callers, 0x0518 runtime path, emulator cycle-exact IRQ timing, native function and autonomous promotion remain BLOCKED. One evidence ZIP: `C:\Projects\Evidence\CHQ6328.zip`. See `docs/RC6.3.28_CPU_B_BNE_CONDITION_AND_NEXT_PC.md`. Older banners retained as history.
 
-1. Linux/static/native checks on the exact package.
-2. Windows `Build-Debug.bat` under the existing narrow historical CPU SEGFAULT rule.
-3. Focused `regression-v06690-rc30-course-mapping-live-survey.chqscript`.
-4. Verify Track View live follower/survey controls and road/player overlays.
-5. Full Regression.
-6. Only then promote RC3.0 from candidate.
+> **AUTHORITATIVE CURRENT — ChaseHQ-Native 0.67.0.0-RC6.3.27 CPU-B ORIGINAL-ROM IRQ VECTOR AND ORDERED STACK BUS SOURCE CANDIDATE (2026-10-15).** Exact source baseline RC6.3.26 SHA256 `aee45c18268daa006f13a0bebaed43f61e9dbd804a63cf1d34b426ae12650386` is fully Windows qualified: genuine native reconstruction PASS, 18/18 CTests, focused 10-command and Full Regression 1153-command PASS; Windows qualifier-reported dist hash `7cb0ebcfe2ef5076e058a2b1f0d82f29f244fa45cc476f16f6f3561072eff6cf` (actual dist ZIP not independently provided). RC6.3.27 uses actual Musashi ACK and CPU-B bus read/write callbacks to record a bounded original-ROM interrupt-entry vector read and PC/SR stack writes, closes at the first handler instruction, and fail-closed crosschecks independent genuine RC6.3.26 exception-frame/USP/ISP snapshots. **NEW bus capture is synthetic-only in local tests; fresh RC6.3.27 Windows ROM acceptance and qualify --fresh are PENDING.** External IRQ ownership, timing, full IRQ scheduling, unobserved 0x0518, full function and native promotion remain BLOCKED. Evidence `C:\Projects\Evidence\CHQ6327.zip`. See `docs/RC6.3.27_CPU_B_IRQ_VECTOR_BUS_ORDER.md`. Older banners below historical.
 
-## Immediate course-survey research after promotion
+> **AUTHORITATIVE CURRENT — ChaseHQ-Native 0.67.0.0-RC6.3.26 CPU-B DUAL-STACK EXCEPTION RETURN CORRECTIVE SOURCE CANDIDATE (2026-10-15).** Latest fully Windows-qualified baseline RC6.3.24, qualifier-reported dist SHA256 `78bc9b7fdaa00a55294f55099c18df82ed69e07b0d53e57b0bffded3308de014`. RC6.3.25 exact source SHA256 `64e62b77b118577cecfa2d0d4c3ed6eb57ccc456344f11e6a3229a09e0d525b8` is **FAILED Windows ROM acceptance**: handler `0x0474` and RTE `0x04D6` returned to CPU-B user SR `0x0004`, restored PC `0x04D8/0x04DE` correctly, but active A7 switched to USP `0x100800` rather than popped ISP `0x100400`; the original RC6.3.25 verifier incorrectly insisted on `SP+6` for active A7. RC6.3.26 instruments and verifies original-ROM USP and ISP independently, plus saved frame, post-RTE PC/SR and bank-selected active SP; fail-closed synthetic user/supervisor mutations PASS. Prior genuine CHQ6325 evidence supports diagnosis, NOT NEW dual-bank capture. **Fresh RC6.3.26 Windows ROM native and `qualify --fresh` remain PENDING.** `0x0518`, vector/bus timing, full function/native promotion remain BLOCKED. Evidence: `C:\Projects\Evidence\CHQ6326.zip`. See `docs/RC6.3.26_CPU_B_DUAL_STACK_BANK_CORRECTIVE.md`. Previous banners are historical.
 
-1. Run the 600-frame mapping shakedown and inspect all structured outputs/screenshots.
-2. Run the 3600-frame centre-follow survey only if the shakedown shows stable controller + evidence capture.
-3. Build the first directed Stage-1 graph by correlating proven page/selector transitions with geometry and screenshots.
-4. Use negative/positive lateral-bias surveys to cover structural branch alternatives; retain A/B semantics until physical left/right is separately proven.
-5. Correlate unclassified dynamic-object evidence with course position/screenshots/collision behaviour to promote genuine traffic/obstacles.
-6. Correlate raw surface signatures with screenshots and handling/road-state evidence to identify road materials without guessing.
+> **AUTHORITATIVE CURRENT - ChaseHQ-Native 0.67.0.0-RC6.3.25 CPU-B EXCEPTION-FRAME RAM/POST-RTE RESTORATION SOURCE CANDIDATE (2026-10-15).** Latest fully Windows-qualified immutable baseline **RC6.3.24**, exact source ZIP SHA-256 `cf1e9c75755c8ee13f8786c552bdf58e67ca930d86a2d5960c179745dd89b1d3`; reported Windows dist SHA-256 `78bc9b7fdaa00a55294f55099c18df82ed69e07b0d53e57b0bffded3308de014` (Windows package bytes not independently uploaded). RC6.3.24 genuine native and 18/18 Windows CTests, focused 10 commands and Full Regression 1,153 commands PASS. RC6.3.25 adds **new read-only original-ROM CPU-B six-byte exception frame RAM peeks** at 0x0474/0x04D6 and post-RTE next-hook PC/SR/SP crosscheck. **Authentic CHQ6324 prerequisite 35/35 PASS; NEW frame data is synthetic in local tests and genuine Windows qualification PENDING.** Not a bus transaction trace, vector ACK, all IRQs, scheduler or native function promotion. `0x0518` remains unobserved; `--out C:\Projects\Evidence\CHQ6325`. See `docs/RC6.3.25_CPU_B_EXCEPTION_FRAME_RESTORATION.md`. Older banners below historical.
 
-## Later tooling
+> **AUTHORITATIVE CURRENT — ChaseHQ-Native 0.67.0.0-RC6.3.24 ORIGINAL-ROM CPU-B IRQ/RTE SELECTED-HOOK CONTEXT SOURCE CANDIDATE (2026-10-15).** Latest fully Windows-qualified immutable baseline **RC6.3.23**, exact source ZIP SHA-256 `9d7b33423e6c7f022059e77eca233f7cdae9b497ab5fedbd0eb60765ab75c55a`, qualifier-reported Windows distribution SHA-256 `3586f6fada3fc56384fb7a213f9c289a68b998427f22a3bf962ae81c28636e5b` (distribution bytes not independently uploaded). RC6.3.23 Windows native, 18/18 CTest and Full Regression 1153/1153 PASS. RC6.3.24 adds fail-closed `M2-CPU-B-original-ROM-IRQ-RTE-hook-context`: authentic CHQ6323.zip selected CPU-B 0x0474 handler-entry and 0x04D6 RTE observations, 7 sampled pairs/case across five cases (35), supervisor-mode, opcode, frame, order and sampled SP consistency. Actual exception-frame bytes/bus transactions, vector ownership, interrupted SR/PC, all IRQs, scheduler and native function promotion NOT VERIFIED. **RC6.3.24 ROM-backed Windows acceptance and `qualify --fresh` PENDING.** Evidence output `C:\Projects\Evidence\CHQ6324.zip`; `0x0518` remains unobserved. See `docs/RC6.3.24_CPU_B_IRQ_RTE_HOOK_CONTEXT.md`. Older status banners below are historical.
 
-- Event-triggered exact-frame survey landmarks (page/selector/surface/entity changes), if 15-frame structured sampling + 60-frame screenshots prove insufficient.
-- Runtime-evaluated Script query collections and structured tuple/record iteration.
-- Whole-scene sprite shadow compare before claiming SHADOW VERIFIED.
-- Audio remains foundation-only until authentic runtime instrumentation exists.
+> **AUTHORITATIVE CURRENT — ChaseHQ-Native 0.67.0.0-RC6.3.23 ORIGINAL-ROM CPU-B ORDINAL-ZERO CORRECTIVE SOURCE CANDIDATE (2026-10-15).** Exact immutable RC6.3.22 source archive SHA-256 `c17673a958446875f047bfd1dceab5675ff5e81084949578615edc9929c3684e` passed local tests and Windows build but **FAILED genuine Windows native acceptance** in `M2-CPU-B-ordered-original-ROM-stack-audit`: first authentic selected hook has zero-based ordinal `0`, incorrectly rejected by `ordinal == 0`. RC6.3.23 removes only this incorrect prohibition while retaining strict increasing ordinals, transition cap, original opcode, sampled SP/return, IRQ separation and fail-closed blockers. Authentic failed `CHQ6322.zip` five-case ROM+Ghidra integration replay now PASS; duplicate-zero and malformed-order tests reject. **Latest fully Windows-qualified baseline RC6.3.21**, Windows qualifier SHA-256 `fbfc6c19131a3a10a28de60449a9716111179fe03cc4285f2f970a0e8646ea3a` (not independently byte-verified). RC6.3.23 Windows native acceptance and `qualify --fresh` PENDING; `--out C:\Projects\Evidence\CHQ6323`. Unobserved `0x0518`, full CPU-B CFG/IRQ stack parity and native promotion BLOCKED. See `docs/RC6.3.23_CPU_B_ORDINAL_ZERO_CORRECTIVE.md`. Earlier banners below are historical.
 
-## Long term
+> **AUTHORITATIVE CURRENT — ChaseHQ-Native 0.67.0.0-RC6.3.22 CPU-B ORDERED HOOK/STACK SOURCE CANDIDATE (2026-10-15).** Exact immutable RC6.3.21 source SHA-256 `bdfbe71f911b2e283132410b3c22fb4159ab044baabb00a4298af3d76d93cd54`; latest Windows fresh-qualified RC6.3.21 release archive SHA-256 `fbfc6c19131a3a10a28de60449a9716111179fe03cc4285f2f970a0e8646ea3a` as recorded by the qualifier (Windows `dist` bytes not independently supplied). Genuine RC6.3.21 ROM/Ghidra native reconstruction PASS; Windows 18/18 CTests, focused 10 commands and Full Regression 1,153 commands PASS. RC6.3.22 instruments *original-ROM* CPU-B instruction hooks to record chronological selected PC visits with ordinal/cycles/SP/SR and marks IRQ vector/RTE sites separately; checks per-checkpoint actual BSR/RTS timeline with sampled stack-pointer pairing. **The selection is filtered and does not establish exhaustive IRQ/scheduling/bus parity, complete CFG, 0x0518 execution or promotable function.** Windows native acceptance and `qualify --fresh` PENDING. Evidence `--out C:\Projects\Evidence\CHQ6322`. See `docs/RC6.3.22_CPU_B_ORDERED_HOOK_STACK_EVIDENCE.md`. Older release banners below are historical.
 
-Continue the native-reconstruction maturity ladder subsystem by subsystem; preserve original/emulated authority while adding SHADOW/COMPARE paths before replacement. Enhanced 2D/3D rendering remains optional presentation work after semantic simulation state is authoritative.
+> **AUTHORITATIVE CURRENT — ChaseHQ-Native 0.67.0.0-RC6.3.21 CPU-B NESTED CALL/RETURN SOURCE CANDIDATE (2026-10-15).** Exact immutable 0.67.0.0-RC6.3.20 source SHA-256 `f52d6abd6b2062050313a8e4bd4370311b3d39ebf956aae3510ee81da35b1a33`; latest fresh Windows-qualified 0.67.0.0-RC6.3.20 release archive SHA-256 `37ff80b5063a687765468c8dc2bde6d3b5f9c32e004408631e233b9eb6bdaab1` (reported by the Windows qualifier, actual `dist` ZIP not provided). RC6.3.20 native ROM/Ghidra reconstruct PASS, 18/18 Windows CTests, focused Run 001 ten commands and Full Regression Run 002 1,153 commands PASS. RC6.3.21 extends original-ROM CPU-B call-return research to three nested BSR instructions (`0x4F70/0x4F74/0x4F78`), nested RTS (`0x5062`) and outer RTS (`0x4F7C`), with fresh Ghidra provenance and five original-ROM scenario graphs, seven counted edges per case. **Aggregated edge counts do not prove temporal stack pairing, complete function closure or native replacement**. CPU-B `0x0518` runtime branch remains unseen; no native promotion. RC6.3.21 Windows native acceptance and `qualify --fresh` PENDING. Evidence `--out C:\Projects\Evidence\CHQ6321`. See `docs/RC6.3.21_CPU_B_NESTED_CALL_RETURN_AUDIT.md`. Older document banners below are retained as history.
+
+> **AUTHORITATIVE CURRENT — ChaseHQ-Native 0.67.0.0-RC6.3.20 CORRECTIVE SOURCE CANDIDATE (2026-10-15).** Latest fully Windows-qualified baseline 0.67.0.0-RC6.3.18 SHA-256 `7978d2e4bdac825e81ef9540694b0ccb54edcd5d04c342b2472198dc25500099`. Exact immutable failed 0.67.0.0-RC6.3.19 source archive SHA-256 `0900d52cb41bea82203695517c708e4a399dab971db878ae85f465c0e099dde0`. RC6.3.19 Windows/MSVC build PASS, but `M2-CPU-B-original-ROM-call-return-audit` **FAIL** due solely to string-format comparison of Ghidra `0x000516` vs runtime-canonical `0x00000516` for post-return CPU-B `BTST` at `0x050E`. RC6.3.20 changes the comparison to strict numeric 32-bit equality and adds independent replay of the actual CHQ6319 Windows Ghidra JSON and all five original-ROM traces (PASS after correction), plus negative guards. Full enclosing function CFG, native substitution composition, unobserved `0x0518` path, timing parity and autonomous promotion remain **UNPROVEN/BLOCKED**. Windows RC6.3.20 native acceptance/`qualify --fresh` PENDING. One ZIP: `--out C:\Projects\Evidence\CHQ6320`. See `docs/RC6.3.20_REAL_GHIDRA_ADDRESS_CORRECTIVE.md`. Older banners are historical.
+
+> **AUTHORITATIVE CURRENT — ChaseHQ-Native 0.67.0.0-RC6.3.19 SOURCE CANDIDATE (2026-10-15).** Immutable RC6.3.18 original authoritative source SHA-256 `7968f432939be3a16de942d46afb8caeeffddba39df3a32c2689c05469530369`; fresh Windows qualified archive SHA-256 `7978d2e4bdac825e81ef9540694b0ccb54edcd5d04c342b2472198dc25500099` (recorded by user Windows qualify), CHQ6318 ROM/Ghidra native reconstruction PASS; 18/18 Windows CTest, focused Run001 10 commands, Full Regression Run002 1,153 commands PASS. RC6.3.19 adds **authentic CPU-B observed JSR→callee→RTS→postreturn provenance** across five original-ROM checkpoints; Ghidra exports new CPU-B 0x050C/0x050E/0x08AC statics and the unobserved 0x0518 branch path (static only). Local replay uses authentic CPU-B TSV and a clearly synthetic static Ghidra double. 0x0518 is NOT runtime proven; no complete function CFG, nested-call closure, timing/composition verification, minimiser or autonomous promotion. RC6.3.19 Windows ROM/Ghidra acceptance is PENDING. One evidence ZIP via `--out C:\Projects\Evidence\CHQ6319`. See `docs/RC6.3.19_CPU_B_ORIGINAL_CALL_RETURN_AND_UNOBSERVED_BNE.md`; older banners are historical.
+
+> **AUTHORITATIVE CURRENT — ChaseHQ-Native 0.67.0.0-RC6.3.18 SOURCE CANDIDATE (2026-10-15).** Exact RC6.3.17 fresh Windows qualification PASS: 18/18 CTest, focused Run001 10 commands, Full Regression Run002 1,153 commands, deterministic Windows release ZIP SHA-256 `6fc40389db4bccd47aef40b7a2c874c43517e2db45b2ac29ced4e72c3f8c1d79`. Genuine CHQ6317 bounded CPU-A/B native/rollback evidence PASS; CPU-B observed research frontier 5,234 edges PASS. RC6.3.18 adds **five extra real-ROM Ghidra continuation instruction sites** (0x04E0/0x04E6/0x04EC/0x0516/0x052C), statically checks lengths/flows and crosswalks with five genuine original-ROM checkpoint cases; entire function CFG, BNE fallthrough, generated whole-function C++, minimiser, composition and native promotion remain BLOCKED. Local static Ghidra cannot run here; RC6.3.18 genuine Windows execution is PENDING. One evidence ZIP: `--out C:\Projects\Evidence\CHQ6318`. See `docs/RC6.3.18_CPU_B_GHIDRA_CONTINUATION_CROSSWALK.md`. Prior banners are historical.
+
+> **AUTHORITATIVE CURRENT — ChaseHQ-Native 0.67.0.0-RC6.3.17 SOURCE CANDIDATE (2026-10-15).** Exact RC6.3.16 Windows-qualified baseline SHA-256 `79c94b0090009b5f5dd29dc2feb543d5d758c072919bb428a761342f732a646d` passed 18/18 Windows CTest, focused 10-command Run001 and Full Regression 1153-command Run002; RC6.3.16 genuine CPU-A/B bounded native/rollback evidence PASS. RC6.3.17 adds a read-only two-hop CPU-B *observed* original-ROM function frontier and heuristic, risk-labelled candidate research ranking (NOT measured cycle savings). Complete enclosing function, automatic minimiser, independent composition gate, native whole-function promotion and RC6.3.17 Windows acceptance remain PENDING/BLOCKED. Next proof: `--out C:\Projects\Evidence\CHQ6317`. See `docs/RC6.3.17_OBSERVED_FUNCTION_FRONTIER.md`. Prior release status banners below are historical.
+
+> **AUTHORITATIVE CURRENT - v0.67.0.0-RC6.3.16 (2026-10-15).** RC6.3.15 genuine Windows Debug and original/native/rollback CPU-A/B bounded reconstruction PASS, verified evidence 959/959. RC6.3.16 SOURCE CANDIDATE adds five-checkpoint authentic CPU-B pair predecessor/successor/BEQ taken+fallthrough and IRQ diversion edge audit, final cross-stage candidate-portfolio reconciliation, and repairs the stale Full Regression 850-limit warning (runtime qualification still pending). CPU-A/B complete-function promotion, automatic composition and minimiser remain BLOCKED. Next Windows proof: `--out C:\Projects\Evidence\CHQ6316`. See `docs/RC6.3.16_BOUNDED_EDGE_AND_PORTFOLIO_RECONCILIATION.md`. Older banners below are historical.
+
+> **AUTHORITATIVE CURRENT - v0.67.0.0-RC6.3.15 (2026-10-14).** RC6.3.15 SOURCE CANDIDATE (2026-10-14): actual RC6.3.14 Windows DEBUG and bounded genuine CPU-B BEQ original/native/fault PASS (17,892 native commits); TST.W+BEQ.B pair original/native/fault PASS (8,945 commits). RC6.3.15 adds Ghidra-authenticated CPU-A/B function-boundary dossiers (NOT a complete-function proof), CPU-B TST mapped R16 versus BEQ zero-data/IRQ ACK-owned attribution, first-divergence capture on pair mismatches, safe atomic single-ZIP evidence under C:\Projects\Evidence\CHQ6315, revised Full Regression structural budget 1176..1536 without removing any commands, and corrected Workbench Next Steps and Brainstorm P0/P1 roadmap. Native execution code unchanged. New Windows qualification PENDING. Whole-function generation/verification and autonomous promotion remain BLOCKED. See `docs/RC6.3.15_FUNCTION_DOSSIER_AND_EVIDENCE.md`. Historic banners below are not current.
+
+## RC6.3.15 and the remaining Autonomous Reconstruction roadmap (authoritative)
+
+RC6.3.14 verified **bounded** CPU-B BEQ (17,892 native commits) and consecutive TST.W+BEQ.B (8,945 native commits) against original/forced-ROM fallback with CPU, flags, IRQ and full-machine parity. Uploaded Windows ZIP manifest 956/956 matched. RC6.3.14 final bundle failed only because writing directly to `C:\CHQ6314-SHORT.zip` was denied; uploaded evidence exists and is verified. No function boundary was promoted.
+
+**Implemented in RC6.3.15 source candidate (Windows prove-off pending):**
+
+1. `function-boundary-dossier.json` from authenticated CPU-A original-Ghidra site windows; `cpu-b-function-boundary-dossier.json` from the separately authenticated CPU-B original-ROM 5-site/opcode, contiguous pair and live pair proof. All unresolved CFG, caller, return, IRQ and scheduling paths remain recorded, with `functionNativePromotionAllowed=false` even for contiguous Ghidra ranges. No arbitrary instruction window becomes a full function.
+2. `cpu-b-instruction-side-effects.json` derived from actual CPU-B original/native/forced pair TSVs: TST.W owns mapped R16, BEQ.B owns zero mapped data effects and Musashi ACK owns IRQ vector and exception stack effects. Original/native/fallback streams must match exactly. Instruction fetch/prefetch is explicitly UNRESOLVED, not silently attributed.
+3. First-differing CPU/state, data-bus, IRQ or machine row captured when bounded pair original/native/rollback differ, retaining archived replay inputs and ROM/fingerprint provenance. It is **not** yet an automatic deterministic input-sequence minimiser; complete P0 minimiser remains open.
+4. `--out C:\Projects\Evidence\CHQ6315`: create parent automatically, refuse existing archive/dirty output and publish an atomic deterministic ZIP, never write at C: root. Subsequent runs use a new distinct prefix (e.g. `CHQ6315-RUN002`).
+5. Full Regression currently compiles to **1,176 structural commands**; existing Go runner allows 2,048. Superseded 850 test ceiling is now a bounded 1,176..1,536 coverage guard. No script commands removed and historical-duplicate exclusion still checked. Runtime Workbench Full Regression must still pass on Windows.
+6. Current candidate evidence, release docs and Workbench Next Steps synced; one focused release script and Go negative tests packaged. No native emulator C++ execution code changed.
+
+**P0 pending (not implemented merely by this release):** full both-CPU function-entry/exit/CFG/caller discovery with dynamic closure; unsupported-68000 generalized generator, complete function-level original/native/rollback and branch/IRQ coverage; deterministic automatic failure *input* reproducer/minimiser (rather than first-difference locator); independent concurrent native composition and scheduling gate across both CPUs, shared RAM and interrupt effects. Fail closed: no automatic whole-function promotion.
+
+**P1 backlog:** incremental content-addressed Ghidra/ROM/contract/evidence research cache with precise invalidation and no false live proof; candidate cycle-benefit/coverage/hardware-side-effect/IRQ/shared-dependency value-risk scoring that distinguishes measured vs estimated savings; autonomous next-candidate selection; deeper Workbench live dossiers and filters.
+
+**Deferred architectural deliverables (retain scope explicitly):** all-ROM both-CPU navigable source export (compilable supported code plus clearly unresolved pseudocode/disassembly, provenance, XREFs and evidence statuses `GENERATED/COMPILED/VERIFIED/NATIVE/UNRESOLVED`) to RC6.4 unless complete RC6.3 gates are demonstrated; multi-game reconstruction via game-agnostic pipelines and game-specific bus/ROM profiles; Capstone/REA/Ghidra integration; ROM-free gameplay reconstruction and non-reconstruction graphics/CHQPACK/controller/Win32/ARM platform roadmap.
+
+Windows next gate (PowerShell one line, from extracted root):
+
+`.\chqdev.bat build debug; if ($LASTEXITCODE -eq 0) { .\chqdev.bat native reconstruct --fresh --live-health --cpu-b-live --out C:\Projects\Evidence\CHQ6315 }`
+
+Expected output ZIP `C:\Projects\Evidence\CHQ6315.zip`; upload it whether PASS or FAIL. This is qualification, not permission to auto-promote incomplete functions.
+
+> **AUTHORITATIVE CURRENT — v0.67.0.0-RC6.3.14 CPU-B DUAL-CANDIDATE DISPATCH CORRECTIVE (2026-10-14).** Actual RC6.3.13 Windows build PASS and Ghidra pair ABI PASS, but BEQ live acceptance BLOCKED in the Go verifier: 22 valid inactive pair original-ROM events were rejected despite 17,892 single-BEQ native commits. RC6.3.14 corrects only the verified audit/proof contract, adds inverse strict pair-mode audits and mutation regressions; **Windows RC6.3.14 genuine BEQ+pair live three-mode parity PENDING**. No whole-function or autonomous promotion; inherited Go Full Regression structural count 1,176 >850 remains FAIL. See `docs/RC6.3.14_CPU_B_DISPATCH_AUDIT_CORRECTIVE.md`. Older CURRENT banners are historical.
+
+> **AUTHORITATIVE CURRENT — v0.67.0.0-RC6.3.13 CPU-B TWO-INSTRUCTION LIVE SOURCE CANDIDATE (2026-10-14).** RC6.3.12 real Windows generated TST.W+BEQ pair ABI 4/4 PASS from short output path, with previous RC6.3.11 authentic single BEQ live parity PASS. RC6.3.13 introduces guarded actual native TST.W+BEQ replacement and original/generated/forced-ROM rollback differential, mapped R16, IRQ and full machine evidence. Local 68000 tests PASS; **actual RC6.3.13 Windows live pair acceptance PENDING**. Full function/autonomous M1–M7 unproven; inherited Full Go regression 1176>850 still FAIL. See `docs/RC6.3.13_LIVE_CPU_B_PAIR.md`. Older CURRENT statements are retained only for historical provenance.
+
+> **AUTHORITATIVE CURRENT — v0.67.0.0-RC6.3.12 CPU-B TWO-INSTRUCTION GENERATED ABI SOURCE CANDIDATE (2026-10-14).** RC6.3.11 authentic Windows single CPU-B BEQ original/native/fault PASS (17,892 commits, exact CPU/IRQ/machine parity; 869/869 evidence hashes). RC6.3.12 adds separate original-Ghidra TST.W 0x4D8 + BEQ 0x4DE pair C++ ABI from authenticated ROM extension words and 17,903 consecutive observed edges; **pair is offline only, NOT yet a live native replacement**. All CPU-A/B enclosing function boundaries, autonomous M1–M7 and full Go budget 1176>850 remain open. See `docs/RC6.3.12_CPU_B_TWO_INSTRUCTION_ABI.md`. Earlier status paragraphs remain historical.
+
+> **AUTHORITATIVE CURRENT — v0.67.0.0-RC6.3.11 CPU-B IRQ-OWNERSHIP CORRECTIVE SOURCE CANDIDATE (2026-10-14).** RC6.3.10 actual Windows `native reconstruct --cpu-b-live` failed only at the CPU-B original-ROM baseline because 12 interrupt-vector/stack bus effects (four genuine IRQ entry groups) were wrongly tagged as BEQ.B data effects by stale `trace_pc`; its CPU-A health/copy, shared dispatcher and real CPU-B Ghidra/compiled ABI gates all PASS. RC6.3.11 uses Musashi interrupt ACK to assign each IRQ vector/stack transaction to a dedicated ordered IRQ stream, preserves strict zero-branch-data and original/native/fallback CPU/cycle/bus/machine parity, and adds real-ACK synthetic and missing/mutated IRQ evidence tests. **RC6.3.11 authentic Windows native CPU-B equivalence is PENDING**, as are complete-function/autonomous promotion and inherited Go Full Regression budget 1176>850. See `docs/RC6.3.11_IRQ_OWNERSHIP_CORRECTIVE.md`. Earlier status blocks remain historical.
+
+> **AUTHORITATIVE CURRENT — v0.67.0.0-RC6.3.10 CPU-B GENUINE GENERATED LIVE BEQ SOURCE CANDIDATE (2026-10-14).** RC6.3.9 actual Windows CPU-B World-ROM CRC/SHA, five Ghidra opcode sites, and independently compiled generated BEQ C++ ABI all PASS (20261014-193243 evidence; 788/788 SHA entries valid). RC6.3.10 adds opt-in **CPU-B live BEQ 0x0004DE** shared-dispatch substitution and genuine original/generated-native/forced-rollback comparisons, with 68000 timeslice/IRQ guard and complete CPU state, cycle, zero mapped data-bus and full machine endstate parity. **RC6.3.10 Windows real-ROM live parity is PENDING**; synthetic Musashi and local tests do not establish game-ROM equivalence. No complete function boundaries, CPU-B auto-promotion or unrestricted M1–M7 signoff. See `docs/RC6.3.10_LIVE_CPU_B_BEQ.md`. Historical sections below remain snapshots.
+
+> **AUTHORITATIVE CURRENT — v0.67.0.0-RC6.3.9 CPU-B ROM/GHIDRA GENERATED ABI (2026-10-14).** RC6.3.8 Windows original/native/fallback shared CPU-A dispatch PASS with authentic 5,234 CPU-B transition rows. RC6.3.9 adds guarded original CPU-B World ROM CRC/SHA verification, five-PC Ghidra static provenance, and compiled BEQ branch C++ shared ABI candidate; **not yet run against real CPU-B Ghidra on Windows**, no CPU-B live native substitution, M6–M7 autonomous promotion BLOCKED. See `docs/RC6.3.9_GENUINE_CPU_B_GHIDRA_GENERATOR.md`. Historical sections retained.
+
+> **AUTHORITATIVE CURRENT - v0.67.0.0-RC6.3.6 SECOND GHIDRA-GENERATED COPY BLOCK (2026-10-14).** RC6.3.5 Windows authentic caller-to-health-tail and CPU-B original census PASS. RC6.3.6 compiles a second Ghidra-derived CPU-A 16-instruction copy library and adds opt-in ROM-backed original/native/forced-rollback parity; 15/15 local CPU tests, Windows native proof PENDING. No full-function or CPU-B native promotion. See `docs/RC6.3.6_SECOND_LIVE_BLOCK.md`. Historical sections below remain as recorded.
+
+> **AUTHORITATIVE CURRENT — v0.67.0.0-RC6.3.4 OBSERVED HEALTH FUNCTION BOUNDARY / CPU-B CANDIDATE PORTFOLIO SOURCE CANDIDATE (2026-10-13).** RC6.3.3 real Windows 5-case controlled original/native/forced-rollback health matrix PASS with 3 distinct authentic original-ROM paths, 9/9 candidate sites, five native commits, five verified ROM fallbacks; 508/508 evidence hashes independently verified. RC6.3.4 adds real 68000 stacked return/entry captures, independent ROM RTS and observed caller audit, and CPU-B original-ROM PC census into a persistent candidate portfolio; **actual Windows RC6.3.4 execution and release qualification PENDING**. Observed boundary does not independently certify all callers or a complete function CFG. CPU-B observed PCs are not functions. No generalized autonomous promotion. RC6.2.6 steering instruction baseline remains signed off. See `docs/RC6.3.4_BOUNDARY_PORTFOLIO.md`. All older CURRENT headings below are historical.
+
+> **AUTHORITATIVE CURRENT — v0.67.0.0-RC6.3.3 CONTROLLED HEALTH BRANCH-MATRIX DEVELOPMENT CANDIDATE (2026-10-13).** RC6.3.2 real Windows bounded CPU-A health-function live differential PASS: one generated multi-instruction commit and authentic forced rollback with exact CPU/bus/mapped state; manifest 198/198 verified. RC6.3.3 adds original-ROM instruction-hook path capture and controlled entry-state 5-case x original/native/rollback differential; real Windows matrix and release qualification **PENDING**. Controlled branch coverage cannot be presented as natural gameplay or independently reviewed full-function coverage. No automatic CPU-B promotion or autonomous multi-routine orchestration. RC6.2.6 steering instruction baseline remains signed off. See `docs/RC6.3.3_BRANCH_MATRIX.md`. All older CURRENT headings below are historical.
+
+> **AUTHORITATIVE CURRENT — v0.67.0.0-RC6.3.2 TRACE-BOUNDARY CORRECTIVE SOURCE CANDIDATE (2026-10-13).** Actual Windows RC6.3.1 evidence showed one generated CPU-A target-health function commit with exact CPU-state and mapped end-state parity but an extra caller W32 0x102DE0 attributed to the function. RC6.3.2 fixes post-native-commit bus PC attribution and adds a synthetic Musashi original/native/forced-rollback regression which fails against RC6.3.1 and passes with the correction; full game-ROM Windows differential and release qualification are **PENDING**. No RC6.3 general-function promotion or CPU-B autonomy. RC6.2.6 bounded steering M1-M7 signoff retained. See `docs/RC6.3.2_TRACE_BOUNDARY.md`. All older CURRENT statements below are historical.
+
+> **AUTHORITATIVE CURRENT — RC6.3.1 PHASE 2 SOURCE CANDIDATE (2026-10-13).** Generated Ghidra target-health function C++ shared library, experimental opt-in live CPU-A entry substitution and original/native/forced-rollback replay with fail-closed CPU-state/bus/endstate gates. **Linux source CTests and offline ABI fixtures are not Windows live proof**; function boundary provisional, generalized CPU-A/B autonomous M1–M7 unproven. RC6.2.6 bounded steering instruction signoff remains the foundation. See `docs/RC6.3.1_LIVE_FUNCTION.md`. All previous CURRENT headings below are historical snapshots.
+
+> **AUTHORITATIVE CURRENT — 0.67.0.0-RC6.3.1 DEVELOPMENT SOURCE CANDIDATE (2026-10-13).** RC6.2.6 bounded CPU-A steering instruction M1–M7 technical acceptance SIGNED_OFF from real Windows evidence: 240 native replacements, 240 identical CPU return states, ordered bus/mapped-state parity, genuine forced rollback. RC6.3 adds three real Ghidra-derived multi-instruction generated C++ candidates including target-health branching; offline fixtures PASS but **RC6.3 whole-function autonomous M1–M7 and Windows qualification are NOT SIGNED OFF**. See `docs/RC6.3_AUTONOMOUS_RECONSTRUCTION.md` and `RC6_STATUS.md`. Older CURRENT headings below are historical snapshots only.
+
+> **CURRENT RELEASE CANDIDATE: 0.67.0.0-RC6.2.6** — RC6.2.4 proved 240 actual CPU-A steering hits and 48 false shadow mismatches for raw 0x0FE0. RC6.2.6 repairs M2 census case normalisation and 68000 low-byte sign extension in shadow and native substitution; Windows qualification and ROM-backed M1–M7 acceptance PENDING. See RC6_STATUS.md and docs/RC6.2.6_M1_M7_ACCEPTANCE.md. All older current-status statements are historical.
+
+**CURRENT RELEASE CANDIDATE: 0.67.0.0-RC6.2.4.** Real opt-in CPU-A `0x820C` guarded generated-library native instruction replacement and original/native/rollback full-state acceptance; Windows and ROM-backed proof pending. Enclosing Ghidra function still unreviewed. See `RC6_STATUS.md` and `docs/RC6.2.4_M1_M7_ACCEPTANCE.md`. All prior “current” paragraphs below are **historical only**.
+
+> **AUTHORITATIVE CURRENT STATUS — 0.67.0.0-RC6.2.2 SOURCE CANDIDATE (2026-10-12).** RC6.2.1 Windows qualification PASS (SHA256 `c8422141d9d079ce522f0b1dc12a95527c5d80e9055b4c874fb356493b46174b`); actual CPU-A Ghidra steering export `0x820C` PASS. RC6.2.2 adds self-contained, fail-closed M1–M7 **acceptance evaluation**, not automatically proven unrestricted native replacement. Full acceptance and Windows qualification must be tested; see `docs/RC6.2.2_M1_M7_ACCEPTANCE.md` and `RC6_STATUS.md`. Prior CURRENT/unqualified statements below are preserved as **historical snapshots, not current release status**.
+
+> **CURRENT RC6.2 DEVELOPMENT:** M1–M7 automation foundation only, not end-to-end autonomous native reconstruction or Windows-qualified. See `RC6_STATUS.md`; prior notes are historical.
+
+> **CURRENT RC6.1 DEVELOPMENT — v0.67.0.0-RC6.2.1.1; native steering shadow opt-in, Windows qualification outstanding.** See `RC6_STATUS.md`; older status below is historical.
+
+> **RC6 DEVELOPMENT STATUS (not qualified):** v0.67.0.0-RC6. RC5.3 sections below are historical. See `RC6_STATUS.md` at release root.
+
+> **CURRENT: v0.67.0.0-RC5.3 native sprite-clear guard corrective DEVELOPMENT CANDIDATE (UNQUALIFIED), 2026-10-11.** RC5 remains Windows-qualified, immutable SHA-256 `47def65d75056fb765d5b60dfe5a4c4a21bdcd3214ebb84920dd62a0d8b37ddf`. RC5.1 original shadow corpus passed (96/96 sprites, 24/24 class-6 road). RC5.2 Windows substitution failed: all 85 native attempts were guard-rejected (0 actual skips); final CSV export crashed. RC5.3 fixes the instruction-proven ROM branch fingerprint, uses entry-latched records for the destination guard, adds observed values, and repairs PS5.1 CSV. RC5.3 native equivalence and Windows qualification remain PENDING. See `docs/RC5.3_NATIVE_CLEAR_SUBSTITUTION.md`.
+
+> **CURRENT: v0.67.0.0-RC5.3 native sprite-clear SUBSTITUTION DEVELOPMENT CANDIDATE (UNQUALIFIED), 2026-10-11.** The original Windows-qualified RC5 parent SHA-256 `47def65d75056fb765d5b60dfe5a4c4a21bdcd3214ebb84920dd62a0d8b37ddf` remains immutable. RC5.1 headless live-shadow corpus PASS 12/12 cases (96/96 sprite transfers and 24/24 class-6 road generator comparisons); RC5.3 adds an experimental, opt-in native substitution of the trailing sprite-clear DBRA loop ONLY. Bulk copier and final RTS remain original ROM; normal emulation is default. RC5.3 Windows native A/B equivalence and exact-archive qualification pending. See `docs/RC5.3_NATIVE_CLEAR_SUBSTITUTION.md`; all older release-status headings below are historical.
+
+> **RC5 Windows qualification gate (2026-10-11):** Initial Windows build/CTest/packaging/runtime/focused PASS; Full Regression FAIL on presentation-contaminated parity capture (76050 differing pixels at frame2069). Source corrective isolates SDL compositor pixels without hiding renderer differences. **Fresh Windows rerun and promotable still outstanding.** See `docs/RC5_WINDOWS_PARITY_CORRECTIVE.md`.
+
+> **RC5 SOURCE CANDIDATE (`0.67.0.0-RC5`), NOT WINDOWS-QUALIFIED.** Original RC4.7 source archive supplied by user; RC5 integrates offline native C++ sprite/road candidates and standalone synthetic Windows preview, updates live Workbench Next Steps. No live SHADOW/COMPARE or native replacement is implemented. Follow `docs/RC5_NATIVE_PREVIEW_AND_SHADOW.md` and exact Windows `chqdev.bat qualify --fresh` gate before promotion. Older version status sections below are historical.
+
+## RC4.7 — Static Analysis / REA tooling candidate
+
+See `docs/REA_GHIDRA_RC47.md` and `docs/DOCUMENTATION_AUDIT_0.67.0.0-RC4.7.md`. **Current candidate RC4.7; promoted parent RC4.6. Windows qualification pending.** Dedicated Workbench REA workspace, bounded `ghidra.wait`, Ghidra run evidence attachment, corrected result path, Java/Jython preflight and flow-edge export. No Capstone library is shipped in this candidate; source vendoring is blocked pending a verified upstream archive. No native emulator CPU replacement.
+
+> **RC4.7 CURRENT SOURCE CANDIDATE — NOT WINDOWS-QUALIFIED.** Authoritative promoted parent RC4.6 SHA-256 `9e76a107e19f3e28a54a8a8b3bdaed630511e02f1da3e3e7ae274c07d863580f`. RC4.7 scope and acceptance criteria were documented before source implementation in `docs/REA_GHIDRA_RC47.md`. The original RC4.6 ZIP remains immutable. Exact RC4.7 Windows `chqdev.bat qualify --fresh` remains mandatory. Older release candidate paragraphs below are historical context.
+
+> **AUTHORITATIVE PROMOTED BASELINE — v0.67.0.0-RC4.6 (2026-10-10).** Windows `chqdev.bat qualify --fresh` reports **11/11 stages PASS** for exact frozen ZIP SHA-256 `9e76a107e19f3e28a54a8a8b3bdaed630511e02f1da3e3e7ae274c07d863580f`. User explicitly authorised promotion following focused, full, and successful headless Ghidra/REA crosswalk evidence. This is a **post-qualification documentation overlay**; it does not change the immutable tested archive. See `docs/RELEASE_VERIFICATION_RC46.md`, `promotion/PROMOTION_RECORD.json`, and `docs/REA_GHIDRA_NEXT_SCOPE.md`. Earlier RC4.6 “candidate/unqualified” statements below are **historical build-time notes, not current release status**.
+
+## Active priority for the next substantial development candidate — REA / Ghidra workspace overhaul
+
+**P0 UX:** Move Static Analysis / REA out of the constrained Native Reconstruction Lab column into a **top-level Workbench tab**, accessible from desktop and mobile, without duplicating state. Preserve Native Lab cross-links. Function list/search/filter, detail/disassembly/xrefs and execution/census comparison should use available width on desktop and stack intelligently on mobile. Selecting a report automatically loads its functions, selects a sensible default, and avoids an apparently empty list that requires a separate View Functions button. Support long JSON/function views without clipping, horizontal overflow or scroll traps.
+
+**P0 functional corrective:** Fix `ghidra.results` lookup to use the actual completed run's analysis path; verify that results and import APIs give consistent report counts when genuine staged census data exist. Prevent `ghidra.status.setup.ready=true` while the worker lacks Java or a required Ghidra scripting runtime. Detect Ghidra version and supported Jython extension or migrate scripts to Java/PyGhidra. Prefer robust source-bundled solutions; do not silently mutate user Windows configuration.
+
+**P0 orchestrated research:** Implement a progress-aware, cancellable `api ghidra.wait` (timeout/poll; no busy spinning or blocked serial API) and success/failure `api ghidra.evidence.attach` to make **one Workbench script produce one complete evidence ZIP**. Include headless console, script log, analysis manifest, findings, crosswalk, originating script, error and ROM fingerprint even for failures. Keep job IDs stable and no arbitrary shell or path injection. Same Workbench/mobile/CLI behavior and test coverage.
+
+**P1 analysis quality:** Independently recover projection routine structure and branch/call/data XREFs; implement optional source-buildable Capstone 68000 decoder behind API/Workbench/script, comparing against Musashi and Ghidra at known PCs including `0xA112`, `0x434EE`, `0x43828`; do not confuse a disassembled instruction site with a proven function boundary. Add live checkpoint-scoped ROM census export without emulator restart. Direct `morluto/rea` 68000 raw-ROM agent support remains optional and unproven.
+
+**Acceptance:** Fresh Windows qualification from exact archive; regression for wrong Java/Jython or unsupported version, correct file mapping and imports, multi-minute job completion/error/timeout/cancel/evidence; no freezes with long-running Ghidra jobs; mobile and authenticated LAN security; automatic function-population UX; explicit `hypothesis` provenance; no original CPU changes or ROM byte upload. Also preserve the independent Full Regression command-budget defect for resolution without deleting scenarios.
+
+## Current state after Windows qualification and completed Ghidra analysis
+
+- **Promoted source baseline:** `0.67.0.0-RC4.6`, exact ZIP SHA-256 shown above, immutable. Prior baseline RC4.5 remains retained for rollback.
+- **Windows authority:** user-pasted `qualification.json` (`chqdev 0.5.13`) reports 11/11 PASS. Focused Run 001: 13 commands PASS; Full Regression Run 002: 1,153 commands PASS. Evidence integrity checks PASS.
+- **Ghidra / REA proof:** Ghidra 12.1.4 headless processed a matching 524,288-byte CPU-A image, Motorola 68000 big-endian, base `0x000000`, and emitted eight static instruction-site windows. Run 035 correlated three genuine checkpoint ROM-census TSVs against those Ghidra exports; 19 commands PASS, three Workbench `ghidra-*` crosswalk reports.
+- **Health routine:** Ghidra **unreviewed function candidate** `0x00A10C–0x00A129` (exclusive end `0x00A12A`), contains authentic `0x00A112` decrement; in damage checkpoint, seven distinct PCs executed once. Ownership/boundaries remain `hypothesis`, not verified.
+- **Known RC4.6 limits:** `ghidra.results` findings-directory resolution is incorrect; Java/Jython preflight and background-job log capture are incomplete; `ghidra.import` initially produced zero reports when prior census inputs were absent (manual `rea.crosswalk` subsequently succeeded); REA/Ghidra controls are cramped in the Native Lab column. `ghidra.wait`, live Workbench ROM census, direct upstream REA 68000 provider, Capstone, complete native projection arithmetic remain future work. The existing Go structural command budget >850 is separate from passing Windows Full Regression.
+- **Next UI priority:** dedicated **top-level Static Analysis / REA tab**, full-width and responsive, with crosswalk/function explorer, Ghidra job controls, evidence, confidence, ROM identity and runtime-PC crosslinks. See `docs/REA_GHIDRA_NEXT_SCOPE.md`.
+
+## RC4.6 Ghidra integration — historical source-candidate description
+
+Promoted immutable parent: RC4.5 SHA-256 `443ffe623a38de4813691c436e05d6f92d9e113a8abae0219824fcc77e9aae11`. RC4.6 adds an optional asynchronous local headless 68000 Ghidra workflow to the Research API, Script Console, and Native Reconstruction Lab. It verifies a user-owned CPU-A ROM fingerprint, runs packaged scripts in a separate process, exports unreviewed static candidates and XREFs, and correlates with previously captured genuine ROM census TSVs. The live SDL emulator is not restarted; no REA agent or native replacement is claimed. See `docs/GHIDRA_WORKBENCH_RC46.md`. Fresh Windows qualification and genuine headless Ghidra execution are pending. Historical RC4.5 candidate lines below remain provenance, not current status.
+
+
+## RC4.5 REA priority and delivery
+
+RC4.5 contains the first visible optional Workbench static-analysis crosswalk and Research API commands. Live ROM census and direct raw-68000 REA/Ghidra provider remain P1 deferred; evidence-driven reference mapping and hash verification are mandatory. The standalone --load-checkpoint census defect from the RC4.4 boot runs is patched and must be proved on actual Windows checkpoint data. See `docs/REA_RC45.md` for concrete acceptance criteria and limitations.
+
+> **AUTHORITATIVE PROMOTED BASELINE — v0.67.0.0-RC4.4 (2026-10-10).** Exact Windows-qualified archive SHA-256: `8a8b715646ee07619891ea137425bd24272d5df2b84c60170105a164ec3d8912`. User-authorised promotion; all eleven stages in Windows `out/chqdev/qualification.json` are PASS, including `promotable`, focused and full regressions, and run-history. The immutable qualified archive is unchanged. Full provenance: `promotion/PROMOTION_RECORD.json` in the separate promotion supplement; historical candidate notes below describe earlier states and are retained.
+
+## P1 — REA static-analysis view in Workbench / Native Reconstruction Lab (NEXT MEANINGFUL BUILD)
+
+- **Status:** requested and deferred; NOT in promoted RC4.4. Grounding: RC4.4 has the offline `chqdev rea crosswalk` adapter only.
+- **UI:** Add a Static Analysis / REA tab within Native Reconstruction Lab, responsive for desktop and mobile read-only use. Import and open vetted `chq-rea-census-crosswalk-v1` JSON; list CPU-A/B functions, ranges, observed PCs/hits and explicit confidence.
+- **Crosslinks:** Select a function to show original disassembly, ROM execution census/observed-PC heatmap, associated Workbench run IDs, evidence bundles, and native maturity records. Initial anchor: CPU-A 0xA112; follow-up: 0x434EE-0x4382A projection path.
+- **Data/API:** Expose crosswalk import, list/detail, PC lookup, evidence links, and export through the script/API as well as Workbench. Preserve startup responsiveness and avoid reindexing historical bundles on launch.
+- **Safety and provenance:** Show image-base mapping, independently verified raw-ROM SHA-256 and static-confidence badges; do not label inferred function boundaries or AI-generated names as verified. Support missing REA/Ghidra without a failure. No ROM upload or emulated CPU replacement.
+- **Acceptance:** Win x64/ARM64 Workbench UI and CLI/API parity, import/export roundtrip, CPU-A 0xA112 fixture correlated with known ROM census, wrong-ROM/wrong-image-base rejection, empty-data UX, LAN/mobile safety, load-performance regression, and clean exact-archive Windows qualification.
+- **Dependency:** Independent raw 68000 static analysis via REA/Ghidra on Windows is not yet available in RC4.4. The first view should consume reviewed exports; direct provider automation is a separately gated milestone.
+
+> **RC4.4 scope limit:** Projection shadow is currently opt-in in the standalone CPU-only runtime; there is **no** Workbench/SDL parity API yet. This is tracked as `LIM-013`; the original 68000 always runs.
+
+> **Current development candidate:** `v0.67.0.0-RC4.4`. Windows exact-archive qualification pending. See `docs/NATIVE_PROJECTION_RC44.md` for present scope and limitations.
+
+## RC4.4 implementation progress (2026-10-10) — source candidate only
+
+RC4.3.2 Windows-qualified but **not promoted**. RC4.4 introduces a read-only independent CPU-A projection clip/index shadow, live instruction-hook comparisons in the CPU-only runtime, a manually reviewed REA static/ROM-census crosswalk, and an offline prepared-to-hardware sprite stage correlator. See `docs/NATIVE_PROJECTION_RC44.md` and the Run 018-029 findings. No C++ 68000 code replacement. No completed general geometry parity. Exact-archive Windows `chqdev.bat qualify --fresh` still pending. The prior Go Full Regression command-budget (<850) failure remains open; do not suppress unique assertions.
+
+**REA status change:** the P1 optional *crosswalk* proof of concept is implemented in RC4.4, but direct `morluto/rea` -> Windows raw 68000 ROM/Ghidra provider support remains unimplemented; do not interpret the following v9 DEFERRED entry as completed full REA integration.
+
+## P1 — Optional REA / Ghidra static-to-runtime evidence adapter (DEFERRED)
+
+- **Priority / status:** P1 research-enabling proof of concept; BACKLOG ONLY, release scope TBD. This item was previously agreed but missing from the v8 backlog; inclusion does not authorise a new RC.
+- **Upstream:** `morluto/rea` — https://github.com/morluto/rea. Confirm repository API, maintenance state, licence and real integration affordances at implementation time rather than assuming a built-in connector.
+- **Objective:** Correlate independent Ghidra/REA 68000 static disassembly/function boundaries, code/data cross-references and ROM offsets with original CPU-A/CPU-B runtime instruction/memory traces, Workbench and native-knowledge/evidence records.
+- **Initial grounded proof:** CPU-A PC `0x0000A112` (`subq.w #1, 0x1002AE`) confirmed at authentic first target damage frame 6334. Resolve actual raw ROM byte offset / CPU logical address / instruction bytes / containing function boundary; compare static call sites or XREFs to frame-scoped trace evidence. Do not treat an assumed function boundary as proof.
+- **Implementation shape:** Optional offline-first adapter / import-export mapping; neither REA nor Ghidra required for standard ChaseHQ-Native execution or qualification. No redistribution of user ROMs or REA binaries; preserve source/checksum provenance and CPU address-space distinctions.
+- **Workbench/API integration:** Link static functions, symbols, offsets and XREFs to trace PC, checkpoint, frame, canonical ROM/CHQPACK identity and evidence ZIP records, retaining CLI/Workbench parity. Version schema, reject mismatched checksums/mappings, and label uncertain symbols as hypotheses.
+- **Acceptance:** Test deterministic cross-refs at `0xA112` against raw-ROM mapping and CPU-A runtime evidence; inspect function boundaries and cross-section mapping; ensure no execution or gameplay changes; handle absent REA, wrong ROM and stale analysis gracefully. Integrate with LIM-001 (live census), LIM-002 (instruction-boundary capture) and LIM-004 (structured exports) in the next coherent native-tooling milestone, not a standalone build.
+
+> Deferred investigation tooling (2026-10-10, Run 026): add checkpoint-literal preflight validation (LIM-012) so renamed/absent states fail before multi-branch execution. Keep distinct gameplay semantics; do not treat `stage1-target-post-final-hit-9548` as a near-destruction checkpoint. See `docs/INVESTIGATION_LIMITATIONS.md`. No release authorised.
+
+> Run 024: 20-case depth × lateral sprite geometry sweep PASS. Source word `0x1027C4` responds to lateral input; natural writers `0xA13C` and `0x4FE4` restore lateral state. Two `128/128` read/write traces have uncertain completeness; recorded as LIM-011. No new build or promotion.
+
+## Investigation limitation intake and release-scope triage (standing rule, 2026-10-10)
+
+**Every observed research/tooling limitation is recorded, even if the experiment succeeds or a workaround exists.** The authoritative deferred intake is `docs/INVESTIGATION_LIMITATIONS.md` (LIM-001 through LIM-011). Each record includes evidence, status, research impact, workaround, acceptance tests and dependencies. Record limitations immediately; **do not cut a build** just to address them. Prioritise at each next meaningful implementation milestone with user-approved scope. The ROM census and instruction-boundary snapshots remain deferred; Run 015 does not unlock ROM-code replacement. **Windows-qualified RC4.3.2 remains unpromoted.**
+
+## Next meaningful RC backlog — Live instruction-boundary register and routine-contract tracing (DEFERRED; no standalone build)
+
+**Status:** BACKLOG / NOT IMPLEMENTED in RC4.3.2. **Build trigger:** combine with the already deferred Workbench ROM Execution Census integration or another substantial native-reconstruction release; do not build solely for this feature. Run 015 can provide disassembly and memory-access provenance now, but cannot assert entry/return register equivalence from that evidence alone.
+
+**Scope and acceptance criteria:**
+
+- Add opt-in, bounded **CPU-A and CPU-B instruction-boundary snapshots** for configurable PCs and routine entry/return boundaries, with `PC`, `SR`, `D0-D7`, `A0-A7`, stack pointer/context, cycle/frame context and call/return correlation. Record the exact observation phase (before/after instruction) to avoid ambiguous register semantics.
+- Track linked entry/return invocations (including nested calls and early exits), bounded relevant RAM reads/writes and before/after memory deltas, while preserving original gameplay behavior. Identify unmatched returns, overflow, trace truncation and unsupported cases explicitly; never imply complete coverage from partial traces.
+- Provide Workbench Script Console, native Research API and CLI parity, usable **inside the current emulator session without restarting**. Integrate start/stop/reset, snapshot, filters, export and explicit trace limits; define and test actual command names at implementation time, rather than assuming they exist now.
+- Emit structured per-invocation JSON/TSV evidence including checkpoint, release, session/run, CPU, entry/return PC, registers, stack, memory effects, frame/timing and drop counters; automatically include evidence in run bundles and permit control-versus-intervention comparisons.
+- Add deterministic regression tests for entry/return pairing, CPU register fidelity, memory effects, overhead/caps, cleanup after script failure and no behavioral perturbation. Preserve `try/finally` cleanup and all existing unique regression assertions.
+- Use the resulting contracts as **evidence** for selecting a bounded original-ROM routine to implement independently in native C++. Do not enable Shadow/Replace until inputs, outputs, side effects and timing have been verified.
+
+## Next meaningful RC backlog — Workbench ROM Execution Census integration (DEFERRED; no standalone build)
+
+**Status:** BACKLOG / NOT IMPLEMENTED in the Windows-qualified RC4.3.2 candidate. **Build trigger:** bundle with the next RC only when independent game research or a coherent set of source changes warrants a release. Continue investigations using the existing offline `--rom-census` and `--native-observe-entry` functionality in the meantime; do not claim that proposed Script Console commands exist in RC4.3.2. Do not restart a healthy Workbench session merely to acquire census data if the future integration can reuse it.
+
+**Scope and acceptance criteria:**
+
+- Expose start, stop, reset, snapshot, compare and export of CPU-A/CPU-B ROM instruction census through the existing Research API and Workbench Script Console, with matching CLI commands. Actual command names and parameters must be documented and schema-tested when implemented; e.g. `rom-census.start`, `rom-census.snapshot` below are proposals, not supported commands today.
+- Enable census measurement in a **live Workbench session without restarting the emulator**, and allow bounded, reproducible runs from canonical checkpoints (gameplay, attract, target damage, end-level). Record checkpoint identity, frame interval, session/run ID, CPU, enable/disable transitions and pack/ROM provenance.
+- Export JSON/TSV per-PC hit counts and hotspot summaries, plus scenario-to-scenario comparisons and a ranked *candidate list*; distinguish observed instructions, emulated CPU cycles and measured host time (only when actually instrumented). Never treat 256-byte bins as proven routine boundaries or unseen code as unused.
+- Allow independent bridge Observe entry counters alongside the census; keep Shadow/Replace **fail-closed** until independent C++ implementations and full state/timing-equivalence proofs exist.
+- Include structured census outputs and invocation metadata in the same automatic run evidence ZIP and display a responsive Workbench report; preserve parity for mobile Script Console where practical.
+- Guard for no game-behaviour change when census is enabled, bounded memory/performance impact and thread-safe snapshot/reset; preserve exact ROM-vs-pack comparative execution where supported.
+- Add native API, script runner, UI startup/readiness and deterministic evidence tests; verify healthy status/frame endpoints remain responsive during census exports. Retain all unique regression scenarios and assertions.
+
+**Current workaround (no rebuild):** use the already implemented offline `ChaseHQRuntime.exe --rom-census [--native-observe-entry A:PC]` on bounded runs and archive its structured evidence. Existing Workbench Script Console does **not** yet support toggling census on a live session.
+
+## RC4.3.2 — authoritative history CTest signature corrective (unqualified)
+
+The exact RC4.3.1 Windows `chqdev.bat qualify --fresh` log passed configuration and debug compilation, then failed CTest 10/13, `authoritative_history_tests`, with `Authoritative history function absent`. The production `Get-AuthoritativeScriptRuns` function is present, but its declaration changed in RC4.3.1 from `()` to `([string]$onlySession='')`. The PowerShell test's regex still matched only `()` and falsely reported absence. Correct the extractor to allow parameters and whitespace, **without dropping** its 320-run ordering/pagination/version tests. Extend Windows CTest coverage to exercise the new current-session filtering path. Add an independent Go regression guard against repeating this signature drift. Do not change production execution, the existing run-history performance fix, or Full Regression assertions. 0 tolerated CTest failures; this candidate is NOT promoted until the final exact ZIP passes Windows qualification. The historical Full Regression expanded-command budget failure remains unresolved.
+
+## RC4.3.1 readiness correction
+
+Current: make Workbench startup independent of historical run discovery, scope current session, persist summary metadata, enforce regression guards. Pending proof: Windows exact-archive runtime readiness and on-demand history UI. Future optional hardening: asynchronous bounded history indexing for manual global searches so heavy history never blocks the serial listener. Preserve unique Full Regression coverage and resolve command budget by measurement, not blanket limit increases.
+
+## v0.67.0.0-RC4.3.2 CURRENT DEVELOPMENT CANDIDATE — NOT QUALIFIED
+
+This source candidate extends v0.67.0.0-RC4.2.3. Its authoritative new feature and limitation inventory is `docs/NATIVE_MIGRATION_RC43.md`. The prior RC4.2.3 Windows debug compile was PASS, but it does **not** qualify RC4.3. Required before promotion: exact-archive Windows `chqdev.bat qualify --fresh` including strict CTest, focused and full regressions, deterministic package verification and readiness. The known pre-existing Full Regression Go structural budget check remains FAIL (1,170+ commands versus <850); do not delete unique assertions or relax that gate to conceal the failure. New code paths MUST keep native replacement disabled by default. User-controlled ROM, SDL and content paths stay outside release ZIPs. Fresh release setup MUST find the existing stable `build-local.json` or provide a precise doctor error. The bundled Windows chqdev executables MUST be present, tested and accompanied by matching release metadata.
+
+## RC4.2.3 mandatory fresh-extraction dependency contract
+
+A newly extracted RC MUST support `chqdev.bat qualify --fresh` without manually copying ROMs, SDL or build-local.json. chqdev discovers configuration in order: release-local `build-local.json`, parent `build-local.json` (preferred stable shared location), then a valid sibling ChaseHQ-Native release configuration. Environment variables CHASEHQ_ROM_SOURCE and CHASEHQ_SDL_SOURCE override configured sources. User-owned ROMs and SDL MUST NOT be bundled. `doctor` MUST fail, not warn, when neither configured nor staged dependencies exist. The package MUST include the Windows chqdev executable, and archive tests MUST verify it. All candidate handovers MUST disclose incomplete qualification, including the existing regression command-budget failure. Fresh Windows qualification remains required before promotion. NEVER weaken regression coverage or gates to conceal a failure.
+
+> Historical unqualified RC4.2.3-line candidate: **v0.67.0.0-RC4.2.3.1** — CHQPACK Browser, overlay inspection and provenance. Windows qualification pending.
+
+> Current development candidate: **v0.67.0.0-RC4** — ROM/CHQPACK source switching and RC3.1 release consistency corrections.
+
+> Current development candidate: **v0.67.0.0-RC3** — CHQPACK runtime content boundary; ROM-free runtime after deterministic import; RC2.1 native rendering retained.
+
+## Immediate native-rendering roadmap — v0.67.0.0-RC2.1
+## v0.67.0.0-RC2.1 — TC0100SCN BG opaque pen-0 corrective
+
+- Windows RC2 focused Run001 and Full Regression Run002 both completed PASS, but the new BG Shadow telemetry exposed a deterministic renderer mismatch rather than a qualification-infrastructure failure.
+- **Physical BG0 compared cleanly throughout**: focused `228/228` and Full Regression final focused section `125/125` comparisons with zero BG0 mismatches.
+- **Physical BG1 mismatched on every compared sample** when it was selected as the opaque bottom plane. First divergence was `original_pixel=0x00000000` versus `native_pixel=0xff000000` with matching coverage at the bottom-screen pen-0 area.
+- The captured Stage-2 reconstruction reports `tileControl6=0x0028`; bit 3 therefore selects physical BG1 as the bottom/opaque TC0100SCN plane.
+- Source inspection localized the defect exactly: the authoritative runtime returns pixel value `0` for palette pen 0 while still setting bottom-layer priority/coverage; the independent renderer instead converted pen 0 through TC0110PCR and produced opaque black.
+- RC2.1 makes independent BG palette conversion return zero for pen 0 while retaining coverage on opaque passes, and adds a unit regression for the exact physical-BG1 opaque-pen-0 contract. No sprite, text/HUD, road, gameplay, script-engine or general-tooling behaviour is intentionally changed.
+
+
+1. Qualify independent TC0100SCN BG0/BG1 Shadow on Windows across the focused + Full Regression corpus.
+2. If zero-diff, widen BG corpus and prove Native-only before promotion to NATIVE.
+3. Implement independent TC0150ROD road Shadow renderer.
+4. Finish independent compositor/priority path.
+
+Sprites and text/HUD are already promoted Native; do not spend new runs reproving them unless a regression appears.
+
+> Exact source baseline: qualified **v0.67.0.0-RC1.1** SHA-256 `ea4ebaafe07cd1c15b64c07ed8e92e32fd0e39cdcc360e31dd7b09c676b77f1d`. RC2 keeps the tooling freeze and moves visible rendering forward. See `docs/DOCUMENTATION_AUDIT_0.67.0.0-RC2.1.md`.
+
+> Historical qualified candidate: **v0.67.0.0-RC1.1** — native sprites default; text/HUD Shadow zero-diff bring-up; native sprite forensic overlap-coverage corrective.
+
+> **RC1.1 qualification corrective:** RC1 Windows focused regression proved 171 zero-diff TC0100SCN text Shadow frames. Full Regression then isolated a forensic-only Native sprite defect: rendered pixels and final owners were exact, but overlap `coverage` collapsed to 1. RC1.1 restores full Original-equivalent overlap density without changing sprite output.
+
+
+> Historical candidate: **v0.66.9.5-RC3**. RC3 closes the broad tooling phase.
+
+## Native implementation roadmap from v0.66.9.5-RC3
+
+1. Qualify the exact RC3 Windows archive.
+2. Run `research/scripts/graphics/native-promotion-sprites.chqscript`.
+3. If its promotion gate passes, record sprite rendering as **NATIVE** and keep Original only as oracle/fallback diagnostic code.
+4. Implement independent TC0100SCN text/HUD Shadow output and drive it through the same promotion framework.
+5. Build the independent Stage-1 course model, then native gameplay-state shadow, road renderer and compositor in evidence order.
+
+**Tooling freeze:** after RC3 qualification, new general tooling is deferred unless a native implementation task is genuinely blocked.
+
+> Historical candidate: **v0.66.9.5-RC2**. See `docs/DOCUMENTATION_AUDIT_0.66.9.5-RC2.md` for Runs003-012 evidence and RC2 changes.
+
+## v0.66.9.5-RC2 roadmap checkpoint
+
+Near term: qualify/promote the direct-ROM Sprite/Vehicle Atlas and evidence-linked semantic registry. Next atlas maturity steps are similarity/family clustering, runtime-evidence backlinks, palette evidence, grouped body/accessory/shadow exports and eventually high-resolution sprite replacement/3D experiments without weakening authentic provenance.
+
+# Roadmap - v0.66.9.5-RC1.1
+
+## Immediate RC1 gate
+
+- Prove semantic-asset `frame.snapshot.parity require=true` on Windows.
+- Prove map509 `player_car.body` replacement and 32-bit `game.speed.freeze` through the focused regression.
+- Prove coupled beacon Force ON/OFF changes next-frame presentation, not only state.
+- Confirm target_contact events appear around 5588 and retain observational/no-suppression semantics.
+- Run exact-archive `chqdev qualify --fresh` with zero tolerated CTest failures, focused + Full Regression, deterministic archive verification and promotable.
+
+## Follow-on research tooling (deferred from RC1)
+
+- Runtime-state query expressions without preflight caching, while retaining `api query.runtime` compatibility.
+- Research Script recoverable error handling (`try/catch/finally`) and structured error objects.
+- Richer tuple/record values for compact corpus scripts.
+- Run-local generic events/sprite-history scopes.
+- Semantic-object corpus coverage discovery and a Workbench Asset Resolver panel.
+- Native Reconstruction corpus matrix/report UI.
+- HUD/Text ownership inspector linking rendered glyph -> TC0100SCN code/RAM/palette/semantic element.
+- Presentation-only glyph/font replacement and safer asset export/import workflows.
+- Replacement Pack / PNG hot-reload only after import provenance and fail-safe fallback contracts are defined.
+
+## Release governance
+
+`chqdev` remains the de facto and authoritative build/release process. Exact-archive `chqdev qualify --fresh`, zero tolerated CTest failures, deterministic archive verification, focused regression, Full Regression and promotable are mandatory. PowerShell/BAT/shell launchers are compatibility surfaces. LF and CRLF release-text behavior must remain valid.
+
+---
+
+> Current release: **v0.66.9.4**. Promoted from exact Windows-qualified **v0.66.9.4-RC3.1.3** SHA-256 `48534c0bd3d8e4a40987e65089b07046535976675ca2e36d0ebf3a6d9584383e`. The final archive is regenerated for release identity/docs/focused-regression wiring only and requires one exact-final-archive `chqdev qualify --fresh` closure before immutable publication.
+
+> Current development candidate: **v0.66.9.4-RC3.1.2**. RC3.1.2 keeps the proven cross-format yellow-target renderer but binds it to semantic `player_car.body` across steering/orientation maps, expands SPEED suppression to the complete live destination block, and retains fail-closed proof plus chqdev readiness/console UX. Exact-archive Windows `chqdev qualify --fresh` remains required.
+
+> Current development candidate: **v0.66.9.4-RC3**. Source lineage remains the immutable promoted **v0.66.9.3** baseline (SHA-256 `6da88889dc8214c6058644e44e4d29f6a2117c9f0e92d99c8d906c280fc3462e`); **v0.66.9.4-RC2** (`50a8fb6d2c4be5fdafdea5b3804d6f2e1f1e5e62685160d3dc6f6d65237a6f41`) passed fresh Windows qualification. RC3 adds format-aware cross-OBJ native asset replacement, the first player-car → Stage-2 yellow-target preset, corrected dynamic SPEED HUD suppression, and expanded native/font tooling. RC3 requires exact-archive Windows `chqdev qualify --fresh` before promotion.
+
+## v0.66.9.4-RC3 implementation milestone
+
+RC3 establishes format-aware semantic replacement on top of the qualified Native sprite backend. Qualification goals are: keep Original as default/oracle; prove the player -> Stage-2 yellow-target cross-format path; keep HUD dynamic fields suppressed when hidden; retain RC2 shadow/native parity and charset tooling; and preserve deterministic cleanup. Follow-on work remains replacement packs/PNG hot reload, click-to-identify, sprite-family discovery, font override and bounded native gameplay-routine shadowing.
+
+## v0.66.9.4-RC1 historical implementation milestone
+
+RC1 packages three coherent outcomes: the behaviour-understood police-beacon state as a reversible Game Lab intervention; semantic HUD element hide/move controls using the proven TC0100SCN text path; and continued regression protection of the already SHADOW VERIFIED independent sprite layer.
+
+Before promotion, run the exact RC1 archive through Windows `chqdev qualify --fresh`, inspect the new Experimental/Game Lab controls visually, and require the focused RC1 regression plus Full Regression to pass. After that, higher-value native work is an explicit experimental sprite replacement backend/fallback gate, deeper TC0100SCN/road shadow parity, Stage-1 graph/minimap work and authentic audio-runtime instrumentation.
+
+> Promoted baseline release: **v0.66.9.3**. Promotion provenance is the exact Windows-qualified `v0.66.9.3-RC5` archive SHA-256 `19b7ed48edae98fd99f660ef56a949573050cabc2958fcdba2833a7888103961`. That candidate passed 8/8 CTest, deterministic package/verify, runtime readiness, focused regression, Full Regression and `promotable`; the final promotion changes release identity/documentation/focused-regression wiring and adds a release-package metadata guard only; it does not intentionally change emulation/gameplay behaviour.
+
+# ChaseHQ-Native v0.66.9.4-RC1 roadmap
+
+## Completed in the v0.66.9.3 cycle
+
+- [x] Harden Script Console evidence/source provenance, portable bundles and run finalization.
+- [x] Exercise the tooling through RC3 diagnosis Runs 003-020 before qualification.
+- [x] Causally map raw sprite record fields, placement/zoom/flips/clipping and equal-priority ownership.
+- [x] Shadow-verify the independent sprite 4bpp decoder.
+- [x] Implement independent placed sprite-source layer rendering from raw sprite RAM/spritemap/gfx/palette.
+- [x] Windows focused regression across all eight canonical checkpoints with **zero pixel and owner mismatches**; promote sprite placement/ownership to **SHADOW VERIFIED**.
+- [x] Correct semantic player body/shadow resolver and map pursuit-beacon presentation.
+- [x] Confirm target sprite family/object binding and three-frame presentation latency after lateral intervention.
+- [x] Confirm Turbo gameplay state and active+remaining HUD selection.
+- [x] Confirm authentic Brake P2:20, processed `0x100302`, physics/lamp causality and palette banks64/65 pen13 transition.
+- [x] Confirm score `0x100488 -> 0x100408 -> text HUD` tested path.
+- [x] Confirm exact road-side classifier and physical grade sign.
+- [x] Confirm race timer `0x100200/201 -> TIME UP -> CONTINUE` chain.
+- [x] Confirm mapped collision response family including exact 0.75 speed retention and off-road interaction type `0001`.
+- [x] Add bounded read/write/rw provenance, structured collision events and sound-command-interface events.
+- [x] Fix RC4 Windows qualification identity defect and add permanent identity guards.
+- [x] RC5 Windows `chqdev qualify --fresh`: **8/8 CTest**, package/verify, runtime readiness, focused PASS, Full PASS, `promotable` PASS.
+- [x] Promote release identity/documentation/focused regression to **v0.66.9.3**.
+
+## Immediate diagnosis - use existing v0.66.9.3 tooling
+
+1. **Police beacon:** **DONE at current scope.** Primary visible/deployment state is behaviour-understood; RC1 adds Authentic / Force ON / Force OFF using `0x101854`. Do not reopen unless contradictory evidence appears.
+2. **Target pre-copy producer:** use read provenance upstream of the generic `0x40500-0x40576` bulk sprite-RAM copier to identify where the target object becomes the prepared sprite record.
+3. **HUD producer provenance:** map tick/state-driven timer text writes and the score/Turbo text-cell producers; do not infer from screenshots when read/write provenance is available.
+4. **Collision object semantics:** use structured interaction type/object-reference events to identify the object record at `0x100420` and classify scenery/object families.
+5. **Audio command interpretation:** correlate `0x820000..03` writes with gameplay events, then map the actual sound CPU/chips before implementing mixer/PCM.
+6. **Stage-1 course graph/minimap:** turn proven selector 0-9 topology/fork logic into an authoritative directed graph and overlay player/course position.
+7. **Residual graphics fidelity:** targeted TC0100SCN flipped-text/origin, remaining palette/compositor edge cases only where still reproducible.
+
+## Next native implementation milestones
+
+1. Put the **SHADOW VERIFIED** placed sprite-source implementation behind an explicit experimental backend selector; retain original/emulated as default.
+2. Define failure/fallback coverage required to move sprite placement/ownership from SHADOW VERIFIED to REPLACEABLE.
+3. Implement independent TC0100SCN text/BG, compositor/mixer and TC0150 road shadow paths in evidence-driven order.
+4. Extend deterministic regression beyond Stage 1 into later stages/transitions.
+5. Only after fidelity is secure, pursue Graphics Lab sprite upscale and optional 3D-model substitution experiments.
+
+## Do not reopen without contradictory evidence
+
+Target health/damage, target terminal underflow, post-defeat handoff, sprite W0-W3 semantics, first-nontransparent ownership, Turbo HUD selection, Brake-lamp mechanism, score display source, exact road-side bands, grade sign and race-timer semantics are settled at their documented scope.
+
+## Permanent release contract
+
+`chqdev` is the **de facto and authoritative build/release process**. Fresh Windows exact-archive qualification uses `chqdev qualify --fresh`. There are **zero tolerated CTest failures; any CTest failure is fatal**. Packaging must be deterministic with exact archive verification, and both the focused regression and **Full Regression** must pass before `promotable`. PowerShell/BAT release tooling is compatibility/fallback only. Release-text checks remain invariant across **LF, CRLF and CR** newline forms.

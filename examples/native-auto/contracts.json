@@ -1,0 +1,42 @@
+[
+  {
+    "routineId": "synthetic_lookup_demo",
+    "cpu": "A",
+    "romSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+    "inputs": [
+      "raw"
+    ],
+    "outputs": [
+      "out"
+    ],
+    "registerEffects": [],
+    "memoryEffects": [],
+    "calls": [],
+    "cyclePolicy": "not modeled",
+    "kind": "signed-i16-lookup",
+    "reviewed": true,
+    "readyForGeneration": true,
+    "unresolvedDependencies": [],
+    "inputMin": -1,
+    "inputMax": 1,
+    "table": [
+      -2,
+      0,
+      3
+    ],
+    "fixtures": [
+      {
+        "raw": -1,
+        "originalOutput": -2
+      },
+      {
+        "raw": 0,
+        "originalOutput": 0
+      },
+      {
+        "raw": 1,
+        "originalOutput": 3
+      }
+    ]
+  }
+]

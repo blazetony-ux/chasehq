@@ -1,0 +1,17 @@
+# name: v0.66.9.1 Release Governance and Documentation Consolidation Regression
+# category: regression
+# regression-version: 0.66.9.1
+# regression-scope: historical
+# purpose: Prove current v0.66.9.1 runtime identity, canonical parameter-default runner behavior, authoritative run history and safe final state after permanent release-governance/documentation consolidation.
+# checkpoint: stage1-driving-2352.chqstate
+# param frames type=select values=2,4,8,16 default=4
+
+echo === ChaseHQ v0.66.9.1 Release Governance Regression: BEGIN ===
+api release.assert-version
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+echo V06691_PARAMETER_FRAMES=${frames}
+api control.run-frames frames=${frames}
+api script.runs limit=5
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api status
+echo === ChaseHQ v0.66.9.1 Release Governance Regression: COMPLETE ===

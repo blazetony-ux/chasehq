@@ -1,0 +1,83 @@
+# name: v0.66.9.4-RC2 Native Reconstruction + Asset Tooling Regression
+# category: regression
+# regression-version: 0.66.9.4-RC2
+# regression-scope: release
+# purpose: Prove the RC2 sprite Original/Shadow/Native backend surface, cross-stage independent sprite-layer parity, global existing-map substitution, complete TC0100SCN charset export and deterministic cleanup.
+# checkpoint: stage1-gameplay-2064.chqstate
+
+echo === ChaseHQ v0.66.9.4-RC2 Native Reconstruction + Asset Tooling Regression: BEGIN ===
+api release.assert-version
+api schema action=backend.sprite.get
+api schema action=backend.sprite.set
+api schema action=sprite.map-override
+api schema action=text.charset.export
+api schema action=sprite.layer-shadow.compare
+
+# Clean deterministic start. Original remains the oracle/default.
+api patch.clear
+api sprite.visual.clear
+api sprite.override.clear
+api sprite.map-override.clear
+api backend.sprite.set mode=original
+api backend.sprite.reset-verification
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api backend.sprite.get
+
+# Existing canonical Stage-1 placement/ownership shadow gate.
+api sprite.layer-shadow.compare failOnMismatch=true output=v06694-rc2-stage1-gameplay-shadow.json
+
+# Extend the independent placed-source shadow gate into Stage 2 using the
+# conservatively named checkpoints supplied for this candidate.
+api checkpoint.load file=stage2-gameplay-7500.chqstate run=false
+api sprite.layer-shadow.compare failOnMismatch=true output=v06694-rc2-stage2-gameplay-shadow.json
+
+api checkpoint.load file=stage2-enemy-10514.chqstate run=false
+api sprite.layer-shadow.compare failOnMismatch=true output=v06694-rc2-stage2-enemy-shadow.json
+
+# Live Shadow mode: Original is displayed while independent comparisons accrue.
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api backend.sprite.set mode=shadow
+api backend.sprite.reset-verification
+api control.run-frames frames=8
+api backend.sprite.get
+
+# Native-mode smoke: the independent renderer becomes the live sprite source.
+# Exact equivalence is already asserted above by the explicit shadow comparator;
+# this section proves the switch itself executes in live runtime state.
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api backend.sprite.set mode=native
+api control.run-frames frames=4
+api frame.capture name=v06694-rc2-native-sprite-backend
+api backend.sprite.get
+
+# Existing-OBJ global map substitution follows map identity across slots.
+api backend.sprite.set mode=original
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api sprite.map-override source=516 target=522 palette=-1
+api control.run-frames frames=1
+api frame.capture name=v06694-rc2-map516-to-522
+api sprite.map-override.clear
+
+# Full live TC0100SCN character-set export. Scale 1 keeps regression evidence
+# compact while exercising all 256 glyphs, atlas, RAM dump, metadata and ZIP.
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api text.charset.export palette=0 scale=1
+
+# Final cleanup: no experimental renderer or presentation override survives.
+api backend.sprite.set mode=original
+api backend.sprite.reset-verification
+api sprite.map-override.clear
+api game.beacon.override mode=authentic
+api hud.layout.reset
+api memory.trace.clear
+api collision.response.reset
+api input.ioc.clear
+api input.steering.set value=0000
+api sprite.visual.clear
+api sprite.override.clear
+api patch.clear
+api palette.overrides.clear
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api status
+
+echo === ChaseHQ v0.66.9.4-RC2 Native Reconstruction + Asset Tooling Regression: COMPLETE ===

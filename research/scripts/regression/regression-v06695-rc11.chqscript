@@ -1,0 +1,125 @@
+# name: v0.66.9.5-RC1.1 Snapshot/Resolver/Speed/Beacon/Collision Corrective Regression
+# category: regression
+# regression-version: 0.66.9.5-RC1.1
+# safe: true
+# purpose: Lock the evidence-backed fixes from v0.66.9.4 Runs005-010: live/snapshot semantic-asset parity, map509 semantic player coverage, 32-bit fixed-point speed freeze, coupled beacon phase/request override, target-contact structured collision instrumentation, and clean telemetry/reset behavior.
+
+echo === ChaseHQ v0.66.9.5-RC1.1 Corrective Regression: BEGIN ===
+api release.assert-version
+
+try
+  api memory.trace.clear
+  api events.clear
+  api collision.response.reset
+  api collision.events.clear
+  api game.target.one-hit enabled=false
+  api game.speed.clear
+  api sprite.asset-replace.clear
+  api sprite.map-override.clear
+  api sprite.override.clear
+  api sprite.visual.clear
+  api patch.clear
+  api palette.overrides.clear
+  api hud.layout.reset
+  api game.beacon.override mode=authentic
+  api input.ioc.clear
+  api input.steering.set value=0000
+  api backend.sprite.set mode=original
+
+  echo === RC1 A: SEMANTIC ASSET LIVE/SNAPSHOT PARITY ===
+  api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+  api backend.sprite.set mode=native
+  api sprite.asset-replace source=516 target=190 format=obj-b64 palette=73 flipx=1 dx=0 dy=0
+  api control.run-frames frames=5
+  assert status sprite_asset_visible=1
+  api frame.snapshot.parity name=rc1-player-asset-parity require=true
+  api sprite.asset-resolve
+  api sprite.asset-replace.clear
+  assert status sprite_asset_visible=0
+
+  echo === RC1 B: MAP509 SEMANTIC PLAYER FAMILY ===
+  api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+  api game.speed.freeze enabled=true value=602
+  api input.steering.set value=0060
+  api sprite.asset-replace object=player_car.body target=190 format=obj-b64 palette=73 flipx=1 dx=0 dy=0
+  api control.run-frames frames=12
+  assert status sprite_asset_visible=1
+  api sprite.asset-resolve
+  api frame.snapshot.parity name=rc1-player-map509-semantic-parity require=true
+  api sprite.asset-replace.clear
+  api game.speed.clear
+  api input.steering.set value=0000
+
+  echo === RC1 C: 32-BIT FIXED-POINT SPEED FREEZE ===
+  api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+  api game.speed.freeze enabled=true value=602
+  api control.run-frames frames=4
+  if memory cpu=A address=10041C width=32 value = 025A0000
+    echo PASS game.speed.freeze holds 0x025A0000 across game writer
+  else
+    echo FAIL game.speed.freeze did not hold 32-bit fixed-point speed
+  end
+  api patch.list
+  api game.speed.clear
+
+  echo === RC1 D: COUPLED BEACON PHASE/REQUEST OVERRIDE ===
+  api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+  api game.beacon.override mode=on
+  if memory cpu=A address=101854 width=16 value = 0006
+    echo PASS beacon Force ON phase=6
+  else
+    echo FAIL beacon Force ON phase incorrect
+  end
+  if memory cpu=A address=108082 width=16 value = FFFF
+    echo PASS beacon Force ON request=FFFF
+  else
+    echo FAIL beacon Force ON request incorrect
+  end
+  api control.run-frames frames=1
+  api game.beacon.get
+
+  api checkpoint.load file=stage1-target-immediate-pre-damage-6333.chqstate run=false
+  api game.beacon.override mode=off
+  if memory cpu=A address=101854 width=16 value = 0000
+    echo PASS beacon Force OFF phase=0
+  else
+    echo FAIL beacon Force OFF phase incorrect
+  end
+  if memory cpu=A address=108082 width=16 value = 0000
+    echo PASS beacon Force OFF request=0
+  else
+    echo FAIL beacon Force OFF request incorrect
+  end
+  api control.run-frames frames=1
+  api game.beacon.get
+  api game.beacon.override mode=authentic
+
+  echo === RC1 E: TARGET-CONTACT STRUCTURED EVENT SURFACE ===
+  api checkpoint.load file=stage1-target-immediate-pre-contact-5587.chqstate run=false
+  api collision.events.clear
+  api control.run-frames frames=4
+  api collision.events count=50
+
+  echo === RC1 F: CLEANUP CONTRACT ===
+finally
+  api memory.trace.clear
+  api collision.response.reset
+  api collision.events.clear
+  api game.target.one-hit enabled=false
+  api game.speed.clear
+  api sprite.asset-replace.clear
+  api sprite.map-override.clear
+  api sprite.override.clear
+  api sprite.visual.clear
+  api patch.clear
+  api palette.overrides.clear
+  api hud.layout.reset
+  api game.beacon.override mode=authentic
+  api input.ioc.clear
+  api input.steering.set value=0000
+  api backend.sprite.set mode=original
+  api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+  api status
+end
+
+echo === ChaseHQ v0.66.9.5-RC1.1 Corrective Regression: COMPLETE ===

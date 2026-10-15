@@ -1,0 +1,19 @@
+# name: RC3.4.7 chqdev v0.4 Fresh Qualification and Go Regression Runner
+# category: regression
+# regression-version: 0.66.9.0-RC3.4.7
+# regression-scope: historical
+# purpose: Prove current RC3.4.7 runtime identity, canonical checkpoint restoration, authoritative run history and safe final state after single-command fresh qualification and Go-side Script Console regression orchestration. Host trust/package/runtime gates are enforced by chqdev.
+# checkpoint: stage1-driving-2352.chqstate
+# param frames type=select values=2,4,8,16 default=4
+
+echo === ChaseHQ RC3.4.7 chqdev v0.4 Trust + Runtime Lifecycle Regression: BEGIN ===
+api release.assert-version
+api schema action=script.run
+api status
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+echo RC347_PARAMETER_FRAMES=${frames}
+api control.run-frames frames=${frames}
+api script.runs limit=5
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api status
+echo === ChaseHQ RC3.4.7 chqdev v0.4 Trust + Runtime Lifecycle Regression: COMPLETE ===

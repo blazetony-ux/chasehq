@@ -1,0 +1,16 @@
+﻿{
+    "schema":  "chq-active-session-v1",
+    "build":  "0.67.0.0-RC6.3.33",
+    "state":  "ready",
+    "phase":  "READY",
+    "started":  "2026-10-15T20:59:27.2840377+01:00",
+    "mode":  "Gameplay",
+    "checkpoint":  ".\\checkpoints\\stage1-gameplay-2064.chqstate",
+    "nativePort":  37600,
+    "httpPort":  37680,
+    "lanAccess":  true,
+    "lanAddress":  "192.168.0.87",
+    "emulatorPid":  20760,
+    "webPid":  21444,
+    "evidence":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\.\\evidence\\sessions\\20261015_205916"
+}

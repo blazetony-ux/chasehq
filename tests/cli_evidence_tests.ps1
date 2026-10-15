@@ -1,4 +1,4 @@
-param([Parameter(Mandatory=$true)][string]$Exe)
+param([Parameter(Mandatory=$true)][string]$Exe,[Parameter(Mandatory=$true)][string]$ExpectedBuild)
 $ErrorActionPreference='Stop'
 $root=Split-Path $PSScriptRoot -Parent
 $temp=Join-Path ([IO.Path]::GetTempPath()) ('chq-evidence-'+[guid]::NewGuid().ToString('N'))
@@ -15,6 +15,6 @@ try {
     $manifest=@($files|Where-Object {$_.Name -eq 'evidence-manifest.json'})
     if($manifest.Count -ne 1){throw 'Evidence identity manifest absent or ambiguous'}
     $m=Get-Content $manifest[0].FullName -Raw|ConvertFrom-Json
-    if($m.build -ne '0.66.9.0-RC3.0' -or $m.startFrame -ne 2352){throw 'Evidence identity incorrect'}
+    if($m.build -ne $ExpectedBuild -or $m.startFrame -ne 2352){throw ('Evidence identity incorrect: expected build='+$ExpectedBuild+' frame=2352; got build='+[string]$m.build+' frame='+[string]$m.startFrame)}
     Write-Host 'CLI checkpoint-frame capture and evidence completeness: PASS'
 } finally { Remove-Item $temp -Recurse -Force -ErrorAction SilentlyContinue }

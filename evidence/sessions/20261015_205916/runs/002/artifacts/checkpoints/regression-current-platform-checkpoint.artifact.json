@@ -1,0 +1,9 @@
+﻿{
+    "schema":  "chq-run-checkpoint-save-v1",
+    "name":  "regression-current-platform-checkpoint",
+    "frame":  2356,
+    "source":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\checkpoints\\regression-current-platform-checkpoint.chqstate",
+    "artifact":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\checkpoints\\regression-current-platform-checkpoint.chqstate",
+    "sha256":  "8B6C46AA397B78ECA9E7209AF0F0EEEADDE88FB58E021F63EE77B4157D656886",
+    "captured":  "2026-10-15T21:07:05.2734803+01:00"
+}

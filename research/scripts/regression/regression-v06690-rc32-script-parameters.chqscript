@@ -1,0 +1,10 @@
+# name: RC3.2 Script Parameter Compatibility
+# category: regression
+# regression-version: 0.66.9.0-RC3.2
+# regression-scope: current
+# purpose: Portable/Workbench parameter substitution smoke test. Defaults must remain additive and legacy variables/commands unchanged.
+# param frames type=select values=300,600,900,1200,2400,3600 default=1200
+
+api release.assert-version
+echo PARAMETER_FRAMES=${frames}
+echo === RC3.2 SCRIPT PARAMETER COMPATIBILITY COMPLETE ===

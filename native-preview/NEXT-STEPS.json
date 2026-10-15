@@ -1,0 +1,25 @@
+{
+  "artifact": "RC5 native-preview standalone POC (not actual RC5)",
+  "base": "v0.67.0.0-RC4.7",
+  "completed_research": [
+    "CPU-A sprite-transfer independent C++ offline 6144/6144-byte agreement",
+    "CPU-B 104-word road-generator independent C++ offline 832/832-byte agreement",
+    "Stage 1 class-4 and class-6 material to road hardware and final pixels causal verification",
+    "Stage 1 police-beacon activation and delayed command queue delivery",
+    "Score display chain, turbo normal expiration and timer glyph provenance"
+  ],
+  "preview_poc": [
+    "Windows x64 native GUI synthetic visualisation cross-compiled",
+    "Four ROM-free scenarios with independently generated expected buffers",
+    "Deliberate mismatch mode and status view"
+  ],
+  "outstanding": [
+    "RC4.7 source received; verify build and full Windows qualification",
+    "C++ candidates linked to chq_runtime with opt-in read-only entry/exit shadow; verify live checkpoint parity on Windows",
+    "Instruction-time native input captures and live shadow evidence with fail-safe fallback",
+    "Confirm Workbench renders updated games/chasehq/next-steps.json on actual Windows runtime",
+    "Build and qualify Windows native preview with actual C++ modules and hybrid original gameplay",
+    "Full official RC5 CTest, regressions, Workbench/mobile, clean-build, final packaging",
+    "Native audio and additional gameplay/road components"
+  ]
+}

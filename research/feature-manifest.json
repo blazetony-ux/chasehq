@@ -1,8 +1,332 @@
 {
   "schema": "chq-feature-manifest-v1",
-  "build": "0.66.9.0-RC3.0",
+  "build": "0.67.0.0-RC6.3.33",
   "policy": "New API/script features should ship with schema and regression coverage in the same build.",
   "features": [
+    {
+      "id": "graphics.native-sprites-default",
+      "title": "Native sprite renderer promoted to default runtime path",
+      "status": "candidate",
+      "since": "0.67.0.0-RC1",
+      "updated": "0.67.0.0-RC1",
+      "regression": "research/scripts/regression/regression-v0670-rc1.chqscript",
+      "summary": "The independent sprite renderer is now the normal runtime backend after the RC3 10-checkpoint Native-only promotion corpus passed with zero Shadow mismatches, zero blocked frames and zero Original fallbacks. Original remains selectable as a verification oracle."
+    },
+    {
+      "id": "graphics.tc0100scn-text-shadow",
+      "title": "Native TC0100SCN text/HUD renderer promoted to default runtime path",
+      "status": "candidate",
+      "since": "0.67.0.0-RC1",
+      "updated": "0.67.0.0-RC3",
+      "regression": "research/scripts/regression/regression-v0670-rc21.chqscript",
+      "summary": "RC1.1 Windows evidence produced 14,397 zero-diff Shadow frames and the canonical promotion run proved 230 clean Shadow frames plus 380 Native-only frames with zero blocked frames and exact snapshots. RC2 makes the independent text/HUD renderer the normal runtime path while retaining Original/Shadow verification modes."
+    },
+    {
+      "id": "graphics.tc0100scn-bg-shadow",
+      "title": "Independent TC0100SCN BG0/BG1 Shadow renderer",
+      "status": "candidate",
+      "since": "0.67.0.0-RC3",
+      "updated": "0.67.0.0-RC3",
+      "regression": "research/scripts/regression/regression-v0670-rc21.chqscript",
+      "summary": "Adds an independent TC0100SCN background renderer with separate tile decode, palette conversion, rowscroll, scroll/origin, flip and bottom/upper transparency handling. Original/Shadow/Native/Native-only modes are exposed through backend.bg; Shadow is the default bring-up path."
+    },
+    {
+      "id": "native.promotion-framework",
+      "title": "Generic Native Promotion Framework",
+      "status": "candidate",
+      "since": "0.66.9.5-RC3",
+      "updated": "0.66.9.5-RC3",
+      "regression": "research/scripts/regression/regression-v06695-rc3.chqscript",
+      "summary": "Machine-readable subsystem maturity, live promotion counters, fail-closed promotion assertions, same-state layer capture and a Workbench Native Progress matrix establish one reusable Original -> Shadow -> Native-only -> corpus -> NATIVE workflow."
+    },
+    {
+      "id": "graphics.sprite-native-only",
+      "title": "Sprite Native-only hard-disable backend",
+      "status": "candidate",
+      "since": "0.66.9.5-RC3",
+      "updated": "0.66.9.5-RC3",
+      "regression": "research/scripts/graphics/native-promotion-sprites.chqscript",
+      "summary": "Native-only renders the live sprite layer exclusively through the independent placed-sprite renderer. Original fallback is forbidden; unsupported forensic filters increment a blocked counter so independence is measurable rather than assumed."
+    },
+    {
+      "id": "native.first-divergence-evidence",
+      "title": "Automatic first-divergence evidence",
+      "status": "candidate",
+      "since": "0.66.9.5-RC3",
+      "updated": "0.66.9.5-RC3",
+      "regression": "research/scripts/regression/regression-v06695-rc3.chqscript",
+      "summary": "The first live Shadow mismatch automatically writes Original/Native/diff sprite-layer PNGs plus a machine-readable manifest. native.layer.capture provides the same same-state comparison manually without advancing emulation."
+    },
+    {
+      "id": "native.performance-telemetry",
+      "title": "Native backend performance/fallback telemetry",
+      "status": "candidate",
+      "since": "0.66.9.5-RC3",
+      "updated": "0.66.9.5-RC3",
+      "regression": "research/scripts/regression/regression-v06695-rc3.chqscript",
+      "summary": "Sprite backend status reports Original/Native/native-only frame counts, blocked/fallback counts, and average Original, Native and Shadow-compare render microseconds for promotion auditing."
+    },
+    {
+      "id": "graphics.rom-sprite-vehicle-atlas",
+      "title": "ROM-backed Sprite / Vehicle Atlas",
+      "status": "candidate",
+      "since": "0.66.9.5-RC2",
+      "updated": "0.66.9.5-RC2",
+      "regression": "research/scripts/regression/regression-v06695-rc2.chqscript",
+      "summary": "Directly enumerates Chase H.Q. spritemap IDs from b52-38.34 and decodes explicit OBJ-A, OBJ-B64 and OBJ-B32 interpretations from ROM graphics without requiring live sprite RAM. Exports native-size raw-pen and palette views, CSV provenance, contact sheets, manifest and ZIP; ROM appearance is kept separate from confirmed semantic identity."
+    },
+    {
+      "id": "graphics.sprite-inspect-source-effective",
+      "title": "Source/effective sprite presentation inspection",
+      "status": "candidate",
+      "since": "0.66.9.5-RC2",
+      "updated": "0.66.9.5-RC2",
+      "regression": "research/scripts/regression/regression-v06695-rc2.chqscript",
+      "summary": "sprites list/inspect and Workbench sprite records distinguish authentic sourceMap/sourcePalette from effectiveMap/effectivePalette and report slot/map/asset override provenance, fixing the Run011 identity/geometry ambiguity."
+    },
+    {
+      "id": "graphics.semantic-vehicle-family-rc2",
+      "title": "Expanded evidence-backed vehicle semantic families",
+      "status": "confirmed-candidate",
+      "since": "0.66.9.5-RC2",
+      "updated": "0.66.9.5-RC2",
+      "regression": "research/scripts/regression/regression-v06695-rc2.chqscript",
+      "summary": "Runs008-010 confirm player body maps530/536, player shadows598/600, target map20, beacon maps519/540/617 and beacon palette78. Run012 visual neighbours remain candidates only until runtime evidence promotes them."
+    },
+    {
+      "id": "workbench.native-backend-web-bridge-parity",
+      "status": "hotfix",
+      "since": "0.66.9.5-RC1.1",
+      "updated": "0.66.9.5-RC1.1",
+      "description": "Native Reconstruction Lab Original/Shadow/Native/status/reset direct backend commands are admitted by the safe Workbench web bridge; static parity coverage rejects literal UI command verbs missing from the bridge allow-list.",
+      "regression": "tests/workbench_v06695_rc11_tests.js"
+    },
+    {
+      "id": "research.run-local-event-window",
+      "title": "Explicit generic event-history clear for run-local causal windows",
+      "status": "candidate",
+      "since": "0.66.9.5-RC1",
+      "updated": "0.66.9.5-RC1",
+      "regression": "research/scripts/regression/regression-v06695-rc11.chqscript",
+      "summary": "events.clear exposes the already-safe native event-clear command through the Research Script API so experiments do not have to interpret stale session-history events."
+    },
+    {
+      "id": "graphics.frame-snapshot-live-parity",
+      "title": "SDL framebuffer / structured snapshot parity gate",
+      "status": "candidate",
+      "since": "0.66.9.5-RC1",
+      "updated": "0.66.9.5-RC1",
+      "regression": "research/scripts/regression/regression-v06695-rc11.chqscript",
+      "summary": "frame.snapshot uses the selected sprite backend/semantic asset resolver and frame.snapshot.parity can fail closed when the structured final differs from the actual paused SDL framebuffer."
+    },
+    {
+      "id": "graphics.semantic-asset-resolver-inspection",
+      "title": "Semantic sprite asset resolver inspection",
+      "status": "candidate",
+      "since": "0.66.9.5-RC1",
+      "updated": "0.66.9.5-RC2",
+      "regression": "research/scripts/regression/regression-v06695-rc2.chqscript",
+      "summary": "sprite.asset-resolve correlates live source map/palette records with semantic families and active replacement state; RC2 adds confirmed player incline body maps530/536 and source/effective inspector provenance."
+    },
+    {
+      "id": "gameplay.speed-fixedpoint-freeze",
+      "title": "32-bit fixed-point speed intervention",
+      "status": "candidate",
+      "since": "0.66.9.5-RC1",
+      "updated": "0.66.9.5-RC1",
+      "regression": "research/scripts/regression/regression-v06695-rc11.chqscript",
+      "summary": "game.speed.set/freeze target CPU-A 0x10041C as a 32-bit fixed-point value<<16, matching the actual PC 0x8700 writer proven by Run010."
+    },
+    {
+      "id": "game.police-beacon-coupled-override",
+      "title": "Coupled police-beacon phase/request override",
+      "status": "verified",
+      "since": "0.66.9.5-RC1",
+      "updated": "0.66.9.5-RC2",
+      "regression": "research/scripts/regression/regression-v06695-rc2.chqscript",
+      "summary": "Force ON/OFF couples 0x101854 with 0x108082. Runs004-007 prove the intervention changes descriptor staging and, after the authentic sprite-pipeline delay, live beacon presentation in both directions; RC2 regression tests the latency-aware live result."
+    },
+    {
+      "id": "gameplay.target-contact-events",
+      "title": "Structured target-contact collision events",
+      "status": "candidate",
+      "since": "0.66.9.5-RC1",
+      "updated": "0.66.9.5-RC1",
+      "regression": "research/scripts/regression/regression-v06695-rc11.chqscript",
+      "summary": "Adds observational target_contact events for the authentic PC A13C -> 0x10A084 target-local overlap response proven at frame5588; existing response suppression remains scoped to player lateral/speed writes."
+    },
+    {
+      "id": "research.timeline-semantic-ranking-v2",
+      "title": "Forensic Timeline gameplay-semantic ranking",
+      "status": "candidate",
+      "since": "0.66.9.5-RC1",
+      "updated": "0.66.9.5-RC1",
+      "summary": "Timeline candidate ranking now labels/boosts confirmed target health, defeat flags/delay, interaction type, target lateral and internal-speed addresses so known causal gameplay writes are not ranked as anonymous RAM."
+    },
+    {
+      "id": "graphics.hud-dynamic-value-suppression",
+      "title": "Dynamic HUD value suppression correctness",
+      "since": "0.66.9.4-RC3",
+      "updated": "0.66.9.4-RC3",
+      "status": "candidate",
+      "summary": "Semantic SPEED hide covers the proven 6x2 dynamic TC0100SCN character cells at rows 4..5 cols 36..41 so runtime glyph rewrites remain presentation-hidden."
+    },
+    {
+      "id": "graphics.semantic-asset-replacement",
+      "title": "Format-aware semantic sprite asset replacement",
+      "since": "0.66.9.4-RC3",
+      "updated": "0.66.9.5-RC2",
+      "status": "experimental",
+      "summary": "Format-aware Native sprite replacement across OBJ classes; RC2 extends confirmed player_car.body coverage with incline/positive-band maps530/536 while preserving structured live/snapshot parity."
+    },
+    {
+      "id": "native.sprite-backend-switch",
+      "status": "experimental",
+      "since": "0.66.9.4-RC2",
+      "updated": "0.66.9.4-RC2",
+      "summary": "Original / Shadow / Native live sprite renderer backend selection. Shadow displays the authoritative Original renderer while independently comparing the placed-source reconstruction; Native displays the independent host renderer.",
+      "validation": "sprite_layer_shadow_tests + RC2 focused cross-stage shadow corpus + exact-archive Windows native-mode visual qualification required"
+    },
+    {
+      "id": "graphics.sprite-map-substitution",
+      "status": "experimental",
+      "since": "0.66.9.4-RC2",
+      "updated": "0.66.9.4-RC2",
+      "summary": "Presentation-only global source-map to target-map substitution for existing OBJ assets, with optional palette override and transient-slot independence.",
+      "validation": "RC2 focused action regression + manual vehicle/billboard candidate prove-off"
+    },
+    {
+      "id": "graphics.tc0100scn-charset-export",
+      "status": "experimental",
+      "since": "0.66.9.4-RC2",
+      "updated": "0.66.9.4-RC2",
+      "summary": "Export all 256 live TC0100SCN 8x8 2bpp RAM characters as atlas, individual PNGs, raw RAM and usage metadata.",
+      "validation": "RC2 focused export + Workbench/API parity"
+    },
+    {
+      "id": "research.stage2-checkpoint-corpus",
+      "status": "candidate",
+      "since": "0.66.9.4-RC2",
+      "updated": "0.66.9.4-RC2",
+      "summary": "Conservative Stage 2 gameplay frame-7500 and enemy-present frame-10514 checkpoints extend cross-stage graphics/native verification without overclaiming encounter semantics.",
+      "validation": "checkpoint load + sprite-layer shadow compare in RC2 focused regression"
+    },
+    {
+      "id": "workbench.hud-layout-responsive-width",
+      "status": "candidate",
+      "since": "0.66.9.4-RC2",
+      "updated": "0.66.9.4-RC2",
+      "summary": "Experimental HUD Layout card spans additional desktop width and collapses responsively so Apply controls are not clipped.",
+      "validation": "static Workbench RC2 test + Windows visual spot-check"
+    },
+    {
+      "id": "game.police-beacon-override",
+      "title": "Evidence-backed police-beacon experimental override",
+      "status": "superseded-by-coupled-override",
+      "since": "0.66.9.4-RC1",
+      "updated": "0.66.9.5-RC1.1",
+      "description": "Historical phase-only override from v0.66.9.4; Runs009-010 proved phase-only state changes did not affect rendered beacon presentation. v0.66.9.5-RC1.1 supersedes it with coupled phase/request intervention.",
+      "validation": "v0.66.9.4-RC1 exact archive passed fresh Windows qualification (9/9 CTest, runtime/Workbench/mobile, focused regression, Full Regression, promotable); carried forward into RC2."
+    },
+    {
+      "id": "graphics.semantic-hud-layout",
+      "title": "Semantic HUD hide/move presentation controls",
+      "status": "implemented-awaiting-proof",
+      "since": "0.66.9.4-RC1",
+      "updated": "0.66.9.4-RC1",
+      "description": "Presentation-only semantic TC0100SCN groups for High Score, Time, Distance, Score, Speed, Turbo markers and Stage/Credit, with per-group visibility and pixel offsets plus Authentic/Minimal/No HUD presets.",
+      "validation": "v0.66.9.4-RC1 exact archive passed fresh Windows qualification (9/9 CTest, runtime/Workbench/mobile, focused regression, Full Regression, promotable); carried forward into RC2."
+    },
+    {
+      "id": "graphics.hud-layout-snapshot-provenance",
+      "title": "HUD presentation state in layered snapshot metadata",
+      "status": "implemented-awaiting-proof",
+      "since": "0.66.9.4-RC1",
+      "updated": "0.66.9.4-RC1",
+      "description": "reconstruction.json records active semantic HUD presentation state and per-element visibility/dx/dy so transformed captures remain self-describing.",
+      "validation": "v0.66.9.4-RC1 exact archive passed fresh Windows qualification (9/9 CTest, runtime/Workbench/mobile, focused regression, Full Regression, promotable); carried forward into RC2."
+    },
+    {
+      "id": "release.v06693-package-metadata-guard",
+      "title": "Final release package-metadata ownership and stale-candidate guard",
+      "status": "confirmed",
+      "since": "0.66.9.3",
+      "updated": "0.66.9.3",
+      "description": "PACKAGE_MANIFEST status/source provenance/feature prose is release-owned in chqdev.json. Preflight fails if a final release retains candidate/pending-promotion wording or missing package metadata.",
+      "validation": "tools/chqdev TestPackageMetadataContract + chqdev preflight package-metadata-contract + deterministic package/verify"
+    },
+    {
+      "id": "graphics.placed-sprite-layer-shadow",
+      "status": "shadow-verified",
+      "since": "0.66.9.3-RC4",
+      "regression": "research/scripts/regression/regression-v06693.chqscript",
+      "description": "Independent raw sprite-RAM/spritemap/4bpp/palette/placement/ownership renderer. Windows promotion regression matched the authoritative placed sprite source at all eight canonical checkpoints with zero pixel and owner mismatches; original/emulated remains the default backend.",
+      "updated": "0.66.9.3"
+    },
+    {
+      "id": "research.memory-read-provenance",
+      "status": "confirmed",
+      "since": "0.66.9.3-RC4",
+      "regression": "research/scripts/regression/regression-v06693.chqscript",
+      "description": "Bounded memory.trace access=read|write|rw with frame/CPU/PC/address/width/value evidence. Carried through the Windows-qualified v0.66.9.3 release and available for producer-provenance diagnosis.",
+      "updated": "0.66.9.3"
+    },
+    {
+      "id": "gameplay.structured-collision-events",
+      "status": "confirmed",
+      "since": "0.66.9.3-RC4",
+      "regression": "research/scripts/regression/regression-v06693.chqscript",
+      "description": "Records every proven mapped collision-response write with interaction type, object reference, writer PC, before/attempted/applied values and suppression class; qualified as part of v0.66.9.3.",
+      "updated": "0.66.9.3"
+    },
+    {
+      "id": "audio.sound-command-events",
+      "status": "confirmed-interface-instrumentation",
+      "since": "0.66.9.3-RC4",
+      "regression": "research/scripts/regression/regression-v06693.chqscript",
+      "description": "Captures writes to the existing 0x820000..03 sound command stub as structured events. The v0.66.9.3 qualification proves the instrumentation surface, but does not claim sound CPU/chip/mixer/PCM runtime.",
+      "updated": "0.66.9.3"
+    },
+    {
+      "id": "gameplay.rc3-promoted-semantics",
+      "status": "confirmed",
+      "since": "0.66.9.3-RC4",
+      "regression": "research/scripts/regression/regression-v06693.chqscript",
+      "description": "Promotes RC3 evidence for player/target families, Turbo HUD, Brake, score/display score, road side, incline/decline, race timer and collision interaction semantics into the current registry/knowledge; carried by the Windows-qualified v0.66.9.3 release.",
+      "updated": "0.66.9.3"
+    },
+    {
+      "id": "graphics.alpha-aware-image-compare",
+      "status": "confirmed",
+      "since": "0.66.9.3-RC4",
+      "regression": "research/scripts/regression/regression-v06693.chqscript",
+      "description": "Image compare reports legacy RGB changes alongside RGBA, alpha and occupancy deltas without breaking existing RGB-identical semantics; carried by the Windows-qualified v0.66.9.3 release.",
+      "updated": "0.66.9.3"
+    },
+    {
+      "id": "research.ioc-sweep-state-capture",
+      "status": "confirmed",
+      "since": "0.66.9.3-RC4",
+      "regression": "research/scripts/regression/regression-v06693.chqscript",
+      "description": "IOC sweep v2 stores gameplay registry, track state and input-port state for each tested mask in addition to screenshots/events; carried by the Windows-qualified v0.66.9.3 release.",
+      "updated": "0.66.9.3"
+    },
+    {
+      "id": "input.signed12-validation",
+      "status": "confirmed",
+      "since": "0.66.9.3-RC4",
+      "regression": "research/scripts/regression/regression-v06693.chqscript",
+      "description": "Rejects steering injection outside raw signed-12-bit 0000..0FFF instead of silently accepting ineffective 16-bit values; carried by the Windows-qualified v0.66.9.3 release.",
+      "updated": "0.66.9.3"
+    },
+    {
+      "id": "track.course-mapping-survey-quality-v2",
+      "status": "implemented-awaiting-proof",
+      "since": "0.66.9.0-RC3.1",
+      "regression": "research/scripts/regression/regression-v06690-rc31-course-mapping-quality.chqscript",
+      "description": "Stabilizes surface segmentation by separating conservative course-record material candidates from volatile TC0150 renderer evidence; preserves one object-candidate row per eligible visible sprite with explicit map/palette/bounds/position evidence and heuristic temporal IDs; enforces runtime candidate coverage/evidence invariants; keeps player trajectory separate from road geometry; and preserves RC3.0 live course-follow/Track View fixes.",
+      "validation": "Windows Build-Debug + direct PowerShell object-candidate helper regression + focused RC3.1 runtime regression + 600-frame shakedown + Full Regression"
+    },
     {
       "id": "graphics.tc0100scn-x-and-workbench-reliability",
       "status": "confirmed",
@@ -425,10 +749,10 @@
     },
     {
       "id": "graphics.sprite-4bpp-shadow-compare",
-      "status": "implemented-awaiting-proof",
+      "status": "shadow-verified",
       "since": "0.66.9.0-RC2.8",
-      "regression": "research/scripts/regression/regression-v06690-rc28-radar-hud-endstate.chqscript",
-      "description": "Independent sprite 4bpp shadow decoder and pixel compare utility. Fixture parity is tested; ROM-scene Windows shadow validation remains pending."
+      "regression": "research/scripts/regression/regression-v06693.chqscript",
+      "description": "Independent sprite 4bpp shadow decoder is ROM-scene verified: RC3 corpus evidence matched 177 active records / 1,159,168 compared pixels with zero mismatches, and it is exercised within the final eight-checkpoint placed-source shadow verification."
     },
     {
       "id": "workbench.responsive-evidence-flow",
@@ -475,30 +799,298 @@
     {
       "id": "track.live-course-follower-api",
       "status": "implemented-candidate",
-      "since": "0.66.9.0-RC3.0",
+      "since": "0.66.9.0-RC3.1",
       "regression": "research/scripts/regression/regression-v06690-rc30-course-mapping-live-survey.chqscript",
       "description": "Existing native course follower is controllable live through Research API, Script Console and Workbench without emulator restart."
     },
     {
       "id": "track.course-mapping-recorder-v2",
       "status": "implemented-candidate",
-      "since": "0.66.9.0-RC3.0",
+      "since": "0.66.9.0-RC3.1",
       "regression": "research/scripts/regression/regression-v06690-rc30-course-mapping-live-survey.chqscript",
       "description": "Track recorder v2 preserves road geometry, real player lateral state, projected driven trajectory, gameplay telemetry, follower telemetry and reconstructable mapping exports."
     },
     {
       "id": "track.entity-evidence-census",
       "status": "observational",
-      "since": "0.66.9.0-RC3.0",
+      "since": "0.66.9.0-RC3.1",
       "regression": "research/scripts/regression/regression-v06690-rc30-course-mapping-live-survey.chqscript",
       "description": "Mapping samples preserve confirmed Stage-1 target-car position plus unclassified visible sprite/object evidence without prematurely assigning AI-car or obstacle semantics."
     },
     {
       "id": "track.surface-signature-evidence",
       "status": "observational",
-      "since": "0.66.9.0-RC3.0",
+      "since": "0.66.9.0-RC3.1",
       "regression": "research/scripts/regression/regression-v06690-rc30-course-mapping-live-survey.chqscript",
       "description": "Mapping records a composite raw surface candidate signature from course-record selectors plus representative TC0150ROD control/body/gfx scanline state, while intentionally leaving asphalt/dirt/material semantics unclassified until proven."
+    },
+    {
+      "id": "script.declared-run-parameters",
+      "status": "implemented-candidate",
+      "since": "0.66.9.0-RC3.2",
+      "regression": "research/scripts/regression/regression-v06690-rc32-script-parameters.chqscript",
+      "description": "Additive # param metadata with typed/bounded validation, Workbench controls/resolved preview and script.run API parity; legacy scripts remain compatible."
+    },
+    {
+      "id": "evidence.script-run-trace-checkpoint-closure",
+      "status": "implemented-candidate",
+      "since": "0.66.9.0-RC3.2",
+      "regression": "research/scripts/regression/regression-v06690-rc32-script-parameters.chqscript",
+      "description": "Authoritative script runs retain selected parameters/resolved commands, legacytrace artifacts with SHA-256 provenance, and checkpoint save/load evidence under the run-local artifact tree."
+    },
+    {
+      "id": "workbench.authenticated-lan-mobile-console",
+      "status": "implemented-candidate",
+      "since": "0.66.9.0-RC3.2",
+      "regression": "tests/workbench_rc32_tests.js",
+      "description": "Default one-command LAN front-listener binding with automatic LAN IPv4 discovery, per-session token authentication, one-time URL-ACL/firewall setup, compact /console companion, and -LocalOnly opt-out; native debugger/private backend stay loopback-only."
+    },
+    {
+      "id": "track.stage1-road-material-type6-path",
+      "status": "observational",
+      "since": "0.66.9.0-RC3.2",
+      "regression": "",
+      "description": "Documents the tested Stage-1 0x06 dirt-like causal path from course byte through CPU-B cache/consumers/render buffers into TC0150 road RAM without globally naming the material value."
+    },
+    {
+      "id": "workbench.mobile-qr-pairing",
+      "status": "implemented-candidate",
+      "since": "0.66.9.0-RC3.4",
+      "regression": "tests/workbench_rc34_tests.js",
+      "description": "Local-only desktop Workbench pairing descriptor and offline QR encode the existing authenticated mobile /console URL; first remote token use stores HttpOnly chq_token and redirects to clean /console."
+    },
+    {
+      "id": "workbench.mobile-authoritative-run-history",
+      "status": "implemented-candidate",
+      "since": "0.66.9.0-RC3.4",
+      "regression": "tests/workbench_rc34_tests.js",
+      "description": "Mobile /console exposes Recent Script Runs from the same authoritative /api/v1/script/runs source as desktop with current/all-session scope, status filtering, paging and selected-run output."
+    },
+    {
+      "id": "release.handover-contract-guard",
+      "status": "release-guard",
+      "since": "0.66.9.0-RC3.4.2",
+      "regression": "research/scripts/regression/regression-v06690-rc342.chqscript",
+      "description": "Fail-closed ChatGPT handover contract derived from src/version.h; requires current v<version>, Authoritative continuation and Immediate next task sections, with validator good/bad fixtures and independent portable frozen-tree regression.",
+      "validation": "Validate-Release handover self-test + tests/workbench_rc342_tests.js + exact-archive Windows preflight + focused RC3.4.2 + Full Regression"
+    },
+    {
+      "id": "release.text-contract-newline-invariance",
+      "status": "release-guard",
+      "since": "0.66.9.0-RC3.4.3",
+      "regression": "research/scripts/regression/regression-v06690-rc343.chqscript",
+      "description": "All line-oriented release/document contracts normalize CRLF and CR to LF before regex matching; Windows PowerShell and independent Node self-tests prove LF, CRLF and CR positive fixtures plus negative handover fixtures.",
+      "validation": "Validate-Release newline matrix self-test + Validate-WindowsPreflight RC3.4.3 wiring + tests/workbench_rc343_tests.js + exact-archive Windows preflight + focused RC3.4.3 + Full Regression"
+    },
+    {
+      "id": "tooling.chqdev-cross-platform-controller",
+      "status": "authoritative",
+      "since": "0.66.9.0-RC3.4.4",
+      "regression": "tests/workbench_v06691_tests.js",
+      "description": "Standard-library-only Go CLI is the de facto/authoritative build-release controller from RC3.4.5 and normal Windows runtime lifecycle entry point from RC3.4.6; deterministic packaging/runtime readiness/regression orchestration remain authoritative while shell tooling is compatibility/fallback.",
+      "validation": "go test ./tools/chqdev + tests/workbench_v06691_tests.js + chqdev preflight + exact-archive Windows qualify --fresh",
+      "updated": "0.66.9.1"
+    },
+    {
+      "id": "release.deterministic-cross-platform-package",
+      "status": "release-guard",
+      "since": "0.66.9.0-RC3.4.5",
+      "regression": "tests/workbench_rc345_tests.js",
+      "description": "chqdev package normalizes ZIP ordering/timestamps/modes, self-produces a second byte-identical archive, exact-verifies extraction and requires Windows/Linux SHA parity for identical source bytes.",
+      "validation": "chqdev package reproducibility PASS + chqdev verify + cross-host SHA comparison"
+    },
+    {
+      "id": "tooling.chqdev-windows-trust-normalization",
+      "status": "implemented-candidate",
+      "since": "0.66.9.0-RC3.4.6",
+      "regression": "tests/workbench_rc346_tests.js",
+      "description": "chqdev natively detects/removes project-owned Windows Zone.Identifier streams; preflight repairs automatically, trust exposes explicit repair/check, and manual Unblock-File is not part of the canonical process.",
+      "validation": "go test ./tools/chqdev + chqdev preflight on fresh Windows extraction + zero Zone.Identifier remaining"
+    },
+    {
+      "id": "tooling.chqdev-runtime-lifecycle",
+      "status": "implemented-candidate",
+      "since": "0.66.9.0-RC3.4.6",
+      "regression": "research/scripts/regression/regression-v06690-rc346.chqscript",
+      "description": "chqdev runtime start/stop/restart is the normal Windows lifecycle entry point. RC3.4.6 bridges internally to the existing PowerShell Workbench host with ExecutionPolicy Bypass after trust normalization and verifies readiness after start/restart.",
+      "validation": "tests/workbench_rc346_tests.js + chqdev runtime restart/check + focused RC3.4.6 + Full Regression"
+    },
+    {
+      "id": "chqdev-fresh-qualification-go-script-runner",
+      "title": "chqdev v0.4 fresh qualification and Go Script Console runner",
+      "since": "0.66.9.0-RC3.4.7",
+      "updated": "0.66.9.0-RC3.4.8",
+      "description": "Canonical one-command fresh qualification plus Go-side release-script control flow/include execution, introduced in RC3.4.7 to replace whole-source posting to the reduced server parser.",
+      "validation": "tests/workbench_rc347_tests.js + tools/chqdev Go tests + chqdev qualify --fresh"
+    },
+    {
+      "id": "chqdev-parameter-default-parity",
+      "title": "chqdev v0.4.1 parameter-default parity and failure diagnostics",
+      "status": "implemented-candidate",
+      "since": "0.66.9.0-RC3.4.8",
+      "updated": "0.66.9.0-RC3.4.8",
+      "description": "Seeds Go-runner query/compile state from Research Script parameter defaults and preserves nested regression failure/session/run/path diagnostics through qualify --fresh.",
+      "regression": "research/scripts/regression/regression-v06690-rc348.chqscript",
+      "validation": "tests/workbench_rc348_tests.js + tools/chqdev TestGoScriptRunnerParameterDefaults + chqdev qualify --fresh"
+    },
+    {
+      "id": "tooling.clean-ctest-windows-portability",
+      "title": "Zero-exception CTest gate and Windows runtime-test portability",
+      "status": "confirmed",
+      "since": "0.66.9.0-RC3.4.9",
+      "updated": "0.66.9.1",
+      "description": "Moves sixteen large Runtime test fixtures from the Windows stack to heap storage, closes eight input streams before filesystem cleanup, and removes the historical cpu_bus_rom_tests tolerated-failure exception from chqdev and compatibility build wrappers.",
+      "regression": "research/scripts/regression/regression-v06690-rc349.chqscript",
+      "validation": "Windows RC3.4.9 qualify --fresh: 7/7 CTest PASS + focused + Full Regression + promotable PASS"
+    },
+    {
+      "id": "release.v06691-documentation-governance",
+      "title": "v0.66.9.1 documentation and release-governance consolidation",
+      "status": "implemented-awaiting-proof",
+      "since": "0.66.9.1",
+      "updated": "0.66.9.1",
+      "regression": "research/scripts/regression/regression-v06691.chqscript",
+      "description": "Deep-audits current human/machine-readable documentation and adds a chqdev preflight release-process contract that blocks drift away from qualify --fresh, zero tolerated CTest failures, deterministic exact-archive proof, focused + Full Regression, and compatibility-only shell tooling.",
+      "validation": "tools/chqdev TestReleaseProcessContract + tests/workbench_v06691_tests.js + chqdev preflight + exact-archive Windows qualify --fresh"
+    },
+    {
+      "id": "track.v06692-record-semantics",
+      "title": "Stage-1 track-record semantics and evidence isolation",
+      "status": "implemented-candidate",
+      "since": "0.66.9.2-RC3",
+      "updated": "0.66.9.2-RC3",
+      "description": "Promotes evidence-backed +2..+7 track-record names, separates full course identity from +4 road-processing/material candidates, preserves polymorphic +7 semantics, fixes legacytrace run isolation, dynamic session build identity and checkpoint/diagnostic context.",
+      "regression": "research/scripts/regression/regression-v06692-rc3.chqscript",
+      "validation": "tests/workbench_v06692_rc3_tests.js + focused regression + Full Regression + Windows chqdev qualify --fresh"
+    },
+    {
+      "id": "release.v06692-root-hygiene",
+      "title": "Single-root release history and canonical qualification entry point",
+      "status": "implemented-candidate",
+      "since": "0.66.9.2-RC3",
+      "updated": "0.66.9.2-RC3",
+      "description": "Removes version-specific qualification wrappers, consolidates root build/hotfix/release history into CHANGELOG.md, keeps one current VALIDATION.md, uses generic current package manifests, and makes obsolete root release artifacts a chqdev preflight failure.",
+      "regression": "tests/workbench_v06692_rc3_tests.js",
+      "validation": "chqdev v0.5.1 preflight release-root-hygiene + deterministic package/exact verification + Windows .\\chqdev.bat qualify --fresh"
+    },
+    {
+      "id": "release.v06692-run-provenance",
+      "title": "Authoritative run source and command-count provenance",
+      "status": "implemented-candidate",
+      "since": "0.66.9.2-RC4",
+      "updated": "0.66.9.2-RC4",
+      "description": "Fixes chqdev-created run bundles so script.chqscript contains the complete authored source rather than the first resolved command, persists cumulative command counts, finalizes the Go runner authoritative total, and surfaces that value through Recent Script Runs/history.",
+      "regression": "research/scripts/regression/regression-v06692-rc4.chqscript",
+      "validation": "tools/chqdev TestGoScriptRunnerControlFlowAndIncludes + tests/workbench_v06692_rc4_tests.js + Windows chqdev qualify --fresh bundle inspection"
+    },
+    {
+      "id": "tooling.v06693-sprite-shadow-compare",
+      "title": "Live sprite 4bpp shadow comparison",
+      "status": "confirmed",
+      "since": "0.66.9.3-RC1",
+      "updated": "0.66.9.3",
+      "description": "Read-only live comparison between the authoritative sprite decoder and independent shadow decoder with native command, HTTP/Script API and Workbench control parity; optional structured evidence output.",
+      "regression": "research/scripts/regression/regression-v06693-rc3.chqscript",
+      "validation": "sprite_gfx_tests + workbench_v06693_rc1_tests.js + focused tooling regression; scene-wide semantic promotion intentionally deferred. + Windows v0.66.9.3-RC5 qualify --fresh PASS (8/8 CTest + focused + Full Regression + promotable)"
+    },
+    {
+      "id": "tooling.v06693-script-runtime-data",
+      "title": "Runtime queries, tuple iteration and checkpoint corpus runner",
+      "status": "confirmed",
+      "since": "0.66.9.3-RC1",
+      "updated": "0.66.9.3",
+      "description": "Adds explicit execution-time get* queries, bounded fixed-arity tuple loops, a checkpoint corpus runner with state restoration, and configurable 2048-command default headroom.",
+      "regression": "research/scripts/regression/regression-v06693-rc3.chqscript",
+      "validation": "Go tuple/limit tests + Workbench static tests + focused tooling regression. + Windows v0.66.9.3-RC5 qualify --fresh PASS (8/8 CTest + focused + Full Regression + promotable)"
+    },
+    {
+      "id": "tooling.v06693-evidence-integrity",
+      "title": "Hashed indexed authoritative run evidence",
+      "status": "confirmed",
+      "since": "0.66.9.3-RC1",
+      "updated": "0.66.9.3",
+      "description": "Authoritative run bundles record per-file byte size and SHA-256, emit portable forward-slash JSON/HTML indexes and verification reports, preserve authored/resolved source plus command maps, and selected Recent Script Runs open directly in the Evidence tab. Standalone HTML index paths are clickable/filterable.",
+      "regression": "tests/workbench_v06693_rc2_tests.js",
+      "validation": "tests/workbench_v06693_rc3_tests.js + focused real-use evidence inspection; Windows promotion qualification deferred until tooling scope freeze. + Windows v0.66.9.3-RC5 qualify --fresh PASS (8/8 CTest + focused + Full Regression + promotable)"
+    },
+    {
+      "id": "regression.v06693-coverage-consolidation",
+      "title": "Full Regression capability-contract consolidation",
+      "status": "confirmed",
+      "since": "0.66.9.3-RC1",
+      "updated": "0.66.9.3",
+      "description": "Removes repeated historical release-tail execution while retaining every unique runtime/host contract through one current platform regression and an explicit coverage-equivalence map. Growth guard uses recursive structural commands: 936 baseline to 746 RC3.",
+      "regression": "research/scripts/regression/regression-platform-current-contracts.chqscript",
+      "validation": "docs/REGRESSION_COVERAGE_MAP.md + recursive full-regression compile/count checks + existing host/static/Go/CTest coverage. + Windows v0.66.9.3-RC5 qualify --fresh PASS (8/8 CTest + focused + Full Regression + promotable)"
+    },
+    {
+      "id": "tooling.v06693-rc2-finalization-hardening",
+      "title": "Fail-closed authoritative run finalization",
+      "status": "confirmed",
+      "since": "0.66.9.3-RC2",
+      "updated": "0.66.9.3",
+      "description": "Repairs Windows evidence-index byte aggregation and marks packaging/index/hash failures FINALIZATION_FAILED while removing incomplete generated bundle artifacts.",
+      "regression": "research/scripts/regression/regression-v06693-rc3.chqscript",
+      "validation": "tests/workbench_v06693_rc2_tests.js + real Windows Workbench focused run before promotion qualification. + Windows v0.66.9.3-RC5 qualify --fresh PASS (8/8 CTest + focused + Full Regression + promotable)"
+    },
+    {
+      "id": "tooling.v06693-rc2-script-provenance",
+      "title": "Authoritative browser/Go command and source provenance parity",
+      "status": "confirmed",
+      "since": "0.66.9.3-RC2",
+      "updated": "0.66.9.3",
+      "description": "Browser and Go runners transport absolute resolved-source line numbers, preserve authored and resolved source, record client-side waits authoritatively, and emit a per-command provenance map while final command counts stay aligned.",
+      "regression": "research/scripts/regression/regression-v06693-rc3.chqscript",
+      "validation": "tests/workbench_v06693_rc3_tests.js + HTTP-backed Go source-line/wait evidence regression. + Windows v0.66.9.3-RC5 qualify --fresh PASS (8/8 CTest + focused + Full Regression + promotable)"
+    },
+    {
+      "id": "tooling.v06693-rc2-corpus-typed-results",
+      "title": "Structured corpus result objects",
+      "status": "confirmed",
+      "since": "0.66.9.3-RC2",
+      "updated": "0.66.9.3",
+      "description": "corpus.run parses JSON-producing nested action output into result objects and retains raw only as fallback for non-JSON actions.",
+      "regression": "research/scripts/regression/regression-v06693-rc3.chqscript",
+      "validation": "tests/workbench_v06693_rc2_tests.js + Windows v0.66.9.3-RC5 qualify --fresh PASS (8/8 CTest + focused + Full Regression + promotable)"
+    },
+    {
+      "id": "native.sprite-transfer-offline-candidate",
+      "title": "Independent sprite-transfer candidate",
+      "status": "candidate",
+      "since": "0.67.0.0-RC5",
+      "updated": "0.67.0.0-RC5",
+      "regression": "research/scripts/regression/regression-v0670-rc5.chqscript",
+      "summary": "Built-in C++ sprite RAM transfer model; independent offline 6144-byte validation, not live shadow."
+    },
+    {
+      "id": "native.road-mask-offline-candidate",
+      "title": "104-word road-mask candidate",
+      "status": "candidate",
+      "since": "0.67.0.0-RC5",
+      "updated": "0.67.0.0-RC5",
+      "regression": "research/scripts/regression/regression-v0670-rc5.chqscript",
+      "summary": "Built-in C++ class-6 road-output model; offline 832-byte comparison, instruction-time input capture and live shadow pending."
+    },
+    {
+      "id": "native.sprite-clear-loop",
+      "title": "Experimental native CPU-A sprite trailing clear-loop substitution",
+      "status": "candidate",
+      "since": "0.67.0.0-RC5.3",
+      "updated": "0.67.0.0-RC5.3",
+      "regression": "research/scripts/regression/regression-v0670-rc53.chqscript",
+      "summary": "Experimental opt-in native substitution ONLY of the original CPU-A 0x4016C..0x40170 trailing clear-loop. Guarded by 68000 opcode fingerprint, registers, shadow bulk-copy check, staged-hardware content and capacity; final PC 0x40174, modeled cycles, rollback to ROM on shadow mismatch. Default off; source candidate requires 12-case Windows native-vs-ROM CPU/RAM/cycle evidence and exact ZIP qualification. Not full sprite routine replacement."
     }
-  ]
+  ],
+  "rc6313HistoricalStatus": {
+    "release": "0.67.0.0-RC6.3.13",
+    "scope": "CPU-B TST.W+BEQ live opt-in original/native/fallback RC6.3.13 Windows acceptance pending; RC6.3.12 generated pair ABI passed, RC6.3.11 single BEQ live passed",
+    "nextSteps": "Qualify RC6.3.13 genuine ROM-backed three-mode pair; review enclosing CPU-B boundaries; preserve strict IRQ/mapped R16 and fix Full Regression budget <850 without reducing coverage",
+    "wholeFunctionPromotionAllowed": false
+  },
+  "rc6314CurrentStatus": {
+    "release": "0.67.0.0-RC6.3.14",
+    "scope": "RC6.3.14 is a fail-closed audit corrective based on uploaded immutable RC6.3.13 source 49fda552c33de158c3071be48affe732a05de1cf873281024e87209e9accea21: real Windows Debug compilation PASS, RC6.3.13 Ghidra CPU-B pair generated ABI 4/4 PASS; 17,892 single-BEQ native commits were recorded but prior validator rejected 22 separate disabled-pair original-ROM audit rows. New candidate accepts only authenticated inactive CPU-B 0x4D8 original-ROM rows, rejects unexpected active/unknown CPU-B routes, and now audits pair-mode dispatch in all three modes. Updated Go unit/mutation tests PASS locally; full Go suite still fails inherited Full Regression command-budget 1176 >= 850. Actual RC6.3.14 Windows BEQ and pair live three-mode acceptance is PENDING, no promotion.",
+    "nextSteps": "Run RC6.3.14 Windows debug and native reconstruct --fresh --live-health --cpu-b-live to prove single-BEQ plus two-instruction TST+BEQ in all three modes; inspect generated/fault CPU/SR/cycles, mapped R16, IRQ, bus and full machine parity. Keep function-level promotion blocked; separately de-duplicate Full Regression 1176 to <850 preserving unique coverage.",
+    "wholeFunctionPromotionAllowed": false
+  }
 }

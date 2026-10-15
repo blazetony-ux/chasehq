@@ -1,0 +1,25 @@
+OK cpu=A start=0x9D0A count=24
+0x9D0A  bsr     $9dc2
+0x9D0E  lea     ($40,A6), A6
+0x9D12  cmpa.l  ($120,A4), A6
+0x9D16  bne     $9d1e
+0x9D18  dbra    D7, $9d0e
+0x9D1C  clr.w   D7
+0x9D1E  dbra    D7, $9c74
+0x9D22  move.w  ($2,A5), D0
+0x9D26  andi.w  #$1f, D0
+0x9D2A  bne     $9d30
+0x9D2C  clr.l   ($120,A4)
+0x9D30  rts
+0x9D32  andi.b  #$f9, ($8,A6)
+0x9D38  move.w  ($a,A6), D0
+0x9D3C  cmpi.w  #$5c0, D0
+0x9D40  bcs     $9d5e
+0x9D42  cmpi.w  #$600, D0
+0x9D46  bcc     $9d5e
+0x9D48  move.l  D0, -(A7)
+0x9D4A  move.w  #$56, D0
+0x9D4E  jsr     $a786.l
+0x9D54  move.l  (A7)+, D0
+0x9D56  jsr     $2730.l
+0x9D5C  bra     $9d6a

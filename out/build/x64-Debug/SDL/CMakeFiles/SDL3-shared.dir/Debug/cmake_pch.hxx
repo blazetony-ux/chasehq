@@ -2,5 +2,5 @@
 
 #pragma system_header
 #ifdef __cplusplus
-#include "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.66.9.0-RC3.0/SDL/src/SDL_internal.h"
+#include "C:/Projects/ChaseHQ-Native-v2-NoGit/ChaseHQ-Native-v0.67.0.0-RC6.3.33/SDL/src/SDL_internal.h"
 #endif // __cplusplus

@@ -1,0 +1,20 @@
+{
+  "schema": "chq-rea-static-export-v1",
+  "cpu": "A",
+  "romSha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "imageBase": "0x100000",
+  "functions": [
+    {
+      "name": "EXAMPLE_ONLY_target_health_candidate",
+      "start": "0x10A110",
+      "end": "0x10A120",
+      "confidence": "hypothesis"
+    },
+    {
+      "name": "EXAMPLE_ONLY_projection_clip_candidate",
+      "start": "0x1434EE",
+      "end": "0x143510",
+      "confidence": "hypothesis"
+    }
+  ]
+}

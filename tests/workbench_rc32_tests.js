@@ -1,0 +1,27 @@
+const fs=require('fs'),path=require('path');
+const root=path.resolve(__dirname,'..'); const read=p=>fs.readFileSync(path.join(root,p),'utf8');
+const web=read('Start-ChaseHQWeb.ps1'),launcher=read('Start-ChaseHQ.ps1'),researchLauncher=read('Start-ChaseHQResearch.ps1'),preflight=read('Validate-WindowsPreflight.ps1'),prepare=read('Prepare-Project.ps1'),releaseValidator=read('Validate-Release.ps1'),version=read('src/version.h'),schema=JSON.parse(read('research/schema/script-language.json')),param=read('research/scripts/track/surveys/current-state-course-mapping-parameterized.chqscript'),full=read('research/scripts/regression/full-regression.chqscript'),releaseRegression=read('research/scripts/regression/regression-v06690-rc32.chqscript'),lanHelper=read('scripts/Ensure-ChaseHQLanAccess.ps1');
+const coverage=read('docs/REGRESSION_COVERAGE_MAP.md'),historicalCatalog=read('research/scripts/SCRIPT_CATALOG.md');
+function ok(v,m){if(!v)throw new Error(m)}
+ok(version.includes('0.66.9.3-RC3'),'RC3.3 carried-forward identity missing');
+ok(web.includes('Get-ChqScriptParameterDefinitions')&&web.includes('Resolve-ChqScriptParameters'),'server parameter resolver missing');
+ok(web.includes('renderScriptParameters')&&web.includes('scriptResolvedPreview'),'Workbench parameter UI/preview missing');
+ok(web.includes('parameters=$Parameters')&&web.includes("resolvedCommands='resolved-commands.txt'")&&web.includes("Append-Utf8NoBom (Join-Path $runRoot 'resolved-commands.txt')"),'resolved parameter/command run metadata missing');
+ok(schema.statements.some(x=>String(x.syntax).startsWith('# param ')),'script-language schema lacks # param');
+ok(param.includes('# param frames type=select values=300,600,900,1200,2400,3600 default=1200')&&param.includes('frames=${frames}'),'parameterized survey wiring missing');
+ok(web.includes('Collect-LegacyTraceArtifact')&&web.includes("Join-Path $artifactRoot 'traces'"),'legacytrace bundle collector missing');
+ok(web.includes("Join-Path $evidencePath 'checkpoints'")&&web.includes("'chq-run-checkpoint-save-v1'")&&web.includes("'chq-run-checkpoint-load-v1'"),'checkpoint run evidence missing');
+ok(web.includes("'/console'")&&web.includes('TokenMatches')&&web.includes('chq_token'),'authenticated mobile console missing');
+ok(web.includes('id="resume"')&&web.includes('id="snapshot"')&&web.includes("runName:'mobile-console'")&&web.includes('finalizeRun:true'),'mobile run/control parity missing');
+ok(launcher.includes('[switch]$LocalOnly')&&launcher.includes('$effectiveLanAccess = (-not $NoWeb -and -not $LocalOnly)')&&launcher.includes('Resolve-ChaseHQLanAddress')&&launcher.includes('Ensure-ChaseHQLanAccess.ps1')&&launcher.includes('LAN/mobile host smoke: PASS')&&launcher.includes('/console?token=$resolvedAccessToken'),'default LAN/mobile launcher contract missing');
+ok(lanHelper.includes('Ensure-ExactUrlAcl')&&lanHelper.includes('Get-UrlAclState')&&lanHelper.includes('ExpectedUser')&&lanHelper.includes('Final proof MUST be performed back in the original non-elevated process')&&lanHelper.includes('netsh.exe http add urlacl')&&lanHelper.includes('New-NetFirewallRule')&&lanHelper.includes('-Verb RunAs'),'LAN HTTP.sys/firewall prerequisite automation/ownership verification missing');
+ok(!full.includes('regression-v06690-rc32.chqscript')&&historicalCatalog.includes('regression/regression-v06690-rc32.chqscript')&&historicalCatalog.includes('historical')&&coverage.includes('regression-v06690-rc32.chqscript')&&releaseRegression.includes('0.66.9.0-RC3.2'),'historical regression-v06690-rc32.chqscript must remain cataloged/mapped while duplicate Full Regression execution stays removed');
+ok(web.includes("'script.run'")&&web.includes("Resolve-ScriptLibraryPath ([string]$a['file'])"),'script.run API parity missing');
+ok(preflight.includes("if($Name -ieq 'null'){return $false}")&&preflight.includes('ScopedItemOptions]::Constant')&&preflight.includes('ScopedItemOptions]::ReadOnly'),'Windows preflight must use runtime Constant/ReadOnly semantics and allow $null sinks');
+ok(preflight.includes("foreach($n in @('Host','PID','true','false'))")&&preflight.includes("Test-ProtectedVariableName '__chq_preflight_probe'"),'Windows preflight reserved-variable rule self-test missing');
+ok(!preflight.includes("foreach($n in @('args','error','foreach','home','host','input','matches','myinvocation','null'"),'Windows preflight regressed to hand-maintained automatic-variable blacklist');
+ok(prepare.indexOf('Validate-WindowsPreflight.ps1')<prepare.indexOf('Local dependency staging'),'Windows preflight must run before dependency staging');
+ok(releaseValidator.includes("Validate-WindowsPreflight.ps1');Check $true 'Windows preflight validator'"),'release validator must execute Windows preflight');
+ok(researchLauncher.includes("$argLine = (($nativeLaunchArgs | ForEach-Object { Quote-Arg $_ }) -join ' ')")&&!researchLauncher.includes("$argLine = (($EmulatorArgs | ForEach-Object { Quote-Arg $_ }) -join ' ')")&&researchLauncher.includes('Start-Process -FilePath $emu -ArgumentList $argLine'),'research launcher must execute the same nativeLaunchArgs vector it prints');
+ok(researchLauncher.includes('[switch]$ValidateLaunchOnly')&&researchLauncher.includes("if ($ValidateLaunchOnly) { $nativeLaunchArgs += '--help' }")&&read('Build-Debug.bat').includes('-ValidateLaunchOnly'),'Build-Debug must exercise the real launcher Start-Process binding after compilation');
+console.log('Workbench RC3.2 parameter/evidence/LAN static tests: PASS');

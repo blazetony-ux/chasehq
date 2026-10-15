@@ -1,5 +1,6 @@
 #pragma once
 #include "rom_loader.h"
+#include "content_pack.h"
 
 #include <cstdint>
 #include <filesystem>
@@ -49,9 +50,11 @@ struct SceneState {
 class Machine {
 public:
     bool load_roms(const std::filesystem::path& directory);
+    bool load_content_pack(const ContentPack& pack);
 
     const std::vector<std::uint8_t>& sprites_a() const { return sprites_a_; }
     const std::vector<std::uint8_t>& sprites_b() const { return sprites_b_; }
+    const std::vector<std::uint8_t>& spritemap() const { return spritemap_; }
     const std::vector<std::uint8_t>& road_gfx() const { return road_gfx_; }
     const std::vector<std::uint8_t>& tile_gfx() const { return tile_gfx_; }
     const std::vector<std::uint8_t>& priority_prom() const { return priority_prom_; }

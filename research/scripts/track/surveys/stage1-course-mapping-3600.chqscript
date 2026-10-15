@@ -1,6 +1,6 @@
 # name: Stage 1 Course Mapping - 3600 frame evidence survey
 # category: track
-# regression-version: 0.66.9.0-RC3.0
+# regression-version: 0.66.9.0-RC3.1
 # purpose: Controlled Stage 1 mapping run with native closed-loop road following, 15-frame structured samples, 60-frame screenshot/state landmarks, topology-write provenance and reconstructable mapping export.
 
 api release.assert-version
@@ -39,4 +39,4 @@ finally
   api timer.hold enabled=false
 end
 
-echo === RC3.0 STAGE 1 COURSE MAPPING 3600 COMPLETE ===
+echo === RC3.1 STAGE 1 COURSE MAPPING 3600 COMPLETE ===

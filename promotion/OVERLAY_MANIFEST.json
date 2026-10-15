@@ -1,0 +1,123 @@
+{
+  "schema": "chqhq-promotion-overlay-manifest-v1",
+  "sourceRelease": "0.67.0.0-RC4.6",
+  "sourceArchiveSha256": "9e76a107e19f3e28a54a8a8b3bdaed630511e02f1da3e3e7ae274c07d863580f",
+  "qualifiedArchiveUnchanged": true,
+  "files": [
+    {
+      "path": "AGENTS.md",
+      "size": 37464,
+      "sha256": "c11c78ae1c98b269e6b1e5847f5f08790e945e51681b197af98f53324f0f0780"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "size": 190117,
+      "sha256": "85701a1a488267e4eea6ca5a0541f9ad6ad187441a0d8d10ceaeea0b43e03267"
+    },
+    {
+      "path": "README.md",
+      "size": 23743,
+      "sha256": "98258eb9d9ca06edcd50c8a3969d2a174c04ee547efe46716be72adc885651e2"
+    },
+    {
+      "path": "VALIDATION.md",
+      "size": 19739,
+      "sha256": "6c43e6b2d4aa16c7ed45c3eafd5c2ba4a90e297db55e8ce57438c6d277554ab0"
+    },
+    {
+      "path": "docs/API_REFERENCE.md",
+      "size": 55658,
+      "sha256": "04f771c5659ecf46f26368ca87e53d06298fa026c589acc21f8cd931968ac2eb"
+    },
+    {
+      "path": "docs/CHATGPT_HANDOVER_PROMPT.md",
+      "size": 7332,
+      "sha256": "6d8cabc9da6b0adf9aaace70c6a0b2a9f5a4bc3f9ac44364c3159323253b6490"
+    },
+    {
+      "path": "docs/DOCUMENTATION_AUDIT_0.67.0.0-RC4.6.md",
+      "size": 2145,
+      "sha256": "9c771433c165b4d95a7ce280daf41ef7e022dd636b38567bd14ad00950a70e44"
+    },
+    {
+      "path": "docs/GHIDRA_WORKBENCH_RC46.md",
+      "size": 8647,
+      "sha256": "6dcecdce16976b5bcdf86c9c077a461a3b65b9643a5a9b6593c1306956422ab7"
+    },
+    {
+      "path": "docs/HANDOVER.md",
+      "size": 12387,
+      "sha256": "ff5f64b28547cf7c271a3bce0be98d005953a28a5e5db188c1922ff2d2b3e365"
+    },
+    {
+      "path": "docs/INVESTIGATION_LIMITATIONS.md",
+      "size": 30235,
+      "sha256": "0cdd483f7310ff73ebf10ff0a70966e00150e908ceb290adc0cde37cc183af30"
+    },
+    {
+      "path": "docs/NATIVE_RECONSTRUCTION.md",
+      "size": 4655,
+      "sha256": "1fcba077143e361b53cab33954757f235de01c09c65397424cf148db0fcf190d"
+    },
+    {
+      "path": "docs/NEXT_BUILD_CHANGELOG.md",
+      "size": 24520,
+      "sha256": "5caea4b13f6027b6bac0aff891c63ad0788ce0f844b5c634930a5d45cc295e46"
+    },
+    {
+      "path": "docs/PROJECT_STATE.md",
+      "size": 22171,
+      "sha256": "e6e9b3e1454c3cd6afb590c860affc0f3326a3106c496f5f45ead8d7bd073cf6"
+    },
+    {
+      "path": "docs/REA_GHIDRA_NEXT_SCOPE.md",
+      "size": 5032,
+      "sha256": "366e49daefc1a76034a8619b4c72def049b4812eeae3c0ba2bb8278dc47d11b3"
+    },
+    {
+      "path": "docs/RELEASE_GOVERNANCE.md",
+      "size": 11236,
+      "sha256": "bcc01a4a763f62b26b61c210a310444f1d64c14d6eed17861a4680fbb551be8b"
+    },
+    {
+      "path": "docs/RELEASE_PROCESS.md",
+      "size": 13336,
+      "sha256": "0dafdcec02251d66a2a0fd9c312a874637e58954a4f388f87e30d98fc630eb86"
+    },
+    {
+      "path": "docs/RELEASE_VERIFICATION_RC46.md",
+      "size": 4021,
+      "sha256": "d9b24501a839081d14ddb1d74a53237198b0f98b1980c922318436472ca6f722"
+    },
+    {
+      "path": "docs/ROADMAP.md",
+      "size": 36505,
+      "sha256": "b48a6d2d0e0427f9694bd726984c0b84ab0f08402e77c8c1b1f91d25240a6616"
+    },
+    {
+      "path": "promotion/PROMOTION_RECORD.json",
+      "size": 4684,
+      "sha256": "aa7ab0ee8f3dc1dd4d7ae95c3e2baa086bf3a4669483b7fd02e65840ad5d9f2e"
+    },
+    {
+      "path": "promotion/README_PROMOTION.md",
+      "size": 1804,
+      "sha256": "8ca9da3adbf144bfac2a65e732ed76710122fa0a879e760df3280063fb70c61b"
+    },
+    {
+      "path": "promotion/REGRESSION_EVIDENCE.json",
+      "size": 755,
+      "sha256": "8863262e9b869018c54310fba6fd80fa3b57aa865646a626e4a22a731448164d"
+    },
+    {
+      "path": "promotion/RESEARCH_EVIDENCE.json",
+      "size": 1123,
+      "sha256": "eb9d51345685c09b13553a97052cb35e3ae1591f834cc4758845bad6ac68b024"
+    },
+    {
+      "path": "promotion/qualification-user-pasted.json",
+      "size": 632,
+      "sha256": "33734456b68df42dddcc3b4e37e0595dd56eb46571947b59c01987abba884432"
+    }
+  ]
+}

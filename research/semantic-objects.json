@@ -1,17 +1,81 @@
 {
-  "schema": "chq-semantic-objects-v1",
-  "build": "0.66.9.0-RC3.0",
+  "schema": "chq-semantic-objects-v2",
+  "build": "0.67.0.0-RC6.3.33",
   "objects": [
     {
       "id": "player_car",
       "label": "Player car",
-      "status": "candidate",
-      "confidence": "RESEARCH",
-      "resolver": "sprite-family / compositor evidence",
+      "status": "confirmed",
+      "confidence": "CONFIRMED",
+      "resolver": "composite body/shadow sprite family with render-selector/grade context",
+      "presentationFamilies": {
+        "body": [
+          472,
+          475,
+          476,
+          508,
+          509,
+          514,
+          516,
+          522,
+          530,
+          536
+        ],
+        "shadow": [
+          572,
+          575,
+          576,
+          590,
+          592,
+          594,
+          596,
+          598,
+          600
+        ],
+        "bodyPalettes": [
+          64,
+          65
+        ],
+        "shadowPalettes": [
+          70
+        ]
+      },
       "evidence": [
-        "deterministic A/B graphics research",
-        "map 181 + palette 75/77 candidate fragments",
-        "render selector CPU-A 0x10A04A"
+        "RC3 Runs 003-020 canonical corpus and individual-sprite assets",
+        "normal gameplay map516/pal64 + map594/pal70",
+        "pursuit pre-contact map522/pal64 + map596/pal70",
+        "historical map181/pal75/77 candidate explicitly rejected as player-car identity",
+        "Run009 proved full-right steering map509/pal65 is player_car.body; direct map509 replacement changes 3,131 pixels while the old semantic family missed it.",
+        "Runs008-010 prove incline/positive-band player body maps530/536 with co-located shadow maps598/600; semantic replacement misses 530/536 while direct replacement succeeds, and hiding 598/600 removes exactly their under-car shadow pixels.",
+        "Run012 ROM-range proto-atlas exposes additional visually coherent black-car artwork candidates; appearance alone is retained as candidate evidence and is not silently promoted to live player identity."
+      ]
+    },
+    {
+      "id": "police_beacon",
+      "label": "Police pursuit beacon",
+      "status": "confirmed",
+      "confidence": "CONFIRMED",
+      "resolver": "multi-component player-relative beacon presentation; phase/request intervention is causal with staged descriptor-to-live presentation latency",
+      "presentationFamilies": {
+        "maps": [
+          518,
+          519,
+          520,
+          540,
+          617
+        ],
+        "palettes": [
+          71,
+          78
+        ]
+      },
+      "evidence": [
+        "Run020 pursuit census: map518/pal71 with turned player body at 5587",
+        "Run020 pursuit/post-hit census: map520/pal71 above player roof at 6333 and 9548",
+        "absent from normal gameplay 2064",
+        "Runs004-007 trace CPU-A beacon descriptor generation through 0x1027xx staging to live D00000 sprite RAM; Force ON/OFF is causal and presentation follows after the authentic staged pipeline delay rather than the next frame.",
+        "Run009 Force-Off removes map540/pal71 and map617/pal71 together (111 exact changed pixels) and removes map520/pal78 in Stage 2 (28 exact pixels).",
+        "Run010 Force-Off removes map519/pal71 together with map520 after the measured pipeline delay (102 exact changed pixels), confirming map519 as a beacon component."
       ]
     },
     {
@@ -19,22 +83,36 @@
       "label": "Target car",
       "status": "confirmed",
       "confidence": "CONFIRMED",
-      "resolver": "confirmed target object record 0x10A080-0x10A0BF plus confirmed remaining-hit counter CPU-A 0x1002AE",
+      "resolver": "CPU-A object record 0x10A080-0x10A0BF with confirmed sprite family maps 13/18/19/20 palettes 80/81",
+      "presentationFamilies": {
+        "maps": [
+          13,
+          18,
+          19,
+          20
+        ],
+        "palettes": [
+          80,
+          81
+        ]
+      },
       "evidence": [
-        "frame 6334 genuine damage: PC 0xA112 decrements 0x1002AE 000E->000D",
-        "causal terminal proof: forced 0000->FFFF takes PC 0xA118, writes 0x1002D8=0x1400 and enters defeat",
-        "canonical checkpoints stage1-target-immediate-pre-damage-6333 and stage1-target-first-damage-6334"
+        "0x10A084 lateral perturbation first changes target presentation exactly three emulated frames later",
+        "maps13/18/19 remain one white target-vehicle family across contact/damage/defeat corpus",
+        "CPU-A 0x1002AE confirmed remaining-hit counter; PC 0xA112 decrements on authentic damage",
+        "Runs008-010 identify post-defeat map20/pal80 as the target presentation; a small 0x10A084 lateral perturbation preserves map20 while moving its rendered X position, closing causal identity."
       ]
     },
     {
       "id": "hud_turbo",
       "label": "Turbo HUD",
-      "status": "candidate",
-      "confidence": "RESEARCH",
-      "resolver": "HUD_TURBO region + palette/sprite evidence",
+      "status": "confirmed",
+      "confidence": "CONFIRMED",
+      "resolver": "TC0100SCN text/HUD source selected by turbo active + remaining count",
       "evidence": [
-        "palette 70/0x464 changed bottom HUD area",
-        "turbo state/timer/remain registers confirmed"
+        "Run012 active+count reproduces authentic HUD exactly",
+        "timer does not select indicator representation",
+        "count 2/1/0 selects right/middle/left inventory indicator while active"
       ]
     },
     {
@@ -42,21 +120,22 @@
       "label": "Brake lamp",
       "status": "confirmed",
       "confidence": "CONFIRMED",
-      "resolver": "processed brake CPU-A 0x100303 -> palette writers 0x4988/0x4992 and restores 0x499E/0x49A8",
+      "resolver": "processed Brake CPU-A 0x100302 -> palette banks 64/65 pen13",
       "evidence": [
-        "causal brake input changes 0x100302/0x100303",
-        "palette banks 64/65 pen 13 use 0x18DE during brake and 0x000E after release",
-        "78-pixel brake-lamp visual delta returns pixel-identical after release"
+        "forcing 0x100302=0x0014 without Brake input reproduces braking physics and lamp palette",
+        "palette banks64/65 pen13 switch 0x000E->0x18DE",
+        "78 source pixels brighten with no geometry/alpha change"
       ]
     },
     {
       "id": "road_edges",
-      "label": "Selected road edges",
+      "label": "Road-side classifier",
       "status": "confirmed",
       "confidence": "CONFIRMED",
-      "resolver": "CPU-A 0x10A04C",
+      "resolver": "CPU-A 0x10A048 plus current decoded road geometry",
       "evidence": [
-        "selected edge state confirmed; former 0x100300 edge-control interpretation superseded by authoritative steering revalidation"
+        "01=on-road,03=right,05=left,07=extreme",
+        "exact canonical straight threshold matrix causally verified in Run019"
       ]
     },
     {
@@ -64,11 +143,12 @@
       "label": "Collision response",
       "status": "confirmed",
       "confidence": "CONFIRMED",
-      "resolver": "proven response writes",
+      "resolver": "structured proven lateral/speed response writes",
       "evidence": [
-        "lateral writes at 0x10A044 from collision PCs",
-        "speed penalty write at 0x10041C from 0x00A200",
-        "detection preserved when response suppression enabled"
+        "lateral PC 0xA1BE to 0x10A044 at first target response",
+        "speed PC 0xA200 to 0x10041C applies exact 0.75 multiplier",
+        "Run020 off-road interaction type 0x0001 uses same mapped response class",
+        "Run010 proves target-local physical overlap writer PC 0xA13C -> 0x10A084; v0.66.9.5-RC1.1 exposes it as structured target_contact without broadening player-response suppression."
       ]
     },
     {
@@ -78,8 +158,8 @@
       "confidence": "CONFIRMED",
       "resolver": "IOC 0x0C/0x0D -> CPU-A 0x10014C raw -> 0x100300 processed -> 0x10A044 lateral",
       "evidence": [
-        "v0.66.2 deterministic signed-12-bit left/centre/right causal tests",
-        "SDL car movement observed during steering tests"
+        "signed-12-bit centre0000/right0060/left0FA0 causal tests",
+        "v0.66.9.3 rejects out-of-range raw injection values"
       ]
     }
   ]

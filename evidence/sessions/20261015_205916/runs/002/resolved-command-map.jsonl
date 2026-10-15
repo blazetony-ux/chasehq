@@ -1,0 +1,1153 @@
+{"sequence":1,"sourceLine":15,"context":"","command":"echo === ChaseHQ Full Regression: BEGIN ===","clientRecord":false,"at":"2026-10-15T21:00:08.0290434+01:00"}
+{"sequence":2,"sourceLine":20,"context":"","command":"api status","clientRecord":false,"at":"2026-10-15T21:00:23.1618634+01:00"}
+{"sequence":3,"sourceLine":21,"context":"","command":"api capabilities","clientRecord":false,"at":"2026-10-15T21:00:26.5200224+01:00"}
+{"sequence":4,"sourceLine":22,"context":"","command":"api actions","clientRecord":false,"at":"2026-10-15T21:00:28.1431606+01:00"}
+{"sequence":5,"sourceLine":23,"context":"","command":"api schema","clientRecord":false,"at":"2026-10-15T21:00:28.9239046+01:00"}
+{"sequence":6,"sourceLine":24,"context":"","command":"api schema action=memory.read","clientRecord":false,"at":"2026-10-15T21:00:29.7098199+01:00"}
+{"sequence":7,"sourceLine":25,"context":"","command":"api schema action=memory.read-range","clientRecord":false,"at":"2026-10-15T21:00:30.4780773+01:00"}
+{"sequence":8,"sourceLine":26,"context":"","command":"api schema action=memory.write","clientRecord":false,"at":"2026-10-15T21:00:30.6485525+01:00"}
+{"sequence":9,"sourceLine":27,"context":"","command":"api schema action=cpu.disassemble","clientRecord":false,"at":"2026-10-15T21:00:30.7099739+01:00"}
+{"sequence":10,"sourceLine":28,"context":"","command":"api schema action=control.run-frames","clientRecord":false,"at":"2026-10-15T21:00:30.7812871+01:00"}
+{"sequence":11,"sourceLine":29,"context":"","command":"api schema action=checkpoint.load","clientRecord":false,"at":"2026-10-15T21:00:30.8524916+01:00"}
+{"sequence":12,"sourceLine":30,"context":"","command":"api schema action=checkpoint.save","clientRecord":false,"at":"2026-10-15T21:00:30.8866501+01:00"}
+{"sequence":13,"sourceLine":31,"context":"","command":"api schema action=patch.freeze","clientRecord":false,"at":"2026-10-15T21:00:31.0641287+01:00"}
+{"sequence":14,"sourceLine":32,"context":"","command":"api schema action=patch.replace","clientRecord":false,"at":"2026-10-15T21:00:31.1159382+01:00"}
+{"sequence":15,"sourceLine":33,"context":"","command":"api schema action=patch.suppress","clientRecord":false,"at":"2026-10-15T21:00:31.1806738+01:00"}
+{"sequence":16,"sourceLine":34,"context":"","command":"api schema action=patch.list","clientRecord":false,"at":"2026-10-15T21:00:32.0756942+01:00"}
+{"sequence":17,"sourceLine":35,"context":"","command":"api schema action=patch.remove","clientRecord":false,"at":"2026-10-15T21:00:32.1406722+01:00"}
+{"sequence":18,"sourceLine":36,"context":"","command":"api schema action=patch.clear","clientRecord":false,"at":"2026-10-15T21:00:32.2214860+01:00"}
+{"sequence":19,"sourceLine":37,"context":"","command":"api schema action=register.read","clientRecord":false,"at":"2026-10-15T21:00:32.3962018+01:00"}
+{"sequence":20,"sourceLine":38,"context":"","command":"api schema action=register.write","clientRecord":false,"at":"2026-10-15T21:00:32.4345274+01:00"}
+{"sequence":21,"sourceLine":39,"context":"","command":"api schema action=frame.capture","clientRecord":false,"at":"2026-10-15T21:00:32.4696411+01:00"}
+{"sequence":22,"sourceLine":40,"context":"","command":"api schema action=track.state","clientRecord":false,"at":"2026-10-15T21:00:32.5004279+01:00"}
+{"sequence":23,"sourceLine":41,"context":"","command":"api schema action=gameplay.registry","clientRecord":false,"at":"2026-10-15T21:00:32.5315062+01:00"}
+{"sequence":24,"sourceLine":42,"context":"","command":"api schema action=evidence.capture","clientRecord":false,"at":"2026-10-15T21:00:32.5643800+01:00"}
+{"sequence":25,"sourceLine":47,"context":"","command":"api patch.clear","clientRecord":false,"at":"2026-10-15T21:00:32.6809337+01:00"}
+{"sequence":26,"sourceLine":48,"context":"","command":"api checkpoint.load file=stage1-driving-2352.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:00:32.8216307+01:00"}
+{"sequence":27,"sourceLine":49,"context":"","command":"api status","clientRecord":false,"at":"2026-10-15T21:00:33.3326417+01:00"}
+{"sequence":28,"sourceLine":53,"context":"","command":"echo PASS baseline player render selector 0x10A04A = 0x000E","clientRecord":false,"at":"2026-10-15T21:00:33.5666709+01:00"}
+{"sequence":29,"sourceLine":59,"context":"","command":"echo PASS baseline cached render selector 0x10A076 = 0x000E","clientRecord":false,"at":"2026-10-15T21:00:33.7315901+01:00"}
+{"sequence":30,"sourceLine":67,"context":"","command":"api memory.read cpu=A address=10A040 width=32","clientRecord":false,"at":"2026-10-15T21:00:33.8031992+01:00"}
+{"sequence":31,"sourceLine":68,"context":"","command":"api memory.read cpu=A address=10A044 width=16","clientRecord":false,"at":"2026-10-15T21:00:33.9014700+01:00"}
+{"sequence":32,"sourceLine":69,"context":"","command":"api memory.read cpu=A address=10A048 width=8","clientRecord":false,"at":"2026-10-15T21:00:33.9517391+01:00"}
+{"sequence":33,"sourceLine":70,"context":"","command":"api memory.read cpu=A address=10A05A width=16","clientRecord":false,"at":"2026-10-15T21:00:34.0052937+01:00"}
+{"sequence":34,"sourceLine":71,"context":"","command":"api memory.read cpu=A address=10A05C width=32","clientRecord":false,"at":"2026-10-15T21:00:34.0969564+01:00"}
+{"sequence":35,"sourceLine":72,"context":"","command":"api memory.read-range cpu=A address=109000 length=64","clientRecord":false,"at":"2026-10-15T21:00:34.1918185+01:00"}
+{"sequence":36,"sourceLine":73,"context":"","command":"api cpu.disassemble cpu=A address=008C2A count=32","clientRecord":false,"at":"2026-10-15T21:00:34.3977302+01:00"}
+{"sequence":37,"sourceLine":74,"context":"","command":"api track.state","clientRecord":false,"at":"2026-10-15T21:00:36.2444100+01:00"}
+{"sequence":38,"sourceLine":75,"context":"","command":"api gameplay.registry","clientRecord":false,"at":"2026-10-15T21:00:38.5251872+01:00"}
+{"sequence":39,"sourceLine":76,"context":"","command":"api input.ports","clientRecord":false,"at":"2026-10-15T21:00:39.3201529+01:00"}
+{"sequence":40,"sourceLine":77,"context":"","command":"api events.tail","clientRecord":false,"at":"2026-10-15T21:00:39.9136799+01:00"}
+{"sequence":41,"sourceLine":78,"context":"","command":"api sprites.tail","clientRecord":false,"at":"2026-10-15T21:00:40.0058343+01:00"}
+{"sequence":42,"sourceLine":79,"context":"","command":"api logs.list","clientRecord":false,"at":"2026-10-15T21:00:40.1138767+01:00"}
+{"sequence":43,"sourceLine":80,"context":"","command":"api evidence.list","clientRecord":false,"at":"2026-10-15T21:00:40.1934942+01:00"}
+{"sequence":44,"sourceLine":85,"context":"","command":"api control.step-frame","clientRecord":false,"at":"2026-10-15T21:00:40.7940101+01:00"}
+{"sequence":45,"sourceLine":86,"context":"","command":"api status","clientRecord":false,"at":"2026-10-15T21:00:40.8708217+01:00"}
+{"sequence":46,"sourceLine":87,"context":"","command":"api checkpoint.load file=stage1-driving-2352.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:00:40.9700089+01:00"}
+{"sequence":47,"sourceLine":89,"context":"","command":"api control.step-instruction","clientRecord":false,"at":"2026-10-15T21:00:41.0540839+01:00"}
+{"sequence":48,"sourceLine":90,"context":"","command":"api status","clientRecord":false,"at":"2026-10-15T21:00:41.1054360+01:00"}
+{"sequence":49,"sourceLine":91,"context":"","command":"api checkpoint.load file=stage1-driving-2352.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:00:41.2083215+01:00"}
+{"sequence":50,"sourceLine":95,"context":"","command":"api control.run-frames frames=2","clientRecord":false,"at":"2026-10-15T21:00:41.6345329+01:00"}
+{"sequence":51,"sourceLine":96,"context":"","command":"api status","clientRecord":false,"at":"2026-10-15T21:00:41.7678850+01:00"}
+{"sequence":52,"sourceLine":97,"context":"","command":"api checkpoint.load file=stage1-driving-2352.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:00:42.3355726+01:00"}
+{"sequence":53,"sourceLine":102,"context":"","command":"api memory.read cpu=A address=10A04A width=16","clientRecord":false,"at":"2026-10-15T21:00:42.6807584+01:00"}
+{"sequence":54,"sourceLine":103,"context":"","command":"api memory.write cpu=A address=10A04A width=16 value=000E expect=000E","clientRecord":false,"at":"2026-10-15T21:00:42.9441697+01:00"}
+{"sequence":55,"sourceLine":104,"context":"","command":"api memory.read cpu=A address=10A04A width=16","clientRecord":false,"at":"2026-10-15T21:00:43.0158765+01:00"}
+{"sequence":56,"sourceLine":107,"context":"","command":"echo PASS memory.write compare-before-write/idempotent path","clientRecord":false,"at":"2026-10-15T21:00:43.1001472+01:00"}
+{"sequence":57,"sourceLine":113,"context":"","command":"api memory.write cpu=A address=10A04A width=16 value=0011 expect=000E","clientRecord":false,"at":"2026-10-15T21:00:43.4423270+01:00"}
+{"sequence":58,"sourceLine":115,"context":"","command":"echo PASS memory.write changed value","clientRecord":false,"at":"2026-10-15T21:00:44.1211801+01:00"}
+{"sequence":59,"sourceLine":120,"context":"","command":"api checkpoint.load file=stage1-driving-2352.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:00:44.2861310+01:00"}
+{"sequence":60,"sourceLine":122,"context":"","command":"echo PASS checkpoint reload restored mutated memory","clientRecord":false,"at":"2026-10-15T21:00:44.5114382+01:00"}
+{"sequence":61,"sourceLine":130,"context":"","command":"api patch.clear","clientRecord":false,"at":"2026-10-15T21:00:44.5951524+01:00"}
+{"sequence":62,"sourceLine":131,"context":"","command":"api patch.freeze cpu=A address=10A04A width=16 value=0011","clientRecord":false,"at":"2026-10-15T21:00:44.7701367+01:00"}
+{"sequence":63,"sourceLine":132,"context":"","command":"api patch.freeze cpu=A address=10A076 width=16 value=0011","clientRecord":false,"at":"2026-10-15T21:00:45.4447379+01:00"}
+{"sequence":64,"sourceLine":133,"context":"","command":"api patch.list","clientRecord":false,"at":"2026-10-15T21:00:45.7049256+01:00"}
+{"sequence":65,"sourceLine":136,"context":"","command":"api control.run-frames frames=2","clientRecord":false,"at":"2026-10-15T21:00:46.0361389+01:00"}
+{"sequence":66,"sourceLine":138,"context":"","command":"api memory.read cpu=A address=10A04A width=16","clientRecord":false,"at":"2026-10-15T21:00:46.1590487+01:00"}
+{"sequence":67,"sourceLine":139,"context":"","command":"api memory.read cpu=A address=10A076 width=16","clientRecord":false,"at":"2026-10-15T21:00:46.3569244+01:00"}
+{"sequence":68,"sourceLine":140,"context":"","command":"api patch.list","clientRecord":false,"at":"2026-10-15T21:00:47.0342213+01:00"}
+{"sequence":69,"sourceLine":143,"context":"","command":"echo PASS patch.freeze enforced 0x10A04A","clientRecord":false,"at":"2026-10-15T21:00:47.1335549+01:00"}
+{"sequence":70,"sourceLine":149,"context":"","command":"echo PASS patch.freeze enforced 0x10A076","clientRecord":false,"at":"2026-10-15T21:00:47.4734252+01:00"}
+{"sequence":71,"sourceLine":154,"context":"","command":"api patch.clear","clientRecord":false,"at":"2026-10-15T21:00:47.5806864+01:00"}
+{"sequence":72,"sourceLine":155,"context":"","command":"api checkpoint.load file=stage1-driving-2352.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:00:47.7434105+01:00"}
+{"sequence":73,"sourceLine":160,"context":"","command":"api frame.capture","clientRecord":false,"at":"2026-10-15T21:00:48.6078587+01:00"}
+{"sequence":74,"sourceLine":161,"context":"client","command":"wait 50","clientRecord":true,"at":"2026-10-15T21:00:48.8372110+01:00"}
+{"sequence":75,"sourceLine":162,"context":"","command":"api frame.capture","clientRecord":false,"at":"2026-10-15T21:00:49.0629639+01:00"}
+{"sequence":76,"sourceLine":163,"context":"client","command":"wait 50","clientRecord":true,"at":"2026-10-15T21:00:49.1950613+01:00"}
+{"sequence":77,"sourceLine":164,"context":"","command":"api frame.capture","clientRecord":false,"at":"2026-10-15T21:00:50.0718925+01:00"}
+{"sequence":78,"sourceLine":167,"context":"","command":"api evidence.list","clientRecord":false,"at":"2026-10-15T21:00:50.1028956+01:00"}
+{"sequence":79,"sourceLine":172,"context":"","command":"api checkpoint.load file=stage1-driving-2352.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:00:50.2157627+01:00"}
+{"sequence":80,"sourceLine":173,"context":"","command":"api track.state","clientRecord":false,"at":"2026-10-15T21:00:51.4506272+01:00"}
+{"sequence":81,"sourceLine":176,"context":"","command":"api control.run-frames frames=2","clientRecord":false,"at":"2026-10-15T21:00:52.2791318+01:00"}
+{"sequence":82,"sourceLine":177,"context":"","command":"api track.state","clientRecord":false,"at":"2026-10-15T21:00:53.8871955+01:00"}
+{"sequence":83,"sourceLine":176,"context":"","command":"api control.run-frames frames=2","clientRecord":false,"at":"2026-10-15T21:00:54.7141813+01:00"}
+{"sequence":84,"sourceLine":177,"context":"","command":"api track.state","clientRecord":false,"at":"2026-10-15T21:00:55.8991626+01:00"}
+{"sequence":85,"sourceLine":176,"context":"","command":"api control.run-frames frames=2","clientRecord":false,"at":"2026-10-15T21:00:56.6893575+01:00"}
+{"sequence":86,"sourceLine":177,"context":"","command":"api track.state","clientRecord":false,"at":"2026-10-15T21:00:57.8751000+01:00"}
+{"sequence":87,"sourceLine":176,"context":"","command":"api control.run-frames frames=2","clientRecord":false,"at":"2026-10-15T21:00:58.7009927+01:00"}
+{"sequence":88,"sourceLine":177,"context":"","command":"api track.state","clientRecord":false,"at":"2026-10-15T21:01:00.2623303+01:00"}
+{"sequence":89,"sourceLine":180,"context":"","command":"api checkpoint.load file=stage1-driving-2352.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:01:01.0011195+01:00"}
+{"sequence":90,"sourceLine":185,"context":"","command":"api checkpoint.save file=regression-temp.chqstate","clientRecord":false,"at":"2026-10-15T21:01:01.2853088+01:00"}
+{"sequence":91,"sourceLine":186,"context":"","command":"api checkpoint.list","clientRecord":false,"at":"2026-10-15T21:01:01.8976835+01:00"}
+{"sequence":92,"sourceLine":187,"context":"","command":"api control.step-frame","clientRecord":false,"at":"2026-10-15T21:01:01.9797623+01:00"}
+{"sequence":93,"sourceLine":188,"context":"","command":"api checkpoint.load file=regression-temp.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:01:02.1040354+01:00"}
+{"sequence":94,"sourceLine":189,"context":"","command":"api status","clientRecord":false,"at":"2026-10-15T21:01:02.1901485+01:00"}
+{"sequence":95,"sourceLine":192,"context":"","command":"api checkpoint.load file=stage1-driving-2352.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:01:02.4184013+01:00"}
+{"sequence":96,"sourceLine":197,"context":"","command":"api schema action=control.abort","clientRecord":false,"at":"2026-10-15T21:01:02.4878801+01:00"}
+{"sequence":97,"sourceLine":198,"context":"","command":"api schema action=register.read","clientRecord":false,"at":"2026-10-15T21:01:02.5757825+01:00"}
+{"sequence":98,"sourceLine":199,"context":"","command":"api schema action=register.write","clientRecord":false,"at":"2026-10-15T21:01:02.6664001+01:00"}
+{"sequence":99,"sourceLine":200,"context":"","command":"api schema action=patch.freeze","clientRecord":false,"at":"2026-10-15T21:01:02.6942514+01:00"}
+{"sequence":100,"sourceLine":201,"context":"","command":"api schema action=patch.replace","clientRecord":false,"at":"2026-10-15T21:01:03.1209254+01:00"}
+{"sequence":101,"sourceLine":202,"context":"","command":"api schema action=patch.suppress","clientRecord":false,"at":"2026-10-15T21:01:03.1471825+01:00"}
+{"sequence":102,"sourceLine":207,"context":"","command":"api patch.clear","clientRecord":false,"at":"2026-10-15T21:01:03.2027050+01:00"}
+{"sequence":103,"sourceLine":208,"context":"","command":"api checkpoint.load file=stage1-driving-2352.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:01:03.4327017+01:00"}
+{"sequence":104,"sourceLine":209,"context":"","command":"api status","clientRecord":false,"at":"2026-10-15T21:01:03.5310123+01:00"}
+{"sequence":105,"sourceLine":212,"context":"","command":"echo PASS final baseline 0x10A04A restored","clientRecord":false,"at":"2026-10-15T21:01:03.7363899+01:00"}
+{"sequence":106,"sourceLine":218,"context":"","command":"echo PASS final baseline 0x10A076 restored","clientRecord":false,"at":"2026-10-15T21:01:03.8199958+01:00"}
+{"sequence":107,"sourceLine":224,"context":"","command":"api frame.snapshot name=regression-graphics-snapshot","clientRecord":false,"at":"2026-10-15T21:01:05.7943861+01:00"}
+{"sequence":108,"sourceLine":225,"context":"","command":"api frame.snapshot.list","clientRecord":false,"at":"2026-10-15T21:01:07.4418522+01:00"}
+{"sequence":109,"sourceLine":229,"context":"","command":"echo === v0.66.0.3 command transport regression ===","clientRecord":false,"at":"2026-10-15T21:01:08.0950642+01:00"}
+{"sequence":110,"sourceLine":230,"context":"","command":"api checkpoint.load file=stage1-driving-2352.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:01:08.2285711+01:00"}
+{"sequence":111,"sourceLine":232,"context":"","command":"api control.run-frames frames=5","clientRecord":false,"at":"2026-10-15T21:01:08.8773489+01:00"}
+{"sequence":112,"sourceLine":233,"context":"","command":"api status","clientRecord":false,"at":"2026-10-15T21:01:09.3348298+01:00"}
+{"sequence":113,"sourceLine":234,"context":"","command":"api track.state","clientRecord":false,"at":"2026-10-15T21:01:11.3735772+01:00"}
+{"sequence":114,"sourceLine":232,"context":"","command":"api control.run-frames frames=5","clientRecord":false,"at":"2026-10-15T21:01:12.7964550+01:00"}
+{"sequence":115,"sourceLine":233,"context":"","command":"api status","clientRecord":false,"at":"2026-10-15T21:01:13.5188863+01:00"}
+{"sequence":116,"sourceLine":234,"context":"","command":"api track.state","clientRecord":false,"at":"2026-10-15T21:01:15.1121451+01:00"}
+{"sequence":117,"sourceLine":232,"context":"","command":"api control.run-frames frames=5","clientRecord":false,"at":"2026-10-15T21:01:16.0715545+01:00"}
+{"sequence":118,"sourceLine":233,"context":"","command":"api status","clientRecord":false,"at":"2026-10-15T21:01:16.2708070+01:00"}
+{"sequence":119,"sourceLine":234,"context":"","command":"api track.state","clientRecord":false,"at":"2026-10-15T21:01:17.7149107+01:00"}
+{"sequence":120,"sourceLine":232,"context":"","command":"api control.run-frames frames=5","clientRecord":false,"at":"2026-10-15T21:01:18.6581924+01:00"}
+{"sequence":121,"sourceLine":233,"context":"","command":"api status","clientRecord":false,"at":"2026-10-15T21:01:18.8909592+01:00"}
+{"sequence":122,"sourceLine":234,"context":"","command":"api track.state","clientRecord":false,"at":"2026-10-15T21:01:19.8812496+01:00"}
+{"sequence":123,"sourceLine":232,"context":"","command":"api control.run-frames frames=5","clientRecord":false,"at":"2026-10-15T21:01:20.8753473+01:00"}
+{"sequence":124,"sourceLine":233,"context":"","command":"api status","clientRecord":false,"at":"2026-10-15T21:01:21.5188714+01:00"}
+{"sequence":125,"sourceLine":234,"context":"","command":"api track.state","clientRecord":false,"at":"2026-10-15T21:01:22.6078220+01:00"}
+{"sequence":126,"sourceLine":236,"context":"","command":"echo === v0.66.0.3 command transport regression complete ===","clientRecord":false,"at":"2026-10-15T21:01:23.2052954+01:00"}
+{"sequence":127,"sourceLine":243,"context":"","command":"api regions.list","clientRecord":false,"at":"2026-10-15T21:01:23.3845525+01:00"}
+{"sequence":128,"sourceLine":244,"context":"","command":"api sprites.maps","clientRecord":false,"at":"2026-10-15T21:01:23.9437239+01:00"}
+{"sequence":129,"sourceLine":245,"context":"","command":"api sprites.palettes","clientRecord":false,"at":"2026-10-15T21:01:24.8425563+01:00"}
+{"sequence":130,"sourceLine":246,"context":"","command":"api palette.entries bank=75","clientRecord":false,"at":"2026-10-15T21:01:25.0182434+01:00"}
+{"sequence":131,"sourceLine":247,"context":"","command":"api checkpoint.list","clientRecord":false,"at":"2026-10-15T21:01:25.1240840+01:00"}
+{"sequence":132,"sourceLine":248,"context":"","command":"api capabilities","clientRecord":false,"at":"2026-10-15T21:01:25.2239936+01:00"}
+{"sequence":133,"sourceLine":249,"context":"","command":"api regions.list","clientRecord":false,"at":"2026-10-15T21:01:25.8175810+01:00"}
+{"sequence":134,"sourceLine":250,"context":"","command":"api sprites.list","clientRecord":false,"at":"2026-10-15T21:01:26.3261990+01:00"}
+{"sequence":135,"sourceLine":251,"context":"","command":"api sprites.maps","clientRecord":false,"at":"2026-10-15T21:01:26.9066776+01:00"}
+{"sequence":136,"sourceLine":252,"context":"","command":"api sprites.palettes","clientRecord":false,"at":"2026-10-15T21:01:27.7626340+01:00"}
+{"sequence":137,"sourceLine":253,"context":"","command":"api palette.entries bank=75","clientRecord":false,"at":"2026-10-15T21:01:27.9124261+01:00"}
+{"sequence":138,"sourceLine":254,"context":"","command":"api state.snapshot include=sprites,regions,gameplay,track","clientRecord":false,"at":"2026-10-15T21:01:31.1073103+01:00"}
+{"sequence":139,"sourceLine":255,"context":"","command":"api checkpoint.load file=stage1-driving-2352.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:01:32.3842603+01:00"}
+{"sequence":140,"sourceLine":256,"context":"","command":"api control.run-frames frames=30","clientRecord":false,"at":"2026-10-15T21:01:34.9081132+01:00"}
+{"sequence":141,"sourceLine":257,"context":"","command":"api sprite.inspect slot=44","clientRecord":false,"at":"2026-10-15T21:01:36.4997551+01:00"}
+{"sequence":142,"sourceLine":258,"context":"","command":"api sprite.visual slot=44 mode=solo","clientRecord":false,"at":"2026-10-15T21:01:37.2290681+01:00"}
+{"sequence":143,"sourceLine":259,"context":"","command":"api sprite.visual.clear","clientRecord":false,"at":"2026-10-15T21:01:37.7083396+01:00"}
+{"sequence":144,"sourceLine":260,"context":"","command":"api sprite.override slot=44 map=182","clientRecord":false,"at":"2026-10-15T21:01:37.8577648+01:00"}
+{"sequence":145,"sourceLine":261,"context":"","command":"api sprite.override.clear","clientRecord":false,"at":"2026-10-15T21:01:38.0383641+01:00"}
+{"sequence":146,"sourceLine":262,"context":"","command":"api schema action=sprites.list","clientRecord":false,"at":"2026-10-15T21:01:38.1342621+01:00"}
+{"sequence":147,"sourceLine":263,"context":"","command":"api schema action=sprite.override","clientRecord":false,"at":"2026-10-15T21:01:38.1806190+01:00"}
+{"sequence":148,"sourceLine":264,"context":"","command":"api schema action=state.snapshot","clientRecord":false,"at":"2026-10-15T21:01:38.4006584+01:00"}
+{"sequence":149,"sourceLine":265,"context":"","command":"echo === v0.65.0 query/live-graphics regression complete ===","clientRecord":false,"at":"2026-10-15T21:01:38.5118188+01:00"}
+{"sequence":150,"sourceLine":271,"context":"","command":"echo === v0.65.1 profile metadata regression ===","clientRecord":false,"at":"2026-10-15T21:01:38.5919893+01:00"}
+{"sequence":151,"sourceLine":272,"context":"","command":"api profiles.list","clientRecord":false,"at":"2026-10-15T21:01:38.7189077+01:00"}
+{"sequence":152,"sourceLine":273,"context":"","command":"api profiles.list","clientRecord":false,"at":"2026-10-15T21:01:39.1608486+01:00"}
+{"sequence":153,"sourceLine":274,"context":"","command":"api profile.get id=chasehq","clientRecord":false,"at":"2026-10-15T21:01:39.3141651+01:00"}
+{"sequence":154,"sourceLine":275,"context":"","command":"api profile.get id=sci","clientRecord":false,"at":"2026-10-15T21:01:39.3880297+01:00"}
+{"sequence":155,"sourceLine":276,"context":"","command":"api schema action=profiles.list","clientRecord":false,"at":"2026-10-15T21:01:39.4588319+01:00"}
+{"sequence":156,"sourceLine":277,"context":"","command":"api schema action=profile.get","clientRecord":false,"at":"2026-10-15T21:01:39.5321895+01:00"}
+{"sequence":157,"sourceLine":278,"context":"","command":"echo === v0.65.1 profile metadata regression complete ===","clientRecord":false,"at":"2026-10-15T21:01:39.6075054+01:00"}
+{"sequence":158,"sourceLine":281,"context":"","command":"echo === v0.66.0 introspection regression ===","clientRecord":false,"at":"2026-10-15T21:01:39.6415910+01:00"}
+{"sequence":159,"sourceLine":282,"context":"","command":"api platform.info","clientRecord":false,"at":"2026-10-15T21:01:39.6898853+01:00"}
+{"sequence":160,"sourceLine":283,"context":"","command":"api features.list","clientRecord":false,"at":"2026-10-15T21:01:39.7820966+01:00"}
+{"sequence":161,"sourceLine":284,"context":"","command":"api script.functions","clientRecord":false,"at":"2026-10-15T21:01:39.8905448+01:00"}
+{"sequence":162,"sourceLine":285,"context":"","command":"api registry.list","clientRecord":false,"at":"2026-10-15T21:01:41.6262845+01:00"}
+{"sequence":163,"sourceLine":286,"context":"","command":"api track.records before=1 after=2","clientRecord":false,"at":"2026-10-15T21:01:44.5994754+01:00"}
+{"sequence":164,"sourceLine":287,"context":"","command":"api objects.list","clientRecord":false,"at":"2026-10-15T21:01:46.1974754+01:00"}
+{"sequence":165,"sourceLine":288,"context":"","command":"api audio.channels","clientRecord":false,"at":"2026-10-15T21:01:47.3807619+01:00"}
+{"sequence":166,"sourceLine":289,"context":"","command":"echo === v0.66.0 introspection regression complete ===","clientRecord":false,"at":"2026-10-15T21:01:47.6267550+01:00"}
+{"sequence":167,"sourceLine":292,"context":"","command":"echo === v0.66.0 audio foundation regression ===","clientRecord":false,"at":"2026-10-15T21:01:47.6623662+01:00"}
+{"sequence":168,"sourceLine":293,"context":"","command":"api audio.capabilities","clientRecord":false,"at":"2026-10-15T21:01:47.6962895+01:00"}
+{"sequence":169,"sourceLine":294,"context":"","command":"api audio.events","clientRecord":false,"at":"2026-10-15T21:01:48.1900235+01:00"}
+{"sequence":170,"sourceLine":295,"context":"","command":"api audio.waveform.plan","clientRecord":false,"at":"2026-10-15T21:01:48.4100806+01:00"}
+{"sequence":171,"sourceLine":296,"context":"","command":"api audio.export.plan","clientRecord":false,"at":"2026-10-15T21:01:48.4835492+01:00"}
+{"sequence":172,"sourceLine":297,"context":"","command":"api audio.inject.plan","clientRecord":false,"at":"2026-10-15T21:01:48.5597974+01:00"}
+{"sequence":173,"sourceLine":298,"context":"","command":"echo === v0.66.0 audio foundation regression complete ===","clientRecord":false,"at":"2026-10-15T21:01:48.6310551+01:00"}
+{"sequence":174,"sourceLine":302,"context":"","command":"echo === v0.66.0.2 diagnostics regression ===","clientRecord":false,"at":"2026-10-15T21:01:48.6621872+01:00"}
+{"sequence":175,"sourceLine":303,"context":"","command":"api logs.list","clientRecord":false,"at":"2026-10-15T21:01:48.7128238+01:00"}
+{"sequence":176,"sourceLine":304,"context":"","command":"api logs.tail file=@runtime/web-listener.log lines=20","clientRecord":false,"at":"2026-10-15T21:01:48.7603876+01:00"}
+{"sequence":177,"sourceLine":305,"context":"","command":"api schema action=logs.tail","clientRecord":false,"at":"2026-10-15T21:01:48.7982730+01:00"}
+{"sequence":178,"sourceLine":306,"context":"","command":"api track.state","clientRecord":false,"at":"2026-10-15T21:01:49.7645222+01:00"}
+{"sequence":179,"sourceLine":307,"context":"","command":"echo === v0.66.0.2 diagnostics regression complete ===","clientRecord":false,"at":"2026-10-15T21:01:50.3210935+01:00"}
+{"sequence":180,"sourceLine":319,"context":"","command":"echo === collision API regression ===","clientRecord":false,"at":"2026-10-15T21:01:50.4793518+01:00"}
+{"sequence":181,"sourceLine":320,"context":"","command":"api collision.state","clientRecord":false,"at":"2026-10-15T21:01:50.5758246+01:00"}
+{"sequence":182,"sourceLine":321,"context":"","command":"api collision.response.get","clientRecord":false,"at":"2026-10-15T21:01:50.6912409+01:00"}
+{"sequence":183,"sourceLine":322,"context":"","command":"api collision.response.set enabled=false","clientRecord":false,"at":"2026-10-15T21:01:50.7684049+01:00"}
+{"sequence":184,"sourceLine":323,"context":"","command":"api collision.state","clientRecord":false,"at":"2026-10-15T21:01:51.2817468+01:00"}
+{"sequence":185,"sourceLine":324,"context":"","command":"api collision.response.reset","clientRecord":false,"at":"2026-10-15T21:01:51.5209034+01:00"}
+{"sequence":186,"sourceLine":325,"context":"","command":"api collision.response.get","clientRecord":false,"at":"2026-10-15T21:01:51.6306779+01:00"}
+{"sequence":187,"sourceLine":326,"context":"","command":"echo === collision API regression complete ===","clientRecord":false,"at":"2026-10-15T21:01:51.7170617+01:00"}
+{"sequence":188,"sourceLine":335,"context":"","command":"api checkpoint.load file=stage1-driving-2352.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:01:51.8902808+01:00"}
+{"sequence":189,"sourceLine":336,"context":"","command":"api sprites.list","clientRecord":false,"at":"2026-10-15T21:01:52.5029358+01:00"}
+{"sequence":190,"sourceLine":337,"context":"","command":"api sprite.inspect slot=46","clientRecord":false,"at":"2026-10-15T21:01:53.5127207+01:00"}
+{"sequence":191,"sourceLine":338,"context":"","command":"echo === sprite priority provenance complete ===","clientRecord":false,"at":"2026-10-15T21:01:53.6926194+01:00"}
+{"sequence":192,"sourceLine":347,"context":"","command":"api platform.info","clientRecord":false,"at":"2026-10-15T21:01:54.1853369+01:00"}
+{"sequence":193,"sourceLine":348,"context":"","command":"api features.list","clientRecord":false,"at":"2026-10-15T21:01:54.3826402+01:00"}
+{"sequence":194,"sourceLine":349,"context":"","command":"echo === manifest/runtime consistency complete ===","clientRecord":false,"at":"2026-10-15T21:01:54.4203964+01:00"}
+{"sequence":195,"sourceLine":360,"context":"","command":"echo === v0.66.1.2 resilience hotfix regression ===","clientRecord":false,"at":"2026-10-15T21:01:54.4537664+01:00"}
+{"sequence":196,"sourceLine":361,"context":"","command":"api platform.info","clientRecord":false,"at":"2026-10-15T21:01:54.5057882+01:00"}
+{"sequence":197,"sourceLine":362,"context":"","command":"api features.list","clientRecord":false,"at":"2026-10-15T21:01:54.6022529+01:00"}
+{"sequence":198,"sourceLine":363,"context":"","command":"api logs.list","clientRecord":false,"at":"2026-10-15T21:01:54.6668290+01:00"}
+{"sequence":199,"sourceLine":364,"context":"","command":"api logs.tail file=@runtime/web-listener.log lines=20","clientRecord":false,"at":"2026-10-15T21:01:54.7227958+01:00"}
+{"sequence":200,"sourceLine":365,"context":"","command":"api schema action=logs.tail","clientRecord":false,"at":"2026-10-15T21:01:54.7552629+01:00"}
+{"sequence":201,"sourceLine":366,"context":"","command":"echo === v0.66.1.2 resilience hotfix regression complete ===","clientRecord":false,"at":"2026-10-15T21:01:54.7851548+01:00"}
+{"sequence":202,"sourceLine":376,"context":"","command":"echo === v0.66.2 steering controls regression ===","clientRecord":false,"at":"2026-10-15T21:01:54.8188299+01:00"}
+{"sequence":203,"sourceLine":377,"context":"","command":"api checkpoint.load file=stage1-gameplay-2064.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:01:54.9439152+01:00"}
+{"sequence":204,"sourceLine":378,"context":"","command":"api input.ioc.clear","clientRecord":false,"at":"2026-10-15T21:01:55.0359948+01:00"}
+{"sequence":205,"sourceLine":379,"context":"","command":"api input.steering.set value=0000","clientRecord":false,"at":"2026-10-15T21:01:55.0997826+01:00"}
+{"sequence":206,"sourceLine":380,"context":"","command":"api input.ioc.xor port=3 mask=20","clientRecord":false,"at":"2026-10-15T21:01:55.2028502+01:00"}
+{"sequence":207,"sourceLine":381,"context":"","command":"api control.run-frames frames=5","clientRecord":false,"at":"2026-10-15T21:01:56.1074245+01:00"}
+{"sequence":208,"sourceLine":383,"context":"","command":"echo PASS steering centre processed=0","clientRecord":false,"at":"2026-10-15T21:01:56.3886079+01:00"}
+{"sequence":209,"sourceLine":387,"context":"","command":"api checkpoint.load file=stage1-gameplay-2064.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:01:56.5678410+01:00"}
+{"sequence":210,"sourceLine":388,"context":"","command":"api input.steering.set value=0060","clientRecord":false,"at":"2026-10-15T21:01:56.6587443+01:00"}
+{"sequence":211,"sourceLine":389,"context":"","command":"api input.ioc.xor port=3 mask=20","clientRecord":false,"at":"2026-10-15T21:01:56.7537954+01:00"}
+{"sequence":212,"sourceLine":390,"context":"","command":"api control.run-frames frames=60","clientRecord":false,"at":"2026-10-15T21:02:00.7394569+01:00"}
+{"sequence":213,"sourceLine":392,"context":"","command":"echo PASS steering right +96","clientRecord":false,"at":"2026-10-15T21:02:02.3644604+01:00"}
+{"sequence":214,"sourceLine":396,"context":"","command":"api checkpoint.load file=stage1-gameplay-2064.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:02:02.7989252+01:00"}
+{"sequence":215,"sourceLine":397,"context":"","command":"api input.steering.set value=0FA0","clientRecord":false,"at":"2026-10-15T21:02:03.4033759+01:00"}
+{"sequence":216,"sourceLine":398,"context":"","command":"api input.ioc.xor port=3 mask=20","clientRecord":false,"at":"2026-10-15T21:02:03.7235774+01:00"}
+{"sequence":217,"sourceLine":399,"context":"","command":"api control.run-frames frames=60","clientRecord":false,"at":"2026-10-15T21:02:07.5640404+01:00"}
+{"sequence":218,"sourceLine":401,"context":"","command":"echo PASS steering left -96","clientRecord":false,"at":"2026-10-15T21:02:09.3663341+01:00"}
+{"sequence":219,"sourceLine":405,"context":"","command":"api input.ioc.clear","clientRecord":false,"at":"2026-10-15T21:02:09.5480406+01:00"}
+{"sequence":220,"sourceLine":406,"context":"","command":"api input.steering.set value=0000","clientRecord":false,"at":"2026-10-15T21:02:09.6767058+01:00"}
+{"sequence":221,"sourceLine":407,"context":"","command":"echo === v0.66.2 steering controls regression complete ===","clientRecord":false,"at":"2026-10-15T21:02:09.7589011+01:00"}
+{"sequence":222,"sourceLine":417,"context":"","command":"echo === v0.66.3 contracts / provenance regression ===","clientRecord":false,"at":"2026-10-15T21:02:09.8600156+01:00"}
+{"sequence":223,"sourceLine":418,"context":"","command":"api platform.info","clientRecord":false,"at":"2026-10-15T21:02:09.9242557+01:00"}
+{"sequence":224,"sourceLine":419,"context":"","command":"api schema.all","clientRecord":false,"at":"2026-10-15T21:02:09.9663206+01:00"}
+{"sequence":225,"sourceLine":420,"context":"","command":"api script.schema","clientRecord":false,"at":"2026-10-15T21:02:10.0060823+01:00"}
+{"sequence":226,"sourceLine":421,"context":"","command":"api schema action=sprite.map.inspect","clientRecord":false,"at":"2026-10-15T21:02:10.0374207+01:00"}
+{"sequence":227,"sourceLine":422,"context":"","command":"api schema action=ui.prompt","clientRecord":false,"at":"2026-10-15T21:02:10.0875575+01:00"}
+{"sequence":228,"sourceLine":423,"context":"","command":"api checkpoint.load file=stage1-gameplay-2064.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:02:10.2375281+01:00"}
+{"sequence":229,"sourceLine":424,"context":"","command":"api control.run-frames frames=5","clientRecord":false,"at":"2026-10-15T21:02:11.1958522+01:00"}
+{"sequence":230,"sourceLine":425,"context":"","command":"api sprite.inspect slot=45","clientRecord":false,"at":"2026-10-15T21:02:11.6454210+01:00"}
+{"sequence":231,"sourceLine":426,"context":"","command":"api sprite.map.inspect slot=45","clientRecord":false,"at":"2026-10-15T21:02:11.7675730+01:00"}
+{"sequence":232,"sourceLine":427,"context":"","command":"echo === v0.66.3 contracts / provenance regression complete ===","clientRecord":false,"at":"2026-10-15T21:02:12.2572839+01:00"}
+{"sequence":233,"sourceLine":438,"context":"","command":"echo === v0.66.3.1 workbench reliability regression ===","clientRecord":false,"at":"2026-10-15T21:02:12.4402315+01:00"}
+{"sequence":234,"sourceLine":439,"context":"","command":"api platform.info","clientRecord":false,"at":"2026-10-15T21:02:12.5298571+01:00"}
+{"sequence":235,"sourceLine":440,"context":"","command":"api schema.all","clientRecord":false,"at":"2026-10-15T21:02:12.5665167+01:00"}
+{"sequence":236,"sourceLine":441,"context":"","command":"api script.schema","clientRecord":false,"at":"2026-10-15T21:02:12.5987011+01:00"}
+{"sequence":237,"sourceLine":442,"context":"","command":"api checkpoint.load file=stage1-gameplay-2064.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:02:12.7021736+01:00"}
+{"sequence":238,"sourceLine":443,"context":"","command":"api control.run-frames frames=5","clientRecord":false,"at":"2026-10-15T21:02:13.1313827+01:00"}
+{"sequence":239,"sourceLine":444,"context":"","command":"api frame.snapshot name=regression-v06631-artifact-path","clientRecord":false,"at":"2026-10-15T21:02:15.0643729+01:00"}
+{"sequence":240,"sourceLine":445,"context":"","command":"api frame.snapshot.list","clientRecord":false,"at":"2026-10-15T21:02:16.3548129+01:00"}
+{"sequence":241,"sourceLine":446,"context":"","command":"echo === v0.66.3.1 workbench reliability regression complete ===","clientRecord":false,"at":"2026-10-15T21:02:17.2272207+01:00"}
+{"sequence":242,"sourceLine":457,"context":"","command":"echo === v0.66.4 palette write trace regression ===","clientRecord":false,"at":"2026-10-15T21:02:17.4769628+01:00"}
+{"sequence":243,"sourceLine":458,"context":"","command":"api schema action=palette.trace.start","clientRecord":false,"at":"2026-10-15T21:02:17.7212864+01:00"}
+{"sequence":244,"sourceLine":459,"context":"","command":"api schema action=palette.trace.status","clientRecord":false,"at":"2026-10-15T21:02:18.6451181+01:00"}
+{"sequence":245,"sourceLine":460,"context":"","command":"api schema action=palette.trace.tail","clientRecord":false,"at":"2026-10-15T21:02:18.9692323+01:00"}
+{"sequence":246,"sourceLine":461,"context":"","command":"api schema action=palette.trace.stop","clientRecord":false,"at":"2026-10-15T21:02:19.0568570+01:00"}
+{"sequence":247,"sourceLine":462,"context":"","command":"api schema action=palette.trace.clear","clientRecord":false,"at":"2026-10-15T21:02:19.1362123+01:00"}
+{"sequence":248,"sourceLine":463,"context":"","command":"api palette.trace.clear","clientRecord":false,"at":"2026-10-15T21:02:19.3118002+01:00"}
+{"sequence":249,"sourceLine":464,"context":"","command":"api palette.trace.start indices=1037,1053 limit=128","clientRecord":false,"at":"2026-10-15T21:02:19.9682667+01:00"}
+{"sequence":250,"sourceLine":465,"context":"","command":"api palette.trace.status","clientRecord":false,"at":"2026-10-15T21:02:20.0607690+01:00"}
+{"sequence":251,"sourceLine":466,"context":"","command":"api checkpoint.load file=stage1-gameplay-2064.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:02:20.1911619+01:00"}
+{"sequence":252,"sourceLine":467,"context":"","command":"api control.run-frames frames=5","clientRecord":false,"at":"2026-10-15T21:02:21.6020981+01:00"}
+{"sequence":253,"sourceLine":468,"context":"","command":"api input.ioc.xor port=2 mask=20","clientRecord":false,"at":"2026-10-15T21:02:22.2344358+01:00"}
+{"sequence":254,"sourceLine":469,"context":"","command":"api control.run-frames frames=8","clientRecord":false,"at":"2026-10-15T21:02:23.5703451+01:00"}
+{"sequence":255,"sourceLine":470,"context":"","command":"api palette.trace.tail count=20","clientRecord":false,"at":"2026-10-15T21:02:23.8487229+01:00"}
+{"sequence":256,"sourceLine":471,"context":"","command":"api input.ioc.clear","clientRecord":false,"at":"2026-10-15T21:02:24.8395111+01:00"}
+{"sequence":257,"sourceLine":472,"context":"","command":"api control.run-frames frames=8","clientRecord":false,"at":"2026-10-15T21:02:25.6006211+01:00"}
+{"sequence":258,"sourceLine":473,"context":"","command":"api palette.trace.tail count=40","clientRecord":false,"at":"2026-10-15T21:02:26.1882800+01:00"}
+{"sequence":259,"sourceLine":474,"context":"","command":"api palette.trace.stop","clientRecord":false,"at":"2026-10-15T21:02:26.4093481+01:00"}
+{"sequence":260,"sourceLine":475,"context":"","command":"api palette.trace.status","clientRecord":false,"at":"2026-10-15T21:02:26.5206807+01:00"}
+{"sequence":261,"sourceLine":476,"context":"","command":"api palette.trace.clear","clientRecord":false,"at":"2026-10-15T21:02:26.5959157+01:00"}
+{"sequence":262,"sourceLine":477,"context":"","command":"api palette.trace.tail count=10","clientRecord":false,"at":"2026-10-15T21:02:26.6630475+01:00"}
+{"sequence":263,"sourceLine":478,"context":"","command":"echo === v0.66.4 palette write trace regression complete ===","clientRecord":false,"at":"2026-10-15T21:02:26.6892590+01:00"}
+{"sequence":264,"sourceLine":489,"context":"","command":"echo === v0.66.5 generic memory write trace regression ===","clientRecord":false,"at":"2026-10-15T21:02:26.7237331+01:00"}
+{"sequence":265,"sourceLine":490,"context":"","command":"api schema action=memory.trace.start","clientRecord":false,"at":"2026-10-15T21:02:27.2796826+01:00"}
+{"sequence":266,"sourceLine":491,"context":"","command":"api schema action=memory.trace.status","clientRecord":false,"at":"2026-10-15T21:02:27.5460742+01:00"}
+{"sequence":267,"sourceLine":492,"context":"","command":"api schema action=memory.trace.tail","clientRecord":false,"at":"2026-10-15T21:02:27.6890221+01:00"}
+{"sequence":268,"sourceLine":493,"context":"","command":"api schema action=memory.trace.stop","clientRecord":false,"at":"2026-10-15T21:02:27.8790538+01:00"}
+{"sequence":269,"sourceLine":494,"context":"","command":"api schema action=memory.trace.clear","clientRecord":false,"at":"2026-10-15T21:02:27.9896973+01:00"}
+{"sequence":270,"sourceLine":495,"context":"","command":"api checkpoint.load file=stage1-gameplay-2064.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:02:28.1938194+01:00"}
+{"sequence":271,"sourceLine":496,"context":"","command":"api memory.trace.clear","clientRecord":false,"at":"2026-10-15T21:02:30.8249686+01:00"}
+{"sequence":272,"sourceLine":497,"context":"","command":"api memory.trace.start cpu=A address=0x100303 length=1 width=any limit=128","clientRecord":false,"at":"2026-10-15T21:02:32.9480605+01:00"}
+{"sequence":273,"sourceLine":498,"context":"","command":"api memory.trace.status","clientRecord":false,"at":"2026-10-15T21:02:35.3790651+01:00"}
+{"sequence":274,"sourceLine":499,"context":"","command":"api control.run-frames frames=5","clientRecord":false,"at":"2026-10-15T21:02:36.5002097+01:00"}
+{"sequence":275,"sourceLine":500,"context":"","command":"api input.ioc.xor port=2 mask=20","clientRecord":false,"at":"2026-10-15T21:02:37.0913531+01:00"}
+{"sequence":276,"sourceLine":501,"context":"","command":"api control.run-frames frames=6","clientRecord":false,"at":"2026-10-15T21:02:37.6713163+01:00"}
+{"sequence":277,"sourceLine":502,"context":"","command":"api memory.trace.tail count=20","clientRecord":false,"at":"2026-10-15T21:02:38.2812820+01:00"}
+{"sequence":278,"sourceLine":503,"context":"","command":"api input.ioc.clear","clientRecord":false,"at":"2026-10-15T21:02:38.4642787+01:00"}
+{"sequence":279,"sourceLine":504,"context":"","command":"api control.run-frames frames=6","clientRecord":false,"at":"2026-10-15T21:02:38.9924290+01:00"}
+{"sequence":280,"sourceLine":505,"context":"","command":"api memory.trace.tail count=40","clientRecord":false,"at":"2026-10-15T21:02:39.4710461+01:00"}
+{"sequence":281,"sourceLine":506,"context":"","command":"api memory.trace.stop","clientRecord":false,"at":"2026-10-15T21:02:39.6733623+01:00"}
+{"sequence":282,"sourceLine":507,"context":"","command":"api memory.trace.status","clientRecord":false,"at":"2026-10-15T21:02:39.7508036+01:00"}
+{"sequence":283,"sourceLine":508,"context":"","command":"api memory.trace.clear","clientRecord":false,"at":"2026-10-15T21:02:39.8280123+01:00"}
+{"sequence":284,"sourceLine":509,"context":"","command":"api memory.trace.tail count=10","clientRecord":false,"at":"2026-10-15T21:02:39.9770047+01:00"}
+{"sequence":285,"sourceLine":510,"context":"","command":"echo === v0.66.5 generic memory write trace regression complete ===","clientRecord":false,"at":"2026-10-15T21:02:40.0542862+01:00"}
+{"sequence":286,"sourceLine":521,"context":"","command":"echo === v0.66.5.1 shared track recorder regression ===","clientRecord":false,"at":"2026-10-15T21:02:40.1287924+01:00"}
+{"sequence":287,"sourceLine":522,"context":"","command":"api schema action=track.record.start","clientRecord":false,"at":"2026-10-15T21:02:40.1675945+01:00"}
+{"sequence":288,"sourceLine":523,"context":"","command":"api schema action=track.record.stop","clientRecord":false,"at":"2026-10-15T21:02:40.3506309+01:00"}
+{"sequence":289,"sourceLine":524,"context":"","command":"api schema action=track.record.clear","clientRecord":false,"at":"2026-10-15T21:02:40.9376315+01:00"}
+{"sequence":290,"sourceLine":525,"context":"","command":"api schema action=track.record.status","clientRecord":false,"at":"2026-10-15T21:02:41.0848345+01:00"}
+{"sequence":291,"sourceLine":526,"context":"","command":"api schema action=track.record.sample","clientRecord":false,"at":"2026-10-15T21:02:41.2345740+01:00"}
+{"sequence":292,"sourceLine":527,"context":"","command":"api schema action=track.svg.export","clientRecord":false,"at":"2026-10-15T21:02:41.4478374+01:00"}
+{"sequence":293,"sourceLine":528,"context":"","command":"api checkpoint.load file=stage1-driving-2352.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:02:41.5798451+01:00"}
+{"sequence":294,"sourceLine":529,"context":"","command":"api track.record.clear","clientRecord":false,"at":"2026-10-15T21:02:41.6390874+01:00"}
+{"sequence":295,"sourceLine":530,"context":"","command":"api track.record.start","clientRecord":false,"at":"2026-10-15T21:02:41.6825387+01:00"}
+{"sequence":296,"sourceLine":531,"context":"","command":"api track.record.sample","clientRecord":false,"at":"2026-10-15T21:02:45.3757956+01:00"}
+{"sequence":297,"sourceLine":532,"context":"","command":"api control.run-frames frames=30","clientRecord":false,"at":"2026-10-15T21:02:48.7603365+01:00"}
+{"sequence":298,"sourceLine":533,"context":"","command":"api track.record.sample","clientRecord":false,"at":"2026-10-15T21:02:54.5901796+01:00"}
+{"sequence":299,"sourceLine":534,"context":"","command":"api control.run-frames frames=30","clientRecord":false,"at":"2026-10-15T21:02:59.2475958+01:00"}
+{"sequence":300,"sourceLine":535,"context":"","command":"api track.record.sample","clientRecord":false,"at":"2026-10-15T21:03:05.8557610+01:00"}
+{"sequence":301,"sourceLine":536,"context":"","command":"api track.record.stop","clientRecord":false,"at":"2026-10-15T21:03:12.3362125+01:00"}
+{"sequence":302,"sourceLine":537,"context":"","command":"api track.record.status","clientRecord":false,"at":"2026-10-15T21:03:14.4790630+01:00"}
+{"sequence":303,"sourceLine":538,"context":"","command":"api track.svg.export name=regression-v06651-track","clientRecord":false,"at":"2026-10-15T21:03:15.4343660+01:00"}
+{"sequence":304,"sourceLine":539,"context":"","command":"api track.record.clear","clientRecord":false,"at":"2026-10-15T21:03:15.9739486+01:00"}
+{"sequence":305,"sourceLine":540,"context":"","command":"api track.record.status","clientRecord":false,"at":"2026-10-15T21:03:16.0465766+01:00"}
+{"sequence":306,"sourceLine":541,"context":"","command":"echo === v0.66.5.1 shared track recorder regression complete ===","clientRecord":false,"at":"2026-10-15T21:03:16.1175482+01:00"}
+{"sequence":307,"sourceLine":552,"context":"","command":"echo === v0.66.6.1 layered frame snapshot regression ===","clientRecord":false,"at":"2026-10-15T21:03:16.1508072+01:00"}
+{"sequence":308,"sourceLine":553,"context":"","command":"api schema action=frame.snapshot","clientRecord":false,"at":"2026-10-15T21:03:16.1849871+01:00"}
+{"sequence":309,"sourceLine":554,"context":"","command":"api schema action=image.compare","clientRecord":false,"at":"2026-10-15T21:03:16.3462293+01:00"}
+{"sequence":310,"sourceLine":555,"context":"","command":"api schema action=image.diff","clientRecord":false,"at":"2026-10-15T21:03:16.7695441+01:00"}
+{"sequence":311,"sourceLine":556,"context":"","command":"api checkpoint.load file=stage1-driving-2352.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:03:16.9035625+01:00"}
+{"sequence":312,"sourceLine":557,"context":"","command":"api frame.snapshot name=regression-v06661-layered","clientRecord":false,"at":"2026-10-15T21:03:18.5658307+01:00"}
+{"sequence":313,"sourceLine":558,"context":"","command":"api frame.snapshot.list","clientRecord":false,"at":"2026-10-15T21:03:19.3153841+01:00"}
+{"sequence":314,"sourceLine":559,"context":"","command":"api image.compare a=regression-v06661-layered b=regression-v06661-layered region=FULL hud=normal","clientRecord":false,"at":"2026-10-15T21:03:20.1094404+01:00"}
+{"sequence":315,"sourceLine":560,"context":"","command":"api image.compare a=regression-v06661-layered b=regression-v06661-layered region=FULL hud=hidden","clientRecord":false,"at":"2026-10-15T21:03:20.5907297+01:00"}
+{"sequence":316,"sourceLine":561,"context":"","command":"api image.compare a=regression-v06661-layered b=regression-v06661-layered region=FULL hud=only","clientRecord":false,"at":"2026-10-15T21:03:21.0481178+01:00"}
+{"sequence":317,"sourceLine":562,"context":"","command":"api image.diff a=regression-v06661-layered b=regression-v06661-layered region=FULL hud=hidden output=regression-v06661-hud-hidden-self-diff","clientRecord":false,"at":"2026-10-15T21:03:21.7107684+01:00"}
+{"sequence":318,"sourceLine":563,"context":"","command":"echo === v0.66.6.1 layered frame snapshot regression complete ===","clientRecord":false,"at":"2026-10-15T21:03:21.8889054+01:00"}
+{"sequence":319,"sourceLine":576,"context":"","command":"echo === v0.66.7.5 User Handbook / Live Reference ===","clientRecord":false,"at":"2026-10-15T21:03:21.9632200+01:00"}
+{"sequence":320,"sourceLine":577,"context":"","command":"api schema action=docs.handbook","clientRecord":false,"at":"2026-10-15T21:03:22.0337421+01:00"}
+{"sequence":321,"sourceLine":578,"context":"","command":"api schema action=docs.page","clientRecord":false,"at":"2026-10-15T21:03:22.1112852+01:00"}
+{"sequence":322,"sourceLine":579,"context":"","command":"api docs.handbook","clientRecord":false,"at":"2026-10-15T21:03:22.1533255+01:00"}
+{"sequence":323,"sourceLine":580,"context":"","command":"api docs.page id=api-overview","clientRecord":false,"at":"2026-10-15T21:03:22.2867335+01:00"}
+{"sequence":324,"sourceLine":581,"context":"","command":"api docs.page id=graphics-lab-guide","clientRecord":false,"at":"2026-10-15T21:03:22.7318359+01:00"}
+{"sequence":325,"sourceLine":582,"context":"","command":"api schema.all","clientRecord":false,"at":"2026-10-15T21:03:22.8356949+01:00"}
+{"sequence":326,"sourceLine":583,"context":"","command":"api script.schema","clientRecord":false,"at":"2026-10-15T21:03:22.9075178+01:00"}
+{"sequence":327,"sourceLine":584,"context":"","command":"api docs.search query=frame.snapshot","clientRecord":false,"at":"2026-10-15T21:03:23.0529738+01:00"}
+{"sequence":328,"sourceLine":585,"context":"","command":"api docs.handover","clientRecord":false,"at":"2026-10-15T21:03:23.0955461+01:00"}
+{"sequence":329,"sourceLine":586,"context":"","command":"api window.status","clientRecord":false,"at":"2026-10-15T21:03:23.1509282+01:00"}
+{"sequence":330,"sourceLine":587,"context":"","command":"api window.fullscreen enabled=false","clientRecord":false,"at":"2026-10-15T21:03:23.2268521+01:00"}
+{"sequence":331,"sourceLine":588,"context":"","command":"api window.scale scale=3","clientRecord":false,"at":"2026-10-15T21:03:23.4275875+01:00"}
+{"sequence":332,"sourceLine":589,"context":"","command":"api window.restore","clientRecord":false,"at":"2026-10-15T21:03:23.5399236+01:00"}
+{"sequence":333,"sourceLine":590,"context":"","command":"api window.show","clientRecord":false,"at":"2026-10-15T21:03:23.6510534+01:00"}
+{"sequence":334,"sourceLine":591,"context":"","command":"api checkpoint.load file=stage1-driving-2352.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:03:23.8059998+01:00"}
+{"sequence":335,"sourceLine":592,"context":"","command":"api frame.snapshot name=regression-v06675-user-handbook","clientRecord":false,"at":"2026-10-15T21:03:25.7800395+01:00"}
+{"sequence":336,"sourceLine":593,"context":"","command":"api frame.snapshot.list","clientRecord":false,"at":"2026-10-15T21:03:26.5607794+01:00"}
+{"sequence":337,"sourceLine":594,"context":"","command":"api docs.export format=html evidence=key output=regression-v06675-user-handbook","clientRecord":false,"at":"2026-10-15T21:03:27.5512566+01:00"}
+{"sequence":338,"sourceLine":595,"context":"","command":"api window.status","clientRecord":false,"at":"2026-10-15T21:03:28.1159990+01:00"}
+{"sequence":339,"sourceLine":596,"context":"","command":"echo === v0.66.7.5 regression complete ===","clientRecord":false,"at":"2026-10-15T21:03:28.2079693+01:00"}
+{"sequence":340,"sourceLine":609,"context":"","command":"echo === v0.66.7.6 Docs / Knowledge Consolidation ===","clientRecord":false,"at":"2026-10-15T21:03:28.7085729+01:00"}
+{"sequence":341,"sourceLine":610,"context":"","command":"api docs.handbook","clientRecord":false,"at":"2026-10-15T21:03:28.7542389+01:00"}
+{"sequence":342,"sourceLine":611,"context":"","command":"api docs.search query=context","clientRecord":false,"at":"2026-10-15T21:03:28.8616853+01:00"}
+{"sequence":343,"sourceLine":612,"context":"","command":"api docs.search query=producer","clientRecord":false,"at":"2026-10-15T21:03:28.9248213+01:00"}
+{"sequence":344,"sourceLine":613,"context":"","command":"api docs.search query=opacity","clientRecord":false,"at":"2026-10-15T21:03:28.9864592+01:00"}
+{"sequence":345,"sourceLine":614,"context":"","command":"api knowledge.search query=context","clientRecord":false,"at":"2026-10-15T21:03:29.0405071+01:00"}
+{"sequence":346,"sourceLine":615,"context":"","command":"api docs.get id=memory-write-tracing","clientRecord":false,"at":"2026-10-15T21:03:29.0933363+01:00"}
+{"sequence":347,"sourceLine":616,"context":"","command":"api docs.get id=processed-brake-input","clientRecord":false,"at":"2026-10-15T21:03:29.1383581+01:00"}
+{"sequence":348,"sourceLine":617,"context":"","command":"api docs.get id=individual-sprite-forensics","clientRecord":false,"at":"2026-10-15T21:03:29.1917674+01:00"}
+{"sequence":349,"sourceLine":618,"context":"","command":"api docs.handover","clientRecord":false,"at":"2026-10-15T21:03:29.3812311+01:00"}
+{"sequence":350,"sourceLine":619,"context":"","command":"api schema.all","clientRecord":false,"at":"2026-10-15T21:03:29.4574291+01:00"}
+{"sequence":351,"sourceLine":620,"context":"","command":"api script.schema","clientRecord":false,"at":"2026-10-15T21:03:29.5282970+01:00"}
+{"sequence":352,"sourceLine":621,"context":"","command":"api window.status","clientRecord":false,"at":"2026-10-15T21:03:29.6299053+01:00"}
+{"sequence":353,"sourceLine":622,"context":"","command":"api window.fullscreen enabled=false","clientRecord":false,"at":"2026-10-15T21:03:29.7028070+01:00"}
+{"sequence":354,"sourceLine":623,"context":"","command":"api window.scale scale=3","clientRecord":false,"at":"2026-10-15T21:03:30.5432817+01:00"}
+{"sequence":355,"sourceLine":624,"context":"","command":"api window.restore","clientRecord":false,"at":"2026-10-15T21:03:30.7435442+01:00"}
+{"sequence":356,"sourceLine":625,"context":"","command":"api window.show","clientRecord":false,"at":"2026-10-15T21:03:30.8566584+01:00"}
+{"sequence":357,"sourceLine":626,"context":"","command":"api checkpoint.load file=stage1-driving-2352.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:03:31.0086764+01:00"}
+{"sequence":358,"sourceLine":627,"context":"","command":"api frame.snapshot name=regression-v06676-docs-consolidation","clientRecord":false,"at":"2026-10-15T21:03:32.6887960+01:00"}
+{"sequence":359,"sourceLine":628,"context":"","command":"api frame.snapshot.list","clientRecord":false,"at":"2026-10-15T21:03:33.8073713+01:00"}
+{"sequence":360,"sourceLine":629,"context":"","command":"api docs.export format=html evidence=key output=regression-v06676-docs-consolidation","clientRecord":false,"at":"2026-10-15T21:03:34.5022039+01:00"}
+{"sequence":361,"sourceLine":630,"context":"","command":"api window.status","clientRecord":false,"at":"2026-10-15T21:03:35.0589880+01:00"}
+{"sequence":362,"sourceLine":631,"context":"","command":"echo === v0.66.7.6 regression complete ===","clientRecord":false,"at":"2026-10-15T21:03:35.1488661+01:00"}
+{"sequence":363,"sourceLine":642,"context":"","command":"echo === v0.66.7.7 Run History / Snapshot Discovery ===","clientRecord":false,"at":"2026-10-15T21:03:35.1900648+01:00"}
+{"sequence":364,"sourceLine":643,"context":"","command":"api schema action=script.runs","clientRecord":false,"at":"2026-10-15T21:03:35.3899183+01:00"}
+{"sequence":365,"sourceLine":644,"context":"","command":"api script.runs limit=25","clientRecord":false,"at":"2026-10-15T21:03:35.5997537+01:00"}
+{"sequence":366,"sourceLine":645,"context":"","command":"api frame.snapshot.list","clientRecord":false,"at":"2026-10-15T21:03:35.7465175+01:00"}
+{"sequence":367,"sourceLine":646,"context":"","command":"echo === v0.66.7.7 persistence/discovery regression complete ===","clientRecord":false,"at":"2026-10-15T21:03:36.2054311+01:00"}
+{"sequence":368,"sourceLine":656,"context":"","command":"echo === v0.66.7.8 discovery performance ===","clientRecord":false,"at":"2026-10-15T21:03:36.3663765+01:00"}
+{"sequence":369,"sourceLine":657,"context":"","command":"api status","clientRecord":false,"at":"2026-10-15T21:03:36.4992726+01:00"}
+{"sequence":370,"sourceLine":658,"context":"","command":"api script.runs limit=25","clientRecord":false,"at":"2026-10-15T21:03:36.7150968+01:00"}
+{"sequence":371,"sourceLine":659,"context":"","command":"api frame.snapshot.list","clientRecord":false,"at":"2026-10-15T21:03:36.8620711+01:00"}
+{"sequence":372,"sourceLine":660,"context":"","command":"api status","clientRecord":false,"at":"2026-10-15T21:03:36.9452703+01:00"}
+{"sequence":373,"sourceLine":661,"context":"","command":"echo === v0.66.7.8 discovery performance complete ===","clientRecord":false,"at":"2026-10-15T21:03:36.9744708+01:00"}
+{"sequence":374,"sourceLine":663,"context":"","command":"echo --- v0.66.7.8 run finalization ---","clientRecord":false,"at":"2026-10-15T21:03:37.0041436+01:00"}
+{"sequence":375,"sourceLine":671,"context":"","command":"echo === v0.66.7.8 run finalization ===","clientRecord":false,"at":"2026-10-15T21:03:37.0413003+01:00"}
+{"sequence":376,"sourceLine":672,"context":"","command":"api status","clientRecord":false,"at":"2026-10-15T21:03:37.0938819+01:00"}
+{"sequence":377,"sourceLine":674,"context":"","command":"echo capability predicate transient PASS","clientRecord":false,"at":"2026-10-15T21:03:37.2886307+01:00"}
+{"sequence":378,"sourceLine":679,"context":"","command":"echo memory predicate transient PASS","clientRecord":false,"at":"2026-10-15T21:03:37.7880478+01:00"}
+{"sequence":379,"sourceLine":683,"context":"","command":"api window.status","clientRecord":false,"at":"2026-10-15T21:03:37.9244511+01:00"}
+{"sequence":380,"sourceLine":684,"context":"","command":"api frame.snapshot.list","clientRecord":false,"at":"2026-10-15T21:03:38.0747659+01:00"}
+{"sequence":381,"sourceLine":685,"context":"","command":"api script.runs limit=25","clientRecord":false,"at":"2026-10-15T21:03:38.2284475+01:00"}
+{"sequence":382,"sourceLine":686,"context":"","command":"echo === v0.66.7.8 run finalization complete ===","clientRecord":false,"at":"2026-10-15T21:03:38.4344105+01:00"}
+{"sequence":383,"sourceLine":696,"context":"","command":"echo === v0.66.7.9 research recovery regression ===","clientRecord":false,"at":"2026-10-15T21:03:38.5079879+01:00"}
+{"sequence":384,"sourceLine":697,"context":"","command":"api platform.info","clientRecord":false,"at":"2026-10-15T21:03:38.5917212+01:00"}
+{"sequence":385,"sourceLine":698,"context":"","command":"api status","clientRecord":false,"at":"2026-10-15T21:03:38.7589437+01:00"}
+{"sequence":386,"sourceLine":699,"context":"","command":"api docs.get id=turbo-hud-investigation","clientRecord":false,"at":"2026-10-15T21:03:39.1989138+01:00"}
+{"sequence":387,"sourceLine":700,"context":"","command":"api schema action=gameplay.registry","clientRecord":false,"at":"2026-10-15T21:03:39.3780341+01:00"}
+{"sequence":388,"sourceLine":701,"context":"","command":"api schema action=frame.snapshot","clientRecord":false,"at":"2026-10-15T21:03:39.4560100+01:00"}
+{"sequence":389,"sourceLine":702,"context":"","command":"api schema action=image.compare","clientRecord":false,"at":"2026-10-15T21:03:39.5266682+01:00"}
+{"sequence":390,"sourceLine":703,"context":"","command":"api schema action=memory.trace.start","clientRecord":false,"at":"2026-10-15T21:03:39.6029134+01:00"}
+{"sequence":391,"sourceLine":704,"context":"","command":"api regions.list","clientRecord":false,"at":"2026-10-15T21:03:39.6418891+01:00"}
+{"sequence":392,"sourceLine":705,"context":"","command":"api checkpoint.load file=stage1-gameplay-2064.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:03:39.7365775+01:00"}
+{"sequence":393,"sourceLine":706,"context":"","command":"api gameplay.registry","clientRecord":false,"at":"2026-10-15T21:03:41.1369119+01:00"}
+{"sequence":394,"sourceLine":707,"context":"","command":"api memory.read cpu=A address=0x100303 width=8","clientRecord":false,"at":"2026-10-15T21:03:41.6610606+01:00"}
+{"sequence":395,"sourceLine":708,"context":"","command":"api memory.read cpu=A address=0x10040F width=8","clientRecord":false,"at":"2026-10-15T21:03:41.8608719+01:00"}
+{"sequence":396,"sourceLine":709,"context":"","command":"api memory.read cpu=A address=0x1003A2 width=16","clientRecord":false,"at":"2026-10-15T21:03:42.2927382+01:00"}
+{"sequence":397,"sourceLine":710,"context":"","command":"api memory.read cpu=A address=0x100414 width=16","clientRecord":false,"at":"2026-10-15T21:03:42.5266711+01:00"}
+{"sequence":398,"sourceLine":711,"context":"","command":"echo === v0.66.7.9 research recovery regression complete ===","clientRecord":false,"at":"2026-10-15T21:03:42.5601562+01:00"}
+{"sequence":399,"sourceLine":722,"context":"","command":"echo === v0.66.8.0 Forensic Timeline regression ===","clientRecord":false,"at":"2026-10-15T21:03:42.5940929+01:00"}
+{"sequence":400,"sourceLine":723,"context":"","command":"api checkpoint.load file=stage1-gameplay-2064.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:03:42.6913641+01:00"}
+{"sequence":401,"sourceLine":724,"context":"","command":"api input.ioc.clear","clientRecord":false,"at":"2026-10-15T21:03:42.7778542+01:00"}
+{"sequence":402,"sourceLine":725,"context":"","command":"api timeline.record.start name=regression-v06680-timeline","clientRecord":false,"at":"2026-10-15T21:03:42.8840401+01:00"}
+{"sequence":403,"sourceLine":726,"context":"","command":"api control.run-frames frames=3","clientRecord":false,"at":"2026-10-15T21:03:43.3803210+01:00"}
+{"sequence":404,"sourceLine":727,"context":"","command":"api timeline.record.stop","clientRecord":false,"at":"2026-10-15T21:03:43.9013237+01:00"}
+{"sequence":405,"sourceLine":728,"context":"","command":"api timeline.list","clientRecord":false,"at":"2026-10-15T21:03:44.2206872+01:00"}
+{"sequence":406,"sourceLine":729,"context":"","command":"api timeline.load name=regression-v06680-timeline","clientRecord":false,"at":"2026-10-15T21:03:44.5933707+01:00"}
+{"sequence":407,"sourceLine":730,"context":"","command":"assert status source=timeline","clientRecord":false,"at":"2026-10-15T21:03:44.7232666+01:00"}
+{"sequence":408,"sourceLine":731,"context":"","command":"api timeline.status","clientRecord":false,"at":"2026-10-15T21:03:45.1543948+01:00"}
+{"sequence":409,"sourceLine":732,"context":"","command":"api timeline.frames","clientRecord":false,"at":"2026-10-15T21:03:45.2180705+01:00"}
+{"sequence":410,"sourceLine":733,"context":"","command":"api timeline.seek frame=2065","clientRecord":false,"at":"2026-10-15T21:03:45.4232335+01:00"}
+{"sequence":411,"sourceLine":734,"context":"","command":"api memory.read cpu=A address=0x100303 width=8","clientRecord":false,"at":"2026-10-15T21:03:45.5497879+01:00"}
+{"sequence":412,"sourceLine":735,"context":"","command":"api register.read cpu=A name=PC","clientRecord":false,"at":"2026-10-15T21:03:45.6696031+01:00"}
+{"sequence":413,"sourceLine":736,"context":"","command":"api sprites.list","clientRecord":false,"at":"2026-10-15T21:03:46.0492089+01:00"}
+{"sequence":414,"sourceLine":737,"context":"","command":"api gameplay.registry","clientRecord":false,"at":"2026-10-15T21:03:47.4481037+01:00"}
+{"sequence":415,"sourceLine":738,"context":"","command":"api timeline.next","clientRecord":false,"at":"2026-10-15T21:03:48.1501748+01:00"}
+{"sequence":416,"sourceLine":739,"context":"","command":"api timeline.prev","clientRecord":false,"at":"2026-10-15T21:03:48.5881471+01:00"}
+{"sequence":417,"sourceLine":740,"context":"","command":"api timeline.unload","clientRecord":false,"at":"2026-10-15T21:03:48.7992637+01:00"}
+{"sequence":418,"sourceLine":741,"context":"","command":"assert status source=live","clientRecord":false,"at":"2026-10-15T21:03:48.9461678+01:00"}
+{"sequence":419,"sourceLine":742,"context":"","command":"api status","clientRecord":false,"at":"2026-10-15T21:03:49.0184716+01:00"}
+{"sequence":420,"sourceLine":743,"context":"","command":"api timeline.scan.memory name=regression-v06680-timeline triggerFrame=2064 stopFrame=2067 window=1","clientRecord":false,"at":"2026-10-15T21:03:50.8498500+01:00"}
+{"sequence":421,"sourceLine":744,"context":"","command":"api schema action=timeline.scan.memory","clientRecord":false,"at":"2026-10-15T21:03:51.8083155+01:00"}
+{"sequence":422,"sourceLine":745,"context":"","command":"api schema action=timeline.trim.event","clientRecord":false,"at":"2026-10-15T21:03:51.9843042+01:00"}
+{"sequence":423,"sourceLine":746,"context":"","command":"api audio.capabilities","clientRecord":false,"at":"2026-10-15T21:03:52.0680736+01:00"}
+{"sequence":424,"sourceLine":747,"context":"","command":"echo === v0.66.8.0 Forensic Timeline regression complete ===","clientRecord":false,"at":"2026-10-15T21:03:52.1320994+01:00"}
+{"sequence":425,"sourceLine":758,"context":"","command":"echo === v0.66.8.0 RC7 Portable Automated Timeline Analysis ===","clientRecord":false,"at":"2026-10-15T21:03:52.1730027+01:00"}
+{"sequence":426,"sourceLine":759,"context":"","command":"api checkpoint.load file=stage1-gameplay-2064.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:03:52.4138848+01:00"}
+{"sequence":427,"sourceLine":760,"context":"","command":"api input.ioc.clear","clientRecord":false,"at":"2026-10-15T21:03:52.8465031+01:00"}
+{"sequence":428,"sourceLine":761,"context":"","command":"api timeline.record.start name=regression-v06680-rc7-auto","clientRecord":false,"at":"2026-10-15T21:03:52.9842622+01:00"}
+{"sequence":429,"sourceLine":762,"context":"","command":"api input.ioc.xor port=3 mask=21","clientRecord":false,"at":"2026-10-15T21:03:53.1104350+01:00"}
+{"sequence":430,"sourceLine":763,"context":"","command":"api control.run-frames frames=2","clientRecord":false,"at":"2026-10-15T21:03:53.4752994+01:00"}
+{"sequence":431,"sourceLine":764,"context":"","command":"api input.ioc.clear","clientRecord":false,"at":"2026-10-15T21:03:53.7091457+01:00"}
+{"sequence":432,"sourceLine":765,"context":"","command":"api control.run-frames frames=3","clientRecord":false,"at":"2026-10-15T21:03:54.5438158+01:00"}
+{"sequence":433,"sourceLine":766,"context":"","command":"api timeline.record.stop","clientRecord":false,"at":"2026-10-15T21:03:54.8167821+01:00"}
+{"sequence":434,"sourceLine":767,"context":"","command":"api timeline.analyze.auto name=regression-v06680-rc7-auto triggerFrame=2065 stopFrame=2067 window=1 top=8","clientRecord":false,"at":"2026-10-15T21:04:18.8437524+01:00"}
+{"sequence":435,"sourceLine":768,"context":"","command":"api timeline.play name=regression-v06680-rc7-auto from=2064 to=2069 fps=60","clientRecord":false,"at":"2026-10-15T21:04:26.4925536+01:00"}
+{"sequence":436,"sourceLine":769,"context":"","command":"api timeline.status","clientRecord":false,"at":"2026-10-15T21:04:28.4449720+01:00"}
+{"sequence":437,"sourceLine":770,"context":"","command":"api timeline.unload","clientRecord":false,"at":"2026-10-15T21:04:29.7707049+01:00"}
+{"sequence":438,"sourceLine":771,"context":"","command":"api status","clientRecord":false,"at":"2026-10-15T21:04:30.2994941+01:00"}
+{"sequence":439,"sourceLine":772,"context":"","command":"echo === v0.66.8.0 RC7 Portable Automated Timeline Analysis complete ===","clientRecord":false,"at":"2026-10-15T21:04:30.4729576+01:00"}
+{"sequence":440,"sourceLine":780,"context":"","command":"echo === v0.66.8.0 RC7.4 Bounded History Discovery ===","clientRecord":false,"at":"2026-10-15T21:04:30.5067048+01:00"}
+{"sequence":441,"sourceLine":781,"context":"","command":"api schema action=script.runs","clientRecord":false,"at":"2026-10-15T21:04:30.5380443+01:00"}
+{"sequence":442,"sourceLine":782,"context":"","command":"api script.runs limit=10","clientRecord":false,"at":"2026-10-15T21:04:30.6629965+01:00"}
+{"sequence":443,"sourceLine":783,"context":"","command":"echo === v0.66.8.0 RC7.4 bounded history discovery complete ===","clientRecord":false,"at":"2026-10-15T21:04:30.6892644+01:00"}
+{"sequence":444,"sourceLine":794,"context":"","command":"echo === v0.66.9.0 Game Lab / Tile Inspector regression ===","clientRecord":false,"at":"2026-10-15T21:04:30.7171568+01:00"}
+{"sequence":445,"sourceLine":795,"context":"","command":"api checkpoint.load file=stage1-gameplay-2064.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:04:30.8403881+01:00"}
+{"sequence":446,"sourceLine":796,"context":"","command":"api game.experiment.status","clientRecord":false,"at":"2026-10-15T21:04:31.2437304+01:00"}
+{"sequence":447,"sourceLine":797,"context":"","command":"api game.turbo.remaining.set value=3","clientRecord":false,"at":"2026-10-15T21:04:32.5671486+01:00"}
+{"sequence":448,"sourceLine":798,"context":"","command":"api game.turbo.stock enabled=true value=3","clientRecord":false,"at":"2026-10-15T21:04:33.1689121+01:00"}
+{"sequence":449,"sourceLine":799,"context":"","command":"api game.turbo.stock enabled=false","clientRecord":false,"at":"2026-10-15T21:04:34.1001149+01:00"}
+{"sequence":450,"sourceLine":800,"context":"","command":"api game.speed.set value=602","clientRecord":false,"at":"2026-10-15T21:04:34.6029943+01:00"}
+{"sequence":451,"sourceLine":801,"context":"","command":"api game.speed.freeze enabled=true value=602","clientRecord":false,"at":"2026-10-15T21:04:35.5522274+01:00"}
+{"sequence":452,"sourceLine":802,"context":"","command":"api game.speed.clear","clientRecord":false,"at":"2026-10-15T21:04:36.1082470+01:00"}
+{"sequence":453,"sourceLine":803,"context":"","command":"api tile.inspect code=7C palette=0 scale=8","clientRecord":false,"at":"2026-10-15T21:04:36.7615212+01:00"}
+{"sequence":454,"sourceLine":804,"context":"","command":"api tile.inspect code=0C palette=0 scale=8","clientRecord":false,"at":"2026-10-15T21:04:37.0270709+01:00"}
+{"sequence":455,"sourceLine":805,"context":"","command":"api game.experiment.status","clientRecord":false,"at":"2026-10-15T21:04:37.4444704+01:00"}
+{"sequence":456,"sourceLine":806,"context":"","command":"echo === v0.66.9.0 Game Lab / Tile Inspector regression complete ===","clientRecord":false,"at":"2026-10-15T21:04:37.9848089+01:00"}
+{"sequence":457,"sourceLine":816,"context":"","command":"echo === v0.66.9.0 RC2 sprite order / speed regression ===","clientRecord":false,"at":"2026-10-15T21:04:38.0529346+01:00"}
+{"sequence":458,"sourceLine":817,"context":"","command":"api checkpoint.load file=stage1-driving-2352.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:04:38.1948261+01:00"}
+{"sequence":459,"sourceLine":818,"context":"","command":"api game.experiment.status","clientRecord":false,"at":"2026-10-15T21:04:38.8025032+01:00"}
+{"sequence":460,"sourceLine":819,"context":"","command":"api sprite.order.inspect","clientRecord":false,"at":"2026-10-15T21:04:39.3317396+01:00"}
+{"sequence":461,"sourceLine":820,"context":"","command":"api sprite.map.inspect map=475","clientRecord":false,"at":"2026-10-15T21:04:39.7039115+01:00"}
+{"sequence":462,"sourceLine":821,"context":"","command":"api game.sprite.order.set mode=lower-slot","clientRecord":false,"at":"2026-10-15T21:04:40.2009145+01:00"}
+{"sequence":463,"sourceLine":822,"context":"","command":"api sprite.order.inspect","clientRecord":false,"at":"2026-10-15T21:04:40.8332397+01:00"}
+{"sequence":464,"sourceLine":823,"context":"","command":"api game.sprite.order.set mode=higher-slot","clientRecord":false,"at":"2026-10-15T21:04:41.3385746+01:00"}
+{"sequence":465,"sourceLine":824,"context":"","command":"api sprite.order.inspect","clientRecord":false,"at":"2026-10-15T21:04:41.5590715+01:00"}
+{"sequence":466,"sourceLine":825,"context":"","command":"api tile.inspect code=0C palette=0 scale=4","clientRecord":false,"at":"2026-10-15T21:04:41.7406722+01:00"}
+{"sequence":467,"sourceLine":826,"context":"","command":"api game.speed.set value=602","clientRecord":false,"at":"2026-10-15T21:04:42.6954858+01:00"}
+{"sequence":468,"sourceLine":827,"context":"","command":"api game.experiment.status","clientRecord":false,"at":"2026-10-15T21:04:43.2413024+01:00"}
+{"sequence":469,"sourceLine":828,"context":"","command":"api game.speed.freeze enabled=true value=602","clientRecord":false,"at":"2026-10-15T21:04:44.2651147+01:00"}
+{"sequence":470,"sourceLine":829,"context":"","command":"api game.experiment.status","clientRecord":false,"at":"2026-10-15T21:04:44.8045759+01:00"}
+{"sequence":471,"sourceLine":830,"context":"","command":"api game.speed.clear","clientRecord":false,"at":"2026-10-15T21:04:45.6994134+01:00"}
+{"sequence":472,"sourceLine":831,"context":"","command":"api game.experiment.status","clientRecord":false,"at":"2026-10-15T21:04:46.2907200+01:00"}
+{"sequence":473,"sourceLine":832,"context":"","command":"echo === v0.66.9.0 RC2 sprite order / speed regression complete ===","clientRecord":false,"at":"2026-10-15T21:04:46.8859592+01:00"}
+{"sequence":474,"sourceLine":843,"context":"","command":"echo === v0.66.9.0 RC2.2 MAME sprite-order regression ===","clientRecord":false,"at":"2026-10-15T21:04:46.9651211+01:00"}
+{"sequence":475,"sourceLine":844,"context":"","command":"api sprite.order.inspect","clientRecord":false,"at":"2026-10-15T21:04:47.1152015+01:00"}
+{"sequence":476,"sourceLine":845,"context":"","command":"api sprite.order.set mode=higher-slot","clientRecord":false,"at":"2026-10-15T21:04:47.2065375+01:00"}
+{"sequence":477,"sourceLine":846,"context":"","command":"api sprite.order.inspect","clientRecord":false,"at":"2026-10-15T21:04:47.4269731+01:00"}
+{"sequence":478,"sourceLine":847,"context":"","command":"api sprite.order.set mode=lower-slot","clientRecord":false,"at":"2026-10-15T21:04:47.5105722+01:00"}
+{"sequence":479,"sourceLine":848,"context":"","command":"api sprite.order.inspect","clientRecord":false,"at":"2026-10-15T21:04:47.6325026+01:00"}
+{"sequence":480,"sourceLine":849,"context":"","command":"echo === v0.66.9.0 RC2.2 MAME sprite-order regression complete ===","clientRecord":false,"at":"2026-10-15T21:04:47.6605526+01:00"}
+{"sequence":481,"sourceLine":861,"context":"","command":"echo === RC2.4.3 snapshot discovery regression ===","clientRecord":false,"at":"2026-10-15T21:04:47.6911738+01:00"}
+{"sequence":482,"sourceLine":862,"context":"","command":"api checkpoint.load file=stage1-gameplay-2064.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:04:48.2122860+01:00"}
+{"sequence":483,"sourceLine":863,"context":"","command":"api control.step-frame","clientRecord":false,"at":"2026-10-15T21:04:48.3985758+01:00"}
+{"sequence":484,"sourceLine":864,"context":"","command":"api frame.snapshot name=regression-rc243-snapshot-discovery sprites=individual","clientRecord":false,"at":"2026-10-15T21:04:49.9502848+01:00"}
+{"sequence":485,"sourceLine":865,"context":"","command":"api frame.snapshot.list require=regression-rc243-snapshot-discovery","clientRecord":false,"at":"2026-10-15T21:04:50.5883799+01:00"}
+{"sequence":486,"sourceLine":866,"context":"","command":"api image.compare a=regression-rc243-snapshot-discovery b=regression-rc243-snapshot-discovery region=FULL hud=normal","clientRecord":false,"at":"2026-10-15T21:04:50.9362382+01:00"}
+{"sequence":487,"sourceLine":867,"context":"","command":"api image.compare a=regression-rc243-snapshot-discovery b=regression-rc243-snapshot-discovery region=FULL hud=hidden","clientRecord":false,"at":"2026-10-15T21:04:51.4959819+01:00"}
+{"sequence":488,"sourceLine":868,"context":"","command":"echo === RC2.4.3 snapshot discovery regression complete ===","clientRecord":false,"at":"2026-10-15T21:04:51.6627138+01:00"}
+{"sequence":489,"sourceLine":882,"context":"","command":"api sprite.visual.clear","clientRecord":false,"at":"2026-10-15T21:04:51.7541818+01:00"}
+{"sequence":490,"sourceLine":883,"context":"","command":"api sprite.override.clear","clientRecord":false,"at":"2026-10-15T21:04:51.8576639+01:00"}
+{"sequence":491,"sourceLine":884,"context":"","command":"api sprite.order.set mode=lower-slot","clientRecord":false,"at":"2026-10-15T21:04:51.9657415+01:00"}
+{"sequence":492,"sourceLine":887,"context":"","command":"api checkpoint.load file=stage1-driving-2352.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:04:52.0951878+01:00"}
+{"sequence":493,"sourceLine":888,"context":"","command":"assert status frame=2352","clientRecord":false,"at":"2026-10-15T21:04:52.1919141+01:00"}
+{"sequence":494,"sourceLine":889,"context":"","command":"api sprite.order.inspect","clientRecord":false,"at":"2026-10-15T21:04:52.4164696+01:00"}
+{"sequence":495,"sourceLine":890,"context":"","command":"api frame.snapshot name=regression-sprite-ownership","clientRecord":false,"at":"2026-10-15T21:04:54.4721523+01:00"}
+{"sequence":496,"sourceLine":891,"context":"","command":"api sprite.visual slot=82 mode=solo","clientRecord":false,"at":"2026-10-15T21:04:55.1604731+01:00"}
+{"sequence":497,"sourceLine":892,"context":"","command":"api frame.snapshot name=regression-sprite-body-solo","clientRecord":false,"at":"2026-10-15T21:04:56.8618990+01:00"}
+{"sequence":498,"sourceLine":893,"context":"","command":"api sprite.visual slot=81 mode=solo","clientRecord":false,"at":"2026-10-15T21:04:57.6356301+01:00"}
+{"sequence":499,"sourceLine":894,"context":"","command":"api frame.snapshot name=regression-sprite-shadow-solo","clientRecord":false,"at":"2026-10-15T21:04:59.4355433+01:00"}
+{"sequence":500,"sourceLine":895,"context":"","command":"api sprite.visual.clear","clientRecord":false,"at":"2026-10-15T21:04:59.9746261+01:00"}
+{"sequence":501,"sourceLine":896,"context":"","command":"api frame.snapshot.assert-overlap name=regression-sprite-ownership front=82 back=81 frontSolo=regression-sprite-body-solo backSolo=regression-sprite-shadow-solo","clientRecord":false,"at":"2026-10-15T21:05:02.0948234+01:00"}
+{"sequence":502,"sourceLine":898,"context":"","command":"api sprite.visual.clear","clientRecord":false,"at":"2026-10-15T21:05:02.9558519+01:00"}
+{"sequence":503,"sourceLine":899,"context":"","command":"api sprite.override.clear","clientRecord":false,"at":"2026-10-15T21:05:03.4513735+01:00"}
+{"sequence":504,"sourceLine":900,"context":"","command":"api sprite.order.set mode=lower-slot","clientRecord":false,"at":"2026-10-15T21:05:03.6348174+01:00"}
+{"sequence":505,"sourceLine":903,"context":"","command":"echo === Sprite ownership and export coordinate assertions COMPLETE ===","clientRecord":false,"at":"2026-10-15T21:05:03.6982284+01:00"}
+{"sequence":506,"sourceLine":918,"context":"","command":"api timeline.reset","clientRecord":false,"at":"2026-10-15T21:05:03.7887686+01:00"}
+{"sequence":507,"sourceLine":919,"context":"","command":"api sprite.visual.clear","clientRecord":false,"at":"2026-10-15T21:05:03.8689980+01:00"}
+{"sequence":508,"sourceLine":920,"context":"","command":"api sprite.override.clear","clientRecord":false,"at":"2026-10-15T21:05:03.9513730+01:00"}
+{"sequence":509,"sourceLine":924,"context":"","command":"api checkpoint.load file=stage1-driving-2352.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:05:04.1581820+01:00"}
+{"sequence":510,"sourceLine":925,"context":"","command":"assert status frame=2352","clientRecord":false,"at":"2026-10-15T21:05:04.3520881+01:00"}
+{"sequence":511,"sourceLine":926,"context":"","command":"api timeline.record.start name=regression-v06690-rc25-script-safety","clientRecord":false,"at":"2026-10-15T21:05:04.9010950+01:00"}
+{"sequence":512,"sourceLine":927,"context":"","command":"api control.run-frames frames=1","clientRecord":false,"at":"2026-10-15T21:05:05.2547852+01:00"}
+{"sequence":513,"sourceLine":928,"context":"","command":"api timeline.record.stop","clientRecord":false,"at":"2026-10-15T21:05:05.4989566+01:00"}
+{"sequence":514,"sourceLine":931,"context":"","command":"api checkpoint.load file=stage1-gameplay-2064.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:05:05.6712378+01:00"}
+{"sequence":515,"sourceLine":932,"context":"","command":"assert status frame=2064","clientRecord":false,"at":"2026-10-15T21:05:05.7379310+01:00"}
+{"sequence":516,"sourceLine":935,"context":"","command":"api timeline.load name=regression-v06690-rc25-script-safety","clientRecord":false,"at":"2026-10-15T21:05:06.4089598+01:00"}
+{"sequence":517,"sourceLine":936,"context":"","command":"api timeline.seek frame=2352","clientRecord":false,"at":"2026-10-15T21:05:06.5904964+01:00"}
+{"sequence":518,"sourceLine":937,"context":"","command":"api timeline.fork-live","clientRecord":false,"at":"2026-10-15T21:05:06.6803005+01:00"}
+{"sequence":519,"sourceLine":938,"context":"","command":"assert status frame=2352","clientRecord":false,"at":"2026-10-15T21:05:06.7807328+01:00"}
+{"sequence":520,"sourceLine":940,"context":"","command":"api sprite.visual.clear","clientRecord":false,"at":"2026-10-15T21:05:06.9441149+01:00"}
+{"sequence":521,"sourceLine":941,"context":"","command":"api sprite.override.clear","clientRecord":false,"at":"2026-10-15T21:05:07.0301782+01:00"}
+{"sequence":522,"sourceLine":942,"context":"","command":"api timeline.reset","clientRecord":false,"at":"2026-10-15T21:05:07.1578003+01:00"}
+{"sequence":523,"sourceLine":945,"context":"","command":"assert status frame=2064","clientRecord":false,"at":"2026-10-15T21:05:07.3553868+01:00"}
+{"sequence":524,"sourceLine":946,"context":"","command":"echo === v0.66.9.0 RC2.5 Script Safety: COMPLETE ===","clientRecord":false,"at":"2026-10-15T21:05:07.8428472+01:00"}
+{"sequence":525,"sourceLine":962,"context":"","command":"echo === v0.66.9.0 RC2.6.1 Sprite Bitplane Significance regression ===","clientRecord":false,"at":"2026-10-15T21:05:07.9070207+01:00"}
+{"sequence":526,"sourceLine":964,"context":"","command":"api palette.overrides.clear","clientRecord":false,"at":"2026-10-15T21:05:08.0201400+01:00"}
+{"sequence":527,"sourceLine":965,"context":"","command":"api checkpoint.load file=stage1-driving-2352.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:05:08.2079042+01:00"}
+{"sequence":528,"sourceLine":966,"context":"","command":"assert status frame=2352","clientRecord":false,"at":"2026-10-15T21:05:08.4028171+01:00"}
+{"sequence":529,"sourceLine":969,"context":"","command":"api sprite.map.inspect map=405","clientRecord":false,"at":"2026-10-15T21:05:09.3182721+01:00"}
+{"sequence":530,"sourceLine":970,"context":"","command":"api frame.snapshot name=regression-rc261-map405-bitplane sprites=individual","clientRecord":false,"at":"2026-10-15T21:05:11.5025965+01:00"}
+{"sequence":531,"sourceLine":971,"context":"","command":"api frame.snapshot.list require=regression-rc261-map405-bitplane","clientRecord":false,"at":"2026-10-15T21:05:12.3400993+01:00"}
+{"sequence":532,"sourceLine":972,"context":"","command":"api image.compare a=regression-rc261-map405-bitplane b=regression-rc261-map405-bitplane region=FULL hud=normal","clientRecord":false,"at":"2026-10-15T21:05:13.1421050+01:00"}
+{"sequence":533,"sourceLine":974,"context":"","command":"api palette.overrides.clear","clientRecord":false,"at":"2026-10-15T21:05:13.2850451+01:00"}
+{"sequence":534,"sourceLine":977,"context":"","command":"assert status frame=2352","clientRecord":false,"at":"2026-10-15T21:05:13.8712901+01:00"}
+{"sequence":535,"sourceLine":978,"context":"","command":"echo === v0.66.9.0 RC2.6.1 Sprite Bitplane Significance regression COMPLETE ===","clientRecord":false,"at":"2026-10-15T21:05:13.9407476+01:00"}
+{"sequence":536,"sourceLine":992,"context":"","command":"api release.assert-version","clientRecord":false,"at":"2026-10-15T21:05:14.0204117+01:00"}
+{"sequence":537,"sourceLine":993,"context":"","command":"api timeline.reset","clientRecord":false,"at":"2026-10-15T21:05:14.0962497+01:00"}
+{"sequence":538,"sourceLine":994,"context":"","command":"api sprite.visual.clear","clientRecord":false,"at":"2026-10-15T21:05:14.1835705+01:00"}
+{"sequence":539,"sourceLine":995,"context":"","command":"api sprite.override.clear","clientRecord":false,"at":"2026-10-15T21:05:14.4180688+01:00"}
+{"sequence":540,"sourceLine":996,"context":"","command":"api layer.offsets.reset","clientRecord":false,"at":"2026-10-15T21:05:14.5425369+01:00"}
+{"sequence":541,"sourceLine":998,"context":"","command":"api layer.offsets.set layer=bg0 x=7 y=-3","clientRecord":false,"at":"2026-10-15T21:05:14.6363167+01:00"}
+{"sequence":542,"sourceLine":999,"context":"","command":"api layer.offsets.get","clientRecord":false,"at":"2026-10-15T21:05:14.8053862+01:00"}
+{"sequence":543,"sourceLine":1000,"context":"","command":"api layer.offsets.assert layer=bg0 x=7 y=-3","clientRecord":false,"at":"2026-10-15T21:05:15.3482516+01:00"}
+{"sequence":544,"sourceLine":1001,"context":"","command":"api layer.offsets.reset layer=bg0","clientRecord":false,"at":"2026-10-15T21:05:15.5719713+01:00"}
+{"sequence":545,"sourceLine":1002,"context":"","command":"api layer.offsets.assert layer=bg0 x=0 y=0","clientRecord":false,"at":"2026-10-15T21:05:15.6951636+01:00"}
+{"sequence":546,"sourceLine":1005,"context":"","command":"api checkpoint.load file=stage1-gameplay-2064.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:05:15.8250241+01:00"}
+{"sequence":547,"sourceLine":1006,"context":"","command":"api tc0100.mode mode=legacy","clientRecord":false,"at":"2026-10-15T21:05:16.0788449+01:00"}
+{"sequence":548,"sourceLine":1007,"context":"","command":"api frame.snapshot name=rc28-stage1-gameplay-2064-legacy","clientRecord":false,"at":"2026-10-15T21:05:17.7427784+01:00"}
+{"sequence":549,"sourceLine":1008,"context":"","command":"api frame.snapshot.list require=rc28-stage1-gameplay-2064-legacy","clientRecord":false,"at":"2026-10-15T21:05:19.0301116+01:00"}
+{"sequence":550,"sourceLine":1009,"context":"","command":"api frame.snapshot.assert-exact name=rc28-stage1-gameplay-2064-legacy","clientRecord":false,"at":"2026-10-15T21:05:19.2222512+01:00"}
+{"sequence":551,"sourceLine":1010,"context":"","command":"api tc0100.mode mode=corrected","clientRecord":false,"at":"2026-10-15T21:05:19.8824667+01:00"}
+{"sequence":552,"sourceLine":1011,"context":"","command":"api frame.snapshot name=rc28-stage1-gameplay-2064-corrected","clientRecord":false,"at":"2026-10-15T21:05:21.7005757+01:00"}
+{"sequence":553,"sourceLine":1012,"context":"","command":"api frame.snapshot.list require=rc28-stage1-gameplay-2064-corrected","clientRecord":false,"at":"2026-10-15T21:05:22.4346510+01:00"}
+{"sequence":554,"sourceLine":1013,"context":"","command":"api frame.snapshot.assert-exact name=rc28-stage1-gameplay-2064-corrected","clientRecord":false,"at":"2026-10-15T21:05:22.9343025+01:00"}
+{"sequence":555,"sourceLine":1014,"context":"","command":"api image.compare a=rc28-stage1-gameplay-2064-legacy b=rc28-stage1-gameplay-2064-corrected region=FULL hud=hidden","clientRecord":false,"at":"2026-10-15T21:05:23.1898128+01:00"}
+{"sequence":556,"sourceLine":1005,"context":"","command":"api checkpoint.load file=stage1-driving-2352.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:05:23.4119914+01:00"}
+{"sequence":557,"sourceLine":1006,"context":"","command":"api tc0100.mode mode=legacy","clientRecord":false,"at":"2026-10-15T21:05:23.4975428+01:00"}
+{"sequence":558,"sourceLine":1007,"context":"","command":"api frame.snapshot name=rc28-stage1-driving-2352-legacy","clientRecord":false,"at":"2026-10-15T21:05:25.1450009+01:00"}
+{"sequence":559,"sourceLine":1008,"context":"","command":"api frame.snapshot.list require=rc28-stage1-driving-2352-legacy","clientRecord":false,"at":"2026-10-15T21:05:25.8292332+01:00"}
+{"sequence":560,"sourceLine":1009,"context":"","command":"api frame.snapshot.assert-exact name=rc28-stage1-driving-2352-legacy","clientRecord":false,"at":"2026-10-15T21:05:26.4308299+01:00"}
+{"sequence":561,"sourceLine":1010,"context":"","command":"api tc0100.mode mode=corrected","clientRecord":false,"at":"2026-10-15T21:05:26.6650010+01:00"}
+{"sequence":562,"sourceLine":1011,"context":"","command":"api frame.snapshot name=rc28-stage1-driving-2352-corrected","clientRecord":false,"at":"2026-10-15T21:05:28.3190333+01:00"}
+{"sequence":563,"sourceLine":1012,"context":"","command":"api frame.snapshot.list require=rc28-stage1-driving-2352-corrected","clientRecord":false,"at":"2026-10-15T21:05:29.5174119+01:00"}
+{"sequence":564,"sourceLine":1013,"context":"","command":"api frame.snapshot.assert-exact name=rc28-stage1-driving-2352-corrected","clientRecord":false,"at":"2026-10-15T21:05:29.6691557+01:00"}
+{"sequence":565,"sourceLine":1014,"context":"","command":"api image.compare a=rc28-stage1-driving-2352-legacy b=rc28-stage1-driving-2352-corrected region=FULL hud=hidden","clientRecord":false,"at":"2026-10-15T21:05:29.9470027+01:00"}
+{"sequence":566,"sourceLine":1005,"context":"","command":"api checkpoint.load file=stage1-target-post-final-hit-9548.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:05:30.5119271+01:00"}
+{"sequence":567,"sourceLine":1006,"context":"","command":"api tc0100.mode mode=legacy","clientRecord":false,"at":"2026-10-15T21:05:30.6641014+01:00"}
+{"sequence":568,"sourceLine":1007,"context":"","command":"api frame.snapshot name=rc28-stage1-target-post-final-hit-9548-legacy","clientRecord":false,"at":"2026-10-15T21:05:32.2651493+01:00"}
+{"sequence":569,"sourceLine":1008,"context":"","command":"api frame.snapshot.list require=rc28-stage1-target-post-final-hit-9548-legacy","clientRecord":false,"at":"2026-10-15T21:05:33.0639406+01:00"}
+{"sequence":570,"sourceLine":1009,"context":"","command":"api frame.snapshot.assert-exact name=rc28-stage1-target-post-final-hit-9548-legacy","clientRecord":false,"at":"2026-10-15T21:05:33.5265004+01:00"}
+{"sequence":571,"sourceLine":1010,"context":"","command":"api tc0100.mode mode=corrected","clientRecord":false,"at":"2026-10-15T21:05:33.7180815+01:00"}
+{"sequence":572,"sourceLine":1011,"context":"","command":"api frame.snapshot name=rc28-stage1-target-post-final-hit-9548-corrected","clientRecord":false,"at":"2026-10-15T21:05:35.4138673+01:00"}
+{"sequence":573,"sourceLine":1012,"context":"","command":"api frame.snapshot.list require=rc28-stage1-target-post-final-hit-9548-corrected","clientRecord":false,"at":"2026-10-15T21:05:36.2235985+01:00"}
+{"sequence":574,"sourceLine":1013,"context":"","command":"api frame.snapshot.assert-exact name=rc28-stage1-target-post-final-hit-9548-corrected","clientRecord":false,"at":"2026-10-15T21:05:36.7995225+01:00"}
+{"sequence":575,"sourceLine":1014,"context":"","command":"api image.compare a=rc28-stage1-target-post-final-hit-9548-legacy b=rc28-stage1-target-post-final-hit-9548-corrected region=FULL hud=hidden","clientRecord":false,"at":"2026-10-15T21:05:37.1011358+01:00"}
+{"sequence":576,"sourceLine":1005,"context":"","command":"api checkpoint.load file=stage1-end-level-9988.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:05:37.2421524+01:00"}
+{"sequence":577,"sourceLine":1006,"context":"","command":"api tc0100.mode mode=legacy","clientRecord":false,"at":"2026-10-15T21:05:37.7528810+01:00"}
+{"sequence":578,"sourceLine":1007,"context":"","command":"api frame.snapshot name=rc28-stage1-end-level-9988-legacy","clientRecord":false,"at":"2026-10-15T21:05:39.0924674+01:00"}
+{"sequence":579,"sourceLine":1008,"context":"","command":"api frame.snapshot.list require=rc28-stage1-end-level-9988-legacy","clientRecord":false,"at":"2026-10-15T21:05:39.6799021+01:00"}
+{"sequence":580,"sourceLine":1009,"context":"","command":"api frame.snapshot.assert-exact name=rc28-stage1-end-level-9988-legacy","clientRecord":false,"at":"2026-10-15T21:05:39.8269383+01:00"}
+{"sequence":581,"sourceLine":1010,"context":"","command":"api tc0100.mode mode=corrected","clientRecord":false,"at":"2026-10-15T21:05:39.9336887+01:00"}
+{"sequence":582,"sourceLine":1011,"context":"","command":"api frame.snapshot name=rc28-stage1-end-level-9988-corrected","clientRecord":false,"at":"2026-10-15T21:05:41.3545480+01:00"}
+{"sequence":583,"sourceLine":1012,"context":"","command":"api frame.snapshot.list require=rc28-stage1-end-level-9988-corrected","clientRecord":false,"at":"2026-10-15T21:05:42.0461363+01:00"}
+{"sequence":584,"sourceLine":1013,"context":"","command":"api frame.snapshot.assert-exact name=rc28-stage1-end-level-9988-corrected","clientRecord":false,"at":"2026-10-15T21:05:42.4486111+01:00"}
+{"sequence":585,"sourceLine":1014,"context":"","command":"api image.compare a=rc28-stage1-end-level-9988-legacy b=rc28-stage1-end-level-9988-corrected region=FULL hud=hidden","clientRecord":false,"at":"2026-10-15T21:05:42.8077346+01:00"}
+{"sequence":586,"sourceLine":1016,"context":"","command":"api checkpoint.load file=stage1-driving-2352.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:05:42.9805669+01:00"}
+{"sequence":587,"sourceLine":1017,"context":"","command":"assert status frame=2352","clientRecord":false,"at":"2026-10-15T21:05:43.0686104+01:00"}
+{"sequence":588,"sourceLine":1018,"context":"","command":"api frame.snapshot name=rc28-scene-no-sprites sprites=individual","clientRecord":false,"at":"2026-10-15T21:05:44.7172550+01:00"}
+{"sequence":589,"sourceLine":1019,"context":"","command":"api frame.snapshot.assert-scene-no-sprites name=rc28-scene-no-sprites","clientRecord":false,"at":"2026-10-15T21:05:45.8005814+01:00"}
+{"sequence":590,"sourceLine":1020,"context":"","command":"api frame.snapshot.assert-exact name=rc28-scene-no-sprites requireColumnZero=true","clientRecord":false,"at":"2026-10-15T21:05:45.9773291+01:00"}
+{"sequence":591,"sourceLine":1022,"context":"","command":"api tc0100.mode mode=corrected","clientRecord":false,"at":"2026-10-15T21:05:46.0760175+01:00"}
+{"sequence":592,"sourceLine":1023,"context":"","command":"api layer.offsets.reset","clientRecord":false,"at":"2026-10-15T21:05:46.1677153+01:00"}
+{"sequence":593,"sourceLine":1024,"context":"","command":"api sprite.visual.clear","clientRecord":false,"at":"2026-10-15T21:05:46.3999301+01:00"}
+{"sequence":594,"sourceLine":1025,"context":"","command":"api sprite.override.clear","clientRecord":false,"at":"2026-10-15T21:05:46.9109128+01:00"}
+{"sequence":595,"sourceLine":1026,"context":"","command":"api timeline.reset","clientRecord":false,"at":"2026-10-15T21:05:47.0048720+01:00"}
+{"sequence":596,"sourceLine":1028,"context":"","command":"echo === RC2.8 TC0100SCN and Reliability regression COMPLETE ===","clientRecord":false,"at":"2026-10-15T21:05:47.0591755+01:00"}
+{"sequence":597,"sourceLine":1039,"context":"","command":"api release.assert-version","clientRecord":false,"at":"2026-10-15T21:05:47.2321804+01:00"}
+{"sequence":598,"sourceLine":1040,"context":"","command":"api checkpoint.load file=stage1-driving-2352.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:05:47.4933408+01:00"}
+{"sequence":599,"sourceLine":1041,"context":"","command":"api frame.snapshot name=rc28-radar-hud-driving sprites=individual","clientRecord":false,"at":"2026-10-15T21:05:49.1943402+01:00"}
+{"sequence":600,"sourceLine":1042,"context":"","command":"api frame.snapshot.assert-exact name=rc28-radar-hud-driving requireColumnZero=true","clientRecord":false,"at":"2026-10-15T21:05:49.8687244+01:00"}
+{"sequence":601,"sourceLine":1043,"context":"","command":"api frame.snapshot.assert-scene-no-sprites name=rc28-radar-hud-driving","clientRecord":false,"at":"2026-10-15T21:05:50.3706644+01:00"}
+{"sequence":602,"sourceLine":1044,"context":"","command":"api checkpoint.load file=stage1-end-level-9988.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:05:50.5752214+01:00"}
+{"sequence":603,"sourceLine":1045,"context":"","command":"api frame.snapshot name=rc28-radar-hud-end-results sprites=individual","clientRecord":false,"at":"2026-10-15T21:05:51.9186391+01:00"}
+{"sequence":604,"sourceLine":1046,"context":"","command":"api frame.snapshot.assert-exact name=rc28-radar-hud-end-results","clientRecord":false,"at":"2026-10-15T21:05:52.3848684+01:00"}
+{"sequence":605,"sourceLine":1047,"context":"","command":"api frame.snapshot.assert-scene-no-sprites name=rc28-radar-hud-end-results","clientRecord":false,"at":"2026-10-15T21:05:52.8424740+01:00"}
+{"sequence":606,"sourceLine":1048,"context":"","command":"api registry.list","clientRecord":false,"at":"2026-10-15T21:05:54.3251043+01:00"}
+{"sequence":607,"sourceLine":1049,"context":"","command":"echo === RC2.8 radar/HUD/end-state captures complete ===","clientRecord":false,"at":"2026-10-15T21:05:54.7876460+01:00"}
+{"sequence":608,"sourceLine":1060,"context":"","command":"echo === RC2.9 target health/tooling regression ===","clientRecord":false,"at":"2026-10-15T21:05:54.9010614+01:00"}
+{"sequence":609,"sourceLine":1061,"context":"","command":"api release.assert-version","clientRecord":false,"at":"2026-10-15T21:05:54.9622862+01:00"}
+{"sequence":610,"sourceLine":1062,"context":"","command":"api schema action=game.target.one-hit","clientRecord":false,"at":"2026-10-15T21:05:54.9954971+01:00"}
+{"sequence":611,"sourceLine":1063,"context":"","command":"api schema action=control.run-frames","clientRecord":false,"at":"2026-10-15T21:05:55.0287250+01:00"}
+{"sequence":612,"sourceLine":1066,"context":"","command":"api game.target.one-hit enabled=false","clientRecord":false,"at":"2026-10-15T21:05:55.4265829+01:00"}
+{"sequence":613,"sourceLine":1067,"context":"","command":"api checkpoint.load file=stage1-target-immediate-pre-damage-6333.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:05:55.9995961+01:00"}
+{"sequence":614,"sourceLine":1070,"context":"","command":"echo PASS canonical 6333 target counter = 000E","clientRecord":false,"at":"2026-10-15T21:05:56.1379879+01:00"}
+{"sequence":615,"sourceLine":1075,"context":"","command":"api game.target.one-hit enabled=true","clientRecord":false,"at":"2026-10-15T21:05:56.6540799+01:00"}
+{"sequence":616,"sourceLine":1076,"context":"","command":"api control.run-frames frames=2 timeout=900000","clientRecord":false,"at":"2026-10-15T21:05:57.0114063+01:00"}
+{"sequence":617,"sourceLine":1079,"context":"","command":"echo PASS one-hit preserved authentic terminal underflow","clientRecord":false,"at":"2026-10-15T21:05:57.6472793+01:00"}
+{"sequence":618,"sourceLine":1084,"context":"","command":"api control.run-frames frames=14 timeout=900000","clientRecord":false,"at":"2026-10-15T21:05:58.7883645+01:00"}
+{"sequence":619,"sourceLine":1086,"context":"","command":"echo PASS one-hit entered authentic defeat mode","clientRecord":false,"at":"2026-10-15T21:05:59.5351234+01:00"}
+{"sequence":620,"sourceLine":1091,"context":"","command":"api game.experiment.status","clientRecord":false,"at":"2026-10-15T21:05:59.9625532+01:00"}
+{"sequence":621,"sourceLine":1093,"context":"","command":"api game.target.one-hit enabled=false","clientRecord":false,"at":"2026-10-15T21:06:00.8218945+01:00"}
+{"sequence":622,"sourceLine":1094,"context":"","command":"api patch.clear","clientRecord":false,"at":"2026-10-15T21:06:01.0166056+01:00"}
+{"sequence":623,"sourceLine":1095,"context":"","command":"api input.ioc.clear","clientRecord":false,"at":"2026-10-15T21:06:01.1035586+01:00"}
+{"sequence":624,"sourceLine":1096,"context":"","command":"api collision.response.reset","clientRecord":false,"at":"2026-10-15T21:06:01.1893355+01:00"}
+{"sequence":625,"sourceLine":1097,"context":"","command":"api checkpoint.load file=stage1-driving-2352.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:06:01.4618884+01:00"}
+{"sequence":626,"sourceLine":1100,"context":"","command":"assert status frame=2352","clientRecord":false,"at":"2026-10-15T21:06:01.9673417+01:00"}
+{"sequence":627,"sourceLine":1101,"context":"","command":"echo === RC2.9 target health/tooling regression complete ===","clientRecord":false,"at":"2026-10-15T21:06:01.9971616+01:00"}
+{"sequence":628,"sourceLine":1112,"context":"","command":"echo === RC3.0 live course mapping/survey regression ===","clientRecord":false,"at":"2026-10-15T21:06:02.0405273+01:00"}
+{"sequence":629,"sourceLine":1113,"context":"","command":"api release.assert-version","clientRecord":false,"at":"2026-10-15T21:06:02.1132051+01:00"}
+{"sequence":630,"sourceLine":1114,"context":"","command":"api schema action=course.follow.status","clientRecord":false,"at":"2026-10-15T21:06:02.1437984+01:00"}
+{"sequence":631,"sourceLine":1115,"context":"","command":"api schema action=course.follow.configure","clientRecord":false,"at":"2026-10-15T21:06:02.1792554+01:00"}
+{"sequence":632,"sourceLine":1116,"context":"","command":"api schema action=course.survey.start","clientRecord":false,"at":"2026-10-15T21:06:02.3496178+01:00"}
+{"sequence":633,"sourceLine":1117,"context":"","command":"api schema action=track.map.export","clientRecord":false,"at":"2026-10-15T21:06:02.4292444+01:00"}
+{"sequence":634,"sourceLine":1120,"context":"","command":"api checkpoint.load file=stage1-gameplay-2064.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:06:02.5803851+01:00"}
+{"sequence":635,"sourceLine":1121,"context":"","command":"api course.follow.configure controller=hybrid lookahead=4 bias=0 speedControl=true","clientRecord":false,"at":"2026-10-15T21:06:02.7762838+01:00"}
+{"sequence":636,"sourceLine":1122,"context":"","command":"api course.follow.reset","clientRecord":false,"at":"2026-10-15T21:06:03.2462298+01:00"}
+{"sequence":637,"sourceLine":1123,"context":"","command":"api course.survey.start collisionResponse=false timerHold=true","clientRecord":false,"at":"2026-10-15T21:06:03.7119840+01:00"}
+{"sequence":638,"sourceLine":1124,"context":"","command":"api track.record.sample","clientRecord":false,"at":"2026-10-15T21:06:05.5332801+01:00"}
+{"sequence":639,"sourceLine":1125,"context":"","command":"api control.run-frames frames=30 timeout=900000","clientRecord":false,"at":"2026-10-15T21:06:07.9996463+01:00"}
+{"sequence":640,"sourceLine":1126,"context":"","command":"api track.record.sample","clientRecord":false,"at":"2026-10-15T21:06:11.5562357+01:00"}
+{"sequence":641,"sourceLine":1127,"context":"","command":"api control.run-frames frames=30 timeout=900000","clientRecord":false,"at":"2026-10-15T21:06:14.3938701+01:00"}
+{"sequence":642,"sourceLine":1128,"context":"","command":"api track.record.sample","clientRecord":false,"at":"2026-10-15T21:06:18.2536008+01:00"}
+{"sequence":643,"sourceLine":1129,"context":"","command":"api course.follow.status","clientRecord":false,"at":"2026-10-15T21:06:19.3879054+01:00"}
+{"sequence":644,"sourceLine":1130,"context":"","command":"api track.record.status","clientRecord":false,"at":"2026-10-15T21:06:20.2741941+01:00"}
+{"sequence":645,"sourceLine":1131,"context":"","command":"api track.map.export name=regression-rc30-course-map","clientRecord":false,"at":"2026-10-15T21:06:20.7528376+01:00"}
+{"sequence":646,"sourceLine":1133,"context":"","command":"api course.survey.stop","clientRecord":false,"at":"2026-10-15T21:06:21.4971882+01:00"}
+{"sequence":647,"sourceLine":1134,"context":"","command":"api course.follow.configure controller=hybrid lookahead=8 bias=0 speedControl=false","clientRecord":false,"at":"2026-10-15T21:06:21.7504907+01:00"}
+{"sequence":648,"sourceLine":1135,"context":"","command":"api patch.clear","clientRecord":false,"at":"2026-10-15T21:06:21.8547819+01:00"}
+{"sequence":649,"sourceLine":1136,"context":"","command":"api input.ioc.clear","clientRecord":false,"at":"2026-10-15T21:06:21.9270435+01:00"}
+{"sequence":650,"sourceLine":1137,"context":"","command":"api collision.response.reset","clientRecord":false,"at":"2026-10-15T21:06:21.9964813+01:00"}
+{"sequence":651,"sourceLine":1138,"context":"","command":"api timer.hold enabled=false","clientRecord":false,"at":"2026-10-15T21:06:22.0713568+01:00"}
+{"sequence":652,"sourceLine":1139,"context":"","command":"api checkpoint.load file=stage1-gameplay-2064.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:06:22.1780598+01:00"}
+{"sequence":653,"sourceLine":1142,"context":"","command":"assert status frame=2064","clientRecord":false,"at":"2026-10-15T21:06:22.3704511+01:00"}
+{"sequence":654,"sourceLine":1143,"context":"","command":"echo === RC3.0 live course mapping/survey regression complete ===","clientRecord":false,"at":"2026-10-15T21:06:22.7927105+01:00"}
+{"sequence":655,"sourceLine":1155,"context":"","command":"echo === RC3.1 course mapping data-quality regression ===","clientRecord":false,"at":"2026-10-15T21:06:22.8586407+01:00"}
+{"sequence":656,"sourceLine":1156,"context":"","command":"api release.assert-version","clientRecord":false,"at":"2026-10-15T21:06:22.9590451+01:00"}
+{"sequence":657,"sourceLine":1157,"context":"","command":"api schema action=course.follow.configure","clientRecord":false,"at":"2026-10-15T21:06:22.9893364+01:00"}
+{"sequence":658,"sourceLine":1158,"context":"","command":"api schema action=course.survey.start","clientRecord":false,"at":"2026-10-15T21:06:23.0156541+01:00"}
+{"sequence":659,"sourceLine":1159,"context":"","command":"api schema action=track.map.export","clientRecord":false,"at":"2026-10-15T21:06:23.0464892+01:00"}
+{"sequence":660,"sourceLine":1162,"context":"","command":"api checkpoint.load file=stage1-gameplay-2064.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:06:23.1589856+01:00"}
+{"sequence":661,"sourceLine":1163,"context":"","command":"api course.follow.configure controller=hybrid lookahead=4 bias=0 speedControl=true","clientRecord":false,"at":"2026-10-15T21:06:23.3670525+01:00"}
+{"sequence":662,"sourceLine":1164,"context":"","command":"api course.follow.reset","clientRecord":false,"at":"2026-10-15T21:06:23.5093076+01:00"}
+{"sequence":663,"sourceLine":1165,"context":"","command":"api course.survey.start collisionResponse=false timerHold=true","clientRecord":false,"at":"2026-10-15T21:06:23.8745617+01:00"}
+{"sequence":664,"sourceLine":1166,"context":"","command":"api track.record.sample","clientRecord":false,"at":"2026-10-15T21:06:26.0553111+01:00"}
+{"sequence":665,"sourceLine":1167,"context":"","command":"api control.run-frames frames=30 timeout=900000","clientRecord":false,"at":"2026-10-15T21:06:28.5562344+01:00"}
+{"sequence":666,"sourceLine":1168,"context":"","command":"api track.record.sample","clientRecord":false,"at":"2026-10-15T21:06:32.1507199+01:00"}
+{"sequence":667,"sourceLine":1169,"context":"","command":"api control.run-frames frames=30 timeout=900000","clientRecord":false,"at":"2026-10-15T21:06:35.1154825+01:00"}
+{"sequence":668,"sourceLine":1170,"context":"","command":"api track.record.sample","clientRecord":false,"at":"2026-10-15T21:06:38.7905531+01:00"}
+{"sequence":669,"sourceLine":1171,"context":"","command":"api track.record.status","clientRecord":false,"at":"2026-10-15T21:06:53.2105811+01:00"}
+{"sequence":670,"sourceLine":1172,"context":"","command":"api track.map.export name=regression-rc31-course-map-quality","clientRecord":false,"at":"2026-10-15T21:06:55.2823204+01:00"}
+{"sequence":671,"sourceLine":1174,"context":"","command":"api course.survey.stop","clientRecord":false,"at":"2026-10-15T21:06:56.5274673+01:00"}
+{"sequence":672,"sourceLine":1175,"context":"","command":"api course.follow.configure controller=hybrid lookahead=8 bias=0 speedControl=false","clientRecord":false,"at":"2026-10-15T21:06:56.7745951+01:00"}
+{"sequence":673,"sourceLine":1176,"context":"","command":"api patch.clear","clientRecord":false,"at":"2026-10-15T21:06:57.2725756+01:00"}
+{"sequence":674,"sourceLine":1177,"context":"","command":"api input.ioc.clear","clientRecord":false,"at":"2026-10-15T21:06:57.4727775+01:00"}
+{"sequence":675,"sourceLine":1178,"context":"","command":"api collision.response.reset","clientRecord":false,"at":"2026-10-15T21:06:57.5822029+01:00"}
+{"sequence":676,"sourceLine":1179,"context":"","command":"api timer.hold enabled=false","clientRecord":false,"at":"2026-10-15T21:06:57.6913012+01:00"}
+{"sequence":677,"sourceLine":1180,"context":"","command":"api checkpoint.load file=stage1-gameplay-2064.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:06:57.8425468+01:00"}
+{"sequence":678,"sourceLine":1183,"context":"","command":"assert status frame=2064","clientRecord":false,"at":"2026-10-15T21:06:57.9187552+01:00"}
+{"sequence":679,"sourceLine":1184,"context":"","command":"echo === RC3.1 course mapping data-quality regression complete ===","clientRecord":false,"at":"2026-10-15T21:06:57.9549587+01:00"}
+{"sequence":680,"sourceLine":1197,"context":"","command":"echo === ChaseHQ Current Platform Contracts: BEGIN ===","clientRecord":false,"at":"2026-10-15T21:06:57.9941679+01:00"}
+{"sequence":681,"sourceLine":1198,"context":"","command":"api release.assert-version","clientRecord":false,"at":"2026-10-15T21:06:58.0849335+01:00"}
+{"sequence":682,"sourceLine":1199,"context":"","command":"api schema action=script.run","clientRecord":false,"at":"2026-10-15T21:06:58.1141445+01:00"}
+{"sequence":683,"sourceLine":1200,"context":"","command":"api schema action=checkpoint.save","clientRecord":false,"at":"2026-10-15T21:06:58.1449860+01:00"}
+{"sequence":684,"sourceLine":1201,"context":"","command":"api status","clientRecord":false,"at":"2026-10-15T21:06:58.2228406+01:00"}
+{"sequence":685,"sourceLine":1204,"context":"","command":"api checkpoint.load file=stage1-driving-2352.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:06:58.8362865+01:00"}
+{"sequence":686,"sourceLine":1205,"context":"","command":"api gameplay.registry","clientRecord":false,"at":"2026-10-15T21:07:00.6265149+01:00"}
+{"sequence":687,"sourceLine":1206,"context":"","command":"api track.state","clientRecord":false,"at":"2026-10-15T21:07:02.2721976+01:00"}
+{"sequence":688,"sourceLine":1207,"context":"","command":"legacytrace reset","clientRecord":false,"at":"2026-10-15T21:07:02.9540692+01:00"}
+{"sequence":689,"sourceLine":1208,"context":"","command":"legacytrace cpu A","clientRecord":false,"at":"2026-10-15T21:07:03.4179197+01:00"}
+{"sequence":690,"sourceLine":1209,"context":"","command":"legacytrace mem 10A04A:10A04B r","clientRecord":false,"at":"2026-10-15T21:07:03.6057825+01:00"}
+{"sequence":691,"sourceLine":1210,"context":"","command":"legacytrace context 0 0","clientRecord":false,"at":"2026-10-15T21:07:03.6894488+01:00"}
+{"sequence":692,"sourceLine":1211,"context":"","command":"legacytrace max 256","clientRecord":false,"at":"2026-10-15T21:07:03.7831257+01:00"}
+{"sequence":693,"sourceLine":1212,"context":"","command":"legacytrace output evidence\\regression-current-platform-trace.log","clientRecord":false,"at":"2026-10-15T21:07:03.9610426+01:00"}
+{"sequence":694,"sourceLine":1213,"context":"","command":"legacytrace start","clientRecord":false,"at":"2026-10-15T21:07:04.0477653+01:00"}
+{"sequence":695,"sourceLine":1214,"context":"","command":"api control.run-frames frames=4","clientRecord":false,"at":"2026-10-15T21:07:04.4886464+01:00"}
+{"sequence":696,"sourceLine":1215,"context":"","command":"legacytrace stop","clientRecord":false,"at":"2026-10-15T21:07:05.1015947+01:00"}
+{"sequence":697,"sourceLine":1216,"context":"","command":"api checkpoint.save file=regression-current-platform-checkpoint.chqstate","clientRecord":false,"at":"2026-10-15T21:07:05.2774709+01:00"}
+{"sequence":698,"sourceLine":1217,"context":"","command":"api checkpoint.list","clientRecord":false,"at":"2026-10-15T21:07:05.4839519+01:00"}
+{"sequence":699,"sourceLine":1218,"context":"","command":"api script.runs limit=5","clientRecord":false,"at":"2026-10-15T21:07:05.6918754+01:00"}
+{"sequence":700,"sourceLine":1221,"context":"","command":"api checkpoint.load file=stage1-gameplay-2064.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:07:05.7925142+01:00"}
+{"sequence":701,"sourceLine":1222,"context":"","command":"api gameplay.registry","clientRecord":false,"at":"2026-10-15T21:07:07.7269977+01:00"}
+{"sequence":702,"sourceLine":1223,"context":"","command":"api track.state","clientRecord":false,"at":"2026-10-15T21:07:09.1625735+01:00"}
+{"sequence":703,"sourceLine":1224,"context":"","command":"api track.records before=1 after=1","clientRecord":false,"at":"2026-10-15T21:07:11.2053400+01:00"}
+{"sequence":704,"sourceLine":1225,"context":"","command":"api script.runs limit=5","clientRecord":false,"at":"2026-10-15T21:07:12.1502484+01:00"}
+{"sequence":705,"sourceLine":1226,"context":"","command":"api checkpoint.load file=stage1-gameplay-2064.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:07:12.7764094+01:00"}
+{"sequence":706,"sourceLine":1227,"context":"","command":"api status","clientRecord":false,"at":"2026-10-15T21:07:12.8438738+01:00"}
+{"sequence":707,"sourceLine":1228,"context":"","command":"echo === ChaseHQ Current Platform Contracts: COMPLETE ===","clientRecord":false,"at":"2026-10-15T21:07:12.8750576+01:00"}
+{"sequence":708,"sourceLine":1240,"context":"","command":"echo === ChaseHQ v0.66.9.3-RC3 Tooling Regression: BEGIN ===","clientRecord":false,"at":"2026-10-15T21:07:12.9062287+01:00"}
+{"sequence":709,"sourceLine":1241,"context":"","command":"api release.assert-version","clientRecord":false,"at":"2026-10-15T21:07:12.9941785+01:00"}
+{"sequence":710,"sourceLine":1242,"context":"","command":"api schema action=sprite.shadow.compare","clientRecord":false,"at":"2026-10-15T21:07:13.0258833+01:00"}
+{"sequence":711,"sourceLine":1243,"context":"","command":"api schema action=query.runtime","clientRecord":false,"at":"2026-10-15T21:07:13.0524797+01:00"}
+{"sequence":712,"sourceLine":1244,"context":"","command":"api schema action=corpus.run","clientRecord":false,"at":"2026-10-15T21:07:13.0834662+01:00"}
+{"sequence":713,"sourceLine":1245,"context":"","command":"api schema action=script.run.verify","clientRecord":false,"at":"2026-10-15T21:07:13.1159789+01:00"}
+{"sequence":714,"sourceLine":1246,"context":"","command":"api script.schema","clientRecord":false,"at":"2026-10-15T21:07:13.1449949+01:00"}
+{"sequence":715,"sourceLine":1249,"context":"client","command":"wait 25","clientRecord":true,"at":"2026-10-15T21:07:13.3068095+01:00"}
+{"sequence":716,"sourceLine":1251,"context":"","command":"api checkpoint.load file=stage1-gameplay-2064.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:07:13.7810007+01:00"}
+{"sequence":717,"sourceLine":1252,"context":"","command":"api sprite.shadow.compare scope=visible failOnMismatch=false","clientRecord":false,"at":"2026-10-15T21:07:14.0200837+01:00"}
+{"sequence":718,"sourceLine":1257,"context":"","command":"api memory.read cpu=A address=1002AE width=16","clientRecord":false,"at":"2026-10-15T21:07:14.1246263+01:00"}
+{"sequence":719,"sourceLine":1257,"context":"","command":"api memory.read cpu=A address=1002D8 width=16","clientRecord":false,"at":"2026-10-15T21:07:14.2012270+01:00"}
+{"sequence":720,"sourceLine":1263,"context":"","command":"api query.runtime function=getmaps()","clientRecord":false,"at":"2026-10-15T21:07:14.6702982+01:00"}
+{"sequence":721,"sourceLine":1264,"context":"","command":"api query.runtime function=getregistry()","clientRecord":false,"at":"2026-10-15T21:07:16.2268264+01:00"}
+{"sequence":722,"sourceLine":1266,"context":"","command":"api status","clientRecord":false,"at":"2026-10-15T21:07:17.2135456+01:00"}
+{"sequence":723,"sourceLine":1270,"context":"","command":"api corpus.run checkpoints=stage1-driving-2352.chqstate,stage1-gameplay-2064.chqstate action=sprite.shadow.compare scope=visible failOnMismatch=false","clientRecord":false,"at":"2026-10-15T21:07:17.9132950+01:00"}
+{"sequence":724,"sourceLine":1271,"context":"","command":"api query.runtime function=gettrackrecords(before=1,after=1)","clientRecord":false,"at":"2026-10-15T21:07:19.8056448+01:00"}
+{"sequence":725,"sourceLine":1272,"context":"","command":"api script.runs limit=5","clientRecord":false,"at":"2026-10-15T21:07:20.5025628+01:00"}
+{"sequence":726,"sourceLine":1274,"context":"","command":"api checkpoint.load file=stage1-gameplay-2064.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:07:20.7562191+01:00"}
+{"sequence":727,"sourceLine":1275,"context":"","command":"api status","clientRecord":false,"at":"2026-10-15T21:07:21.2447882+01:00"}
+{"sequence":728,"sourceLine":1276,"context":"","command":"echo === ChaseHQ v0.66.9.3-RC3 Tooling Regression: COMPLETE ===","clientRecord":false,"at":"2026-10-15T21:07:21.3901528+01:00"}
+{"sequence":729,"sourceLine":1288,"context":"","command":"echo === ChaseHQ v0.66.9.3 Final Release Capability Regression: BEGIN ===","clientRecord":false,"at":"2026-10-15T21:07:21.4344977+01:00"}
+{"sequence":730,"sourceLine":1289,"context":"","command":"api release.assert-version","clientRecord":false,"at":"2026-10-15T21:07:21.5020031+01:00"}
+{"sequence":731,"sourceLine":1290,"context":"","command":"api schema action=sprite.layer-shadow.compare","clientRecord":false,"at":"2026-10-15T21:07:21.5316493+01:00"}
+{"sequence":732,"sourceLine":1291,"context":"","command":"api schema action=memory.trace.start","clientRecord":false,"at":"2026-10-15T21:07:21.5644518+01:00"}
+{"sequence":733,"sourceLine":1292,"context":"","command":"api schema action=collision.events","clientRecord":false,"at":"2026-10-15T21:07:21.6006088+01:00"}
+{"sequence":734,"sourceLine":1293,"context":"","command":"api schema action=audio.events","clientRecord":false,"at":"2026-10-15T21:07:21.6322944+01:00"}
+{"sequence":735,"sourceLine":1294,"context":"","command":"api schema action=input.steering.set","clientRecord":false,"at":"2026-10-15T21:07:21.6616141+01:00"}
+{"sequence":736,"sourceLine":1295,"context":"","command":"api schema action=gameplay.registry","clientRecord":false,"at":"2026-10-15T21:07:21.6929918+01:00"}
+{"sequence":737,"sourceLine":1298,"context":"","command":"api checkpoint.load file=stage1-driving-2352.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:07:21.8194300+01:00"}
+{"sequence":738,"sourceLine":1299,"context":"","command":"api sprite.layer-shadow.compare failOnMismatch=true output=v06693-shadow-2352.json","clientRecord":false,"at":"2026-10-15T21:07:21.9843102+01:00"}
+{"sequence":739,"sourceLine":1300,"context":"","command":"api checkpoint.load file=stage1-gameplay-2064.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:07:22.1134897+01:00"}
+{"sequence":740,"sourceLine":1301,"context":"","command":"api sprite.layer-shadow.compare failOnMismatch=true output=v06693-shadow-2064.json","clientRecord":false,"at":"2026-10-15T21:07:22.2443149+01:00"}
+{"sequence":741,"sourceLine":1302,"context":"","command":"api checkpoint.load file=stage1-target-immediate-pre-contact-5587.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:07:22.8954491+01:00"}
+{"sequence":742,"sourceLine":1303,"context":"","command":"api sprite.layer-shadow.compare failOnMismatch=true output=v06693-shadow-5587.json","clientRecord":false,"at":"2026-10-15T21:07:23.1084157+01:00"}
+{"sequence":743,"sourceLine":1304,"context":"","command":"api checkpoint.load file=stage1-target-first-physical-contact-5588.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:07:23.2764418+01:00"}
+{"sequence":744,"sourceLine":1305,"context":"","command":"api sprite.layer-shadow.compare failOnMismatch=true output=v06693-shadow-5588.json","clientRecord":false,"at":"2026-10-15T21:07:23.5935117+01:00"}
+{"sequence":745,"sourceLine":1306,"context":"","command":"api checkpoint.load file=stage1-target-immediate-pre-damage-6333.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:07:23.7366345+01:00"}
+{"sequence":746,"sourceLine":1307,"context":"","command":"api sprite.layer-shadow.compare failOnMismatch=true output=v06693-shadow-6333.json","clientRecord":false,"at":"2026-10-15T21:07:24.2727094+01:00"}
+{"sequence":747,"sourceLine":1308,"context":"","command":"api checkpoint.load file=stage1-target-first-damage-6334.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:07:24.6452528+01:00"}
+{"sequence":748,"sourceLine":1309,"context":"","command":"api sprite.layer-shadow.compare failOnMismatch=true output=v06693-shadow-6334.json","clientRecord":false,"at":"2026-10-15T21:07:24.8308073+01:00"}
+{"sequence":749,"sourceLine":1310,"context":"","command":"api checkpoint.load file=stage1-target-post-final-hit-9548.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:07:24.9634277+01:00"}
+{"sequence":750,"sourceLine":1311,"context":"","command":"api sprite.layer-shadow.compare failOnMismatch=true output=v06693-shadow-9548.json","clientRecord":false,"at":"2026-10-15T21:07:25.1310930+01:00"}
+{"sequence":751,"sourceLine":1312,"context":"","command":"api checkpoint.load file=stage1-end-level-9988.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:07:25.2778100+01:00"}
+{"sequence":752,"sourceLine":1313,"context":"","command":"api sprite.layer-shadow.compare failOnMismatch=true output=v06693-shadow-9988.json","clientRecord":false,"at":"2026-10-15T21:07:25.8761130+01:00"}
+{"sequence":753,"sourceLine":1316,"context":"","command":"api checkpoint.load file=stage1-gameplay-2064.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:07:26.0375213+01:00"}
+{"sequence":754,"sourceLine":1317,"context":"","command":"api memory.trace.clear","clientRecord":false,"at":"2026-10-15T21:07:26.1503578+01:00"}
+{"sequence":755,"sourceLine":1318,"context":"","command":"api memory.trace.start cpu=A address=100200 length=2 width=any limit=128 access=read","clientRecord":false,"at":"2026-10-15T21:07:26.2673719+01:00"}
+{"sequence":756,"sourceLine":1319,"context":"","command":"api control.run-frames frames=2","clientRecord":false,"at":"2026-10-15T21:07:26.6234137+01:00"}
+{"sequence":757,"sourceLine":1320,"context":"","command":"api memory.trace.status","clientRecord":false,"at":"2026-10-15T21:07:26.6951838+01:00"}
+{"sequence":758,"sourceLine":1321,"context":"","command":"api memory.trace.tail count=20","clientRecord":false,"at":"2026-10-15T21:07:26.7706291+01:00"}
+{"sequence":759,"sourceLine":1322,"context":"","command":"api memory.trace.stop","clientRecord":false,"at":"2026-10-15T21:07:27.2417471+01:00"}
+{"sequence":760,"sourceLine":1323,"context":"","command":"api memory.trace.clear","clientRecord":false,"at":"2026-10-15T21:07:27.4473052+01:00"}
+{"sequence":761,"sourceLine":1325,"context":"","command":"api collision.events.clear","clientRecord":false,"at":"2026-10-15T21:07:27.5885610+01:00"}
+{"sequence":762,"sourceLine":1326,"context":"","command":"api collision.events count=10","clientRecord":false,"at":"2026-10-15T21:07:27.6976168+01:00"}
+{"sequence":763,"sourceLine":1327,"context":"","command":"api audio.events.clear","clientRecord":false,"at":"2026-10-15T21:07:27.8070015+01:00"}
+{"sequence":764,"sourceLine":1328,"context":"","command":"api audio.events count=10","clientRecord":false,"at":"2026-10-15T21:07:27.8809929+01:00"}
+{"sequence":765,"sourceLine":1329,"context":"","command":"api gameplay.registry","clientRecord":false,"at":"2026-10-15T21:07:29.4248546+01:00"}
+{"sequence":766,"sourceLine":1330,"context":"","command":"api objects.list","clientRecord":false,"at":"2026-10-15T21:07:30.3217727+01:00"}
+{"sequence":767,"sourceLine":1331,"context":"","command":"api audio.capabilities","clientRecord":false,"at":"2026-10-15T21:07:30.8187894+01:00"}
+{"sequence":768,"sourceLine":1333,"context":"","command":"api input.ioc.clear","clientRecord":false,"at":"2026-10-15T21:07:30.9413904+01:00"}
+{"sequence":769,"sourceLine":1334,"context":"","command":"api input.steering.set value=0000","clientRecord":false,"at":"2026-10-15T21:07:31.0957056+01:00"}
+{"sequence":770,"sourceLine":1335,"context":"","command":"api sprite.visual.clear","clientRecord":false,"at":"2026-10-15T21:07:31.1710533+01:00"}
+{"sequence":771,"sourceLine":1336,"context":"","command":"api sprite.override.clear","clientRecord":false,"at":"2026-10-15T21:07:31.3641180+01:00"}
+{"sequence":772,"sourceLine":1337,"context":"","command":"api patch.clear","clientRecord":false,"at":"2026-10-15T21:07:31.8439400+01:00"}
+{"sequence":773,"sourceLine":1338,"context":"","command":"api palette.overrides.clear","clientRecord":false,"at":"2026-10-15T21:07:31.9471101+01:00"}
+{"sequence":774,"sourceLine":1339,"context":"","command":"api collision.response.reset","clientRecord":false,"at":"2026-10-15T21:07:32.0592248+01:00"}
+{"sequence":775,"sourceLine":1340,"context":"","command":"api checkpoint.load file=stage1-gameplay-2064.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:07:32.1761505+01:00"}
+{"sequence":776,"sourceLine":1341,"context":"","command":"api status","clientRecord":false,"at":"2026-10-15T21:07:32.3398792+01:00"}
+{"sequence":777,"sourceLine":1343,"context":"","command":"echo === ChaseHQ v0.66.9.3 Final Release Capability Regression: COMPLETE ===","clientRecord":false,"at":"2026-10-15T21:07:32.3955531+01:00"}
+{"sequence":778,"sourceLine":1355,"context":"","command":"echo === ChaseHQ v0.66.9.4 Final Release Regression: BEGIN ===","clientRecord":false,"at":"2026-10-15T21:07:32.4694666+01:00"}
+{"sequence":779,"sourceLine":1356,"context":"","command":"api release.assert-version","clientRecord":false,"at":"2026-10-15T21:07:32.5674924+01:00"}
+{"sequence":780,"sourceLine":1357,"context":"","command":"api schema action=sprite.asset-replace","clientRecord":false,"at":"2026-10-15T21:07:32.6706076+01:00"}
+{"sequence":781,"sourceLine":1359,"context":"","command":"api patch.clear","clientRecord":false,"at":"2026-10-15T21:07:32.7599510+01:00"}
+{"sequence":782,"sourceLine":1360,"context":"","command":"api input.ioc.clear","clientRecord":false,"at":"2026-10-15T21:07:33.2279617+01:00"}
+{"sequence":783,"sourceLine":1361,"context":"","command":"api input.steering.set value=0000","clientRecord":false,"at":"2026-10-15T21:07:33.4226008+01:00"}
+{"sequence":784,"sourceLine":1362,"context":"","command":"api sprite.visual.clear","clientRecord":false,"at":"2026-10-15T21:07:33.5295360+01:00"}
+{"sequence":785,"sourceLine":1363,"context":"","command":"api sprite.override.clear","clientRecord":false,"at":"2026-10-15T21:07:33.6398803+01:00"}
+{"sequence":786,"sourceLine":1364,"context":"","command":"api sprite.map-override.clear","clientRecord":false,"at":"2026-10-15T21:07:33.7553074+01:00"}
+{"sequence":787,"sourceLine":1365,"context":"","command":"api sprite.asset-replace.clear","clientRecord":false,"at":"2026-10-15T21:07:33.8394956+01:00"}
+{"sequence":788,"sourceLine":1366,"context":"","command":"api hud.layout.reset","clientRecord":false,"at":"2026-10-15T21:07:33.9445762+01:00"}
+{"sequence":789,"sourceLine":1367,"context":"","command":"api backend.sprite.set mode=original","clientRecord":false,"at":"2026-10-15T21:07:34.0160026+01:00"}
+{"sequence":790,"sourceLine":1370,"context":"","command":"api checkpoint.load file=stage2-gameplay-7500.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:07:34.1145189+01:00"}
+{"sequence":791,"sourceLine":1371,"context":"","command":"api control.run-frames frames=4","clientRecord":false,"at":"2026-10-15T21:07:34.4903997+01:00"}
+{"sequence":792,"sourceLine":1372,"context":"","command":"api frame.capture name=v06694-final-player-authentic","clientRecord":false,"at":"2026-10-15T21:07:35.1057916+01:00"}
+{"sequence":793,"sourceLine":1373,"context":"","command":"api checkpoint.load file=stage2-gameplay-7500.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:07:35.2698677+01:00"}
+{"sequence":794,"sourceLine":1374,"context":"","command":"api sprite.asset-replace object=player_car.body target=190 format=obj-b64 palette=73 flipx=1 dx=0 dy=0","clientRecord":false,"at":"2026-10-15T21:07:35.4970637+01:00"}
+{"sequence":795,"sourceLine":1375,"context":"","command":"api control.run-frames frames=4","clientRecord":false,"at":"2026-10-15T21:07:35.9316305+01:00"}
+{"sequence":796,"sourceLine":1376,"context":"","command":"assert status sprite_backend=native","clientRecord":false,"at":"2026-10-15T21:07:36.3452247+01:00"}
+{"sequence":797,"sourceLine":1377,"context":"","command":"assert status sprite_asset_overrides=1","clientRecord":false,"at":"2026-10-15T21:07:36.5580666+01:00"}
+{"sequence":798,"sourceLine":1378,"context":"","command":"assert status sprite_asset_visible=1","clientRecord":false,"at":"2026-10-15T21:07:36.6685999+01:00"}
+{"sequence":799,"sourceLine":1379,"context":"","command":"api frame.capture name=v06694-final-player-yellow-target-straight","clientRecord":false,"at":"2026-10-15T21:07:36.8298901+01:00"}
+{"sequence":800,"sourceLine":1382,"context":"","command":"api input.steering.set value=0060","clientRecord":false,"at":"2026-10-15T21:07:36.9520730+01:00"}
+{"sequence":801,"sourceLine":1383,"context":"","command":"api control.run-frames frames=30","clientRecord":false,"at":"2026-10-15T21:07:38.8644424+01:00"}
+{"sequence":802,"sourceLine":1384,"context":"","command":"assert status sprite_asset_visible=1","clientRecord":false,"at":"2026-10-15T21:07:39.8170816+01:00"}
+{"sequence":803,"sourceLine":1385,"context":"","command":"api frame.capture name=v06694-final-player-yellow-target-steer-right","clientRecord":false,"at":"2026-10-15T21:07:40.1065048+01:00"}
+{"sequence":804,"sourceLine":1386,"context":"","command":"api input.steering.set value=0FA0","clientRecord":false,"at":"2026-10-15T21:07:40.2111677+01:00"}
+{"sequence":805,"sourceLine":1387,"context":"","command":"api control.run-frames frames=60","clientRecord":false,"at":"2026-10-15T21:07:44.3338300+01:00"}
+{"sequence":806,"sourceLine":1388,"context":"","command":"assert status sprite_asset_visible=1","clientRecord":false,"at":"2026-10-15T21:07:45.5086843+01:00"}
+{"sequence":807,"sourceLine":1389,"context":"","command":"api frame.capture name=v06694-final-player-yellow-target-steer-left","clientRecord":false,"at":"2026-10-15T21:07:46.1397369+01:00"}
+{"sequence":808,"sourceLine":1390,"context":"","command":"api input.steering.set value=0000","clientRecord":false,"at":"2026-10-15T21:07:46.2164925+01:00"}
+{"sequence":809,"sourceLine":1393,"context":"","command":"api sprite.asset-replace.clear","clientRecord":false,"at":"2026-10-15T21:07:46.7454487+01:00"}
+{"sequence":810,"sourceLine":1394,"context":"","command":"api backend.sprite.set mode=original","clientRecord":false,"at":"2026-10-15T21:07:46.8158653+01:00"}
+{"sequence":811,"sourceLine":1395,"context":"","command":"api checkpoint.load file=stage1-gameplay-2064.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:07:46.9160148+01:00"}
+{"sequence":812,"sourceLine":1396,"context":"","command":"api sprite.layer-shadow.compare failOnMismatch=true output=v06694-final-stage1-shadow.json","clientRecord":false,"at":"2026-10-15T21:07:47.0359691+01:00"}
+{"sequence":813,"sourceLine":1400,"context":"","command":"api hud.layout.set element=speed visible=false dx=0 dy=0","clientRecord":false,"at":"2026-10-15T21:07:47.1444327+01:00"}
+{"sequence":814,"sourceLine":1401,"context":"","command":"api input.ioc.xor port=3 mask=20","clientRecord":false,"at":"2026-10-15T21:07:47.2174502+01:00"}
+{"sequence":815,"sourceLine":1402,"context":"","command":"api control.run-frames frames=120","clientRecord":false,"at":"2026-10-15T21:07:54.3462959+01:00"}
+{"sequence":816,"sourceLine":1403,"context":"","command":"api input.ioc.clear","clientRecord":false,"at":"2026-10-15T21:07:56.5456783+01:00"}
+{"sequence":817,"sourceLine":1404,"context":"","command":"api frame.snapshot name=v06694-final-speed-hidden-after-acceleration","clientRecord":false,"at":"2026-10-15T21:07:58.5611478+01:00"}
+{"sequence":818,"sourceLine":1405,"context":"","command":"assert status hud_speed_region_empty=1","clientRecord":false,"at":"2026-10-15T21:07:59.4660324+01:00"}
+{"sequence":819,"sourceLine":1408,"context":"","command":"api text.charset.export palette=0 scale=1","clientRecord":false,"at":"2026-10-15T21:08:04.9763923+01:00"}
+{"sequence":820,"sourceLine":1411,"context":"","command":"api backend.sprite.set mode=original","clientRecord":false,"at":"2026-10-15T21:08:06.8168869+01:00"}
+{"sequence":821,"sourceLine":1412,"context":"","command":"api sprite.asset-replace.clear","clientRecord":false,"at":"2026-10-15T21:08:07.4028740+01:00"}
+{"sequence":822,"sourceLine":1413,"context":"","command":"api sprite.map-override.clear","clientRecord":false,"at":"2026-10-15T21:08:07.9476089+01:00"}
+{"sequence":823,"sourceLine":1414,"context":"","command":"api game.beacon.override mode=authentic","clientRecord":false,"at":"2026-10-15T21:08:08.3396887+01:00"}
+{"sequence":824,"sourceLine":1415,"context":"","command":"api hud.layout.reset","clientRecord":false,"at":"2026-10-15T21:08:08.6174015+01:00"}
+{"sequence":825,"sourceLine":1416,"context":"","command":"api input.steering.set value=0000","clientRecord":false,"at":"2026-10-15T21:08:08.6922707+01:00"}
+{"sequence":826,"sourceLine":1417,"context":"","command":"api patch.clear","clientRecord":false,"at":"2026-10-15T21:08:08.8211249+01:00"}
+{"sequence":827,"sourceLine":1418,"context":"","command":"api checkpoint.load file=stage1-gameplay-2064.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:08:09.3224438+01:00"}
+{"sequence":828,"sourceLine":1419,"context":"","command":"assert status sprite_backend=original","clientRecord":false,"at":"2026-10-15T21:08:09.5079241+01:00"}
+{"sequence":829,"sourceLine":1420,"context":"","command":"assert status sprite_asset_overrides=0","clientRecord":false,"at":"2026-10-15T21:08:09.5830735+01:00"}
+{"sequence":830,"sourceLine":1421,"context":"","command":"api status","clientRecord":false,"at":"2026-10-15T21:08:09.6535991+01:00"}
+{"sequence":831,"sourceLine":1423,"context":"","command":"echo === ChaseHQ v0.66.9.4 Final Release Regression: COMPLETE ===","clientRecord":false,"at":"2026-10-15T21:08:09.6845701+01:00"}
+{"sequence":832,"sourceLine":1434,"context":"","command":"echo === ChaseHQ v0.66.9.5-RC1.1 Corrective Regression: BEGIN ===","clientRecord":false,"at":"2026-10-15T21:08:09.7190523+01:00"}
+{"sequence":833,"sourceLine":1435,"context":"","command":"api release.assert-version","clientRecord":false,"at":"2026-10-15T21:08:09.7884862+01:00"}
+{"sequence":834,"sourceLine":1438,"context":"","command":"api memory.trace.clear","clientRecord":false,"at":"2026-10-15T21:08:09.8475446+01:00"}
+{"sequence":835,"sourceLine":1439,"context":"","command":"api events.clear","clientRecord":false,"at":"2026-10-15T21:08:09.9103932+01:00"}
+{"sequence":836,"sourceLine":1440,"context":"","command":"api collision.response.reset","clientRecord":false,"at":"2026-10-15T21:08:09.9895458+01:00"}
+{"sequence":837,"sourceLine":1441,"context":"","command":"api collision.events.clear","clientRecord":false,"at":"2026-10-15T21:08:10.0590407+01:00"}
+{"sequence":838,"sourceLine":1442,"context":"","command":"api game.target.one-hit enabled=false","clientRecord":false,"at":"2026-10-15T21:08:10.4663047+01:00"}
+{"sequence":839,"sourceLine":1443,"context":"","command":"api game.speed.clear","clientRecord":false,"at":"2026-10-15T21:08:11.2916563+01:00"}
+{"sequence":840,"sourceLine":1444,"context":"","command":"api sprite.asset-replace.clear","clientRecord":false,"at":"2026-10-15T21:08:11.4976037+01:00"}
+{"sequence":841,"sourceLine":1445,"context":"","command":"api sprite.map-override.clear","clientRecord":false,"at":"2026-10-15T21:08:11.6298959+01:00"}
+{"sequence":842,"sourceLine":1446,"context":"","command":"api sprite.override.clear","clientRecord":false,"at":"2026-10-15T21:08:11.7672075+01:00"}
+{"sequence":843,"sourceLine":1447,"context":"","command":"api sprite.visual.clear","clientRecord":false,"at":"2026-10-15T21:08:12.1853773+01:00"}
+{"sequence":844,"sourceLine":1448,"context":"","command":"api patch.clear","clientRecord":false,"at":"2026-10-15T21:08:12.4057377+01:00"}
+{"sequence":845,"sourceLine":1449,"context":"","command":"api palette.overrides.clear","clientRecord":false,"at":"2026-10-15T21:08:12.5093786+01:00"}
+{"sequence":846,"sourceLine":1450,"context":"","command":"api hud.layout.reset","clientRecord":false,"at":"2026-10-15T21:08:12.6712767+01:00"}
+{"sequence":847,"sourceLine":1451,"context":"","command":"api game.beacon.override mode=authentic","clientRecord":false,"at":"2026-10-15T21:08:13.1415263+01:00"}
+{"sequence":848,"sourceLine":1452,"context":"","command":"api input.ioc.clear","clientRecord":false,"at":"2026-10-15T21:08:13.2138352+01:00"}
+{"sequence":849,"sourceLine":1453,"context":"","command":"api input.steering.set value=0000","clientRecord":false,"at":"2026-10-15T21:08:13.7348513+01:00"}
+{"sequence":850,"sourceLine":1454,"context":"","command":"api backend.sprite.set mode=original","clientRecord":false,"at":"2026-10-15T21:08:13.8361644+01:00"}
+{"sequence":851,"sourceLine":1456,"context":"","command":"echo === RC1 A: SEMANTIC ASSET LIVE/SNAPSHOT PARITY ===","clientRecord":false,"at":"2026-10-15T21:08:13.9147214+01:00"}
+{"sequence":852,"sourceLine":1457,"context":"","command":"api checkpoint.load file=stage1-gameplay-2064.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:08:14.1668996+01:00"}
+{"sequence":853,"sourceLine":1458,"context":"","command":"api backend.sprite.set mode=native","clientRecord":false,"at":"2026-10-15T21:08:14.3459682+01:00"}
+{"sequence":854,"sourceLine":1459,"context":"","command":"api sprite.asset-replace source=516 target=190 format=obj-b64 palette=73 flipx=1 dx=0 dy=0","clientRecord":false,"at":"2026-10-15T21:08:14.4240891+01:00"}
+{"sequence":855,"sourceLine":1460,"context":"","command":"api control.run-frames frames=5","clientRecord":false,"at":"2026-10-15T21:08:14.9276931+01:00"}
+{"sequence":856,"sourceLine":1461,"context":"","command":"assert status sprite_asset_visible=1","clientRecord":false,"at":"2026-10-15T21:08:15.4044614+01:00"}
+{"sequence":857,"sourceLine":1462,"context":"","command":"api frame.snapshot.parity name=rc1-player-asset-parity require=true","clientRecord":false,"at":"2026-10-15T21:08:17.3358622+01:00"}
+{"sequence":858,"sourceLine":1463,"context":"","command":"api sprite.asset-resolve","clientRecord":false,"at":"2026-10-15T21:08:18.6773473+01:00"}
+{"sequence":859,"sourceLine":1464,"context":"","command":"api sprite.asset-replace.clear","clientRecord":false,"at":"2026-10-15T21:08:19.2415515+01:00"}
+{"sequence":860,"sourceLine":1465,"context":"","command":"assert status sprite_asset_visible=0","clientRecord":false,"at":"2026-10-15T21:08:19.8073906+01:00"}
+{"sequence":861,"sourceLine":1467,"context":"","command":"echo === RC1 B: MAP509 SEMANTIC PLAYER FAMILY ===","clientRecord":false,"at":"2026-10-15T21:08:19.8692997+01:00"}
+{"sequence":862,"sourceLine":1468,"context":"","command":"api checkpoint.load file=stage1-gameplay-2064.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:08:19.9689178+01:00"}
+{"sequence":863,"sourceLine":1469,"context":"","command":"api game.speed.freeze enabled=true value=602","clientRecord":false,"at":"2026-10-15T21:08:20.4452124+01:00"}
+{"sequence":864,"sourceLine":1470,"context":"","command":"api input.steering.set value=0060","clientRecord":false,"at":"2026-10-15T21:08:20.6760879+01:00"}
+{"sequence":865,"sourceLine":1471,"context":"","command":"api sprite.asset-replace object=player_car.body target=190 format=obj-b64 palette=73 flipx=1 dx=0 dy=0","clientRecord":false,"at":"2026-10-15T21:08:20.7819319+01:00"}
+{"sequence":866,"sourceLine":1472,"context":"","command":"api control.run-frames frames=12","clientRecord":false,"at":"2026-10-15T21:08:22.0906746+01:00"}
+{"sequence":867,"sourceLine":1473,"context":"","command":"assert status sprite_asset_visible=1","clientRecord":false,"at":"2026-10-15T21:08:22.2741208+01:00"}
+{"sequence":868,"sourceLine":1474,"context":"","command":"api sprite.asset-resolve","clientRecord":false,"at":"2026-10-15T21:08:23.5001669+01:00"}
+{"sequence":869,"sourceLine":1475,"context":"","command":"api frame.snapshot.parity name=rc1-player-map509-semantic-parity require=true","clientRecord":false,"at":"2026-10-15T21:08:25.4690989+01:00"}
+{"sequence":870,"sourceLine":1476,"context":"","command":"api sprite.asset-replace.clear","clientRecord":false,"at":"2026-10-15T21:08:26.4704492+01:00"}
+{"sequence":871,"sourceLine":1477,"context":"","command":"api game.speed.clear","clientRecord":false,"at":"2026-10-15T21:08:27.1065015+01:00"}
+{"sequence":872,"sourceLine":1478,"context":"","command":"api input.steering.set value=0000","clientRecord":false,"at":"2026-10-15T21:08:27.6825955+01:00"}
+{"sequence":873,"sourceLine":1480,"context":"","command":"echo === RC1 C: 32-BIT FIXED-POINT SPEED FREEZE ===","clientRecord":false,"at":"2026-10-15T21:08:27.8264086+01:00"}
+{"sequence":874,"sourceLine":1481,"context":"","command":"api checkpoint.load file=stage1-gameplay-2064.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:08:27.9572883+01:00"}
+{"sequence":875,"sourceLine":1482,"context":"","command":"api game.speed.freeze enabled=true value=602","clientRecord":false,"at":"2026-10-15T21:08:28.5466018+01:00"}
+{"sequence":876,"sourceLine":1483,"context":"","command":"api control.run-frames frames=4","clientRecord":false,"at":"2026-10-15T21:08:29.4519629+01:00"}
+{"sequence":877,"sourceLine":1485,"context":"","command":"echo PASS game.speed.freeze holds 0x025A0000 across game writer","clientRecord":false,"at":"2026-10-15T21:08:29.6667924+01:00"}
+{"sequence":878,"sourceLine":1489,"context":"","command":"api patch.list","clientRecord":false,"at":"2026-10-15T21:08:29.7727983+01:00"}
+{"sequence":879,"sourceLine":1490,"context":"","command":"api game.speed.clear","clientRecord":false,"at":"2026-10-15T21:08:30.5634430+01:00"}
+{"sequence":880,"sourceLine":1492,"context":"","command":"echo === RC1 D: COUPLED BEACON PHASE/REQUEST OVERRIDE ===","clientRecord":false,"at":"2026-10-15T21:08:30.7349104+01:00"}
+{"sequence":881,"sourceLine":1493,"context":"","command":"api checkpoint.load file=stage1-gameplay-2064.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:08:30.8645230+01:00"}
+{"sequence":882,"sourceLine":1494,"context":"","command":"api game.beacon.override mode=on","clientRecord":false,"at":"2026-10-15T21:08:31.3564015+01:00"}
+{"sequence":883,"sourceLine":1496,"context":"","command":"echo PASS beacon Force ON phase=6","clientRecord":false,"at":"2026-10-15T21:08:31.9554074+01:00"}
+{"sequence":884,"sourceLine":1501,"context":"","command":"echo PASS beacon Force ON request=FFFF","clientRecord":false,"at":"2026-10-15T21:08:32.0261008+01:00"}
+{"sequence":885,"sourceLine":1505,"context":"","command":"api control.run-frames frames=1","clientRecord":false,"at":"2026-10-15T21:08:32.2705627+01:00"}
+{"sequence":886,"sourceLine":1506,"context":"","command":"api game.beacon.get","clientRecord":false,"at":"2026-10-15T21:08:32.4594710+01:00"}
+{"sequence":887,"sourceLine":1508,"context":"","command":"api checkpoint.load file=stage1-target-immediate-pre-damage-6333.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:08:32.6145514+01:00"}
+{"sequence":888,"sourceLine":1509,"context":"","command":"api game.beacon.override mode=off","clientRecord":false,"at":"2026-10-15T21:08:33.1554960+01:00"}
+{"sequence":889,"sourceLine":1511,"context":"","command":"echo PASS beacon Force OFF phase=0","clientRecord":false,"at":"2026-10-15T21:08:33.7999457+01:00"}
+{"sequence":890,"sourceLine":1516,"context":"","command":"echo PASS beacon Force OFF request=0","clientRecord":false,"at":"2026-10-15T21:08:33.8815029+01:00"}
+{"sequence":891,"sourceLine":1520,"context":"","command":"api control.run-frames frames=1","clientRecord":false,"at":"2026-10-15T21:08:34.1042628+01:00"}
+{"sequence":892,"sourceLine":1521,"context":"","command":"api game.beacon.get","clientRecord":false,"at":"2026-10-15T21:08:34.1906863+01:00"}
+{"sequence":893,"sourceLine":1522,"context":"","command":"api game.beacon.override mode=authentic","clientRecord":false,"at":"2026-10-15T21:08:35.2194847+01:00"}
+{"sequence":894,"sourceLine":1524,"context":"","command":"echo === RC1 E: TARGET-CONTACT STRUCTURED EVENT SURFACE ===","clientRecord":false,"at":"2026-10-15T21:08:35.3793063+01:00"}
+{"sequence":895,"sourceLine":1525,"context":"","command":"api checkpoint.load file=stage1-target-immediate-pre-contact-5587.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:08:35.5449941+01:00"}
+{"sequence":896,"sourceLine":1526,"context":"","command":"api collision.events.clear","clientRecord":false,"at":"2026-10-15T21:08:35.6646522+01:00"}
+{"sequence":897,"sourceLine":1527,"context":"","command":"api control.run-frames frames=4","clientRecord":false,"at":"2026-10-15T21:08:36.1307716+01:00"}
+{"sequence":898,"sourceLine":1528,"context":"","command":"api collision.events count=50","clientRecord":false,"at":"2026-10-15T21:08:36.6747411+01:00"}
+{"sequence":899,"sourceLine":1530,"context":"","command":"echo === RC1 F: CLEANUP CONTRACT ===","clientRecord":false,"at":"2026-10-15T21:08:36.8573794+01:00"}
+{"sequence":900,"sourceLine":1532,"context":"","command":"api memory.trace.clear","clientRecord":false,"at":"2026-10-15T21:08:36.9613120+01:00"}
+{"sequence":901,"sourceLine":1533,"context":"","command":"api collision.response.reset","clientRecord":false,"at":"2026-10-15T21:08:37.0666372+01:00"}
+{"sequence":902,"sourceLine":1534,"context":"","command":"api collision.events.clear","clientRecord":false,"at":"2026-10-15T21:08:37.1637244+01:00"}
+{"sequence":903,"sourceLine":1535,"context":"","command":"api game.target.one-hit enabled=false","clientRecord":false,"at":"2026-10-15T21:08:37.7563150+01:00"}
+{"sequence":904,"sourceLine":1536,"context":"","command":"api game.speed.clear","clientRecord":false,"at":"2026-10-15T21:08:38.8327766+01:00"}
+{"sequence":905,"sourceLine":1537,"context":"","command":"api sprite.asset-replace.clear","clientRecord":false,"at":"2026-10-15T21:08:39.5177389+01:00"}
+{"sequence":906,"sourceLine":1538,"context":"","command":"api sprite.map-override.clear","clientRecord":false,"at":"2026-10-15T21:08:39.7360166+01:00"}
+{"sequence":907,"sourceLine":1539,"context":"","command":"api sprite.override.clear","clientRecord":false,"at":"2026-10-15T21:08:39.8365816+01:00"}
+{"sequence":908,"sourceLine":1540,"context":"","command":"api sprite.visual.clear","clientRecord":false,"at":"2026-10-15T21:08:39.9546514+01:00"}
+{"sequence":909,"sourceLine":1541,"context":"","command":"api patch.clear","clientRecord":false,"at":"2026-10-15T21:08:40.0133999+01:00"}
+{"sequence":910,"sourceLine":1542,"context":"","command":"api palette.overrides.clear","clientRecord":false,"at":"2026-10-15T21:08:40.0644614+01:00"}
+{"sequence":911,"sourceLine":1543,"context":"","command":"api hud.layout.reset","clientRecord":false,"at":"2026-10-15T21:08:40.1694318+01:00"}
+{"sequence":912,"sourceLine":1544,"context":"","command":"api game.beacon.override mode=authentic","clientRecord":false,"at":"2026-10-15T21:08:40.8358889+01:00"}
+{"sequence":913,"sourceLine":1545,"context":"","command":"api input.ioc.clear","clientRecord":false,"at":"2026-10-15T21:08:41.4214915+01:00"}
+{"sequence":914,"sourceLine":1546,"context":"","command":"api input.steering.set value=0000","clientRecord":false,"at":"2026-10-15T21:08:41.6437074+01:00"}
+{"sequence":915,"sourceLine":1547,"context":"","command":"api backend.sprite.set mode=original","clientRecord":false,"at":"2026-10-15T21:08:41.7533643+01:00"}
+{"sequence":916,"sourceLine":1548,"context":"","command":"api checkpoint.load file=stage1-gameplay-2064.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:08:42.3659440+01:00"}
+{"sequence":917,"sourceLine":1549,"context":"","command":"api status","clientRecord":false,"at":"2026-10-15T21:08:42.5482215+01:00"}
+{"sequence":918,"sourceLine":1552,"context":"","command":"echo === ChaseHQ v0.66.9.5-RC1.1 Corrective Regression: COMPLETE ===","clientRecord":false,"at":"2026-10-15T21:08:42.5810039+01:00"}
+{"sequence":919,"sourceLine":1563,"context":"","command":"echo === ChaseHQ v0.66.9.5-RC2 Focused Regression: BEGIN ===","clientRecord":false,"at":"2026-10-15T21:08:42.6207971+01:00"}
+{"sequence":920,"sourceLine":1564,"context":"","command":"api release.assert-version","clientRecord":false,"at":"2026-10-15T21:08:42.7090164+01:00"}
+{"sequence":921,"sourceLine":1567,"context":"","command":"api memory.trace.clear","clientRecord":false,"at":"2026-10-15T21:08:42.7652704+01:00"}
+{"sequence":922,"sourceLine":1568,"context":"","command":"api events.clear","clientRecord":false,"at":"2026-10-15T21:08:42.8316201+01:00"}
+{"sequence":923,"sourceLine":1569,"context":"","command":"api collision.response.reset","clientRecord":false,"at":"2026-10-15T21:08:42.8951938+01:00"}
+{"sequence":924,"sourceLine":1570,"context":"","command":"api collision.events.clear","clientRecord":false,"at":"2026-10-15T21:08:42.9574698+01:00"}
+{"sequence":925,"sourceLine":1571,"context":"","command":"api game.target.one-hit enabled=false","clientRecord":false,"at":"2026-10-15T21:08:43.3630513+01:00"}
+{"sequence":926,"sourceLine":1572,"context":"","command":"api game.speed.clear","clientRecord":false,"at":"2026-10-15T21:08:44.1575620+01:00"}
+{"sequence":927,"sourceLine":1573,"context":"","command":"api game.beacon.override mode=authentic","clientRecord":false,"at":"2026-10-15T21:08:44.5971194+01:00"}
+{"sequence":928,"sourceLine":1574,"context":"","command":"api sprite.asset-replace.clear","clientRecord":false,"at":"2026-10-15T21:08:44.8228752+01:00"}
+{"sequence":929,"sourceLine":1575,"context":"","command":"api sprite.map-override.clear","clientRecord":false,"at":"2026-10-15T21:08:45.2839935+01:00"}
+{"sequence":930,"sourceLine":1576,"context":"","command":"api sprite.override.clear","clientRecord":false,"at":"2026-10-15T21:08:45.5204294+01:00"}
+{"sequence":931,"sourceLine":1577,"context":"","command":"api sprite.visual.clear","clientRecord":false,"at":"2026-10-15T21:08:45.5894868+01:00"}
+{"sequence":932,"sourceLine":1578,"context":"","command":"api patch.clear","clientRecord":false,"at":"2026-10-15T21:08:45.6526503+01:00"}
+{"sequence":933,"sourceLine":1579,"context":"","command":"api palette.overrides.clear","clientRecord":false,"at":"2026-10-15T21:08:45.7189480+01:00"}
+{"sequence":934,"sourceLine":1580,"context":"","command":"api hud.layout.reset","clientRecord":false,"at":"2026-10-15T21:08:45.8273345+01:00"}
+{"sequence":935,"sourceLine":1581,"context":"","command":"api input.ioc.clear","clientRecord":false,"at":"2026-10-15T21:08:45.8954641+01:00"}
+{"sequence":936,"sourceLine":1582,"context":"","command":"api input.steering.set value=0000","clientRecord":false,"at":"2026-10-15T21:08:45.9672913+01:00"}
+{"sequence":937,"sourceLine":1583,"context":"","command":"api backend.sprite.set mode=original","clientRecord":false,"at":"2026-10-15T21:08:46.0302405+01:00"}
+{"sequence":938,"sourceLine":1585,"context":"","command":"echo === RC2 A: DIRECT ROM ATLAS EXPORT ===","clientRecord":false,"at":"2026-10-15T21:08:46.0712383+01:00"}
+{"sequence":939,"sourceLine":1586,"context":"","command":"api sprite.rom-atlas.export start=516 end=520 format=obj-b64 palette=65 name=rc2-rom-atlas-smoke","clientRecord":false,"at":"2026-10-15T21:08:46.2947195+01:00"}
+{"sequence":940,"sourceLine":1588,"context":"","command":"echo === RC2 B: SOURCE / EFFECTIVE SPRITE INSPECTION ===","clientRecord":false,"at":"2026-10-15T21:08:46.7948541+01:00"}
+{"sequence":941,"sourceLine":1589,"context":"","command":"api checkpoint.load file=stage1-gameplay-2064.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:08:46.9076516+01:00"}
+{"sequence":942,"sourceLine":1590,"context":"","command":"api sprite.override slot=45 map=522 palette=65","clientRecord":false,"at":"2026-10-15T21:08:47.0579894+01:00"}
+{"sequence":943,"sourceLine":1591,"context":"","command":"api sprite.inspect slot=45","clientRecord":false,"at":"2026-10-15T21:08:47.4533009+01:00"}
+{"sequence":944,"sourceLine":1592,"context":"","command":"api sprites.list","clientRecord":false,"at":"2026-10-15T21:08:47.9233912+01:00"}
+{"sequence":945,"sourceLine":1593,"context":"","command":"api sprite.override.clear","clientRecord":false,"at":"2026-10-15T21:08:48.3740763+01:00"}
+{"sequence":946,"sourceLine":1595,"context":"","command":"echo === RC2 C: PLAYER POSITIVE-BAND SEMANTIC COVERAGE ===","clientRecord":false,"at":"2026-10-15T21:08:48.5370968+01:00"}
+{"sequence":947,"sourceLine":1596,"context":"","command":"api checkpoint.load file=stage1-driving-2352.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:08:48.7412945+01:00"}
+{"sequence":948,"sourceLine":1597,"context":"","command":"api control.run-frames frames=300","clientRecord":false,"at":"2026-10-15T21:09:07.7549581+01:00"}
+{"sequence":949,"sourceLine":1598,"context":"","command":"api sprite.asset-replace object=player_car.body target=190 format=obj-b64 palette=73 flipx=1 dx=0 dy=0","clientRecord":false,"at":"2026-10-15T21:09:13.7216865+01:00"}
+{"sequence":950,"sourceLine":1599,"context":"","command":"api control.run-frames frames=1","clientRecord":false,"at":"2026-10-15T21:09:16.2421992+01:00"}
+{"sequence":951,"sourceLine":1600,"context":"","command":"assert status sprite_asset_visible=1","clientRecord":false,"at":"2026-10-15T21:09:17.6527952+01:00"}
+{"sequence":952,"sourceLine":1601,"context":"","command":"api sprite.asset-resolve","clientRecord":false,"at":"2026-10-15T21:09:18.5087238+01:00"}
+{"sequence":953,"sourceLine":1602,"context":"","command":"api sprite.asset-replace.clear","clientRecord":false,"at":"2026-10-15T21:09:19.1654265+01:00"}
+{"sequence":954,"sourceLine":1604,"context":"","command":"echo === RC2 D: BEACON FORCE-ON AUTHENTIC PIPELINE LATENCY ===","clientRecord":false,"at":"2026-10-15T21:09:19.2890356+01:00"}
+{"sequence":955,"sourceLine":1605,"context":"","command":"api checkpoint.load file=stage1-gameplay-2064.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:09:19.8884079+01:00"}
+{"sequence":956,"sourceLine":1606,"context":"","command":"api game.beacon.override mode=on","clientRecord":false,"at":"2026-10-15T21:09:20.3507812+01:00"}
+{"sequence":957,"sourceLine":1607,"context":"","command":"api control.run-frames frames=4","clientRecord":false,"at":"2026-10-15T21:09:20.8815875+01:00"}
+{"sequence":958,"sourceLine":1608,"context":"","command":"assert status beacon_live_present=1","clientRecord":false,"at":"2026-10-15T21:09:21.3899851+01:00"}
+{"sequence":959,"sourceLine":1609,"context":"","command":"api game.beacon.get","clientRecord":false,"at":"2026-10-15T21:09:21.5526446+01:00"}
+{"sequence":960,"sourceLine":1611,"context":"","command":"echo === RC2 E: BEACON FORCE-OFF AUTHENTIC PIPELINE LATENCY ===","clientRecord":false,"at":"2026-10-15T21:09:21.6385604+01:00"}
+{"sequence":961,"sourceLine":1612,"context":"","command":"api checkpoint.load file=stage1-target-immediate-pre-damage-6333.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:09:21.8112044+01:00"}
+{"sequence":962,"sourceLine":1613,"context":"","command":"api game.beacon.override mode=off","clientRecord":false,"at":"2026-10-15T21:09:22.3186912+01:00"}
+{"sequence":963,"sourceLine":1614,"context":"","command":"api control.run-frames frames=3","clientRecord":false,"at":"2026-10-15T21:09:23.2072099+01:00"}
+{"sequence":964,"sourceLine":1615,"context":"","command":"assert status beacon_live_present=0","clientRecord":false,"at":"2026-10-15T21:09:23.4057134+01:00"}
+{"sequence":965,"sourceLine":1616,"context":"","command":"api game.beacon.get","clientRecord":false,"at":"2026-10-15T21:09:23.4938025+01:00"}
+{"sequence":966,"sourceLine":1617,"context":"","command":"api game.beacon.override mode=authentic","clientRecord":false,"at":"2026-10-15T21:09:24.0243104+01:00"}
+{"sequence":967,"sourceLine":1619,"context":"","command":"echo === RC2 F: RC1.1 CORRECTIVE CONTRACT CARRY-FORWARD ===","clientRecord":false,"at":"2026-10-15T21:09:24.4496784+01:00"}
+{"sequence":968,"sourceLine":1620,"context":"","command":"api checkpoint.load file=stage1-gameplay-2064.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:09:24.6865933+01:00"}
+{"sequence":969,"sourceLine":1621,"context":"","command":"api game.speed.freeze enabled=true value=602","clientRecord":false,"at":"2026-10-15T21:09:25.1855382+01:00"}
+{"sequence":970,"sourceLine":1622,"context":"","command":"api control.run-frames frames=4","clientRecord":false,"at":"2026-10-15T21:09:25.7217563+01:00"}
+{"sequence":971,"sourceLine":1624,"context":"","command":"echo PASS game.speed.freeze still holds 0x025A0000","clientRecord":false,"at":"2026-10-15T21:09:26.3112379+01:00"}
+{"sequence":972,"sourceLine":1628,"context":"","command":"api game.speed.clear","clientRecord":false,"at":"2026-10-15T21:09:26.7522145+01:00"}
+{"sequence":973,"sourceLine":1630,"context":"","command":"api checkpoint.load file=stage1-target-immediate-pre-contact-5587.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:09:27.2619513+01:00"}
+{"sequence":974,"sourceLine":1631,"context":"","command":"api collision.events.clear","clientRecord":false,"at":"2026-10-15T21:09:27.4944710+01:00"}
+{"sequence":975,"sourceLine":1632,"context":"","command":"api control.run-frames frames=4","clientRecord":false,"at":"2026-10-15T21:09:27.9609797+01:00"}
+{"sequence":976,"sourceLine":1633,"context":"","command":"api collision.events count=50","clientRecord":false,"at":"2026-10-15T21:09:28.0275508+01:00"}
+{"sequence":977,"sourceLine":1635,"context":"","command":"echo === ChaseHQ v0.66.9.5-RC2 Focused Regression: BODY COMPLETE ===","clientRecord":false,"at":"2026-10-15T21:09:28.0633310+01:00"}
+{"sequence":978,"sourceLine":1637,"context":"","command":"api memory.trace.clear","clientRecord":false,"at":"2026-10-15T21:09:28.1436964+01:00"}
+{"sequence":979,"sourceLine":1638,"context":"","command":"api events.clear","clientRecord":false,"at":"2026-10-15T21:09:28.2017998+01:00"}
+{"sequence":980,"sourceLine":1639,"context":"","command":"api collision.response.reset","clientRecord":false,"at":"2026-10-15T21:09:28.9084774+01:00"}
+{"sequence":981,"sourceLine":1640,"context":"","command":"api collision.events.clear","clientRecord":false,"at":"2026-10-15T21:09:29.0139028+01:00"}
+{"sequence":982,"sourceLine":1641,"context":"","command":"api game.target.one-hit enabled=false","clientRecord":false,"at":"2026-10-15T21:09:29.6228892+01:00"}
+{"sequence":983,"sourceLine":1642,"context":"","command":"api game.speed.clear","clientRecord":false,"at":"2026-10-15T21:09:30.2731062+01:00"}
+{"sequence":984,"sourceLine":1643,"context":"","command":"api game.beacon.override mode=authentic","clientRecord":false,"at":"2026-10-15T21:09:31.4413178+01:00"}
+{"sequence":985,"sourceLine":1644,"context":"","command":"api sprite.asset-replace.clear","clientRecord":false,"at":"2026-10-15T21:09:32.1433296+01:00"}
+{"sequence":986,"sourceLine":1645,"context":"","command":"api sprite.map-override.clear","clientRecord":false,"at":"2026-10-15T21:09:32.4830941+01:00"}
+{"sequence":987,"sourceLine":1646,"context":"","command":"api sprite.override.clear","clientRecord":false,"at":"2026-10-15T21:09:32.6466766+01:00"}
+{"sequence":988,"sourceLine":1647,"context":"","command":"api sprite.visual.clear","clientRecord":false,"at":"2026-10-15T21:09:32.7686740+01:00"}
+{"sequence":989,"sourceLine":1648,"context":"","command":"api patch.clear","clientRecord":false,"at":"2026-10-15T21:09:33.3700607+01:00"}
+{"sequence":990,"sourceLine":1649,"context":"","command":"api palette.overrides.clear","clientRecord":false,"at":"2026-10-15T21:09:33.5885984+01:00"}
+{"sequence":991,"sourceLine":1650,"context":"","command":"api hud.layout.reset","clientRecord":false,"at":"2026-10-15T21:09:33.7585108+01:00"}
+{"sequence":992,"sourceLine":1651,"context":"","command":"api input.ioc.clear","clientRecord":false,"at":"2026-10-15T21:09:33.8633222+01:00"}
+{"sequence":993,"sourceLine":1652,"context":"","command":"api input.steering.set value=0000","clientRecord":false,"at":"2026-10-15T21:09:33.9689339+01:00"}
+{"sequence":994,"sourceLine":1653,"context":"","command":"api backend.sprite.set mode=original","clientRecord":false,"at":"2026-10-15T21:09:34.0215132+01:00"}
+{"sequence":995,"sourceLine":1654,"context":"","command":"api checkpoint.load file=stage1-gameplay-2064.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:09:34.1119385+01:00"}
+{"sequence":996,"sourceLine":1655,"context":"","command":"api status","clientRecord":false,"at":"2026-10-15T21:09:34.1922551+01:00"}
+{"sequence":997,"sourceLine":1658,"context":"","command":"echo === ChaseHQ v0.66.9.5-RC2 Focused Regression: COMPLETE ===","clientRecord":false,"at":"2026-10-15T21:09:34.6604691+01:00"}
+{"sequence":998,"sourceLine":1669,"context":"","command":"echo === ChaseHQ v0.66.9.5-RC3 Focused Regression: BEGIN ===","clientRecord":false,"at":"2026-10-15T21:09:34.7351466+01:00"}
+{"sequence":999,"sourceLine":1670,"context":"","command":"api release.assert-version","clientRecord":false,"at":"2026-10-15T21:09:34.8304271+01:00"}
+{"sequence":1000,"sourceLine":1673,"context":"","command":"api sprite.override.clear","clientRecord":false,"at":"2026-10-15T21:09:34.9532976+01:00"}
+{"sequence":1001,"sourceLine":1674,"context":"","command":"api sprite.visual.clear","clientRecord":false,"at":"2026-10-15T21:09:35.0252538+01:00"}
+{"sequence":1002,"sourceLine":1675,"context":"","command":"api sprite.map-override.clear","clientRecord":false,"at":"2026-10-15T21:09:35.0883864+01:00"}
+{"sequence":1003,"sourceLine":1676,"context":"","command":"api sprite.asset-replace.clear","clientRecord":false,"at":"2026-10-15T21:09:35.1545830+01:00"}
+{"sequence":1004,"sourceLine":1677,"context":"","command":"api patch.clear","clientRecord":false,"at":"2026-10-15T21:09:35.2350471+01:00"}
+{"sequence":1005,"sourceLine":1678,"context":"","command":"api input.ioc.clear","clientRecord":false,"at":"2026-10-15T21:09:35.4245475+01:00"}
+{"sequence":1006,"sourceLine":1679,"context":"","command":"api input.steering.set value=0000","clientRecord":false,"at":"2026-10-15T21:09:35.5248261+01:00"}
+{"sequence":1007,"sourceLine":1680,"context":"","command":"api game.beacon.override mode=authentic","clientRecord":false,"at":"2026-10-15T21:09:35.9605700+01:00"}
+{"sequence":1008,"sourceLine":1682,"context":"","command":"echo === RC3 PROMOTION API / SHADOW ===","clientRecord":false,"at":"2026-10-15T21:09:36.3873438+01:00"}
+{"sequence":1009,"sourceLine":1683,"context":"","command":"api backend.sprite.reset-verification","clientRecord":false,"at":"2026-10-15T21:09:36.5840433+01:00"}
+{"sequence":1010,"sourceLine":1684,"context":"","command":"api checkpoint.load file=stage1-gameplay-2064.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:09:36.7489717+01:00"}
+{"sequence":1011,"sourceLine":1685,"context":"","command":"api backend.sprite.set mode=shadow","clientRecord":false,"at":"2026-10-15T21:09:36.8568937+01:00"}
+{"sequence":1012,"sourceLine":1686,"context":"","command":"api control.run-frames frames=4","clientRecord":false,"at":"2026-10-15T21:09:37.4770098+01:00"}
+{"sequence":1013,"sourceLine":1687,"context":"","command":"api backend.sprite.get","clientRecord":false,"at":"2026-10-15T21:09:38.0883296+01:00"}
+{"sequence":1014,"sourceLine":1688,"context":"","command":"api native.promotion.status subsystem=sprites","clientRecord":false,"at":"2026-10-15T21:09:38.1724289+01:00"}
+{"sequence":1015,"sourceLine":1689,"context":"","command":"api native.layer.capture subsystem=sprites name=rc3-focused-stage1","clientRecord":false,"at":"2026-10-15T21:09:38.4225046+01:00"}
+{"sequence":1016,"sourceLine":1691,"context":"","command":"echo === RC3 NATIVE-ONLY HARD DISABLE ===","clientRecord":false,"at":"2026-10-15T21:09:38.5196317+01:00"}
+{"sequence":1017,"sourceLine":1692,"context":"","command":"api checkpoint.load file=stage1-gameplay-2064.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:09:38.6285790+01:00"}
+{"sequence":1018,"sourceLine":1693,"context":"","command":"api backend.sprite.set mode=native-only","clientRecord":false,"at":"2026-10-15T21:09:38.7064154+01:00"}
+{"sequence":1019,"sourceLine":1694,"context":"","command":"api control.run-frames frames=4","clientRecord":false,"at":"2026-10-15T21:09:39.4732212+01:00"}
+{"sequence":1020,"sourceLine":1695,"context":"","command":"api backend.sprite.get","clientRecord":false,"at":"2026-10-15T21:09:39.6854751+01:00"}
+{"sequence":1021,"sourceLine":1696,"context":"","command":"api native.promotion.status subsystem=sprites","clientRecord":false,"at":"2026-10-15T21:09:39.7984531+01:00"}
+{"sequence":1022,"sourceLine":1697,"context":"","command":"api native.promotion.assert subsystem=sprites minShadowFrames=4 minNativeOnlyFrames=4","clientRecord":false,"at":"2026-10-15T21:09:39.9341821+01:00"}
+{"sequence":1023,"sourceLine":1698,"context":"","command":"api native.progress","clientRecord":false,"at":"2026-10-15T21:09:40.1725994+01:00"}
+{"sequence":1024,"sourceLine":1700,"context":"","command":"echo === RC3 STAGE2 NATIVE-ONLY SMOKE ===","clientRecord":false,"at":"2026-10-15T21:09:40.3267908+01:00"}
+{"sequence":1025,"sourceLine":1701,"context":"","command":"api checkpoint.load file=stage2-gameplay-7500.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:09:40.7929302+01:00"}
+{"sequence":1026,"sourceLine":1702,"context":"","command":"api backend.sprite.set mode=native-only","clientRecord":false,"at":"2026-10-15T21:09:40.9294727+01:00"}
+{"sequence":1027,"sourceLine":1703,"context":"","command":"api control.run-frames frames=4","clientRecord":false,"at":"2026-10-15T21:09:41.3400290+01:00"}
+{"sequence":1028,"sourceLine":1704,"context":"","command":"api backend.sprite.get","clientRecord":false,"at":"2026-10-15T21:09:41.5339949+01:00"}
+{"sequence":1029,"sourceLine":1705,"context":"","command":"api native.promotion.assert subsystem=sprites minShadowFrames=4 minNativeOnlyFrames=8","clientRecord":false,"at":"2026-10-15T21:09:41.6397127+01:00"}
+{"sequence":1030,"sourceLine":1707,"context":"","command":"echo === ChaseHQ v0.66.9.5-RC3 Focused Regression: BODY COMPLETE ===","clientRecord":false,"at":"2026-10-15T21:09:41.7233606+01:00"}
+{"sequence":1031,"sourceLine":1709,"context":"","command":"api backend.sprite.set mode=original","clientRecord":false,"at":"2026-10-15T21:09:42.1879729+01:00"}
+{"sequence":1032,"sourceLine":1710,"context":"","command":"api sprite.override.clear","clientRecord":false,"at":"2026-10-15T21:09:42.3931128+01:00"}
+{"sequence":1033,"sourceLine":1711,"context":"","command":"api sprite.visual.clear","clientRecord":false,"at":"2026-10-15T21:09:42.4916028+01:00"}
+{"sequence":1034,"sourceLine":1712,"context":"","command":"api sprite.map-override.clear","clientRecord":false,"at":"2026-10-15T21:09:42.6223015+01:00"}
+{"sequence":1035,"sourceLine":1713,"context":"","command":"api sprite.asset-replace.clear","clientRecord":false,"at":"2026-10-15T21:09:42.7246620+01:00"}
+{"sequence":1036,"sourceLine":1714,"context":"","command":"api patch.clear","clientRecord":false,"at":"2026-10-15T21:09:42.7940111+01:00"}
+{"sequence":1037,"sourceLine":1715,"context":"","command":"api input.ioc.clear","clientRecord":false,"at":"2026-10-15T21:09:42.8605624+01:00"}
+{"sequence":1038,"sourceLine":1716,"context":"","command":"api input.steering.set value=0000","clientRecord":false,"at":"2026-10-15T21:09:42.9344048+01:00"}
+{"sequence":1039,"sourceLine":1717,"context":"","command":"api game.beacon.override mode=authentic","clientRecord":false,"at":"2026-10-15T21:09:43.3271987+01:00"}
+{"sequence":1040,"sourceLine":1718,"context":"","command":"api checkpoint.load file=stage1-gameplay-2064.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:09:43.8818199+01:00"}
+{"sequence":1041,"sourceLine":1719,"context":"","command":"api status","clientRecord":false,"at":"2026-10-15T21:09:44.0215869+01:00"}
+{"sequence":1042,"sourceLine":1722,"context":"","command":"echo === ChaseHQ v0.66.9.5-RC3 Focused Regression: COMPLETE ===","clientRecord":false,"at":"2026-10-15T21:09:44.1041446+01:00"}
+{"sequence":1043,"sourceLine":1732,"context":"","command":"echo === v0.67.0-RC1.1 native sprite forensic coverage corrective ===","clientRecord":false,"at":"2026-10-15T21:09:44.1746631+01:00"}
+{"sequence":1044,"sourceLine":1733,"context":"","command":"api release.assert-version","clientRecord":false,"at":"2026-10-15T21:09:44.3431975+01:00"}
+{"sequence":1045,"sourceLine":1736,"context":"","command":"api sprite.override.clear","clientRecord":false,"at":"2026-10-15T21:09:44.4030544+01:00"}
+{"sequence":1046,"sourceLine":1737,"context":"","command":"api sprite.visual.clear","clientRecord":false,"at":"2026-10-15T21:09:44.4765167+01:00"}
+{"sequence":1047,"sourceLine":1738,"context":"","command":"api sprite.map-override.clear","clientRecord":false,"at":"2026-10-15T21:09:44.5383884+01:00"}
+{"sequence":1048,"sourceLine":1739,"context":"","command":"api sprite.asset-replace.clear","clientRecord":false,"at":"2026-10-15T21:09:44.6076718+01:00"}
+{"sequence":1049,"sourceLine":1740,"context":"","command":"api patch.clear","clientRecord":false,"at":"2026-10-15T21:09:44.6735603+01:00"}
+{"sequence":1050,"sourceLine":1741,"context":"","command":"api hud.layout.reset","clientRecord":false,"at":"2026-10-15T21:09:44.7761390+01:00"}
+{"sequence":1051,"sourceLine":1742,"context":"","command":"api layer.offsets.reset layer=all","clientRecord":false,"at":"2026-10-15T21:09:45.2123486+01:00"}
+{"sequence":1052,"sourceLine":1744,"context":"","command":"echo === NATIVE SPRITE DEFAULT / PROMOTED PATH ===","clientRecord":false,"at":"2026-10-15T21:09:45.3997156+01:00"}
+{"sequence":1053,"sourceLine":1745,"context":"","command":"api backend.sprite.set mode=native","clientRecord":false,"at":"2026-10-15T21:09:45.5146397+01:00"}
+{"sequence":1054,"sourceLine":1746,"context":"","command":"api backend.sprite.get","clientRecord":false,"at":"2026-10-15T21:09:45.6214740+01:00"}
+{"sequence":1055,"sourceLine":1747,"context":"","command":"api checkpoint.load file=stage1-gameplay-2064.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:09:45.7664493+01:00"}
+{"sequence":1056,"sourceLine":1748,"context":"","command":"api control.run-frames frames=8","clientRecord":false,"at":"2026-10-15T21:09:46.3902978+01:00"}
+{"sequence":1057,"sourceLine":1749,"context":"","command":"api checkpoint.load file=stage2-gameplay-7500.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:09:47.0069662+01:00"}
+{"sequence":1058,"sourceLine":1750,"context":"","command":"api control.run-frames frames=8","clientRecord":false,"at":"2026-10-15T21:09:47.6480258+01:00"}
+{"sequence":1059,"sourceLine":1751,"context":"","command":"api backend.sprite.get","clientRecord":false,"at":"2026-10-15T21:09:47.8776925+01:00"}
+{"sequence":1060,"sourceLine":1754,"context":"","command":"echo === NATIVE SPRITE FORENSIC OVERLAP COVERAGE ===","clientRecord":false,"at":"2026-10-15T21:09:48.3005851+01:00"}
+{"sequence":1061,"sourceLine":1755,"context":"","command":"api checkpoint.load file=stage1-driving-2352.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:09:48.5082198+01:00"}
+{"sequence":1062,"sourceLine":1756,"context":"","command":"api frame.snapshot name=rc11-native-sprite-ownership","clientRecord":false,"at":"2026-10-15T21:09:50.1610930+01:00"}
+{"sequence":1063,"sourceLine":1757,"context":"","command":"api sprite.visual slot=82 mode=solo","clientRecord":false,"at":"2026-10-15T21:09:50.8926326+01:00"}
+{"sequence":1064,"sourceLine":1758,"context":"","command":"api frame.snapshot name=rc11-native-sprite-body-solo","clientRecord":false,"at":"2026-10-15T21:09:52.8209836+01:00"}
+{"sequence":1065,"sourceLine":1759,"context":"","command":"api sprite.visual slot=81 mode=solo","clientRecord":false,"at":"2026-10-15T21:09:53.3833087+01:00"}
+{"sequence":1066,"sourceLine":1760,"context":"","command":"api frame.snapshot name=rc11-native-sprite-shadow-solo","clientRecord":false,"at":"2026-10-15T21:09:55.0944681+01:00"}
+{"sequence":1067,"sourceLine":1761,"context":"","command":"api sprite.visual.clear","clientRecord":false,"at":"2026-10-15T21:09:55.5549102+01:00"}
+{"sequence":1068,"sourceLine":1762,"context":"","command":"api frame.snapshot.assert-overlap name=rc11-native-sprite-ownership front=82 back=81 frontSolo=rc11-native-sprite-body-solo backSolo=rc11-native-sprite-shadow-solo","clientRecord":false,"at":"2026-10-15T21:09:57.7145543+01:00"}
+{"sequence":1069,"sourceLine":1764,"context":"","command":"echo === TC0100SCN TEXT SHADOW BRING-UP ===","clientRecord":false,"at":"2026-10-15T21:09:58.3830085+01:00"}
+{"sequence":1070,"sourceLine":1765,"context":"","command":"api backend.text.reset-verification","clientRecord":false,"at":"2026-10-15T21:09:59.1500395+01:00"}
+{"sequence":1071,"sourceLine":1766,"context":"","command":"api backend.text.set mode=shadow","clientRecord":false,"at":"2026-10-15T21:09:59.2360242+01:00"}
+{"sequence":1072,"sourceLine":1768,"context":"","command":"api checkpoint.load file=stage1-gameplay-2064.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:09:59.4780180+01:00"}
+{"sequence":1073,"sourceLine":1769,"context":"","command":"api control.run-frames frames=8","clientRecord":false,"at":"2026-10-15T21:10:00.1972968+01:00"}
+{"sequence":1074,"sourceLine":1770,"context":"","command":"api backend.text.get","clientRecord":false,"at":"2026-10-15T21:10:00.7982436+01:00"}
+{"sequence":1075,"sourceLine":1772,"context":"","command":"api checkpoint.load file=stage1-driving-2352.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:10:00.9395367+01:00"}
+{"sequence":1076,"sourceLine":1773,"context":"","command":"api control.run-frames frames=8","clientRecord":false,"at":"2026-10-15T21:10:01.6741435+01:00"}
+{"sequence":1077,"sourceLine":1774,"context":"","command":"api backend.text.get","clientRecord":false,"at":"2026-10-15T21:10:02.3260668+01:00"}
+{"sequence":1078,"sourceLine":1776,"context":"","command":"api checkpoint.load file=stage2-gameplay-7500.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:10:02.6093697+01:00"}
+{"sequence":1079,"sourceLine":1777,"context":"","command":"api control.run-frames frames=8","clientRecord":false,"at":"2026-10-15T21:10:03.2505090+01:00"}
+{"sequence":1080,"sourceLine":1778,"context":"","command":"api backend.text.get","clientRecord":false,"at":"2026-10-15T21:10:03.8034224+01:00"}
+{"sequence":1081,"sourceLine":1780,"context":"","command":"echo === ZERO OUTPUT REFERENCE ===","clientRecord":false,"at":"2026-10-15T21:10:03.8332437+01:00"}
+{"sequence":1082,"sourceLine":1781,"context":"","command":"api checkpoint.load file=stage1-end-level-9988.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:10:03.9597978+01:00"}
+{"sequence":1083,"sourceLine":1782,"context":"","command":"api control.run-frames frames=2","clientRecord":false,"at":"2026-10-15T21:10:04.2220026+01:00"}
+{"sequence":1084,"sourceLine":1783,"context":"","command":"api backend.text.get","clientRecord":false,"at":"2026-10-15T21:10:04.8118870+01:00"}
+{"sequence":1085,"sourceLine":1785,"context":"","command":"echo === v0.67.0-RC1.1 regression body complete ===","clientRecord":false,"at":"2026-10-15T21:10:04.8929052+01:00"}
+{"sequence":1086,"sourceLine":1787,"context":"","command":"api sprite.override.clear","clientRecord":false,"at":"2026-10-15T21:10:04.9916150+01:00"}
+{"sequence":1087,"sourceLine":1788,"context":"","command":"api sprite.visual.clear","clientRecord":false,"at":"2026-10-15T21:10:05.1198193+01:00"}
+{"sequence":1088,"sourceLine":1789,"context":"","command":"api sprite.map-override.clear","clientRecord":false,"at":"2026-10-15T21:10:05.1964313+01:00"}
+{"sequence":1089,"sourceLine":1790,"context":"","command":"api sprite.asset-replace.clear","clientRecord":false,"at":"2026-10-15T21:10:05.3606160+01:00"}
+{"sequence":1090,"sourceLine":1791,"context":"","command":"api patch.clear","clientRecord":false,"at":"2026-10-15T21:10:05.4378554+01:00"}
+{"sequence":1091,"sourceLine":1792,"context":"","command":"api hud.layout.reset","clientRecord":false,"at":"2026-10-15T21:10:05.5874429+01:00"}
+{"sequence":1092,"sourceLine":1793,"context":"","command":"api layer.offsets.reset layer=all","clientRecord":false,"at":"2026-10-15T21:10:05.7424419+01:00"}
+{"sequence":1093,"sourceLine":1794,"context":"","command":"api backend.sprite.set mode=native","clientRecord":false,"at":"2026-10-15T21:10:06.2139115+01:00"}
+{"sequence":1094,"sourceLine":1795,"context":"","command":"api backend.text.set mode=shadow","clientRecord":false,"at":"2026-10-15T21:10:06.3900807+01:00"}
+{"sequence":1095,"sourceLine":1796,"context":"","command":"api checkpoint.load file=stage1-gameplay-2064.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:10:06.5072983+01:00"}
+{"sequence":1096,"sourceLine":1797,"context":"","command":"api status","clientRecord":false,"at":"2026-10-15T21:10:06.5975047+01:00"}
+{"sequence":1097,"sourceLine":1800,"context":"","command":"echo === v0.67.0-RC1.1 native sprite forensic coverage corrective complete ===","clientRecord":false,"at":"2026-10-15T21:10:06.7099947+01:00"}
+{"sequence":1098,"sourceLine":1815,"context":"","command":"echo === v0.67.0-RC4.2.1 CHQPACK content boundary ===","clientRecord":false,"at":"2026-10-15T21:10:06.7541415+01:00"}
+{"sequence":1099,"sourceLine":1816,"context":"","command":"api release.assert-version","clientRecord":false,"at":"2026-10-15T21:10:06.8250869+01:00"}
+{"sequence":1100,"sourceLine":1819,"context":"","command":"api sprite.override.clear","clientRecord":false,"at":"2026-10-15T21:10:06.8983449+01:00"}
+{"sequence":1101,"sourceLine":1820,"context":"","command":"api sprite.visual.clear","clientRecord":false,"at":"2026-10-15T21:10:06.9784856+01:00"}
+{"sequence":1102,"sourceLine":1821,"context":"","command":"api sprite.map-override.clear","clientRecord":false,"at":"2026-10-15T21:10:07.0547798+01:00"}
+{"sequence":1103,"sourceLine":1822,"context":"","command":"api sprite.asset-replace.clear","clientRecord":false,"at":"2026-10-15T21:10:07.1338530+01:00"}
+{"sequence":1104,"sourceLine":1823,"context":"","command":"api patch.clear","clientRecord":false,"at":"2026-10-15T21:10:07.2381270+01:00"}
+{"sequence":1105,"sourceLine":1824,"context":"","command":"api hud.layout.reset","clientRecord":false,"at":"2026-10-15T21:10:07.9149091+01:00"}
+{"sequence":1106,"sourceLine":1825,"context":"","command":"api layer.offsets.reset layer=all","clientRecord":false,"at":"2026-10-15T21:10:07.9947481+01:00"}
+{"sequence":1107,"sourceLine":1827,"context":"","command":"echo === PROMOTED NATIVE DISPLAY PATHS ===","clientRecord":false,"at":"2026-10-15T21:10:08.0484143+01:00"}
+{"sequence":1108,"sourceLine":1828,"context":"","command":"api backend.sprite.set mode=native","clientRecord":false,"at":"2026-10-15T21:10:08.1579405+01:00"}
+{"sequence":1109,"sourceLine":1829,"context":"","command":"api backend.text.set mode=native","clientRecord":false,"at":"2026-10-15T21:10:08.3734770+01:00"}
+{"sequence":1110,"sourceLine":1830,"context":"","command":"api backend.sprite.get","clientRecord":false,"at":"2026-10-15T21:10:08.4807979+01:00"}
+{"sequence":1111,"sourceLine":1831,"context":"","command":"api backend.text.get","clientRecord":false,"at":"2026-10-15T21:10:08.5858308+01:00"}
+{"sequence":1112,"sourceLine":1833,"context":"","command":"echo === TC0100SCN BG SHADOW ===","clientRecord":false,"at":"2026-10-15T21:10:08.6424218+01:00"}
+{"sequence":1113,"sourceLine":1834,"context":"","command":"api backend.bg.reset-verification","clientRecord":false,"at":"2026-10-15T21:10:08.7433494+01:00"}
+{"sequence":1114,"sourceLine":1835,"context":"","command":"api backend.bg.set mode=shadow","clientRecord":false,"at":"2026-10-15T21:10:09.1730598+01:00"}
+{"sequence":1115,"sourceLine":1838,"context":"","command":"api checkpoint.load file=stage1-gameplay-2064.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:10:09.3722931+01:00"}
+{"sequence":1116,"sourceLine":1839,"context":"","command":"api control.run-frames frames=8","clientRecord":false,"at":"2026-10-15T21:10:10.0402226+01:00"}
+{"sequence":1117,"sourceLine":1840,"context":"","command":"api backend.bg.get","clientRecord":false,"at":"2026-10-15T21:10:10.1554440+01:00"}
+{"sequence":1118,"sourceLine":1843,"context":"","command":"api checkpoint.load file=stage1-driving-2352.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:10:10.3055659+01:00"}
+{"sequence":1119,"sourceLine":1844,"context":"","command":"api control.run-frames frames=8","clientRecord":false,"at":"2026-10-15T21:10:11.5082483+01:00"}
+{"sequence":1120,"sourceLine":1845,"context":"","command":"api backend.bg.get","clientRecord":false,"at":"2026-10-15T21:10:11.6970783+01:00"}
+{"sequence":1121,"sourceLine":1848,"context":"","command":"api checkpoint.load file=stage1-target-first-damage-6334.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:10:12.2410764+01:00"}
+{"sequence":1122,"sourceLine":1849,"context":"","command":"api control.run-frames frames=8","clientRecord":false,"at":"2026-10-15T21:10:13.1025157+01:00"}
+{"sequence":1123,"sourceLine":1850,"context":"","command":"api backend.bg.get","clientRecord":false,"at":"2026-10-15T21:10:13.1990748+01:00"}
+{"sequence":1124,"sourceLine":1853,"context":"","command":"api checkpoint.load file=stage2-gameplay-7500.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:10:13.4311584+01:00"}
+{"sequence":1125,"sourceLine":1854,"context":"","command":"api control.run-frames frames=8","clientRecord":false,"at":"2026-10-15T21:10:14.3982148+01:00"}
+{"sequence":1126,"sourceLine":1855,"context":"","command":"api backend.bg.get","clientRecord":false,"at":"2026-10-15T21:10:14.6233242+01:00"}
+{"sequence":1127,"sourceLine":1857,"context":"","command":"api checkpoint.load file=stage2-enemy-10514.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:10:14.7959905+01:00"}
+{"sequence":1128,"sourceLine":1858,"context":"","command":"api control.run-frames frames=8","clientRecord":false,"at":"2026-10-15T21:10:15.9264268+01:00"}
+{"sequence":1129,"sourceLine":1859,"context":"","command":"api backend.bg.get","clientRecord":false,"at":"2026-10-15T21:10:16.1223898+01:00"}
+{"sequence":1130,"sourceLine":1861,"context":"","command":"echo === STRUCTURED FRAME WITH NATIVE SPRITES/TEXT + BG SHADOW ===","clientRecord":false,"at":"2026-10-15T21:10:16.1859772+01:00"}
+{"sequence":1131,"sourceLine":1862,"context":"","command":"api frame.snapshot name=rc2-native-display-bg-shadow-stage2","clientRecord":false,"at":"2026-10-15T21:10:17.9724918+01:00"}
+{"sequence":1132,"sourceLine":1863,"context":"","command":"api frame.snapshot.assert-exact name=rc2-native-display-bg-shadow-stage2","clientRecord":false,"at":"2026-10-15T21:10:19.0051788+01:00"}
+{"sequence":1133,"sourceLine":1865,"context":"","command":"echo === v0.67.0-RC4.2.1 regression body complete ===","clientRecord":false,"at":"2026-10-15T21:10:19.1427289+01:00"}
+{"sequence":1134,"sourceLine":1867,"context":"","command":"api sprite.override.clear","clientRecord":false,"at":"2026-10-15T21:10:19.2215333+01:00"}
+{"sequence":1135,"sourceLine":1868,"context":"","command":"api sprite.visual.clear","clientRecord":false,"at":"2026-10-15T21:10:19.8366536+01:00"}
+{"sequence":1136,"sourceLine":1869,"context":"","command":"api sprite.map-override.clear","clientRecord":false,"at":"2026-10-15T21:10:19.9320629+01:00"}
+{"sequence":1137,"sourceLine":1870,"context":"","command":"api sprite.asset-replace.clear","clientRecord":false,"at":"2026-10-15T21:10:20.0224564+01:00"}
+{"sequence":1138,"sourceLine":1871,"context":"","command":"api patch.clear","clientRecord":false,"at":"2026-10-15T21:10:20.1243938+01:00"}
+{"sequence":1139,"sourceLine":1872,"context":"","command":"api hud.layout.reset","clientRecord":false,"at":"2026-10-15T21:10:20.2653185+01:00"}
+{"sequence":1140,"sourceLine":1873,"context":"","command":"api layer.offsets.reset layer=all","clientRecord":false,"at":"2026-10-15T21:10:20.4543393+01:00"}
+{"sequence":1141,"sourceLine":1874,"context":"","command":"api backend.sprite.set mode=native","clientRecord":false,"at":"2026-10-15T21:10:20.5458936+01:00"}
+{"sequence":1142,"sourceLine":1875,"context":"","command":"api backend.text.set mode=native","clientRecord":false,"at":"2026-10-15T21:10:20.6361265+01:00"}
+{"sequence":1143,"sourceLine":1876,"context":"","command":"api backend.bg.set mode=shadow","clientRecord":false,"at":"2026-10-15T21:10:20.7448751+01:00"}
+{"sequence":1144,"sourceLine":1877,"context":"","command":"api checkpoint.load file=stage1-gameplay-2064.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:10:21.2760069+01:00"}
+{"sequence":1145,"sourceLine":1878,"context":"","command":"api status","clientRecord":false,"at":"2026-10-15T21:10:21.4728517+01:00"}
+{"sequence":1146,"sourceLine":1881,"context":"","command":"echo === v0.67.0-RC4.2.1 CHQPACK content boundary complete ===","clientRecord":false,"at":"2026-10-15T21:10:21.5592224+01:00"}
+{"sequence":1147,"sourceLine":1891,"context":"","command":"echo === RC4.3 Native foundation: BEGIN ===","clientRecord":false,"at":"2026-10-15T21:10:21.6297287+01:00"}
+{"sequence":1148,"sourceLine":1892,"context":"","command":"api release.assert-version","clientRecord":false,"at":"2026-10-15T21:10:21.7431730+01:00"}
+{"sequence":1149,"sourceLine":1893,"context":"","command":"api checkpoint.load file=stage1-driving-2352.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:10:21.8631510+01:00"}
+{"sequence":1150,"sourceLine":1894,"context":"","command":"api status","clientRecord":false,"at":"2026-10-15T21:10:21.9542987+01:00"}
+{"sequence":1151,"sourceLine":1895,"context":"","command":"api checkpoint.load file=stage1-driving-2352.chqstate run=false","clientRecord":false,"at":"2026-10-15T21:10:22.0909574+01:00"}
+{"sequence":1152,"sourceLine":1896,"context":"","command":"echo === RC4.3 Native foundation: COMPLETE ===","clientRecord":false,"at":"2026-10-15T21:10:22.1278410+01:00"}
+{"sequence":1153,"sourceLine":1899,"context":"","command":"echo === ChaseHQ Full Regression: COMPLETE ===","clientRecord":false,"at":"2026-10-15T21:10:22.1619325+01:00"}

@@ -1,7 +1,7 @@
 # name: Stage 1 Course Mapping - 600 frame shakedown
 # category: track
-# regression-version: 0.66.9.0-RC3.0
-# purpose: Fast prove-off of the live course follower, v2 recorder, car trajectory, dynamic-object census, raw surface signatures and map export before any long survey.
+# regression-version: 0.66.9.0-RC3.1
+# purpose: Fast prove-off of the live course follower, v3 recorder, car trajectory, dynamic-object census, stable surface candidates + raw renderer evidence and map export before any long survey.
 
 api release.assert-version
 api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
@@ -39,4 +39,4 @@ finally
   api timer.hold enabled=false
 end
 
-echo === RC3.0 STAGE 1 COURSE MAPPING SHAKEDOWN 600 COMPLETE ===
+echo === RC3.1 STAGE 1 COURSE MAPPING SHAKEDOWN 600 COMPLETE ===

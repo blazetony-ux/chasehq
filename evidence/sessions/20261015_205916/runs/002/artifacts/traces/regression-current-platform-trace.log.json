@@ -1,0 +1,9 @@
+﻿{
+    "schema":  "chq-run-trace-artifact-v1",
+    "kind":  "legacytrace",
+    "source":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\regression-current-platform-trace.log",
+    "artifact":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\traces\\regression-current-platform-trace.log",
+    "size":  362,
+    "sha256":  "EA39DB795A41376966D5FC37578F2769F772825CB31C52B4F29707C7D10FB027",
+    "captured":  "2026-10-15T21:10:22.3769399+01:00"
+}

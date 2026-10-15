@@ -1,0 +1,16 @@
+const fs=require('fs'),path=require('path');
+const root=path.resolve(__dirname,'..'),read=p=>fs.readFileSync(path.join(root,p),'utf8'),ok=(v,m)=>{if(!v)throw Error(m)};
+const current='0.66.9.3-RC3',cfg=JSON.parse(read('chqdev.json')),version=read('src/version.h'),web=read('Start-ChaseHQWeb.ps1'),apiSchema=read('research/schema/api-actions.json'),rc2=read('research/scripts/regression/regression-v06693-rc2.chqscript'),full=read('research/scripts/regression/full-regression.chqscript'),catalog=read('research/scripts/SCRIPT_CATALOG.md'),schema=JSON.parse(read('research/schema/script-language.json')),changelog=read('CHANGELOG.md');
+ok(cfg.release===current&&cfg.focusedRegression.endsWith('regression-v06693-rc3.chqscript'),'current RC3 identity/focused regression missing');
+ok(version.includes(current)&&version.includes('chqdev v0.5.5'),'current RC3/chqdev identity missing');
+ok(!web.includes('Measure-Object -Property bytes -Sum')&&web.includes("$totalBytes += [int64](Prop $f 'bytes' 0)"),'RC2 Windows evidence-index repair regressed');
+ok(web.includes("$failed['status']='FINALIZATION_FAILED'")&&web.includes("$failed['finalizationError']=$_.Exception.Message"),'RC2 fail-closed finalization regressed');
+ok(web.includes('async function finalizeServerRun(status,commandCount)')&&web.includes('commandCount:Number.isFinite(commandCount)?commandCount:-1'),'RC2 browser final count parity regressed');
+ok(web.includes('function compileRange(a,b,seed)')&&!web.includes('function compileSlice('),'RC2 browser nested compiler repair regressed');
+ok(web.includes("$row['result']=$output|ConvertFrom-Json -ErrorAction Stop")&&web.includes("$row['raw']=[string]$output"),'RC2 structured corpus contract regressed');
+ok(!schema.notes.some(x=>/planned|not part of current|until explicit runtime-query syntax is implemented/i.test(x)),'script schema again describes shipped tuple/runtime-query support as future work');
+ok(rc2.includes('wait 25')&&rc2.includes('corpus.run')&&rc2.includes('sprite.shadow.compare'),'historical RC2 tooling probe missing');
+ok(!full.includes('include "regression/regression-v06693-rc2.chqscript"')&&full.includes('include "regression/regression-v06693-rc3.chqscript"'),'RC2 must be historical and RC3 current in Full Regression');
+ok(catalog.includes('regression/regression-v06693-rc2.chqscript')&&catalog.includes('0.66.9.3-RC2 | historical'),'RC2 historical catalog mapping missing');
+ok(changelog.includes('v0.66.9.3-RC2'),'RC2 changelog history missing');
+console.log('Workbench v0.66.9.3-RC2 carry-forward tests: PASS');

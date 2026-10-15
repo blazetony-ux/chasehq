@@ -1,47 +1,32 @@
-# Discovery record — sprite and video path
+# Discovery record - sprite and video path
 
-**Status:** core sprite format/path largely CONFIRMED; remaining compositor/palette accuracy work OPEN
+**Status:** sprite record/decode/placement/ownership SHADOW VERIFIED for the canonical placed-source corpus; compositor/tile/road work remains open.
 
-## Confirmed sprite RAM format
-Raw sprite RAM: `$D00000-$D007FF`, 8-byte entries.
+## Confirmed raw sprite format
 
-- W0: bits 15..9 Zoom Y; bits 8..0 Y.
-- W1: bit 15 priority; bits 14..7 palette bank; bits 6..0 Zoom X.
-- W2: bit 15 Flip Y; bit 14 Flip X; bits 8..0 X.
-- W3: bits 10..0 spritemap/object number.
-- Sprite list consumption is back-to-front.
-- B52-38 spritemap entries are little-endian 16-bit words; effective graphics tile index `raw_code & 0x3fff`.
+Raw sprite RAM is `$D00000-$D007FF`, 256 entries x 8 bytes, words big-endian.
 
-## Proven player-car path examples
-- `$1027E8-$1027EF`: slot 44 software staging entry.
-- `$1027F0-$1027F7`: slot 45 primary-car staging entry.
-- `$D00160-$D00167`: slot 44 hardware sprite RAM destination.
+- W0: Y bits 8..0; Zoom Y = bits15..9 + 1. Native Y uses `(W0&0x1ff)+7` wrap; logical visible placement includes the proven bottom-anchor/visible-origin transform.
+- W1: bit15 priority; bits14..7 palette; Zoom X = bits6..0 + 1.
+- W2: bit15 Flip Y; bit14 Flip X; bits8..0 X with hardware wrap.
+- W3: bits10..0 spritemap/object number; map0 inactive.
+- Traversal is descending slot order; first non-transparent source pixel owns equal-priority overlap.
+- Spritemap entries use the established object-size/bank rules and independent 4bpp physical-plane significance 0,1,2,3 -> pen bits 3,2,1,0.
 
-## Rejected interpretation
-Global zero-colour transparency is REJECTED: investigated slot-44 palette entry 70/pen 4 is deliberately written `$0000`.
+## Independent shadow verification
 
-## RC2.6 confirmed sprite-decoder finding
-The remaining broad sprite-colour error was isolated causally on RC2.5 at Stage 1 frame 2352 / Map 405 / palette bank 175. The physical source-plane addresses were already correct, but their 4bpp significance was reversed. Physical planes 0,1,2,3 must contribute pen bits 3,2,1,0. A palette-only simulation of that four-bit reversal produced coherent shaded Map-405 cloud artwork without changing geometry, priority, ownership, or ROM data; the structured snapshot remained exact. RC2.6 implements the significance in the shared live/export source decoder. See `../../evidence/sprite-bitplane-significance/README.md`.
+The v0.66.9.3 promotion carries an independent placed sprite-source renderer that parses raw sprite RAM, raw spritemap bytes, raw OBJ graphics, palette, zoom, flips, clipping and ownership without calling the authoritative placement/decode helpers. The Windows RC5 focused promotion regression compared the independent and authoritative placed-source layers at canonical frames 2352, 2064, 5587, 5588, 6333, 6334, 9548 and 9988. Every frame compared 76,800 pixels and reported **0 pixel mismatches / 0 owner mismatches**.
 
-This result does **not** authorize palette tuning as a renderer fix: the palette intervention was a causal simulation of a source-decoder hypothesis. RC2.6 removes the need for that intervention by correcting the decoded pen itself.
+Therefore both `sprite-4bpp-decoder` and `sprite-placement-ownership` are **SHADOW VERIFIED** at this corpus/scope. They are not yet REPLACEABLE: original/emulated remains authoritative and no default replacement backend exists.
 
-## Current unresolved visual work
-Fresh Windows/SDL prove-off is required across representative sprite scenes after the decoder change. Missing turbo indicators and any residual HUD issues remain separate compositor/text-layer investigations. The `scene-no-sprites.png` forensic base also has a separately tracked export bug discovered in the RC2.5 causal bundle.
+## Confirmed semantic sprite families
 
-## Reference
-See `../reference/SPRITE_HARDWARE.md`, `SPRITE_FORENSICS.md`, `PRIORITY_PROM.md` and `VIDEO_PIPELINE.md` for the detailed evidence chain.
+Player body maps: `472,475,476,508,514,516,522`, palettes `64/65`. Player shadow maps: `572,575,576,590,592,594,596`, palette `70`. Historical map181/pal75/77 fragments are explicitly rejected as player identity.
 
+Pursuit police-beacon presentation/lifecycle is behaviour-understood at current scope: maps `517/518/519/520/601/602` participate in deployment/roof-side animation, steady deployed is map `520`, CPU-A `0x101854` is the visible/deployment phase, and steady palette state is driven through `0x101858`. Target presentation is one family maps `13/18/19`, palettes `80/81`, causally tied to object record `0x10A080-0x10A0BF`; changing target lateral `0x10A084` first displaces its sprite on the third emulated frame.
 
-## 2026-09-25 live Palette Lab intervention
+The player brake lamp is a palette transformation, not separate geometry: banks64/65 pen13 `000E -> 18DE`, affecting the existing body source.
 
-**Starting state:** canonical Stage-1 gameplay checkpoint (`stage1-gameplay-2064.chqstate`).
+## Remaining visual work
 
-**Method:** inspect TC0110PCR bank 0 in the Web Workbench, select a non-zero palette entry, replace its raw value with `$0000`, and observe the SDL output without restarting.
-
-**Observation:** the top HUD/text colours visibly changed after the live entry override. This confirms the Workbench can causally alter a palette entry that contributes to the rendered frame.
-
-**Tool defect found:** in v0.62.x, `Restore entry` only released the freeze and did not immediately write the pre-override raw value back, so the HUD remained altered until a later game write/restart. v0.63.0 stores the original raw value at first override and restores it explicitly.
-
-**What this does not prove:** it does not yet identify the root cause of the broader colour-accuracy problem, and changing the browser's viewed bank does not force a different hardware palette bank.
-
-**Reusable method:** controlled one-entry palette intervention is a valid way to distinguish whether a visible element is using a suspected palette entry; always restore the exact original value and repeat from a canonical checkpoint.
+Do not continue generic sprite-format probing. Remaining high-value graphics work is targeted: target pre-copy producer provenance, deeper TC0100SCN text/HUD writers and flipped-origin edge cases, compositor priority/PROM completeness, then independent tile/compositor/road shadow backends.

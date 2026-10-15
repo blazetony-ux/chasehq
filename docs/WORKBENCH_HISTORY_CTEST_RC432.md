@@ -1,0 +1,5 @@
+# RC4.3.2 corrective evidence and release gate
+
+## RC4.3.2 — authoritative history CTest signature corrective (unqualified)
+
+The exact RC4.3.1 Windows `chqdev.bat qualify --fresh` log passed configuration and debug compilation, then failed CTest 10/13, `authoritative_history_tests`, with `Authoritative history function absent`. The production `Get-AuthoritativeScriptRuns` function is present, but its declaration changed in RC4.3.1 from `()` to `([string]$onlySession='')`. The PowerShell test's regex still matched only `()` and falsely reported absence. Correct the extractor to allow parameters and whitespace, **without dropping** its 320-run ordering/pagination/version tests. Extend Windows CTest coverage to exercise the new current-session filtering path. Add an independent Go regression guard against repeating this signature drift. Do not change production execution, the existing run-history performance fix, or Full Regression assertions. 0 tolerated CTest failures; this candidate is NOT promoted until the final exact ZIP passes Windows qualification. The historical Full Regression expanded-command budget failure remains unresolved.

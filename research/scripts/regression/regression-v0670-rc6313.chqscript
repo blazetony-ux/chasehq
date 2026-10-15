@@ -1,0 +1,22 @@
+# name: RC6.3.13 CPU-B Ghidra Live Two-Instruction Pair and Bounded Original-ROM Rollback Contract
+# category: regression
+# purpose: Research Workbench status/version and REA/Ghidra schema smoke; the genuine CPU-B ROM/native/rollback parity is proven exclusively by the opt-in `chqdev native reconstruct --fresh --live-health --cpu-b-live` Windows acceptance. DO NOT classify this version check as native execution proof.
+# checkpoint: stage1-gameplay-2064.chqstate
+# version: 0.67.0.0-RC6.3.13
+# regression-version: 0.67.0.0-RC6.3.13
+# regression-scope: release
+# safety: no mutations or native-substitution toggles
+# cleanup: no session changes
+ echo === RC6.3.13 CPU-B TWO-INSTRUCTION REGRESSION BEGIN ===
+try
+  api release.assert-version
+  api schema action=ghidra.status
+  api schema action=ghidra.results
+  api schema action=rea.crosswalk
+  api schema action=rea.function.inspect
+  api ghidra.status
+  api rea.reports
+  echo === RC6.3.13 CPU-B TWO-INSTRUCTION REGRESSION PASS ===
+finally
+  echo === RC6.3.13 RELEASE SMOKE PRESERVED LIVE SESSION ===
+end

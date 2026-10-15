@@ -1,0 +1,88 @@
+{
+  "Schema": "chq-rc634-candidate-portfolio-v1",
+  "Release": "0.67.0.0-RC6.3.33",
+  "Status": "IN_PROGRESS_NOT_AUTONOMOUS",
+  "candidates": [
+    {
+      "ID": "A:000081FC-00008212",
+      "CPU": "A",
+      "Family": "steering-lookup-tail",
+      "Stage": "STATIC_GENERATED",
+      "Blocker": "No live complete-range equivalence; Ghidra boundary not reviewed",
+      "candidateEntry": "0x000081FC",
+      "liveNativeVerified": false,
+      "promotionAllowed": false
+    },
+    {
+      "ID": "A:0000A10C-0000A12A",
+      "CPU": "A",
+      "Family": "conditional-health-function",
+      "Stage": "VERIFIED_NATIVE_RANGE_FUNCTION_TAIL",
+      "Blocker": "Original ROM caller targets an earlier function; 0xA10C is a verified tail range, not independently verified full function; natural caller/CFG coverage and CPU-B substitution unresolved",
+      "candidateEntry": "0x0000A10C",
+      "liveNativeVerified": true,
+      "promotionAllowed": false
+    },
+    {
+      "ID": "A:00040540-00040560",
+      "CPU": "A",
+      "Family": "sequential-longword-copy",
+      "Stage": "LIVE_VERIFIED_BOUNDED_COPY_BLOCK",
+      "Blocker": "Full enclosing copier function/caller coverage remains unreviewed; CPU-B one-opcode BEQ live verified in RC6.3.11; full CPU-B function and autonomous promotion unreviewed",
+      "candidateEntry": "0x00040540",
+      "liveNativeVerified": true,
+      "promotionAllowed": false
+    },
+    {
+      "ID": "B:0x0004D8",
+      "CPU": "B",
+      "Family": "runtime-executed-PC",
+      "Stage": "LIVE_VERIFIED_BOUNDED_TWO_INSTRUCTIONS",
+      "Blocker": "TST.W + BEQ.B genuine original/native/rollback parity and bounded original-ROM edges proven; enclosing CPU-B function CFG/callers/exits/scheduling NOT certified",
+      "candidateEntry": "0x0004D8",
+      "liveNativeVerified": true,
+      "promotionAllowed": false
+    },
+    {
+      "ID": "B:0x0004DE",
+      "CPU": "B",
+      "Family": "runtime-executed-PC",
+      "Stage": "LIVE_VERIFIED_BOUNDED_BEQ_INSTRUCTION",
+      "Blocker": "17,892-class bounded BEQ replay proved independently; enclosing function CFG, callers, exits, IRQ/scheduling composition NOT certified",
+      "candidateEntry": "0x0004DE",
+      "liveNativeVerified": true,
+      "promotionAllowed": false
+    },
+    {
+      "ID": "B:0x004FD0",
+      "CPU": "B",
+      "Family": "runtime-executed-PC",
+      "Stage": "OBSERVED_ORIGINAL_ROM_OPCODE_AND_EDGES_NOT_NATIVE",
+      "Blocker": "Runtime-observed original-ROM site only; verified 0x4D8 pair/0x4DE BEQ does NOT promote this different candidate or its enclosing function",
+      "candidateEntry": "0x004FD0",
+      "liveNativeVerified": false,
+      "promotionAllowed": false
+    },
+    {
+      "ID": "B:0x004FD2",
+      "CPU": "B",
+      "Family": "runtime-executed-PC",
+      "Stage": "OBSERVED_ORIGINAL_ROM_OPCODE_AND_EDGES_NOT_NATIVE",
+      "Blocker": "Runtime-observed original-ROM site only; verified 0x4D8 pair/0x4DE BEQ does NOT promote this different candidate or its enclosing function",
+      "candidateEntry": "0x004FD2",
+      "liveNativeVerified": false,
+      "promotionAllowed": false
+    },
+    {
+      "ID": "B:0x004FD4",
+      "CPU": "B",
+      "Family": "runtime-executed-PC",
+      "Stage": "OBSERVED_ORIGINAL_ROM_OPCODE_AND_EDGES_NOT_NATIVE",
+      "Blocker": "Runtime-observed original-ROM site only; verified 0x4D8 pair/0x4DE BEQ does NOT promote this different candidate or its enclosing function",
+      "candidateEntry": "0x004FD4",
+      "liveNativeVerified": false,
+      "promotionAllowed": false
+    }
+  ],
+  "generalAutonomousPromotionAllowed": false
+}

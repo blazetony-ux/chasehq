@@ -1,0 +1,26 @@
+[
+  {
+    "filename": "bundle(20261010-144017).zip",
+    "sha256": "ee677e0485617c3b298c111f63adb2fa5551a64c9261f5eaa1a948b665b8c129",
+    "sessionId": "20261010_153856",
+    "runId": "001",
+    "name": "0.67.0.0-RC4.6 focused release regression",
+    "status": "PASS",
+    "commands": 13,
+    "durationMs": 6064,
+    "bundleIntegrityVerified": true,
+    "bundleCheckedFiles": 10
+  },
+  {
+    "filename": "bundle(20261010-144623).zip",
+    "sha256": "4de93d115fcf3246fffbcd4e32cd233fd09a52e224e26c948773fe3b2ad82b9d",
+    "sessionId": "20261010_153856",
+    "runId": "002",
+    "name": "Full Regression Suite",
+    "status": "PASS",
+    "commands": 1153,
+    "durationMs": 358680,
+    "bundleIntegrityVerified": true,
+    "bundleCheckedFiles": 3180
+  }
+]

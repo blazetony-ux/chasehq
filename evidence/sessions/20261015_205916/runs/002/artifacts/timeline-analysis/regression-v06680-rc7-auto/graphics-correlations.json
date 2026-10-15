@@ -1,0 +1,258 @@
+﻿[
+    {
+        "pair":  "before-vs-active",
+        "hud":  "normal",
+        "result":  {
+                       "a":  "regression-v06680-rc7-auto-before-f2064",
+                       "b":  "regression-v06680-rc7-auto-active-f2065",
+                       "region":  "HUD_TURBO",
+                       "hud":  "normal",
+                       "pixels":  11200,
+                       "changedPixels":  0,
+                       "changedPixelsRgb":  0,
+                       "changedPixelsRgba":  0,
+                       "alphaChangedPixels":  0,
+                       "occupancyChangedPixels":  0,
+                       "changedPercent":  0,
+                       "changedPercentRgba":  0,
+                       "meanAbsRgb":  0,
+                       "identical":  true,
+                       "rgbaIdentical":  true,
+                       "boundingBox":  null,
+                       "rgbaBoundingBox":  null,
+                       "diffPath":  null
+                   }
+    },
+    {
+        "pair":  "before-vs-active",
+        "hud":  "only",
+        "result":  {
+                       "a":  "regression-v06680-rc7-auto-before-f2064",
+                       "b":  "regression-v06680-rc7-auto-active-f2065",
+                       "region":  "HUD_TURBO",
+                       "hud":  "only",
+                       "pixels":  11200,
+                       "changedPixels":  0,
+                       "changedPixelsRgb":  0,
+                       "changedPixelsRgba":  0,
+                       "alphaChangedPixels":  0,
+                       "occupancyChangedPixels":  0,
+                       "changedPercent":  0,
+                       "changedPercentRgba":  0,
+                       "meanAbsRgb":  0,
+                       "identical":  true,
+                       "rgbaIdentical":  true,
+                       "boundingBox":  null,
+                       "rgbaBoundingBox":  null,
+                       "diffPath":  null
+                   }
+    },
+    {
+        "pair":  "before-vs-active",
+        "hud":  "hidden",
+        "result":  {
+                       "a":  "regression-v06680-rc7-auto-before-f2064",
+                       "b":  "regression-v06680-rc7-auto-active-f2065",
+                       "region":  "HUD_TURBO",
+                       "hud":  "hidden",
+                       "pixels":  11200,
+                       "changedPixels":  0,
+                       "changedPixelsRgb":  0,
+                       "changedPixelsRgba":  0,
+                       "alphaChangedPixels":  0,
+                       "occupancyChangedPixels":  0,
+                       "changedPercent":  0,
+                       "changedPercentRgba":  0,
+                       "meanAbsRgb":  0,
+                       "identical":  true,
+                       "rgbaIdentical":  true,
+                       "boundingBox":  null,
+                       "rgbaBoundingBox":  null,
+                       "diffPath":  null
+                   }
+    },
+    {
+        "pair":  "active-vs-expiry",
+        "hud":  "normal",
+        "result":  {
+                       "a":  "regression-v06680-rc7-auto-active-f2065",
+                       "b":  "regression-v06680-rc7-auto-expiry-f2067",
+                       "region":  "HUD_TURBO",
+                       "hud":  "normal",
+                       "pixels":  11200,
+                       "changedPixels":  24,
+                       "changedPixelsRgb":  24,
+                       "changedPixelsRgba":  24,
+                       "alphaChangedPixels":  0,
+                       "occupancyChangedPixels":  0,
+                       "changedPercent":  0.2143,
+                       "changedPercentRgba":  0.2143,
+                       "meanAbsRgb":  0.3175,
+                       "identical":  false,
+                       "rgbaIdentical":  false,
+                       "boundingBox":  {
+                                           "x":  44,
+                                           "y":  228,
+                                           "w":  8,
+                                           "h":  8
+                                       },
+                       "rgbaBoundingBox":  {
+                                               "x":  44,
+                                               "y":  228,
+                                               "w":  8,
+                                               "h":  8
+                                           },
+                       "diffPath":  null
+                   }
+    },
+    {
+        "pair":  "active-vs-expiry",
+        "hud":  "only",
+        "result":  {
+                       "a":  "regression-v06680-rc7-auto-active-f2065",
+                       "b":  "regression-v06680-rc7-auto-expiry-f2067",
+                       "region":  "HUD_TURBO",
+                       "hud":  "only",
+                       "pixels":  11200,
+                       "changedPixels":  12,
+                       "changedPixelsRgb":  12,
+                       "changedPixelsRgba":  24,
+                       "alphaChangedPixels":  20,
+                       "occupancyChangedPixels":  20,
+                       "changedPercent":  0.1071,
+                       "changedPercentRgba":  0.2143,
+                       "meanAbsRgb":  0.2646,
+                       "identical":  false,
+                       "rgbaIdentical":  false,
+                       "boundingBox":  {
+                                           "x":  46,
+                                           "y":  229,
+                                           "w":  6,
+                                           "h":  7
+                                       },
+                       "rgbaBoundingBox":  {
+                                               "x":  44,
+                                               "y":  228,
+                                               "w":  8,
+                                               "h":  8
+                                           },
+                       "diffPath":  null
+                   }
+    },
+    {
+        "pair":  "active-vs-expiry",
+        "hud":  "hidden",
+        "result":  {
+                       "a":  "regression-v06680-rc7-auto-active-f2065",
+                       "b":  "regression-v06680-rc7-auto-expiry-f2067",
+                       "region":  "HUD_TURBO",
+                       "hud":  "hidden",
+                       "pixels":  11200,
+                       "changedPixels":  0,
+                       "changedPixelsRgb":  0,
+                       "changedPixelsRgba":  0,
+                       "alphaChangedPixels":  0,
+                       "occupancyChangedPixels":  0,
+                       "changedPercent":  0,
+                       "changedPercentRgba":  0,
+                       "meanAbsRgb":  0,
+                       "identical":  true,
+                       "rgbaIdentical":  true,
+                       "boundingBox":  null,
+                       "rgbaBoundingBox":  null,
+                       "diffPath":  null
+                   }
+    },
+    {
+        "pair":  "expiry-vs-after",
+        "hud":  "normal",
+        "result":  {
+                       "a":  "regression-v06680-rc7-auto-expiry-f2067",
+                       "b":  "regression-v06680-rc7-auto-after-f2068",
+                       "region":  "HUD_TURBO",
+                       "hud":  "normal",
+                       "pixels":  11200,
+                       "changedPixels":  24,
+                       "changedPixelsRgb":  24,
+                       "changedPixelsRgba":  24,
+                       "alphaChangedPixels":  0,
+                       "occupancyChangedPixels":  0,
+                       "changedPercent":  0.2143,
+                       "changedPercentRgba":  0.2143,
+                       "meanAbsRgb":  0.3175,
+                       "identical":  false,
+                       "rgbaIdentical":  false,
+                       "boundingBox":  {
+                                           "x":  44,
+                                           "y":  228,
+                                           "w":  8,
+                                           "h":  8
+                                       },
+                       "rgbaBoundingBox":  {
+                                               "x":  44,
+                                               "y":  228,
+                                               "w":  8,
+                                               "h":  8
+                                           },
+                       "diffPath":  null
+                   }
+    },
+    {
+        "pair":  "expiry-vs-after",
+        "hud":  "only",
+        "result":  {
+                       "a":  "regression-v06680-rc7-auto-expiry-f2067",
+                       "b":  "regression-v06680-rc7-auto-after-f2068",
+                       "region":  "HUD_TURBO",
+                       "hud":  "only",
+                       "pixels":  11200,
+                       "changedPixels":  12,
+                       "changedPixelsRgb":  12,
+                       "changedPixelsRgba":  24,
+                       "alphaChangedPixels":  20,
+                       "occupancyChangedPixels":  20,
+                       "changedPercent":  0.1071,
+                       "changedPercentRgba":  0.2143,
+                       "meanAbsRgb":  0.2646,
+                       "identical":  false,
+                       "rgbaIdentical":  false,
+                       "boundingBox":  {
+                                           "x":  46,
+                                           "y":  229,
+                                           "w":  6,
+                                           "h":  7
+                                       },
+                       "rgbaBoundingBox":  {
+                                               "x":  44,
+                                               "y":  228,
+                                               "w":  8,
+                                               "h":  8
+                                           },
+                       "diffPath":  null
+                   }
+    },
+    {
+        "pair":  "expiry-vs-after",
+        "hud":  "hidden",
+        "result":  {
+                       "a":  "regression-v06680-rc7-auto-expiry-f2067",
+                       "b":  "regression-v06680-rc7-auto-after-f2068",
+                       "region":  "HUD_TURBO",
+                       "hud":  "hidden",
+                       "pixels":  11200,
+                       "changedPixels":  0,
+                       "changedPixelsRgb":  0,
+                       "changedPixelsRgba":  0,
+                       "alphaChangedPixels":  0,
+                       "occupancyChangedPixels":  0,
+                       "changedPercent":  0,
+                       "changedPercentRgba":  0,
+                       "meanAbsRgb":  0,
+                       "identical":  true,
+                       "rgbaIdentical":  true,
+                       "boundingBox":  null,
+                       "rgbaBoundingBox":  null,
+                       "diffPath":  null
+                   }
+    }
+]

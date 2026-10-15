@@ -1,0 +1,28 @@
+const fs=require('fs'),path=require('path');
+const root=path.resolve(__dirname,'..'),read=p=>fs.readFileSync(path.join(root,p),'utf8'),ok=(v,m)=>{if(!v)throw Error(m)};
+const cfg=JSON.parse(read('chqdev.json')),api=JSON.parse(read('research/schema/api-actions.json'));
+const web=read('Start-ChaseHQWeb.ps1'),video=read('src/video.cpp'),runtime=read('src/runtime.cpp'),shadow=read('src/sprite_layer_shadow.h'),full=read('research/scripts/regression/full-regression.chqscript'),reg=read('research/scripts/regression/regression-v06695-rc11.chqscript'),catalog=read('research/scripts/SCRIPT_CATALOG.md');
+ok(cfg.release==='0.66.9.5-RC1.1','RC1.1 release identity missing');
+ok(cfg.baseline==='0.66.9.5-RC1','RC1.1 baseline must be exact Windows-qualified v0.66.9.5-RC1');
+ok(cfg.focusedRegression.endsWith('regression-v06695-rc11.chqscript'),'RC1 focused regression not wired');
+ok(api.build==='0.66.9.5-RC1.1','API schema build stale');
+ok(api.actions['frame.snapshot.parity']&&api.actions['sprite.asset-resolve']&&api.actions['events.clear'],'RC1 diagnostics API actions missing');
+ok(web.includes("Set-GameLabFreeze 'speed' '10041C' 32 $raw")&&web.includes('$raw=[uint32]($v -shl 16)'),'Game Lab speed freeze is not 32-bit fixed point');
+ok(shadow.includes('case 509:'),'map509 missing from semantic player body matcher');
+ok(video.includes('draw_runtime_sprites_selected')&&video.includes('sourceMap')&&video.includes('replacementApplied'),'structured snapshot effective sprite path/metadata missing');
+ok(runtime.includes('0x108082')&&runtime.includes('0xffff'),'coupled beacon request intervention missing');
+ok(runtime.includes('target_contact')&&runtime.includes('0x10a084')&&runtime.includes('0x00a13c'),'target_contact collision instrumentation missing');
+ok(web.includes("'1002AE'")&&web.includes("'10A084'"),'timeline semantic ranking additions missing');
+
+const allowMatch=web.match(/\$allowedFirst=@\(([^\n]+)\)/);
+ok(allowMatch,'web bridge allow-list definition missing');
+const allowedFirst=new Set([...allowMatch[1].matchAll(/'([^']+)'/g)].map(m=>m[1].toLowerCase()));
+const directCmds=[...web.matchAll(/\bcmd\(\s*['"]([^'"]+)/g)].map(m=>m[1].trim()).filter(Boolean);
+const blockedVerbs=[...new Set(directCmds.map(c=>c.split(/\s+/)[0].toLowerCase()).filter(v=>!allowedFirst.has(v)))];
+ok(blockedVerbs.length===0,'Workbench direct command verbs missing from safe web bridge allow-list: '+blockedVerbs.join(','));
+ok(allowedFirst.has('backend'),'Native Reconstruction Lab backend controls are not admitted by the safe web bridge');
+ok(web.includes('frameSnapshotParity')&&web.includes('nativeAssetResolve'),'Workbench parity/resolver controls missing');
+ok(reg.includes('frame.snapshot.parity name=rc1-player-asset-parity require=true')&&reg.includes('width=32 value = 025A0000'),'focused parity/speed assertions missing');
+ok(full.includes('regression-v06695-rc11.chqscript'),'Full Regression RC1 tail missing');
+ok(catalog.includes('regression/regression-v06695-rc11.chqscript'),'script catalog RC1 row missing');
+console.log('Workbench v0.66.9.5-RC1.1 corrective contracts: PASS');

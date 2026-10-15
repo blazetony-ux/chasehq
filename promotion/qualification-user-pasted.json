@@ -1,0 +1,21 @@
+{
+  "schema": "chqdev-qualification-v2",
+  "release": "0.67.0.0-RC4.6",
+  "toolVersion": "0.5.13",
+  "updatedUtc": "2026-10-10T14:46:08.1039321Z",
+  "archive": "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC4.6\\dist\\ChaseHQ-Native-v0.67.0.0-RC4.6.zip",
+  "archiveSha256": "9e76a107e19f3e28a54a8a8b3bdaed630511e02f1da3e3e7ae274c07d863580f",
+  "stages": {
+    "build": "PASS",
+    "clean": "PASS",
+    "doctor": "PASS",
+    "focused": "PASS",
+    "full": "PASS",
+    "package": "PASS",
+    "preflight": "PASS",
+    "promotable": "PASS",
+    "run-history": "PASS",
+    "runtime": "PASS",
+    "test": "PASS"
+  }
+}

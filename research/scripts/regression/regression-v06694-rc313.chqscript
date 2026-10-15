@@ -1,0 +1,76 @@
+# name: v0.66.9.4-RC3.1.3 Semantic Vehicle Persistence + Dynamic HUD Corrective Regression
+# category: regression
+# regression-version: 0.66.9.4-RC3.1.3
+# regression-scope: release
+# purpose: Carry forward the proven RC3.1.2 semantic vehicle/SPEED gates under RC3.1.3 while qualification orchestration changes remain behavior-neutral: semantic player replacement must render visible target pixels and persist through left/right steering map changes, SPEED must stay visually empty while accelerator-driven live values change, Native shadow parity must remain exact, and cleanup must restore authentic state.
+# checkpoint: stage1-gameplay-2064.chqstate
+
+echo === ChaseHQ v0.66.9.4-RC3.1.3 Corrective Regression: BEGIN ===
+api release.assert-version
+api schema action=sprite.asset-replace
+
+api patch.clear
+api input.ioc.clear
+api input.steering.set value=0000
+api sprite.visual.clear
+api sprite.override.clear
+api sprite.map-override.clear
+api sprite.asset-replace.clear
+api hud.layout.reset
+api backend.sprite.set mode=original
+
+# Cross-format vehicle replacement must produce actual visible replacement pixels.
+api checkpoint.load file=stage2-gameplay-7500.chqstate run=false
+api control.run-frames frames=4
+api frame.capture name=v06694-rc313-player-authentic
+api checkpoint.load file=stage2-gameplay-7500.chqstate run=false
+api sprite.asset-replace object=player_car.body target=190 format=obj-b64 palette=73 flipx=1 dx=0 dy=0
+api control.run-frames frames=4
+assert status sprite_backend=native
+assert status sprite_asset_overrides=1
+assert status sprite_asset_visible=1
+api frame.capture name=v06694-rc313-player-yellow-target-straight
+
+# Semantic replacement must survive authentic player body-map changes while steering.
+api input.steering.set value=0060
+api control.run-frames frames=30
+assert status sprite_asset_visible=1
+api frame.capture name=v06694-rc313-player-yellow-target-steer-right
+api input.steering.set value=0FA0
+api control.run-frames frames=60
+assert status sprite_asset_visible=1
+api frame.capture name=v06694-rc313-player-yellow-target-steer-left
+api input.steering.set value=0000
+
+# Independent raw sprite renderer must still match after the experiment is cleared.
+api sprite.asset-replace.clear
+api backend.sprite.set mode=original
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api sprite.layer-shadow.compare failOnMismatch=true output=v06694-rc313-stage1-shadow.json
+
+# SPEED hide must suppress the true destination cells while authentic dynamic
+# character RAM continues changing under accelerator input.
+api hud.layout.set element=speed visible=false dx=0 dy=0
+api input.ioc.xor port=3 mask=20
+api control.run-frames frames=120
+api input.ioc.clear
+api frame.snapshot name=v06694-rc313-speed-hidden-after-acceleration
+assert status hud_speed_region_empty=1
+
+# Full live TC0100SCN export remains available.
+api text.charset.export palette=0 scale=1
+
+# Deterministic cleanup.
+api backend.sprite.set mode=original
+api sprite.asset-replace.clear
+api sprite.map-override.clear
+api game.beacon.override mode=authentic
+api hud.layout.reset
+api input.steering.set value=0000
+api patch.clear
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+assert status sprite_backend=original
+assert status sprite_asset_overrides=0
+api status
+
+echo === ChaseHQ v0.66.9.4-RC3.1.3 Corrective Regression: COMPLETE ===

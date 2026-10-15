@@ -1,0 +1,18 @@
+const fs=require('fs'),path=require('path');
+const root=path.resolve(__dirname,'..'),read=p=>fs.readFileSync(path.join(root,p),'utf8'),ok=(v,m)=>{if(!v)throw Error(m)};
+const current='0.66.9.3-RC3';
+const cfg=JSON.parse(read('chqdev.json')),version=read('src/version.h'),runner=read('tools/chqdev/script_runner.go'),gotest=read('tools/chqdev/runtime_test.go'),web=read('Start-ChaseHQWeb.ps1'),full=read('research/scripts/regression/full-regression.chqscript'),reg=read('research/scripts/regression/regression-v06692.chqscript'),rc4reg=read('research/scripts/regression/regression-v06692-rc4.chqscript'),catalog=read('research/scripts/SCRIPT_CATALOG.md'),validation=read('VALIDATION.md'),changelog=read('CHANGELOG.md');
+const coverage=read('docs/REGRESSION_COVERAGE_MAP.md'),historicalCatalog=read('research/scripts/SCRIPT_CATALOG.md');
+ok(cfg.release===current&&cfg.focusedRegression.endsWith('regression-v06693-rc3.chqscript'),'RC4 config/focused regression identity missing');
+ok(version.includes(current)&&version.includes('chqdev v0.5.5'),'RC4/chqdev v0.5.2 version identity missing');
+ok(runner.includes('runSource')&&runner.includes('authoredSource')&&runner.includes('req["runSource"] = g.runSource')&&runner.includes('g.runID == ""'),'Go runner does not preserve the complete authored source on run creation');
+ok(runner.includes('"commandCount": g.commandCount'),'Go runner does not finalize authoritative command count');
+ok(gotest.includes('authoritativeSource != src')&&gotest.includes('finalizedCommandCount != len(commands)')&&gotest.includes('expected 5'),'HTTP-backed Go provenance/count integration regression missing');
+ok(web.includes('$priorCommands=0')&&web.includes('$priorCommands++')&&web.includes('$commandTotal=$priorCommands')&&web.includes('commands=$commandTotal'),'Workbench does not persist cumulative command counts');
+ok(web.includes("function Finalize-ChqScriptRun([string]$requestedRunId,[string]$runStatus='PASS',[int]$commandCount=-1)")&&web.includes("$final['commands']=$commandCount"),'Workbench finalization command-count override missing');
+ok(web.includes("$commandCount=[int](Prop $b 'commandCount' -1)")&&web.includes('Finalize-ChqScriptRun $rid $runStatus $commandCount'),'script API commandCount finalization wiring missing');
+ok(web.includes("commands=[int](Prop $m 'commands' 0)")&&web.includes('${Number(r.commands||0)} commands'),'Recent Script Runs does not expose persisted command count');
+ok(!full.includes('regression-v06692-rc4.chqscript')&&historicalCatalog.includes('regression/regression-v06692-rc4.chqscript')&&historicalCatalog.includes('historical')&&coverage.includes('regression-v06692-rc4.chqscript')&&rc4reg.includes('0.66.9.2-RC4'),'historical regression-v06692-rc4.chqscript must remain cataloged/mapped while duplicate Full Regression execution stays removed');
+ok(validation.includes(current)&&validation.includes('complete authored')&&validation.includes('commands'),'RC4 validation provenance contract missing');
+ok(changelog.includes('## v0.66.9.2-RC4')&&changelog.includes('script.chqscript')&&changelog.includes('run-metadata.json'),'RC4 changelog provenance finding missing');
+console.log('Workbench v0.66.9.2 final authoritative run provenance/command-count tests: PASS');

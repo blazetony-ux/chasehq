@@ -1,0 +1,26 @@
+# name: Regression - v0.67.0.0 RC6.3.3 Original ROM Health Branch Matrix Contracts
+# category: regression
+# purpose: Verify RC6.3.3 release identity and inherited Ghidra/REA actions; Ghidra original-ROM branch census and controlled original/native/rollback matrix are tested by Go/CTest and live command.
+# checkpoint: stage1-gameplay-2064.chqstate
+# version: 0.67.0.0-RC6.3.3
+# regression-version: 0.67.0.0-RC6.3.3
+# regression-scope: release
+# safety: Read-only API schema checks and Ghidra dependency discovery; no Ghidra job started.
+# cleanup: No gameplay state changes.
+echo === RC6.3.3 REA FOCUSED REGRESSION BEGIN ===
+try
+  api release.assert-version
+  api schema action=ghidra.status
+  api schema action=ghidra.start
+  api schema action=ghidra.wait
+  api schema action=ghidra.results
+  api schema action=ghidra.import
+  api schema action=ghidra.evidence.attach
+  api schema action=rea.crosswalk
+  api schema action=rea.function.inspect
+  api ghidra.status
+  api rea.reports
+  echo === RC6.3.3 REA FOCUSED REGRESSION PASS ===
+finally
+  echo === RC6.3.3 RELEASE SMOKE PRESERVED LIVE SESSION ===
+end

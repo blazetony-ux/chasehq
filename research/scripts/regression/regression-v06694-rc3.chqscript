@@ -1,0 +1,71 @@
+# name: v0.66.9.4-RC3 Semantic Asset + Dynamic HUD Regression
+# category: regression
+# regression-version: 0.66.9.4-RC3
+# regression-scope: release
+# purpose: Prove RC3 format-aware cross-OBJ native asset replacement, corrected dynamic SPEED HUD cell suppression, retained native sprite parity and deterministic cleanup.
+# checkpoint: stage1-gameplay-2064.chqstate
+
+echo === ChaseHQ v0.66.9.4-RC3 Semantic Asset + Dynamic HUD Regression: BEGIN ===
+api release.assert-version
+api schema action=sprite.asset-replace
+api schema action=sprite.asset-replace.clear
+api schema action=backend.sprite.set
+api schema action=hud.layout.set
+
+api patch.clear
+api sprite.visual.clear
+api sprite.override.clear
+api sprite.map-override.clear
+api sprite.asset-replace.clear
+api hud.layout.reset
+api backend.sprite.set mode=original
+api checkpoint.load file=stage2-gameplay-7500.chqstate run=false
+
+# Authentic baseline.
+api control.run-frames frames=4
+api frame.capture name=v06694-rc3-player-authentic
+
+# Cross-format player body replacement. map516 is OBJ-A; map190 is OBJ-B64.
+# The RC3 action carries the target format independently of the player placement box.
+api checkpoint.load file=stage2-gameplay-7500.chqstate run=false
+api sprite.asset-replace source=516 target=190 format=obj-b64 palette=73 flipx=1 dx=0 dy=0
+api backend.sprite.get
+api control.run-frames frames=4
+api frame.capture name=v06694-rc3-player-yellow-target
+api status
+
+# Clear semantic replacement and prove ordinary native renderer remains exact.
+api sprite.asset-replace.clear
+api backend.sprite.set mode=original
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api sprite.layer-shadow.compare failOnMismatch=true output=v06694-rc3-stage1-shadow.json
+
+# RC3 SPEED semantic map includes the authentic 6x2 dynamic character block
+# at source rows 4..5, columns 32..37. Keep it hidden across live execution.
+api hud.layout.set element=speed visible=false dx=0 dy=0
+api control.run-frames frames=16
+api frame.snapshot name=v06694-rc3-speed-hidden-after-live-update
+api hud.layout.get
+
+# Complete TC0100SCN export remains part of the release surface.
+api text.charset.export palette=0 scale=1
+
+# Deterministic cleanup.
+api backend.sprite.set mode=original
+api backend.sprite.reset-verification
+api sprite.asset-replace.clear
+api sprite.map-override.clear
+api game.beacon.override mode=authentic
+api hud.layout.reset
+api memory.trace.clear
+api collision.response.reset
+api input.ioc.clear
+api input.steering.set value=0000
+api sprite.visual.clear
+api sprite.override.clear
+api patch.clear
+api palette.overrides.clear
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api status
+
+echo === ChaseHQ v0.66.9.4-RC3 Semantic Asset + Dynamic HUD Regression: COMPLETE ===

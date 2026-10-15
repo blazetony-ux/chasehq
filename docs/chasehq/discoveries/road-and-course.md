@@ -1,27 +1,19 @@
-# Discovery record — road geometry and Stage-1 topology
+# Discovery record - road, course and grade
 
-**Status:** core road/course channels CONFIRMED; fork/selector lifecycle BEHAVIOUR UNDERSTOOD; directed map representation outstanding.
+**Status:** Stage-1 record semantics/topology and grade sign substantially behaviour-understood; directed graph/minimap still open.
 
-## Live topology state
+The eight-byte Stage-1 course record is: `+0 curve`, `+1 shapeTarget/physical grade`, `+2 featureType`, `+3 geometryCode`, `+4 roadProcessingSelector`, `+5 paletteTransitionSelector`, `+6 environmentTransitionSelector`, `+7 featureParameter` (polymorphic by feature type).
 
-- page/index: CPU-A `0x10A058`
-- selector/table phase: `0x10A059`
-- downstream mirror: `0x10A018/19`
-- player lateral coordinate used by fork choice: `0x10A044`
+## Physical grade semantics
 
-The branch routine uses a 32-byte table at ROM `0xAF64 + selector*32`, indexes the current page by `page*2`, and selects candidate A/B by whether player lateral is below/above `0x8000` when the pair differs. The A/B labels are structural; do not rename them physical left/right without separate proof.
+Run018 causally resolved `+1`: positive signed values are **INCLINE/uphill**, negative values are **DECLINE/downhill**, zero is level. On a sustained controlled corridor, `-10` increased display/internal speed and course progress versus neutral; `+10` reduced them. The renderer and player-body presentation change consistently with that physical meaning.
 
-## Valid selector tables
+## Road-side classifier
 
-Only selectors 0-9 are valid transition tables. Selectors 0-4 share the branching template; selectors 5-9 share a linear `0 -> 1 -> 2 -> ... -> 15 -> 0` template. On terminal `page 15 -> 0`, code at `0x8088` adds 5 to selectors below 5, producing pairings `0->5`, `1->6`, `2->7`, `3->8`, `4->9`.
+`0x10A048` encodes `01=ON_ROAD`, `03=OFF_ROAD_RIGHT`, `05=OFF_ROAD_LEFT`, `07=OFF_ROAD_EXTREME`. Run019 disassembly plus forced-position matrix resolved exact canonical-straight bands: with left `0x7470`, right `0x86F0`, outer limits are `0x7090`/`0x8AD0`; the side bands are one 0x100-wide region beyond the interior tolerance.
 
-Causal branch proof with selector 0:
+## Topology
 
-- lateral `0x7F00`: `0 -> 1 -> 3 -> 7`
-- lateral `0x8100`: `0 -> 1 -> 4 -> 9`
+Selector/fork lifecycle, branch choice and the Stage-1 0-9 transition family are already causally established. Treat the byte-semantics probe as closed. The next product is an authoritative **directed course graph/minimap** using the proven selector transitions, lateral fork rule, record addresses and live course/player position.
 
-Full lifecycle proof observed `0 -> 1 -> 3 -> 7 -> 15`, then selector `0 -> 5` and page `15 -> 0`. Do not spend further experiments reproving this low-level mechanism.
-
-## Next step
-
-Represent these proven transitions as an authoritative directed course graph/minimap and add semantic route labels only where supported by evidence.
+Do not conflate `+5/+6/+7` with road material identity. Keep full course record signature separate from road-processing/material candidates and raw TC0150 renderer state.

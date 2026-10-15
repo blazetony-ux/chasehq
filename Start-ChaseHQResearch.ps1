@@ -3,6 +3,7 @@ param(
     [string]$Preset,
     [string]$Session,
     [string]$Roms = ".\roms\chasehq",
+    [string]$ContentPack = "",
     [string]$Checkpoint,
     [string]$Experiment,
     [string[]]$EmulatorArgs = @(),
@@ -12,6 +13,7 @@ param(
     [switch]$NoShell,
     [switch]$Fresh,
     [switch]$NoBuildCheck,
+    [switch]$ValidateLaunchOnly,
     [switch]$NoCollisions,
     [switch]$InfiniteTime,
     [switch]$UnlimitedTurbo,
@@ -153,27 +155,33 @@ if (-not $NoBuildCheck) {
 }
 
 if (-not $Attach) {
-    if (Test-Api $ctl $Port) { throw "A ChaseHQ Research API is already responding on port $Port. Use -Attach or choose another -Port." }
+    if (-not $ValidateLaunchOnly -and (Test-Api $ctl $Port)) { throw "A ChaseHQ Research API is already responding on port $Port. Use -Attach or choose another -Port." }
 
     $romPath = if ([IO.Path]::IsPathRooted($Roms)) { $Roms } else { Join-Path $root $Roms }
-    if (-not (Test-Path $romPath)) { throw "ROM directory not found: $romPath" }
-    $requiredRom = Join-Path $romPath 'b52-132.39'
-    if (-not (Test-Path $requiredRom -PathType Leaf)) { throw "Required Chase H.Q. ROM missing before launch: $requiredRom. Run .\Prepare-Project.bat first." }
+    $contentPackPath = if ([string]::IsNullOrWhiteSpace($ContentPack)) { $null } elseif ([IO.Path]::IsPathRooted($ContentPack)) { $ContentPack } else { Join-Path $root $ContentPack }
+    if ($contentPackPath) {
+        if (-not (Test-Path $contentPackPath -PathType Leaf)) { throw "CHQPACK file not found: $contentPackPath" }
+    } else {
+        if (-not (Test-Path $romPath -PathType Container)) { throw "ROM directory not found: $romPath" }
+        $requiredRom = Join-Path $romPath 'b52-132.39'
+        if (-not (Test-Path $requiredRom -PathType Leaf)) { throw "Required Chase H.Q. ROM missing before launch: $requiredRom. Run .\Prepare-Project.bat first." }
+    }
 
-    $args = @('--roms', $romPath, '--debug-api-port', [string]$Port, '--logs', $evidencePath)
+    $nativeLaunchArgs = if ($contentPackPath) { @('--content-pack', $contentPackPath, '--debug-api-port', [string]$Port, '--logs', $evidencePath) } else { @('--roms', $romPath, '--debug-api-port', [string]$Port, '--logs', $evidencePath) }
     if ($Checkpoint) {
         $cp = if ([IO.Path]::IsPathRooted($Checkpoint)) { $Checkpoint } else { Join-Path $root $Checkpoint }
         if (-not (Test-Path $cp)) { throw "Checkpoint not found: $cp" }
-        $args += @('--load-checkpoint', $cp)
+        $nativeLaunchArgs += @('--load-checkpoint', $cp)
     }
-    if ($NoCollisions) { $args += '--no-collisions' }
-    if ($InfiniteTime) { $args += '--infinite-time' }
-    if ($UnlimitedTurbo) { $args += '--unlimited-turbo' }
-    if ($AutoTurbo) { $args += '--auto-turbo' }
-    if ($CorneringScale -gt 0) { $args += @('--cornering-scale', [string]::Format([Globalization.CultureInfo]::InvariantCulture, '{0:0.####}', $CorneringScale)) }
-    if ($CorneringSpeedRetain -gt 0) { $args += @('--cornering-speed-retain', [string]::Format([Globalization.CultureInfo]::InvariantCulture, '{0:0.####}', $CorneringSpeedRetain)) }
-    if ($CourseFollowController) { $args += @('--course-follow-controller', $CourseFollowController) }
-    $args += $EmulatorArgs
+    if ($NoCollisions) { $nativeLaunchArgs += '--no-collisions' }
+    if ($InfiniteTime) { $nativeLaunchArgs += '--infinite-time' }
+    if ($UnlimitedTurbo) { $nativeLaunchArgs += '--unlimited-turbo' }
+    if ($AutoTurbo) { $nativeLaunchArgs += '--auto-turbo' }
+    if ($CorneringScale -gt 0) { $nativeLaunchArgs += @('--cornering-scale', [string]::Format([Globalization.CultureInfo]::InvariantCulture, '{0:0.####}', $CorneringScale)) }
+    if ($CorneringSpeedRetain -gt 0) { $nativeLaunchArgs += @('--cornering-speed-retain', [string]::Format([Globalization.CultureInfo]::InvariantCulture, '{0:0.####}', $CorneringSpeedRetain)) }
+    if ($CourseFollowController) { $nativeLaunchArgs += @('--course-follow-controller', $CourseFollowController) }
+    $nativeLaunchArgs += @($EmulatorArgs)
+    if ($ValidateLaunchOnly) { $nativeLaunchArgs += '--help' }
 
     if ($Fresh) {
         $freshPath = $evidencePath
@@ -182,12 +190,26 @@ if (-not $Attach) {
     }
 
     Write-Host "Launching ChaseHQNative on Research API port $Port..." -ForegroundColor Green
-    Write-Host ("  " + $emu + " " + (($args | ForEach-Object { Quote-Arg $_ }) -join ' ')) -ForegroundColor DarkGray
-    $argLine = (($args | ForEach-Object { Quote-Arg $_ }) -join ' ')
+    Write-Host ("  " + $emu + " " + (($nativeLaunchArgs | ForEach-Object { Quote-Arg $_ }) -join ' ')) -ForegroundColor DarkGray
+    $argLine = (($nativeLaunchArgs | ForEach-Object { Quote-Arg $_ }) -join ' ')
     $nativeStdout=Join-Path $evidencePath 'native-stdout.log';$nativeStderr=Join-Path $evidencePath 'native-stderr.log'
     Write-StartupRecord 'starting' 'NATIVE_LAUNCH' $null
     $script:NativeProcess = Start-Process -FilePath $emu -ArgumentList $argLine -WorkingDirectory $root -RedirectStandardOutput $nativeStdout -RedirectStandardError $nativeStderr -PassThru
     Write-Host "Native PID: $($script:NativeProcess.Id)" -ForegroundColor DarkGray
+    if ($ValidateLaunchOnly) {
+        $script:NativeProcess.WaitForExit()
+        $launchCode=[int]$script:NativeProcess.ExitCode
+        $launchOut=Tail-IfExists $nativeStdout 40
+        $launchErr=Tail-IfExists $nativeStderr 40
+        if($launchCode -ne 0){
+            if($launchOut){Write-Host "--- launcher smoke stdout ---`n$launchOut"}
+            if($launchErr){Write-Host "--- launcher smoke stderr ---`n$launchErr"}
+            throw "Research launcher process/argument binding smoke failed with exit code $launchCode."
+        }
+        Write-Host 'Research launcher process/argument binding smoke: PASS' -ForegroundColor Green
+        Remove-Item $evidencePath -Recurse -Force -ErrorAction SilentlyContinue
+        return
+    }
     Write-StartupRecord 'starting' 'API_WAIT' $script:NativeProcess
 }
 

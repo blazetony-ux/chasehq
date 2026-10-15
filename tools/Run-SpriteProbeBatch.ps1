@@ -1,4 +1,4 @@
-param(
+﻿param(
   [string]$Exe = ".\out\build\x64-Debug\ChaseHQNative.exe",
   [string]$Roms = ".\roms\chasehq",
   [string]$Checkpoint = ".\ui_quick.chqstate",
@@ -20,7 +20,7 @@ foreach ($r in $rows) {
   $exit = $to + 1
   $name = "$BatchName-$($r.name)"
   Write-Host "=== $name : $($r.selector) frames $from-$to ==="
-  $args = @($Roms,
+  $probeArgs = @($Roms,
     "--load-checkpoint", $Checkpoint,
     "--sprite-evidence-every", "$every",
     "--sprite-evidence-from", "$from",
@@ -33,7 +33,7 @@ foreach ($r in $rows) {
     "--exit-at-frame", "$exit",
     "--evidence-bundle",
     "--evidence-name", $name)
-  & $Exe @args
+  & $Exe @probeArgs
   if ($LASTEXITCODE -ne 0) { throw "$name failed with exit code $LASTEXITCODE" }
   $zip = Join-Path ".\evidence" ($name + ".zip")
   if (Test-Path $zip) { $produced += $zip }

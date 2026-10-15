@@ -1,0 +1,20 @@
+# name: Run 033B - Inspect Completed Ghidra Static Findings
+# category: native-reconstruction
+# purpose: Inspect a completed headless Ghidra job and automatically crosswalk its unreviewed CPU-A candidate windows with previously staged genuine gameplay execution census data.
+# version: 0.67.0.0-RC4.6
+# research-status: original-static-and-runtime-correlation
+# method: Call after ghidra.status reports PASS. Inspect findings, import available real census cases, list resulting REA reports.
+# safety: Read-only import, no gameplay modifications or inferred verified function ownership.
+# expected-output: Static disassembly/XREF findings, hypothesis-window counts, real PC crosswalk reports and evidence artifacts.
+# cleanup: Preserve current Workbench/emulator state.
+echo === RUN033B GHIDRA STATIC FINDINGS ===
+try
+  api release.assert-version
+  api ghidra.status
+  api ghidra.results
+  api ghidra.import
+  api rea.reports
+finally
+  echo === RUN033B ORIGINAL SDL SESSION UNCHANGED ===
+end
+echo === RUN033B COMPLETE ===

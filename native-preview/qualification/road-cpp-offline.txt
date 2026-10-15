@@ -1,0 +1,15 @@
+
+=== Frame 5588 ===
+cf4=0x166e cf2=0x0 cf6=0x2000 selected=84/104
+mutated input: 208 bytes, 0 mismatches
+road output: 208 bytes, 0 mismatches
+PASS: independent generator matches captured inputs and outputs
+
+=== Frame 5595 ===
+cf4=0x90a cf2=0x0 cf6=0x1000 selected=68/104
+mutated input: 208 bytes, 0 mismatches
+road output: 208 bytes, 0 mismatches
+PASS: independent generator matches captured inputs and outputs
+
+PASS: 2 active frames x (208 input + 208 output) = 832 modeled bytes, 0 mismatches
+Frame 5600 is intentionally excluded: output can persist after generator deactivation.

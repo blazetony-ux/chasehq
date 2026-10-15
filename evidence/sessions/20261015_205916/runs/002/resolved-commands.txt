@@ -1,0 +1,1153 @@
+echo === ChaseHQ Full Regression: BEGIN ===
+api status
+api capabilities
+api actions
+api schema
+api schema action=memory.read
+api schema action=memory.read-range
+api schema action=memory.write
+api schema action=cpu.disassemble
+api schema action=control.run-frames
+api schema action=checkpoint.load
+api schema action=checkpoint.save
+api schema action=patch.freeze
+api schema action=patch.replace
+api schema action=patch.suppress
+api schema action=patch.list
+api schema action=patch.remove
+api schema action=patch.clear
+api schema action=register.read
+api schema action=register.write
+api schema action=frame.capture
+api schema action=track.state
+api schema action=gameplay.registry
+api schema action=evidence.capture
+api patch.clear
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api status
+echo PASS baseline player render selector 0x10A04A = 0x000E
+echo PASS baseline cached render selector 0x10A076 = 0x000E
+api memory.read cpu=A address=10A040 width=32
+api memory.read cpu=A address=10A044 width=16
+api memory.read cpu=A address=10A048 width=8
+api memory.read cpu=A address=10A05A width=16
+api memory.read cpu=A address=10A05C width=32
+api memory.read-range cpu=A address=109000 length=64
+api cpu.disassemble cpu=A address=008C2A count=32
+api track.state
+api gameplay.registry
+api input.ports
+api events.tail
+api sprites.tail
+api logs.list
+api evidence.list
+api control.step-frame
+api status
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api control.step-instruction
+api status
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api control.run-frames frames=2
+api status
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api memory.read cpu=A address=10A04A width=16
+api memory.write cpu=A address=10A04A width=16 value=000E expect=000E
+api memory.read cpu=A address=10A04A width=16
+echo PASS memory.write compare-before-write/idempotent path
+api memory.write cpu=A address=10A04A width=16 value=0011 expect=000E
+echo PASS memory.write changed value
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+echo PASS checkpoint reload restored mutated memory
+api patch.clear
+api patch.freeze cpu=A address=10A04A width=16 value=0011
+api patch.freeze cpu=A address=10A076 width=16 value=0011
+api patch.list
+api control.run-frames frames=2
+api memory.read cpu=A address=10A04A width=16
+api memory.read cpu=A address=10A076 width=16
+api patch.list
+echo PASS patch.freeze enforced 0x10A04A
+echo PASS patch.freeze enforced 0x10A076
+api patch.clear
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api frame.capture
+wait 50
+api frame.capture
+wait 50
+api frame.capture
+api evidence.list
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api track.state
+api control.run-frames frames=2
+api track.state
+api control.run-frames frames=2
+api track.state
+api control.run-frames frames=2
+api track.state
+api control.run-frames frames=2
+api track.state
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api checkpoint.save file=regression-temp.chqstate
+api checkpoint.list
+api control.step-frame
+api checkpoint.load file=regression-temp.chqstate run=false
+api status
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api schema action=control.abort
+api schema action=register.read
+api schema action=register.write
+api schema action=patch.freeze
+api schema action=patch.replace
+api schema action=patch.suppress
+api patch.clear
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api status
+echo PASS final baseline 0x10A04A restored
+echo PASS final baseline 0x10A076 restored
+api frame.snapshot name=regression-graphics-snapshot
+api frame.snapshot.list
+echo === v0.66.0.3 command transport regression ===
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api control.run-frames frames=5
+api status
+api track.state
+api control.run-frames frames=5
+api status
+api track.state
+api control.run-frames frames=5
+api status
+api track.state
+api control.run-frames frames=5
+api status
+api track.state
+api control.run-frames frames=5
+api status
+api track.state
+echo === v0.66.0.3 command transport regression complete ===
+api regions.list
+api sprites.maps
+api sprites.palettes
+api palette.entries bank=75
+api checkpoint.list
+api capabilities
+api regions.list
+api sprites.list
+api sprites.maps
+api sprites.palettes
+api palette.entries bank=75
+api state.snapshot include=sprites,regions,gameplay,track
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api control.run-frames frames=30
+api sprite.inspect slot=44
+api sprite.visual slot=44 mode=solo
+api sprite.visual.clear
+api sprite.override slot=44 map=182
+api sprite.override.clear
+api schema action=sprites.list
+api schema action=sprite.override
+api schema action=state.snapshot
+echo === v0.65.0 query/live-graphics regression complete ===
+echo === v0.65.1 profile metadata regression ===
+api profiles.list
+api profiles.list
+api profile.get id=chasehq
+api profile.get id=sci
+api schema action=profiles.list
+api schema action=profile.get
+echo === v0.65.1 profile metadata regression complete ===
+echo === v0.66.0 introspection regression ===
+api platform.info
+api features.list
+api script.functions
+api registry.list
+api track.records before=1 after=2
+api objects.list
+api audio.channels
+echo === v0.66.0 introspection regression complete ===
+echo === v0.66.0 audio foundation regression ===
+api audio.capabilities
+api audio.events
+api audio.waveform.plan
+api audio.export.plan
+api audio.inject.plan
+echo === v0.66.0 audio foundation regression complete ===
+echo === v0.66.0.2 diagnostics regression ===
+api logs.list
+api logs.tail file=@runtime/web-listener.log lines=20
+api schema action=logs.tail
+api track.state
+echo === v0.66.0.2 diagnostics regression complete ===
+echo === collision API regression ===
+api collision.state
+api collision.response.get
+api collision.response.set enabled=false
+api collision.state
+api collision.response.reset
+api collision.response.get
+echo === collision API regression complete ===
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api sprites.list
+api sprite.inspect slot=46
+echo === sprite priority provenance complete ===
+api platform.info
+api features.list
+echo === manifest/runtime consistency complete ===
+echo === v0.66.1.2 resilience hotfix regression ===
+api platform.info
+api features.list
+api logs.list
+api logs.tail file=@runtime/web-listener.log lines=20
+api schema action=logs.tail
+echo === v0.66.1.2 resilience hotfix regression complete ===
+echo === v0.66.2 steering controls regression ===
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api input.ioc.clear
+api input.steering.set value=0000
+api input.ioc.xor port=3 mask=20
+api control.run-frames frames=5
+echo PASS steering centre processed=0
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api input.steering.set value=0060
+api input.ioc.xor port=3 mask=20
+api control.run-frames frames=60
+echo PASS steering right +96
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api input.steering.set value=0FA0
+api input.ioc.xor port=3 mask=20
+api control.run-frames frames=60
+echo PASS steering left -96
+api input.ioc.clear
+api input.steering.set value=0000
+echo === v0.66.2 steering controls regression complete ===
+echo === v0.66.3 contracts / provenance regression ===
+api platform.info
+api schema.all
+api script.schema
+api schema action=sprite.map.inspect
+api schema action=ui.prompt
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api control.run-frames frames=5
+api sprite.inspect slot=45
+api sprite.map.inspect slot=45
+echo === v0.66.3 contracts / provenance regression complete ===
+echo === v0.66.3.1 workbench reliability regression ===
+api platform.info
+api schema.all
+api script.schema
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api control.run-frames frames=5
+api frame.snapshot name=regression-v06631-artifact-path
+api frame.snapshot.list
+echo === v0.66.3.1 workbench reliability regression complete ===
+echo === v0.66.4 palette write trace regression ===
+api schema action=palette.trace.start
+api schema action=palette.trace.status
+api schema action=palette.trace.tail
+api schema action=palette.trace.stop
+api schema action=palette.trace.clear
+api palette.trace.clear
+api palette.trace.start indices=1037,1053 limit=128
+api palette.trace.status
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api control.run-frames frames=5
+api input.ioc.xor port=2 mask=20
+api control.run-frames frames=8
+api palette.trace.tail count=20
+api input.ioc.clear
+api control.run-frames frames=8
+api palette.trace.tail count=40
+api palette.trace.stop
+api palette.trace.status
+api palette.trace.clear
+api palette.trace.tail count=10
+echo === v0.66.4 palette write trace regression complete ===
+echo === v0.66.5 generic memory write trace regression ===
+api schema action=memory.trace.start
+api schema action=memory.trace.status
+api schema action=memory.trace.tail
+api schema action=memory.trace.stop
+api schema action=memory.trace.clear
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api memory.trace.clear
+api memory.trace.start cpu=A address=0x100303 length=1 width=any limit=128
+api memory.trace.status
+api control.run-frames frames=5
+api input.ioc.xor port=2 mask=20
+api control.run-frames frames=6
+api memory.trace.tail count=20
+api input.ioc.clear
+api control.run-frames frames=6
+api memory.trace.tail count=40
+api memory.trace.stop
+api memory.trace.status
+api memory.trace.clear
+api memory.trace.tail count=10
+echo === v0.66.5 generic memory write trace regression complete ===
+echo === v0.66.5.1 shared track recorder regression ===
+api schema action=track.record.start
+api schema action=track.record.stop
+api schema action=track.record.clear
+api schema action=track.record.status
+api schema action=track.record.sample
+api schema action=track.svg.export
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api track.record.clear
+api track.record.start
+api track.record.sample
+api control.run-frames frames=30
+api track.record.sample
+api control.run-frames frames=30
+api track.record.sample
+api track.record.stop
+api track.record.status
+api track.svg.export name=regression-v06651-track
+api track.record.clear
+api track.record.status
+echo === v0.66.5.1 shared track recorder regression complete ===
+echo === v0.66.6.1 layered frame snapshot regression ===
+api schema action=frame.snapshot
+api schema action=image.compare
+api schema action=image.diff
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api frame.snapshot name=regression-v06661-layered
+api frame.snapshot.list
+api image.compare a=regression-v06661-layered b=regression-v06661-layered region=FULL hud=normal
+api image.compare a=regression-v06661-layered b=regression-v06661-layered region=FULL hud=hidden
+api image.compare a=regression-v06661-layered b=regression-v06661-layered region=FULL hud=only
+api image.diff a=regression-v06661-layered b=regression-v06661-layered region=FULL hud=hidden output=regression-v06661-hud-hidden-self-diff
+echo === v0.66.6.1 layered frame snapshot regression complete ===
+echo === v0.66.7.5 User Handbook / Live Reference ===
+api schema action=docs.handbook
+api schema action=docs.page
+api docs.handbook
+api docs.page id=api-overview
+api docs.page id=graphics-lab-guide
+api schema.all
+api script.schema
+api docs.search query=frame.snapshot
+api docs.handover
+api window.status
+api window.fullscreen enabled=false
+api window.scale scale=3
+api window.restore
+api window.show
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api frame.snapshot name=regression-v06675-user-handbook
+api frame.snapshot.list
+api docs.export format=html evidence=key output=regression-v06675-user-handbook
+api window.status
+echo === v0.66.7.5 regression complete ===
+echo === v0.66.7.6 Docs / Knowledge Consolidation ===
+api docs.handbook
+api docs.search query=context
+api docs.search query=producer
+api docs.search query=opacity
+api knowledge.search query=context
+api docs.get id=memory-write-tracing
+api docs.get id=processed-brake-input
+api docs.get id=individual-sprite-forensics
+api docs.handover
+api schema.all
+api script.schema
+api window.status
+api window.fullscreen enabled=false
+api window.scale scale=3
+api window.restore
+api window.show
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api frame.snapshot name=regression-v06676-docs-consolidation
+api frame.snapshot.list
+api docs.export format=html evidence=key output=regression-v06676-docs-consolidation
+api window.status
+echo === v0.66.7.6 regression complete ===
+echo === v0.66.7.7 Run History / Snapshot Discovery ===
+api schema action=script.runs
+api script.runs limit=25
+api frame.snapshot.list
+echo === v0.66.7.7 persistence/discovery regression complete ===
+echo === v0.66.7.8 discovery performance ===
+api status
+api script.runs limit=25
+api frame.snapshot.list
+api status
+echo === v0.66.7.8 discovery performance complete ===
+echo --- v0.66.7.8 run finalization ---
+echo === v0.66.7.8 run finalization ===
+api status
+echo capability predicate transient PASS
+echo memory predicate transient PASS
+api window.status
+api frame.snapshot.list
+api script.runs limit=25
+echo === v0.66.7.8 run finalization complete ===
+echo === v0.66.7.9 research recovery regression ===
+api platform.info
+api status
+api docs.get id=turbo-hud-investigation
+api schema action=gameplay.registry
+api schema action=frame.snapshot
+api schema action=image.compare
+api schema action=memory.trace.start
+api regions.list
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api gameplay.registry
+api memory.read cpu=A address=0x100303 width=8
+api memory.read cpu=A address=0x10040F width=8
+api memory.read cpu=A address=0x1003A2 width=16
+api memory.read cpu=A address=0x100414 width=16
+echo === v0.66.7.9 research recovery regression complete ===
+echo === v0.66.8.0 Forensic Timeline regression ===
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api input.ioc.clear
+api timeline.record.start name=regression-v06680-timeline
+api control.run-frames frames=3
+api timeline.record.stop
+api timeline.list
+api timeline.load name=regression-v06680-timeline
+assert status source=timeline
+api timeline.status
+api timeline.frames
+api timeline.seek frame=2065
+api memory.read cpu=A address=0x100303 width=8
+api register.read cpu=A name=PC
+api sprites.list
+api gameplay.registry
+api timeline.next
+api timeline.prev
+api timeline.unload
+assert status source=live
+api status
+api timeline.scan.memory name=regression-v06680-timeline triggerFrame=2064 stopFrame=2067 window=1
+api schema action=timeline.scan.memory
+api schema action=timeline.trim.event
+api audio.capabilities
+echo === v0.66.8.0 Forensic Timeline regression complete ===
+echo === v0.66.8.0 RC7 Portable Automated Timeline Analysis ===
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api input.ioc.clear
+api timeline.record.start name=regression-v06680-rc7-auto
+api input.ioc.xor port=3 mask=21
+api control.run-frames frames=2
+api input.ioc.clear
+api control.run-frames frames=3
+api timeline.record.stop
+api timeline.analyze.auto name=regression-v06680-rc7-auto triggerFrame=2065 stopFrame=2067 window=1 top=8
+api timeline.play name=regression-v06680-rc7-auto from=2064 to=2069 fps=60
+api timeline.status
+api timeline.unload
+api status
+echo === v0.66.8.0 RC7 Portable Automated Timeline Analysis complete ===
+echo === v0.66.8.0 RC7.4 Bounded History Discovery ===
+api schema action=script.runs
+api script.runs limit=10
+echo === v0.66.8.0 RC7.4 bounded history discovery complete ===
+echo === v0.66.9.0 Game Lab / Tile Inspector regression ===
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api game.experiment.status
+api game.turbo.remaining.set value=3
+api game.turbo.stock enabled=true value=3
+api game.turbo.stock enabled=false
+api game.speed.set value=602
+api game.speed.freeze enabled=true value=602
+api game.speed.clear
+api tile.inspect code=7C palette=0 scale=8
+api tile.inspect code=0C palette=0 scale=8
+api game.experiment.status
+echo === v0.66.9.0 Game Lab / Tile Inspector regression complete ===
+echo === v0.66.9.0 RC2 sprite order / speed regression ===
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api game.experiment.status
+api sprite.order.inspect
+api sprite.map.inspect map=475
+api game.sprite.order.set mode=lower-slot
+api sprite.order.inspect
+api game.sprite.order.set mode=higher-slot
+api sprite.order.inspect
+api tile.inspect code=0C palette=0 scale=4
+api game.speed.set value=602
+api game.experiment.status
+api game.speed.freeze enabled=true value=602
+api game.experiment.status
+api game.speed.clear
+api game.experiment.status
+echo === v0.66.9.0 RC2 sprite order / speed regression complete ===
+echo === v0.66.9.0 RC2.2 MAME sprite-order regression ===
+api sprite.order.inspect
+api sprite.order.set mode=higher-slot
+api sprite.order.inspect
+api sprite.order.set mode=lower-slot
+api sprite.order.inspect
+echo === v0.66.9.0 RC2.2 MAME sprite-order regression complete ===
+echo === RC2.4.3 snapshot discovery regression ===
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api control.step-frame
+api frame.snapshot name=regression-rc243-snapshot-discovery sprites=individual
+api frame.snapshot.list require=regression-rc243-snapshot-discovery
+api image.compare a=regression-rc243-snapshot-discovery b=regression-rc243-snapshot-discovery region=FULL hud=normal
+api image.compare a=regression-rc243-snapshot-discovery b=regression-rc243-snapshot-discovery region=FULL hud=hidden
+echo === RC2.4.3 snapshot discovery regression complete ===
+api sprite.visual.clear
+api sprite.override.clear
+api sprite.order.set mode=lower-slot
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+assert status frame=2352
+api sprite.order.inspect
+api frame.snapshot name=regression-sprite-ownership
+api sprite.visual slot=82 mode=solo
+api frame.snapshot name=regression-sprite-body-solo
+api sprite.visual slot=81 mode=solo
+api frame.snapshot name=regression-sprite-shadow-solo
+api sprite.visual.clear
+api frame.snapshot.assert-overlap name=regression-sprite-ownership front=82 back=81 frontSolo=regression-sprite-body-solo backSolo=regression-sprite-shadow-solo
+api sprite.visual.clear
+api sprite.override.clear
+api sprite.order.set mode=lower-slot
+echo === Sprite ownership and export coordinate assertions COMPLETE ===
+api timeline.reset
+api sprite.visual.clear
+api sprite.override.clear
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+assert status frame=2352
+api timeline.record.start name=regression-v06690-rc25-script-safety
+api control.run-frames frames=1
+api timeline.record.stop
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+assert status frame=2064
+api timeline.load name=regression-v06690-rc25-script-safety
+api timeline.seek frame=2352
+api timeline.fork-live
+assert status frame=2352
+api sprite.visual.clear
+api sprite.override.clear
+api timeline.reset
+assert status frame=2064
+echo === v0.66.9.0 RC2.5 Script Safety: COMPLETE ===
+echo === v0.66.9.0 RC2.6.1 Sprite Bitplane Significance regression ===
+api palette.overrides.clear
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+assert status frame=2352
+api sprite.map.inspect map=405
+api frame.snapshot name=regression-rc261-map405-bitplane sprites=individual
+api frame.snapshot.list require=regression-rc261-map405-bitplane
+api image.compare a=regression-rc261-map405-bitplane b=regression-rc261-map405-bitplane region=FULL hud=normal
+api palette.overrides.clear
+assert status frame=2352
+echo === v0.66.9.0 RC2.6.1 Sprite Bitplane Significance regression COMPLETE ===
+api release.assert-version
+api timeline.reset
+api sprite.visual.clear
+api sprite.override.clear
+api layer.offsets.reset
+api layer.offsets.set layer=bg0 x=7 y=-3
+api layer.offsets.get
+api layer.offsets.assert layer=bg0 x=7 y=-3
+api layer.offsets.reset layer=bg0
+api layer.offsets.assert layer=bg0 x=0 y=0
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api tc0100.mode mode=legacy
+api frame.snapshot name=rc28-stage1-gameplay-2064-legacy
+api frame.snapshot.list require=rc28-stage1-gameplay-2064-legacy
+api frame.snapshot.assert-exact name=rc28-stage1-gameplay-2064-legacy
+api tc0100.mode mode=corrected
+api frame.snapshot name=rc28-stage1-gameplay-2064-corrected
+api frame.snapshot.list require=rc28-stage1-gameplay-2064-corrected
+api frame.snapshot.assert-exact name=rc28-stage1-gameplay-2064-corrected
+api image.compare a=rc28-stage1-gameplay-2064-legacy b=rc28-stage1-gameplay-2064-corrected region=FULL hud=hidden
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api tc0100.mode mode=legacy
+api frame.snapshot name=rc28-stage1-driving-2352-legacy
+api frame.snapshot.list require=rc28-stage1-driving-2352-legacy
+api frame.snapshot.assert-exact name=rc28-stage1-driving-2352-legacy
+api tc0100.mode mode=corrected
+api frame.snapshot name=rc28-stage1-driving-2352-corrected
+api frame.snapshot.list require=rc28-stage1-driving-2352-corrected
+api frame.snapshot.assert-exact name=rc28-stage1-driving-2352-corrected
+api image.compare a=rc28-stage1-driving-2352-legacy b=rc28-stage1-driving-2352-corrected region=FULL hud=hidden
+api checkpoint.load file=stage1-target-post-final-hit-9548.chqstate run=false
+api tc0100.mode mode=legacy
+api frame.snapshot name=rc28-stage1-target-post-final-hit-9548-legacy
+api frame.snapshot.list require=rc28-stage1-target-post-final-hit-9548-legacy
+api frame.snapshot.assert-exact name=rc28-stage1-target-post-final-hit-9548-legacy
+api tc0100.mode mode=corrected
+api frame.snapshot name=rc28-stage1-target-post-final-hit-9548-corrected
+api frame.snapshot.list require=rc28-stage1-target-post-final-hit-9548-corrected
+api frame.snapshot.assert-exact name=rc28-stage1-target-post-final-hit-9548-corrected
+api image.compare a=rc28-stage1-target-post-final-hit-9548-legacy b=rc28-stage1-target-post-final-hit-9548-corrected region=FULL hud=hidden
+api checkpoint.load file=stage1-end-level-9988.chqstate run=false
+api tc0100.mode mode=legacy
+api frame.snapshot name=rc28-stage1-end-level-9988-legacy
+api frame.snapshot.list require=rc28-stage1-end-level-9988-legacy
+api frame.snapshot.assert-exact name=rc28-stage1-end-level-9988-legacy
+api tc0100.mode mode=corrected
+api frame.snapshot name=rc28-stage1-end-level-9988-corrected
+api frame.snapshot.list require=rc28-stage1-end-level-9988-corrected
+api frame.snapshot.assert-exact name=rc28-stage1-end-level-9988-corrected
+api image.compare a=rc28-stage1-end-level-9988-legacy b=rc28-stage1-end-level-9988-corrected region=FULL hud=hidden
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+assert status frame=2352
+api frame.snapshot name=rc28-scene-no-sprites sprites=individual
+api frame.snapshot.assert-scene-no-sprites name=rc28-scene-no-sprites
+api frame.snapshot.assert-exact name=rc28-scene-no-sprites requireColumnZero=true
+api tc0100.mode mode=corrected
+api layer.offsets.reset
+api sprite.visual.clear
+api sprite.override.clear
+api timeline.reset
+echo === RC2.8 TC0100SCN and Reliability regression COMPLETE ===
+api release.assert-version
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api frame.snapshot name=rc28-radar-hud-driving sprites=individual
+api frame.snapshot.assert-exact name=rc28-radar-hud-driving requireColumnZero=true
+api frame.snapshot.assert-scene-no-sprites name=rc28-radar-hud-driving
+api checkpoint.load file=stage1-end-level-9988.chqstate run=false
+api frame.snapshot name=rc28-radar-hud-end-results sprites=individual
+api frame.snapshot.assert-exact name=rc28-radar-hud-end-results
+api frame.snapshot.assert-scene-no-sprites name=rc28-radar-hud-end-results
+api registry.list
+echo === RC2.8 radar/HUD/end-state captures complete ===
+echo === RC2.9 target health/tooling regression ===
+api release.assert-version
+api schema action=game.target.one-hit
+api schema action=control.run-frames
+api game.target.one-hit enabled=false
+api checkpoint.load file=stage1-target-immediate-pre-damage-6333.chqstate run=false
+echo PASS canonical 6333 target counter = 000E
+api game.target.one-hit enabled=true
+api control.run-frames frames=2 timeout=900000
+echo PASS one-hit preserved authentic terminal underflow
+api control.run-frames frames=14 timeout=900000
+echo PASS one-hit entered authentic defeat mode
+api game.experiment.status
+api game.target.one-hit enabled=false
+api patch.clear
+api input.ioc.clear
+api collision.response.reset
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+assert status frame=2352
+echo === RC2.9 target health/tooling regression complete ===
+echo === RC3.0 live course mapping/survey regression ===
+api release.assert-version
+api schema action=course.follow.status
+api schema action=course.follow.configure
+api schema action=course.survey.start
+api schema action=track.map.export
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api course.follow.configure controller=hybrid lookahead=4 bias=0 speedControl=true
+api course.follow.reset
+api course.survey.start collisionResponse=false timerHold=true
+api track.record.sample
+api control.run-frames frames=30 timeout=900000
+api track.record.sample
+api control.run-frames frames=30 timeout=900000
+api track.record.sample
+api course.follow.status
+api track.record.status
+api track.map.export name=regression-rc30-course-map
+api course.survey.stop
+api course.follow.configure controller=hybrid lookahead=8 bias=0 speedControl=false
+api patch.clear
+api input.ioc.clear
+api collision.response.reset
+api timer.hold enabled=false
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+assert status frame=2064
+echo === RC3.0 live course mapping/survey regression complete ===
+echo === RC3.1 course mapping data-quality regression ===
+api release.assert-version
+api schema action=course.follow.configure
+api schema action=course.survey.start
+api schema action=track.map.export
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api course.follow.configure controller=hybrid lookahead=4 bias=0 speedControl=true
+api course.follow.reset
+api course.survey.start collisionResponse=false timerHold=true
+api track.record.sample
+api control.run-frames frames=30 timeout=900000
+api track.record.sample
+api control.run-frames frames=30 timeout=900000
+api track.record.sample
+api track.record.status
+api track.map.export name=regression-rc31-course-map-quality
+api course.survey.stop
+api course.follow.configure controller=hybrid lookahead=8 bias=0 speedControl=false
+api patch.clear
+api input.ioc.clear
+api collision.response.reset
+api timer.hold enabled=false
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+assert status frame=2064
+echo === RC3.1 course mapping data-quality regression complete ===
+echo === ChaseHQ Current Platform Contracts: BEGIN ===
+api release.assert-version
+api schema action=script.run
+api schema action=checkpoint.save
+api status
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api gameplay.registry
+api track.state
+legacytrace reset
+legacytrace cpu A
+legacytrace mem 10A04A:10A04B r
+legacytrace context 0 0
+legacytrace max 256
+legacytrace output evidence\regression-current-platform-trace.log
+legacytrace start
+api control.run-frames frames=4
+legacytrace stop
+api checkpoint.save file=regression-current-platform-checkpoint.chqstate
+api checkpoint.list
+api script.runs limit=5
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api gameplay.registry
+api track.state
+api track.records before=1 after=1
+api script.runs limit=5
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api status
+echo === ChaseHQ Current Platform Contracts: COMPLETE ===
+echo === ChaseHQ v0.66.9.3-RC3 Tooling Regression: BEGIN ===
+api release.assert-version
+api schema action=sprite.shadow.compare
+api schema action=query.runtime
+api schema action=corpus.run
+api schema action=script.run.verify
+api script.schema
+wait 25
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api sprite.shadow.compare scope=visible failOnMismatch=false
+api memory.read cpu=A address=1002AE width=16
+api memory.read cpu=A address=1002D8 width=16
+api query.runtime function=getmaps()
+api query.runtime function=getregistry()
+api status
+api corpus.run checkpoints=stage1-driving-2352.chqstate,stage1-gameplay-2064.chqstate action=sprite.shadow.compare scope=visible failOnMismatch=false
+api query.runtime function=gettrackrecords(before=1,after=1)
+api script.runs limit=5
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api status
+echo === ChaseHQ v0.66.9.3-RC3 Tooling Regression: COMPLETE ===
+echo === ChaseHQ v0.66.9.3 Final Release Capability Regression: BEGIN ===
+api release.assert-version
+api schema action=sprite.layer-shadow.compare
+api schema action=memory.trace.start
+api schema action=collision.events
+api schema action=audio.events
+api schema action=input.steering.set
+api schema action=gameplay.registry
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api sprite.layer-shadow.compare failOnMismatch=true output=v06693-shadow-2352.json
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api sprite.layer-shadow.compare failOnMismatch=true output=v06693-shadow-2064.json
+api checkpoint.load file=stage1-target-immediate-pre-contact-5587.chqstate run=false
+api sprite.layer-shadow.compare failOnMismatch=true output=v06693-shadow-5587.json
+api checkpoint.load file=stage1-target-first-physical-contact-5588.chqstate run=false
+api sprite.layer-shadow.compare failOnMismatch=true output=v06693-shadow-5588.json
+api checkpoint.load file=stage1-target-immediate-pre-damage-6333.chqstate run=false
+api sprite.layer-shadow.compare failOnMismatch=true output=v06693-shadow-6333.json
+api checkpoint.load file=stage1-target-first-damage-6334.chqstate run=false
+api sprite.layer-shadow.compare failOnMismatch=true output=v06693-shadow-6334.json
+api checkpoint.load file=stage1-target-post-final-hit-9548.chqstate run=false
+api sprite.layer-shadow.compare failOnMismatch=true output=v06693-shadow-9548.json
+api checkpoint.load file=stage1-end-level-9988.chqstate run=false
+api sprite.layer-shadow.compare failOnMismatch=true output=v06693-shadow-9988.json
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api memory.trace.clear
+api memory.trace.start cpu=A address=100200 length=2 width=any limit=128 access=read
+api control.run-frames frames=2
+api memory.trace.status
+api memory.trace.tail count=20
+api memory.trace.stop
+api memory.trace.clear
+api collision.events.clear
+api collision.events count=10
+api audio.events.clear
+api audio.events count=10
+api gameplay.registry
+api objects.list
+api audio.capabilities
+api input.ioc.clear
+api input.steering.set value=0000
+api sprite.visual.clear
+api sprite.override.clear
+api patch.clear
+api palette.overrides.clear
+api collision.response.reset
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api status
+echo === ChaseHQ v0.66.9.3 Final Release Capability Regression: COMPLETE ===
+echo === ChaseHQ v0.66.9.4 Final Release Regression: BEGIN ===
+api release.assert-version
+api schema action=sprite.asset-replace
+api patch.clear
+api input.ioc.clear
+api input.steering.set value=0000
+api sprite.visual.clear
+api sprite.override.clear
+api sprite.map-override.clear
+api sprite.asset-replace.clear
+api hud.layout.reset
+api backend.sprite.set mode=original
+api checkpoint.load file=stage2-gameplay-7500.chqstate run=false
+api control.run-frames frames=4
+api frame.capture name=v06694-final-player-authentic
+api checkpoint.load file=stage2-gameplay-7500.chqstate run=false
+api sprite.asset-replace object=player_car.body target=190 format=obj-b64 palette=73 flipx=1 dx=0 dy=0
+api control.run-frames frames=4
+assert status sprite_backend=native
+assert status sprite_asset_overrides=1
+assert status sprite_asset_visible=1
+api frame.capture name=v06694-final-player-yellow-target-straight
+api input.steering.set value=0060
+api control.run-frames frames=30
+assert status sprite_asset_visible=1
+api frame.capture name=v06694-final-player-yellow-target-steer-right
+api input.steering.set value=0FA0
+api control.run-frames frames=60
+assert status sprite_asset_visible=1
+api frame.capture name=v06694-final-player-yellow-target-steer-left
+api input.steering.set value=0000
+api sprite.asset-replace.clear
+api backend.sprite.set mode=original
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api sprite.layer-shadow.compare failOnMismatch=true output=v06694-final-stage1-shadow.json
+api hud.layout.set element=speed visible=false dx=0 dy=0
+api input.ioc.xor port=3 mask=20
+api control.run-frames frames=120
+api input.ioc.clear
+api frame.snapshot name=v06694-final-speed-hidden-after-acceleration
+assert status hud_speed_region_empty=1
+api text.charset.export palette=0 scale=1
+api backend.sprite.set mode=original
+api sprite.asset-replace.clear
+api sprite.map-override.clear
+api game.beacon.override mode=authentic
+api hud.layout.reset
+api input.steering.set value=0000
+api patch.clear
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+assert status sprite_backend=original
+assert status sprite_asset_overrides=0
+api status
+echo === ChaseHQ v0.66.9.4 Final Release Regression: COMPLETE ===
+echo === ChaseHQ v0.66.9.5-RC1.1 Corrective Regression: BEGIN ===
+api release.assert-version
+api memory.trace.clear
+api events.clear
+api collision.response.reset
+api collision.events.clear
+api game.target.one-hit enabled=false
+api game.speed.clear
+api sprite.asset-replace.clear
+api sprite.map-override.clear
+api sprite.override.clear
+api sprite.visual.clear
+api patch.clear
+api palette.overrides.clear
+api hud.layout.reset
+api game.beacon.override mode=authentic
+api input.ioc.clear
+api input.steering.set value=0000
+api backend.sprite.set mode=original
+echo === RC1 A: SEMANTIC ASSET LIVE/SNAPSHOT PARITY ===
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api backend.sprite.set mode=native
+api sprite.asset-replace source=516 target=190 format=obj-b64 palette=73 flipx=1 dx=0 dy=0
+api control.run-frames frames=5
+assert status sprite_asset_visible=1
+api frame.snapshot.parity name=rc1-player-asset-parity require=true
+api sprite.asset-resolve
+api sprite.asset-replace.clear
+assert status sprite_asset_visible=0
+echo === RC1 B: MAP509 SEMANTIC PLAYER FAMILY ===
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api game.speed.freeze enabled=true value=602
+api input.steering.set value=0060
+api sprite.asset-replace object=player_car.body target=190 format=obj-b64 palette=73 flipx=1 dx=0 dy=0
+api control.run-frames frames=12
+assert status sprite_asset_visible=1
+api sprite.asset-resolve
+api frame.snapshot.parity name=rc1-player-map509-semantic-parity require=true
+api sprite.asset-replace.clear
+api game.speed.clear
+api input.steering.set value=0000
+echo === RC1 C: 32-BIT FIXED-POINT SPEED FREEZE ===
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api game.speed.freeze enabled=true value=602
+api control.run-frames frames=4
+echo PASS game.speed.freeze holds 0x025A0000 across game writer
+api patch.list
+api game.speed.clear
+echo === RC1 D: COUPLED BEACON PHASE/REQUEST OVERRIDE ===
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api game.beacon.override mode=on
+echo PASS beacon Force ON phase=6
+echo PASS beacon Force ON request=FFFF
+api control.run-frames frames=1
+api game.beacon.get
+api checkpoint.load file=stage1-target-immediate-pre-damage-6333.chqstate run=false
+api game.beacon.override mode=off
+echo PASS beacon Force OFF phase=0
+echo PASS beacon Force OFF request=0
+api control.run-frames frames=1
+api game.beacon.get
+api game.beacon.override mode=authentic
+echo === RC1 E: TARGET-CONTACT STRUCTURED EVENT SURFACE ===
+api checkpoint.load file=stage1-target-immediate-pre-contact-5587.chqstate run=false
+api collision.events.clear
+api control.run-frames frames=4
+api collision.events count=50
+echo === RC1 F: CLEANUP CONTRACT ===
+api memory.trace.clear
+api collision.response.reset
+api collision.events.clear
+api game.target.one-hit enabled=false
+api game.speed.clear
+api sprite.asset-replace.clear
+api sprite.map-override.clear
+api sprite.override.clear
+api sprite.visual.clear
+api patch.clear
+api palette.overrides.clear
+api hud.layout.reset
+api game.beacon.override mode=authentic
+api input.ioc.clear
+api input.steering.set value=0000
+api backend.sprite.set mode=original
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api status
+echo === ChaseHQ v0.66.9.5-RC1.1 Corrective Regression: COMPLETE ===
+echo === ChaseHQ v0.66.9.5-RC2 Focused Regression: BEGIN ===
+api release.assert-version
+api memory.trace.clear
+api events.clear
+api collision.response.reset
+api collision.events.clear
+api game.target.one-hit enabled=false
+api game.speed.clear
+api game.beacon.override mode=authentic
+api sprite.asset-replace.clear
+api sprite.map-override.clear
+api sprite.override.clear
+api sprite.visual.clear
+api patch.clear
+api palette.overrides.clear
+api hud.layout.reset
+api input.ioc.clear
+api input.steering.set value=0000
+api backend.sprite.set mode=original
+echo === RC2 A: DIRECT ROM ATLAS EXPORT ===
+api sprite.rom-atlas.export start=516 end=520 format=obj-b64 palette=65 name=rc2-rom-atlas-smoke
+echo === RC2 B: SOURCE / EFFECTIVE SPRITE INSPECTION ===
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api sprite.override slot=45 map=522 palette=65
+api sprite.inspect slot=45
+api sprites.list
+api sprite.override.clear
+echo === RC2 C: PLAYER POSITIVE-BAND SEMANTIC COVERAGE ===
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api control.run-frames frames=300
+api sprite.asset-replace object=player_car.body target=190 format=obj-b64 palette=73 flipx=1 dx=0 dy=0
+api control.run-frames frames=1
+assert status sprite_asset_visible=1
+api sprite.asset-resolve
+api sprite.asset-replace.clear
+echo === RC2 D: BEACON FORCE-ON AUTHENTIC PIPELINE LATENCY ===
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api game.beacon.override mode=on
+api control.run-frames frames=4
+assert status beacon_live_present=1
+api game.beacon.get
+echo === RC2 E: BEACON FORCE-OFF AUTHENTIC PIPELINE LATENCY ===
+api checkpoint.load file=stage1-target-immediate-pre-damage-6333.chqstate run=false
+api game.beacon.override mode=off
+api control.run-frames frames=3
+assert status beacon_live_present=0
+api game.beacon.get
+api game.beacon.override mode=authentic
+echo === RC2 F: RC1.1 CORRECTIVE CONTRACT CARRY-FORWARD ===
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api game.speed.freeze enabled=true value=602
+api control.run-frames frames=4
+echo PASS game.speed.freeze still holds 0x025A0000
+api game.speed.clear
+api checkpoint.load file=stage1-target-immediate-pre-contact-5587.chqstate run=false
+api collision.events.clear
+api control.run-frames frames=4
+api collision.events count=50
+echo === ChaseHQ v0.66.9.5-RC2 Focused Regression: BODY COMPLETE ===
+api memory.trace.clear
+api events.clear
+api collision.response.reset
+api collision.events.clear
+api game.target.one-hit enabled=false
+api game.speed.clear
+api game.beacon.override mode=authentic
+api sprite.asset-replace.clear
+api sprite.map-override.clear
+api sprite.override.clear
+api sprite.visual.clear
+api patch.clear
+api palette.overrides.clear
+api hud.layout.reset
+api input.ioc.clear
+api input.steering.set value=0000
+api backend.sprite.set mode=original
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api status
+echo === ChaseHQ v0.66.9.5-RC2 Focused Regression: COMPLETE ===
+echo === ChaseHQ v0.66.9.5-RC3 Focused Regression: BEGIN ===
+api release.assert-version
+api sprite.override.clear
+api sprite.visual.clear
+api sprite.map-override.clear
+api sprite.asset-replace.clear
+api patch.clear
+api input.ioc.clear
+api input.steering.set value=0000
+api game.beacon.override mode=authentic
+echo === RC3 PROMOTION API / SHADOW ===
+api backend.sprite.reset-verification
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api backend.sprite.set mode=shadow
+api control.run-frames frames=4
+api backend.sprite.get
+api native.promotion.status subsystem=sprites
+api native.layer.capture subsystem=sprites name=rc3-focused-stage1
+echo === RC3 NATIVE-ONLY HARD DISABLE ===
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api backend.sprite.set mode=native-only
+api control.run-frames frames=4
+api backend.sprite.get
+api native.promotion.status subsystem=sprites
+api native.promotion.assert subsystem=sprites minShadowFrames=4 minNativeOnlyFrames=4
+api native.progress
+echo === RC3 STAGE2 NATIVE-ONLY SMOKE ===
+api checkpoint.load file=stage2-gameplay-7500.chqstate run=false
+api backend.sprite.set mode=native-only
+api control.run-frames frames=4
+api backend.sprite.get
+api native.promotion.assert subsystem=sprites minShadowFrames=4 minNativeOnlyFrames=8
+echo === ChaseHQ v0.66.9.5-RC3 Focused Regression: BODY COMPLETE ===
+api backend.sprite.set mode=original
+api sprite.override.clear
+api sprite.visual.clear
+api sprite.map-override.clear
+api sprite.asset-replace.clear
+api patch.clear
+api input.ioc.clear
+api input.steering.set value=0000
+api game.beacon.override mode=authentic
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api status
+echo === ChaseHQ v0.66.9.5-RC3 Focused Regression: COMPLETE ===
+echo === v0.67.0-RC1.1 native sprite forensic coverage corrective ===
+api release.assert-version
+api sprite.override.clear
+api sprite.visual.clear
+api sprite.map-override.clear
+api sprite.asset-replace.clear
+api patch.clear
+api hud.layout.reset
+api layer.offsets.reset layer=all
+echo === NATIVE SPRITE DEFAULT / PROMOTED PATH ===
+api backend.sprite.set mode=native
+api backend.sprite.get
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api control.run-frames frames=8
+api checkpoint.load file=stage2-gameplay-7500.chqstate run=false
+api control.run-frames frames=8
+api backend.sprite.get
+echo === NATIVE SPRITE FORENSIC OVERLAP COVERAGE ===
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api frame.snapshot name=rc11-native-sprite-ownership
+api sprite.visual slot=82 mode=solo
+api frame.snapshot name=rc11-native-sprite-body-solo
+api sprite.visual slot=81 mode=solo
+api frame.snapshot name=rc11-native-sprite-shadow-solo
+api sprite.visual.clear
+api frame.snapshot.assert-overlap name=rc11-native-sprite-ownership front=82 back=81 frontSolo=rc11-native-sprite-body-solo backSolo=rc11-native-sprite-shadow-solo
+echo === TC0100SCN TEXT SHADOW BRING-UP ===
+api backend.text.reset-verification
+api backend.text.set mode=shadow
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api control.run-frames frames=8
+api backend.text.get
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api control.run-frames frames=8
+api backend.text.get
+api checkpoint.load file=stage2-gameplay-7500.chqstate run=false
+api control.run-frames frames=8
+api backend.text.get
+echo === ZERO OUTPUT REFERENCE ===
+api checkpoint.load file=stage1-end-level-9988.chqstate run=false
+api control.run-frames frames=2
+api backend.text.get
+echo === v0.67.0-RC1.1 regression body complete ===
+api sprite.override.clear
+api sprite.visual.clear
+api sprite.map-override.clear
+api sprite.asset-replace.clear
+api patch.clear
+api hud.layout.reset
+api layer.offsets.reset layer=all
+api backend.sprite.set mode=native
+api backend.text.set mode=shadow
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api status
+echo === v0.67.0-RC1.1 native sprite forensic coverage corrective complete ===
+echo === v0.67.0-RC4.2.1 CHQPACK content boundary ===
+api release.assert-version
+api sprite.override.clear
+api sprite.visual.clear
+api sprite.map-override.clear
+api sprite.asset-replace.clear
+api patch.clear
+api hud.layout.reset
+api layer.offsets.reset layer=all
+echo === PROMOTED NATIVE DISPLAY PATHS ===
+api backend.sprite.set mode=native
+api backend.text.set mode=native
+api backend.sprite.get
+api backend.text.get
+echo === TC0100SCN BG SHADOW ===
+api backend.bg.reset-verification
+api backend.bg.set mode=shadow
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api control.run-frames frames=8
+api backend.bg.get
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api control.run-frames frames=8
+api backend.bg.get
+api checkpoint.load file=stage1-target-first-damage-6334.chqstate run=false
+api control.run-frames frames=8
+api backend.bg.get
+api checkpoint.load file=stage2-gameplay-7500.chqstate run=false
+api control.run-frames frames=8
+api backend.bg.get
+api checkpoint.load file=stage2-enemy-10514.chqstate run=false
+api control.run-frames frames=8
+api backend.bg.get
+echo === STRUCTURED FRAME WITH NATIVE SPRITES/TEXT + BG SHADOW ===
+api frame.snapshot name=rc2-native-display-bg-shadow-stage2
+api frame.snapshot.assert-exact name=rc2-native-display-bg-shadow-stage2
+echo === v0.67.0-RC4.2.1 regression body complete ===
+api sprite.override.clear
+api sprite.visual.clear
+api sprite.map-override.clear
+api sprite.asset-replace.clear
+api patch.clear
+api hud.layout.reset
+api layer.offsets.reset layer=all
+api backend.sprite.set mode=native
+api backend.text.set mode=native
+api backend.bg.set mode=shadow
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api status
+echo === v0.67.0-RC4.2.1 CHQPACK content boundary complete ===
+echo === RC4.3 Native foundation: BEGIN ===
+api release.assert-version
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api status
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+echo === RC4.3 Native foundation: COMPLETE ===
+echo === ChaseHQ Full Regression: COMPLETE ===

@@ -1,0 +1,14 @@
+﻿{
+    "schema":  "chq-course-map-summary-v2",
+    "sampleCount":  3,
+    "surfaceCandidateCount":  1,
+    "surfaceSegmentCount":  1,
+    "rawSurfaceRenderVariantCount":  3,
+    "rawSpriteRowCount":  131,
+    "eligibleObjectCandidateSourceRowCount":  131,
+    "objectCandidateRowCount":  131,
+    "objectCandidateCoverage":  1,
+    "objectCandidateTrackCount":  46,
+    "persistentObjectCandidateTrackCount":  43,
+    "confirmedTargetSamples":  3
+}

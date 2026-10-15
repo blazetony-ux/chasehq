@@ -2,44 +2,389 @@
   "schema": "chq-next-steps-v1",
   "items": [
     {
-      "title": "TC0100SCN text origin and flip",
+      "title": "RC6.3.33 - genuine CPU-B checkpoint differential replay at multiple frame bounds",
+      "status": "SOURCE CANDIDATE - GENUINE WINDOWS CHQ6332 PRIOR EVIDENCE PASS; RC6.3.33 FRESH WINDOWS PENDING",
+      "detail": "Separate original-ROM, generated CPU-B Ghidra TST.W+BEQ native and forced-ROM-rollback processes at frame 6337 and 6340; strict parity on CPU/flags/cycles, mapped R16, ordered IRQ, machine endstate, raw bus; digest inputs; rerun high bound to confirm determinism. Genuine mismatch invokes checkpoint-prefix reducer and witness. Never claim complete CPU-B function promotion."
+    },
+    {
+      "title": "RC6.3.33 - first-divergence reduction and controlled negative comparison",
+      "status": "GO TESTS PASS - NEGATIVE FIXTURE LABELLED; FRESH WINDOWS PENDING",
+      "detail": "A DIFFERING genuine native stream triggers automatic RC6.3.32 executor-backed reducer; mutation of copied genuine state trace only tests witness detection, not an actual ROM-native defect. No input-event minimization or untested-bound monotonicity guarantee."
+    },
+    {
+      "title": "RC6.3.33 - Windows native reconstruct and full regression",
+      "status": "PENDING - WINDOWS REAL ROM AND FRESH QUALIFY",
+      "detail": "New-Item -ItemType Directory -Force 'C:\\Projects\\Evidence' | Out-Null; .\\chqdev.bat build debug; if ($LASTEXITCODE -eq 0) { .\\chqdev.bat native reconstruct --fresh --live-health --cpu-b-live --out C:\\Projects\\Evidence\\CHQ6333 }; require genuine replay and rollback PASS, native reconstruct PASS, then qualify --fresh Windows 18/18 CTest, focused Run001 10 commands, Full Run002 1153, package SHA and Workbench/mobile readiness; one evidence ZIP."
+    },
+    {
+      "title": "RC6.3.34+ - function-wide Ghidra CFG, autonomous candidate selection and multi-native scheduling",
+      "status": "P0 - BLOCKED UNTIL WHOLE-FUNCTION PROOF",
+      "detail": "Resolve CPU-B alternate 0x0518, true initial 0x100802 producer, full function CFG entry/caller/exit plus unsupported opcodes; implement complete-generated-C++ parity, input-event replay reduction, scheduler-safe multi-routine native composition and rollback. Do not confuse bounded two-opcode parity with completed native conversion."
+    },
+    {
+      "title": "RC6.3.32 - checkpoint executable replay and first-divergence reduction",
+      "status": "HISTORICAL - RC6.3.32 WINDOWS NATIVE RECONSTRUCT AND FRESH QUALIFY PASSED",
+      "detail": "chqdev native minimize reads declarative plan, same SHA-pinned checkpoint and executable provenance, separately launches original/native processes per frame bound, compares isolated traces and binary bisects a reproduced mismatch. Confirms bound by an independent subprocess re-run. This is a replay tool, not full function parity, event-input minimization or monotonic proof; nativePromotionAllowed=false."
+    },
+    {
+      "title": "RC6.3.32 - CPU-B 0x04A8 writer and full CFG dependency report",
+      "status": "Genuine RC6.3.31 35 events support 0x04A8 writer; full function remains BLOCKED",
+      "detail": "At 0x100802 CPU B PC 0x04A8 overwrites 0x80 with 0x80 35 times in five windows, zero bit7 changes, 0x050E BTST leads to 0x0516 BNE→0x052C. Missing initial producer, unobserved 0x0518, static CFG entries/callers/exits and scheduler/IRQ parity remain explicit."
+    },
+    {
+      "title": "RC6.3.32 - Windows acceptance and full regression",
+      "status": "PENDING - ORIGINAL-ROM WINDOWS NATIVE + FRESH QUALIFICATION",
+      "detail": "New-Item -ItemType Directory -Force 'C:\\Projects\\Evidence' | Out-Null; .\\chqdev.bat build debug; if ($LASTEXITCODE -eq 0) { .\\chqdev.bat native reconstruct --fresh --live-health --cpu-b-live --out C:\\Projects\\Evidence\\CHQ6332 }; require RC6.3.32 boundary confidence PASS, synthetic executable replay smoke PASS clearly tagged synthetic; CHQ6332.zip; then qualify --fresh, 18/18 CTests, Run001 10 commands, Run002 1153 commands. Do NOT infer complete-native function or genuine original/native replay from synthetic test."
+    },
+    {
+      "title": "RC6.3.33+ - real function-wide replay / input-event minimization / native composition",
+      "status": "P0 - BLOCKED",
+      "detail": "Produce actual original/native/forced differential traces from same real checkpoint, minimize controlled inputs by replay, resolve 0x0518 plus complete Ghidra CFG/callers/indirect exits, compile whole supported function and verify CPU flags/bus/memory/cycles/IRQ scheduling and safe fallback across simultaneous replacements."
+    },
+    {
+      "title": "RC6.3.31 - autonomous multi-source CPU-B function-boundary and writer dossier",
+      "status": "HISTORICAL - GENUINE RC6.3.31 WINDOWS NATIVE + FRESH QUALIFICATION PASS",
+      "detail": "Genuine RC6.3.30 sample has byte 0x80 on 35 sampled BTST/BNE visits. RC6.3.31 adds opt-in CPU A/B bus-write witness of 0x100802 and joins it with Ghidra sites and observed CPU-B PC edges in cpu-b-automated-function-and-writer-dossier.json. Zero captured writes is UNKNOWN PRECHECKPOINT PRODUCER, not proven no writer. Shared-RAM alias/callers/full CFG and 0x0518 remain unverified, nativePromotionAllowed=false."
+    },
+    {
+      "title": "RC6.3.31 - reusable first-divergence trace witness",
+      "status": "HISTORICAL - GENUINE RC6.3.31 WINDOWS NATIVE + FRESH QUALIFICATION PASS",
+      "detail": "chqdev native diagnose --candidate ID --original FILE --native FILE --out JSON produces hashes, first divergent line, preceding context and explicit inputScenarioMinimized=false. It is not autonomous replay or actual scenario minimization; next milestone should wire into new full-function candidates with reproducible fixtures and automatic rerun."
+    },
+    {
+      "title": "RC6.3.31 - single Windows acceptance and Full Regression",
+      "status": "HISTORICAL - GENUINE RC6.3.31 WINDOWS NATIVE + FRESH QUALIFICATION PASS",
+      "detail": "New-Item -ItemType Directory -Force 'C:\\Projects\\Evidence' | Out-Null; .\\chqdev.bat build debug; if ($LASTEXITCODE -eq 0) { .\\chqdev.bat native reconstruct --fresh --live-health --cpu-b-live --out C:\\Projects\\Evidence\\CHQ6331 }; require M2-CPU-B-autonomous-function-frontier-and-writer-dossier PASS, CHQDEV NATIVE RECONSTRUCT PASS and CHQ6331.zip. Then .\\chqdev.bat qualify --fresh, 18/18 CTest and Focused Run001 10 commands and Full Regression Run002 1153 commands. Use actual runId metadata."
+    },
+    {
+      "title": "RC6.3.32 onward - complete function CFG and automatic real differential rerun/minimisation",
+      "status": "P0 - BLOCKED AND NOT PROMOTED",
+      "detail": "Probe genuine producer and separately classified forced 0x0518 path. Establish full Ghidra CFG/callers/indirect exits and supported generated C++ for entire function. Drive independent original/native/forced rollback whole-function parity, input reduction via actual replay, fail-closed promotion plus multi-routine IRQ/scheduling composition; evidence cache and automatic selection."
+    },
+    {
+      "title": "RC6.3.30 - authentic CPU-B 0x050E BTST source byte to 0x0516 Z flag",
+      "status": "HISTORICAL - GENUINE RC6.3.30 WINDOWS NATIVE + FRESH QUALIFICATION PASS",
+      "detail": "Ghidra-authenticated BTST.B #7,(0x00100802).L reads byte at CPU-B 0x100802. RC6.3.30 captures actual read-only byte at 0x050E hook and immediate 0x0516 SR, ordinal, frame and next PC. Correlate against genuine Ghidra/original-ROM hooks and 0x0516 BNE taken nextPC; require new genuine observations, never promote synthetic byte fixture to ROM observation."
+    },
+    {
+      "title": "RC6.3.30 - consolidated Windows original-ROM native gate and full regression",
+      "status": "HISTORICAL - GENUINE RC6.3.30 WINDOWS NATIVE + FRESH QUALIFICATION PASS",
+      "detail": "New-Item -ItemType Directory -Force 'C:\\Projects\\Evidence' | Out-Null; .\\chqdev.bat build debug; if ($LASTEXITCODE -eq 0) { .\\chqdev.bat native reconstruct --fresh --live-health --cpu-b-live --out C:\\Projects\\Evidence\\CHQ6330 }; require M2-CPU-B-original-ROM-050E-BTST-source-bit7 PASS, CHQDEV NATIVE RECONSTRUCT PASS, evidence ZIP CHQ6330.zip. Only then .\\chqdev.bat qualify --fresh with Windows 18/18 CTests and Focused Run001 + Full Regression Run002 (1153 commands). Use run-metadata actual run IDs and auto evidence ZIPs."
+    },
+    {
+      "title": "RC6.3.30 - retain authentic vs controlled research separation",
+      "status": "HISTORICAL - GENUINE RC6.3.30 WINDOWS NATIVE + FRESH QUALIFICATION PASS",
+      "detail": "Five genuine RC6.3.29 checkpoint cases all Z=0, BNE from 0x0516 to 0x052C. 0x0518 still unseen, even if source-byte Z=1 can be forced in a separate research-only experiment, such evidence cannot be classified original/unmodified. CPU-B full CFG, unknown indirect entry/exit, IRQ scheduling parity and autonomous native promotion remain BLOCKED."
+    },
+    {
+      "title": "RC6.3.29 - original-ROM CPU-B equal cycle verifier correction",
+      "status": "HISTORICAL: GENUINE WINDOWS NATIVE AND FRESH QUALIFICATION PASSED",
+      "detail": "Immutable RC6.3.28 source ZIP 18b2a4a5c32aa750e57eb525fc6b29697b7db77acca420268e084f7ce8a3ab4f; 35 genuine BNE next-PC+SR samples agree with Ghidra, hooks and original ROM edge counts when equal cyclesB snapshots are permitted; strictly lower cycles, flags, opcode and ordinal mismatches still FAIL; 0x0518 unobserved; whole-function native promotion prohibited."
+    },
+    {
+      "title": "RC6.3.29 - one native Windows ZIP, then qualify fresh",
+      "status": "HISTORICAL: GENUINE WINDOWS NATIVE AND FRESH QUALIFICATION PASSED",
+      "detail": "New-Item -ItemType Directory -Force 'C:\\Projects\\Evidence' | Out-Null; .\\chqdev.bat build debug; if ($LASTEXITCODE -eq 0) { .\\chqdev.bat native reconstruct --fresh --live-health --cpu-b-live --out C:\\Projects\\Evidence\\CHQ6329 }; require M2-CPU-B-original-ROM-0516-BNE-condition-and-next-PC PASS and CHQDEV NATIVE RECONSTRUCT PASS and CHQ6329.zip. Then .\\chqdev.bat qualify --fresh requiring 18/18 CTests, focused 10 commands, Full Regression 1153 commands. Upload both evidence bundle ZIPs, use actual run-metadata runIds; RC6.3.27 qualified baseline remains immutable."
+    },
+    {
+      "title": "RC6.3.29 - preserve ROM vs synthetic provenance and safe promotion policy",
+      "status": "HISTORICAL: GENUINE WINDOWS NATIVE AND FRESH QUALIFICATION PASSED",
+      "detail": "All new next-PC replay data in CHQ6328.zip is authentic original-ROM (35 visits) and distinct from earlier RC6.3.27 integration with synthetic new columns. No forcing of 0x0518 is authentic, no whole-function CPU-B CFG, IRQ/scheduling or native autonomous promotion verified."
+    },
+    {
+      "title": "RC6.3.28 - original-ROM CPU-B BNE branch condition and next-PC provenance",
+      "status": "HISTORICAL — WINDOWS NATIVE BNE GATE FAILED; NOT QUALIFIED",
+      "detail": "Genuine CHQ6328.zip 1007/1007 manifest verified; MSVC build PASS; new M2 0x0516 original BNE next-PC gate FAIL natural row 1 due to analyser nc<=cycle rejecting valid equal batch cycles. Complete isolated corrected real Ghidra and 35 original ROM BNE observations PASS. This release must stay immutable, no qualify."
+    },
+    {
+      "title": "RC6.3.28 - one Windows native acceptance ZIP, then fresh qualify",
+      "status": "HISTORICAL — WINDOWS NATIVE BNE GATE FAILED; NOT QUALIFIED",
+      "detail": "Genuine CHQ6328.zip 1007/1007 manifest verified; MSVC build PASS; new M2 0x0516 original BNE next-PC gate FAIL natural row 1 due to analyser nc<=cycle rejecting valid equal batch cycles. Complete isolated corrected real Ghidra and 35 original ROM BNE observations PASS. This release must stay immutable, no qualify."
+    },
+    {
+      "title": "RC6.3.31 onward - investigate controlled Z=1 path separately from original ROM and expand enclosing CPU-B CFG",
+      "status": "P0 OPEN - CONTROLLED EXPLORATION NEEDED, NOT NATIVE",
+      "detail": "Find authentic condition generating SR.Z=1 at CPU-B 0x0516; survey additional checkpoints/ROM paths without forcing the result into the original category. If using controlled intervention, label it MODIFIED, require independent Ghidra 0x0518/CFG/ABI and restore authentic comparisons. Function closure and autonomous native promotion blocked."
+    },
+    {
+      "title": "RC6.3.27 - original-ROM CPU-B IRQ vector/stack bus capture",
+      "status": "HISTORICAL - WINDOWS QUALIFIED 2026-10-15",
+      "detail": "Real CHQ6327 five-case ACK/vector/PC+SR bus-order gate PASS, native reconstruct PASS, Windows 18/18 CTests, focused Run001 10 commands, Full Regression Run002 1153 commands PASS. Workbench session 20261015_164508; immutable source SHA256 deaf140c0ee129804785ee2c9026af240d7ee9d5806c77095eead93795932b39. Original-ROM BNE 0x0516 had 35 samples with no 0x0518 successor."
+    },
+    {
+      "title": "RC6.3.27 - native Windows acceptance then fresh qualify",
+      "status": "HISTORICAL - WINDOWS QUALIFIED 2026-10-15",
+      "detail": "Real CHQ6327 five-case ACK/vector/PC+SR bus-order gate PASS, native reconstruct PASS, Windows 18/18 CTests, focused Run001 10 commands, Full Regression Run002 1153 commands PASS. Workbench session 20261015_164508; immutable source SHA256 deaf140c0ee129804785ee2c9026af240d7ee9d5806c77095eead93795932b39. Original-ROM BNE 0x0516 had 35 samples with no 0x0518 successor."
+    },
+    {
+      "title": "RC6.3.27 - remaining CPU-B function and IRQ boundary research",
+      "status": "HISTORICAL - WINDOWS QUALIFIED 2026-10-15",
+      "detail": "Real CHQ6327 five-case ACK/vector/PC+SR bus-order gate PASS, native reconstruct PASS, Windows 18/18 CTests, focused Run001 10 commands, Full Regression Run002 1153 commands PASS. Workbench session 20261015_164508; immutable source SHA256 deaf140c0ee129804785ee2c9026af240d7ee9d5806c77095eead93795932b39. Original-ROM BNE 0x0516 had 35 samples with no 0x0518 successor."
+    },
+    {
+      "title": "RC6.3.26 - Windows-qualified dual-bank exception-frame restoration",
+      "status": "HISTORICAL - WINDOWS QUALIFIED 2026-10-15",
+      "detail": "Real CHQ6326 five-case 35/35 CPU-B exception frame PC/SR/USP/ISP and active-SP parity PASS; native reconstruct PASS, 18/18 Windows CTest, focused Run001 10 and Full Regression Run002 1153 commands PASS. Session 20261015_155233; immutable source baseline."
+    },
+    {
+      "title": "RC6.3.26 - CPU-B dual-stack exception-frame corrective",
+      "status": "HISTORICAL - WINDOWS QUALIFIED 2026-10-15",
+      "detail": "RC6.3.26 original-ROM dual-bank frame and restored PC/SR pass five authentic Windows cases, 18/18 Windows CTest and Full Regression 1153 commands; do not relabel immutable qualified source. New IRQ vector bus test belongs to RC6.3.27."
+    },
+    {
+      "title": "RC6.3.26 - Windows native then fresh qualify",
+      "status": "HISTORICAL - WINDOWS QUALIFIED 2026-10-15",
+      "detail": "RC6.3.26 original-ROM dual-bank frame and restored PC/SR pass five authentic Windows cases, 18/18 Windows CTest and Full Regression 1153 commands; do not relabel immutable qualified source. New IRQ vector bus test belongs to RC6.3.27."
+    },
+    {
+      "title": "RC6.3.26 - Remaining CPU-B complete-function and IRQ-vector research",
+      "status": "HISTORICAL - WINDOWS QUALIFIED 2026-10-15",
+      "detail": "RC6.3.26 original-ROM dual-bank frame and restored PC/SR pass five authentic Windows cases, 18/18 Windows CTest and Full Regression 1153 commands; do not relabel immutable qualified source. New IRQ vector bus test belongs to RC6.3.27."
+    },
+    {
+      "title": "RC6.3.25 - CPU-B exception-frame memory and RTE resumed state",
+      "status": "HISTORICAL - WINDOWS BUILD PASS; GENUINE EXCEPTION FRAME AUDIT FAIL",
+      "detail": "Real CHQ6325: first natural RTE ordinal14, saved PC/SR restored but active user A7=0x100800, not popped supervisor frame ISP=0x100400. RC6.3.25 wrongly compared active SP to ISP+6; 35 original ROM frame triplets diagnosed; correction RC6.3.26 pending."
+    },
+    {
+      "title": "RC6.3.25 - Native ROM evidence and fresh qualification",
+      "status": "HISTORICAL - WINDOWS BUILD PASS; GENUINE EXCEPTION FRAME AUDIT FAIL",
+      "detail": "Real CHQ6325: first natural RTE ordinal14, saved PC/SR restored but active user A7=0x100800, not popped supervisor frame ISP=0x100400. RC6.3.25 wrongly compared active SP to ISP+6; 35 original ROM frame triplets diagnosed; correction RC6.3.26 pending."
+    },
+    {
+      "title": "RC6.3.25 - IRQ bus/vector, CPU-B CFG and autonomous gates",
+      "status": "HISTORICAL - WINDOWS BUILD PASS; GENUINE EXCEPTION FRAME AUDIT FAIL",
+      "detail": "Real CHQ6325: first natural RTE ordinal14, saved PC/SR restored but active user A7=0x100800, not popped supervisor frame ISP=0x100400. RC6.3.25 wrongly compared active SP to ISP+6; 35 original ROM frame triplets diagnosed; correction RC6.3.26 pending."
+    },
+    {
+      "title": "RC6.3.24 - Original-ROM CPU-B sampled handler/RTE context",
+      "status": "HISTORICAL - WINDOWS QUALIFIED 2026-10-15",
+      "detail": "RC6.3.24 genuine native reconstruction and 18/18 Windows CTests, focused Run 001 and 1153-command Full Regression Run 002 PASS; 35/35 sampled handler/RTE pairs, no exception-frame RAM or bus/vector proof. Session 20261015_141719; release qualified, preserve immutable."
+    },
+    {
+      "title": "RC6.3.24 - Fresh Windows ROM and release qualification",
+      "status": "HISTORICAL - WINDOWS QUALIFIED 2026-10-15",
+      "detail": "RC6.3.24 genuine native reconstruction and 18/18 Windows CTests, focused Run 001 and 1153-command Full Regression Run 002 PASS; 35/35 sampled handler/RTE pairs, no exception-frame RAM or bus/vector proof. Session 20261015_141719; release qualified, preserve immutable."
+    },
+    {
+      "title": "RC6.3.24 - Next: exception frame and CPU-B function CFG closure",
+      "status": "HISTORICAL - WINDOWS QUALIFIED 2026-10-15",
+      "detail": "RC6.3.24 genuine native reconstruction and 18/18 Windows CTests, focused Run 001 and 1153-command Full Regression Run 002 PASS; 35/35 sampled handler/RTE pairs, no exception-frame RAM or bus/vector proof. Session 20261015_141719; release qualified, preserve immutable."
+    },
+    {
+      "title": "RC6.3.23 - CPU-B original-ROM ordinal-zero analyser corrective",
+      "status": "HISTORICAL - WINDOWS QUALIFIED 2026-10-15",
+      "detail": "RC6.3.23 native ordered-stack audit PASS, 18/18 Windows CTest PASS, focused 10 commands and Full Regression 1153 commands PASS, authentic run IDs 001/002 session 20261015_132943. Preserve immutable source and qualification evidence; no complete-function promotion."
+    },
+    {
+      "title": "RC6.3.23 - Windows acceptance then qualify fresh",
+      "status": "HISTORICAL - WINDOWS QUALIFIED 2026-10-15",
+      "detail": "RC6.3.23 native ordered-stack audit PASS, 18/18 Windows CTest PASS, focused 10 commands and Full Regression 1153 commands PASS, authentic run IDs 001/002 session 20261015_132943. Preserve immutable source and qualification evidence; no complete-function promotion."
+    },
+    {
+      "title": "RC6.3.23 - Next CPU-B research: full CFG and IRQ stack provenance",
+      "status": "HISTORICAL - WINDOWS QUALIFIED 2026-10-15",
+      "detail": "RC6.3.23 native ordered-stack audit PASS, 18/18 Windows CTest PASS, focused 10 commands and Full Regression 1153 commands PASS, authentic run IDs 001/002 session 20261015_132943. Preserve immutable source and qualification evidence; no complete-function promotion."
+    },
+    {
+      "title": "RC6.3.22 - Original-ROM CPU-B sampled chronological stack evidence",
+      "status": "HISTORICAL - WINDOWS BUILD PASS BUT ORDERED HOOK AUDIT FAIL; NOT QUALIFIED",
+      "detail": "CHQ6322 actual ROM/Ghidra run: MSVC build PASS, all preceding M1-M7 gates PASS, M2 ordered stack audit FAIL at natural row 1 because genuine first ordinal 0 was rejected. Evidence ZIP preserved. RC6.3.23 corrective needed; do not retry unchanged RC6.3.22."
+    },
+    {
+      "title": "RC6.3.22 - Windows evidence and fresh release qualification",
+      "status": "HISTORICAL - WINDOWS BUILD PASS BUT ORDERED HOOK AUDIT FAIL; NOT QUALIFIED",
+      "detail": "CHQ6322 actual ROM/Ghidra run: MSVC build PASS, all preceding M1-M7 gates PASS, M2 ordered stack audit FAIL at natural row 1 because genuine first ordinal 0 was rejected. Evidence ZIP preserved. RC6.3.23 corrective needed; do not retry unchanged RC6.3.22."
+    },
+    {
+      "title": "RC6.3.22 - Full CPU-B CFG, IRQ ownership, 0x0518 and Brainstorm P0",
+      "status": "HISTORICAL - WINDOWS BUILD PASS BUT ORDERED HOOK AUDIT FAIL; NOT QUALIFIED",
+      "detail": "CHQ6322 actual ROM/Ghidra run: MSVC build PASS, all preceding M1-M7 gates PASS, M2 ordered stack audit FAIL at natural row 1 because genuine first ordinal 0 was rejected. Evidence ZIP preserved. RC6.3.23 corrective needed; do not retry unchanged RC6.3.22."
+    },
+    {
+      "title": "RC6.3.21 - Ghidra nested BSR/RTS original-ROM audit",
+      "status": "HISTORICAL - FULL WINDOWS QUALIFICATION PASS; IMMUTABLE RC6.3.21",
+      "detail": "Fresh Windows RC6.3.21 original-ROM/Ghidra reconstruct PASS; 18/18 CTests, focused Run 001 10 and Full Regression Run 002 1,153 commands PASS. Qualified archive SHA-256 fbfc6c19131a3a10a28de60449a9716111179fe03cc4285f2f970a0e8646ea3a recorded by qualifier. CPU-B nested counts verified; temporal proof and full function still blocked until RC6.3.22."
+    },
+    {
+      "title": "RC6.3.21 - Windows evidence and fresh release qualification",
+      "status": "HISTORICAL - FULL WINDOWS QUALIFICATION PASS; IMMUTABLE RC6.3.21",
+      "detail": "Fresh Windows RC6.3.21 original-ROM/Ghidra reconstruct PASS; 18/18 CTests, focused Run 001 10 and Full Regression Run 002 1,153 commands PASS. Qualified archive SHA-256 fbfc6c19131a3a10a28de60449a9716111179fe03cc4285f2f970a0e8646ea3a recorded by qualifier. CPU-B nested counts verified; temporal proof and full function still blocked until RC6.3.22."
+    },
+    {
+      "title": "RC6.3.21 - Full CPU-B function closure and Brainstorm P0",
+      "status": "HISTORICAL - FULL WINDOWS QUALIFICATION PASS; IMMUTABLE RC6.3.21",
+      "detail": "Fresh Windows RC6.3.21 original-ROM/Ghidra reconstruct PASS; 18/18 CTests, focused Run 001 10 and Full Regression Run 002 1,153 commands PASS. Qualified archive SHA-256 fbfc6c19131a3a10a28de60449a9716111179fe03cc4285f2f970a0e8646ea3a recorded by qualifier. CPU-B nested counts verified; temporal proof and full function still blocked until RC6.3.22."
+    },
+    {
+      "title": "RC6.3.20 - Correct Ghidra post-return BTST PC equality and prove real-evidence replay",
+      "status": "HISTORICAL - FULL WINDOWS QUALIFICATION PASS; IMMUTABLE RC6.3.20",
+      "detail": "Windows RC6.3.20 native reconstruct PASS (CHQ6320 original-ROM/Ghidra evidence 963/963 verified), fresh qualify PASS 18/18 CTests, focused Run001 10 and Full Regression Run002 1,153 commands. Exact Windows qualified archive SHA-256 37ff80b5063a687765468c8dc2bde6d3b5f9c32e004408631e233b9eb6bdaab1 recorded by qualifier. CPU-B pair bounded, enclosing whole-function auto-promotion remains blocked."
+    },
+    {
+      "title": "RC6.3.20 - Windows native ROM/Ghidra acceptance and full fresh qualification",
+      "status": "HISTORICAL - FULL WINDOWS QUALIFICATION PASS; IMMUTABLE RC6.3.20",
+      "detail": "Windows RC6.3.20 native reconstruct PASS (CHQ6320 original-ROM/Ghidra evidence 963/963 verified), fresh qualify PASS 18/18 CTests, focused Run001 10 and Full Regression Run002 1,153 commands. Exact Windows qualified archive SHA-256 37ff80b5063a687765468c8dc2bde6d3b5f9c32e004408631e233b9eb6bdaab1 recorded by qualifier. CPU-B pair bounded, enclosing whole-function auto-promotion remains blocked."
+    },
+    {
+      "title": "RC6.3.20 - Close CPU-B function and Brainstorm P0 safety gates",
+      "status": "HISTORICAL - FULL WINDOWS QUALIFICATION PASS; IMMUTABLE RC6.3.20",
+      "detail": "Windows RC6.3.20 native reconstruct PASS (CHQ6320 original-ROM/Ghidra evidence 963/963 verified), fresh qualify PASS 18/18 CTests, focused Run001 10 and Full Regression Run002 1,153 commands. Exact Windows qualified archive SHA-256 37ff80b5063a687765468c8dc2bde6d3b5f9c32e004408631e233b9eb6bdaab1 recorded by qualifier. CPU-B pair bounded, enclosing whole-function auto-promotion remains blocked."
+    },
+    {
+      "title": "RC6.3.19 - Original-ROM CPU-B JSR/RTS return chain and Ghidra 0x0518",
+      "status": "HISTORICAL - WINDOWS NATIVE ACCEPTANCE FAIL; SUPERSEDED BY RC6.3.20",
+      "detail": "RC6.3.19 Windows build PASS; native M2 call-return audit FAIL due to numerically equal but differently padded post-return BTST address (0x000516 vs 0x00000516); full qualification NOT run. Immutable original source SHA-256 0900d52cb41bea82203695517c708e4a399dab971db878ae85f465c0e099dde0. CHQ6319 authentic Windows Ghidra + ROM evidence retained. Next RC6.3.20 fixes comparison; genuine complete function remains blocked."
+    },
+    {
+      "title": "RC6.3.19 - Prove missing branch, complete function and safe composition",
+      "status": "HISTORICAL - WINDOWS NATIVE ACCEPTANCE FAIL; SUPERSEDED BY RC6.3.20",
+      "detail": "RC6.3.19 Windows build PASS; native M2 call-return audit FAIL due to numerically equal but differently padded post-return BTST address (0x000516 vs 0x00000516); full qualification NOT run. Immutable original source SHA-256 0900d52cb41bea82203695517c708e4a399dab971db878ae85f465c0e099dde0. CHQ6319 authentic Windows Ghidra + ROM evidence retained. Next RC6.3.20 fixes comparison; genuine complete function remains blocked."
+    },
+    {
+      "title": "RC6.3.19 - Windows source acceptance and release qualification",
+      "status": "HISTORICAL - WINDOWS NATIVE ACCEPTANCE FAIL; SUPERSEDED BY RC6.3.20",
+      "detail": "RC6.3.19 Windows build PASS; native M2 call-return audit FAIL due to numerically equal but differently padded post-return BTST address (0x000516 vs 0x00000516); full qualification NOT run. Immutable original source SHA-256 0900d52cb41bea82203695517c708e4a399dab971db878ae85f465c0e099dde0. CHQ6319 authentic Windows Ghidra + ROM evidence retained. Next RC6.3.20 fixes comparison; genuine complete function remains blocked."
+    },
+    {
+      "title": "RC6.3.18 - Genuine CPU-B continuation Ghidra crosswalk",
+      "status": "HISTORICAL - WINDOWS QUALIFIED RC6.3.18",
+      "detail": "RC6.3.18 fresh Windows qualify PASS 18/18 CTests, focused Run001 10 commands, Full Regression Run002 1,153 commands, deterministic archive SHA-256 7978d2e4bdac825e81ef9540694b0ccb54edcd5d04c342b2472198dc25500099. Native ROM/Ghidra CHQ6318 PASS: five new continuation sites crosswalked with original-ROM runtime; still no complete function or autonomous promotion."
+    },
+    {
+      "title": "RC6.3.18 - Explore 0x0516 BNE fallthrough and enclosing entry/exit",
+      "status": "HISTORICAL - WINDOWS QUALIFIED RC6.3.18",
+      "detail": "RC6.3.18 fresh Windows qualify PASS 18/18 CTests, focused Run001 10 commands, Full Regression Run002 1,153 commands, deterministic archive SHA-256 7978d2e4bdac825e81ef9540694b0ccb54edcd5d04c342b2472198dc25500099. Native ROM/Ghidra CHQ6318 PASS: five new continuation sites crosswalked with original-ROM runtime; still no complete function or autonomous promotion."
+    },
+    {
+      "title": "RC6.3.18 - Windows acceptance and immutable qualification",
+      "status": "HISTORICAL - WINDOWS QUALIFIED RC6.3.18",
+      "detail": "RC6.3.18 fresh Windows qualify PASS 18/18 CTests, focused Run001 10 commands, Full Regression Run002 1,153 commands, deterministic archive SHA-256 7978d2e4bdac825e81ef9540694b0ccb54edcd5d04c342b2472198dc25500099. Native ROM/Ghidra CHQ6318 PASS: five new continuation sites crosswalked with original-ROM runtime; still no complete function or autonomous promotion."
+    },
+    {
+      "title": "RC6.3.17 - Authentic CPU-B observed function frontier",
+      "status": "HISTORICAL - WINDOWS QUALIFIED RC6.3.17",
+      "detail": "RC6.3.17 Windows chqdev native reconstruct PASS, evidence CHQ6317 verified. Fresh Windows qualify PASS: 18/18 CTest; focused Run001 10 commands; Full Regression Run002 1,153 commands. Windows release SHA-256 6fc40389db4bccd47aef40b7a2c874c43517e2db45b2ac29ced4e72c3f8c1d79. Read-only 7-node, 11-edge observed CPU-B frontier and heuristically ranked research queue; complete function STILL NOT verified."
+    },
+    {
+      "title": "RC6.3.17 - Evidence-based next-candidate research priority",
+      "status": "HISTORICAL - WINDOWS QUALIFIED RC6.3.17",
+      "detail": "RC6.3.17 Windows chqdev native reconstruct PASS, evidence CHQ6317 verified. Fresh Windows qualify PASS: 18/18 CTest; focused Run001 10 commands; Full Regression Run002 1,153 commands. Windows release SHA-256 6fc40389db4bccd47aef40b7a2c874c43517e2db45b2ac29ced4e72c3f8c1d79. Read-only 7-node, 11-edge observed CPU-B frontier and heuristically ranked research queue; complete function STILL NOT verified."
+    },
+    {
+      "title": "RC6.3.17 - Windows acceptance and immutable release qualification",
+      "status": "HISTORICAL - WINDOWS QUALIFIED RC6.3.17",
+      "detail": "RC6.3.17 Windows chqdev native reconstruct PASS, evidence CHQ6317 verified. Fresh Windows qualify PASS: 18/18 CTest; focused Run001 10 commands; Full Regression Run002 1,153 commands. Windows release SHA-256 6fc40389db4bccd47aef40b7a2c874c43517e2db45b2ac29ced4e72c3f8c1d79. Read-only 7-node, 11-edge observed CPU-B frontier and heuristically ranked research queue; complete function STILL NOT verified."
+    },
+    {
+      "title": "RC6.3.16 - Verified bounded CPU-B edge audit and enclosing function discovery",
+      "status": "HISTORICAL - WINDOWS QUALIFIED RC6.3.16",
+      "detail": "RC6.3.16 Windows `native reconstruct` PASS and `qualify --fresh` PASS: 18/18 CTest, focused Run001 10 commands, Full Regression Run002 1,153 commands, deterministic promoted archive SHA-256 79c94b0090009b5f5dd29dc2feb543d5d758c072919bb428a761342f732a646d. Historical RC6.3.16 gates remain valid. Bounded CPU-B BEQ and pair verified, enclosing whole function NOT proven."
+    },
+    {
+      "title": "RC6.3.16 - Current and persistent candidate-portfolio reconciliation",
+      "status": "HISTORICAL - WINDOWS QUALIFIED RC6.3.16",
+      "detail": "RC6.3.16 Windows `native reconstruct` PASS and `qualify --fresh` PASS: 18/18 CTest, focused Run001 10 commands, Full Regression Run002 1,153 commands, deterministic promoted archive SHA-256 79c94b0090009b5f5dd29dc2feb543d5d758c072919bb428a761342f732a646d. Historical RC6.3.16 gates remain valid. Bounded CPU-B BEQ and pair verified, enclosing whole function NOT proven."
+    },
+    {
+      "title": "RC6.3.16 - Windows native acceptance and exact ZIP",
+      "status": "HISTORICAL - WINDOWS QUALIFIED RC6.3.16",
+      "detail": "RC6.3.16 Windows `native reconstruct` PASS and `qualify --fresh` PASS: 18/18 CTest, focused Run001 10 commands, Full Regression Run002 1,153 commands, deterministic promoted archive SHA-256 79c94b0090009b5f5dd29dc2feb543d5d758c072919bb428a761342f732a646d. Historical RC6.3.16 gates remain valid. Bounded CPU-B BEQ and pair verified, enclosing whole function NOT proven."
+    },
+    {
+      "title": "RC6.3.15 - Real CPU-B enclosing function boundary and full CFG",
+      "status": "HISTORICAL - SUPERSEDED BY RC6.3.16 CURRENT ITEMS",
+      "detail": "RC6.3.14 genuine Windows BEQ 17,892 + TST.W/BEQ.B pair 8,945 bounded native commits, CPU/SR/cycle/IRQ/machine original/native/rollback PASS. RC6.3.15 emits authenticated CPU-A and CPU-B function-boundary dossiers; CPU-B still only two consecutive opcodes with enclosing function entry, callers, exits and CFG unresolved. The next native milestone is a complete function with every reachable branch and caller evidenced; do NOT promote a bounded instruction window."
+    },
+    {
+      "title": "RC6.3.15 - Instruction attribution and first mismatch capture",
+      "status": "HISTORICAL - SUPERSEDED BY RC6.3.16 CURRENT ITEMS",
+      "detail": "Candidate pair original/native/fault streams classify TST.W R16 mapped data, BEQ.B no mapped data and Musashi ACK-owned IRQ/vector/stack. Unattributed fetch, parent routine and scheduler effects remain UNRESOLVED. On a failing pair comparator a first-different-row JSON and replay provenance is emitted; full deterministic input sequence minimisation still P0 open."
+    },
+    {
+      "title": "RC6.3.15 - Windows acceptance, Full Regression and evidence ZIP",
+      "status": "HISTORICAL - SUPERSEDED BY RC6.3.16 CURRENT ITEMS",
+      "detail": "Run .\\chqdev.bat build debug; if ($LASTEXITCODE -eq 0) { .\\chqdev.bat native reconstruct --fresh --live-health --cpu-b-live --out C:\\Projects\\Evidence\\CHQ6315 }. The new output parent is writable and automatically created; existing evidence ZIP/dirty output is never overwritten. Full regression Go structural count 1176 fits the documented 2048 runner and new 1176..1536 guarded bound, with no scripts removed; actual Windows Workbench Full Regression/CTest remains required."
+    },
+    {
+      "title": "RC6.3 - P0 autonomous function, failure minimiser and composition gate",
+      "status": "PLANNED / NOT YET IMPLEMENTED",
+      "detail": "Finish both-CPU function CFG/all caller/exit dynamic closure, genuine multi-path compiler, full function differential, automatic deterministic reduced failing input replay and a separate multi-native/CPU-A/B scheduling/IRQ/shared-RAM composition gate. No autonomous promotion until all independent evidence is proved."
+    },
+    {
+      "title": "RC6.3 - P1 evidence cache and candidate value/risk ranking",
+      "status": "PARTIAL RC6.3.17 RESEARCH PRIORITISATION; CACHE AND FULL SCORING OPEN",
+      "detail": "RC6.3.17 records per-checkpoint observed visits and a transparent risk-labelled heuristic priority for three authentic CPU-B expansion targets, deliberately NO measured native-cycle savings and NO promotion. Complete multi-routine measured/estimated value/risk model, ROM/source/Ghidra cache fingerprints and invalidation remain open."
+    },
+    {
+      "title": "Long term native reconstruction export and multi-game architecture",
+      "status": "PLANNED / RC6.4 DEFERRED",
+      "detail": "Downloadable all-ROM both-CPU readable C++/pseudocode/disassembly with GENERATED/COMPILED/VERIFIED/NATIVE/UNRESOLVED and full provenance; reusable game-neutral analysis pipeline and Chase H.Q.-specific bus/ROM profile. Retain Capstone/REA/Ghidra, CHQPACK, controller, Win32 backend, ARM and graphics backlog."
+    },
+    {
+      "title": "RC6.3.2 native health function live verification: trace boundary corrected",
+      "status": "HISTORICAL - SUPERSEDED BY RC6.3.15 CURRENT ITEMS",
+      "detail": "Actual Windows RC6.3.1 generated health native commit at CPU-A 0xA10C had matching full CPU return state and mapped end state; the ordered health bus trace falsely included the caller W32 0x102DE0 due to stale hook-entry trace PC. RC6.3.2 preserves actual post-commit PC, never filters transactions, and tests genuine synthetic Musashi original/native/forced rollback paths. Old source fails this synthetic test; corrected source passes. Run .\\chqdev.bat build debug then .\\chqdev.bat native reconstruct --fresh --live-health. Real Windows parity and forced rollback must PASS before any bounded function sign-off. All generated native substitution remains opt-in; broader CPU-A/B autonomous M1-M7 unproven."
+    },
+    {
+      "title": "Historical RC5.3 corrective research (superseded by RC6.2.6 bounded instruction sign-off)",
+      "status": "HISTORICAL - SEE RC6.3.2 CURRENT ITEM",
+      "detail": "Parent RC5 archive SHA-256 47def65d75056fb765d5b60dfe5a4c4a21bdcd3214ebb84920dd62a0d8b37ddf is Windows-qualified. RC5.1 shadow corpus 12/12 PASS, 96/96 sprites, 24/24 road generator. RC5.2 Windows execution was NOT successful: 85 attempts all rejected, 0 substitutions (destination-pointer, rom-fingerprint); final PowerShell CSV export crashed. RC5.3 corrects DBRA displacement guard to 0xFFFA, takes record count and stage pointer from instruction-entry shadow state, includes rejection addresses and PS5.1 CSV export fix. No RC5.3 Windows result yet; exact archive NOT qualified."
+    },
+    {
+      "title": "Native CPU-A sprite transfer: shadow verified; trailing-clear native experiment",
+      "status": "SHADOW VERIFIED ON 12-CASE CORPUS; CLEAR LOOP EXPERIMENTAL",
+      "detail": "RC5.1 complete sprite transfer verified 96/96 in headless 12-case corpus. Independent model verification also compared 3 sprite RAM snapshots (6144 bytes) for a separate offline evidence set. RC5.3 opt-in substitution only for 0x4016C-0x40170 trailing clear loop; bulk copy, final RTS remain original ROM. ROM fingerprint guard corrected after actual Run 005, destination tied to transfer-entry count rather than mutable RAM latch, hard bounds, original shadow comparison and fail-closed rollback retained. No native commit yet verified; continue at zero-tolerance CPU, cycle, RAM equivalence across 12 scenarios."
+    },
+    {
+      "title": "Native CPU-B road generator live Shadow",
+      "status": "LIVE SHADOW OBSERVED - 12/12, COVERAGE OPEN",
+      "detail": "Genuine Windows headless Run058 class-6 forced checkpoint: 12 CPU-B generator entries, 12 full byte-perfect PASS, 0 FAIL, 0 pending. Run009 census: 512 Stage-1 exported course-table +4 selectors are all 0x00; class4/6 not naturally selected on this table. Classes 0/4/6 hardware paths causally traced; synthetic and offline model PASS 832/832 bytes, but need broader live coverage; no replacement. CPU-B 0x3B84-0x3BE6 read-only live shadow comparisons confirm 12/12 observed generator calls. RC5.1 recovered corpus added independent class6 24/24 PASS across experimental checks; native road substitution remains OFF."
+    },
+    {
+      "title": "Real native client / hybrid GUI progression",
       "status": "IN PROGRESS",
-      "detail": "Normal text source X uses the evidence-backed +16 origin. Validate flipped text independently against title, HUD and end-state checkpoints."
+      "detail": "Self-contained Windows GUI synthetic preview bundled, and native C++ models build within chq_runtime. The preview is not gameplay and does not yet attach to SDL or the emulator; hybrid client, native rendering replacement and actual game playback remain future work."
     },
     {
-      "title": "Radar and HUD regression",
-      "status": "IN PROGRESS",
-      "detail": "Compare radar position, brake lamps, turbo indicators and end-state HUD across canonical Stage 1 driving and end-level checkpoints."
+      "title": "Stage 1 police beacon",
+      "status": "BEHAVIOUR UNDERSTOOD",
+      "detail": "Run042: proximity condition CPU-A 0x4B82/4B96 activates 0x1002D2; task 0x54CA sets request 0x108082 at 0x5528; palette state CPU-A 0x40Bxx and sprite reader 0x46B9E; request reset exists but natural reset not separately proven."
     },
     {
-      "title": "Sprite 4bpp shadow/compare",
-      "status": "OPEN",
-      "detail": "Add an independent SHADOW/COMPARE path for the native sprite 4bpp decoder; require exact sprite ownership and pixel parity before any verified claim."
+      "title": "Target object and sprite-record pipeline",
+      "status": "BEHAVIOUR UNDERSTOOD",
+      "detail": "Run031: target-related intermediate generator 0x418CA onward→projection 0x4220E→0x101E00→staging via 0x470E8/EA→D00000. Two records followed instruction-by-instruction; specific target-car sprite identity remains unproven."
     },
     {
-      "title": "End-results transition",
-      "status": "CONFIRMED",
-      "detail": "Post-defeat chain is behavior-understood: 0x1002D0 minimum delay -> 0x1002C8 readiness -> 0x1002CE completion handoff -> results worker -> 0x100248 -> 0x1002E8 intermission gate."
+      "title": "Timer score Turbo gameplay and HUD",
+      "status": "BEHAVIOUR UNDERSTOOD",
+      "detail": "Timer BCD 0x100200→0x2116 glyph producer→C06600. Score 0x100488→0x82AA copy→0x644A formatting→C04294. Turbo elapsed timer 0x100414 reaches 210 and clears active bit 0x10040F at frame9691; activation and 270-frame variant still need direct proof."
     },
     {
-      "title": "Target health / damage",
-      "status": "CONFIRMED",
-      "detail": "CPU-A 0x1002AE is the special target remaining-hit counter. PC 0xA112 decrements on genuine damaging hits; FFFF is the terminal sentinel and PC 0xA118 enters defeat. Preferred causal checkpoint: stage1-target-immediate-pre-damage-6333."
+      "title": "CPU-A audio commands and native sound",
+      "status": "BEHAVIOUR UNDERSTOOD / PLAYBACK OPEN",
+      "detail": "Run045: beacon 0x5C after 180-frame task wait enters 0x101720 ring and transfers through 0xA806 to sound port; sound CPU/chips and playback still stubbed. Audio I/O memory trace drops payload, and audio.events mixes replay histories."
     },
     {
-      "title": "Brake-lamp mechanism",
-      "status": "CONFIRMED",
-      "detail": "Processed brake at CPU-A 0x100303 feeds the 0x497E..0x49A8 palette path; banks 64/65 pen 13 switch to 0x18DE while braking and restore to 0x000E."
+      "title": "Research Script v3 and scoped diagnostics",
+      "status": "P0 PLANNED",
+      "detail": "Typed results, branching, expected-empty handling, multi-region traces, bounded event-triggered execution, provenance chaining, accurate bus payload and replay-scoped audio/collision; implement with CLI/UI parity and regression."
     },
     {
-      "title": "Stage 1 course graph / minimap",
-      "status": "IN PROGRESS",
-      "detail": "Fork choice and selector lifecycle are behavior-understood. Convert proven selector 0-9 transition tables and lateral branch rule into an authoritative directed course graph/minimap."
+      "title": "Capstone and Ghidra/REA research bridge",
+      "status": "P1 PLANNED",
+      "detail": "Existing Ghidra/REA static analysis remains. Add audited Capstone source 68000 disassembly only when verified; function auto-selection and provenance improvements subject to Windows tests."
     },
     {
-      "title": "Audio / sound CPU",
-      "status": "LATER",
-      "detail": "Perform a dedicated audio/device communication diagnostic pass after core gameplay controls are mapped."
+      "title": "Stage 1 course graph and later stages",
+      "status": "PLANNED",
+      "detail": "Autopilot actual Runs007-009 span assisted frame 5587 through 11187, add ~25 checkpoints including sprite density 8647 and palette selector 7507. 512/512 records of 4 KiB Stage-1 table use selector 0x00 at frames2352 and10387; seeking native class4/class6 via ordinary Stage-1 driving is low-value. Autopilot can go off-road; retain assisted/experimental provenance separate from authentic gameplay. Future: stage2+ and novel road/vehicle modes."
+    },
+    {
+      "title": "Native promotion and source qualification",
+      "status": "HISTORICAL - SUPERSEDED BY RC6.3.15 CURRENT ITEMS",
+      "detail": "RC6.2.6 authentic CPU-A 0x820C bounded generated-native instruction M1-M7 technical signoff passed with 240 commits, exact CPU state/bus/endstate parity and forced rollback. RC6.3.1 function-scale generation executed successfully once but live M5 failed only because a caller stack write was attributed to the health function. RC6.3.2 fixes trace PC ownership and adds synthetic original/native/rollback regression; real Windows generated-health function and forced mismatch remain to be checked. No default function promotion or generalized CPU-B autonomy."
     }
   ]
 }

@@ -1,0 +1,25 @@
+OK cpu=B start=0xADA count=24
+0xADA  bsr     $ae4
+0xADE  bsr     $b90
+0xAE2  rts
+0xAE4  tst.w   $102ce0.l
+0xAEA  bne     $af8
+0xAEC  btst    #$0, $10080b.l
+0xAF4  bne     $b28
+0xAF8  lea     $100818.l, A1
+0xAFE  move.b  ($7,A1), $102bb2.l
+0xB06  move.b  ($8,A1), $102bb3.l
+0xB0E  lea     $1021c7.l, A0
+0xB14  lea     $102214.l, A2
+0xB1A  bsr     $b5e
+0xB1E  tst.w   $102ce0.l
+0xB24  bne     $b28
+0xB26  rts
+0xB28  tst.w   $10227a.l
+0xB2E  bne     $b3c
+0xB30  move.w  $100816.l, $1027f6.l
+0xB3A  rts
+0xB3C  lea     $1027f8.l, A1
+0xB42  move.b  ($7,A1), $102bb4.l
+0xB4A  move.b  ($8,A1), $102bb5.l
+0xB52  lea     $102233.l, A0

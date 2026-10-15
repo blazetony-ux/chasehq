@@ -78,9 +78,9 @@
       "id": "road_state",
       "label": "Road state / side",
       "group": "Road / Track",
-      "source": "CPU-A 0x10A048 bits 1-2",
+      "source": "CPU-A 0x10A048",
       "width": 8,
-      "encoding": "00 on-road, 02 right, 04 left, 06 extreme",
+      "encoding": "raw 01 on-road, 03 right, 05 left, 07 extreme (bits 1-2 select side class; bit0 remains set in observed gameplay)",
       "confidence": "CONFIRMED"
     },
     {
@@ -130,20 +130,20 @@
     },
     {
       "id": "track_shape_target",
-      "label": "Track +1 target",
+      "label": "Track incline/decline target",
       "group": "Road / Track",
       "source": "current live track record +1",
       "width": 8,
-      "encoding": "signed target for smoothed three-band player renderer state",
+      "encoding": "signed physical grade target; negative=DECLINE/downhill, zero=LEVEL, positive=INCLINE/uphill",
       "confidence": "CONFIRMED"
     },
     {
       "id": "track_shape_smooth",
-      "label": "Smoothed track +1 state",
+      "label": "Smoothed incline/decline state",
       "group": "Road / Track",
       "source": "CPU-A 0x10A04E",
       "width": 8,
-      "encoding": "signed; follows record +1 by one unit/frame",
+      "encoding": "signed; slews toward current record +1 by one unit/frame; negative=decline, positive=incline",
       "confidence": "CONFIRMED"
     },
     {
@@ -153,7 +153,7 @@
       "source": "CPU-A 0x10A04E thresholds at -5/+5",
       "encoding": "NEGATIVE / NEUTRAL / POSITIVE",
       "confidence": "CONFIRMED",
-      "note": "physical uphill/downhill meaning still under causal test"
+      "note": "RC3 Run018 causally established negative=decline/downhill, neutral=level, positive=incline/uphill; the same state also selects player render families."
     },
     {
       "id": "player_render_selector",
@@ -265,6 +265,87 @@
       "width": 8,
       "encoding": "end-results/intermission transition gate",
       "confidence": "HIGH CONFIDENCE"
+    },
+    {
+      "id": "track_grade",
+      "label": "Incline / decline",
+      "group": "Road / Track",
+      "source": "CPU-A 0x10A04E + current record +1",
+      "encoding": "DECLINE / LEVEL / INCLINE from signed smoothed grade",
+      "confidence": "CONFIRMED",
+      "note": "Negative grade increases forward speed/progress; positive grade reduces it on the controlled Stage-1 corridor."
+    },
+    {
+      "id": "brake_processed",
+      "label": "Processed Brake state",
+      "group": "Driving / Input",
+      "source": "CPU-A 0x100302",
+      "width": 16,
+      "encoding": "processed control word; 0x0014 causally reproduces authentic braking in tested moving state",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "id": "brake_lamp",
+      "label": "Brake lamp state",
+      "group": "Vehicle / Render",
+      "source": "TC0110PCR banks 64/65 pen 13",
+      "encoding": "ACTIVE when both player-body lamp pens are 0x18DE; normal 0x000E",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "id": "race_timer",
+      "label": "Race timer seconds",
+      "group": "Race / HUD",
+      "source": "CPU-A 0x100200",
+      "width": 8,
+      "encoding": "packed BCD seconds",
+      "confidence": "CONFIRMED",
+      "note": "Authentic 01->00 countdown write at PC 0x1AE0; HUD update is tick/state driven rather than a combinational redraw from this byte."
+    },
+    {
+      "id": "race_timer_fraction",
+      "label": "Race timer fraction",
+      "group": "Race / HUD",
+      "source": "CPU-A 0x100201",
+      "width": 8,
+      "encoding": "packed BCD/subsecond countdown state",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "id": "collision_interaction_type",
+      "label": "Collision / interaction type",
+      "group": "Collision",
+      "source": "CPU-A 0x10042E",
+      "width": 16,
+      "encoding": "interaction class; 0x0001 observed non-target physical scenery/object collision, 0x000A observed damaging target interaction",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "id": "collision_object_reference",
+      "label": "Collision object reference",
+      "group": "Collision",
+      "source": "CPU-A 0x100420",
+      "width": 32,
+      "encoding": "interaction-associated object-record reference candidate",
+      "confidence": "HIGH CONFIDENCE"
+    },
+    {
+      "id": "target_longitudinal",
+      "label": "Target longitudinal position",
+      "group": "Target",
+      "source": "CPU-A 0x10A080",
+      "width": 32,
+      "encoding": "target object longitudinal/course state",
+      "confidence": "CONFIRMED"
+    },
+    {
+      "id": "target_lateral",
+      "label": "Target lateral position",
+      "group": "Target",
+      "source": "CPU-A 0x10A084",
+      "width": 16,
+      "encoding": "target object lateral state; presentation response measured at three emulated frames in frame6333 causal test",
+      "confidence": "CONFIRMED"
     }
   ]
 }

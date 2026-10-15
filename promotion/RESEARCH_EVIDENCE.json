@@ -1,0 +1,30 @@
+{
+  "ghidraJob": "ghidra-20261010-161350-586bf542",
+  "ghidraEvidenceZip": "ghidra-rea-run032-20261010-161351-650.zip",
+  "ghidraEvidenceSha256": "87c8b0d061058bc4d9750bee1d3e8ff4ef09c2075988c66d812bfa01d1bfaad3",
+  "userSuppliedFindingsFile": "chq-ghidra-findings.json",
+  "findingsSha256": "24889492bae60e52f780637dff47537641f9c36a506a577d69da6bde0622085b",
+  "romSha256": "5cf1c9e786a39795ebd8e99c8e8be0d2398cc4f74221067cf2844945308d6c5a",
+  "headlessProcessor": "68000:BE:32:default",
+  "romImageBase": "0x000000",
+  "staticSites": 8,
+  "staticConfidence": "hypothesis",
+  "crosswalkRun": {
+    "filename": "bundle(20261010-152600).zip",
+    "sha256": "ca2e63d49e590d3a5536a74dacaf40b8702de867a5a0bb13f8d87e83d23a0886",
+    "sessionId": "20261010_160542",
+    "runId": "009",
+    "name": "Run 035 - Genuine Ghidra Static and Runtime Crosswalk",
+    "status": "PASS",
+    "commands": 19,
+    "durationMs": 1859,
+    "bundleIntegrityVerified": true,
+    "bundleCheckedFiles": 11
+  },
+  "reports": [
+    "ghidra-contact-5587",
+    "ghidra-damage-6333",
+    "ghidra-post-final-9548"
+  ],
+  "directREAAgentInvoked": false
+}

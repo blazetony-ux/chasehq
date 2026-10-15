@@ -10,6 +10,7 @@
 #include <array>
 #include <cmath>
 #include <cstdint>
+#include <chrono>
 #include <cctype>
 #include <filesystem>
 #include <iomanip>
@@ -17,6 +18,7 @@
 #include <limits>
 #include <iostream>
 #include <sstream>
+#include <stdexcept>
 #include <string_view>
 #include <vector>
 
@@ -191,6 +193,355 @@ std::string Video::layer_offsets_status() const {
     for(const auto& entry : {std::pair{"bg0",layer_offset_bg0_},std::pair{"bg1",layer_offset_bg1_},std::pair{"text",layer_offset_text_},std::pair{"sprites",layer_offset_sprites_},std::pair{"road",layer_offset_road_}})
         out << ' ' << entry.first << "_x=" << entry.second.x << ' ' << entry.first << "_y=" << entry.second.y;
     return out.str();
+}
+
+bool Video::set_hud_element(const std::string& element, bool visible, int dx, int dy) {
+    if (dx < -WIDTH || dx > WIDTH || dy < -HEIGHT || dy > HEIGHT) return false;
+    const auto parsed = hud_element_from_name(element);
+    if (!parsed) return false;
+    auto& e = hud_layout_.elements[static_cast<std::size_t>(*parsed)];
+    e.visible = visible;
+    e.dx = dx;
+    e.dy = dy;
+    return true;
+}
+
+bool Video::set_hud_preset(const std::string& preset) {
+    return hud_layout_apply_preset(hud_layout_, preset);
+}
+
+const char* Video::sprite_backend_name() const {
+    switch (sprite_backend_) {
+    case SpriteBackend::Original: return "original";
+    case SpriteBackend::Shadow: return "shadow";
+    case SpriteBackend::Native: return "native";
+    case SpriteBackend::NativeOnly: return "native-only";
+    }
+    return "original";
+}
+
+bool Video::set_sprite_backend(const std::string& mode) {
+    std::string m;
+    m.reserve(mode.size());
+    for (char c : mode) m.push_back(static_cast<char>(std::tolower(static_cast<unsigned char>(c))));
+    if (m == "original" || m == "authentic" || m == "emulated") sprite_backend_ = SpriteBackend::Original;
+    else if (m == "shadow" || m == "compare") sprite_backend_ = SpriteBackend::Shadow;
+    else if (m == "native") sprite_backend_ = SpriteBackend::Native;
+    else if (m == "native-only" || m == "native_only" || m == "hard-native") sprite_backend_ = SpriteBackend::NativeOnly;
+    else return false;
+    runtime_sprite_asset_visible_pixels_ = 0;
+    return true;
+}
+
+void Video::reset_sprite_backend_verification() {
+    sprite_backend_compared_frames_ = 0;
+    sprite_backend_mismatch_frames_ = 0;
+    sprite_backend_first_mismatch_frame_ = 0;
+    sprite_backend_have_first_mismatch_ = false;
+    sprite_backend_last_compare_ = {};
+    sprite_backend_first_compare_ = {};
+    sprite_backend_original_frames_ = 0;
+    sprite_backend_native_frames_ = 0;
+    sprite_backend_native_only_frames_ = 0;
+    sprite_backend_native_only_blocked_frames_ = 0;
+    sprite_backend_original_fallbacks_ = 0;
+    sprite_backend_original_us_ = 0;
+    sprite_backend_native_us_ = 0;
+    sprite_backend_shadow_compare_us_ = 0;
+    sprite_backend_shadow_compare_frames_ = 0;
+    sprite_backend_first_evidence_path_.clear();
+}
+
+std::string Video::sprite_backend_status() const {
+    std::ostringstream o;
+    o << "mode=" << sprite_backend_name()
+      << " compared_frames=" << sprite_backend_compared_frames_
+      << " mismatch_frames=" << sprite_backend_mismatch_frames_
+      << " last_pixel_mismatches=" << sprite_backend_last_compare_.pixel_mismatches
+      << " last_owner_mismatches=" << sprite_backend_last_compare_.owner_mismatches;
+    if (sprite_backend_have_first_mismatch_) {
+        o << " first_mismatch_frame=" << sprite_backend_first_mismatch_frame_
+          << " first_x=" << sprite_backend_first_compare_.first_x
+          << " first_y=" << sprite_backend_first_compare_.first_y
+          << " original_pixel=0x" << std::hex << sprite_backend_first_compare_.authoritative_pixel
+          << " native_pixel=0x" << sprite_backend_first_compare_.shadow_pixel
+          << " original_owner=0x" << sprite_backend_first_compare_.authoritative_owner
+          << " native_owner=0x" << sprite_backend_first_compare_.shadow_owner << std::dec;
+    } else {
+        o << " first_mismatch_frame=-1";
+    }
+    const auto original_avg = sprite_backend_original_frames_ ? sprite_backend_original_us_ / sprite_backend_original_frames_ : 0;
+    const auto native_avg = sprite_backend_native_frames_ ? sprite_backend_native_us_ / sprite_backend_native_frames_ : 0;
+    const auto shadow_avg = sprite_backend_shadow_compare_frames_ ? sprite_backend_shadow_compare_us_ / sprite_backend_shadow_compare_frames_ : 0;
+    o << " map_overrides=" << runtime_sprite_map_overrides_.size()
+      << " asset_overrides=" << runtime_sprite_asset_overrides_.size()
+      << " original_frames=" << sprite_backend_original_frames_
+      << " native_frames=" << sprite_backend_native_frames_
+      << " native_only_frames=" << sprite_backend_native_only_frames_
+      << " native_only_blocked=" << sprite_backend_native_only_blocked_frames_
+      << " original_fallbacks=" << sprite_backend_original_fallbacks_
+      << " original_avg_us=" << original_avg
+      << " native_avg_us=" << native_avg
+      << " shadow_compare_avg_us=" << shadow_avg
+      << " first_evidence=" << (sprite_backend_first_evidence_path_.empty() ? "none" : sprite_backend_first_evidence_path_);
+    return o.str();
+}
+
+std::string Video::native_promotion_status() const {
+    std::ostringstream o;
+    const bool shadow_clean = sprite_backend_compared_frames_ > 0 && sprite_backend_mismatch_frames_ == 0;
+    const bool hard_native_clean = sprite_backend_native_only_frames_ > 0 && sprite_backend_native_only_blocked_frames_ == 0 && sprite_backend_original_fallbacks_ == 0;
+    o << "subsystem=sprites maturity=NATIVE"
+      << " mode=" << sprite_backend_name()
+      << " shadow_clean=" << (shadow_clean ? 1 : 0)
+      << " compared_frames=" << sprite_backend_compared_frames_
+      << " mismatch_frames=" << sprite_backend_mismatch_frames_
+      << " native_only_supported=1"
+      << " native_only_frames=" << sprite_backend_native_only_frames_
+      << " native_only_blocked=" << sprite_backend_native_only_blocked_frames_
+      << " original_fallbacks=" << sprite_backend_original_fallbacks_
+      << " hard_disable_proven=" << (hard_native_clean ? 1 : 0)
+      << " promotion_ready=" << ((shadow_clean && hard_native_clean) ? 1 : 0)
+      << " first_evidence=" << (sprite_backend_first_evidence_path_.empty() ? "none" : sprite_backend_first_evidence_path_);
+    return o.str();
+}
+
+
+const char* Video::text_backend_name() const {
+    switch (text_backend_) {
+    case TextBackend::Original: return "original";
+    case TextBackend::Shadow: return "shadow";
+    case TextBackend::Native: return "native";
+    case TextBackend::NativeOnly: return "native-only";
+    }
+    return "original";
+}
+
+bool Video::set_text_backend(const std::string& mode) {
+    std::string m;
+    m.reserve(mode.size());
+    for (char c : mode) m.push_back(static_cast<char>(std::tolower(static_cast<unsigned char>(c))));
+    if (m == "original" || m == "authentic" || m == "emulated") text_backend_ = TextBackend::Original;
+    else if (m == "shadow" || m == "compare") text_backend_ = TextBackend::Shadow;
+    else if (m == "native") text_backend_ = TextBackend::Native;
+    else if (m == "native-only" || m == "native_only" || m == "hard-native") text_backend_ = TextBackend::NativeOnly;
+    else return false;
+    return true;
+}
+
+void Video::reset_text_backend_verification() {
+    text_backend_compared_frames_ = 0;
+    text_backend_mismatch_frames_ = 0;
+    text_backend_first_mismatch_frame_ = 0;
+    text_backend_have_first_mismatch_ = false;
+    text_backend_last_compare_ = {};
+    text_backend_first_compare_ = {};
+    text_backend_original_frames_ = 0;
+    text_backend_native_frames_ = 0;
+    text_backend_native_only_frames_ = 0;
+    text_backend_native_only_blocked_frames_ = 0;
+    text_backend_original_us_ = 0;
+    text_backend_native_us_ = 0;
+    text_backend_shadow_compare_us_ = 0;
+    text_backend_shadow_compare_frames_ = 0;
+}
+
+std::string Video::text_backend_status() const {
+    std::ostringstream o;
+    o << "mode=" << text_backend_name()
+      << " maturity=NATIVE"
+      << " compared_frames=" << text_backend_compared_frames_
+      << " mismatch_frames=" << text_backend_mismatch_frames_
+      << " last_pixel_mismatches=" << text_backend_last_compare_.pixel_mismatches;
+    if (text_backend_have_first_mismatch_) {
+        o << " first_mismatch_frame=" << text_backend_first_mismatch_frame_
+          << " first_x=" << text_backend_first_compare_.first_x
+          << " first_y=" << text_backend_first_compare_.first_y
+          << " original_pixel=0x" << std::hex << text_backend_first_compare_.original_pixel
+          << " native_pixel=0x" << text_backend_first_compare_.native_pixel << std::dec;
+    } else {
+        o << " first_mismatch_frame=-1";
+    }
+    const auto original_avg = text_backend_original_frames_ ? text_backend_original_us_ / text_backend_original_frames_ : 0;
+    const auto native_avg = text_backend_native_frames_ ? text_backend_native_us_ / text_backend_native_frames_ : 0;
+    const auto shadow_avg = text_backend_shadow_compare_frames_ ? text_backend_shadow_compare_us_ / text_backend_shadow_compare_frames_ : 0;
+    o << " original_frames=" << text_backend_original_frames_
+      << " native_frames=" << text_backend_native_frames_
+      << " native_only_frames=" << text_backend_native_only_frames_
+      << " native_only_blocked=" << text_backend_native_only_blocked_frames_
+      << " original_avg_us=" << original_avg
+      << " native_avg_us=" << native_avg
+      << " shadow_compare_avg_us=" << shadow_avg;
+    return o.str();
+}
+
+const char* Video::bg_backend_name() const {
+    switch (bg_backend_) {
+    case BgBackend::Original: return "original";
+    case BgBackend::Shadow: return "shadow";
+    case BgBackend::Native: return "native";
+    case BgBackend::NativeOnly: return "native-only";
+    }
+    return "original";
+}
+
+bool Video::set_bg_backend(const std::string& mode) {
+    std::string m;
+    m.reserve(mode.size());
+    for (char c : mode) m.push_back(static_cast<char>(std::tolower(static_cast<unsigned char>(c))));
+    if (m == "original" || m == "authentic" || m == "emulated") bg_backend_ = BgBackend::Original;
+    else if (m == "shadow" || m == "compare") bg_backend_ = BgBackend::Shadow;
+    else if (m == "native") bg_backend_ = BgBackend::Native;
+    else if (m == "native-only" || m == "native_only" || m == "hard-native") bg_backend_ = BgBackend::NativeOnly;
+    else return false;
+    return true;
+}
+
+void Video::reset_bg_backend_verification() {
+    bg_backend_compared_layers_ = 0;
+    bg_backend_mismatch_layers_ = 0;
+    bg_backend_bg0_compared_ = 0;
+    bg_backend_bg1_compared_ = 0;
+    bg_backend_bg0_mismatch_ = 0;
+    bg_backend_bg1_mismatch_ = 0;
+    bg_backend_first_mismatch_frame_ = 0;
+    bg_backend_first_mismatch_layer_ = -1;
+    bg_backend_have_first_mismatch_ = false;
+    bg_backend_last_compare_ = {};
+    bg_backend_first_compare_ = {};
+    bg_backend_original_layers_ = 0;
+    bg_backend_native_layers_ = 0;
+    bg_backend_native_only_layers_ = 0;
+    bg_backend_native_only_blocked_ = 0;
+    bg_backend_original_us_ = 0;
+    bg_backend_native_us_ = 0;
+    bg_backend_shadow_compare_us_ = 0;
+}
+
+std::string Video::bg_backend_status() const {
+    std::ostringstream o;
+    const auto original_avg = bg_backend_original_layers_ ? bg_backend_original_us_ / bg_backend_original_layers_ : 0;
+    const auto native_avg = bg_backend_native_layers_ ? bg_backend_native_us_ / bg_backend_native_layers_ : 0;
+    const auto shadow_avg = bg_backend_compared_layers_ ? bg_backend_shadow_compare_us_ / bg_backend_compared_layers_ : 0;
+    o << "mode=" << bg_backend_name()
+      << " maturity=NATIVE-CANDIDATE"
+      << " compared_layers=" << bg_backend_compared_layers_
+      << " mismatch_layers=" << bg_backend_mismatch_layers_
+      << " bg0_compared=" << bg_backend_bg0_compared_
+      << " bg0_mismatch=" << bg_backend_bg0_mismatch_
+      << " bg1_compared=" << bg_backend_bg1_compared_
+      << " bg1_mismatch=" << bg_backend_bg1_mismatch_
+      << " last_pixel_mismatches=" << bg_backend_last_compare_.pixel_mismatches
+      << " last_coverage_mismatches=" << bg_backend_last_compare_.coverage_mismatches;
+    if (bg_backend_have_first_mismatch_) {
+        o << " first_mismatch_frame=" << bg_backend_first_mismatch_frame_
+          << " first_mismatch_layer=" << bg_backend_first_mismatch_layer_
+          << " first_x=" << bg_backend_first_compare_.first_x
+          << " first_y=" << bg_backend_first_compare_.first_y
+          << " original_pixel=0x" << std::hex << bg_backend_first_compare_.original_pixel
+          << " native_pixel=0x" << bg_backend_first_compare_.native_pixel << std::dec;
+    } else {
+        o << " first_mismatch_frame=-1 first_mismatch_layer=-1";
+    }
+    o << " original_layers=" << bg_backend_original_layers_
+      << " native_layers=" << bg_backend_native_layers_
+      << " native_only_layers=" << bg_backend_native_only_layers_
+      << " native_only_blocked=" << bg_backend_native_only_blocked_
+      << " original_avg_us=" << original_avg
+      << " native_avg_us=" << native_avg
+      << " shadow_compare_avg_us=" << shadow_avg;
+    return o.str();
+}
+
+bool Video::set_runtime_sprite_map_override(unsigned source_map, unsigned target_map, int palette) {
+    if (source_map > 0x7ffu || target_map > 0x7ffu || palette < -1 || palette > 255) return false;
+    auto it = std::find_if(runtime_sprite_map_overrides_.begin(), runtime_sprite_map_overrides_.end(),
+        [&](const auto& q){ return q.source == source_map; });
+    if (it == runtime_sprite_map_overrides_.end()) {
+        RuntimeSpriteMapOverride q;
+        q.source = static_cast<std::uint16_t>(source_map);
+        q.target = static_cast<std::uint16_t>(target_map);
+        q.palette = palette;
+        runtime_sprite_map_overrides_.push_back(q);
+    } else {
+        it->target = static_cast<std::uint16_t>(target_map);
+        it->palette = palette;
+    }
+    return true;
+}
+
+void Video::clear_runtime_sprite_map_overrides() {
+    runtime_sprite_map_overrides_.clear();
+}
+
+bool Video::set_runtime_sprite_asset_override(unsigned source_map, unsigned target_map, const std::string& format, int palette, int flip_x, int flip_y, int dx, int dy) {
+    if (source_map > 0x7ffu || target_map > 0x7ffu || palette < -1 || palette > 255
+        || flip_x < -1 || flip_x > 1 || flip_y < -1 || flip_y > 1
+        || dx < -512 || dx > 512 || dy < -512 || dy > 512) return false;
+    std::string f; f.reserve(format.size());
+    for (char c : format) f.push_back(static_cast<char>(std::tolower(static_cast<unsigned char>(c))));
+    int fmt=0;
+    if (f=="preserve" || f=="source" || f=="auto") fmt=0;
+    else if (f=="obj-a" || f=="obja" || f=="128" || f=="128x128") fmt=1;
+    else if (f=="obj-b64" || f=="objb64" || f=="64" || f=="64x128") fmt=2;
+    else if (f=="obj-b32" || f=="objb32" || f=="32" || f=="32x128") fmt=3;
+    else return false;
+    auto it=std::find_if(runtime_sprite_asset_overrides_.begin(),runtime_sprite_asset_overrides_.end(),
+        [&](const auto& q){return q.source_map==source_map;});
+    SpriteLayerShadowOverride q{}; q.source_map=static_cast<std::uint16_t>(source_map); q.semantic_object=0;
+    q.target_map=static_cast<std::uint16_t>(target_map); q.target_format=fmt; q.palette=palette;
+    q.flip_x=flip_x; q.flip_y=flip_y; q.dx=dx; q.dy=dy;
+    if(it==runtime_sprite_asset_overrides_.end()) runtime_sprite_asset_overrides_.push_back(q); else *it=q;
+    runtime_sprite_asset_visible_pixels_ = 0;
+    return true;
+}
+
+bool Video::set_runtime_sprite_asset_override_object(const std::string& object, unsigned target_map, const std::string& format, int palette, int flip_x, int flip_y, int dx, int dy) {
+    if (target_map > 0x7ffu || palette < -1 || palette > 255
+        || flip_x < -1 || flip_x > 1 || flip_y < -1 || flip_y > 1
+        || dx < -512 || dx > 512 || dy < -512 || dy > 512) return false;
+    std::string obj; obj.reserve(object.size());
+    for (char c : object) obj.push_back(static_cast<char>(std::tolower(static_cast<unsigned char>(c))));
+    int semantic=0;
+    if (obj=="player_car.body" || obj=="player-car.body" || obj=="player_car" || obj=="player-car") semantic=1;
+    else return false;
+    std::string f; f.reserve(format.size());
+    for (char c : format) f.push_back(static_cast<char>(std::tolower(static_cast<unsigned char>(c))));
+    int fmt=0;
+    if (f=="preserve" || f=="source" || f=="auto") fmt=0;
+    else if (f=="obj-a" || f=="obja" || f=="128" || f=="128x128") fmt=1;
+    else if (f=="obj-b64" || f=="objb64" || f=="64" || f=="64x128") fmt=2;
+    else if (f=="obj-b32" || f=="objb32" || f=="32" || f=="32x128") fmt=3;
+    else return false;
+    auto it=std::find_if(runtime_sprite_asset_overrides_.begin(),runtime_sprite_asset_overrides_.end(),
+        [&](const auto& q){return q.semantic_object==semantic;});
+    SpriteLayerShadowOverride q{}; q.source_map=0; q.semantic_object=semantic;
+    q.target_map=static_cast<std::uint16_t>(target_map); q.target_format=fmt; q.palette=palette;
+    q.flip_x=flip_x; q.flip_y=flip_y; q.dx=dx; q.dy=dy;
+    if(it==runtime_sprite_asset_overrides_.end()) runtime_sprite_asset_overrides_.push_back(q); else *it=q;
+    runtime_sprite_asset_visible_pixels_ = 0;
+    return true;
+}
+
+void Video::clear_runtime_sprite_asset_overrides(){ runtime_sprite_asset_overrides_.clear(); runtime_sprite_asset_visible_pixels_ = 0; }
+
+std::string Video::runtime_sprite_asset_overrides_status() const {
+    std::ostringstream o; o<<"count="<<runtime_sprite_asset_overrides_.size();
+    for(const auto&q:runtime_sprite_asset_overrides_){
+        const char* fmt=q.target_format==1?"obj-a":q.target_format==2?"obj-b64":q.target_format==3?"obj-b32":"preserve";
+        if(q.semantic_object==1) o<<" object=player_car.body"; else o<<" source="<<q.source_map;
+        o<<",target="<<q.target_map<<",format="<<fmt<<",palette="<<q.palette
+         <<",flipx="<<q.flip_x<<",flipy="<<q.flip_y<<",dx="<<q.dx<<",dy="<<q.dy;
+    }
+    return o.str();
+}
+
+std::string Video::runtime_sprite_map_overrides_status() const {
+    std::ostringstream o;
+    o << "count=" << runtime_sprite_map_overrides_.size();
+    for (const auto& q : runtime_sprite_map_overrides_)
+        o << " source=" << q.source << ",target=" << q.target << ",palette=" << q.palette;
+    return o.str();
 }
 
 void Video::configure_sprite_tie_break(const Options& options) {
@@ -1108,6 +1459,128 @@ void Video::draw_runtime_tile_layer(
     }
 }
 
+void Video::draw_runtime_tile_native(
+    std::vector<std::uint32_t>& pixels,
+    std::vector<std::uint8_t>& priority,
+    const Machine& machine,
+    const Bus& bus,
+    int layer,
+    std::uint8_t pri,
+    bool opaque) {
+    const Region* tr = find_region(bus, "tilemap");
+    const Region* cr = find_region(bus, "tile_control");
+    if (!tr || !cr) { ++bg_backend_native_only_blocked_; return; }
+    Tc0100BgNativeInput in{};
+    in.tilemap = &tr->bytes;
+    in.control = &cr->bytes;
+    in.tile_gfx = &machine.tile_gfx();
+    in.palette = &bus.palette;
+    in.layer = layer;
+    in.opaque = opaque;
+    in.legacy_x = tc0100scn_legacy_x_;
+    in.width = WIDTH;
+    in.height = HEIGHT;
+    in.visible_y_start = VISIBLE_Y_START;
+    const auto& lo = layer ? layer_offset_bg1_ : layer_offset_bg0_;
+    in.offset_x = lo.x;
+    in.offset_y = lo.y;
+    const auto native = render_tc0100scn_bg_native(in);
+    if (!native.available) { ++bg_backend_native_only_blocked_; return; }
+    for (std::size_t i = 0; i < native.pixels.size() && i < pixels.size(); ++i) {
+        if (!native.coverage[i]) continue;
+        pixels[i] = native.pixels[i];
+        priority[i] |= pri;
+    }
+}
+
+Tc0100BgNativeCompare Video::compare_runtime_bg_layer_shadow(
+    const Machine& machine,
+    const Runtime& runtime,
+    int layer,
+    bool opaque,
+    std::vector<std::uint32_t>* original_pixels,
+    std::vector<std::uint32_t>* native_pixels) {
+    const Region* tr = find_region(runtime.bus, "tilemap");
+    const Region* cr = find_region(runtime.bus, "tile_control");
+    if (!tr || !cr) throw std::runtime_error("TC0100SCN BG RAM/control unavailable");
+
+    std::vector<std::uint32_t> original(WIDTH * HEIGHT, 0u);
+    std::vector<std::uint8_t> original_cov(WIDTH * HEIGHT, 0u);
+    draw_runtime_tile_layer(original, original_cov, machine, runtime.bus, layer, 0x01, opaque);
+    for (auto& v : original_cov) v = v ? 1u : 0u;
+
+    Tc0100BgNativeInput in{};
+    in.tilemap = &tr->bytes;
+    in.control = &cr->bytes;
+    in.tile_gfx = &machine.tile_gfx();
+    in.palette = &runtime.bus.palette;
+    in.layer = layer;
+    in.opaque = opaque;
+    in.legacy_x = tc0100scn_legacy_x_;
+    in.width = WIDTH;
+    in.height = HEIGHT;
+    in.visible_y_start = VISIBLE_Y_START;
+    const auto& lo = layer ? layer_offset_bg1_ : layer_offset_bg0_;
+    in.offset_x = lo.x;
+    in.offset_y = lo.y;
+    const auto native = render_tc0100scn_bg_native(in);
+    if (!native.available) throw std::runtime_error("native TC0100SCN BG renderer unavailable");
+    if (original_pixels) *original_pixels = original;
+    if (native_pixels) *native_pixels = native.pixels;
+    return compare_tc0100scn_bg_native(original, original_cov, native, WIDTH, HEIGHT);
+}
+
+void Video::draw_runtime_tile_selected(
+    std::vector<std::uint32_t>& pixels,
+    std::vector<std::uint8_t>& priority,
+    const Machine& machine,
+    const Runtime& runtime,
+    int layer,
+    std::uint8_t pri,
+    bool opaque,
+    unsigned frame) {
+    using Clock = std::chrono::steady_clock;
+    if (bg_backend_ == BgBackend::Native || bg_backend_ == BgBackend::NativeOnly) {
+        const auto t0 = Clock::now();
+        draw_runtime_tile_native(pixels, priority, machine, runtime.bus, layer, pri, opaque);
+        const auto us = std::chrono::duration_cast<std::chrono::microseconds>(Clock::now()-t0).count();
+        ++bg_backend_native_layers_;
+        bg_backend_native_us_ += static_cast<std::uint64_t>(std::max<std::int64_t>(0, us));
+        if (bg_backend_ == BgBackend::NativeOnly) ++bg_backend_native_only_layers_;
+        return;
+    }
+
+    const auto t0 = Clock::now();
+    draw_runtime_tile_layer(pixels, priority, machine, runtime.bus, layer, pri, opaque);
+    const auto us = std::chrono::duration_cast<std::chrono::microseconds>(Clock::now()-t0).count();
+    ++bg_backend_original_layers_;
+    bg_backend_original_us_ += static_cast<std::uint64_t>(std::max<std::int64_t>(0, us));
+
+    if (bg_backend_ == BgBackend::Shadow) {
+        try {
+            const auto st = Clock::now();
+            const auto cmp = compare_runtime_bg_layer_shadow(machine, runtime, layer, opaque);
+            const auto sus = std::chrono::duration_cast<std::chrono::microseconds>(Clock::now()-st).count();
+            bg_backend_shadow_compare_us_ += static_cast<std::uint64_t>(std::max<std::int64_t>(0, sus));
+            bg_backend_last_compare_ = cmp;
+            ++bg_backend_compared_layers_;
+            if (layer == 0) ++bg_backend_bg0_compared_; else ++bg_backend_bg1_compared_;
+            if (cmp.pixel_mismatches || cmp.coverage_mismatches) {
+                ++bg_backend_mismatch_layers_;
+                if (layer == 0) ++bg_backend_bg0_mismatch_; else ++bg_backend_bg1_mismatch_;
+                if (!bg_backend_have_first_mismatch_) {
+                    bg_backend_have_first_mismatch_ = true;
+                    bg_backend_first_mismatch_frame_ = frame;
+                    bg_backend_first_mismatch_layer_ = layer;
+                    bg_backend_first_compare_ = cmp;
+                }
+            }
+        } catch (...) {
+            // Shadow mode must never disturb the authoritative frame.
+        }
+    }
+}
+
 void Video::draw_runtime_text_layer(
     std::vector<std::uint32_t>& pixels,
     std::vector<std::uint8_t>& priority,
@@ -1117,6 +1590,8 @@ void Video::draw_runtime_text_layer(
     const Region* tr = find_region(bus, "tilemap");
     const Region* cr = find_region(bus, "tile_control");
     if (!tr || !cr || tr->bytes.size() < 0x7000 || cr->bytes.size() < 0x10) return;
+
+    hud_speed_region_visible_pixels_ = 0;
 
     const std::uint16_t ctrl2 = be16(cr->bytes, 4);
     const std::uint16_t ctrl5 = be16(cr->bytes, 10);
@@ -1143,14 +1618,141 @@ void Video::draw_runtime_text_layer(
             if (attr & 0x8000) py = 7 - py;
             const std::uint8_t pen = text_pixel(*tr, code, px, py);
             if (pen == 0) continue;
+
+            int out_x = sx, out_y = sy;
+            const auto hud_element = hud_element_for_text_cell(tx, ty);
+            if (hud_element != HudElement::None) {
+                const auto& presentation = hud_layout_.elements[static_cast<std::size_t>(hud_element)];
+                if (!presentation.visible) continue;
+                out_x += presentation.dx;
+                out_y += presentation.dy;
+            }
+            if (out_x < 0 || out_x >= WIDTH || out_y < 0 || out_y >= HEIGHT) continue;
+            // Regression-grade destination-region metric. This region is the
+            // actual on-screen SPEED label/value footprint at canonical gameplay
+            // geometry, independent of which dynamic character codes are stored.
+            if (out_x >= 192 && out_x <= 319 && out_y >= 24 && out_y <= 39)
+                ++hud_speed_region_visible_pixels_;
+
             const std::uint16_t color = static_cast<std::uint16_t>((attr >> 8) & 0x3f);
-            const std::size_t dst = static_cast<std::size_t>(sy * WIDTH + sx);
+            const std::size_t dst = static_cast<std::size_t>(out_y * WIDTH + out_x);
             pixels[dst] = runtime_palette_color(bus, color, pen);
             priority[dst] |= pri;
         }
     }
 }
 
+
+
+void Video::draw_runtime_text_native(
+    std::vector<std::uint32_t>& pixels,
+    std::vector<std::uint8_t>& priority,
+    const Bus& bus,
+    std::uint8_t pri) {
+    const Region* tr = find_region(bus, "tilemap");
+    const Region* cr = find_region(bus, "tile_control");
+    if (!tr || !cr) { ++text_backend_native_only_blocked_frames_; return; }
+    Tc0100TextNativeInput in{};
+    in.tilemap = &tr->bytes;
+    in.control = &cr->bytes;
+    in.palette = &bus.palette;
+    in.hud_layout = &hud_layout_;
+    in.width = WIDTH;
+    in.height = HEIGHT;
+    in.visible_y_start = VISIBLE_Y_START;
+    in.offset_x = layer_offset_text_.x;
+    in.offset_y = layer_offset_text_.y;
+    const auto native = render_tc0100scn_text_native(in);
+    if (!native.available) { ++text_backend_native_only_blocked_frames_; return; }
+    hud_speed_region_visible_pixels_ = 0;
+    for (std::size_t i = 0; i < native.pixels.size() && i < pixels.size(); ++i) {
+        if (!native.coverage[i]) continue;
+        pixels[i] = native.pixels[i];
+        priority[i] |= pri;
+        const int x = static_cast<int>(i % WIDTH);
+        const int y = static_cast<int>(i / WIDTH);
+        if (x >= 192 && x <= 319 && y >= 24 && y <= 39) ++hud_speed_region_visible_pixels_;
+    }
+}
+
+Tc0100TextNativeCompare Video::compare_runtime_text_layer_shadow(
+    const Runtime& runtime,
+    std::vector<std::uint32_t>* original_pixels,
+    std::vector<std::uint32_t>* native_pixels) {
+    const Region* tr = find_region(runtime.bus, "tilemap");
+    const Region* cr = find_region(runtime.bus, "tile_control");
+    if (!tr || !cr) throw std::runtime_error("TC0100SCN text RAM/control unavailable");
+
+    std::vector<std::uint32_t> original(WIDTH * HEIGHT, 0u);
+    std::vector<std::uint8_t> original_mask(WIDTH * HEIGHT, 0u);
+    draw_runtime_text_layer(original, original_mask, runtime.bus, LAYER_TEXT);
+
+    Tc0100TextNativeInput in{};
+    in.tilemap = &tr->bytes;
+    in.control = &cr->bytes;
+    in.palette = &runtime.bus.palette;
+    in.hud_layout = &hud_layout_;
+    in.width = WIDTH;
+    in.height = HEIGHT;
+    in.visible_y_start = VISIBLE_Y_START;
+    in.offset_x = layer_offset_text_.x;
+    in.offset_y = layer_offset_text_.y;
+    const auto native = render_tc0100scn_text_native(in);
+    if (!native.available) throw std::runtime_error("native TC0100SCN text renderer unavailable");
+    if (original_pixels) *original_pixels = original;
+    if (native_pixels) *native_pixels = native.pixels;
+    return compare_tc0100scn_text_native(original, native, WIDTH, HEIGHT);
+}
+
+void Video::draw_runtime_text_selected(
+    std::vector<std::uint32_t>& pixels,
+    std::vector<std::uint8_t>& priority,
+    const Runtime& runtime,
+    std::uint8_t pri,
+    unsigned frame) {
+    using Clock = std::chrono::steady_clock;
+    if (text_backend_ == TextBackend::Native || text_backend_ == TextBackend::NativeOnly) {
+        const auto t0 = Clock::now();
+        const auto before_blocked = text_backend_native_only_blocked_frames_;
+        draw_runtime_text_native(pixels, priority, runtime.bus, pri);
+        const auto us = std::chrono::duration_cast<std::chrono::microseconds>(Clock::now()-t0).count();
+        ++text_backend_native_frames_;
+        text_backend_native_us_ += static_cast<std::uint64_t>(std::max<std::int64_t>(0, us));
+        if (text_backend_ == TextBackend::NativeOnly) ++text_backend_native_only_frames_;
+        // Native mode is also fail-closed for text: there is deliberately no
+        // Original fallback. NativeOnly simply records promotion coverage.
+        (void)before_blocked;
+        return;
+    }
+
+    const auto t0 = Clock::now();
+    draw_runtime_text_layer(pixels, priority, runtime.bus, pri);
+    const auto us = std::chrono::duration_cast<std::chrono::microseconds>(Clock::now()-t0).count();
+    ++text_backend_original_frames_;
+    text_backend_original_us_ += static_cast<std::uint64_t>(std::max<std::int64_t>(0, us));
+
+    if (text_backend_ == TextBackend::Shadow) {
+        try {
+            const auto st = Clock::now();
+            const auto cmp = compare_runtime_text_layer_shadow(runtime);
+            const auto sus = std::chrono::duration_cast<std::chrono::microseconds>(Clock::now()-st).count();
+            ++text_backend_shadow_compare_frames_;
+            text_backend_shadow_compare_us_ += static_cast<std::uint64_t>(std::max<std::int64_t>(0, sus));
+            text_backend_last_compare_ = cmp;
+            ++text_backend_compared_frames_;
+            if (cmp.pixel_mismatches) {
+                ++text_backend_mismatch_frames_;
+                if (!text_backend_have_first_mismatch_) {
+                    text_backend_have_first_mismatch_ = true;
+                    text_backend_first_mismatch_frame_ = frame;
+                    text_backend_first_compare_ = cmp;
+                }
+            }
+        } catch (...) {
+            // Shadow mode never disturbs the authoritative/original frame.
+        }
+    }
+}
 
 void Video::note_road_scanline(
     std::uint16_t ctl,
@@ -1361,6 +1963,278 @@ void Video::draw_runtime_road(
     }
 }
 
+SpriteLayerShadowCompare Video::compare_runtime_sprite_layer_shadow(
+    const Machine& machine, const Runtime& runtime, const SceneState& scene,
+    std::vector<std::uint32_t>* authoritative_pixels,
+    std::vector<std::uint32_t>* native_pixels,
+    std::vector<std::uint16_t>* authoritative_owners,
+    std::vector<std::uint16_t>* native_owners) {
+    if (!runtime_sprite_overrides_.empty() || runtime_visual_slot_ >= 0
+        || !sprite_solo_.empty() || !sprite_hide_.empty() || !runtime_sprite_asset_overrides_.empty())
+        throw std::runtime_error("sprite layer shadow compare requires raw presentation state; clear sprite overrides/visual filters/asset replacements first");
+    const Region* sr = find_region(runtime.bus, "sprites");
+    if (!sr) throw std::runtime_error("sprite RAM unavailable");
+
+    std::vector<std::uint32_t> live(WIDTH * HEIGHT, 0u);
+    std::vector<std::uint8_t> layer_mask(WIDTH * HEIGHT, 0u), prom_addr(WIDTH * HEIGHT, 0u),
+                              prom_out(WIDTH * HEIGHT, 0u), prom_source(WIDTH * HEIGHT, 0u);
+    std::vector<std::uint16_t> live_owner(WIDTH * HEIGHT, 0xffffu);
+    // Render the authoritative raw sprite source onto an otherwise empty canvas.
+    // Background priority is intentionally absent: this compares sprite parsing,
+    // placement, palette and sprite-vs-sprite ownership, not the final compositor.
+    draw_runtime_sprites(live, layer_mask, prom_addr, prom_out, prom_source,
+                         machine, runtime.bus, false, scene.prom_input_mask, true,
+                         &live_owner, nullptr, sprite_tie_break_higher_);
+
+    std::vector<std::uint8_t> effective_ram = sr->bytes;
+    for (std::size_t pos = 0; pos * 8u + 7u < effective_ram.size(); ++pos) {
+        const std::size_t off = pos * 8u;
+        auto w1 = shadow_be16(effective_ram, off + 2);
+        auto w3 = shadow_be16(effective_ram, off + 6);
+        const auto source = static_cast<std::uint16_t>(w3 & 0x07ffu);
+        for (const auto& mv : runtime_sprite_map_overrides_) if (mv.source == source) {
+            w3 = static_cast<std::uint16_t>((w3 & 0xf800u) | (mv.target & 0x07ffu));
+            if (mv.palette >= 0)
+                w1 = static_cast<std::uint16_t>((w1 & 0x807fu) | ((static_cast<unsigned>(mv.palette) & 0xffu) << 7));
+            effective_ram[off + 2] = static_cast<std::uint8_t>(w1 >> 8);
+            effective_ram[off + 3] = static_cast<std::uint8_t>(w1 & 0xff);
+            effective_ram[off + 6] = static_cast<std::uint8_t>(w3 >> 8);
+            effective_ram[off + 7] = static_cast<std::uint8_t>(w3 & 0xff);
+            break;
+        }
+    }
+
+    SpriteLayerShadowInput in{};
+    in.sprite_ram = &effective_ram;
+    in.spritemap = &machine.spritemap();
+    in.gfx_a = &machine.sprites_a();
+    in.gfx_b = &machine.sprites_b();
+    in.palette = &runtime.bus.palette;
+    in.width = WIDTH; in.height = HEIGHT; in.visible_y_start = VISIBLE_Y_START;
+    in.offset_x = layer_offset_sprites_.x; in.offset_y = layer_offset_sprites_.y;
+    in.ascending_slots = sprite_tie_break_higher_;
+    const auto shadow = render_sprite_layer_shadow(in);
+    if (authoritative_pixels) *authoritative_pixels = live;
+    if (native_pixels) *native_pixels = shadow.pixels;
+    if (authoritative_owners) *authoritative_owners = live_owner;
+    if (native_owners) *native_owners = shadow.owners;
+    return compare_sprite_layer_shadow(live, live_owner, shadow);
+}
+
+bool Video::export_sprite_backend_comparison(const Machine& machine, const Runtime& runtime, const SceneState& scene, unsigned frame, const std::string& name, std::string* path_out) {
+    std::string safe; safe.reserve(name.size());
+    for (char c : name) safe.push_back((std::isalnum(static_cast<unsigned char>(c)) || c=='-' || c=='_') ? c : '_');
+    if (safe.empty()) safe = "sprites";
+    std::vector<std::uint32_t> original, native;
+    std::vector<std::uint16_t> original_owner, native_owner;
+    SpriteLayerShadowCompare cmp{};
+    try { cmp = compare_runtime_sprite_layer_shadow(machine, runtime, scene, &original, &native, &original_owner, &native_owner); }
+    catch (...) { return false; }
+    const auto root = log_directory_ / "native_promotion" / (safe + "_f" + std::to_string(frame));
+    std::error_code ec; std::filesystem::create_directories(root, ec); if (ec) return false;
+    std::vector<std::uint32_t> diff(original.size(), 0u);
+    for (std::size_t i=0;i<diff.size() && i<native.size();++i) {
+        const bool p = original[i] != native[i];
+        const bool ow = i<original_owner.size() && i<native_owner.size() && original_owner[i] != native_owner[i];
+        if (p || ow) diff[i] = p ? 0xffff00ffu : 0xffffff00u;
+    }
+    bool ok = diag_save_png(root/"original.png", WIDTH, HEIGHT, original);
+    ok &= diag_save_png(root/"native.png", WIDTH, HEIGHT, native);
+    ok &= diag_save_png(root/"diff.png", WIDTH, HEIGHT, diff);
+    std::ofstream meta(root/"manifest.json", std::ios::out|std::ios::trunc);
+    meta << "{\n  \"schema\": \"chq-native-layer-compare-v1\",\n  \"build\": \"" << kNativeVersion << "\",\n  \"subsystem\": \"sprites\",\n  \"frame\": " << frame
+         << ",\n  \"pixelMismatches\": " << cmp.pixel_mismatches
+         << ",\n  \"ownerMismatches\": " << cmp.owner_mismatches
+         << ",\n  \"firstX\": " << cmp.first_x << ",\n  \"firstY\": " << cmp.first_y
+         << ",\n  \"original\": \"original.png\",\n  \"native\": \"native.png\",\n  \"diff\": \"diff.png\"\n}\n";
+    ok &= static_cast<bool>(meta);
+    if (path_out) *path_out = root.string();
+    return ok;
+}
+
+unsigned Video::draw_runtime_sprites_native(
+    std::vector<std::uint32_t>& pixels,
+    std::vector<std::uint8_t>& layer_mask,
+    std::vector<std::uint8_t>& prom_addr,
+    std::vector<std::uint8_t>& prom_out,
+    std::vector<std::uint8_t>& prom_source,
+    const Machine& machine,
+    const Bus& bus,
+    bool use_prom_mixer,
+    std::uint8_t input_mask,
+    bool reference_priority,
+    std::vector<std::uint16_t>* sprite_owner,
+    std::vector<std::uint16_t>* sprite_coverage,
+    bool ascending_order,
+    bool allow_original_fallback) {
+
+    // Slot-specific presentation filters remain an Original-only forensic control.
+    // Native mode may fall back explicitly; NativeOnly is the promotion gate and
+    // hard-disables that fallback so independence is measurable rather than assumed.
+    if (!runtime_sprite_overrides_.empty() || runtime_visual_slot_ >= 0
+        || !sprite_solo_.empty() || !sprite_hide_.empty()) {
+        if (!allow_original_fallback) { ++sprite_backend_native_only_blocked_frames_; return 0; }
+        ++sprite_backend_original_fallbacks_;
+        return draw_runtime_sprites(pixels, layer_mask, prom_addr, prom_out, prom_source,
+                                    machine, bus, use_prom_mixer, input_mask, reference_priority,
+                                    sprite_owner, sprite_coverage, ascending_order);
+    }
+
+    runtime_sprite_asset_visible_pixels_ = 0;
+    const Region* sr = find_region(bus, "sprites");
+    if (!sr) return 0;
+    std::vector<std::uint8_t> effective_ram = sr->bytes;
+    for (std::size_t pos = 0; pos * 8u + 7u < effective_ram.size(); ++pos) {
+        const std::size_t off = pos * 8u;
+        auto w1 = shadow_be16(effective_ram, off + 2);
+        auto w3 = shadow_be16(effective_ram, off + 6);
+        const auto source = static_cast<std::uint16_t>(w3 & 0x07ffu);
+        for (const auto& mv : runtime_sprite_map_overrides_) if (mv.source == source) {
+            w3 = static_cast<std::uint16_t>((w3 & 0xf800u) | (mv.target & 0x07ffu));
+            if (mv.palette >= 0)
+                w1 = static_cast<std::uint16_t>((w1 & 0x807fu) | ((static_cast<unsigned>(mv.palette) & 0xffu) << 7));
+            effective_ram[off + 2] = static_cast<std::uint8_t>(w1 >> 8);
+            effective_ram[off + 3] = static_cast<std::uint8_t>(w1 & 0xff);
+            effective_ram[off + 6] = static_cast<std::uint8_t>(w3 >> 8);
+            effective_ram[off + 7] = static_cast<std::uint8_t>(w3 & 0xff);
+            break;
+        }
+    }
+
+    SpriteLayerShadowInput in{};
+    in.sprite_ram = &effective_ram;
+    in.spritemap = &machine.spritemap();
+    in.gfx_a = &machine.sprites_a();
+    in.gfx_b = &machine.sprites_b();
+    in.palette = &bus.palette;
+    in.width = WIDTH; in.height = HEIGHT; in.visible_y_start = VISIBLE_Y_START;
+    in.offset_x = layer_offset_sprites_.x; in.offset_y = layer_offset_sprites_.y;
+    in.ascending_slots = ascending_order;
+    in.overrides = runtime_sprite_asset_overrides_.empty() ? nullptr : &runtime_sprite_asset_overrides_;
+    const auto native = render_sprite_layer_shadow(in);
+
+    const auto count = effective_ram.size() / 8u;
+    // Preserve the original forensic overlap-density contract. The independent
+    // layer renderer records every non-zero in-bounds candidate before occupancy
+    // rejects later sprites. Native live rendering must export that complete count,
+    // not collapse every visible pixel to coverage=1.
+    if (sprite_coverage) {
+        const auto n = std::min(sprite_coverage->size(), native.coverage.size());
+        for (std::size_t i = 0; i < n; ++i) {
+            const auto cur = (*sprite_coverage)[i];
+            const auto add = native.coverage[i];
+            (*sprite_coverage)[i] = static_cast<std::uint16_t>(
+                std::min<unsigned>(0xffffu, static_cast<unsigned>(cur) + static_cast<unsigned>(add)));
+        }
+    }
+    for (std::size_t i = 0; i < native.pixels.size() && i < pixels.size(); ++i) {
+        const auto owner = i < native.owners.size() ? native.owners[i] : 0xffffu;
+        if (owner == 0xffffu || owner >= count || native.pixels[i] == 0) continue;
+        const std::size_t off = static_cast<std::size_t>(owner) * 8u;
+        const auto w1 = shadow_be16(effective_ram, off + 2);
+        const auto w2 = shadow_be16(effective_ram, off + 4);
+        const bool priority = (w1 & 0x8000u) != 0;
+        const auto color = static_cast<std::uint8_t>((w1 & 0x7f80u) >> 7);
+
+        std::uint8_t block_mask = 0, addr = 0, raw = 0;
+        if (reference_priority) {
+            block_mask = priority ? 0xfcu : 0xf0u;
+        } else if (use_prom_mixer && prom_configured_) {
+            SpriteInstance sprite{};
+            sprite.color = color;
+            sprite.priority = priority ? 1 : 0;
+            addr = sprite_prom_address(sprite, w2, input_mask);
+            const auto& entry = mix_lut_[addr];
+            raw = entry.raw;
+            block_mask = entry.block_mask;
+            note_prom(PromSource::Sprite, addr, entry);
+        } else {
+            block_mask = priority ? 0 : LAYER_BG_UPPER;
+        }
+        if ((layer_mask[i] & block_mask) != 0) continue;
+        if (!runtime_sprite_asset_overrides_.empty()) {
+            const auto source_map = static_cast<std::uint16_t>(shadow_be16(effective_ram, off + 6) & 0x07ffu);
+            const auto source_palette = static_cast<std::uint8_t>((w1 & 0x7f80u) >> 7);
+            if (std::any_of(runtime_sprite_asset_overrides_.begin(), runtime_sprite_asset_overrides_.end(),
+                    [&](const auto& q){ return shadow_override_matches(q, source_map, source_palette); }))
+                ++runtime_sprite_asset_visible_pixels_;
+        }
+
+        pixels[i] = native.pixels[i];
+        if (!reference_priority) layer_mask[i] |= LAYER_SPRITE;
+        if (use_prom_mixer && !reference_priority && prom_configured_) {
+            prom_addr[i] = addr; prom_out[i] = raw; prom_source[i] = static_cast<std::uint8_t>(PromSource::Sprite);
+        }
+        if (sprite_owner && i < sprite_owner->size()) (*sprite_owner)[i] = owner;
+    }
+    return static_cast<unsigned>(native.active_records);
+}
+
+unsigned Video::draw_runtime_sprites_selected(
+    std::vector<std::uint32_t>& pixels,
+    std::vector<std::uint8_t>& layer_mask,
+    std::vector<std::uint8_t>& prom_addr,
+    std::vector<std::uint8_t>& prom_out,
+    std::vector<std::uint8_t>& prom_source,
+    const Machine& machine,
+    const Runtime& runtime,
+    bool use_prom_mixer,
+    std::uint8_t input_mask,
+    bool reference_priority,
+    std::vector<std::uint16_t>* sprite_owner,
+    std::vector<std::uint16_t>* sprite_coverage,
+    bool ascending_order,
+    unsigned frame) {
+
+    using Clock = std::chrono::steady_clock;
+    if (sprite_backend_ == SpriteBackend::Native || sprite_backend_ == SpriteBackend::NativeOnly) {
+        const bool hard = sprite_backend_ == SpriteBackend::NativeOnly;
+        const auto t0 = Clock::now();
+        const auto drawn = draw_runtime_sprites_native(pixels, layer_mask, prom_addr, prom_out, prom_source,
+            machine, runtime.bus, use_prom_mixer, input_mask, reference_priority,
+            sprite_owner, sprite_coverage, ascending_order, !hard);
+        const auto us = std::chrono::duration_cast<std::chrono::microseconds>(Clock::now()-t0).count();
+        ++sprite_backend_native_frames_; sprite_backend_native_us_ += static_cast<std::uint64_t>(std::max<std::int64_t>(0, us));
+        if (hard) ++sprite_backend_native_only_frames_;
+        return drawn;
+    }
+
+    const auto original_t0 = Clock::now();
+    const auto drawn = draw_runtime_sprites(pixels, layer_mask, prom_addr, prom_out, prom_source,
+        machine, runtime.bus, use_prom_mixer, input_mask, reference_priority,
+        sprite_owner, sprite_coverage, ascending_order);
+    const auto original_us = std::chrono::duration_cast<std::chrono::microseconds>(Clock::now()-original_t0).count();
+    ++sprite_backend_original_frames_; sprite_backend_original_us_ += static_cast<std::uint64_t>(std::max<std::int64_t>(0, original_us));
+
+    if (sprite_backend_ == SpriteBackend::Shadow
+        && runtime_sprite_overrides_.empty() && runtime_visual_slot_ < 0
+        && sprite_solo_.empty() && sprite_hide_.empty() && runtime_sprite_asset_overrides_.empty()) {
+        try {
+            const auto shadow_t0 = Clock::now();
+            const auto cmp = compare_runtime_sprite_layer_shadow(machine, runtime, SceneState{});
+            const auto shadow_us = std::chrono::duration_cast<std::chrono::microseconds>(Clock::now()-shadow_t0).count();
+            ++sprite_backend_shadow_compare_frames_; sprite_backend_shadow_compare_us_ += static_cast<std::uint64_t>(std::max<std::int64_t>(0, shadow_us));
+            sprite_backend_last_compare_ = cmp;
+            ++sprite_backend_compared_frames_;
+            if (cmp.pixel_mismatches || cmp.owner_mismatches) {
+                ++sprite_backend_mismatch_frames_;
+                if (!sprite_backend_have_first_mismatch_) {
+                    sprite_backend_have_first_mismatch_ = true;
+                    sprite_backend_first_mismatch_frame_ = frame;
+                    sprite_backend_first_compare_ = cmp;
+                    std::string evidence;
+                    if (export_sprite_backend_comparison(machine, runtime, SceneState{}, frame, "first-sprite-mismatch", &evidence))
+                        sprite_backend_first_evidence_path_ = evidence;
+                }
+            }
+        } catch (...) {
+            // Shadow mode must never disturb authoritative rendering. Explicit
+            // compare commands remain assertive and report failures normally.
+        }
+    }
+    return drawn;
+}
+
 unsigned Video::draw_runtime_sprites(
     std::vector<std::uint32_t>& pixels,
     std::vector<std::uint8_t>& layer_mask,
@@ -1410,6 +2284,12 @@ unsigned Video::draw_runtime_sprites(
         // by the original game too, but are not part of the spritemap index.
         std::uint16_t tile = static_cast<std::uint16_t>(w3 & 0x07ff);
         if (tile == 0) continue;
+
+        for (const auto& mv : runtime_sprite_map_overrides_) if (mv.source == tile) {
+            tile = mv.target;
+            if (mv.palette >= 0) color = static_cast<std::uint8_t>(mv.palette & 0xff);
+            break;
+        }
 
         for (const auto& ov : runtime_sprite_overrides_) if (ov.slot == pos) {
             if (ov.visible == 0) tile = 0;
@@ -2424,6 +3304,30 @@ void Video::set_runtime_sprite_override(unsigned slot, int map, int palette, int
     if(map>=-1) it->map=map; if(palette>=-1) it->palette=palette; if(visible>=-1) it->visible=visible;
 }
 void Video::clear_runtime_sprite_overrides(){ runtime_sprite_overrides_.clear(); }
+
+Video::RuntimeSpritePresentationInfo Video::runtime_sprite_presentation(unsigned slot, std::uint16_t source_map, std::uint8_t source_palette) const {
+    RuntimeSpritePresentationInfo r{};
+    r.source_map=source_map; r.source_palette=source_palette;
+    r.effective_map=source_map; r.effective_palette=source_palette;
+    for(const auto& mv:runtime_sprite_map_overrides_) if(mv.source==r.effective_map){
+        r.effective_map=mv.target;
+        if(mv.palette>=0) r.effective_palette=static_cast<std::uint8_t>(mv.palette&0xff);
+        r.map_override=true; break;
+    }
+    for(const auto& ov:runtime_sprite_overrides_) if(ov.slot==slot){
+        if(ov.visible==0) r.effective_visible=0;
+        else if(ov.visible==1) r.effective_visible=1;
+        if(ov.map>=0) r.effective_map=static_cast<std::uint16_t>(ov.map&0x07ff);
+        if(ov.palette>=0) r.effective_palette=static_cast<std::uint8_t>(ov.palette&0xff);
+        r.slot_override=true; break;
+    }
+    for(const auto& ov:runtime_sprite_asset_overrides_) if(shadow_override_matches(ov,source_map,source_palette)){
+        r.effective_map=ov.target_map;
+        if(ov.palette>=0) r.effective_palette=static_cast<std::uint8_t>(ov.palette&0xff);
+        r.asset_override=true; break;
+    }
+    return r;
+}
 void Video::set_runtime_sprite_visual(unsigned slot,const std::string& mode){ runtime_visual_slot_=(int)slot; runtime_visual_mode_=mode; }
 void Video::clear_runtime_sprite_visual(){ runtime_visual_slot_=-1; runtime_visual_mode_.clear(); }
 
@@ -2490,15 +3394,15 @@ bool Video::write_semantic_object_evidence_csv(const std::filesystem::path& path
         if(name!="player_car") continue;
         const DebugSpriteInfo* best_body=nullptr; const DebugSpriteInfo* best_shadow=nullptr; int best_dist=1<<30;
         for(const auto& b:debug_sprites_){
-            if(!in(b.map,{472u,475u,476u,508u,514u,516u}) || !in(b.palette,{64u,65u})) continue;
+            if(!in(b.map,{472u,475u,476u,508u,509u,514u,516u,522u}) || !in(b.palette,{64u,65u})) continue;
             for(const auto& sh:debug_sprites_){
-                if(!in(sh.map,{572u,575u,576u,590u,592u,594u}) || sh.palette!=70u) continue;
+                if(!in(sh.map,{572u,575u,576u,590u,592u,594u,596u}) || sh.palette!=70u) continue;
                 const int d=std::abs(b.x-sh.x)+std::abs(b.y-sh.y);
                 if(d<best_dist){ best_dist=d; best_body=&b; best_shadow=&sh; }
             }
         }
-        if(!best_body){ for(const auto& b:debug_sprites_) if(in(b.map,{472u,475u,476u,508u,514u,516u}) && in(b.palette,{64u,65u})) { best_body=&b; break; } }
-        if(!best_shadow){ for(const auto& sh:debug_sprites_) if(in(sh.map,{572u,575u,576u,590u,592u,594u}) && sh.palette==70u) { best_shadow=&sh; break; } }
+        if(!best_body){ for(const auto& b:debug_sprites_) if(in(b.map,{472u,475u,476u,508u,509u,514u,516u,522u}) && in(b.palette,{64u,65u})) { best_body=&b; break; } }
+        if(!best_shadow){ for(const auto& sh:debug_sprites_) if(in(sh.map,{572u,575u,576u,590u,592u,594u,596u}) && sh.palette==70u) { best_shadow=&sh; break; } }
         if(!best_body && !best_shadow){ out<<frame<<','<<name<<",0,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,0\n"; continue; }
         int left=1<<30,top=1<<30,right=-(1<<30),bottom=-(1<<30); std::uint64_t vp=0;
         auto absorb=[&](const DebugSpriteInfo* q){ if(!q)return; left=std::min(left,q->x); top=std::min(top,q->y); right=std::max(right,q->x+q->width-1); bottom=std::max(bottom,q->y+q->height-1); vp+=q->visible_pixels; };
@@ -2751,7 +3655,7 @@ bool Video::save_layered_snapshot(const std::filesystem::path& root, const Machi
     ok &= save_source("bg-bottom.png", [&](auto& q){ if(scene.show_tiles) draw_runtime_tile_layer(q.px,q.lm,machine,runtime.bus,bottom,reference?0x00:LAYER_BG_BOTTOM,true); });
     ok &= save_source("road.png", [&](auto& q){ if(scene.show_road) draw_runtime_road(q.px,q.lm,q.pa,q.po,q.ps,q.rp,machine,runtime.bus,prom,scene.prom_input_mask,reference); });
     ok &= save_source("bg-upper.png", [&](auto& q){ if(scene.show_tiles) draw_runtime_tile_layer(q.px,q.lm,machine,runtime.bus,upper,reference?0x01:LAYER_BG_UPPER,false); });
-    ok &= save_source("sprites.png", [&](auto& q){ if(scene.show_sprites) draw_runtime_sprites(q.px,q.lm,q.pa,q.po,q.ps,machine,runtime.bus,prom,scene.prom_input_mask,reference,nullptr,nullptr,sprite_tie_break_higher_); });
+    ok &= save_source("sprites.png", [&](auto& q){ if(scene.show_sprites) draw_runtime_sprites_selected(q.px,q.lm,q.pa,q.po,q.ps,machine,runtime,prom,scene.prom_input_mask,reference,nullptr,nullptr,sprite_tie_break_higher_,frame); });
     ok &= save_source("text-hud.png", [&](auto& q){ if(scene.show_text) draw_runtime_text_layer(q.px,q.lm,runtime.bus,reference?0x04:LAYER_TEXT); });
 
     auto q=blank_state(0xff101010u);
@@ -2780,13 +3684,13 @@ bool Video::save_layered_snapshot(const std::filesystem::path& root, const Machi
         if(scene.show_road) apply("road",[&](auto& z){draw_runtime_road(z.px,z.lm,z.pa,z.po,z.ps,z.rp,machine,runtime.bus,false,scene.prom_input_mask,true);});
         if(scene.show_text) apply("text-hud",[&](auto& z){draw_runtime_text_layer(z.px,z.lm,runtime.bus,0x04);});
         sns=q;
-        if(scene.show_sprites) apply("sprites",[&](auto& z){draw_runtime_sprites(z.px,z.lm,z.pa,z.po,z.ps,machine,runtime.bus,false,scene.prom_input_mask,true,&snapshot_owner,&snapshot_coverage,sprite_tie_break_higher_);});
+        if(scene.show_sprites) apply("sprites",[&](auto& z){draw_runtime_sprites_selected(z.px,z.lm,z.pa,z.po,z.ps,machine,runtime,false,scene.prom_input_mask,true,&snapshot_owner,&snapshot_coverage,sprite_tie_break_higher_,frame);});
     }else{
         if(scene.show_tiles) apply("bg-bottom",[&](auto& z){draw_runtime_tile_layer(z.px,z.lm,machine,runtime.bus,bottom,LAYER_BG_BOTTOM,true);});
         if(scene.show_road) apply("road",[&](auto& z){draw_runtime_road(z.px,z.lm,z.pa,z.po,z.ps,z.rp,machine,runtime.bus,prom,scene.prom_input_mask,false);});
         if(scene.show_tiles) apply("bg-upper",[&](auto& z){draw_runtime_tile_layer(z.px,z.lm,machine,runtime.bus,upper,LAYER_BG_UPPER,false);});
         sns=q;
-        if(scene.show_sprites) apply("sprites",[&](auto& z){draw_runtime_sprites(z.px,z.lm,z.pa,z.po,z.ps,machine,runtime.bus,prom,scene.prom_input_mask,false,&snapshot_owner,&snapshot_coverage,sprite_tie_break_higher_);});
+        if(scene.show_sprites) apply("sprites",[&](auto& z){draw_runtime_sprites_selected(z.px,z.lm,z.pa,z.po,z.ps,machine,runtime,prom,scene.prom_input_mask,false,&snapshot_owner,&snapshot_coverage,sprite_tie_break_higher_,frame);});
         if(scene.show_text) apply("text-hud",[&](auto& z){draw_runtime_text_layer(z.px,z.lm,runtime.bus,LAYER_TEXT);});
     }
     const auto final_raw=q.px;
@@ -2819,12 +3723,12 @@ bool Video::save_layered_snapshot(const std::filesystem::path& root, const Machi
         if(scene.show_tiles) draw_runtime_tile_layer(nh.px,nh.lm,machine,runtime.bus,bottom,0x00,true);
         if(scene.show_tiles) draw_runtime_tile_layer(nh.px,nh.lm,machine,runtime.bus,upper,0x01,false);
         if(scene.show_road) draw_runtime_road(nh.px,nh.lm,nh.pa,nh.po,nh.ps,nh.rp,machine,runtime.bus,false,scene.prom_input_mask,true);
-        if(scene.show_sprites) draw_runtime_sprites(nh.px,nh.lm,nh.pa,nh.po,nh.ps,machine,runtime.bus,false,scene.prom_input_mask,true,nullptr,nullptr,sprite_tie_break_higher_);
+        if(scene.show_sprites) draw_runtime_sprites_selected(nh.px,nh.lm,nh.pa,nh.po,nh.ps,machine,runtime,false,scene.prom_input_mask,true,nullptr,nullptr,sprite_tie_break_higher_,frame);
     }else{
         if(scene.show_tiles) draw_runtime_tile_layer(nh.px,nh.lm,machine,runtime.bus,bottom,LAYER_BG_BOTTOM,true);
         if(scene.show_road) draw_runtime_road(nh.px,nh.lm,nh.pa,nh.po,nh.ps,nh.rp,machine,runtime.bus,prom,scene.prom_input_mask,false);
         if(scene.show_tiles) draw_runtime_tile_layer(nh.px,nh.lm,machine,runtime.bus,upper,LAYER_BG_UPPER,false);
-        if(scene.show_sprites) draw_runtime_sprites(nh.px,nh.lm,nh.pa,nh.po,nh.ps,machine,runtime.bus,prom,scene.prom_input_mask,false,nullptr,nullptr,sprite_tie_break_higher_);
+        if(scene.show_sprites) draw_runtime_sprites_selected(nh.px,nh.lm,nh.pa,nh.po,nh.ps,machine,runtime,prom,scene.prom_input_mask,false,nullptr,nullptr,sprite_tie_break_higher_,frame);
     }
     const auto nh_final=opaque_copy(nh.px);
     ok &= diag_save_png(root/"final-no-hud.png",WIDTH,HEIGHT,nh_final);
@@ -2846,13 +3750,30 @@ bool Video::save_layered_snapshot(const std::filesystem::path& root, const Machi
     if(snap_sr){
         for(std::size_t pos=0; pos*8+7<snap_sr->bytes.size(); ++pos){
             const auto off=pos*8; auto w0=be16(snap_sr->bytes,off),w1=be16(snap_sr->bytes,off+2),w2=be16(snap_sr->bytes,off+4),w3=be16(snap_sr->bytes,off+6);
-            const auto tile=(std::uint16_t)(w3&0x7ff); if(!tile) continue;
+            const auto source_tile=(std::uint16_t)(w3&0x7ff); if(!source_tile) continue;
+            const auto source_palette=(std::uint8_t)((w1&0x7f80)>>7);
             int zy=((w0>>9)&0x7f)+1,zx=(w1&0x7f)+1; auto fmt=Machine::format_for_zoomx(zx); if(fmt==SpriteFormat::Invalid) continue;
             int x=w2&0x1ff; if(x>0x140)x-=0x200; int y=sprite_visible_y(w0,VISIBLE_Y_START,layer_offset_sprites_.y); y += (128-zy); x += layer_offset_sprites_.x;
-            SpriteInstance sp{x,y-(128-zy),zx,zy,tile,(std::uint8_t)((w1&0x7f80)>>7),(w2&0x4000)!=0,(w2&0x8000)!=0,(w1&0x8000)?1:0};
+            SpriteInstance sp{x,y-(128-zy),zx,zy,source_tile,source_palette,(w2&0x4000)!=0,(w2&0x8000)!=0,(w1&0x8000)?1:0};
             auto addr=sprite_prom_address(sp,w2,scene.prom_input_mask); auto pe=mix_lut_[addr];
+            std::uint16_t effective_tile=source_tile; int effective_palette=source_palette; bool replacement_applied=false;
+            for(const auto& mv:runtime_sprite_map_overrides_) if(mv.source==source_tile){effective_tile=mv.target;if(mv.palette>=0)effective_palette=mv.palette;replacement_applied=true;break;}
+            for(const auto& ov:runtime_sprite_asset_overrides_) if(shadow_override_matches(ov,source_tile,source_palette)){effective_tile=ov.target_map;if(ov.palette>=0)effective_palette=ov.palette;replacement_applied=true;break;}
             std::vector<std::uint32_t> solo(WIDTH*HEIGHT,0u); std::vector<std::uint8_t> slm(WIDTH*HEIGHT,0),d8(WIDTH*HEIGHT,0); std::vector<std::uint16_t> own(WIDTH*HEIGHT,0xffff),cov(WIDTH*HEIGHT,0);
-            draw_sprite(solo,machine,sp,&runtime.bus,&slm,LAYER_SPRITE,0,&d8,&d8,&d8,addr,pe.raw,PromSource::Sprite,&own,&cov,(std::uint16_t)pos);
+            if(sprite_backend_==SpriteBackend::Native){
+                auto solo_ram=snap_sr->bytes;
+                for(std::size_t si=0;si*8+7<solo_ram.size();++si){
+                    const auto so=si*8;auto sw3=shadow_be16(solo_ram,so+6);
+                    if(si!=pos){sw3=static_cast<std::uint16_t>(sw3&0xf800u);solo_ram[so+6]=static_cast<std::uint8_t>(sw3>>8);solo_ram[so+7]=static_cast<std::uint8_t>(sw3&0xff);continue;}
+                    auto sw1=shadow_be16(solo_ram,so+2);
+                    for(const auto& mv:runtime_sprite_map_overrides_) if(mv.source==source_tile){sw3=static_cast<std::uint16_t>((sw3&0xf800u)|(mv.target&0x07ffu));if(mv.palette>=0)sw1=static_cast<std::uint16_t>((sw1&0x807fu)|((static_cast<unsigned>(mv.palette)&0xffu)<<7));break;}
+                    solo_ram[so+2]=static_cast<std::uint8_t>(sw1>>8);solo_ram[so+3]=static_cast<std::uint8_t>(sw1&0xff);solo_ram[so+6]=static_cast<std::uint8_t>(sw3>>8);solo_ram[so+7]=static_cast<std::uint8_t>(sw3&0xff);
+                }
+                SpriteLayerShadowInput rin{};rin.sprite_ram=&solo_ram;rin.spritemap=&machine.spritemap();rin.gfx_a=&machine.sprites_a();rin.gfx_b=&machine.sprites_b();rin.palette=&runtime.bus.palette;rin.width=WIDTH;rin.height=HEIGHT;rin.visible_y_start=VISIBLE_Y_START;rin.offset_x=layer_offset_sprites_.x;rin.offset_y=layer_offset_sprites_.y;rin.ascending_slots=sprite_tie_break_higher_;rin.overrides=runtime_sprite_asset_overrides_.empty()?nullptr:&runtime_sprite_asset_overrides_;
+                solo=render_sprite_layer_shadow(rin).pixels;
+            }else{
+                draw_sprite(solo,machine,sp,&runtime.bus,&slm,LAYER_SPRITE,0,&d8,&d8,&d8,addr,pe.raw,PromSource::Sprite,&own,&cov,(std::uint16_t)pos);
+            }
             int minx=WIDTH,miny=HEIGHT,maxx=-1,maxy=-1; std::uint64_t pixels=0;
             for(int yy=0;yy<HEIGHT;++yy) for(int xx=0;xx<WIDTH;++xx){auto c=solo[(std::size_t)yy*WIDTH+xx]; if((c>>24)!=0){++pixels;minx=std::min(minx,xx);miny=std::min(miny,yy);maxx=std::max(maxx,xx);maxy=std::max(maxy,yy);}}
             if(!pixels) continue;
@@ -2860,7 +3781,7 @@ bool Video::save_layered_snapshot(const std::filesystem::path& root, const Machi
             for(int yy=0;yy<ch;++yy) for(int xx=0;xx<cw;++xx) crop[(std::size_t)yy*cw+xx]=solo[(std::size_t)(miny+yy)*WIDTH+(minx+xx)];
             std::ostringstream fn; fn<<"slot_"<<std::setfill('0')<<std::setw(3)<<pos<<".png"; ok &= diag_save_png(root/"sprites"/fn.str(),cw,ch,crop);
             if(!first_sprite) sj << ",\n"; first_sprite=false;
-            sj << "    {\"slot\":"<<pos<<",\"asset\":\"sprites/"<<fn.str()<<"\",\"x\":"<<minx<<",\"y\":"<<miny<<",\"width\":"<<cw<<",\"height\":"<<ch<<",\"map\":"<<tile<<",\"palette\":"<<(unsigned)sp.color<<",\"priority\":"<<sp.priority<<",\"zoomX\":"<<zx<<",\"zoomY\":"<<zy<<",\"flipX\":"<<(sp.flip_x?"true":"false")<<",\"flipY\":"<<(sp.flip_y?"true":"false")<<",\"promAddress\":"<<(unsigned)addr<<",\"promRaw\":"<<(unsigned)pe.raw<<",\"pixels\":"<<pixels<<"}";
+            sj << "    {\"slot\":"<<pos<<",\"asset\":\"sprites/"<<fn.str()<<"\",\"x\":"<<minx<<",\"y\":"<<miny<<",\"width\":"<<cw<<",\"height\":"<<ch<<",\"map\":"<<effective_tile<<",\"sourceMap\":"<<source_tile<<",\"palette\":"<<effective_palette<<",\"sourcePalette\":"<<(unsigned)source_palette<<",\"replacementApplied\":"<<(replacement_applied?"true":"false")<<",\"priority\":"<<sp.priority<<",\"zoomX\":"<<zx<<",\"zoomY\":"<<zy<<",\"flipX\":"<<(sp.flip_x?"true":"false")<<",\"flipY\":"<<(sp.flip_y?"true":"false")<<",\"promAddress\":"<<(unsigned)addr<<",\"promRaw\":"<<(unsigned)pe.raw<<",\"pixels\":"<<pixels<<"}";
             ++sprite_asset_count;
         }
     }
@@ -2877,7 +3798,15 @@ bool Video::save_layered_snapshot(const std::filesystem::path& root, const Machi
     meta<<"{\n  \"schema\": \"chq-frame-reconstruction-v2\",\n  \"build\": \""<<kNativeVersion<<"\",\n  \"frame\": "<<frame<<",\n"
         <<"  \"width\": "<<WIDTH<<", \"height\": "<<HEIGHT<<",\n  \"compositor\": \""<<(reference?"reference":(prom?"prom-mask":"legacy"))<<"\",\n"
         <<"  \"promInputMask\": "<<unsigned(scene.prom_input_mask)<<",\n  \"tileControl6\": "<<ctrl6<<",\n  \"hudModel\": \"tc0100scn-text-layer\",\n"
-        <<"  \"hudModes\": {\"normal\":\"final.png\",\"hidden\":\"final-no-hud.png\",\"only\":\"hud-only.png\"},\n"
+        <<"  \"hudModes\": {\"normal\":\"final.png\",\"hidden\":\"final-no-hud.png\",\"only\":\"hud-only.png\"},\n";
+    meta << "  \"hudPresentation\": {\"active\":" << (hud_layout_active(hud_layout_)?"true":"false") << ",\"elements\":{";
+    for (std::size_t i=0; i<static_cast<std::size_t>(HudElement::Count); ++i) {
+        if(i) meta << ',';
+        const auto e=static_cast<HudElement>(i); const auto& st=hud_layout_.elements[i];
+        meta << '\"' << hud_element_name(e) << "\":{\"visible\":" << (st.visible?"true":"false") << ",\"dx\":" << st.dx << ",\"dy\":" << st.dy << '}';
+    }
+    meta << "}},\n"
+        << "  \"spriteBackend\": {\"mode\":\"" << sprite_backend_name() << "\",\"comparedFrames\":" << sprite_backend_compared_frames_ << ",\"mismatchFrames\":" << sprite_backend_mismatch_frames_ << ",\"mapOverrideCount\":" << runtime_sprite_map_overrides_.size() << ",\"assetOverrideCount\":" << runtime_sprite_asset_overrides_.size() << "},\n"
         <<"  \"offsets\": {\"bg0\":["<<layer_offset_bg0_.x<<','<<layer_offset_bg0_.y<<"],\"bg1\":["<<layer_offset_bg1_.x<<','<<layer_offset_bg1_.y<<"],\"text\":["<<layer_offset_text_.x<<','<<layer_offset_text_.y<<"],\"sprites\":["<<layer_offset_sprites_.x<<','<<layer_offset_sprites_.y<<"],\"road\":["<<layer_offset_road_.x<<','<<layer_offset_road_.y<<"]},\n"
         <<"  \"sourceRegions\": {\"background\":\"tilemap/tile_control\",\"road\":\"road\",\"sprites\":\"sprites + sprite graphics/spritemap\",\"textHud\":\"tilemap text plane\",\"palette\":\"TC0110PCR\"},\n"
         <<"  \"paletteState\": \"palette.csv\",\n"
@@ -2899,7 +3828,8 @@ void Video::draw_runtime(
     const SceneState& scene,
     unsigned frame,
     bool paused,
-    bool timer_frozen) {
+    bool timer_frozen,
+    bool compositor_capture) {
     if (tc0100scn_trace_ && frame>=tc0100scn_trace_from_ && (!tc0100scn_trace_to_ || frame<=tc0100scn_trace_to_) && tc0100scn_trace_log_) {
         const Region* tr=find_region(runtime.bus,"tilemap"); const Region* cr=find_region(runtime.bus,"tile_control");
         if(tr && cr && tr->bytes.size()>=0x10000 && cr->bytes.size()>=0x10){
@@ -2934,56 +3864,56 @@ void Video::draw_runtime(
         // bottom BG(pri 0), upper BG(pri 1), TC0150ROD(pri 1/2), text(pri 4),
         // then back-to-front sprites using primasks {0xf0,0xfc}.
         if (scene.show_tiles)
-            draw_runtime_tile_layer(pixels, layer_mask, machine, runtime.bus, bottom, 0x00, true);
+            draw_runtime_tile_selected(pixels, layer_mask, machine, runtime, bottom, 0x00, true, frame);
         else
             draw_sky(pixels, 72);
         if (scene.show_tiles)
-            draw_runtime_tile_layer(pixels, layer_mask, machine, runtime.bus, upper, 0x01, false);
+            draw_runtime_tile_selected(pixels, layer_mask, machine, runtime, upper, 0x01, false, frame);
         if (scene.show_road)
             draw_runtime_road(pixels, layer_mask, prom_addr, prom_out, prom_source, road_probe,
                               machine, runtime.bus, false, scene.prom_input_mask, true);
         if (scene.show_text)
-            draw_runtime_text_layer(pixels, layer_mask, runtime.bus, 0x04);
+            draw_runtime_text_selected(pixels, layer_mask, runtime, 0x04, frame);
         if (scene.show_sprites)
-            sprites = draw_runtime_sprites(pixels, layer_mask, prom_addr, prom_out, prom_source,
-                                           machine, runtime.bus, false, scene.prom_input_mask, true,
-                                           &sprite_owner, &sprite_coverage, sprite_tie_break_higher_);
+            sprites = draw_runtime_sprites_selected(pixels, layer_mask, prom_addr, prom_out, prom_source,
+                                           machine, runtime, false, scene.prom_input_mask, true,
+                                           &sprite_owner, &sprite_coverage, sprite_tie_break_higher_, frame);
     } else {
         if (scene.show_tiles)
-            draw_runtime_tile_layer(pixels, layer_mask, machine, runtime.bus, bottom, LAYER_BG_BOTTOM, true);
+            draw_runtime_tile_selected(pixels, layer_mask, machine, runtime, bottom, LAYER_BG_BOTTOM, true, frame);
         else
             draw_sky(pixels, 72);
         if (scene.show_road)
             draw_runtime_road(pixels, layer_mask, prom_addr, prom_out, prom_source, road_probe,
                               machine, runtime.bus, scene.use_prom_mixer, scene.prom_input_mask, false);
         if (scene.show_tiles)
-            draw_runtime_tile_layer(pixels, layer_mask, machine, runtime.bus, upper, LAYER_BG_UPPER, false);
+            draw_runtime_tile_selected(pixels, layer_mask, machine, runtime, upper, LAYER_BG_UPPER, false, frame);
         if (scene.show_sprites)
-            sprites = draw_runtime_sprites(pixels, layer_mask, prom_addr, prom_out, prom_source,
-                                           machine, runtime.bus, scene.use_prom_mixer, scene.prom_input_mask, false,
-                                           &sprite_owner, &sprite_coverage, sprite_tie_break_higher_);
+            sprites = draw_runtime_sprites_selected(pixels, layer_mask, prom_addr, prom_out, prom_source,
+                                           machine, runtime, scene.use_prom_mixer, scene.prom_input_mask, false,
+                                           &sprite_owner, &sprite_coverage, sprite_tie_break_higher_, frame);
         if (scene.show_text)
-            draw_runtime_text_layer(pixels, layer_mask, runtime.bus, LAYER_TEXT);
+            draw_runtime_text_selected(pixels, layer_mask, runtime, LAYER_TEXT, frame);
     }
 
     const auto compositor_pixels = pixels;
-    if (diagnostics_frame(frame))
+    if (!compositor_capture && diagnostics_frame(frame))
         export_runtime_diagnostics(machine, runtime, scene, frame, compositor_pixels, layer_mask, prom_addr, prom_out, prom_source, road_probe, sprite_owner, sprite_coverage);
 
-    if (scene.show_road_ram_map)
+    if (!compositor_capture && scene.show_road_ram_map)
         visualise_road_ram_map(pixels, runtime.bus);
-    else if (scene.show_road_probe)
+    else if (!compositor_capture && scene.show_road_probe)
         visualise_road_probe(pixels, road_probe);
-    else if (scene.show_prom_bits)
+    else if (!compositor_capture && scene.show_prom_bits)
         visualise_prom_bits(pixels, prom_addr, prom_source, scene.prom_input_mask);
-    else if (scene.show_prom_trace)
+    else if (!compositor_capture && scene.show_prom_trace)
         visualise_prom_trace(pixels, prom_addr, prom_out, prom_source);
-    else if (scene.show_priority)
+    else if (!compositor_capture && scene.show_priority)
         visualise_layer_mask(pixels, layer_mask);
 
     // v0.49.1 presentation-only diagnostic background. Preserve normal composition/priority
     // decisions, then replace non-sprite-owned final pixels for clean isolation.
-    if (diagnostic_background_ != Options::DiagnosticBackground::None && !scene.show_road_ram_map && !scene.show_road_probe && !scene.show_prom_bits && !scene.show_prom_trace && !scene.show_priority) {
+    if (!compositor_capture && diagnostic_background_ != Options::DiagnosticBackground::None && !scene.show_road_ram_map && !scene.show_road_probe && !scene.show_prom_bits && !scene.show_prom_trace && !scene.show_priority) {
         for (std::size_t i=0;i<pixels.size();++i) if (sprite_owner[i]==0xffff) {
             if (diagnostic_background_ == Options::DiagnosticBackground::Black) pixels[i]=0xff000000u;
             else if (diagnostic_background_ == Options::DiagnosticBackground::White) pixels[i]=0xffffffffu;
@@ -2993,9 +3923,11 @@ void Video::draw_runtime(
 
     rebuild_debug_sprite_list(runtime, sprite_owner);
     update_sprite_change_events(runtime, frame);
-    if (research_workbench_) draw_research_workbench(pixels, runtime, frame, paused);
-    else draw_debug_overlay(pixels, runtime, frame, paused, timer_frozen);
-    draw_script_prompt(pixels);
+    if (!compositor_capture) {
+        if (research_workbench_) draw_research_workbench(pixels, runtime, frame, paused);
+        else draw_debug_overlay(pixels, runtime, frame, paused, timer_frozen);
+        draw_script_prompt(pixels);
+    }
     update_runtime_title(runtime, scene, frame, sprites, paused);
     present(pixels);
 }

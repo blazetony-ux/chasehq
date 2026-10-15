@@ -1,0 +1,30 @@
+[10] echo === RC6.3.33 RELEASE SMOKE BEGIN ===
+=== RC6.3.33 RELEASE SMOKE BEGIN ===
+
+[12] api release.assert-version
+PASS build=0.67.0.0-RC6.3.33
+
+[13] api schema action=ghidra.status
+{"script":"chq-research-script-v2","action":"ghidra.status","contract":{"params":[],"example":"api ghidra.status","description":"Read background local Ghidra setup and job progress without stopping emulation."}}
+
+[14] api schema action=ghidra.results
+{"script":"chq-research-script-v2","action":"ghidra.results","contract":{"params":[],"example":"api ghidra.results","description":"Read completed hypothesis function findings with raw static cross-references; never marks function ownership as verified."}}
+
+[15] api schema action=rea.crosswalk
+{"script":"chq-research-script-v2","action":"rea.crosswalk","contract":{"params":["name=STAGED_NAME required; ASCII basename only"],"example":"api rea.crosswalk name=stage1-contact","description":"Run the reviewed static export and ROM PC census staged as research/rea/imports/NAME.static.json and NAME.census.tsv; write JSON to evidence/rea-crosswalks and the current script-run artifacts."}}
+
+[16] api schema action=rea.function.inspect
+{"script":"chq-research-script-v2","action":"rea.function.inspect","contract":{"params":["report=NAME required","function=EXACT_NAME_OR_ROM_START required"],"example":"api rea.function.inspect report=stage1-contact function=projection_clip_candidate","description":"Inspect one imported static function with per-PC observed runtime hits; neither function ownership nor ROM hash is automatically verified."}}
+
+[17] api ghidra.status
+{"schema":"chq-ghidra-workbench-status-v1","build":"0.67.0.0-RC6.3.33","job":{"schema":"chq-ghidra-job-v1","state":"IDLE","jobId":"","emulatorUnchanged":true},"setup":{"javaReady":true,"javaHome":"C:\\Program Files\\Eclipse Adoptium\\jdk-25.0.4.101-hotspot","jythonReady":true,"jythonPath":"C:\\Users\\user\\AppData\\Roaming\\ghidra\\ghidra_12.1.4_PUBLIC\\Extensions\\Jython","ready":false,"romReady":false,"romExpectedSha256":"5CF1C9E786A39795EBD8E99C8E8BE0D2398CC4F74221067CF2844945308D6C5A","romSha256":"","headlessFound":true,"launcherPackaged":true,"romPath":"C:\\Users\\user\\Downloads\\cpu_main.bin","instruction":"Install Ghidra and matching Jython extension, provide JDK 25 to Workbench, retain the exported CPU-A ROM at Downloads\\\\cpu_main.bin, and set GHIDRA_HOME only if auto-discovery fails. No ROM upload."},"directReaAgent":false,"rawRomUploaded":false,"emulatorUnchanged":true}
+
+[18] api rea.reports
+{"schema":"chq-rea-workbench-reports-v1","reports":[],"directRaw68000Provider":false,"runSessionUnchanged":true}
+
+[19] echo === RC6.3.33 RELEASE SMOKE PASS ===
+=== RC6.3.33 RELEASE SMOKE PASS ===
+
+[21] echo === RC6.3.33 RELEASE SMOKE PRESERVED SESSION ===
+=== RC6.3.33 RELEASE SMOKE PRESERVED SESSION ===
+

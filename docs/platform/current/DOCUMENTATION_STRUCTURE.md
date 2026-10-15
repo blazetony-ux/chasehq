@@ -1,3 +1,5 @@
+> **v0.66.9.1 release-documentation rule:** current operational authority is `docs/RELEASE_GOVERNANCE.md`, `docs/RELEASE_PROCESS.md`, `docs/CHQDEV.md`, `QUICK_START.txt` and the synchronized handbook. Versioned/historical implementation notes do not override them.
+
 # Documentation structure
 
 The v0.62.0 pickup documentation refresh separates game knowledge from tool knowledge.

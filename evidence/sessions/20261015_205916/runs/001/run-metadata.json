@@ -1,0 +1,34 @@
+{
+    "schema":  "chq-script-run-v2",
+    "runId":  "001",
+    "build":  "0.67.0.0-RC6.3.33",
+    "sessionId":  "20261015_205916",
+    "sessionPath":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916",
+    "started":  "2026-10-15T20:59:37.9249695+01:00",
+    "updated":  "2026-10-15T20:59:48.7068891+01:00",
+    "ended":  "2026-10-15T20:59:48.7068891+01:00",
+    "durationMs":  10782,
+    "ok":  true,
+    "status":  "PASS",
+    "validateOnly":  false,
+    "name":  "0.67.0.0-RC6.3.33 focused release regression",
+    "purpose":  "chqdev authoritative Go Script Console runner",
+    "sourceType":  "file",
+    "sourcePath":  "research/scripts/regression/regression-v0670-rc6333.chqscript",
+    "parameters":  {
+
+                   },
+    "commands":  10,
+    "resolvedCommands":  "resolved-commands.txt",
+    "resolvedCommandMap":  "resolved-command-map.jsonl",
+    "resolvedSource":  "resolved-script.chqscript",
+    "artifactRoot":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\001\\artifacts",
+    "source":  "script.chqscript",
+    "console":  "console-output.txt",
+    "bundleDownloadName":  "20261015_205916-r001-0.67.0.0-RC6.3.33-focused-release-regression.zip",
+    "finalization":  "COMPLETE",
+    "artifactCount":  0,
+    "artifactTypes":  {
+
+                      }
+}

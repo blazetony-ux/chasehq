@@ -1,0 +1,25 @@
+OK cpu=B start=0x33AA count=24
+0x33AA  bsr     $3b70
+0x33AE  rts
+0x33B0  lea     $101384.l, A1
+0x33B6  move.l  $102cae.l, D2
+0x33BC  move.l  $102cb2.l, D3
+0x33C2  bsr     $3426
+0x33C6  rts
+0x33C8  lea     $101384.l, A1
+0x33CE  lea     $1021c8.l, A2
+0x33D4  move.l  $102c9e.l, D2
+0x33DA  move.l  $102ca2.l, D3
+0x33E0  bsr     $340c
+0x33E4  tst.w   $10227a.l
+0x33EA  bne     $33ee
+0x33EC  rts
+0x33EE  lea     $102bc6.l, A1
+0x33F4  lea     $102234.l, A2
+0x33FA  move.l  $102ca6.l, D2
+0x3400  move.l  $102caa.l, D3
+0x3406  bsr     $340c
+0x340A  rts
+0x340C  move.w  #$7, D0
+0x3410  move.b  (A2), D1
+0x3412  andi.b  #$e0, D1

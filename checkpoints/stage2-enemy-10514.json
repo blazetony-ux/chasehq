@@ -1,0 +1,18 @@
+{
+  "format_version": 1,
+  "name": "stage2-enemy-10514",
+  "game": "Chase H.Q.",
+  "frame": 10514,
+  "description": "User-supplied Stage 2 checkpoint with an enemy vehicle present. Packaged as a provisional enemy-reference state pending exact semantic/object classification.",
+  "validated_with": ["0.66.9.4-RC2"],
+  "checkpoint_format": "v1 binary .chqstate",
+  "notes": [
+    "Original uploaded filename: snapshot_stage2-enemy.chqstate.",
+    "Do not infer near-destruction/contact/damage semantics from the filename alone.",
+    "Useful for enemy sprite-family discovery, player-appearance substitution research and cross-stage native-renderer validation."
+  ],
+  "sha256": "c9ab47a6d7d333fd4964d2f7427690864425c2b898b18cffa8f7577f0a734741",
+  "size_bytes": 250488,
+  "role": "stage2_enemy_reference_provisional",
+  "recommended_use": "Enemy sprite/object inspection and cross-stage graphics/native-backend experiments."
+}

@@ -1,0 +1,11 @@
+const fs=require('fs'),path=require('path'),cp=require('child_process');
+const root=path.resolve(__dirname,'..'),read=p=>fs.readFileSync(path.join(root,p),'utf8'),ok=(v,m)=>{if(!v)throw Error(m)};
+const cfg=JSON.parse(read('chqdev.json')),version=read('src/version.h'),main=read('tools/chqdev/main.go'),trust=read('tools/chqdev/trust_common.go'),trustWin=read('tools/chqdev/trust_windows.go'),preflight=read('tools/chqdev/preflight.go'),life=read('tools/chqdev/runtime_lifecycle.go'),full=read('research/scripts/regression/full-regression.chqscript'),reg=read('research/scripts/regression/regression-v06690-rc346.chqscript'),catalog=read('research/scripts/SCRIPT_CATALOG.md');
+const coverage=read('docs/REGRESSION_COVERAGE_MAP.md'),historicalCatalog=read('research/scripts/SCRIPT_CATALOG.md');
+ok(version.includes(cfg.release),'current native/config identity mismatch');
+ok(main.includes('case "trust"')&&main.includes('"start", "stop", "restart"'),'carried-forward chqdev trust/runtime command surface missing');
+ok(trust.includes('collectTrustTargets')&&trust.includes('windows-trust')&&trustWin.includes(':Zone.Identifier')&&trustWin.includes('os.Remove')&&trustWin.includes('trustSelfTest'),'native Windows trust/self-test implementation missing');
+ok(preflight.includes('trustSelfTest(root)')&&preflight.includes('trustScan(root, cfg, true)')&&preflight.includes('Zone.Identifier stream(s) removed'),'preflight does not self-test/auto-repair Windows trust');
+ok(life.includes('ExecutionPolicy')&&life.includes('Bypass')&&life.includes('Start-ChaseHQ.ps1')&&life.includes('runtimeStartupCheck')&&life.includes('trustScan(root, cfg, true)'),'runtime lifecycle bridge/trust/readiness contract missing');
+ok(!full.includes('regression-v06690-rc346.chqscript')&&historicalCatalog.includes('regression/regression-v06690-rc346.chqscript')&&historicalCatalog.includes('historical')&&coverage.includes('regression-v06690-rc346.chqscript')&&reg.includes('0.66.9.0-RC3.4.6'),'historical regression-v06690-rc346.chqscript must remain cataloged/mapped while duplicate Full Regression execution stays removed');
+console.log('Workbench RC3.4.6 chqdev trust/runtime lifecycle carry-forward tests: PASS');

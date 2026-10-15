@@ -1,0 +1,22 @@
+# name: RC6.3.24 CPU-B IRQ-RTE Selected-Hook Context Smoke
+# category: regression
+# purpose: Assert current release/Workbench Ghidra/REA APIs; repaired Ghidra BTST 0x050E PC-format comparison validated against authentic failed RC6.3.19 Windows evidence, original-ROM JSR/RTS five-case return chain and static-only BNE alternative, Ghidra continuation crosswalk, observed frontier and risk prioritisation, bounded original-ROM IRQ-RTE hook-context audit (chqdev native reconstruct only), true ROM edge audit, portfolio reconciliation and CPU parity require chqdev native reconstruct --cpu-b-live, not this smoke.
+# checkpoint: stage1-gameplay-2064.chqstate
+# version: 0.67.0.0-RC6.3.24
+# regression-version: 0.67.0.0-RC6.3.24
+# regression-scope: release
+# safety: no mutations; does not promote any native function
+# cleanup: no session changes
+echo === RC6.3.24 RELEASE SMOKE BEGIN ===
+try
+  api release.assert-version
+  api schema action=ghidra.status
+  api schema action=ghidra.results
+  api schema action=rea.crosswalk
+  api schema action=rea.function.inspect
+  api ghidra.status
+  api rea.reports
+  echo === RC6.3.24 RELEASE SMOKE PASS ===
+finally
+  echo === RC6.3.24 RELEASE SMOKE PRESERVED SESSION ===
+end

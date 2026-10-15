@@ -1,0 +1,89 @@
+# name: Native Sprite Promotion Corpus
+# category: graphics
+# purpose: Final fail-closed sprite promotion corpus. Runs deterministic Shadow parity and Native-only hard-disable coverage across canonical Stage 1 / Stage 2 checkpoints, then asserts zero mismatches, zero blocked frames and zero Original fallbacks.
+
+echo === NATIVE SPRITE PROMOTION CORPUS: BEGIN ===
+api release.assert-version
+
+try
+  api sprite.override.clear
+  api sprite.visual.clear
+  api sprite.map-override.clear
+  api sprite.asset-replace.clear
+  api patch.clear
+  api input.ioc.clear
+  api input.steering.set value=0000
+  api game.beacon.override mode=authentic
+  api backend.sprite.reset-verification
+
+  echo === SHADOW CORPUS ===
+  api backend.sprite.set mode=shadow
+
+  api checkpoint.load file=stage1-driving-2352.chqstate run=false
+  api control.run-frames frames=8
+  api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+  api control.run-frames frames=8
+  api checkpoint.load file=stage1-target-immediate-pre-contact-5587.chqstate run=false
+  api control.run-frames frames=8
+  api checkpoint.load file=stage1-target-first-physical-contact-5588.chqstate run=false
+  api control.run-frames frames=8
+  api checkpoint.load file=stage1-target-immediate-pre-damage-6333.chqstate run=false
+  api control.run-frames frames=8
+  api checkpoint.load file=stage1-target-first-damage-6334.chqstate run=false
+  api control.run-frames frames=8
+  api checkpoint.load file=stage1-target-post-final-hit-9548.chqstate run=false
+  api control.run-frames frames=8
+  api checkpoint.load file=stage1-end-level-9988.chqstate run=false
+  api control.run-frames frames=8
+  api checkpoint.load file=stage2-gameplay-7500.chqstate run=false
+  api control.run-frames frames=8
+  api checkpoint.load file=stage2-enemy-10514.chqstate run=false
+  api control.run-frames frames=8
+
+  api backend.sprite.get
+  api native.layer.capture subsystem=sprites name=promotion-shadow-final
+
+  echo === NATIVE-ONLY HARD-DISABLE CORPUS ===
+  api backend.sprite.set mode=native-only
+
+  api checkpoint.load file=stage1-driving-2352.chqstate run=false
+  api control.run-frames frames=8
+  api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+  api control.run-frames frames=8
+  api checkpoint.load file=stage1-target-immediate-pre-contact-5587.chqstate run=false
+  api control.run-frames frames=8
+  api checkpoint.load file=stage1-target-first-physical-contact-5588.chqstate run=false
+  api control.run-frames frames=8
+  api checkpoint.load file=stage1-target-immediate-pre-damage-6333.chqstate run=false
+  api control.run-frames frames=8
+  api checkpoint.load file=stage1-target-first-damage-6334.chqstate run=false
+  api control.run-frames frames=8
+  api checkpoint.load file=stage1-target-post-final-hit-9548.chqstate run=false
+  api control.run-frames frames=8
+  api checkpoint.load file=stage1-end-level-9988.chqstate run=false
+  api control.run-frames frames=8
+  api checkpoint.load file=stage2-gameplay-7500.chqstate run=false
+  api control.run-frames frames=8
+  api checkpoint.load file=stage2-enemy-10514.chqstate run=false
+  api control.run-frames frames=8
+
+  api backend.sprite.get
+  api native.promotion.assert subsystem=sprites minShadowFrames=80 minNativeOnlyFrames=80
+  api native.progress
+
+  echo === NATIVE SPRITE PROMOTION CORPUS: BODY COMPLETE ===
+finally
+  api backend.sprite.set mode=original
+  api sprite.override.clear
+  api sprite.visual.clear
+  api sprite.map-override.clear
+  api sprite.asset-replace.clear
+  api patch.clear
+  api input.ioc.clear
+  api input.steering.set value=0000
+  api game.beacon.override mode=authentic
+  api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+  api status
+end
+
+echo === NATIVE SPRITE PROMOTION CORPUS: COMPLETE ===

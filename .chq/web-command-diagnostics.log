@@ -1,0 +1,4 @@
+﻿[2026-10-15T21:05:46.2302264+01:00] request=5478 caller=<ScriptBlock> command=screenshot C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.67.0.0-RC6.3.33\.chq\web-preview.png response=ERR empty command recovery=retry-once
+[2026-10-15T21:05:46.3455267+01:00] request=5478 RECOVERED retry command=screenshot C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.67.0.0-RC6.3.33\.chq\web-preview.png
+[2026-10-15T21:08:57.5905241+01:00] request=8748 caller=Wait-ChqPaused <- Invoke-ScriptApiAction <- Invoke-ChqScript <- Invoke-ChqScriptRun command=status response=ERR empty command recovery=retry-once
+[2026-10-15T21:08:57.6529456+01:00] request=8748 RECOVERED retry command=status

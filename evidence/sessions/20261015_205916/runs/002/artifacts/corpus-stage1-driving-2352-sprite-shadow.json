@@ -1,0 +1,14 @@
+﻿{
+    "schema":  "chq-sprite-shadow-compare-v1",
+    "build":  "0.67.0.0-RC6.3.33",
+    "frame":  2352,
+    "scope":  "visible",
+    "slots":  86,
+    "chunks":  2496,
+    "uniqueTiles":  185,
+    "pixelsCompared":  638976,
+    "mismatchCount":  0,
+    "invalidTiles":  0,
+    "raw":  "OK scope=visible slots=86 chunks=2496 unique_tiles=185 pixels=638976 mismatches=0 invalid_tiles=0",
+    "artifact":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\corpus-stage1-driving-2352-sprite-shadow.json"
+}

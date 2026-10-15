@@ -1,0 +1,92 @@
+{
+    "schema":  "chq-run-bundle-index-v2",
+    "build":  "0.67.0.0-RC6.3.33",
+    "created":  "2026-10-15T20:59:48.8619468+01:00",
+    "run":  {
+                "schema":  "chq-script-run-v2",
+                "runId":  "001",
+                "build":  "0.67.0.0-RC6.3.33",
+                "sessionId":  "20261015_205916",
+                "sessionPath":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916",
+                "started":  "2026-10-15T20:59:37.9249695+01:00",
+                "updated":  "2026-10-15T20:59:48.7068891+01:00",
+                "ended":  "2026-10-15T20:59:48.7068891+01:00",
+                "durationMs":  10782,
+                "ok":  true,
+                "status":  "PASS",
+                "validateOnly":  false,
+                "name":  "0.67.0.0-RC6.3.33 focused release regression",
+                "purpose":  "chqdev authoritative Go Script Console runner",
+                "sourceType":  "file",
+                "sourcePath":  "research/scripts/regression/regression-v0670-rc6333.chqscript",
+                "parameters":  {
+
+                               },
+                "commands":  10,
+                "resolvedCommands":  "resolved-commands.txt",
+                "resolvedCommandMap":  "resolved-command-map.jsonl",
+                "resolvedSource":  "resolved-script.chqscript",
+                "artifactRoot":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\001\\artifacts",
+                "source":  "script.chqscript",
+                "console":  "console-output.txt",
+                "bundleDownloadName":  "20261015_205916-r001-0.67.0.0-RC6.3.33-focused-release-regression.zip",
+                "finalization":  "COMPLETE",
+                "artifactCount":  0,
+                "artifactTypes":  {
+
+                                  }
+            },
+    "fileCount":  7,
+    "totalBytes":  11414,
+    "categories":  {
+                       "source":  2,
+                       "metadata":  1,
+                       "run":  1,
+                       "commands":  2,
+                       "console":  1
+                   },
+    "files":  [
+                  {
+                      "path":  "chqdev-command-timings.json",
+                      "bytes":  2701,
+                      "sha256":  "b9f18f044b27a6284bb3a4eae1a76d64a4628d686990329a68bf8024ab8e9101",
+                      "category":  "run"
+                  },
+                  {
+                      "path":  "console-output.txt",
+                      "bytes":  2854,
+                      "sha256":  "6e2ba9e2650630511583e1d5d178cd9b82031da8ee2eb44441aee2fb58ea5dc0",
+                      "category":  "console"
+                  },
+                  {
+                      "path":  "resolved-command-map.jsonl",
+                      "bytes":  1515,
+                      "sha256":  "d7ce02f9efac0b8527e1794503f2ed0326ad97f6629653114cc1f35b5f77524e",
+                      "category":  "commands"
+                  },
+                  {
+                      "path":  "resolved-commands.txt",
+                      "bytes":  344,
+                      "sha256":  "033784399d6d90f45e9f4e6c6739cb26814ef8fd2d34305ab28fe8a53ccaca2c",
+                      "category":  "commands"
+                  },
+                  {
+                      "path":  "resolved-script.chqscript",
+                      "bytes":  1277,
+                      "sha256":  "dd7a4b373269f4b2d540fcf4fbaee6f77324760cd2dcc968e57e9a0d4835fa54",
+                      "category":  "source"
+                  },
+                  {
+                      "path":  "run-metadata.json",
+                      "bytes":  1446,
+                      "sha256":  "7c42185c124cbc1c6c8178f4f3374a3570cdd3e93f4ad0310de12b1b9f7fa527",
+                      "category":  "metadata"
+                  },
+                  {
+                      "path":  "script.chqscript",
+                      "bytes":  1277,
+                      "sha256":  "dd7a4b373269f4b2d540fcf4fbaee6f77324760cd2dcc968e57e9a0d4835fa54",
+                      "category":  "source"
+                  }
+              ]
+}

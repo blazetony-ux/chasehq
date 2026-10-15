@@ -1,0 +1,5 @@
+PASS case=45 current_n=45 latched_n=45 source=0x102698 clear_dbra=-2 predicted_writes=90 changed_output_bytes=173 mismatched_bytes=0 compared_bytes=2048
+PASS case=44 current_n=44 latched_n=44 source=0x1026a0 clear_dbra=0 predicted_writes=90 changed_output_bytes=167 mismatched_bytes=0 compared_bytes=2048
+PASS case=50 current_n=50 latched_n=50 source=0x102670 clear_dbra=-7 predicted_writes=100 changed_output_bytes=262 mismatched_bytes=0 compared_bytes=2048
+PASS independent C++ model vs emulated full sprite RAM: 3 snapshots / 6144 bytes / 0 mismatches
+NOTE offline snapshot agreement; not yet integrated live shadow validation

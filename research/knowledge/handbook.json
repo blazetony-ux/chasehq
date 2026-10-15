@@ -1,8 +1,172 @@
 {
   "schema": "chq-handbook-v1",
-  "build": "0.66.9.0-RC3.0",
+  "build": "0.67.0.0-RC6.3.33",
   "title": "Chase H.Q. Native User & Research Handbook",
   "sections": [
+    {
+      "id": "v06695-rc2",
+      "title": "v0.66.9.5-RC2 ROM Sprite Atlas and Semantic Vehicle Research",
+      "pages": [
+        {
+          "id": "v06695-rc2-atlas",
+          "title": "v0.66.9.5-RC2: ROM Sprite/Vehicle Atlas",
+          "summary": "Direct-ROM sprite-map exploration and evidence-linked vehicle-family research built from the Windows-qualified v0.66.9.5-RC1.1 baseline.",
+          "blocks": [
+            {
+              "type": "callout",
+              "title": "Candidate provenance",
+              "text": "RC2 is built directly from exact Windows-qualified v0.66.9.5-RC1.1 SHA-256 556aaee447fd0ebd616001139ae6f26572bad327325d48c105da6388905c44f1. RC2 remains a candidate until its own exact archive passes chqdev.bat qualify --fresh."
+            },
+            {
+              "type": "paragraph",
+              "text": "The ROM Sprite / Vehicle Atlas decodes b52-38.34 spritemaps directly against OBJ-A and OBJ-B graphics without requiring a map to become active in live sprite RAM. It supports obj-a, obj-b64, obj-b32 and all-format interpretation, raw-pen geometry, selected-palette previews, per-map provenance and labelled contact sheets/browser output."
+            },
+            {
+              "type": "paragraph",
+              "text": "Runs003-007 proved police-beacon Force ON/OFF is causal but presentation is staged: descriptor generation changes in the 0x1027xx list before the later D00000 live sprite list and framebuffer. Regression therefore verifies eventual live presentation after the authentic pipeline delay rather than requiring a one-frame response."
+            },
+            {
+              "type": "list",
+              "items": [
+                "Confirmed player_car.body additions: maps530 and 536.",
+                "Confirmed player_car.shadow additions: maps598 and 600.",
+                "Confirmed target_car addition: map20.",
+                "Confirmed police_beacon additions: maps519, 540 and 617 plus palette78.",
+                "Run012 map450-620 visual families remain ROM-visual candidates unless runtime/causal evidence promotes them.",
+                "sprites.list and sprite.inspect expose sourceMap/sourcePalette separately from effectiveMap/effectivePalette and override provenance."
+              ]
+            },
+            {
+              "type": "callout",
+              "title": "Research rule",
+              "text": "Visual similarity in the atlas is discovery evidence, not semantic identity. Promote a map to a semantic object only with runtime observation or causal evidence."
+            }
+          ]
+        },
+        {
+          "id": "v06695-rc2-atlas-workflow",
+          "title": "ROM atlas workflow",
+          "summary": "Export a bounded ROM map range from Graphics Lab or Script API, inspect raw geometry first, then correlate candidates with runtime evidence.",
+          "blocks": [
+            {
+              "type": "paragraph",
+              "text": "In Graphics Lab > Native Reconstruction Lab, choose Start, End, Format, Palette and Name under ROM Sprite / Vehicle Atlas, then export. Start with raw-pen geometry; palette previews are viewing aids because final palette selection is runtime state."
+            },
+            {
+              "type": "paragraph",
+              "text": "Script/API action: sprite.rom-atlas.export. The exporter produces per-map PNGs, index/provenance data, labelled browser/contact sheets, a manifest and a ZIP while leaving the live machine state untouched."
+            },
+            {
+              "type": "list",
+              "items": [
+                "Use map-number adjacency to spot likely body/accessory/shadow families.",
+                "Use source/effective inspection when validating presentation overrides.",
+                "Use semantic resolver and checkpoint evidence to distinguish observed maps from ROM-only candidates.",
+                "Keep Original as the rendering oracle; atlas decoding is a research/export surface, not a gameplay replacement by itself."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v06694-rc2",
+      "title": "v0.66.9.4-RC2 Current Candidate",
+      "pages": [
+        {
+          "id": "v06694-rc2",
+          "title": "v0.66.9.4-RC2: native reconstruction + asset tooling",
+          "summary": "Current native-reconstruction/asset-tooling candidate following fully Windows-qualified RC1; exact RC2 Windows qualification is pending.",
+          "blocks": [
+            {
+              "type": "callout",
+              "title": "Candidate provenance",
+              "text": "Immutable promoted source lineage remains v0.66.9.3 SHA-256 6da88889dc8214c6058644e44e4d29f6a2117c9f0e92d99c8d906c280fc3462e. v0.66.9.4-RC1 SHA-256 82d0ee720b40f248624e6c3b2b532ecbef83a68c80a45c68e70556a49b1b1a3a passed fresh Windows qualification. RC2 must pass its own exact-archive Windows chqdev qualify --fresh before promotion."
+            },
+            {
+              "type": "paragraph",
+              "text": "Native Reconstruction Lab exposes the already SHADOW VERIFIED independent placed-sprite source as Original / Shadow / experimental Native backends. Original remains default/oracle; exposing Native does not itself promote maturity beyond SHADOW VERIFIED."
+            },
+            {
+              "type": "paragraph",
+              "text": "Global sprite-map substitution replaces one existing OBJ map with another presentation-only across transient slots. Complete TC0100SCN charset export snapshots all 256 live RAM-defined 8x8 2bpp glyphs as atlas, individual PNGs, raw RAM and usage metadata."
+            },
+            {
+              "type": "list",
+              "items": [
+                "Stage-2 frame-7500 gameplay and frame-10514 enemy-present checkpoints are packaged with conservative semantics and used for cross-stage sprite-shadow verification.",
+                "HUD Layout card responsive width/clipping is corrected for wide and narrow Workbench layouts.",
+                "RC1 police-beacon and semantic HUD show/hide/reposition controls carry forward.",
+                "Next release action: exact RC2 Windows qualification, focused RC2 regression, Full Regression and promotable."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v06693-final",
+      "title": "v0.66.9.3 Current Release",
+      "pages": [
+        {
+          "id": "v06693-final",
+          "title": "v0.66.9.3: promoted research-capability release",
+          "summary": "Current release promoted from the exact Windows-qualified RC5 candidate after full CTest/package/runtime/focused/Full Regression proof.",
+          "blocks": [
+            {
+              "type": "callout",
+              "title": "Promotion provenance",
+              "text": "Exact Windows-qualified promotion source: 0.66.9.3-RC5 SHA-256 19b7ed48edae98fd99f660ef56a949573050cabc2958fcdba2833a7888103961. It passed 8/8 CTest, deterministic package/verify, runtime readiness, focused run 001, Full Regression run 002 and promotable. The final 0.66.9.3 package changes release identity/documentation/focused-regression wiring only and has its own generated package manifest/hash."
+            },
+            {
+              "type": "paragraph",
+              "text": "Independent sprite 4bpp decode and the independent placed sprite-source layer are SHADOW VERIFIED across canonical frames 2352, 2064, 5587, 5588, 6333, 6334, 9548 and 9988 with zero pixel and owner mismatches."
+            },
+            {
+              "type": "list",
+              "items": [
+                "Release package metadata is release-owned and preflight-guarded so final manifests cannot retain stale RC candidate/pending wording.",
+                "Historical v0.66.9.3 next item, now closed in v0.66.9.4-RC1: authoritative police-beacon primary lifecycle mapped.",
+                "Next: target pre-copy sprite producer upstream of the generic bulk copier.",
+                "Next: timer/score/Turbo text-HUD producer provenance.",
+                "Next: collision object-reference semantics and sound-command interpretation.",
+                "Next: Stage-1 directed graph/minimap.",
+                "Rebuild only for a genuine blocker or coherent implementation milestone."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rc4-capability-promotion",
+      "title": "RC4 Research Capability Promotion",
+      "pages": [
+        {
+          "id": "rc4-capability-promotion",
+          "title": "RC4: independent sprite-layer shadow and promoted RC3 semantics",
+          "summary": "v0.66.9.3-RC4 turns Runs 003-020 into independent sprite-layer verification, read provenance, structured collision/sound command events and corrected semantic gameplay/object metadata.",
+          "blocks": [
+            {
+              "type": "callout",
+              "tone": "warning",
+              "title": "Historical qualification result",
+              "text": "RC4 itself was not promoted: its first Windows qualification stopped at a stale CLI-evidence build-identity assertion. RC5 repaired that release-test contract without changing the RC4 capability set and subsequently passed the complete Windows qualification path; v0.66.9.3 is the promoted release."
+            },
+            {
+              "type": "list",
+              "items": [
+                "Independent placed sprite-source layer renderer/compare does not call the authoritative placement/decode helpers.",
+                "memory.trace supports read, write and rw provenance.",
+                "Collision response events carry interaction type/object reference and before/attempted/applied values.",
+                "Sound instrumentation captures writes to the existing 0x820000..03 stub only; no real sound CPU/mixer is claimed.",
+                "Player/target/beacon, Turbo, Brake, score, road side, incline/decline and race timer knowledge is promoted from RC3 evidence."
+              ]
+            }
+          ]
+        }
+      ]
+    },
     {
       "id": "rc29-candidate",
       "title": "RC2.9 Target Damage and Research UX",
@@ -39,7 +203,7 @@
               "type": "callout",
               "tone": "info",
               "title": "Script query caveat",
-              "text": "RC2.9 documents that get*() query functions are preflight-evaluated and cached. If a script changes machine state (for example by loading a checkpoint), a previously preflighted getmaps()/getsprites() iterable can describe the pre-run state. Use runtime api actions for state-sensitive inspection until explicit runtime-query syntax is implemented."
+              "text": "RC2.9 documents that get*() query functions are preflight-evaluated and cached. If a script changes machine state (for example by loading a checkpoint), a previously preflighted getmaps()/getsprites() iterable can describe the pre-run state. Use `api query.runtime function=...` for explicit execution-time state-sensitive inspection after in-script state changes; existing get* helpers remain preflight-resolved for backward compatibility."
             }
           ]
         }
@@ -58,7 +222,7 @@
               "type": "callout",
               "tone": "warning",
               "title": "Validation boundary",
-              "text": "RC2.8 subsequently passed Windows/SDL proof and is the current validation baseline. RC2.9 requires its own focused Windows/SDL regression and Full Regression. Build-Debug stages local SDL/ROM paths using build-local.json."
+              "text": "Historical note: RC2.8 subsequently passed its Windows/SDL proof; RC2.9 then required its own focused Windows/SDL regression and Full Regression. These are historical candidate records. Current release/qualification authority is v0.66.9.3 and docs/RELEASE_GOVERNANCE.md."
             },
             {
               "type": "p",
@@ -88,8 +252,8 @@
             {
               "type": "callout",
               "tone": "info",
-              "title": "Current validation baseline",
-              "text": "RC2.8 is the latest Windows/SDL-proven baseline. RC2.9 is the current source candidate and requires its own Windows build, focused RC2.9 regression and Full Regression before promotion."
+              "title": "Current release",
+              "text": "v0.66.9.3 is the current promoted release; direct Windows qualification provenance is 0.66.9.3-RC5 SHA-256 19b7ed48edae98fd99f660ef56a949573050cabc2958fcdba2833a7888103961."
             },
             {
               "type": "p",
@@ -115,36 +279,36 @@
         {
           "id": "build-launch",
           "title": "Build and launch",
-          "summary": "Normal Windows development build and research launch workflow.",
+          "summary": "Authoritative chqdev development build, runtime and release workflow.",
           "blocks": [
             {
               "type": "p",
-              "text": "The normal Windows development entry point is Build-Debug.bat. It prepares the project, configures/builds the native target and runs the packaged tests. The research launcher then starts the SDL runtime, private debugger API and browser Workbench together."
+              "text": "chqdev is the de facto and authoritative build/release process. Use its bundled launcher for build/test/runtime/release work; PowerShell/BAT release tooling is compatibility/fallback only."
             },
             {
               "type": "code",
               "language": "powershell",
-              "title": "Build",
-              "text": ".\\Build-Debug.bat"
+              "title": "Development build/test",
+              "text": ".\\chqdev.bat build debug\n.\\chqdev.bat test debug"
             },
             {
               "type": "code",
               "language": "powershell",
-              "title": "Launch research session",
-              "text": ".\\Start-ChaseHQ.ps1"
+              "title": "Launch/restart research session",
+              "text": ".\\chqdev.bat runtime restart"
             },
             {
               "type": "callout",
-              "tone": "warning",
-              "title": "Known Windows test exception",
-              "text": "A narrowly documented historical cpu_bus_rom_tests SEGFAULT may be tolerated only when it exactly matches the known signature recorded in validation documentation. Other failures remain blocking."
+              "tone": "info",
+              "title": "Strict test policy",
+              "text": "There are zero tolerated CTest failures. Any CTest failure is fatal. Fresh Windows Mark-of-the-Web is repaired by chqdev; manual Unblock-File is not a normal step."
             }
           ]
         },
         {
           "id": "first-investigation",
           "title": "Your first reproducible investigation",
-          "summary": "A minimal checkpoint \u2192 action \u2192 capture \u2192 compare workflow.",
+          "summary": "A minimal checkpoint → action → capture → compare workflow.",
           "blocks": [
             {
               "type": "steps",
@@ -168,32 +332,39 @@
         {
           "id": "release-proveoff",
           "title": "Release and prove-off workflow",
-          "summary": "Use cheap gates before Full Regression and keep one authoritative run/bundle lifecycle.",
+          "summary": "One-command exact-archive qualification with deterministic packaging and regression proof.",
           "blocks": [
             {
               "type": "p",
-              "text": "The canonical Windows build path is Build-Debug.bat. Do not bypass it with ad-hoc build or validator sequences."
+              "text": "From a fresh Windows extraction, the canonical release prove-off is chqdev qualify --fresh. Do not manually reproduce the release sequence unless diagnosing a failure."
+            },
+            {
+              "type": "code",
+              "language": "powershell",
+              "title": "Fresh qualification",
+              "text": ".\\chqdev.bat qualify --fresh"
             },
             {
               "type": "steps",
               "items": [
-                "Build with Build-Debug.bat.",
-                "Launch with Start-ChaseHQ.ps1 -Restart and require browser bootstrap READY.",
-                "Check root/status/run-history/snapshot endpoints.",
-                "Run Recovery / Fast Release Gate.",
-                "Run the focused regression for the changed subsystem.",
-                "Run Full Regression Suite once against the exact candidate intended for promotion."
+                "Clean generated state and run doctor/preflight/trust normalization.",
+                "Build Debug and require every CTest case to pass.",
+                "Create a deterministic package, reproduce it byte-for-byte and verify the exact archive.",
+                "Restart/check the exact runtime.",
+                "Run the focused release regression.",
+                "Run Full Regression.",
+                "Record promotable=PASS only if every required stage succeeds."
               ]
             },
             {
               "type": "callout",
               "tone": "warning",
-              "title": "One run, one bundle",
-              "text": "A script run must create one run directory and generate bundle-manifest.json / bundle.zip only once at PASS, FAIL or CANCELLED finalization. Repeated Compress-Archive activity during individual commands is a runner defect."
+              "title": "Exact archive identity",
+              "text": "Promotion evidence belongs to one immutable candidate ZIP SHA-256. Any source edit after packaging creates a new candidate identity."
             },
             {
               "type": "p",
-              "text": "See docs/RELEASE_PROCESS.md for the complete packaging, validation, discovery and lifecycle rules."
+              "text": "See docs/RELEASE_GOVERNANCE.md and docs/RELEASE_PROCESS.md for the permanent rules."
             }
           ]
         }
@@ -325,7 +496,7 @@
           "blocks": [
             {
               "type": "p",
-              "text": "Game Lab groups confirmed gameplay manipulations into named reversible controls. Infinite turbo stock freezes 0x1003A2, infinite active turbo freezes the duration timer at 0x100414, and current speed set/freeze targets 0x10041C."
+              "text": "Game Lab groups confirmed gameplay manipulations into named reversible controls. Infinite turbo stock freezes 0x1003A2, infinite active turbo freezes the duration timer at 0x100414, and current speed set/freeze targets the confirmed 32-bit fixed-point field 0x10041C using user speed << 16; Run010 proved the older 16-bit helper could not intercept the 32-bit PC 0x8700 writer."
             },
             {
               "type": "callout",
@@ -383,7 +554,7 @@
           "blocks": [
             {
               "type": "paragraph",
-              "text": "Game Lab distinguishes HUD display speed at CPU-A 0x100400 (packed BCD) from raw internal/physics speed at 0x10041C. The values are not expected to match numerically."
+              "text": "Game Lab distinguishes HUD display speed at CPU-A 0x100400 (packed BCD) from 32-bit fixed-point internal/physics speed at 0x10041C. The values are not expected to match numerically."
             },
             {
               "type": "paragraph",
@@ -650,7 +821,7 @@
         {
           "id": "live-course-survey",
           "title": "Run a controlled course-mapping survey",
-          "summary": "Use RC3.0 live autonomous driving and Track Recorder v2 from Workbench or Script Console without restarting the emulator.",
+          "summary": "Use RC3.1 live autonomous driving and Track Recorder v3 from Workbench or Script Console without restarting the emulator; stable surface candidates and heuristic object tracks are retained without overclaiming semantics.",
           "blocks": [
             {
               "type": "p",
@@ -666,13 +837,16 @@
               "type": "callout",
               "tone": "warning",
               "title": "Semantic discipline",
-              "text": "The confirmed Stage-1 special target may be called a target car. Generic visible sprites remain UNCLASSIFIED_DYNAMIC_OBJECT. Raw surface signatures remain UNCLASSIFIED and must not be called asphalt/dirt until separate evidence supports that meaning."
+              "text": "The proven 0x10A080-0x10A0BF record may be called CONFIRMED_TARGET_CAR only in explicit Stage-1 checkpoint context; otherwise it remains UNCLASSIFIED_TARGET_RECORD. Raw visible sprites remain UNCLASSIFIED_DYNAMIC_OBJECT; temporal tracks remain UNCLASSIFIED_OBJECT_CANDIDATE. Stable surface candidates use conservative course-record signatures while volatile TC0150 render words remain separate raw evidence. Do not call candidates AI cars, obstacles, asphalt or dirt until separate evidence supports those meanings."
             },
             {
               "type": "list",
               "items": [
                 "Road left/centre/right geometry and the player driven line are separate outputs.",
                 "Raw player lateral position/error remains authoritative; the SVG player line is a projection for map visualisation.",
+                "Track Recorder v3 reports stable surface candidates/segments separately from raw renderer variants, preventing perspective/scroll changes from masquerading as material changes.",
+                "Raw sprite rows are preserved; road-relevant observations receive conservative map/palette/position-based candidate track IDs. Touching rectangles are not merged merely from proximity, and no semantic AI/obstacle promotion is implied.",
+                "Object-candidate coverage is fail-closed: every eligible road-region sprite observation must produce one candidate row with map/palette/bounds/position evidence; Track Recorder v3 exposes eligible source rows, candidate rows and coverage (expected 1.0 under the current policy).",
                 "Use negative/positive bias surveys only as structural branch coverage; do not relabel candidate A/B as left/right without proof.",
                 "Run the 600-frame shakedown before the 3600-frame survey."
               ]
@@ -703,6 +877,145 @@
           ]
         }
       ]
+    },
+    {
+      "id": "developer-release-tooling",
+      "title": "Developer / Release Tooling",
+      "pages": [
+        {
+          "id": "chqdev-v050",
+          "title": "Use chqdev v0.5.1",
+          "summary": "Use the authoritative cross-platform controller for development, deterministic packaging, runtime lifecycle, regressions and one-command fresh qualification.",
+          "blocks": [
+            {
+              "type": "p",
+              "text": "chqdev is the de facto and authoritative build/release process. New release logic belongs in the Go controller; PowerShell/BAT release tooling is compatibility/fallback only."
+            },
+            {
+              "type": "code",
+              "language": "text",
+              "title": "Development",
+              "text": "chqdev.bat build debug\nchqdev.bat test debug\nchqdev.bat runtime restart"
+            },
+            {
+              "type": "code",
+              "language": "text",
+              "title": "Fresh Windows promotion",
+              "text": "chqdev.bat qualify --fresh"
+            },
+            {
+              "type": "callout",
+              "tone": "warning",
+              "title": "Fail-closed promotion",
+              "text": "Zero tolerated CTest failures. Promotion requires deterministic exact archive proof, runtime readiness, focused regression, Full Regression and final promotable PASS on one immutable candidate SHA."
+            },
+            {
+              "type": "p",
+              "text": "See docs/RELEASE_GOVERNANCE.md, docs/RELEASE_PROCESS.md and docs/CHQDEV.md."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rc348-chqdev",
+      "title": "RC3.4.8 chqdev Qualification Hardening",
+      "pages": [
+        {
+          "id": "rc348-chqdev-param-defaults",
+          "title": "RC3.4.8: parameter-default parity and failure diagnostics",
+          "summary": "chqdev qualify --fresh remains the canonical release path; v0.4.1 fixes the Go regression runner parameter-default gap exposed by RC3.4.7 Windows qualification.",
+          "blocks": [
+            {
+              "type": "callout",
+              "tone": "info",
+              "title": "Root cause",
+              "text": "RC3.4.7 parsed # param frames ... default=4 but compiled the release script with empty variable state, leaving ${frames} unresolved. Manual Workbench focused and Full Regression both passed, proving this was a controller parity defect."
+            },
+            {
+              "type": "list",
+              "items": [
+                "Query resolution and compilation now start from script parameter defaults.",
+                "A real HTTP-backed Go test requires frames=4 to reach Workbench commands.",
+                "Regression failures expose nested error, session ID, run ID, run path and bundle path.",
+                "Canonical fresh prove-off remains chqdev qualify --fresh."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rc349-clean-ctest",
+      "title": "RC3.4.9 Clean CTest Gate",
+      "pages": [
+        {
+          "id": "rc349-windows-runtime-test-portability",
+          "title": "RC3.4.9: remove the final Windows CTest exception",
+          "summary": "The historical cpu_bus_rom_tests SEGFAULT is fixed rather than tolerated; fresh qualification now requires every CTest case to pass.",
+          "blocks": [
+            {
+              "type": "callout",
+              "tone": "info",
+              "title": "Proven root causes",
+              "text": "Sixteen large stack-local Runtime objects exhausted the Windows test-process stack. Once heap allocated, the test progressed until Windows rejected deletion of files still held open by eight ifstream readers."
+            },
+            {
+              "type": "list",
+              "items": [
+                "Runtime test fixtures are heap allocated.",
+                "Input streams close before remove/remove_all.",
+                "chqdev contains no knownCTestFailure exception.",
+                "Any CTest failure is fatal.",
+                "Windows promotion requires 7/7 CTest PASS."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "v06691-release-governance",
+      "title": "v0.66.9.1 Release Governance",
+      "pages": [
+        {
+          "id": "v06691-release-governance",
+          "title": "v0.66.9.1: permanent release-process contract",
+          "summary": "Consolidates the proven chqdev process and makes documentation drift a preflight failure.",
+          "blocks": [
+            {
+              "type": "list",
+              "items": [
+                "chqdev qualify --fresh is the canonical fresh Windows promotion command.",
+                "Zero tolerated CTest failures; any CTest failure is fatal.",
+                "Packages are deterministic and promotion belongs to one exact immutable ZIP SHA.",
+                "Focused + Full Regression run against the exact extraction.",
+                "PowerShell/BAT release tooling is compatibility/fallback only.",
+                "Current human docs, handbook and machine-readable knowledge must stay synchronized."
+              ]
+            },
+            {
+              "type": "p",
+              "text": "The permanent contract is docs/RELEASE_GOVERNANCE.md and is enforced by chqdev preflight."
+            }
+          ]
+        }
+      ]
     }
-  ]
+  ],
+  "rc346ProcessNote": "RC3.4.6: chqdev preflight natively repairs Windows Zone.Identifier/Mark-of-the-Web and chqdev runtime start/stop/restart is the normal lifecycle entry point; manual Unblock-File and direct Start-ChaseHQ.ps1 are not canonical steps.",
+  "releaseGovernanceNote": "RC6.3.12: actual RC6.3.11 Windows original/native/fault CPU-B one BEQ 0x4DE PASS, 17892 commits and exact IRQ/machine parity. New B:0x4D8 TST.W + BEQ two-instruction generated ABI from original ROM/Ghidra with extension/edge verification and 4 path tests; NOT LIVE pair. Full Go 1176>850 open; whole-function/autonomous promotion blocked.",
+  "currentDevelopmentCandidate": "0.67.0.0-RC6.3.15",
+  "rc6313HistoricalStatus": {
+    "release": "0.67.0.0-RC6.3.13",
+    "scope": "CPU-B TST.W+BEQ live opt-in original/native/fallback RC6.3.13 Windows acceptance pending; RC6.3.12 generated pair ABI passed, RC6.3.11 single BEQ live passed",
+    "nextSteps": "Qualify RC6.3.13 genuine ROM-backed three-mode pair; review enclosing CPU-B boundaries; preserve strict IRQ/mapped R16 and fix Full Regression budget <850 without reducing coverage",
+    "wholeFunctionPromotionAllowed": false
+  },
+  "rc6314CurrentStatus": {
+    "release": "0.67.0.0-RC6.3.14",
+    "scope": "RC6.3.14 is a fail-closed audit corrective based on uploaded immutable RC6.3.13 source 49fda552c33de158c3071be48affe732a05de1cf873281024e87209e9accea21: real Windows Debug compilation PASS, RC6.3.13 Ghidra CPU-B pair generated ABI 4/4 PASS; 17,892 single-BEQ native commits were recorded but prior validator rejected 22 separate disabled-pair original-ROM audit rows. New candidate accepts only authenticated inactive CPU-B 0x4D8 original-ROM rows, rejects unexpected active/unknown CPU-B routes, and now audits pair-mode dispatch in all three modes. Updated Go unit/mutation tests PASS locally; full Go suite still fails inherited Full Regression command-budget 1176 >= 850. Actual RC6.3.14 Windows BEQ and pair live three-mode acceptance is PENDING, no promotion.",
+    "nextSteps": "Run RC6.3.14 Windows debug and native reconstruct --fresh --live-health --cpu-b-live to prove single-BEQ plus two-instruction TST+BEQ in all three modes; inspect generated/fault CPU/SR/cycles, mapped R16, IRQ, bus and full machine parity. Keep function-level promotion blocked; separately de-duplicate Full Regression 1176 to <850 preserving unique coverage.",
+    "wholeFunctionPromotionAllowed": false
+  }
 }

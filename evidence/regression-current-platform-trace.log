@@ -1,0 +1,5 @@
+# Chase H.Q. Native v0.32 graphics/sprite diagnostic runtime tracer. Hex values unless noted.
+# CPU mask=A max_lines=256 before=0 after=0 frame_window=0:4294967295 armed=yes
+# MEM 10a04a-10a04b mode=r
+MEM_R frame=2352 cpu=A pc=042cc0 bits=16 addr=10a04a value=000e region=shared
+MEM_R frame=2354 cpu=A pc=042cc0 bits=16 addr=10a04a value=000e region=shared

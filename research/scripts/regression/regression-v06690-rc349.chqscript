@@ -1,0 +1,17 @@
+# name: RC3.4.9 chqdev v0.4.2 Clean CTest and Windows Portability Regression
+# category: regression
+# regression-version: 0.66.9.0-RC3.4.9
+# regression-scope: historical
+# purpose: Prove current RC3.4.9 runtime identity, Go-runner script parameter defaults, canonical checkpoint restoration, authoritative run history and safe final state after removing the historical Windows cpu_bus_rom_tests exception and repairing test portability.
+# checkpoint: stage1-driving-2352.chqstate
+# param frames type=select values=2,4,8,16 default=4
+
+echo === ChaseHQ RC3.4.9 chqdev v0.4.1 Parameter Defaults Regression: BEGIN ===
+api release.assert-version
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+echo RC349_PARAMETER_FRAMES=${frames}
+api control.run-frames frames=${frames}
+api script.runs limit=5
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api status
+echo === ChaseHQ RC3.4.9 chqdev v0.4.1 Parameter Defaults Regression: COMPLETE ===

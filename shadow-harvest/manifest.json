@@ -1,0 +1,83 @@
+[
+  {
+    "file": "rc5-live-shadow-class06-5587.chqstate",
+    "source_bundle": "bundle(20261011-082108).zip",
+    "source_session": "20261011_084951",
+    "source_run": "003",
+    "bytes": 250488,
+    "sha256": "95e489d422079bc9691a4d8cbfa98028f78614626ade73aca25fe4df86518f9e",
+    "source_archive_member": "artifacts/checkpoints/rc5-live-shadow-class06-5587.chqstate"
+  },
+  {
+    "file": "rc5-road-sweep-class0-5587.chqstate",
+    "source_bundle": "bundle(20261011-084907).zip",
+    "source_session": "20261011_084951",
+    "source_run": "006",
+    "bytes": 250488,
+    "sha256": "55248eaf979d5a69253b2145a68feef777ebc166f2a1bc43c8f553a01272d527",
+    "source_archive_member": "artifacts/checkpoints/rc5-road-sweep-class0-5587.chqstate"
+  },
+  {
+    "file": "rc5-road-sweep-class4-5587.chqstate",
+    "source_bundle": "bundle(20261011-084907).zip",
+    "source_session": "20261011_084951",
+    "source_run": "006",
+    "bytes": 250488,
+    "sha256": "9db85f6874b9b8287e9a455f3af295129dbc1f9fbe2579775f1142dbe62d53ed",
+    "source_archive_member": "artifacts/checkpoints/rc5-road-sweep-class4-5587.chqstate"
+  },
+  {
+    "file": "rc5-road-sweep-class6-5587.chqstate",
+    "source_bundle": "bundle(20261011-084907).zip",
+    "source_session": "20261011_084951",
+    "source_run": "006",
+    "bytes": 250488,
+    "sha256": "95e489d422079bc9691a4d8cbfa98028f78614626ade73aca25fe4df86518f9e",
+    "source_archive_member": "artifacts/checkpoints/rc5-road-sweep-class6-5587.chqstate"
+  },
+  {
+    "file": "rc5-sprite-density-8647.chqstate",
+    "source_bundle": "bundle(20261011-105713).zip",
+    "source_session": "20261011_084951",
+    "source_run": "008",
+    "bytes": 250488,
+    "sha256": "110475cdc298fe017f46648e7ace139aae3ee8ce0ca3d931faf160bfc93d52ab",
+    "source_archive_member": "artifacts/checkpoints/rc5-sprite-density-8647.chqstate"
+  },
+  {
+    "file": "rc5-palette-transition-7507.chqstate",
+    "source_bundle": "bundle(20261011-105713).zip",
+    "source_session": "20261011_084951",
+    "source_run": "008",
+    "bytes": 250488,
+    "sha256": "45291e32eb509db865b99d6b7dcb325547a750c541aa8cf64d0e7af7292f09ba",
+    "source_archive_member": "artifacts/checkpoints/rc5-palette-transition-7507.chqstate"
+  },
+  {
+    "file": "rc5-extended-centre-3.chqstate",
+    "source_bundle": "bundle(20261011-105713).zip",
+    "source_session": "20261011_084951",
+    "source_run": "008",
+    "bytes": 250488,
+    "sha256": "f44f80e1aeab1d68052c4f6869601681e04bd6cf4c99f16962d33c687a775574",
+    "source_archive_member": "artifacts/checkpoints/rc5-extended-centre-3.chqstate"
+  },
+  {
+    "file": "rc5-census-centre-1.chqstate",
+    "source_bundle": "bundle(20261011-114641).zip",
+    "source_session": "20261011_084951",
+    "source_run": "009",
+    "bytes": 250488,
+    "sha256": "b3bbfcf3dfa760892f8bb722c04908662511d6ec9f7bc076c0494612ced881bf",
+    "source_archive_member": "artifacts/checkpoints/rc5-census-centre-1.chqstate"
+  },
+  {
+    "file": "rc5-census-negative-bias-2.chqstate",
+    "source_bundle": "bundle(20261011-114641).zip",
+    "source_session": "20261011_084951",
+    "source_run": "009",
+    "bytes": 250488,
+    "sha256": "ff864237b8129210791f61f276516d30360546c7838701c508d7f9e5b2375813",
+    "source_archive_member": "artifacts/checkpoints/rc5-census-negative-bias-2.chqstate"
+  }
+]

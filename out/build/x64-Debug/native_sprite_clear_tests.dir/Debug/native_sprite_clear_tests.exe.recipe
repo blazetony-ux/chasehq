@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <ProjectOutputs>
+    <ProjectOutput>
+      <FullPath>C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.67.0.0-RC6.3.33\out\build\x64-Debug\x64\Debug\ZERO_CHECK</FullPath>
+    </ProjectOutput>
+    <ProjectOutput>
+      <FullPath>C:\Projects\ChaseHQ-Native-v2-NoGit\ChaseHQ-Native-v0.67.0.0-RC6.3.33\out\build\x64-Debug\Debug\native_sprite_clear_tests.exe</FullPath>
+    </ProjectOutput>
+  </ProjectOutputs>
+  <ContentFiles />
+  <SatelliteDlls />
+  <NonRecipeFileRefs />
+</Project>

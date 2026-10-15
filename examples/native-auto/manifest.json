@@ -1,0 +1,8 @@
+{
+  "schema": "chq-native-auto-pipeline-v1",
+  "ghidraReports": [
+    "examples/native-auto/ghidra.json"
+  ],
+  "census": "examples/native-auto/census.json",
+  "contracts": "examples/native-auto/contracts.json"
+}

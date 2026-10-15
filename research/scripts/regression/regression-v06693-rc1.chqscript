@@ -1,0 +1,32 @@
+# name: v0.66.9.3-RC1 Research Tooling Hardening Regression
+# category: regression
+# regression-version: 0.66.9.3-RC1
+# regression-scope: historical
+# purpose: Historical first v0.66.9.3 tooling-hardening probe. Superseded by RC2 after Windows exposed evidence-finalization, browser command-count, nested-line-number and corpus-structure defects.
+# checkpoint: stage1-gameplay-2064.chqstate
+
+echo === ChaseHQ v0.66.9.3-RC1 Tooling Regression: BEGIN ===
+api release.assert-version
+api schema action=sprite.shadow.compare
+api schema action=query.runtime
+api schema action=corpus.run
+api script.schema
+
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api sprite.shadow.compare scope=visible failOnMismatch=false
+api query.runtime function=getmaps()
+api query.runtime function=getregistry()
+api query.runtime function=gettrackrecords(before=1,after=1)
+
+# Structured tuple iteration must expand deterministically and retain both bindings.
+for address,width in [(1002AE,16),(1002D8,16)]
+  api memory.read cpu=A address=${address} width=${width}
+end
+
+# Repeat a read-only analysis across attract-reference and genuine-player checkpoints, restoring caller state afterwards.
+api corpus.run checkpoints=stage1-driving-2352.chqstate,stage1-gameplay-2064.chqstate action=sprite.shadow.compare scope=visible failOnMismatch=false
+api script.runs limit=5
+
+api checkpoint.load file=stage1-gameplay-2064.chqstate run=false
+api status
+echo === ChaseHQ v0.66.9.3-RC1 Tooling Regression: COMPLETE ===

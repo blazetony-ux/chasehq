@@ -1,0 +1,29 @@
+# name: RC3.4.4 chqdev v0.1 Transition Regression
+# category: regression
+# regression-version: 0.66.9.0-RC3.4.4
+# regression-scope: historical
+# purpose: Prove current RC3.4.4 runtime identity, canonical checkpoint restoration, evidence closure and safe final state while chqdev v0.1 begins cross-platform release-controller migration. Host chqdev/legacy parity gates are enforced outside Research Script.
+# checkpoint: stage1-driving-2352.chqstate
+# param frames type=select values=2,4,8,16 default=4
+
+echo === ChaseHQ RC3.4.4 chqdev v0.1 Transition Regression: BEGIN ===
+api release.assert-version
+api schema action=script.run
+api status
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+echo RC344_PARAMETER_FRAMES=${frames}
+legacytrace reset
+legacytrace cpu A
+legacytrace mem 10A04A:10A04B r
+legacytrace context 0 0
+legacytrace max 256
+legacytrace output evidence\regression-rc344-release-trace.log
+legacytrace start
+api control.run-frames frames=${frames}
+legacytrace stop
+api checkpoint.save file=regression-rc344-release-checkpoint.chqstate
+api checkpoint.list
+api script.runs limit=5
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api status
+echo === ChaseHQ RC3.4.4 chqdev v0.1 Transition Regression: COMPLETE ===

@@ -1,0 +1,32 @@
+﻿{
+    "schema":  "chq-frame-snapshot-parity-v1",
+    "build":  "0.67.0.0-RC6.3.33",
+    "name":  "rc1-player-map509-semantic-parity",
+    "live":  "rc1-player-map509-semantic-parity-live",
+    "snapshot":  "rc1-player-map509-semantic-parity-snapshot",
+    "screenshot":  "C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\rc1-player-map509-semantic-parity-live.png",
+    "liveCaptureResult":  "OK screenshot C:\\Projects\\ChaseHQ-Native-v2-NoGit\\ChaseHQ-Native-v0.67.0.0-RC6.3.33\\evidence\\sessions\\20261015_205916\\runs\\002\\artifacts\\rc1-player-map509-semantic-parity-live.png capture=composited",
+    "capturePolicy":  "composited-no-ui-overlays-or-debug-probes",
+    "comparison":  {
+                       "a":  "rc1-player-map509-semantic-parity-live",
+                       "b":  "rc1-player-map509-semantic-parity-snapshot",
+                       "region":  "FULL",
+                       "hud":  "normal",
+                       "pixels":  76800,
+                       "changedPixels":  0,
+                       "changedPixelsRgb":  0,
+                       "changedPixelsRgba":  0,
+                       "alphaChangedPixels":  0,
+                       "occupancyChangedPixels":  0,
+                       "changedPercent":  0,
+                       "changedPercentRgba":  0,
+                       "meanAbsRgb":  0,
+                       "identical":  true,
+                       "rgbaIdentical":  true,
+                       "boundingBox":  null,
+                       "rgbaBoundingBox":  null,
+                       "diffPath":  null
+                   },
+    "identical":  true,
+    "changedPixels":  0
+}

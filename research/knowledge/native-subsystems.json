@@ -1,6 +1,6 @@
 {
   "schema": "chq-native-subsystem-maturity-v1",
-  "build": "0.66.9.0-RC3.0",
+  "build": "0.67.0.0-RC6.3.33",
   "ladder": [
     "UNKNOWN",
     "OBSERVED",
@@ -11,85 +11,160 @@
     "REPLACEABLE",
     "NATIVE"
   ],
-  "independentShadowImplemented": false,
+  "independentShadowImplemented": true,
   "subsystems": [
     {
       "id": "sprite-4bpp-decoder",
-      "maturity": "NATIVE-CANDIDATE",
-      "evidenceSummary": "All 16 plane-to-pen mappings tested. RC2.8 adds an independent SHADOW decoder and COMPARE utility; deterministic fixture parity passes, whole-frame SHADOW VERIFIED is not claimed.",
+      "maturity": "SHADOW VERIFIED",
+      "evidenceSummary": "Independent 4bpp decoder matched the authoritative decoder across the RC3 corpus (177 active records / 1,159,168 compared pixels, zero mismatches) and is exercised inside the final independent placed-source shadow verification.",
       "backend": "original/emulated",
-      "replacementEnabled": false
+      "replacementEnabled": false,
+      "nativeOnlySupported": false,
+      "promotionGate": "Covered by placed-sprite Shadow corpus; decoder remains an independent dependency of the Native sprite path."
     },
     {
       "id": "sprite-placement-ownership",
-      "maturity": "BEHAVIOUR UNDERSTOOD",
-      "evidenceSummary": "Canonical ownership evidence and native priority tests; full general hardware coverage remains open.",
-      "backend": "original/emulated",
-      "replacementEnabled": false
+      "maturity": "NATIVE",
+      "evidenceSummary": "RC3 Windows Run003 completed the canonical 10-checkpoint Stage-1/Stage-2 promotion corpus with zero Shadow mismatches, zero Native-only blocked frames and zero Original fallbacks. v0.67.0.0-RC1 therefore promotes the independent renderer to the default live sprite path while retaining Original only as an explicit verification oracle.",
+      "backend": "native (default) | shadow | original verification",
+      "replacementEnabled": true,
+      "nativeOnlySupported": true,
+      "promotionGate": "PASSED: RC3 canonical promotion corpus; v0.67.0.0-RC1 makes Native the default runtime sprite backend."
     },
     {
       "id": "tc0100scn-bg",
-      "maturity": "MAPPED",
-      "evidenceSummary": "RC2.7 Windows proof established the BG X correction and reliability path; RC2.8 tests text origin +16 and explicit flip coordinates. Column scroll remains unsupported.",
-      "backend": "original/emulated",
-      "replacementEnabled": false
+      "maturity": "NATIVE-CANDIDATE",
+      "evidenceSummary": "RC2 adds a second, independent BG0/BG1 renderer with its own tile decode, rowscroll, scroll/origin, flip, palette and opaque/transparent layer semantics. It does not call tc0100scn_geometry.h or Video::tile_pixel. Shadow is the default BG backend so Windows qualification can measure exact per-layer parity.",
+      "backend": "original + independent shadow/native candidate",
+      "replacementEnabled": false,
+      "nativeOnlySupported": true,
+      "promotionGate": "Zero BG0/BG1 Shadow pixel and coverage mismatches across canonical Stage-1/Stage-2 states, then Native-only hard-disable coverage."
     },
     {
       "id": "tc0150rod",
       "maturity": "MAPPED",
       "evidenceSummary": "Mapped road state and rendering diagnostics; native replacement parity not established.",
       "backend": "original/emulated",
-      "replacementEnabled": false
+      "replacementEnabled": false,
+      "nativeOnlySupported": false,
+      "promotionGate": "not implemented"
     },
     {
       "id": "compositor-mixer",
       "maturity": "MAPPED",
       "evidenceSummary": "Exact internal reconstruction exists; hardware priority completeness remains under research.",
       "backend": "original/emulated",
-      "replacementEnabled": false
+      "replacementEnabled": false,
+      "nativeOnlySupported": false,
+      "promotionGate": "not implemented"
     },
     {
       "id": "tile-text",
-      "maturity": "MAPPED",
-      "evidenceSummary": "RAM text inspection and source-layer HUD model; independent rendering parity not established.",
-      "backend": "original/emulated",
-      "replacementEnabled": false
+      "maturity": "NATIVE",
+      "evidenceSummary": "RC1.1 Windows Full Regression accumulated 14,397 independent TC0100SCN text/HUD Shadow frames with zero mismatches. Run003 then passed the canonical ten-checkpoint promotion corpus with 230 clean Shadow frames, 380 Native-only frames, zero blocked frames and exact Native-only snapshots at Stage-1 gameplay/end-level and Stage-2 gameplay. RC2 therefore promotes the independent text/HUD renderer to the default live path.",
+      "backend": "native (default) | shadow | original verification",
+      "replacementEnabled": true,
+      "nativeOnlySupported": true,
+      "promotionGate": "PASSED: zero-diff Full Regression plus canonical Native-only promotion corpus; RC2 makes Native the default TC0100SCN text/HUD backend."
     },
     {
       "id": "hud",
-      "maturity": "OBSERVED",
-      "evidenceSummary": "Source-isolated HUD captures; complete gameplay semantics unresolved.",
+      "maturity": "MAPPED",
+      "evidenceSummary": "RC3 causally mapped Turbo HUD active/count selection, authoritative score -> display-score -> TC0100SCN path, Brake lamp palette path and race timer -> timeout/continue behaviour. A complete independent text/HUD renderer is not yet implemented.",
       "backend": "original/emulated",
-      "replacementEnabled": false
+      "replacementEnabled": false,
+      "nativeOnlySupported": false,
+      "promotionGate": "not implemented"
     },
     {
       "id": "inputs",
       "maturity": "MAPPED",
       "evidenceSummary": "IOC and processed-input mappings with causal probes; native translation not shadow verified.",
       "backend": "original/emulated",
-      "replacementEnabled": false
+      "replacementEnabled": false,
+      "nativeOnlySupported": false,
+      "promotionGate": "not implemented"
     },
     {
       "id": "gameplay-physics",
       "maturity": "OBSERVED",
       "evidenceSummary": "Speed/lateral behaviour observable; sufficient native reproduction model not established.",
       "backend": "original/emulated",
-      "replacementEnabled": false
+      "replacementEnabled": false,
+      "nativeOnlySupported": false,
+      "promotionGate": "not implemented"
     },
     {
       "id": "target-health-damage",
       "maturity": "BEHAVIOUR UNDERSTOOD",
       "evidenceSummary": "CPU-A 0x1002AE is causally confirmed as the special-target remaining-hit counter. Authentic PC 0xA112 decrements; result FFFF takes terminal PC 0xA118 and known defeat sequence.",
       "backend": "original/emulated",
-      "replacementEnabled": false
+      "replacementEnabled": false,
+      "nativeOnlySupported": false,
+      "promotionGate": "not implemented"
     },
     {
       "id": "stage1-track-topology",
       "maturity": "BEHAVIOUR UNDERSTOOD",
-      "evidenceSummary": "Selectors 0-9, branching/linear templates, lateral fork rule and selector +5 terminal lifecycle are causally proven. RC3.0 adds live course-follow mapping, player trajectory, entity/surface evidence and reconstructable exports; the authoritative directed graph/minimap remains the next research product.",
+      "evidenceSummary": "Selectors 0-9, branching/linear templates, lateral fork rule and selector +5 terminal lifecycle are causally proven. RC3.1 adds live course-follow mapping, player trajectory, entity/surface evidence and reconstructable exports; the authoritative directed graph/minimap remains the next research product.",
       "backend": "original/emulated",
-      "replacementEnabled": false
+      "replacementEnabled": false,
+      "nativeOnlySupported": false,
+      "promotionGate": "not implemented"
+    },
+    {
+      "id": "hud-semantic-presentation",
+      "maturity": "MAPPED",
+      "evidenceSummary": "RC1 maps named Stage-1 TC0100SCN HUD source-cell groups and adds presentation-only visibility/pixel-offset controls. This is not an independent native TC0100 renderer and does not advance TC0100SCN itself beyond MAPPED.",
+      "backend": "original/emulated + presentation transform",
+      "replacementEnabled": false,
+      "nativeOnlySupported": false,
+      "promotionGate": "not implemented"
+    },
+    {
+      "id": "sprite-semantic-asset-replacement",
+      "maturity": "NATIVE-CANDIDATE",
+      "evidenceSummary": "RC3.1.1 Windows/manual proof rendered the Stage-2 yellow target correctly as the player in straight-ahead state, but steering exposed map516-only matching. RC3.1.2 binds replacement to semantic player_car.body across the known body-map family and expands the SPEED destination suppression footprint to cols32..41; exact-archive Windows prove-off remains required.",
+      "backend": "native presentation replacement",
+      "replacementEnabled": true,
+      "nativeOnlySupported": false,
+      "promotionGate": "not implemented"
+    },
+    {
+      "id": "cpu-a-target-projection-clip-lookup",
+      "maturity": "NATIVE-CANDIDATE",
+      "evidenceSummary": "Runs 018-022 clipping [-0x180,+0x8000), lookup index verified; Runs 023-029 causal longitudinal/lateral staging and map19; RC4.4 adds independent read-only opt-in shadow of clip/index, but live multi-checkpoint match corpus not yet qualified.",
+      "backend": "original emulated CPU-A + optional read-only native selector shadow",
+      "replacementEnabled": false,
+      "nativeOnlySupported": false,
+      "promotionGate": "Exact Windows runtime shadow corpus with zero mismatches/unresolved across accepted/rejected branches and distinct gameplay states; then fixed-point sprite geometry and staging equivalence separately."
     }
   ],
-  "independentCompareUtility": true
+  "independentCompareUtility": "RC3 Native Promotion Framework remains the common promotion harness. v0.67 RC2 has two promoted native display paths (sprites and TC0100SCN text/HUD) and brings TC0100SCN BG0/BG1 into independent Shadow comparison.",
+  "promotionFramework": {
+    "schema": "chq-native-promotion-framework-v1",
+    "policy": [
+      "Original authoritative baseline",
+      "Shadow same-state independent comparison",
+      "Native optional replacement",
+      "Native-only hard-disables Original fallback",
+      "Canonical promotion corpus",
+      "Promote only after fail-closed acceptance gate"
+    ],
+    "genericApis": [
+      "native.progress",
+      "native.promotion.status",
+      "native.promotion.reset",
+      "native.promotion.assert",
+      "native.layer.capture"
+    ],
+    "firstDivergenceEvidence": "Shadow mode automatically writes Original/Native/diff PNGs plus manifest on first sprite mismatch.",
+    "performanceTelemetry": "Sprite backend reports average Original, Native and Shadow-compare microseconds plus fallback/block counters."
+  },
+  "rc6313CurrentStatus": {
+    "release": "0.67.0.0-RC6.3.13",
+    "scope": "CPU-B TST.W+BEQ live opt-in original/native/fallback RC6.3.13 Windows acceptance pending; RC6.3.12 generated pair ABI passed, RC6.3.11 single BEQ live passed",
+    "nextSteps": "Qualify RC6.3.13 genuine ROM-backed three-mode pair; review enclosing CPU-B boundaries; preserve strict IRQ/mapped R16 and fix Full Regression budget <850 without reducing coverage",
+    "wholeFunctionPromotionAllowed": false
+  }
 }

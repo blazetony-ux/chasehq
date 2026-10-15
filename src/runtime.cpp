@@ -1,3 +1,23 @@
+// Windows SDK must be parsed before Musashi's softfloat.h (which defines
+// FLOAT128 as a feature macro, conflicting with Windows' FLOAT128 typedef).
+// Also stop Windows from defining min/max macros used by std::min/max below.
+#if defined(_WIN32)
+#ifndef WIN32_LEAN_AND_MEAN
+#define WIN32_LEAN_AND_MEAN
+#endif
+#ifndef NOMINMAX
+#define NOMINMAX
+#endif
+#include <windows.h>
+// Musashi defines this name as the 68000 exception-vector number, not the
+// Windows NTSTATUS. Free the name after the SDK has finished parsing.
+#ifdef EXCEPTION_ILLEGAL_INSTRUCTION
+#undef EXCEPTION_ILLEGAL_INSTRUCTION
+#endif
+#else
+#include <dlfcn.h>
+#endif
+#include <cstdlib>
 #include "runtime.h"
 #include "version.h"
 #include "m68k.h"
@@ -11,6 +31,7 @@
 #include <iomanip>
 #include <iostream>
 #include <stdexcept>
+
 
 static chq::Runtime* active = nullptr;
 static chq::BusSpace active_space = chq::BusSpace::Main;
@@ -298,12 +319,15 @@ void Bus::palette_trace_start(const std::vector<std::uint16_t>& indices, std::si
     palette_trace_enabled_ = true;
 }
 
-void Bus::memory_trace_start(BusSpace space, std::uint32_t address, std::uint32_t length, unsigned width, std::size_t limit) {
+void Bus::memory_trace_start(BusSpace space, std::uint32_t address, std::uint32_t length, unsigned width, std::size_t limit, bool reads, bool writes) {
     memory_trace_space_ = space;
     memory_trace_address_ = address & 0xffffffu;
     const auto remaining = 0x1000000u - memory_trace_address_;
     memory_trace_length_ = std::max<std::uint32_t>(1, std::min<std::uint32_t>(length, remaining));
     memory_trace_width_ = (width == 1 || width == 2 || width == 4) ? width : 0;
+    memory_trace_reads_ = reads;
+    memory_trace_writes_ = writes;
+    if (!memory_trace_reads_ && !memory_trace_writes_) memory_trace_writes_ = true;
     memory_trace_limit_ = std::max<std::size_t>(64, std::min<std::size_t>(limit, 1000000));
     while (memory_trace_events_.size() > memory_trace_limit_) memory_trace_events_.pop_front();
     memory_trace_write_count_ = 0;
@@ -345,6 +369,41 @@ unsigned Bus::research_add_patch(BusSpace space, std::uint32_t address, unsigned
 std::uint32_t Bus::read(std::uint32_t a, unsigned size, BusSpace space) {
     a &= 0xffffff;
     const auto value = peek(a, size, space);
+    if (space==BusSpace::Sub && cpu_b_original_irq_phase_ && cpu_b_original_irq_observer_)
+        cpu_b_original_irq_observer_('R',a,value,size);
+    // ACK starts the exception phase *before* Musashi reads its vector or
+    // pushes the return context. A stale trace_pc(0x4DE) does not make those
+    // transactions data effects of BEQ.B. Keep both ordered streams strict.
+    if(space==BusSpace::Sub && native_cpu_b_irq_phase_) {
+        if(native_cpu_b_irq_bus_observer_) native_cpu_b_irq_bus_observer_('R',a,value,size);
+    } else if(native_cpu_b_pair_bus_observer_ && space==BusSpace::Sub && trace_pc(space)==0x4d8 &&
+              !(a>=0x4d8u && a<0x4deu)) {
+        native_cpu_b_pair_bus_observer_('R',a,value,size);
+    } else if(native_cpu_b_bus_observer_ && space==BusSpace::Sub && trace_pc(space)==0x4de &&
+              !(a==0x4deu && size==2)) {
+        native_cpu_b_bus_observer_('R',a,value,size);
+    }
+    if(native_copy_bus_observer_ && space==BusSpace::Main && trace_pc(space)>=0x40540 && trace_pc(space)<=0x4055e
+       && !(a==trace_pc(space) && size==2)) // exclude 68000 opcode fetch, retain all longword data accesses
+        native_copy_bus_observer_('R',a,value,size);
+    if(native_health_bus_observer_ && space==BusSpace::Main && trace_pc(space)>=0xA10C &&
+       trace_pc(space)<=0xA128 && a>=0x100000 && a<0x110000)
+        native_health_bus_observer_('R',a,value,size);
+    if (native_steering_bus_observer_ && space==BusSpace::Main && trace_pc(space)==0x820c &&
+        a>=0x3126c && a<=0x313ec && size==2)
+        native_steering_bus_observer_('R',a,value,size);
+    if (memory_trace_enabled_ && memory_trace_reads_ && !quiet_fast_forward_ && !research_internal_write_
+        && space == memory_trace_space_ && (memory_trace_width_ == 0 || memory_trace_width_ == size)) {
+        const auto trace_end = memory_trace_address_ + memory_trace_length_ - 1u;
+        const auto read_end = a + size - 1u;
+        if (trace_end >= memory_trace_address_ && a <= trace_end && read_end >= memory_trace_address_) {
+            MemoryWriteTraceEvent e{}; e.access='R'; e.frame=ioc_debug_frame_; e.space=space;
+            e.pc=trace_pc(space); e.address=a; e.size=size; e.old_value=value; e.new_value=value;
+            e.changed=false; e.write_count=++memory_trace_write_count_;
+            memory_trace_events_.push_back(e);
+            while(memory_trace_events_.size()>memory_trace_limit_) memory_trace_events_.pop_front();
+        }
+    }
     if (research_enabled_ && !research_internal_write_) {
         const auto end = (a + size - 1) & 0xffffffu;
         for (const auto& w : research_watches_) {
@@ -381,6 +440,30 @@ void Bus::write(std::uint32_t a, std::uint32_t value, unsigned size, BusSpace sp
     if (size != 1 && size != 2 && size != 4)
         throw std::invalid_argument("Bus size must be 1, 2 or 4");
     a &= 0xffffff;
+    if(space==BusSpace::Sub && cpu_b_original_irq_phase_ && cpu_b_original_irq_observer_)
+        cpu_b_original_irq_observer_('W',a,value,size);
+    if(space==BusSpace::Sub && native_cpu_b_irq_phase_) {
+        if(native_cpu_b_irq_bus_observer_) native_cpu_b_irq_bus_observer_('W',a,value,size);
+    } else if(native_cpu_b_pair_bus_observer_ && space==BusSpace::Sub && trace_pc(space)==0x4d8) {
+        native_cpu_b_pair_bus_observer_('W',a,value,size);
+    } else if(native_cpu_b_bus_observer_ && space==BusSpace::Sub && trace_pc(space)==0x4de) {
+        native_cpu_b_bus_observer_('W',a,value,size);
+    }
+    if(native_copy_bus_observer_ && space==BusSpace::Main && trace_pc(space)>=0x40540 && trace_pc(space)<=0x4055e)
+        native_copy_bus_observer_('W',a,value,size);
+    if(native_health_bus_observer_ && space==BusSpace::Main && trace_pc(space)>=0xA10C &&
+       trace_pc(space)<=0xA128 && a>=0x100000 && a<0x110000)
+        native_health_bus_observer_('W',a,value,size);
+    if (native_steering_bus_observer_ && space==BusSpace::Main && trace_pc(space)==0x820c &&
+        a==0x100300 && size==2)
+        native_steering_bus_observer_('W',a,value,size);
+    if (!quiet_fast_forward_ && !research_internal_write_ && space == BusSpace::Main
+        && a <= 0x820003u && (a + size - 1u) >= 0x820000u) {
+        SoundCommandEvent se{}; se.frame=ioc_debug_frame_; se.space=space; se.pc=trace_pc(space);
+        se.address=a; se.size=size; se.value=value; se.sequence=++sound_command_sequence_;
+        sound_command_events_.push_back(se);
+        while(sound_command_events_.size()>sound_command_event_limit_) sound_command_events_.pop_front();
+    }
     // Live intervention patches are enforcement controls, not merely trace features.
     // They must remain active even when research event recording itself is disabled.
     LivePatch* live_patch = nullptr;
@@ -391,7 +474,7 @@ void Bus::write(std::uint32_t a, std::uint32_t value, unsigned size, BusSpace sp
     const auto research_old_value = ((research_enabled_ || live_patch || timeline_write_interested) && !research_internal_write_) ? peek(a,size,space) : 0u;
     const auto memory_trace_end = (memory_trace_address_ + memory_trace_length_ - 1u) & 0xffffffu;
     const auto write_end = (a + size - 1u) & 0xffffffu;
-    const bool memory_trace_interested = memory_trace_enabled_ && !quiet_fast_forward_ && !research_internal_write_ &&
+    const bool memory_trace_interested = memory_trace_enabled_ && memory_trace_writes_ && !quiet_fast_forward_ && !research_internal_write_ &&
         space == memory_trace_space_ && (memory_trace_width_ == 0 || memory_trace_width_ == size) &&
         memory_trace_end >= memory_trace_address_ && a <= memory_trace_end && write_end >= memory_trace_address_;
     const std::uint32_t memory_trace_old_value = memory_trace_interested ? peek(a,size,space) : 0u;
@@ -407,15 +490,31 @@ void Bus::write(std::uint32_t a, std::uint32_t value, unsigned size, BusSpace sp
     // v0.59.1: collision-free mapping suppresses only response writes whose
     // semantics have been proven from execution traces. Detection, object state,
     // event/scoring logic and timers remain live.
-    if (suppress_collision_shove_ && space == BusSpace::Main) {
+    if (space == BusSpace::Main) {
         const bool lateral_response = a == 0x10a044 && size == 2 &&
             (pc_a_ == 0x00a142 || pc_a_ == 0x00a156 || pc_a_ == 0x00a1be || pc_a_ == 0x00a1c4);
         const bool speed_response = a == 0x10041c && size == 4 && pc_a_ == 0x00a200;
-        if (lateral_response || speed_response) {
-            ++suppressed_collision_shoves_;
-            if (lateral_response) ++suppressed_collision_lateral_;
-            if (speed_response) ++suppressed_collision_speed_;
-            return;
+        const bool target_contact_response = a == 0x10a084 && size == 2 && pc_a_ == 0x00a13c;
+        if (lateral_response || speed_response || target_contact_response) {
+            const auto old_response = peek(a,size,space);
+            CollisionResponseEvent ce{}; ce.frame=ioc_debug_frame_; ce.space=space; ce.pc=pc_a_;
+            ce.address=a; ce.size=size; ce.old_value=old_response; ce.attempted_value=value;
+            ce.interaction_type=static_cast<std::uint16_t>(peek(0x10042e,2,BusSpace::Main));
+            ce.object_reference=peek(0x100420,4,BusSpace::Main);
+            ce.lateral=lateral_response; ce.speed=speed_response; ce.target_contact=target_contact_response;
+            // Existing collision.response suppression intentionally applies only to the
+            // proven player lateral/speed response class. Target-local A13C overlap
+            // response is observed and classified but remains authentic.
+            ce.suppressed=(lateral_response || speed_response) && suppress_collision_shove_;
+            ce.applied_value=ce.suppressed?old_response:value; ce.sequence=++collision_response_sequence_;
+            collision_response_events_.push_back(ce);
+            while(collision_response_events_.size()>collision_response_event_limit_) collision_response_events_.pop_front();
+            if (ce.suppressed) {
+                ++suppressed_collision_shoves_;
+                if (lateral_response) ++suppressed_collision_lateral_;
+                if (speed_response) ++suppressed_collision_speed_;
+                return;
+            }
         }
     }
     const bool generic_trace_interested = !quiet_fast_forward_ && generic_trace_cb_ &&
@@ -439,15 +538,22 @@ void Bus::write(std::uint32_t a, std::uint32_t value, unsigned size, BusSpace sp
         }
     }
 
+    // The original byte is captured before the write so the observer cannot
+    // confuse a repeated write with a changed bit. The hook is observational.
+    const bool btst_writer_overlap=!research_internal_write_ &&
+        static_cast<bool>(cpu_b_btst_writer_observer_) && a<=0x100802u && a+size>0x100802u;
+    const auto btst_before=btst_writer_overlap ? static_cast<std::uint8_t>(peek(0x100802u,1,space)) : 0u;
     for (unsigned i = 0; i < size; ++i) {
         const auto address = (a + i) & 0xffffff;
         if (!quiet_fast_forward_) { if (auto* r = region(address, space)) ++r->writes; else ++unmapped_writes_; }
         write_byte(address, static_cast<std::uint8_t>(value >> ((size - i - 1) * 8)), space);
     }
+    if (btst_writer_overlap) cpu_b_btst_writer_observer_(space,a,size,btst_before,
+        static_cast<std::uint8_t>(peek(0x100802u,1,space)));
 
     if (memory_trace_interested) {
         const auto now = peek(a,size,space);
-        MemoryWriteTraceEvent e{};
+        MemoryWriteTraceEvent e{}; e.access='W';
         e.frame = ioc_debug_frame_; e.space = space; e.pc = trace_pc(space); e.address = a; e.size = size;
         e.old_value = memory_trace_old_value; e.new_value = now; e.changed = e.old_value != e.new_value;
         e.write_count = ++memory_trace_write_count_;
@@ -1007,6 +1113,19 @@ void Bus::load_checkpoint_state(std::istream& in) {
 
 Runtime::Runtime(Bytes main_rom, Bytes sub_rom)
     : bus(std::move(main_rom), std::move(sub_rom)) {
+    // Off is the only default. 'native' requires the shadow verifier plus an
+    // explicit experimental acknowledgement; no Workbench/UI implicit enable.
+    const auto* clear_mode = std::getenv("CHQ_NATIVE_SPRITE_CLEAR_MODE");
+    if (clear_mode && std::string(clear_mode)=="compare") native_clear_mode_=NativeClearMode::Compare;
+    if (clear_mode && std::string(clear_mode)=="native" &&
+        std::getenv("CHQ_NATIVE_SPRITE_CLEAR_EXPERIMENT_ACK") &&
+        std::string(std::getenv("CHQ_NATIVE_SPRITE_CLEAR_EXPERIMENT_ACK"))=="YES_UNQUALIFIED" &&
+        std::getenv("CHQ_NATIVE_SPRITE_TRANSFER_SHADOW") &&
+        std::string(std::getenv("CHQ_NATIVE_SPRITE_TRANSFER_SHADOW"))=="1")
+        native_clear_mode_=NativeClearMode::Native;
+    live_candidate_shadow_.configure(std::getenv("CHQ_NATIVE_ROAD_SHADOW") != nullptr && std::string(std::getenv("CHQ_NATIVE_ROAD_SHADOW")) == "1",
+        std::getenv("CHQ_NATIVE_SPRITE_TRANSFER_SHADOW") != nullptr && std::string(std::getenv("CHQ_NATIVE_SPRITE_TRANSFER_SHADOW")) == "1");
+
     if (active) throw std::runtime_error("Only one dual-Musashi runtime may exist");
     active = this;
 
@@ -1017,6 +1136,16 @@ Runtime::Runtime(Bytes main_rom, Bytes sub_rom)
 
     context_a_.resize(m68k_context_size());
     context_b_.resize(m68k_context_size());
+    bus.set_cpu_b_btst_writer_observer([this](BusSpace space,std::uint32_t address,unsigned width,std::uint8_t before,std::uint8_t after) {
+        if (!cpu_b_edge_enabled_ || active_space!=space) return;
+        ++cpu_b_100802_hits_;
+        if (cpu_b_100802_writers_.size()>=4096u) { ++cpu_b_100802_dropped_; return; }
+        cpu_b_100802_writers_.push_back({cpu_b_edge_transitions_,generic_trace_frame_,cycles_b,
+            bus.trace_pc(space),address,width,before,after,space==BusSpace::Sub?'B':'A'});
+    });
+    bus.set_cpu_b_original_irq_observer([this](char op,std::uint32_t address,std::uint32_t value,unsigned width) {
+        record_cpu_b_irq_bus(op,address,value,width);
+    });
     bus.set_generic_trace_callback([this](char op, BusSpace space, std::uint32_t address,
                                           std::uint32_t value, unsigned size,
                                           std::uint32_t old_value, bool has_old,
@@ -1092,6 +1221,40 @@ Runtime::Runtime(Bytes main_rom, Bytes sub_rom)
 }
 
 
+const char* Runtime::beacon_override_name() const {
+    switch (beacon_override_mode_) {
+    case BeaconOverrideMode::ForceOn: return "on";
+    case BeaconOverrideMode::ForceOff: return "off";
+    default: return "authentic";
+    }
+}
+
+void Runtime::set_beacon_override(BeaconOverrideMode mode) {
+    if (beacon_override_patch_id_) {
+        bus.research_remove_patch(beacon_override_patch_id_);
+        beacon_override_patch_id_ = 0;
+    }
+    if (beacon_request_patch_id_) {
+        bus.research_remove_patch(beacon_request_patch_id_);
+        beacon_request_patch_id_ = 0;
+    }
+    beacon_override_mode_ = mode;
+    if (mode == BeaconOverrideMode::Authentic) return;
+
+    const std::uint32_t phase = mode == BeaconOverrideMode::ForceOn ? 0x0006u : 0x0000u;
+    const std::uint32_t request = mode == BeaconOverrideMode::ForceOn ? 0xffffu : 0x0000u;
+    // Runs 007-010 proved that phase alone does not drive the descriptor producer.
+    // Couple the authoritative visible/deployment phase to the contextual deployment
+    // request so the normal game producer gets the same two inputs seen during
+    // authentic pursuit. Palette/timer animation remains game-owned.
+    bus.debug_write(0x101854u, phase, 2, BusSpace::Main);
+    bus.debug_write(0x108082u, request, 2, BusSpace::Main);
+    beacon_override_patch_id_ = bus.research_add_patch(
+        BusSpace::Main, 0x101854u, 2, phase, LivePatchMode::Freeze);
+    beacon_request_patch_id_ = bus.research_add_patch(
+        BusSpace::Main, 0x108082u, 2, request, LivePatchMode::Freeze);
+}
+
 void Runtime::save_checkpoint(const std::filesystem::path& path, unsigned frame) const {
     if(path.has_parent_path()) std::filesystem::create_directories(path.parent_path());
     std::ofstream out(path,std::ios::binary); if(!out) throw std::runtime_error("Cannot create checkpoint: "+path.string());
@@ -1130,6 +1293,8 @@ static void repair_loaded_musashi_context(std::vector<std::uint8_t>& context) {
 }
 
 unsigned Runtime::load_checkpoint(const std::filesystem::path& path) {
+    // Research interventions are execution context, never checkpoint state.
+    set_beacon_override(BeaconOverrideMode::Authentic);
     std::ifstream in(path,std::ios::binary); if(!in)throw std::runtime_error("Cannot open checkpoint: "+path.string());
     char magic[8]{};in.read(magic,8);if(std::memcmp(magic,"CHQSTATE",8)!=0)throw std::runtime_error("Invalid checkpoint magic");
     const auto version=checkpoint_read_u32(in); if(version!=1)throw std::runtime_error("Unsupported checkpoint version"); const auto frame=checkpoint_read_u32(in);
@@ -1140,11 +1305,58 @@ unsigned Runtime::load_checkpoint(const std::filesystem::path& path) {
     repair_loaded_musashi_context(context_a_);
     repair_loaded_musashi_context(context_b_);
 
+    live_candidate_shadow_.reset();
+    native_clear_disabled_=false;
+    native_clear_attempts_=native_clear_guards_passed_=native_clear_rejected_=0;
+    native_clear_committed_=native_clear_verified_=native_clear_postcheck_fail_=0;
+    native_clear_last_rejection_.clear();
+    native_clear_rollback_=0;
     fault.clear(); generic_trace_history_.clear(); forensic_history_.clear(); provenance_cpu_a_={}; provenance_cpu_b_={}; return frame;
 }
 
 Runtime::~Runtime() {
     if (active == this) active = nullptr;
+    if (native_cpu_b_pair_handle_) {
+#if defined(_WIN32)
+        FreeLibrary(static_cast<HMODULE>(native_cpu_b_pair_handle_));
+#else
+        dlclose(native_cpu_b_pair_handle_);
+#endif
+        native_cpu_b_pair_handle_=nullptr;
+    }
+    if (native_cpu_b_handle_) {
+#if defined(_WIN32)
+        FreeLibrary(static_cast<HMODULE>(native_cpu_b_handle_));
+#else
+        dlclose(native_cpu_b_handle_);
+#endif
+        native_cpu_b_handle_=nullptr;
+    }
+    if (native_copy_handle_) {
+#if defined(_WIN32)
+        FreeLibrary(static_cast<HMODULE>(native_copy_handle_));
+#else
+        dlclose(native_copy_handle_);
+#endif
+        native_copy_handle_=nullptr;
+    }
+    if (native_health_handle_) {
+#if defined(_WIN32)
+        FreeLibrary(static_cast<HMODULE>(native_health_handle_));
+#else
+        dlclose(native_health_handle_);
+#endif
+        native_health_handle_=nullptr;
+    }
+    if (native_steering_library_handle_) {
+#if defined(_WIN32)
+        FreeLibrary(static_cast<HMODULE>(native_steering_library_handle_));
+#else
+        dlclose(native_steering_library_handle_);
+#endif
+        native_steering_library_handle_=nullptr;
+    }
+
 }
 
 void Runtime::enable_boot_debug(bool enabled, unsigned sample_limit) {
@@ -1833,8 +2045,267 @@ void Runtime::log_road_state_sample(std::uint32_t pc) {
     ++road_state_samples_;
 }
 
+void Runtime::record_cpu_b_irq_bus(char kind,std::uint32_t addr,std::uint32_t value,unsigned width) {
+    if (cpu_b_irq_bus_events_.size()<25000u) {
+        cpu_b_irq_bus_events_.push_back({cpu_b_irq_bus_samples_,generic_trace_frame_,addr,value,width,kind});
+    } else { ++cpu_b_irq_bus_dropped_; }
+}
+
 void Runtime::instruction_hook(unsigned int pc) {
-    bus.set_trace_pc(active_space, pc);
+    if (native_steering_bus_stream_.is_open()) bus.set_trace_pc(active_space,pc);
+    // Census sees *every* emulated instruction, including fast-forward paths.
+    // Bridge Observe counts entry hits only; it never changes registers, RAM,
+    // stack, PC, cycles, or Musashi's normal dispatch.
+    rom_execution_census_.record(active_space == BusSpace::Sub, pc);
+    if (cpu_b_edge_enabled_ && active_space == BusSpace::Sub) {
+        if (cpu_b_irq_bus_pending_) {
+            // First instruction after ACK closes the exception-entry bus window.
+            // The actual next PC is recorded, not inferred from ROM/vector bytes.
+            bus.set_cpu_b_original_irq_phase(false);
+            record_cpu_b_irq_bus('H',pc,0,0);
+            cpu_b_irq_bus_pending_=false;
+        }
+        // An edge means consecutive observed CPU-B instruction hooks. It may
+        // include an IRQ/exception transition; never call this a function CFG.
+        if (pc < 0x20000u && !cpu_b_instruction_words_.count(pc) && cpu_b_instruction_words_.size() < 65536)
+            cpu_b_instruction_words_[pc] = static_cast<std::uint16_t>(bus.peek(pc,2,BusSpace::Sub));
+        if (cpu_b_edge_have_previous_ && cpu_b_edge_previous_ < 0x20000u && cpu_b_edge_transitions_ < 2000000) {
+            const auto key=std::make_pair(cpu_b_edge_previous_,static_cast<std::uint32_t>(pc));
+            if (cpu_b_edges_.count(key) || cpu_b_edges_.size()<150000) ++cpu_b_edges_[key];
+            ++cpu_b_edge_transitions_;
+        }
+        // RC6.3.30: immediate CPU-B instruction after the Ghidra-authenticated
+        // BTST.B #7,($100802).L, not a guessed flag producer. Record its
+        // actual status and PC; no emulator or bus mutation whatsoever.
+        if (cpu_b_050e_pending_) {
+            cpu_b_050e_pending_context_.nextOrdinal=cpu_b_edge_transitions_;
+            cpu_b_050e_pending_context_.nextFrame=generic_trace_frame_;
+            cpu_b_050e_pending_context_.nextCycles=cycles_b;
+            cpu_b_050e_pending_context_.nextPC=pc;
+            cpu_b_050e_pending_context_.nextSR=m68k_get_reg(nullptr,M68K_REG_SR);
+            if (cpu_b_050e_sources_.size()<4096u)
+                cpu_b_050e_sources_.push_back(cpu_b_050e_pending_context_);
+            else ++cpu_b_050e_dropped_;
+            cpu_b_050e_pending_=false;
+        }
+        if (pc==0x050eu) {
+            ++cpu_b_050e_hits_;
+            cpu_b_050e_pending_context_={};
+            cpu_b_050e_pending_context_.ordinal=cpu_b_edge_transitions_;
+            cpu_b_050e_pending_context_.frame=generic_trace_frame_;
+            cpu_b_050e_pending_context_.cycles=cycles_b;
+            // Byte-sized read precisely at 0x100802, matching BTST.B's operand.
+            cpu_b_050e_pending_context_.sourceByte=bus.peek(0x100802u,1,BusSpace::Sub);
+            cpu_b_050e_pending_=true;
+        }
+        // Sample the *real* instruction immediately following 0x0516 and
+        // preserve the SR/ordinal from the BNE entry hook. IRQ diversion is
+        // not silently reported as a BNE successor. Only original-ROM hooks
+        // (not native substitutions) enable this opt-in edge probe.
+        if (cpu_b_0516_pending_) {
+            cpu_b_0516_pending_context_.nextPc=pc;
+            cpu_b_0516_pending_context_.nextFrame=generic_trace_frame_;
+            cpu_b_0516_pending_context_.nextCycles=cycles_b;
+            if (cpu_b_0516_branches_.size()<4096u)
+                cpu_b_0516_branches_.push_back(cpu_b_0516_pending_context_);
+            else ++cpu_b_0516_dropped_;
+            cpu_b_0516_pending_=false;
+        }
+        if (pc==0x0516u) {
+            ++cpu_b_0516_hits_;
+            cpu_b_0516_pending_context_={cpu_b_edge_transitions_,cycles_b,0,
+                generic_trace_frame_,0,m68k_get_reg(nullptr,M68K_REG_SR),0};
+            cpu_b_0516_pending_=true;
+        }
+        // Original-ROM instruction-entry RAM snapshot and post-RTE next-hook
+        // state. peek() is nonmutating; it is NOT a record of the 68000 bus
+        // cycles, hardware vector ACK, or exception-frame write transactions.
+        auto record_exception = [&](const char* kind, std::uint32_t savedSr, std::uint32_t savedPc) {
+            if (cpu_b_exception_frame_hooks_.size() < 25000u) {
+                cpu_b_exception_frame_hooks_.push_back({cpu_b_edge_transitions_,
+                    generic_trace_frame_, pc,
+                    m68k_get_reg(nullptr,M68K_REG_SP),
+                    m68k_get_reg(nullptr,M68K_REG_USP),
+                    m68k_get_reg(nullptr,M68K_REG_ISP),
+                    m68k_get_reg(nullptr,M68K_REG_SR), savedSr, savedPc, kind});
+            } else { ++cpu_b_exception_frame_dropped_; }
+        };
+        if (cpu_b_exception_rte_pending_) {
+            record_exception("resume",0,0);
+            cpu_b_exception_rte_pending_=false;
+        }
+        if (pc == 0x0474u || pc == 0x04d6u) {
+            const auto sp=m68k_get_reg(nullptr,M68K_REG_SP);
+            // Original 68000 standard six-byte exception stack frame: SR.W
+            // at SP, interrupted PC.L at SP+2. The verifier authenticates
+            // the actual values and restored state; it does not infer bytes.
+            const auto savedSr=bus.peek(sp,2,BusSpace::Sub);
+            const auto savedPc=bus.peek(sp+2,4,BusSpace::Sub);
+            record_exception(pc==0x0474u?"handler":"rte",savedSr,savedPc);
+            if (pc==0x04d6u) cpu_b_exception_rte_pending_=true;
+        }
+        // Save the *actual execution order* of selected CPU-B call/return
+        // and IRQ/RTE sites. Never generate this from aggregate edge counts.
+        // The ordinal spans all CPU-B hooks, including unrecorded sites.
+        // A bounded recording drop invalidates chronological proof.
+        switch(pc) {
+        case 0x050c: case 0x06c2: case 0x08a4: case 0x08a6:
+        case 0x4f70: case 0x4f74: case 0x4f78: case 0x4f7c:
+        case 0x4fb2: case 0x5062: case 0x08ac: case 0x050e:
+        case 0x0516: case 0x0518: case 0x0474: case 0x04d6:
+            if (cpu_b_ordered_hooks_.size() < 25000u) {
+                cpu_b_ordered_hooks_.push_back({cpu_b_edge_transitions_,cycles_b,
+                    generic_trace_frame_,pc,
+                    m68k_get_reg(nullptr,M68K_REG_SP),
+                    m68k_get_reg(nullptr,M68K_REG_SR),
+                    static_cast<std::uint16_t>(bus.peek(pc,2,BusSpace::Sub))});
+            } else { ++cpu_b_ordered_dropped_; }
+            break;
+        default: break;
+        }
+        cpu_b_edge_previous_ = pc;
+        cpu_b_edge_have_previous_ = true;
+    }
+    // At the next genuine CPU-B instruction hook, capture the complete CPU
+    // return register state, including actual IRQ/exception redirects. A
+    // transient B:0x474 edge is NEVER called a BEQ result.
+    if(active_space==BusSpace::Sub) {
+        if(native_cpu_b_pending_) record_native_cpu_b_exit(pc);
+        if(native_cpu_b_pair_pending_) {
+            if(native_cpu_b_pair_saw_beq_) record_native_cpu_b_pair_exit(pc);
+            else if(pc==0x4deu) native_cpu_b_pair_saw_beq_=true;
+            else { native_cpu_b_pair_pending_=false; native_cpu_b_pair_saw_beq_=false; }
+        }
+        if(pc==0x4d8u && native_cpu_b_pair_state_stream_.is_open()) {
+            native_cpu_b_pair_pending_=true;
+            native_cpu_b_pair_saw_beq_=false;
+            native_cpu_b_pair_entry_frame_=generic_trace_frame_;
+        }
+        // All exception vector/stack accesses are finished before this hook.
+        // Do not reset on a slice switch: ACK and next hook may be in distinct
+        // slices and the exception phase must remain owned until completion.
+        bus.set_native_cpu_b_irq_phase(false);
+    }
+    native_execution_bridge_.instruction(active_space == BusSpace::Sub, pc);
+    if (live_candidate_shadow_.enabled()) {
+        const BusSpace space = active_space;
+        live_candidate_shadow_.instruction(space == BusSpace::Sub, pc,
+            [this, space](std::uint32_t address, unsigned width) { return bus.peek(address, width, space); }, generic_trace_frame_);
+    }
+    // RC6.1: compare at the CPU-A ROM conversion write boundary. The hook runs
+    // BEFORE each instruction. At 0x820C A0 indexes the ROM table; the value
+    // at 0x8210 reflects the original CPU's completed write. Never mutate RAM.
+    if (native_steering_shadow_enabled_ && active_space == BusSpace::Main) {
+        if (steering_shadow_pending_ && pc != 0x8210) {
+            ++steering_shadow_incomplete_;
+            steering_shadow_pending_ = false;
+        }
+        if (pc == 0x820c) {
+            ++steering_shadow_entries_;
+            steering_shadow_input_ = static_cast<std::int16_t>(bus.peek(0x100300, 2, BusSpace::Main));
+            steering_shadow_entry_frame_ = generic_trace_frame_;
+            // Only the verified normal-mode lookup is within this candidate.
+            const auto gate = static_cast<std::int16_t>(bus.peek(0x10012e, 2, BusSpace::Main));
+            const auto result = chasehq::native::convert_steering({steering_shadow_input_, gate});
+            if (result.verified_mode) {
+                steering_shadow_expected_ = result.output;
+                steering_shadow_pending_ = true;
+            } else ++steering_shadow_bypass_;
+        } else if (pc == 0x8210 && steering_shadow_pending_) {
+            complete_native_steering_observation();
+        }
+    }
+    // RC6.2.4: bounded, opt-in real CPU-A opcode replacement. The hook is
+    // BEFORE the ROM fetch; native substitution skips the actual MOVE.W.
+    if (active_space == BusSpace::Main) {
+        if (native_steering_state_stream_.is_open() && pc == 0x8210)
+            record_native_steering_state(pc);
+        if (native_steering_replace_enabled_ && pc == 0x820c)
+            process_native_steering_instruction(pc);
+    }
+    // An independent second Ghidra-derived native candidate. Strictly the
+    // 16-opcode contiguous block 0x40540..0x40560, NOT the whole copier.
+    // A genuine ROM instruction hook at the exit captures original state.
+    if(active_space==BusSpace::Main && native_copy_state_stream_.is_open()) {
+        if(pc==0x40540u)native_copy_pending_=true;
+        else if(native_copy_pending_ && pc==0x40560u) {
+            record_native_copy_state("rom");native_copy_pending_=false;
+        }
+        else if(native_copy_pending_ && (pc<0x40540u||pc>0x40560u)) {
+            native_copy_pending_=false; // exits outside the audited candidate
+        }
+    }
+    // RC6.3.5: bounded CPU-A preentry execution history. Read-only and
+    // independent of whether the trailing generated block is substituted.
+    // Preserve real instruction order rather than inferring a call from the
+    // stacked return address alone.
+    if(active_space==BusSpace::Main && native_health_caller_stream_.is_open()) {
+        native_health_cpu_a_history_.push_back(pc);
+        if(native_health_cpu_a_history_.size()>16384u) native_health_cpu_a_history_.pop_front();
+    }
+    // RC6.3.3: controlled entry-state interventions occur at the real ROM
+    // function entry, and BEFORE either original or native code executes.
+    // Seed writes are logged separately and excluded from function bus effects.
+    if(active_space==BusSpace::Main && pc==0xA10Cu && native_health_stream_.is_open()) {
+        apply_native_health_entry_case();
+        const auto health_entry_sp=static_cast<std::uint32_t>(m68k_get_reg(nullptr,M68K_REG_SP));
+        native_health_return_pc_=bus.peek(health_entry_sp,4,BusSpace::Main);
+        // Entry provenance is captured from the authentic 68000 stack before
+        // any native implementation is invoked. It is read-only, and the same
+        // record must match across original/native/forced-ROM-fallback runs.
+        record_native_health_caller_path(native_health_return_pc_,pc);
+        native_health_entry_stream_<<generic_trace_frame_<<'\t'<<native_health_case_<<'\t'
+            <<std::hex<<health_entry_sp<<'\t'<<native_health_return_pc_<<'\t'
+            <<m68k_get_reg(nullptr,M68K_REG_A5)<<'\t'<<m68k_get_reg(nullptr,M68K_REG_SR)
+            <<std::dec<<'\n';
+        native_health_pending_=true;
+        native_health_path_.clear();
+    }
+    if(active_space==BusSpace::Main && native_health_stream_.is_open() && native_health_pending_ && pc>=0xA10Cu && pc<=0xA128u)
+        native_health_path_.push_back(pc);
+    // RC6.3.1: experimental generated multi-instruction function replacement.
+    if (active_space==BusSpace::Main && native_health_stream_.is_open() && native_health_pending_ && pc==native_health_return_pc_) {
+        record_native_health_return("rom"); record_native_health_path("rom"); native_health_pending_=false;
+    }
+    // RC6.3.7: both generated libraries use one audited PC/CPU dispatcher;
+    // opcode-family semantics and guards remain in separately proven adapters.
+    const auto dispatched=dispatch_generated_candidates(pc);
+    // Experimental, opt-in native completion of the trailing clear loop.
+    // This runs AFTER the read-only shadow hook. Native completion explicitly
+    // compares the full output before redirecting PC, because Musashi does not
+    // invoke a second hook when its PC is changed before instruction fetch.
+    if (active_space==BusSpace::Main && native_clear_mode_!=NativeClearMode::Off)
+        process_native_clear_instruction(pc);
+    // RC4.4: independent shadow selector, observed at the original CPU-A
+    // instruction boundaries. Peek is side-effect-free; never write emulated state.
+    if (projection_shadow_.enabled() && active_space == BusSpace::Main) {
+        if (pc == 0x434ee) {
+            // This renderer is called for multiple objects: compare ONLY the
+            // independently established Stage-1 target cache/reference pair.
+            // Derive actual indexed bus address from original 68000 registers;
+            // do not mistake an unrelated object for the target.
+            const auto cache_address = static_cast<std::uint32_t>(
+                m68k_get_reg(nullptr,M68K_REG_A1) + m68k_get_reg(nullptr,M68K_REG_D2));
+            const auto reference_address = static_cast<std::uint32_t>(
+                m68k_get_reg(nullptr,M68K_REG_A5) - 0x6600u);
+            if (cache_address == 0x101a80 && reference_address == 0x101a00)
+                projection_shadow_.entry(bus.peek(cache_address,4,BusSpace::Main),
+                                         bus.peek(reference_address,4,BusSpace::Main),generic_trace_frame_);
+        } else if (pc == 0x4351c) {
+            projection_shadow_.lookup(m68k_get_reg(nullptr,M68K_REG_A2),generic_trace_frame_);
+        } else if (pc == 0x40f5a) {
+            projection_shadow_.exit(generic_trace_frame_);
+        }
+    }
+    // RC6.3.2: the hook's entry PC is no longer the executing PC after a
+    // committed generated-function substitution. Musashi can execute the
+    // caller immediately without another hook, so every subsequent bus access
+    // must be attributed to the actual post-commit return PC. In particular,
+    // the caller's W32 to 0x102DE0 is NOT part of the health function. On a
+    // rejected candidate/forced rollback there is no PC redirect: preserve
+    // original attribution and let the authentic function execute as usual.
+    bus.set_trace_pc(active_space, (dispatched.health_committed || dispatched.copy_committed || dispatched.cpu_b_committed)
+        ? static_cast<std::uint32_t>(m68k_get_reg(nullptr, M68K_REG_PC)) : pc);
     if (quiet_fast_forward_) {
         if (!bus.executable(pc, active_space)) {
             fault = std::string(active_space == BusSpace::Main ? "CPU A" : "CPU B") + " PC outside executable ROM/work RAM";
@@ -1960,6 +2431,30 @@ void Runtime::instruction_hook(unsigned int pc) {
 
 void Runtime::interrupt_ack(int level) {
     ++irq_acks_;
+    if (active_space==BusSpace::Sub && cpu_b_edge_enabled_) {
+        // Direct Musashi IRQ acknowledgement; not inferred from last executed PC.
+        // Any overlapping IRQ, extra/missing transaction or unexpected handler
+        // causes the Go provenance gate to reject the entire sample.
+        if (cpu_b_irq_bus_pending_) ++cpu_b_irq_bus_dropped_;
+        ++cpu_b_irq_bus_samples_;
+        record_cpu_b_irq_bus('A',m68k_get_reg(nullptr,M68K_REG_PC),static_cast<std::uint32_t>(level),0);
+        cpu_b_irq_bus_pending_=true;
+        bus.set_cpu_b_original_irq_phase(true);
+    }
+    if(active_space==BusSpace::Sub && native_cpu_b_pair_irq_stream_.is_open()) {
+        native_cpu_b_pair_irq_stream_<<generic_trace_frame_<<"\tA\t"<<std::hex
+                <<m68k_get_reg(nullptr,M68K_REG_PC)<<"\t"<<level<<std::dec<<"\t0\n";
+        bus.set_native_cpu_b_irq_phase(true);
+    }
+    if(active_space==BusSpace::Sub && native_cpu_b_irq_stream_.is_open()) {
+        // Musashi ACK occurs before any interrupt vector read or stack write.
+        // Record the boundary as its own event so IRQ effects cannot be
+        // confused with a BEQ and original/native/rollback can be compared.
+        native_cpu_b_irq_stream_<<generic_trace_frame_<<"\tA\t"<<std::hex
+                <<m68k_get_reg(nullptr,M68K_REG_PC)<<"\t"<<level
+                <<std::dec<<"\t0\n";
+        bus.set_native_cpu_b_irq_phase(true);
+    }
     if (sub_debug_ && active_space == BusSpace::Sub) {
         std::ostringstream ss;
         ss << "IRQ_ACK cpu=B level=" << std::dec << level
@@ -2003,6 +2498,25 @@ void Runtime::reset() {
     cycles_a = cycles_b = instructions_a = instructions_b = 0;
     irq4_requests_a_ = irq4_requests_b_ = irq_acks_ = loop_entries_ = 0;
     loop_pc_hits_.fill(0);
+    rom_execution_census_.reset();
+    cpu_b_edge_have_previous_=false;cpu_b_edge_previous_=0;
+    cpu_b_edges_.clear();cpu_b_instruction_words_.clear();cpu_b_edge_transitions_=0;
+    cpu_b_ordered_hooks_.clear();cpu_b_ordered_dropped_=0;
+    cpu_b_100802_writers_.clear();cpu_b_100802_hits_=0;cpu_b_100802_dropped_=0;
+    cpu_b_050e_sources_.clear();cpu_b_050e_pending_=false;
+    cpu_b_050e_hits_=0;cpu_b_050e_dropped_=0;cpu_b_050e_pending_context_={};
+    cpu_b_0516_branches_.clear();cpu_b_0516_pending_=false;
+    cpu_b_0516_hits_=0;cpu_b_0516_dropped_=0;cpu_b_0516_pending_context_={};
+    cpu_b_exception_frame_hooks_.clear(); cpu_b_exception_frame_dropped_=0; cpu_b_exception_rte_pending_=false;
+    cpu_b_irq_bus_events_.clear(); cpu_b_irq_bus_dropped_=0; cpu_b_irq_bus_samples_=0; cpu_b_irq_bus_pending_=false;
+    bus.set_cpu_b_original_irq_phase(false);
+    native_execution_bridge_.clear_counters();
+    projection_shadow_.reset();
+    native_clear_disabled_=false;
+    native_clear_attempts_=native_clear_guards_passed_=native_clear_rejected_=0;
+    native_clear_committed_=native_clear_verified_=native_clear_postcheck_fail_=0;
+    native_clear_last_rejection_.clear();
+    native_clear_rollback_=0;
     sub_pc_hits_.fill(0);
     boot_samples_ = 0;
     sub_samples_ = 0;
@@ -2045,6 +2559,889 @@ void Runtime::sync_sub_reset() {
         std::cout << "[CPU B] reset asserted by CPU A control latch\n";
     }
     sub_was_enabled_ = enabled;
+}
+
+void Runtime::process_native_clear_instruction(unsigned int pc) {
+    if (pc!=0x4016C || native_clear_disabled_) return;
+    ++native_clear_attempts_;
+    auto refuse=[this](const std::string& why) {
+        ++native_clear_rejected_;native_clear_last_rejection_=why;
+    };
+    if (!live_candidate_shadow_.sprite_clear_eligible()) {
+        refuse("bulk-shadow-unverified");return;
+    }
+    candidate::ClearLoopContext context;
+    context.a1=m68k_get_reg(nullptr,M68K_REG_A1);
+    context.d0=m68k_get_reg(nullptr,M68K_REG_D0);
+    context.d1=m68k_get_reg(nullptr,M68K_REG_D1);
+    context.sr=m68k_get_reg(nullptr,M68K_REG_SR);
+    // RC5.3: entry-latched copy input was validated at 0x40576. Do NOT
+    // reconstruct the destination from a fresh RAM latch read at 0x4016C.
+    context.records=live_candidate_shadow_.active_sprite_records();
+    context.stage_pointer=live_candidate_shadow_.active_sprite_stage_pointer();
+    context.clear_dbra=static_cast<std::int16_t>(bus.peek(0x101812,2,BusSpace::Main));
+    native_clear_last_observed_a1_=context.a1;
+    native_clear_last_expected_a1_=0xD00000u + 8u*context.records;
+    native_clear_last_entry_records_=context.records;
+    native_clear_last_current_records_=static_cast<std::uint16_t>(bus.peek(0x101844,2,BusSpace::Main));
+    native_clear_last_entry_stage_=context.stage_pointer;
+    native_clear_last_current_stage_=bus.peek(0x101846,4,BusSpace::Main);
+    native_clear_last_clear_dbra_=context.clear_dbra;
+    native_clear_last_rom_displacement_=static_cast<std::uint16_t>(bus.peek(0x40172,2,BusSpace::Main));
+    const auto plan=candidate::plan_native_sprite_clear(context,
+        [this](std::uint32_t a,unsigned w){return bus.peek(a,w,BusSpace::Main);});
+    if (!plan.permitted) {refuse(plan.reason);return;}
+    ++native_clear_guards_passed_;
+    if (native_clear_mode_==NativeClearMode::Compare) return;
+
+    // One native transaction replaces two MOVE.L writes and one DBRA per
+    // clear record. Capture rollback memory FIRST; never leave partial output.
+    std::vector<std::uint32_t> originals;
+    originals.reserve(plan.bytes/4);
+    for(std::uint32_t i=0;i<plan.bytes;i+=4)
+        originals.push_back(bus.peek(plan.address+i,4,BusSpace::Main));
+    for(std::uint32_t i=0;i<plan.bytes;i+=4)
+        bus.write(plan.address+i,0,4,BusSpace::Main);
+    bool valid=true;
+    for(std::uint32_t i=0;i<plan.bytes;i+=4)
+        if(bus.peek(plan.address+i,4,BusSpace::Main)!=0){valid=false;break;}
+    if(!valid){
+        for(std::size_t i=0;i<originals.size();++i)
+            bus.write(plan.address+static_cast<std::uint32_t>(4*i),originals[i],4,BusSpace::Main);
+        refuse("native-write-readback-failure");native_clear_disabled_=true;
+        ++native_clear_postcheck_fail_;return;
+    }
+    // IMPORTANT: Musashi invokes the instruction hook BEFORE instruction
+    // fetch. Redirecting PC at 0x4016C immediately fetches the final RTS
+    // (0x40174) in this SAME CPU iteration, without a second instruction
+    // callback there. Complete the authoritative full-RAM shadow comparison
+    // here, after writing native output but BEFORE changing registers, PC
+    // or cycle budget. Otherwise the comparison remains spuriously pending.
+    live_candidate_shadow_.instruction(false,0x40174,
+        [this](std::uint32_t address,unsigned width) {
+            return bus.peek(address,width,BusSpace::Main);
+        },generic_trace_frame_);
+    if (!live_candidate_shadow_.last_completed_sprite_pass()) {
+        // Fail closed: reverse the native tail modification, then let
+        // Musashi execute the ORIGINAL ROM clear loop from its current PC.
+        // The failed comparison remains recorded in the shadow evidence.
+        for (std::size_t i=0;i<originals.size();++i)
+            bus.write(plan.address+static_cast<std::uint32_t>(4*i),originals[i],4,BusSpace::Main);
+        native_clear_disabled_=true;
+        ++native_clear_rollback_;
+        ++native_clear_postcheck_fail_;
+        native_clear_last_rejection_="native-shadow-mismatch-rolled-back-to-rom";
+        return;
+    }
+    // Musashi's instruction hook executes before FETCH; changing PC here
+    // genuinely skips the 68000 clear loop rather than overlaying its output.
+    m68k_set_reg(M68K_REG_A1,plan.next_a1);
+    m68k_set_reg(M68K_REG_D0,plan.next_d0);
+    m68k_set_reg(M68K_REG_PC,plan.return_pc);
+    // The skipped 68000 instructions consume cycles in the original;
+    // debit those cycles from the active Musashi slice explicitly.
+    m68ki_remaining_cycles-=static_cast<int>(plan.emulated_cycles);
+    ++native_clear_committed_;
+    ++native_clear_verified_;
+}
+
+std::string Runtime::native_clear_report_json() const {
+    std::ostringstream o;
+    const char* mode=native_clear_mode_==NativeClearMode::Native?"native":
+        native_clear_mode_==NativeClearMode::Compare?"compare":"off";
+    o<<"{\"schema\":\"chq-native-sprite-clear-v1\",\"scope\":\"trailing-clear-only\","
+      <<"\"mode\":\""<<mode<<"\",\"optInRequired\":true,"
+      <<"\"experimentalNotPromoted\":true,\"fullSpriteRoutineReplaced\":false,"
+      <<"\"attempts\":"<<native_clear_attempts_<<",\"guardsPassed\":"<<native_clear_guards_passed_
+      <<",\"guardRejected\":"<<native_clear_rejected_<<",\"nativeLoopSkips\":"<<native_clear_committed_
+      <<",\"nativeReachedFinalRts\":"<<native_clear_verified_
+      <<",\"rolledBackToRom\":"<<native_clear_rollback_<<",\"readbackFailures\":"<<native_clear_postcheck_fail_
+      <<",\"disabledAfterFailure\":"<<(native_clear_disabled_?"true":"false")
+      <<",\"lastRejection\":\""<<native_clear_last_rejection_<<"\","
+      <<"\"lastGuardObservation\":{" 
+      <<"\"actualA1\":"<<native_clear_last_observed_a1_
+      <<",\"expectedA1\":"<<native_clear_last_expected_a1_
+      <<",\"latchedRecordsAtEntry\":"<<native_clear_last_entry_records_
+      <<",\"recordsInRamAtClear\":"<<native_clear_last_current_records_
+      <<",\"stagePointerAtEntry\":"<<native_clear_last_entry_stage_
+      <<",\"stagePointerInRamAtClear\":"<<native_clear_last_current_stage_
+      <<",\"clearDbra\":"<<native_clear_last_clear_dbra_
+      <<",\"romDbraDisplacement\":"<<native_clear_last_rom_displacement_
+      <<"}}\n";
+    return o.str();
+}
+
+void Runtime::load_native_steering_library(const std::filesystem::path& path) {
+    if(native_steering_library_handle_)throw std::runtime_error("native generated library already loaded");
+#if defined(_WIN32)
+    auto handle=LoadLibraryW(path.wstring().c_str());
+    if(!handle)throw std::runtime_error("cannot load generated steering DLL: "+path.string());
+    auto fn=reinterpret_cast<NativeSteeringFn>(GetProcAddress(handle,"chq_native_steering_193"));
+    if(!fn){FreeLibrary(handle);throw std::runtime_error("generated steering DLL missing required export");}
+    native_steering_library_handle_=handle;
+#else
+    auto handle=dlopen(path.c_str(),RTLD_NOW|RTLD_LOCAL);
+    if(!handle)throw std::runtime_error(std::string("cannot load generated steering SO: ")+(dlerror()?dlerror():"unknown"));
+    auto fn=reinterpret_cast<NativeSteeringFn>(dlsym(handle,"chq_native_steering_193"));
+    if(!fn){dlclose(handle);throw std::runtime_error("generated steering SO missing required export");}
+    native_steering_library_handle_=handle;
+#endif
+    native_steering_generated_fn_=fn;
+}
+
+// Observe the *real* post-MOVE.W state. The original ROM arrives at 0x8210
+// through Musashi's normal instruction hook; native commits skip that hook and
+// call this at the equivalent completed instruction boundary instead.
+void Runtime::complete_native_steering_observation() {
+    if (!steering_shadow_pending_) return;
+    const auto actual = static_cast<std::int16_t>(bus.peek(0x100300, 2, BusSpace::Main));
+    ++steering_shadow_compared_;
+    if (actual == steering_shadow_expected_) ++steering_shadow_matches_;
+    else {
+        ++steering_shadow_mismatches_;
+        if (steering_shadow_first_mismatch_.empty()) {
+            std::ostringstream os;
+            os << "frame=" << steering_shadow_entry_frame_ << " pc=0x820c raw=" << steering_shadow_input_
+               << " expected=" << steering_shadow_expected_ << " actual=" << actual;
+            steering_shadow_first_mismatch_ = os.str();
+        }
+    }
+    steering_shadow_pending_ = false;
+}
+
+void Runtime::process_native_steering_instruction(unsigned pc) {
+    if (pc != 0x820c || native_steering_replace_disabled_) return;
+    ++native_steering_attempts_;
+    auto reject=[this](const char* why) {
+        ++native_steering_guards_rejected_;
+        native_steering_reject_reason_=why;
+    };
+    // This is a single opcode (MOVE.W (A0),(-0x7D00,A5)), NOT a claimed
+    // replacement for all branches of the enclosing unreviewed function.
+    // Require exact original instruction bytes, 68000 mode, memory mapping,
+    // table-index state and a verified normal-mode steering contract.
+    const auto a0=static_cast<std::uint32_t>(m68k_get_reg(nullptr,M68K_REG_A0))&0xffffffu;
+    const auto a5=static_cast<std::uint32_t>(m68k_get_reg(nullptr,M68K_REG_A5))&0xffffffu;
+    const auto raw=static_cast<std::int16_t>(bus.peek(0x100300,2,BusSpace::Main));
+    // At this boundary the preceding EXT.W used the low byte of D1; RAM
+    // may contain a 12-bit/16-bit encoded steering source (e.g. 0x0FE0).
+    // Use the same signed 8-bit index that the real 68000 placed in A0.
+    const auto signedIndex=chasehq::native::steering_ext_w_index(raw);
+    const auto gate=static_cast<std::int16_t>(bus.peek(0x10012e,2,BusSpace::Main));
+    const auto expected=chasehq::native::convert_steering({raw,gate});
+    if (gate!=0 || !expected.verified_mode || signedIndex < -96 || signedIndex > 96) {reject("mode-or-index-unverified");return;}
+    if (bus.peek(0x820c,2,BusSpace::Main)!=0x3b50 ||
+        bus.peek(0x820e,2,BusSpace::Main)!=0x8300) {reject("rom-opcode-fingerprint-mismatch");return;}
+    if (a5 != 0x108000u || a0 != static_cast<std::uint32_t>(0x3132c+2*signedIndex)) {
+        reject("register-address-contract-mismatch");return;
+    }
+    // Validate candidate before any observable memory access. In a forced
+    // mismatch the ROM handler must run with *exactly* its own ROM read and
+    // RAM write, not a speculative read or dirty write from this fast path.
+    const auto referenceWord=static_cast<std::uint16_t>(bus.peek(a0,2,BusSpace::Main));
+    std::uint16_t value=native_steering_generated_fn_ ?
+        static_cast<std::uint16_t>(native_steering_generated_fn_(signedIndex)) : referenceWord;
+    if(value!=referenceWord){reject("generated-library-disagrees-with-ROM");return;}
+    if (native_steering_fault_probe_ && native_steering_rollbacks_==0) value^=1u;
+    if (value!=static_cast<std::uint16_t>(expected.output)) {
+        native_steering_replace_disabled_=true;
+        ++native_steering_rollbacks_;
+        native_steering_reject_reason_="native-output-mismatch-before-commit-original-ROM-fallback";
+        return; // No bus side effects: genuine ROM MOVE.W executes next.
+    }
+    // The successful native path issues the identical ordered read/write as
+    // the original 68000 MOVE.W; the generated library supplied the value.
+    const auto operand=static_cast<std::uint16_t>(bus.read(a0,2,BusSpace::Main));
+    if(operand!=value){
+        native_steering_replace_disabled_=true;
+        ++native_steering_rollbacks_;
+        native_steering_reject_reason_="ROM-value-changed-before-commit-original-ROM-fallback";
+        return; // Safety fallback: exceptional read already occurred, never eligible.
+    }
+    const auto oldsr=static_cast<std::uint16_t>(m68k_get_reg(nullptr,M68K_REG_SR));
+    bus.write(0x100300,value,2,BusSpace::Main);
+    const auto newSR=static_cast<std::uint16_t>((oldsr&0xfff0u) |
+       (value==0?0x0004u:0u) | ((value&0x8000u)?0x0008u:0u));
+    m68k_set_reg(M68K_REG_SR,newSR); // MOVE.W preserves X, resets V/C, updates N/Z.
+    m68k_set_reg(M68K_REG_PC,0x8210u);
+    // Debit precisely the original opcode's Musashi 68000 cycle table entry;
+    // no invented timing constants. The next fetched opcode is the original RTS.
+    m68ki_remaining_cycles-=CYC_INSTRUCTION[0x3b50];
+    ++native_steering_commits_;
+    // The Musashi hook for 0x8210 is skipped by our PC redirect. Capture
+    // the actual post-write SR/D/A/PC/cycle state *here*, never recreate it
+    // in the acceptance tool or copy values from the reference ROM run.
+    complete_native_steering_observation();
+    if (native_steering_state_stream_.is_open()) record_native_steering_state(0x8210u);
+}
+
+
+void Runtime::load_native_copy_library(const std::filesystem::path& path) {
+    if(native_copy_handle_)throw std::runtime_error("generated copy library already loaded");
+#if defined(_WIN32)
+    auto h=LoadLibraryW(path.wstring().c_str());
+    if(!h)throw std::runtime_error("cannot load generated copy DLL: "+path.string());
+    auto fn=reinterpret_cast<NativeCopyFunction>(GetProcAddress(h,"chq_native_copy_v1"));
+    if(!fn){FreeLibrary(h);throw std::runtime_error("generated copy DLL missing ABI v1 export");}
+#else
+    auto h=dlopen(path.c_str(),RTLD_NOW|RTLD_LOCAL);
+    if(!h)throw std::runtime_error(std::string("cannot load generated copy SO: ")+(dlerror()?dlerror():"unknown"));
+    auto fn=reinterpret_cast<NativeCopyFunction>(dlsym(h,"chq_native_copy_v1"));
+    if(!fn){dlclose(h);throw std::runtime_error("generated copy SO missing ABI v1 export");}
+#endif
+    native_copy_handle_=h;native_copy_function_=fn;
+}
+void Runtime::record_native_copy_state(const char* mode) {
+    if(!native_copy_state_stream_.is_open()||active_space!=BusSpace::Main)return;
+    auto& o=native_copy_state_stream_;
+    o<<generic_trace_frame_<<'\t'<<mode<<'\t'<<std::hex<<std::setfill('0');
+    o<<std::setw(8)<<m68k_get_reg(nullptr,M68K_REG_PC)<<'\t';
+    for(int i=0;i<8;++i)o<<std::setw(8)<<m68k_get_reg(nullptr,static_cast<m68k_register_t>(M68K_REG_D0+i))<<'\t';
+    for(int i=0;i<8;++i)o<<std::setw(8)<<m68k_get_reg(nullptr,static_cast<m68k_register_t>(M68K_REG_A0+i))<<'\t';
+    o<<std::setw(4)<<m68k_get_reg(nullptr,M68K_REG_SR)<<'\t'<<std::dec<<m68k_cycles_run()<<'\n';
+}
+// RC6.3.7. One dispatch table, shared CPU/entry matching, trace and
+// decision audit for every compiled Ghidra candidate. The adapters remain
+// strictly guarded because their ABI/memory semantics differ; unknown
+// candidates cannot be executed by guessing their types.
+Runtime::NativeDispatchResult Runtime::dispatch_generated_candidates(std::uint32_t pc) {
+    NativeDispatchResult result{};
+    struct Route {BusSpace cpu;std::uint32_t entry;const char* id;int family;};
+    static constexpr Route routes[] = {
+        {BusSpace::Main,0x0000a10cU,"A:0000A10C-0000A12A",1},
+        {BusSpace::Main,0x00040540U,"A:00040540-00040560",2},
+        {BusSpace::Sub, 0x000004deU,"B:000004DE-000004E0",3},
+        {BusSpace::Sub, 0x000004d8U,"B:000004D8-000004E0",4}
+    };
+    for(const auto& route : routes) {
+        if(route.entry != pc || route.cpu != active_space) continue;
+        if(route.family==3 && native_cpu_b_state_stream_.is_open()) {
+            native_cpu_b_pending_=true;
+            native_cpu_b_entry_frame_=generic_trace_frame_;
+        }
+        const auto before=route.family==1 ? native_health_commits_ : route.family==2 ? native_copy_commits_ :
+                          route.family==3 ? native_cpu_b_commits_ : native_cpu_b_pair_commits_;
+        bool enabled=route.family==1 ? (native_health_enabled_ && !native_health_disabled_) :
+                     route.family==2 ? (native_copy_enabled_ && !native_copy_disabled_) :
+                     route.family==3 ? native_cpu_b_enabled_ : native_cpu_b_pair_enabled_;
+        if(enabled) {
+            bus.set_trace_pc(route.cpu,pc);
+            if(route.family==1) process_native_health_function(pc);
+            else if(route.family==2) process_native_copy_block(pc);
+            else if(route.family==3) process_native_cpu_b_branch(pc);
+            else process_native_cpu_b_pair(pc);
+        }
+        const auto after=route.family==1 ? native_health_commits_ : route.family==2 ? native_copy_commits_ :
+                         route.family==3 ? native_cpu_b_commits_ : native_cpu_b_pair_commits_;
+        const bool committed=after>before;
+        if(committed) {
+            if(route.family==1){native_health_pending_=false;result.health_committed=true;}
+            else if(route.family==2){native_copy_pending_=false;result.copy_committed=true;}
+            else result.cpu_b_committed=true;
+        }
+        if(native_dispatch_stream_.is_open()) {
+            native_dispatch_stream_ << generic_trace_frame_ << '\t' << (route.cpu==BusSpace::Sub?"B":"A") << '\t'
+                << route.id << '\t' << std::hex << pc << std::dec << '\t'
+                << (committed ? "native-commit" : enabled ? "original-fallback" : "original-rom") << '\n';
+        }
+        break;
+    }
+    return result;
+}
+
+void Runtime::load_native_cpu_b_library(const std::filesystem::path& path) {
+    if(native_cpu_b_handle_)throw std::runtime_error("CPU-B generated library already loaded");
+#if defined(_WIN32)
+    auto h=LoadLibraryW(path.wstring().c_str());
+    if(!h)throw std::runtime_error("cannot load Ghidra CPU-B DLL: "+path.string());
+    auto fn=reinterpret_cast<NativeCpuBBranchFunction>(GetProcAddress(h,"chq_native_cpu_b_beq_v1"));
+    if(!fn){FreeLibrary(h);throw std::runtime_error("CPU-B generated DLL ABI v1 missing");}
+#else
+    auto h=dlopen(path.c_str(),RTLD_NOW|RTLD_LOCAL);
+    if(!h)throw std::runtime_error("cannot load Ghidra CPU-B library: "+path.string());
+    auto fn=reinterpret_cast<NativeCpuBBranchFunction>(dlsym(h,"chq_native_cpu_b_beq_v1"));
+    if(!fn){dlclose(h);throw std::runtime_error("CPU-B generated library ABI v1 missing");}
+#endif
+    native_cpu_b_handle_=h;native_cpu_b_function_=fn;
+}
+// RC6.3.13: opt-in REAL CPU-B ROM paired-instruction substitution.
+// Never execute both the single-BEQ and paired candidates in the same replay.
+void Runtime::load_native_cpu_b_pair_library(const std::filesystem::path& path) {
+    if(native_cpu_b_pair_handle_ || native_cpu_b_handle_) throw std::runtime_error("CPU-B pair conflicts with loaded single-BEQ library");
+#if defined(_WIN32)
+    auto h=LoadLibraryW(path.wstring().c_str());
+    if(!h)throw std::runtime_error("cannot load CPU-B TST+BEQ Ghidra DLL: "+path.string());
+    auto fn=reinterpret_cast<NativeCpuBPairFunction>(GetProcAddress(h,"chq_native_cpu_b_tst_beq_pair_v1"));
+    if(!fn){FreeLibrary(h);throw std::runtime_error("generated CPU-B pair DLL ABI missing");}
+#else
+    auto h=dlopen(path.c_str(),RTLD_NOW|RTLD_LOCAL);
+    if(!h)throw std::runtime_error("cannot load CPU-B TST+BEQ generated library: "+path.string());
+    auto fn=reinterpret_cast<NativeCpuBPairFunction>(dlsym(h,"chq_native_cpu_b_tst_beq_pair_v1"));
+    if(!fn){dlclose(h);throw std::runtime_error("generated CPU-B pair library ABI missing");}
+#endif
+    native_cpu_b_pair_handle_=h;native_cpu_b_pair_function_=fn;
+}
+void Runtime::process_native_cpu_b_pair(unsigned pc) {
+    if(active_space!=BusSpace::Sub || pc!=0x4d8u || !native_cpu_b_pair_enabled_)return;
+    ++native_cpu_b_pair_attempts_;
+    auto reject=[this](const char* why){++native_cpu_b_pair_rejected_;native_cpu_b_pair_reason_=why;};
+    if(!native_cpu_b_pair_function_){reject("Ghidra-pair-library-not-loaded");return;}
+    if(native_cpu_b_enabled_){reject("overlapping-single-BEQ-native-route");return;}
+    if(bus.peek(0x4d8,2,BusSpace::Sub)!=0x4a79u || bus.peek(0x4da,4,BusSpace::Sub)!=0x00100804u ||
+       bus.peek(0x4de,2,BusSpace::Sub)!=0x67f8u) {reject("authentic-pair-opcode-operand-mismatch");return;}
+    constexpr std::uint32_t address=0x00100804u;
+    const auto sr=static_cast<std::uint16_t>(m68k_get_reg(nullptr,M68K_REG_SR));
+    const auto sampled=static_cast<std::uint16_t>(bus.peek(address,2,BusSpace::Sub));
+    PairInput in{pc,address,0x4a79u,0x67f8u,sampled,sr,1,0}; PairOutput out{};
+    if(native_cpu_b_pair_function_(&in,&out)!=1) {reject("generated-pair-ABI-rejected-input");return;}
+    const bool zero=sampled==0;
+    const std::uint16_t expected=static_cast<std::uint16_t>((sr&0xfff0u)|(sampled&0x8000u?8u:0u)|(zero?4u:0u));
+    if(out.version!=1 || out.address!=address || out.readWidth!=2 || out.pc!=(zero?0x4d8u:0x4e0u) ||
+       out.sr!=expected || out.cycles!=(zero?26u:24u)) {reject("generated-pair-output-mismatch");return;}
+    // Explicitly preserve the interrupt boundary and never commit on a
+    // marginal timeslice. Original ROM executes both opcodes on fallback.
+    if(m68ki_remaining_cycles<=static_cast<int>(out.cycles)){
+        ++native_cpu_b_pair_timeslice_guards_;reject("pair-timeslice-IRQ-boundary-original-ROM-fallback");return;
+    }
+    if(native_cpu_b_pair_fault_probe_){
+        ++native_cpu_b_pair_rollbacks_;native_cpu_b_pair_fault_probe_=false;
+        reject("deliberate-pair-mismatch-original-ROM-fallback");return;
+    }
+    // Side-effecting mapped bus read must occur exactly once on COMMIT,
+    // matching the original TST.W bus operation (not just a silent peek).
+    const auto actual=static_cast<std::uint16_t>(bus.read(address,2,BusSpace::Sub));
+    if(actual!=sampled) {reject("pair-R16-changed-before-commit");return;}
+    m68k_set_reg(M68K_REG_SR,out.sr);
+    m68k_set_reg(M68K_REG_PC,out.pc);
+    m68ki_remaining_cycles-=static_cast<int>(out.cycles);
+    ++native_cpu_b_pair_commits_;instructions_b+=2;
+    if(zero)++native_cpu_b_pair_taken_;else ++native_cpu_b_pair_not_taken_;
+    // There is no second Musashi instruction hook at the redirected PC;
+    // record the full pair boundary here before target execution.
+    record_native_cpu_b_pair_exit(out.pc);
+    if(zero && native_cpu_b_pair_state_stream_.is_open()) {
+        // Musashi immediately executes the target TST.W without an entry
+        // hook following PC redirection. Treat that exact target instruction
+        // as an original-ROM pair entry for capture purposes; no native call
+        // is made for that skipped-hook instruction. This preserves one
+        // return-state record per genuine loop iteration on all three modes.
+        native_cpu_b_pair_pending_=true;
+        native_cpu_b_pair_saw_beq_=false;
+        native_cpu_b_pair_entry_frame_=generic_trace_frame_;
+    }
+}
+void Runtime::record_native_cpu_b_pair_exit(unsigned nextPC) {
+    if(!native_cpu_b_pair_pending_ || !native_cpu_b_pair_state_stream_.is_open() || active_space!=BusSpace::Sub)return;
+    native_cpu_b_pair_pending_=false;native_cpu_b_pair_saw_beq_=false;
+    auto& o=native_cpu_b_pair_state_stream_;
+    o<<native_cpu_b_pair_entry_frame_<<'\t'<<generic_trace_frame_<<'\t'<<std::hex<<std::setfill('0')<<std::setw(6)<<nextPC;
+    for(int i=0;i<8;++i)o<<'\t'<<std::setw(8)<<m68k_get_reg(nullptr,static_cast<m68k_register_t>(M68K_REG_D0+i));
+    for(int i=0;i<8;++i)o<<'\t'<<std::setw(8)<<m68k_get_reg(nullptr,static_cast<m68k_register_t>(M68K_REG_A0+i));
+    o<<'\t'<<std::setw(4)<<m68k_get_reg(nullptr,M68K_REG_SR)
+     <<'\t'<<std::dec<<(cycles_b+static_cast<std::uint64_t>(m68k_cycles_run()))<<'\n';
+}
+void Runtime::process_native_cpu_b_branch(std::uint32_t pc) {
+    if(active_space!=BusSpace::Sub || pc!=0x4de || !native_cpu_b_enabled_)return;
+    ++native_cpu_b_attempts_;
+    auto reject=[this](const char* reason){++native_cpu_b_rejected_;native_cpu_b_reason_=reason;};
+    if(!native_cpu_b_function_){reject("generated-library-not-loaded");return;}
+    if(bus.peek(0x4de,2,BusSpace::Sub)!=0x67f8u){reject("ROM-opcode-fingerprint-mismatch");return;}
+    BInput in{pc,static_cast<std::uint16_t>(m68k_get_reg(nullptr,M68K_REG_SR)),0x67f8u,1};
+    BOutput out{};
+    if(native_cpu_b_function_(&in,&out)!=1){reject("generated-ABI-rejected-input");return;}
+    const bool taken=(in.sr&4u)!=0;
+    // Independently inspect outputs before any emulated state changes. BEQ.B
+    // preserves all registers, SR and bus state; this branch skips no other ROM.
+    if(out.version!=1 || out.sr!=in.sr || out.pc!=(taken?0x4d8u:0x4e0u) ||
+       out.cycles!=(taken?10u:8u)) {reject("generated-CPU-B-output-mismatch");return;}
+    // A 68000 takes an IRQ at the start of a new execute timeslice. Native
+    // redirect inside the hook will fetch one target opcode immediately; if
+    // the original BEQ would finish this timeslice, that would execute the
+    // target before the IRQ. Reject those boundary entries to original ROM.
+    if(m68ki_remaining_cycles<=static_cast<int>(out.cycles)) {
+        ++native_cpu_b_timeslice_guards_;
+        reject("CPU-B-timeslice-interrupt-boundary-original-ROM-fallback");
+        return;
+    }
+    if(native_cpu_b_fault_probe_){
+        ++native_cpu_b_rollbacks_;
+        native_cpu_b_fault_probe_=false;
+        reject("deliberate-generated-rejection-original-ROM-fallback");
+        return;
+    }
+    // Musashi's instruction hook runs before opcode fetch. Advancing PC and
+    // subtracting the exact original 68000 BEQ cost skips precisely one opcode.
+    // The next CPU-B instruction is still fetched and timed by Musashi.
+    m68k_set_reg(M68K_REG_PC,out.pc);
+    m68ki_remaining_cycles-=static_cast<int>(out.cycles);
+    ++native_cpu_b_commits_;
+    // The destination opcode executes in this loop iteration without its
+    // normal entry hook; account for its genuine execution in diagnostics.
+    ++instructions_b;
+    if(taken)++native_cpu_b_taken_;else ++native_cpu_b_not_taken_;
+    // Musashi invokes the hook before fetching an opcode. After redirecting
+    // its PC, Musashi executes the *target* opcode in the same loop iteration,
+    // without calling the target's instruction hook. Capture the CPU-B branch
+    // exit NOW, before that target instruction executes. Original ROM captures
+    // the same boundary at the next actual original instruction hook.
+    record_native_cpu_b_exit(out.pc);
+}
+void Runtime::record_native_cpu_b_exit(std::uint32_t nextPC) {
+    if(!native_cpu_b_pending_ || !native_cpu_b_state_stream_.is_open() || active_space!=BusSpace::Sub)return;
+    native_cpu_b_pending_=false;
+    if(nextPC!=0x4d8u&&nextPC!=0x4e0u)++native_cpu_b_irq_edges_;
+    auto& o=native_cpu_b_state_stream_;
+    o<<native_cpu_b_entry_frame_<<'\t'<<generic_trace_frame_<<'\t'<<std::hex<<std::setfill('0')
+     <<std::setw(6)<<nextPC;
+    for(int i=0;i<8;++i)o<<'\t'<<std::setw(8)<<m68k_get_reg(nullptr,static_cast<m68k_register_t>(M68K_REG_D0+i));
+    for(int i=0;i<8;++i)o<<'\t'<<std::setw(8)<<m68k_get_reg(nullptr,static_cast<m68k_register_t>(M68K_REG_A0+i));
+    o<<'\t'<<std::setw(4)<<m68k_get_reg(nullptr,M68K_REG_SR)
+     <<'\t'<<std::dec<<(cycles_b+static_cast<std::uint64_t>(m68k_cycles_run()))<<'\n';
+}
+
+void Runtime::process_native_copy_block(unsigned pc) {
+    if(pc!=0x40540u||native_copy_disabled_)return;
+    ++native_copy_attempts_;
+    auto reject=[this](const char* msg){++native_copy_rejected_;native_copy_reason_=msg;};
+    if(!native_copy_function_){reject("generated-library-not-loaded");return;}
+    auto a0=static_cast<std::uint32_t>(m68k_get_reg(nullptr,M68K_REG_A0));
+    auto a1=static_cast<std::uint32_t>(m68k_get_reg(nullptr,M68K_REG_A1));
+    const auto sr=static_cast<std::uint16_t>(m68k_get_reg(nullptr,M68K_REG_SR));
+    if((a0&1u)||(a1&1u)||std::uint64_t(a0)+64u>0x1000000ull||std::uint64_t(a1)+64u>0x1000000ull||
+        !(std::uint64_t(a0)+64u<=a1||std::uint64_t(a1)+64u<=a0)) {reject("unaligned-overlapping-or-unmapped-copy");return;}
+    for(unsigned i=0;i<16;++i){
+        if(bus.peek(0x40540u+i*2u,2,BusSpace::Main)!=0x22d8u){reject("ROM-opcode-fingerprint-mismatch");return;}
+    }
+    CopyInput in{};CopyOutput out{};
+    in.a0=a0;in.a1=a1;in.sr=sr;in.version=1;
+    for(unsigned i=0;i<16;++i)in.source[i]=bus.peek(a0+i*4u,4,BusSpace::Main);
+    if(native_copy_function_(&in,&out)!=1||out.version!=1||out.a0!=a0+64u||out.a1!=a1+64u) {
+        reject("generated-copy-ABI-disagrees");return;
+    }
+    for(unsigned i=0;i<16;++i)if(in.source[i]!=out.values[i]){
+        reject("generated-copy-value-disagrees-with-ROM-source");return;
+    }
+    const auto last=in.source[15];
+    const auto expectedSR=static_cast<std::uint16_t>((sr&0xfff0u)|(last==0?4u:0u)|((last&0x80000000u)?8u:0u));
+    if(out.sr!=expectedSR){reject("generated-copy-flags-disagree");return;}
+    if(native_copy_fault_ && native_copy_rollbacks_==0){
+        ++native_copy_rollbacks_;native_copy_disabled_=true;
+        native_copy_reason_="forced-native-output-mismatch-original-ROM-fallback";
+        return; // no observable access or write; genuine 16 ROM opcodes run
+    }
+    for(unsigned i=0;i<16;++i){
+        bus.set_trace_pc(BusSpace::Main,0x40540u+2u*i);
+        const auto value=bus.read(a0+4u*i,4,BusSpace::Main);
+        bus.write(a1+4u*i,value,4,BusSpace::Main);
+    }
+    m68k_set_reg(M68K_REG_A0,out.a0);
+    m68k_set_reg(M68K_REG_A1,out.a1);
+    m68k_set_reg(M68K_REG_SR,out.sr);
+    m68k_set_reg(M68K_REG_PC,0x40560u);
+    // A bounded block with 16 identical original 68000 MOVE.L opcodes.
+    m68ki_remaining_cycles-=16*CYC_INSTRUCTION[0x22d8];
+    ++native_copy_commits_;
+    record_native_copy_state("native");
+}
+
+void Runtime::load_native_health_library(const std::filesystem::path& path) {
+    if(native_health_handle_)throw std::runtime_error("generated health library already loaded");
+#if defined(_WIN32)
+    auto h=LoadLibraryW(path.wstring().c_str());
+    if(!h)throw std::runtime_error("cannot load generated health DLL: "+path.string());
+    auto fn=reinterpret_cast<NativeHealthFunction>(GetProcAddress(h,"chq_native_health_v1"));
+    if(!fn){FreeLibrary(h);throw std::runtime_error("generated health DLL missing ABI v1 export");}
+#else
+    auto h=dlopen(path.c_str(),RTLD_NOW|RTLD_LOCAL);
+    if(!h)throw std::runtime_error("cannot load generated health shared library: "+path.string());
+    auto fn=reinterpret_cast<NativeHealthFunction>(dlsym(h,"chq_native_health_v1"));
+    if(!fn){dlclose(h);throw std::runtime_error("generated health library missing ABI v1 export");}
+#endif
+    native_health_handle_=h; native_health_function_=fn;
+}
+void Runtime::apply_native_health_entry_case() {
+    if (native_health_case_applied_ || !native_health_stream_.is_open() || active_space!=BusSpace::Main) return;
+    native_health_case_applied_=true;
+    struct Field { std::uint32_t address; std::uint16_t value; };
+    std::vector<Field> fields;
+    if (native_health_case_=="bypass") fields={{0x10012e,1},{0x1002ae,3},{0x1002ba,2},{0x1002d8,100}};
+    else if (native_health_case_=="nonterminal") fields={{0x10012e,0},{0x1002ae,3},{0x1002ba,2},{0x1002d8,100}};
+    else if (native_health_case_=="terminal") fields={{0x10012e,0},{0x1002ae,0},{0x1002ba,2},{0x1002d8,100}};
+    else if (native_health_case_=="overflow") fields={{0x10012e,0},{0x1002ae,2},{0x1002ba,0x8000},{0x1002d8,0x8001}};
+    // These are debugger-controlled experiments, NEVER naturally-observed
+    // gameplay branches. Keep every intervention in the evidence ledger.
+    for(const auto& field:fields) {
+        const auto old=bus.peek(field.address,2,BusSpace::Main);
+        const auto previous_trace_pc=bus.trace_pc(BusSpace::Main);
+        bus.set_trace_pc(BusSpace::Main,0); // setup is not a function transaction
+        bus.debug_write(field.address,field.value,2,BusSpace::Main);
+        bus.set_trace_pc(BusSpace::Main,previous_trace_pc);
+        native_health_seed_stream_<<generic_trace_frame_<<'\t'<<native_health_case_<<'\t'
+            <<std::hex<<field.address<<'\t'<<old<<'\t'<<field.value<<std::dec<<'\n';
+    }
+    if(fields.empty())native_health_seed_stream_<<generic_trace_frame_<<"\tnatural\tUNMODIFIED\n";
+}
+// Write only the observed bounded PC history between the executed instruction
+// that produced the return address and entry into the candidate tail. If the
+// call was not observed, state that explicitly rather than creating a path.
+void Runtime::record_native_health_caller_path(std::uint32_t ret, std::uint32_t entry) {
+    if(!native_health_caller_stream_.is_open()) return;
+    const std::uint32_t candidate_call = ret >= 2u ? ret - 2u : 0u;
+    auto i=native_health_cpu_a_history_.size();
+    // The history already includes the current entry PC as its final item.
+    while(i>0) {
+        --i;
+        if(native_health_cpu_a_history_[i]==candidate_call) break;
+    }
+    const bool found=!native_health_cpu_a_history_.empty()
+        && native_health_cpu_a_history_[i]==candidate_call
+        && i+1<native_health_cpu_a_history_.size()
+        && i+1u<native_health_cpu_a_history_.size();
+    native_health_caller_stream_<<generic_trace_frame_<<'\t'<<native_health_case_<<'\t'
+        <<std::hex<<ret<<'\t';
+    if(!found) {native_health_caller_stream_<<"UNOBSERVED\tUNOBSERVED\tUNOBSERVED\n";return;}
+    native_health_caller_stream_<<candidate_call<<'\t'<<native_health_cpu_a_history_[i+1]<<'\t';
+    for(auto j=i;j<native_health_cpu_a_history_.size();++j) {
+        if(j!=i) native_health_caller_stream_<<',';
+        native_health_caller_stream_<<native_health_cpu_a_history_[j];
+    }
+    native_health_caller_stream_<<std::dec<<'\n';
+}
+
+void Runtime::record_native_health_path(const char* mode) {
+    if(!native_health_path_stream_.is_open())return;
+    native_health_path_stream_<<generic_trace_frame_<<'\t'<<mode<<'\t'<<native_health_case_<<'\t';
+    for(std::size_t i=0;i<native_health_path_.size();++i){
+        if(i)native_health_path_stream_<<',';
+        native_health_path_stream_<<std::hex<<native_health_path_[i]<<std::dec;
+    }
+    native_health_path_stream_<<'\n';
+    native_health_path_.clear();
+}
+void Runtime::record_native_health_return(const char* mode) {
+    auto& o=native_health_stream_;if(!o||active_space!=BusSpace::Main)return;
+    o<<generic_trace_frame_<<'\t'<<mode<<'\t'<<std::hex<<std::setfill('0');
+    o<<std::setw(8)<<m68k_get_reg(nullptr,M68K_REG_PC)<<'\t';
+    for(int i=0;i<8;++i)o<<std::setw(8)<<m68k_get_reg(nullptr,static_cast<m68k_register_t>(M68K_REG_D0+i))<<'\t';
+    for(int i=0;i<8;++i)o<<std::setw(8)<<m68k_get_reg(nullptr,static_cast<m68k_register_t>(M68K_REG_A0+i))<<'\t';
+    o<<std::setw(4)<<m68k_get_reg(nullptr,M68K_REG_SR)<<'\t'
+     <<std::setw(4)<<bus.peek(0x1002ae,2,BusSpace::Main)<<'\t'
+     <<std::setw(4)<<bus.peek(0x1002d8,2,BusSpace::Main)<<'\t'
+     <<std::dec<<m68k_cycles_run()<<'\n';
+}
+void Runtime::process_native_health_function(unsigned pc) {
+    if(pc!=0xA10Cu||native_health_disabled_)return;
+    ++native_health_attempts_;
+    auto reject=[this](const char* why){++native_health_rejections_;native_health_reason_=why;};
+    // No native function may execute without a generated DLL and the exact
+    // verified target ROM opcode / known A5-relative RAM layout.
+    if(!native_health_function_){reject("generated-library-not-loaded");return;}
+    const auto a5=static_cast<std::uint32_t>(m68k_get_reg(nullptr,M68K_REG_A5));
+    const auto sp=static_cast<std::uint32_t>(m68k_get_reg(nullptr,M68K_REG_SP));
+    if(a5!=0x108000u||sp<0x100000u||sp>0x10fffcu ||
+       bus.peek(0xA10C,2,BusSpace::Main)!=0x4a6du||
+       bus.peek(0xA128,2,BusSpace::Main)!=0x4e75u){reject("ROM-register-stack-contract");return;}
+    HealthFunctionInput in{};
+    in.d0=m68k_get_reg(nullptr,M68K_REG_D0);in.a5=a5;in.sp=sp;
+    in.return_pc=bus.peek(sp,4,BusSpace::Main);
+    in.sr=static_cast<std::uint16_t>(m68k_get_reg(nullptr,M68K_REG_SR));
+    in.gate=static_cast<std::uint16_t>(bus.peek(a5-0x7ed2,2,BusSpace::Main));
+    in.hits=static_cast<std::uint16_t>(bus.peek(a5-0x7d52,2,BusSpace::Main));
+    in.increment=static_cast<std::uint16_t>(bus.peek(a5-0x7d46,2,BusSpace::Main));
+    in.score=static_cast<std::uint16_t>(bus.peek(a5-0x7d28,2,BusSpace::Main));
+    if(in.return_pc&1u){reject("invalid-return-PC");return;}
+    HealthFunctionOutput out{};
+    if(native_health_function_(&in,&out)!=1||out.returned!=1||out.pc!=in.return_pc||out.sp!=sp+4){reject("generated-function-ABI-contract");return;}
+    // Independent branch/result invariant before any observable write.
+    const bool dec=in.gate==0;
+    const auto nextHits=static_cast<std::uint16_t>(in.hits-1u);
+    const bool terminal=dec && static_cast<std::int16_t>(nextHits)<0;
+    const auto nextScore=terminal?std::uint16_t(0x1400):
+        static_cast<std::uint16_t>(in.score+in.increment);
+    const auto nextD0=terminal?in.d0:((in.d0&0xffff0000u)|in.increment);
+    if(out.hits!=(dec?nextHits:in.hits)||out.score!=nextScore||out.d0!=nextD0){reject("generated-function-result-invariant");return;}
+    if(native_health_fault_probe_&&native_health_rollbacks_==0){out.score^=1u;}
+    if(out.score!=nextScore){
+        ++native_health_rollbacks_;native_health_disabled_=true;
+        native_health_reason_="forced-mismatch-original-ROM-fallback";
+        return; // No speculative RAM writes. Musashi executes original function.
+    }
+    // Commit only after all guards and generated results have passed. Bus reads
+    // and writes follow the authentic branch order, then the original RTS pop.
+    const auto gate=static_cast<std::uint16_t>(bus.read(a5-0x7ed2,2,BusSpace::Main));
+    if(gate!=in.gate){reject("volatile-gate-changed");return;}
+    if(dec){
+        const auto hit=static_cast<std::uint16_t>(bus.read(a5-0x7d52,2,BusSpace::Main));
+        if(hit!=in.hits){reject("volatile-hits-changed");return;}
+        bus.write(a5-0x7d52,nextHits,2,BusSpace::Main);
+    }
+    if(terminal)bus.write(a5-0x7d28,out.score,2,BusSpace::Main);
+    else{
+        (void)bus.read(a5-0x7d46,2,BusSpace::Main);
+        (void)bus.read(a5-0x7d28,2,BusSpace::Main);
+        bus.write(a5-0x7d28,out.score,2,BusSpace::Main);
+    }
+    (void)bus.read(sp,4,BusSpace::Main);
+    m68k_set_reg(M68K_REG_D0,out.d0);
+    m68k_set_reg(M68K_REG_SR,out.sr);
+    m68k_set_reg(M68K_REG_SP,out.sp);
+    m68k_set_reg(M68K_REG_PC,out.pc);
+    // Use actual Musashi 68000 opcode timing plus conditional-branch penalty.
+    auto cost=[this](std::uint32_t addr)->int{
+        auto op=bus.peek(addr,2,BusSpace::Main);
+        return CYC_INSTRUCTION[op];
+    };
+    int cycles=cost(0xA10C)+cost(0xA110)+cost(0xA128);
+    if(dec){cycles+=static_cast<std::int32_t>(CYC_BCC_NOTAKE_B)+cost(0xA112)+cost(0xA116);
+        if(terminal)cycles+=static_cast<std::int32_t>(CYC_BCC_NOTAKE_B)+cost(0xA118)+cost(0xA11E);
+    }
+    if(!terminal)cycles+=cost(0xA120)+cost(0xA124);
+    m68ki_remaining_cycles-=cycles;
+    ++native_health_commits_;
+    if(native_health_stream_.is_open()){record_native_health_return("native");record_native_health_path("native");}
+}
+
+void Runtime::record_native_steering_state(unsigned pc) {
+    auto& out=native_steering_state_stream_;
+    if (!out || active_space!=BusSpace::Main) return;
+    out << generic_trace_frame_ << '\t' << std::hex << std::setfill('0');
+    out << std::setw(6) << pc << '\t';
+    for(int i=0;i<8;++i) out << std::setw(8) << m68k_get_reg(nullptr,static_cast<m68k_register_t>(M68K_REG_D0+i)) << '\t';
+    for(int i=0;i<8;++i) out << std::setw(8) << m68k_get_reg(nullptr,static_cast<m68k_register_t>(M68K_REG_A0+i)) << '\t';
+    out << std::setw(4) << m68k_get_reg(nullptr,M68K_REG_SR) << '\t'
+        << std::setw(4) << bus.peek(0x100300,2,BusSpace::Main) << '\t'
+        << std::dec << m68k_cycles_run() << '\n';
+}
+
+void Runtime::export_native_endstate(const std::filesystem::path& path) const {
+    // Every public CPU register plus every mutable mapped RAM/video region,
+    // CPU cycles and palette contents. We do not hash ROM, host pointers,
+    // logging timestamps or opaque Musashi callback addresses.
+    auto fnv=[](std::uint64_t h,const void* data,std::size_t n) {
+        auto* b=static_cast<const std::uint8_t*>(data);
+        for(std::size_t i=0;i<n;++i){h^=b[i];h*=1099511628211ull;}
+        return h;
+    };
+    std::ofstream out(path,std::ios::binary|std::ios::trunc);
+    if(!out)throw std::runtime_error("native endstate output cannot be opened");
+    out << "{\n  \"schema\": \"chq-native-machine-endstate-v1\",\n";
+    for(int c=0;c<2;++c) {
+        const auto& ctx=c?context_b_:context_a_;
+        out << "  \"cpu"<<(c?"B":"A")<<"\": {\"registers\": [";
+        for(int i=0;i<18;++i) {
+            auto r=static_cast<m68k_register_t>(i<8?M68K_REG_D0+i:(i<16?M68K_REG_A0+i-8:(i==16?M68K_REG_PC:M68K_REG_SR)));
+            if(i)out<<',';
+            out << m68k_get_reg(const_cast<std::uint8_t*>(ctx.data()),r);
+        }
+        out << "], \"cycles\": " << (c?cycles_b:cycles_a) << "},\n";
+    }
+    out << "  \"memory\": [\n";
+    bool first=true;
+    for(const auto& region:bus.regions) {
+        if(region.readonly)continue;
+        if(!first)out<<",\n"; first=false;
+        const auto hash=fnv(14695981039346656037ull,region.bytes.data(),region.bytes.size());
+        out << "    {\"region\":\""<<region.name<<"\",\"start\":"<<region.base
+            <<",\"size\":"<<region.bytes.size()<<",\"fnv64\":\""<<std::hex<<std::setw(16)<<std::setfill('0')<<hash<<std::dec<<"\"}";
+    }
+    out << "\n  ],\n  \"paletteFNV64\": \"" << std::hex << std::setw(16)
+        << fnv(14695981039346656037ull,bus.palette.data(),bus.palette.size()*sizeof(bus.palette[0]))
+        << "\"\n}\n";
+    if(!out)throw std::runtime_error("native endstate output write failed");
+}
+
+std::string Runtime::native_steering_shadow_report_json() const {
+    std::ostringstream os;
+    os << "{\"schema\":\"chq-native-steering-shadow-v1\",\"enabled\":true,"
+       << "\"readOnly\":" << (native_steering_replace_enabled_?"false":"true")
+       << ",\"substitution\":" << (native_steering_commits_>0?"true":"false")
+       << ",\"attempts\":" << native_steering_attempts_
+       << ",\"commits\":" << native_steering_commits_
+       << ",\"generatedLibraryUsed\":" << (native_steering_generated_fn_&&native_steering_commits_>0?"true":"false")
+       << ",\"guardRejected\":" << native_steering_guards_rejected_
+       << ",\"rollbacks\":" << native_steering_rollbacks_
+       << ",\"disabledAfterRollback\":" << (native_steering_replace_disabled_?"true":"false")
+       << ",\"lastRejection\":\"" << native_steering_reject_reason_ << "\""
+       << ",\"entries\":" << steering_shadow_entries_
+       << ",\"compared\":" << steering_shadow_compared_ << ",\"matches\":" << steering_shadow_matches_
+       << ",\"mismatches\":" << steering_shadow_mismatches_ << ",\"incomplete\":" << steering_shadow_incomplete_
+       << ",\"unsupportedMode\":" << steering_shadow_bypass_ << ",\"pending\":" << (steering_shadow_pending_?"true":"false")
+       << ",\"firstMismatch\":\"" << steering_shadow_first_mismatch_ << "\"}\n";
+    return os.str();
+}
+
+void Runtime::write_native_execution_evidence(const std::filesystem::path& directory,
+                                             const std::string& scenario) const {
+    if (cpu_b_edge_enabled_) {
+        std::ofstream edges(directory / "cpu-b-observed-edges.tsv",std::ios::binary|std::ios::trunc);
+        if (!edges) throw std::runtime_error("cannot create CPU-B observed edge evidence");
+        for (const auto& [pair,count] : cpu_b_edges_) {
+            const auto it=cpu_b_instruction_words_.find(pair.first);
+            if (it==cpu_b_instruction_words_.end()) throw std::runtime_error("CPU-B edge lacks original opcode fingerprint");
+            edges<<std::hex<<pair.first<<'\t'<<pair.second<<'\t'<<it->second<<std::dec<<'\t'<<count<<'\n';
+        }
+        if(!edges)throw std::runtime_error("cannot flush CPU-B observed edge evidence");
+        std::ofstream ordered(directory / "cpu-b-ordered-hook-events.tsv",std::ios::binary|std::ios::trunc);
+        if (!ordered) throw std::runtime_error("cannot create original-ROM ordered CPU-B evidence");
+        ordered << "ordinal\tframe\tcyclesB\tpc\topcode\tsp\tsr\n";
+        for (const auto& e : cpu_b_ordered_hooks_) {
+            ordered << std::dec << e.ordinal << '\t' << e.frame << '\t' << e.cycles
+                    << '\t' << std::hex << e.pc << '\t' << e.opcode
+                    << '\t' << e.sp << '\t' << e.sr << std::dec << '\n';
+        }
+        if (!ordered) throw std::runtime_error("cannot write CPU-B ordered hook data");
+        std::ofstream cap(directory / "cpu-b-ordered-hook-cap.json",std::ios::binary|std::ios::trunc);
+        if (!cap) throw std::runtime_error("cannot write CPU-B ordered cap status");
+        cap << "{\"schema\":\"chq-rc6322-ordered-hook-cap-v1\",\"source\":\"ORIGINAL_ROM_CPU_B_INSTRUCTION_HOOK\",\"recorded\":"
+            << cpu_b_ordered_hooks_.size() << ",\"dropped\":" << cpu_b_ordered_dropped_
+            << ",\"cpuBTransitions\":" << cpu_b_edge_transitions_ << "}\n";
+        if (!cap) throw std::runtime_error("cannot flush CPU-B ordered cap status");
+        // Only instruction-observed runtime windows are recorded. This may
+        // contain NO writer, because checkpoint RAM can predate observation.
+        std::ofstream writers(directory / "cpu-b-original-100802-writer-events.tsv",std::ios::binary|std::ios::trunc);
+        if(!writers) throw std::runtime_error("cannot create CPU-B source writer witness");
+        writers << "ordinal\tframe\tcyclesB\tcpu\tpc\taddress\twidth\tbefore\tafter\n";
+        for(const auto& e:cpu_b_100802_writers_) {
+            writers << std::dec << e.ordinal << '\t' << e.frame << '\t' << e.cycles
+                    << '\t' << e.cpu << '\t' << std::hex << e.pc << '\t' << e.address << std::dec << '\t' << e.width
+                    << '\t' << std::hex << e.before << '\t' << e.after << std::dec << '\n';
+        }
+        if(!writers) throw std::runtime_error("cannot flush CPU-B writer evidence");
+        std::ofstream writerCap(directory / "cpu-b-original-100802-writer-cap.json",std::ios::binary|std::ios::trunc);
+        if(!writerCap) throw std::runtime_error("cannot create CPU-B writer cap");
+        writerCap << "{\"schema\":\"chq-rc6331-cpu-b-100802-writer-window-v1\",\"source\":\"CPU_A_AND_B_BUS_WRITE_POSTCOMMIT_NO_FORCED_PATCH\",\"hits\":"
+                  << cpu_b_100802_hits_ << ",\"recorded\":" << cpu_b_100802_writers_.size()
+                  << ",\"dropped\":" << cpu_b_100802_dropped_ << ",\"cpuBTransitions\":" << cpu_b_edge_transitions_ << "}\n";
+        if(!writerCap) throw std::runtime_error("cannot flush CPU-B writer cap");
+        std::ofstream btst(directory / "cpu-b-original-050e-btst-source.tsv",std::ios::binary|std::ios::trunc);
+        if (!btst) throw std::runtime_error("cannot create CPU-B original BTST source evidence");
+        btst << "ordinal\tframe\tcyclesB\tpc\topcode\tsourceAddr\tsourceByte\tnextOrdinal\tnextPc\tnextSr\tnextFrame\tnextCyclesB\n";
+        for (const auto& e : cpu_b_050e_sources_) {
+            btst << std::dec << e.ordinal << '\t' << e.frame << '\t' << e.cycles
+                 << "\t50e\t839\t100802\t" << std::hex << e.sourceByte << std::dec
+                 << '\t' << e.nextOrdinal << '\t' << std::hex << e.nextPC << '\t' << e.nextSR << std::dec
+                 << '\t' << e.nextFrame << '\t' << e.nextCycles << '\n';
+        }
+        if (!btst) throw std::runtime_error("cannot flush original BTST source evidence");
+        std::ofstream btstCap(directory / "cpu-b-original-050e-btst-cap.json",std::ios::binary|std::ios::trunc);
+        if (!btstCap) throw std::runtime_error("cannot create original BTST capture cap");
+        btstCap << "{\"schema\":\"chq-rc6330-cpu-b-050e-btst-source-v1\",\"source\":\"ORIGINAL_ROM_CPU_B_BTST_NONMUTATING_SOURCE_BYTE_AND_IMMEDIATE_HOOK\",\"hits\":"
+                << cpu_b_050e_hits_ << ",\"recorded\":" << cpu_b_050e_sources_.size()
+                << ",\"dropped\":" << cpu_b_050e_dropped_
+                << ",\"pending\":" << (cpu_b_050e_pending_?"true":"false")
+                << ",\"cpuBTransitions\":" << cpu_b_edge_transitions_ << "}\n";
+        if (!btstCap) throw std::runtime_error("cannot flush original BTST cap");
+        std::ofstream branch(directory / "cpu-b-original-0516-bne-decisions.tsv",std::ios::binary|std::ios::trunc);
+        if (!branch) throw std::runtime_error("cannot create CPU-B original branch decision evidence");
+        branch << "ordinal\tframe\tcyclesB\tpc\topcode\tsr\tnextPc\tnextFrame\tnextCyclesB\n";
+        for (const auto& e : cpu_b_0516_branches_) {
+            branch << std::dec << e.ordinal << '\t' << e.frame << '\t' << e.cycles
+                   << "\t516\t6614\t" << std::hex << e.sr << '\t' << e.nextPc
+                   << std::dec << '\t' << e.nextFrame << '\t' << e.nextCycles << '\n';
+        }
+        if (!branch) throw std::runtime_error("cannot flush CPU-B branch decision evidence");
+        std::ofstream branchCap(directory / "cpu-b-original-0516-bne-cap.json",std::ios::binary|std::ios::trunc);
+        if (!branchCap) throw std::runtime_error("cannot create CPU-B branch decision cap");
+        branchCap << "{\"schema\":\"chq-rc6328-cpu-b-0516-bne-cap-v1\",\"source\":\"ORIGINAL_ROM_CPU_B_INSTRUCTION_HOOK_NEXT_PC_AND_SR\",\"hits\":"
+                  << cpu_b_0516_hits_ << ",\"recorded\":" << cpu_b_0516_branches_.size()
+                  << ",\"dropped\":" << cpu_b_0516_dropped_
+                  << ",\"pending\":" << (cpu_b_0516_pending_?"true":"false")
+                  << ",\"cpuBTransitions\":" << cpu_b_edge_transitions_ << "}\n";
+        if (!branchCap) throw std::runtime_error("cannot flush CPU-B branch cap");
+        std::ofstream frames(directory / "cpu-b-exception-frame-hooks.tsv",std::ios::binary|std::ios::trunc);
+        if (!frames) throw std::runtime_error("cannot create CPU-B exception-frame snapshot evidence");
+        frames << "ordinal\tframe\tkind\tpc\tsp\tusp\tisp\tsr\tsavedSr\tsavedPc\n";
+        for (const auto& e : cpu_b_exception_frame_hooks_) {
+            frames << std::dec << e.ordinal << '\t' << e.frame << '\t' << e.kind
+                   << '\t' << std::hex << e.pc << '\t' << e.sp << '\t' << e.usp << '\t' << e.isp << '\t' << e.sr
+                   << '\t' << e.savedSr << '\t' << e.savedPc << std::dec << '\n';
+        }
+        if (!frames) throw std::runtime_error("cannot flush CPU-B exception-frame snapshot evidence");
+        std::ofstream frameCap(directory / "cpu-b-exception-frame-cap.json",std::ios::binary|std::ios::trunc);
+        if (!frameCap) throw std::runtime_error("cannot create CPU-B exception-frame cap");
+        frameCap << "{\"schema\":\"chq-rc6326-cpu-b-exception-frame-cap-v2\",\"source\":\"ORIGINAL_ROM_CPU_B_INSTRUCTION_HOOK_RAM_PEEK\",\"recorded\":"
+                 << cpu_b_exception_frame_hooks_.size() << ",\"dropped\":" << cpu_b_exception_frame_dropped_
+                 << ",\"pendingRte\":" << (cpu_b_exception_rte_pending_?"true":"false")
+                 << ",\"cpuBTransitions\":" << cpu_b_edge_transitions_ << "}\n";
+        if (!frameCap) throw std::runtime_error("cannot flush CPU-B exception-frame cap");
+        std::ofstream irqBus(directory / "cpu-b-original-irq-delivery-bus.tsv",std::ios::binary|std::ios::trunc);
+        if (!irqBus) throw std::runtime_error("cannot create CPU-B original-ROM IRQ bus trace");
+        irqBus << "sample\tframe\tkind\taddress\tvalue\twidth\n";
+        for (const auto& e : cpu_b_irq_bus_events_)
+            irqBus << std::dec << e.sample << '\t' << e.frame << '\t' << e.kind << '\t'
+                   << std::hex << e.address << '\t' << e.value << std::dec << '\t' << e.width << '\n';
+        if (!irqBus) throw std::runtime_error("cannot flush original-ROM IRQ bus trace");
+        std::ofstream irqCap(directory / "cpu-b-original-irq-delivery-cap.json",std::ios::binary|std::ios::trunc);
+        if (!irqCap) throw std::runtime_error("cannot create CPU-B IRQ bus cap");
+        irqCap << "{\"schema\":\"chq-rc6327-cpu-b-original-irq-delivery-cap-v1\",\"source\":\"ORIGINAL_ROM_MUSASHI_ACK_AND_CPU_B_BUS_TRANSACTIONS\",\"samples\":"
+               << cpu_b_irq_bus_samples_ << ",\"recorded\":" << cpu_b_irq_bus_events_.size()
+               << ",\"dropped\":" << cpu_b_irq_bus_dropped_ << ",\"pending\":"
+               << (cpu_b_irq_bus_pending_?"true":"false") << ",\"cpuBTransitions\":" << cpu_b_edge_transitions_ << "}\n";
+        if (!irqCap) throw std::runtime_error("cannot flush CPU-B original IRQ cap");
+
+
+    }
+    if (rom_execution_census_.enabled()) {
+        rom_execution_census_.export_json(directory / "rom-execution-census.json", scenario, cycles_a, cycles_b);
+        rom_execution_census_.export_pc_counts(directory / "rom-execution-pc-counts.tsv");
+    }
+    std::ofstream bridge(directory / "native-execution-bridge.json", std::ios::binary | std::ios::trunc);
+    if (!bridge) throw std::runtime_error("cannot write native execution bridge evidence");
+    bridge << native_execution_bridge_.report_json();
+    if (live_candidate_shadow_.enabled()) {
+        std::ofstream candidate(directory / "native-live-candidate-shadow.json",std::ios::binary|std::ios::trunc);
+        if(!candidate)throw std::runtime_error("cannot write native candidate evidence");
+        candidate << live_candidate_shadow_.report_json();
+    }
+    if (!bridge) throw std::runtime_error("cannot finish native execution bridge evidence");
+    if (native_clear_mode_!=NativeClearMode::Off) {
+        std::ofstream native(directory / "native-sprite-clear-substitution.json", std::ios::binary|std::ios::trunc);
+        if (!native) throw std::runtime_error("cannot write native sprite clear evidence");
+        native << native_clear_report_json();
+    }
+    if(native_cpu_b_pair_state_stream_.is_open()) {
+        std::ofstream out(directory / "native-cpu-b-pair-report.json",std::ios::binary|std::ios::trunc);
+        out << "{\"schema\":\"chq-rc6313-cpu-b-pair-live-v1\",\"attempts\":"<<native_cpu_b_pair_attempts_
+            <<",\"commits\":"<<native_cpu_b_pair_commits_<<",\"rejected\":"<<native_cpu_b_pair_rejected_
+            <<",\"rollbacks\":"<<native_cpu_b_pair_rollbacks_<<",\"timesliceGuards\":"<<native_cpu_b_pair_timeslice_guards_
+            <<",\"taken\":"<<native_cpu_b_pair_taken_<<",\"notTaken\":"<<native_cpu_b_pair_not_taken_
+            <<",\"generatedLibraryUsed\":"<<(native_cpu_b_pair_function_&&native_cpu_b_pair_commits_?"true":"false")
+            <<",\"lastReason\":\""<<native_cpu_b_pair_reason_<<"\"}\n";
+    }
+    if(native_cpu_b_state_stream_.is_open()) {
+        std::ofstream out(directory / "native-cpu-b-report.json",std::ios::binary|std::ios::trunc);
+        out << "{\"schema\":\"chq-rc6310-cpu-b-live-v1\",\"attempts\":"<<native_cpu_b_attempts_
+            <<",\"commits\":"<<native_cpu_b_commits_<<",\"rejected\":"<<native_cpu_b_rejected_
+            <<",\"rollbacks\":"<<native_cpu_b_rollbacks_<<",\"taken\":"<<native_cpu_b_taken_
+            <<",\"notTaken\":"<<native_cpu_b_not_taken_<<",\"interruptEdges\":"<<native_cpu_b_irq_edges_
+            <<",\"timesliceGuards\":"<<native_cpu_b_timeslice_guards_
+            <<",\"generatedLibraryUsed\":"<<(native_cpu_b_function_&&native_cpu_b_commits_?"true":"false")
+            <<",\"lastReason\":\""<<native_cpu_b_reason_<<"\"}\n";
+    }
+    if (native_copy_state_stream_.is_open()) {
+        std::ofstream out(directory / "native-copy-report.json",std::ios::binary|std::ios::trunc);
+        out << "{\"schema\":\"chq-rc636-copy-v1\",\"attempts\":"<<native_copy_attempts_
+            <<",\"commits\":"<<native_copy_commits_<<",\"rejected\":"<<native_copy_rejected_
+            <<",\"rollbacks\":"<<native_copy_rollbacks_
+            <<",\"generatedLibraryUsed\":"<<(native_copy_function_&&native_copy_commits_?"true":"false")
+            <<",\"lastReason\":\""<<native_copy_reason_<<"\"}\n";
+    }
+    if (native_health_stream_.is_open()) {
+        std::ofstream out(directory / "native-health-report.json",std::ios::binary|std::ios::trunc);
+        out << "{\"schema\":\"chq-rc631-health-v1\",\"attempts\":"<<native_health_attempts_
+            <<",\"commits\":"<<native_health_commits_
+            <<",\"rejected\":"<<native_health_rejections_
+            <<",\"rollbacks\":"<<native_health_rollbacks_
+            <<",\"generatedLibraryUsed\":"<<(native_health_function_&&native_health_commits_?"true":"false")
+            <<",\"lastReason\":\""<<native_health_reason_<<"\"}\n";
+    }
+    if (native_steering_shadow_enabled_) {
+        std::ofstream out(directory / "native-steering-shadow.json", std::ios::binary | std::ios::trunc);
+        if (!out) throw std::runtime_error("cannot write native steering shadow evidence");
+        out << native_steering_shadow_report_json();
+        if (!out) throw std::runtime_error("cannot finish native steering shadow evidence");
+    }
+    if (projection_shadow_.enabled()) projection_shadow_.export_json(directory / "native-projection-shadow.json");
 }
 
 int Runtime::execute_slice(BusSpace space, int budget) {
@@ -2835,7 +4232,7 @@ static Options::SpriteSelector parse_sprite_selector(const std::string& text, co
 static Options::SpriteSelector semantic_object_selector(const std::string& name, const char* option) {
     Options::SpriteSelector sel;
     if(name=="player_car") {
-        sel.maps={472,475,476,508,514,516,572,575,576,590,592,594};
+        sel.maps={472,475,476,508,509,514,516,522,572,575,576,590,592,594,596};
         sel.palettes={64,65,70};
         return sel;
     }
@@ -2864,6 +4261,35 @@ static Options::SpriteQuadCandidate parse_sprite_quad_candidate(const std::strin
 static bool parse_core_option(Options& o, const std::string& arg, int& i, int argc, char** argv) {
     auto value = [&]() { return option_value(i, argc, argv, arg); };
     if (arg == "--roms") { o.roms = value(); return true; }
+    else if (arg == "--content-pack") { o.content_pack = value(); return true; }
+    else if (arg == "--rom-census") { o.rom_census = true; return true; }
+    else if (arg == "--cpu-b-edge-probe") { o.cpu_b_edge_probe = true; return true; }
+    else if (arg == "--native-dispatch-audit") { o.native_dispatch_audit = true; return true; }
+    else if (arg == "--native-cpu-b-library") { o.native_cpu_b_library = value(); return true; }
+    else if (arg == "--native-cpu-b-replace") { o.native_cpu_b_replace = true; return true; }
+    else if (arg == "--native-cpu-b-fault-probe") { o.native_cpu_b_fault_probe = true; return true; }
+    else if (arg == "--native-cpu-b-state-capture") { o.native_cpu_b_state_capture = true; return true; }
+    else if (arg == "--native-cpu-b-pair-library") { o.native_cpu_b_pair_library = value(); return true; }
+    else if (arg == "--native-cpu-b-pair-replace") { o.native_cpu_b_pair_replace = true; return true; }
+    else if (arg == "--native-cpu-b-pair-fault-probe") { o.native_cpu_b_pair_fault_probe = true; return true; }
+    else if (arg == "--native-cpu-b-pair-state-capture") { o.native_cpu_b_pair_state_capture = true; return true; }
+    else if (arg == "--native-projection-shadow") { o.native_projection_shadow = true; return true; }
+    else if (arg == "--native-steering-shadow") { o.native_steering_shadow = true; return true; }
+    else if (arg == "--native-steering-replace") { o.native_steering_replace = true; return true; }
+    else if (arg == "--native-steering-library") { o.native_steering_library = value(); return true; }
+    else if (arg == "--native-steering-rollback-probe") { o.native_steering_rollback_probe = true; return true; }
+    else if (arg == "--native-steering-state-capture") { o.native_steering_state_capture = true; return true; }
+    else if (arg == "--native-copy-library") { o.native_copy_library = value(); return true; }
+    else if (arg == "--native-copy-replace") { o.native_copy_replace = true; return true; }
+    else if (arg == "--native-copy-fault-probe") { o.native_copy_fault_probe = true; return true; }
+    else if (arg == "--native-copy-state-capture") { o.native_copy_state_capture = true; return true; }
+    else if (arg == "--native-health-library") { o.native_health_library = value(); return true; }
+    else if (arg == "--native-health-replace") { o.native_health_replace = true; return true; }
+    else if (arg == "--native-health-fault-probe") { o.native_health_fault_probe = true; return true; }
+    else if (arg == "--native-health-state-capture") { o.native_health_state_capture = true; return true; }
+    else if (arg == "--native-health-case") { o.native_health_case = value(); return true; }
+    else if (arg == "--native-observe-entry") { o.native_observe_entries.push_back(value()); return true; }
+    else if (arg == "--content-overlay") { o.content_overlays.push_back(value()); return true; }
     else if (arg == "--logs") { o.logs = value(); o.logs_explicit=true; return true; }
     else if (arg == "--frames" || arg == "--exit-at-frame") {
         const auto text = value(); std::size_t end = 0;
@@ -3168,7 +4594,30 @@ Options parse_options(int argc, char** argv) {
 
 void print_help() {
     std::cout << "ChaseHQ-Native " << kNativeVersion << " " << kNativePlatform << "\n"
-        "[rom-directory] [--roms path] [--frames N] [--logs logs] [--irq4]\n"
+        "[rom-directory] [--roms path | --content-pack file.chqpack] [--frames N] [--logs logs] [--irq4]\n"
+        "Content source:\n"
+        "  --content-pack FILE            load imported CHQPACK1 content; ROM directory is not required at runtime\n"
+        "  --content-overlay FILE         apply sparse graphics/PROM replacement pack (repeatable, pack mode only)\n"
+        "  --roms PATH                    load original World ROM set directly (oracle/reference path)\n"
+        "  --rom-census                   record original ROM instruction PCs and hot regions (CPU-A/B)\n"
+        "  --cpu-b-edge-probe             original-ROM CPU-B observed PC edges and opcode fingerprints (read-only)\n"
+        "  --native-dispatch-audit        record shared original/native/fallback dispatch decisions\n"
+        "  --native-cpu-b-library FILE  Ghidra-generated CPU-B BEQ.B shared DLL/SO (opt-in)\n"
+        "  --native-cpu-b-replace       guarded CPU-B 0x0004DE BEQ.B native execution\n"
+        "  --native-cpu-b-fault-probe   reject one CPU-B native attempt, execute original ROM\n"
+        "  --native-cpu-b-state-capture capture genuine CPU-B next-PC/register/cycle state\n"
+        "  --native-projection-shadow     read-only CPU-A clip/index shadow comparisons (no substitution)\n"
+        "  --native-steering-shadow       read-only CPU-A steering conversion comparison (no substitution)\n"
+        "  --native-copy-library FILE    generated C++ copy-block DLL/SO (opt-in, 0x40540..0x40560)\n"
+        "  --native-copy-replace         bounded native 16-instruction longword-copy substitution\n"
+        "  --native-copy-fault-probe     reject generated copy before any bus writes; run original ROM\n"
+        "  --native-copy-state-capture   record CPU-state and ordered copy-block bus transactions\n"
+        "  --native-health-library FILE   load Ghidra-generated, opt-in CPU-A 0xA10C health function DLL/SO\n"
+        "  --native-health-replace        experimental guarded full-range health candidate substitution\n"
+        "  --native-health-fault-probe    force one candidate mismatch and original-ROM fallback\n"
+        "  --native-health-state-capture capture original/native health function exit CPU state\n"
+        "  --native-health-case NAME     natural|bypass|nonterminal|terminal|overflow; controlled ENTRY RAM interventions\n"
+        "  --native-observe-entry A:PC   observe CPU A/B entry hits without replacing any code (repeatable)\n"
         "Scenarios / reusable diagnostics:\n"
         "  --frames N                     explicit absolute frame bound (SDL frontend is continuous by default)\n"
         "  --exit-at-frame N              friendly alias for --frames N; works with loaded checkpoints\n"

@@ -1,0 +1,33 @@
+# name: RC3.2 Release Regression
+# category: regression
+# regression-version: 0.66.9.0-RC3.2
+# regression-scope: historical
+# purpose: Focused whole-release regression for RC3.2 parameters, run-local trace/checkpoint evidence, current build identity, and safe final-state restoration. Host LAN/mobile transport is proven separately by the launcher smoke.
+# checkpoint: stage1-driving-2352.chqstate
+# param frames type=select values=2,4,8,16 default=4
+
+echo === ChaseHQ RC3.2 Release Regression: BEGIN ===
+api release.assert-version
+api schema action=script.run
+api schema action=checkpoint.save
+api status
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+
+echo RC32_PARAMETER_FRAMES=${frames}
+legacytrace reset
+legacytrace cpu A
+legacytrace mem 10A04A:10A04B r
+legacytrace context 0 0
+legacytrace max 256
+legacytrace output evidence\regression-rc32-release-trace.log
+legacytrace start
+api control.run-frames frames=${frames}
+legacytrace stop
+
+api checkpoint.save file=regression-rc32-release-checkpoint.chqstate
+api checkpoint.list
+api script.runs limit=5
+
+api checkpoint.load file=stage1-driving-2352.chqstate run=false
+api status
+echo === ChaseHQ RC3.2 Release Regression: COMPLETE ===

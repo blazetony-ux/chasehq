@@ -1,3 +1,5 @@
+> **Historical process note for v0.66.9.1:** This document describes historical implementation components. Current release/lifecycle authority is `chqdev`; PowerShell host details below are implementation history, not canonical operational instructions.
+
 # v0.61.0 Research Infrastructure
 
 This candidate deliberately builds infrastructure while v0.60.3 remains the unvalidated baseline.

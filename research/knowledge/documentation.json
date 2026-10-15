@@ -1,7 +1,7 @@
 {
   "schema": "chq-documentation-knowledge-v1",
-  "build": "0.66.9.0-RC3.0",
-  "generated": "2026-10-01",
+  "build": "0.67.0.0-RC6.3.33",
+  "generated": "2026-10-04",
   "policy": "Machine-readable knowledge is authoritative for Workbench glossary/search metadata. Confirmed findings should cite reproducible evidence where practical. Revision builds must keep this source, human docs, API schema and handover synchronized.",
   "statuses": [
     "confirmed",
@@ -13,6 +13,150 @@
     "superseded"
   ],
   "entries": [
+    {
+      "id": "v06694-rc2-native-reconstruction-assets",
+      "title": "v0.66.9.4-RC2 Native Reconstruction / Asset Tooling Candidate",
+      "kind": "release-candidate",
+      "category": "Native Reconstruction",
+      "status": "candidate",
+      "confidence": "implementation-pending-windows-qualification",
+      "introduced": "0.66.9.4-RC2",
+      "updated": "0.66.9.4-RC2",
+      "summary": "RC2 adds switchable sprite Original/Shadow/Native rendering, global existing-map substitution, complete live TC0100SCN charset export, Stage 2 checkpoint corpus expansion and the HUD Layout responsive-width fix.",
+      "tags": [
+        "native",
+        "sprite",
+        "assets",
+        "font",
+        "stage2",
+        "workbench"
+      ],
+      "related": [
+        "placed-sprite-layer-shadow"
+      ],
+      "docs": [
+        "docs/DOCUMENTATION_AUDIT_0.66.9.4-RC2.md",
+        "docs/NATIVE_RECONSTRUCTION.md"
+      ]
+    },
+    {
+      "id": "release.v06694-rc1",
+      "title": "v0.66.9.4-RC1 beacon/HUD experimental-control candidate",
+      "kind": "release",
+      "category": "Platform",
+      "status": "implemented-awaiting-proof",
+      "confidence": "portable-tested-windows-qualification-pending",
+      "introduced": "0.66.9.4-RC1",
+      "updated": "0.66.9.4-RC1",
+      "summary": "RC1 branches from immutable promoted v0.66.9.3 SHA-256 6da88889dc8214c6058644e44e4d29f6a2117c9f0e92d99c8d906c280fc3462e. It adds an authoritative-state police-beacon override and presentation-only semantic HUD layout controls while carrying forward the already SHADOW VERIFIED independent sprite-layer renderer. Promotion requires exact-archive Windows chqdev qualify --fresh.",
+      "tags": [
+        "release",
+        "candidate",
+        "beacon",
+        "hud",
+        "sprite-shadow"
+      ],
+      "related": [
+        "gameplay.police-beacon-state",
+        "graphics.semantic-hud-layout",
+        "tooling.v06693-sprite-shadow-compare"
+      ],
+      "docs": [
+        "README.md",
+        "VALIDATION.md",
+        "docs/PROJECT_STATE.md",
+        "docs/DOCUMENTATION_AUDIT_0.66.9.4-RC1.md"
+      ],
+      "evidence": [
+        "portable CMake/CTest and focused static contracts are package-time evidence only; Windows qualification pending"
+      ]
+    },
+    {
+      "id": "gameplay.police-beacon-state",
+      "title": "Police beacon deployment / steady-flash state",
+      "kind": "finding",
+      "category": "Gameplay / Graphics",
+      "status": "confirmed",
+      "confidence": "causal-behaviour-understood",
+      "introduced": "0.66.9.3-research",
+      "updated": "0.66.9.4-RC1",
+      "summary": "CPU-A 0x101854 is the authoritative current visible/deployment phase: 0=off, 1..5 deployment, 6 steady deployed. 0x101856 is deployment countdown, 0x101858 selects the steady descriptor/palette state, and 0x108082 is only an upstream contextual request. RC1 exposes Authentic / Force ON / Force OFF by intervening on 0x101854, not by faking sprite presentation.",
+      "tags": [
+        "police",
+        "beacon",
+        "gameplay",
+        "sprite",
+        "experimental"
+      ],
+      "related": [
+        "release.v06694-rc1"
+      ],
+      "docs": [
+        "docs/DOCUMENTATION_AUDIT_0.66.9.4-RC1.md",
+        "docs/PROJECT_STATE.md"
+      ],
+      "evidence": [
+        "Runs 007-013: descriptor producer decode, selector causality, active-pipeline proof, flash decode, lifecycle closure and natural 9548->9988 teardown"
+      ]
+    },
+    {
+      "id": "graphics.semantic-hud-layout",
+      "title": "Semantic TC0100SCN HUD presentation map and layout override",
+      "kind": "feature",
+      "category": "Graphics / HUD",
+      "status": "implemented-awaiting-proof",
+      "confidence": "canonical-checkpoint-source-map",
+      "introduced": "0.66.9.4-RC1",
+      "updated": "0.66.9.4-RC1",
+      "summary": "Mapped TC0100SCN source-cell groups for High Score, Time, Distance, Score, Speed, Turbo markers and Stage/Credit. RC1 can independently show/hide and move each group with pixel offsets at presentation time without changing emulated tile RAM; frame snapshot metadata records the transform.",
+      "tags": [
+        "hud",
+        "tc0100scn",
+        "presentation",
+        "experimental"
+      ],
+      "related": [
+        "release.v06694-rc1"
+      ],
+      "docs": [
+        "docs/DOCUMENTATION_AUDIT_0.66.9.4-RC1.md",
+        "docs/API_REFERENCE.md"
+      ],
+      "evidence": [
+        "canonical Stage-1 checkpoint tilemap/character-RAM inspection; Windows SDL/Workbench visual qualification pending"
+      ]
+    },
+    {
+      "id": "release.v06693-final",
+      "title": "v0.66.9.3 promoted research-capability release",
+      "kind": "release",
+      "category": "Platform",
+      "status": "confirmed",
+      "confidence": "windows-qualified-rc5-provenance",
+      "introduced": "0.66.9.3",
+      "updated": "0.66.9.3",
+      "summary": "Promoted from exact Windows-qualified 0.66.9.3-RC5 SHA-256 19b7ed48edae98fd99f660ef56a949573050cabc2958fcdba2833a7888103961; RC5 passed 8/8 CTest, deterministic package/verify, runtime readiness, focused and Full Regression, and promotable. Independent placed sprite-source layer is SHADOW VERIFIED across all eight canonical checkpoints. Final promotion also adds a package-manifest metadata guard without changing emulation/gameplay behaviour.",
+      "tags": [
+        "release",
+        "qualification",
+        "sprite-shadow",
+        "provenance"
+      ],
+      "related": [
+        "tooling.v06693-sprite-shadow-compare"
+      ],
+      "docs": [
+        "README.md",
+        "VALIDATION.md",
+        "docs/PROJECT_STATE.md",
+        "docs/ROADMAP.md",
+        "docs/DOCUMENTATION_AUDIT_0.66.9.3.md"
+      ],
+      "evidence": [
+        "focused run 001 bundle SHA-256 e23091feaecba7b468b93f4b24ee8ae279b4eb16892cac54196b51527ba9e6c1",
+        "Full Regression run 002 bundle SHA-256 80471a6cd5d5ea1b4431bc7ad5b68f1c39f0012656fa87a18ccfe7c3d33922cf"
+      ]
+    },
     {
       "id": "checkpoint",
       "title": "Checkpoint",
@@ -272,7 +416,7 @@
       "status": "confirmed",
       "confidence": "regression-proven",
       "introduced": "0.66.6",
-      "updated": "0.66.7.5",
+      "updated": "0.66.9.3",
       "summary": "v0.66.6.1 proved exact reconstructable frame snapshots, transparent contribution layers, raw logical-source layers and source-level HUD hidden/HUD-only variants. Native capture rejects a snapshot if recomposition is not pixel exact.",
       "tags": [
         "graphics",
@@ -356,7 +500,7 @@
           "Inspect contribution layers separately from raw logical-source layers."
         ],
         "openQuestions": [
-          "The tooling is proven; current graphics research priority is applying it to the missing/incorrect turbo HUD indicators."
+          "Turbo HUD source isolation has since been resolved causally: active + remaining selects the HUD representation. Current graphics use of this tooling is targeted producer provenance (timer/score/Turbo text writes) and reproducible compositor edge cases rather than re-proving the Turbo indicators."
         ]
       }
     },
@@ -507,14 +651,14 @@
     },
     {
       "id": "processed-brake-input",
-      "title": "Processed brake input around CPU-A 0x100303",
+      "title": "Processed Brake state at CPU-A 0x100302",
       "kind": "finding",
       "category": "Input / IOC",
-      "status": "provisional",
-      "confidence": "writer-path-under-investigation",
+      "status": "confirmed",
+      "confidence": "causal",
       "introduced": "0.66.5",
-      "updated": "0.66.7.5",
-      "summary": "CPU-A 0x100303 is an important processed-input investigation point. Tooling exists to trace its writers, but semantic promotion should remain evidence-led.",
+      "updated": "0.66.9.3",
+      "summary": "Authentic IOC P2:20 Brake causally drives upstream processed state CPU-A 0x100302; forcing 0x0014 reproduces braking physics and the banks64/65 pen13 brake-lamp palette transition.",
       "tags": [
         "input",
         "ioc",
@@ -526,30 +670,40 @@
         "semantic-state"
       ],
       "docs": [
-        "docs/chasehq/discoveries/IOC_POLLING_AND_OVERRIDE_PATH_0.63.3.md"
+        "docs/chasehq/discoveries/gameplay-state.md",
+        "docs/chasehq/discoveries/sprite-and-video.md"
       ],
       "scripts": [
         "research/scripts/gameplay/brake-processed-input-writer-trace.chqscript"
       ],
       "evidence": [],
       "article": {
-        "discovery": "CPU-A 0x100303 is a useful processed-input investigation point, but its final semantic meaning has not yet been promoted to a confirmed gameplay-state field.",
-        "significance": "Tracing this location may help connect raw IOC/brake input to the higher-level state that eventually drives gameplay behaviour and visual effects.",
+        "discovery": "CPU-A 0x100302 is the causally sufficient upstream Brake-related state for the tested Stage-1 path; 0x100303 bit0 is Turbo, not Brake.",
+        "significance": "This corrects the stale 0x100303 Brake hypothesis and ties authentic P2:20 input to both braking physics and the palette lamp response.",
+        "confirmedValues": [
+          {
+            "name": "Authentic Brake IOC",
+            "value": "P2:20"
+          },
+          {
+            "name": "Processed Brake state",
+            "value": "CPU-A 0x100302; tested braking value 0x0014"
+          },
+          {
+            "name": "Lamp palette",
+            "value": "banks64/65 pen13 0x000E -> 0x18DE"
+          }
+        ],
         "method": [
-          "Reproduce a deterministic braking experiment.",
-          "Trace writers affecting CPU-A 0x100303.",
-          "Record writer PC, width, old/new values and timing relative to brake input.",
-          "Compare repeated runs before assigning a semantic meaning to the location."
+          "Use canonical gameplay checkpoint.",
+          "Compare authentic P2:20 Brake with causal forcing of 0x100302.",
+          "Verify downstream physics and palette state together."
         ],
         "reproduction": [
-          "Run research/scripts/gameplay/brake-processed-input-writer-trace.chqscript.",
-          "Use the generic memory-write tracing API rather than relying on screenshot inference.",
-          "Repeat the same checkpoint/input sequence so writer behaviour can be compared across runs."
+          "Use current Brake causal/provenance scripts and the gameplay registry."
         ],
         "openQuestions": [
-          "Which routine is the authoritative producer of the processed brake state?",
-          "Does 0x100303 represent brake state directly, a transient input stage, or part of a wider control structure?",
-          "How does the processed state relate to the proven brake-lamp palette transformation?"
+          "Exact internal field encoding beyond the proven tested values remains narrower than a universal Boolean model."
         ]
       }
     },
@@ -624,11 +778,11 @@
       "title": "Turbo gameplay state / HUD indicator rendering",
       "kind": "investigation",
       "category": "Graphics",
-      "status": "open",
-      "confidence": "gameplay-state-confirmed-render-path-open",
+      "status": "confirmed",
+      "confidence": "causal-hud-selection",
       "introduced": "0.66.6.1",
-      "updated": "0.66.7.9",
-      "summary": "Turbo input/active/count/timer state is already confirmed; the open investigation is why the bottom-HUD turbo indicators are absent, incorrect or inconsistently composed in the current renderer.",
+      "updated": "0.66.9.3",
+      "summary": "Turbo gameplay state and the HUD indicator selection are causally confirmed: active+remaining is sufficient for the authentic text-HUD representation; the turbo timer does not select the indicator representation.",
       "tags": [
         "turbo",
         "hud",
@@ -647,8 +801,8 @@
       ],
       "evidence": [],
       "article": {
-        "discovery": "Authoritative turbo gameplay state is already confirmed. The unresolved question is the rendering/source path for the bottom-HUD turbo indicators in the current renderer.",
-        "significance": "This narrows the work from broad state discovery to a source-localization problem: compare confirmed gameplay transitions against HUD-only, HUD-hidden and final composition before tracing the responsible text/tile/character-data writers.",
+        "discovery": "Run012/013 established that the TC0100SCN text-HUD turbo representation is selected by turbo active state plus remaining count; the previously broad missing-indicator investigation is closed at this scope.",
+        "significance": "Turbo HUD work should now focus only on exact writer provenance or residual renderer discrepancies, not on whether the indicators exist or what gameplay state selects them.",
         "confirmedValues": [
           {
             "name": "Processed turbo input",
@@ -689,10 +843,7 @@
           "Run research/scripts/gameplay/turbo-state-writer-trace.chqscript when exact producer PCs are needed."
         ],
         "openQuestions": [
-          "Which TC0100SCN tile/character-data entries represent each remaining turbo in the current renderer?",
-          "Are the expected indicators absent from the HUD source or lost/incorrect later in composition?",
-          "Does the historical rows 29/30 visible-area finding reproduce in the current renderer?",
-          "Which writer/consumer path updates the visual indicator state from the confirmed gameplay values?"
+          "Exact text-cell/character writer provenance can be refined with read/write tracing if needed."
         ]
       },
       "scripts": [
@@ -797,8 +948,8 @@
       "status": "confirmed",
       "confidence": "regression-proven",
       "introduced": "0.66.7",
-      "updated": "0.66.7.5",
-      "summary": "Versioned continuation prompt designed to accompany the latest source ZIP into a new ChatGPT conversation. Package validation checks that its build metadata matches the native build.",
+      "updated": "0.66.9.0-RC3.4.3",
+      "summary": "Versioned continuation prompt paired with the current source ZIP. RC3.4.3 makes its required-section contract newline-invariant across LF, CRLF and CR and validates it in both Windows PowerShell and an independent portable regression.",
       "tags": [
         "handover",
         "chatgpt",
@@ -817,7 +968,7 @@
       "evidence": [],
       "article": {
         "discovery": "Each revision carries a versioned ChatGPT continuation prompt intended to travel with the latest project ZIP into a new conversation.",
-        "significance": "This provides an explicit continuation contract so a new conversation can recover current build state, proof status, project rules, checkpoints, tooling surfaces and immediate next work without relying on stale chat history.",
+        "significance": "This provides an explicit continuation contract so a new conversation can recover current build state without relying on stale chat history. RC3.4.3 additionally prevents platform line-ending differences from invalidating an otherwise correct handover.",
         "confirmedValues": [
           {
             "name": "Authoritative file",
@@ -836,7 +987,9 @@
           "Package the handover prompt with every meaningful revision.",
           "Keep build/proof status synchronized with the current source package.",
           "Expose the same prompt through the Workbench and Research API.",
-          "Validate stale continuation metadata during release checks."
+          "Validate stale continuation metadata during release checks.",
+          "Normalize CRLF and CR to LF before line-oriented contract matching.",
+          "Prove valid LF, CRLF and CR fixtures plus invalid missing-section/stale-version fixtures before packaging."
         ],
         "reproduction": [
           "Open Docs / Knowledge -> Authoritative ChatGPT handover.",
@@ -1210,8 +1363,8 @@
       "status": "confirmed",
       "confidence": "full-regression-proven",
       "introduced": "0.66.7.9",
-      "updated": "0.66.7.9",
-      "summary": "Canonical staged release workflow proven on Windows/SDL after the v0.66.7.6-v0.66.7.8 cycle exposed packaging, parser/strict-mode, identity, discovery-performance, run-finalization and UI-lifecycle defects.",
+      "updated": "0.66.9.0-RC3.4.3",
+      "summary": "Canonical staged release workflow. RC3.4.3 additionally requires line-ending-invariant release/document contract validation (LF/CRLF/CR), Windows-script ASCII enforcement, current-document identity parity and exact immutable archive proof.",
       "tags": [
         "release",
         "validation",
@@ -1239,12 +1392,12 @@
         "significance": "These failures consumed development time without advancing game fidelity. Encoding the lessons as release contracts and cheap gates reduces the chance of repeating the same class of failure and keeps Full Regression as the final proof rather than the first diagnostic tool.",
         "confirmedValues": [
           {
-            "name": "Canonical build entry",
-            "value": "Build-Debug.bat"
+            "name": "Current canonical release entry",
+            "value": "chqdev qualify --fresh"
           },
           {
-            "name": "Canonical launch",
-            "value": "Start-ChaseHQ.ps1 -Restart"
+            "name": "Current runtime lifecycle",
+            "value": "chqdev runtime start|stop|restart|check"
           },
           {
             "name": "Script run artifact rule",
@@ -1256,11 +1409,7 @@
           },
           {
             "name": "Full Regression role",
-            "value": "final expensive gate after fast/focused checks"
-          },
-          {
-            "name": "v0.66.7.9 release proof",
-            "value": "Fast Release Gate + Research Recovery + Full Regression PASS"
+            "value": "final expensive gate after focused checks"
           }
         ],
         "method": [
@@ -1270,13 +1419,12 @@
           "Keep the canonical process in the handbook/handover so later conversations do not improvise a new path."
         ],
         "reproduction": [
-          "Read docs/RELEASE_PROCESS.md.",
-          "Build only through Build-Debug.bat.",
-          "Run Recovery / Fast Release Gate before Full Regression.",
-          "Use tools/Test-ReleaseArchive.ps1 on the final ZIP before handoff."
+          "Read docs/RELEASE_GOVERNANCE.md and docs/RELEASE_PROCESS.md.",
+          "From a fresh Windows extraction run chqdev qualify --fresh.",
+          "Require all CTest cases PASS, deterministic exact-archive proof, runtime readiness, focused regression, Full Regression and promotable PASS."
         ],
         "openQuestions": [
-          "Revise the process only when new evidence exposes a genuine gap; do not add gates speculatively."
+          "Revise the process only when new evidence exposes a genuine gap; implement the fix in chqdev first and regression-test it."
         ]
       }
     },
@@ -1564,7 +1712,7 @@
           },
           {
             "name": "internal/physics speed",
-            "value": "CPU-A 0x10041C, 16-bit raw"
+            "value": "CPU-A 0x10041C, 32-bit fixed point (user value << 16)"
           },
           {
             "name": "Infinite stock",
@@ -2200,11 +2348,11 @@
       "title": "TC0100SCN X correction and RC2.6.1 findings",
       "kind": "finding",
       "category": "Graphics",
-      "status": "implemented-awaiting-proof",
+      "status": "confirmed",
       "confidence": "controlled-prior-runs-plus-source-and-coordinate-tests",
       "introduced": "0.66.9.0-RC2.7",
-      "updated": "0.66.9.0-RC2.7",
-      "summary": "Shared BG X now subtracts control and rowscroll; Y/origin and zero presentation defaults are preserved. Old/corrected comparison and exact/no-sprites assertions are available. Windows canonical proof is pending.",
+      "updated": "0.66.9.3",
+      "summary": "Shared BG X subtracts control and rowscroll; the RC2.7 Windows proof established the correction. RC2.8 carries the text-origin +16 / explicit flipped-coordinate work; column scrolling remains outside the proven scope.",
       "tags": [
         "tc0100scn",
         "rowscroll",
@@ -2230,7 +2378,8 @@
         "frame.snapshot.assert-scene-no-sprites"
       ],
       "article": {
-        "summary": "See the authoritative findings document; column scrolling is unsupported outside the tested zero state."
+        "summary": "See the authoritative findings document; column scrolling is unsupported outside the tested zero state.",
+        "discovery": "RC2.7 Run009 Windows evidence proved the shared BG X correction and reliable regression path. Later RC2.8 work established normal text origin +16 with an explicit flipped-coordinate implementation; column scrolling remains unsupported outside the tested zero state."
       }
     },
     {
@@ -2291,7 +2440,7 @@
       "apiActions": [],
       "article": {
         "discovery": "Run 009 RC2.7 saturation evidence confirmed the current baseline. RC2.8 applies the text-origin correction, isolates flipped text mapping, and tracks end-results through 0x1002E8.",
-        "method": "Native coordinate tests cover text source X at +16 and both flip states. Sprite compare tests cover the independent 4bpp reference decoder on deterministic fixtures. Windows checkpoint proof remains pending.",
+        "method": "Native coordinate tests cover text source X at +16 and both flip states. The independent 4bpp decoder was later ROM-scene shadow-verified in RC3, and the independent placed sprite-source layer was shadow-verified across all eight canonical checkpoints in the v0.66.9.3-RC5 Windows promotion run.",
         "details": [
           "Normal text origin is +16 instead of +23.",
           "Flipped text mirrors in the 512-pixel tilemap and uses the distinct +23 flip offset.",
@@ -2299,8 +2448,8 @@
           "0x1002AE was not confirmed in RC2.8; RC2.9 later causally confirms it as the target remaining-hit counter."
         ],
         "limitations": [
-          "Pixel-level Windows/SDL comparison is still required.",
-          "Sprite shadow parity is tested on fixtures, not a complete ROM frame."
+          "This entry is a historical RC2.8 record; later evidence supersedes its then-pending sprite-shadow and target-health conclusions.",
+          "Full TC0100SCN independent renderer parity is still not established."
         ]
       }
     },
@@ -2340,7 +2489,10 @@
         "RC2.8 manual damage timeline frame 6334",
         "RC2.8 run 024 decrement threshold proof",
         "RC2.8 run 025 terminal-underflow causal proof"
-      ]
+      ],
+      "article": {
+        "discovery": "CPU-A 0x1002AE is the Stage 1 special target remaining-hit counter. Genuine damage at PC 0xA112 decrements it; FFFF is the terminal sentinel and PC 0xA118 enters the real defeat path."
+      }
     },
     {
       "id": "one-hit-target-kill",
@@ -2368,18 +2520,21 @@
       "apiActions": [
         "game.target.one-hit"
       ],
-      "evidence": []
+      "evidence": [],
+      "article": {
+        "discovery": "Experimental special-target cheat that arms 0x1002AE to zero immediately before authentic PC 0xA112, preserving the game's genuine 0000->FFFF terminal decrement and PC 0xA118 defeat path."
+      }
     },
     {
       "id": "course-mapping-live-survey",
-      "title": "Live Course Mapping / Survey tooling",
+      "title": "Live Course Mapping / Survey v3 data model",
       "kind": "tool",
       "category": "Track / Course Mapping",
-      "status": "implemented-awaiting-windows-proof",
+      "status": "implemented-awaiting-proof",
       "confidence": "implementation",
-      "introduced": "0.66.9.0-RC3.0",
-      "updated": "0.66.9.0-RC3.0",
-      "summary": "RC3.0 exposes the native closed-loop course follower live through Workbench/API/scripting and upgrades the shared track recorder to retain road geometry, player trajectory, target/dynamic-object evidence and raw surface signatures in reconstructable mapping exports.",
+      "introduced": "0.66.9.0-RC3.1",
+      "updated": "0.66.9.2-RC3",
+      "summary": "Course mapping keeps authoritative geometry/player/object evidence while v0.66.9.2-RC3 refines material grouping to the confirmed +4 roadProcessingSelector and stores complete eight-byte record identity separately.",
       "tags": [
         "track",
         "course",
@@ -2402,7 +2557,8 @@
         "research/scripts/track/surveys/stage1-course-mapping-3600.chqscript",
         "research/scripts/track/surveys/stage1-course-mapping-negative-bias.chqscript",
         "research/scripts/track/surveys/stage1-course-mapping-positive-bias.chqscript",
-        "research/scripts/track/surveys/current-state-course-mapping-1200.chqscript"
+        "research/scripts/track/surveys/current-state-course-mapping-1200.chqscript",
+        "research/scripts/track/surveys/current-state-material-object-survey-1200.chqscript"
       ],
       "apiActions": [
         "course.follow.status",
@@ -2418,20 +2574,739 @@
       "evidence": [],
       "article": {
         "discovery": "Long Stage-1 mapping was deliberately deferred until the mature native course follower could be controlled from the live Research Workbench and mapping evidence could preserve more than centreline geometry.",
-        "method": "The Workbench now controls the native follower at runtime and samples the authoritative road/course state alongside player lateral state, gameplay telemetry, the confirmed Stage-1 target record and a generic live sprite census.",
+        "method": "The Workbench controls the native follower at runtime and samples authoritative road/course/player state. Stable road/material candidate grouping now uses confirmed record +4 only; complete courseRecordSignature and raw renderer evidence remain separate. Road-relevant sprite observations retain conservative temporal candidate IDs only when map/palette identity and plausible screen-space motion support continuity.",
         "details": [
           "Road left/centre/right and the player driven line are separate outputs.",
           "The player line is a map projection derived from authoritative lateral error; raw lateral units remain in the dataset.",
-          "The Stage-1 special target is the only entity currently promoted to a semantic car identity. Other visible sprites remain UNCLASSIFIED_DYNAMIC_OBJECT.",
-          "Surface signatures preserve raw course-record selectors plus representative TC0150ROD control/body/gfx renderer state and remain UNCLASSIFIED until visual/behavioural evidence supports material names.",
-          "Signed lateral bias allows controlled structural branch coverage without calling candidate A/B left/right prematurely."
+          "The Stage-1 special target is promoted to a semantic car identity only when the active checkpoint context is explicitly Stage 1; other contexts retain the same record as UNCLASSIFIED_TARGET_RECORD.",
+          "Every visible sprite row remains available as UNCLASSIFIED_DYNAMIC_OBJECT evidence.",
+          "Road-relevant sprite observations can be tracked as UNCLASSIFIED_OBJECT_CANDIDATE rows using map/palette identity plus bounded screen-space motion. Touching rectangles are deliberately not merged because repeated perspective scenery can form dense chains; IDs remain research aids, not semantic proof.",
+          "Under the current conservative policy, every eligible road-region visible sprite row must produce exactly one object-candidate row preserving map, palette, visible bounds, centre, dimensions and visible-pixel evidence; recorder/export coverage is expected to be 1.0 and export fails on evidence loss.",
+          "Signed lateral bias allows controlled structural branch coverage without calling candidate A/B left/right prematurely.",
+          "surfaceStableSignature now follows the confirmed +4 roadProcessingSelector; courseRecordSignature retains all eight bytes, while +5 palette, +6 environment and +7 feature metadata are excluded from material grouping."
         ],
         "limitations": [
-          "RC3.0 still requires Windows/SDL build and focused/full regression proof before promotion.",
-          "Generic traffic/obstacle course-space semantics are not yet proven.",
-          "Surface signatures are evidence candidates, not material classifications."
+          "RC3.1 requires Windows/SDL Build-Debug, focused RC3.1 regression, 600-frame shakedown inspection and Full Regression before promotion.",
+          "Heuristic object candidate tracks are screen-space groupings and do not yet prove AI car/obstacle identity or world/course coordinates.",
+          "Road/material candidates are +4 road-processing evidence buckets, not asphalt/dirt/material classifications.",
+          "The current one-eligible-sprite-per-candidate model is intentionally conservative and may over-segment multi-sprite visual objects; semantic grouping remains future research rather than being guessed during capture."
         ]
       }
+    },
+    {
+      "id": "rc32-script-parameters-evidence",
+      "title": "RC3.2 script parameters and authoritative run evidence",
+      "kind": "tool",
+      "category": "Script Console / Evidence",
+      "status": "implemented-awaiting-proof",
+      "confidence": "implementation",
+      "introduced": "0.66.9.0-RC3.2",
+      "updated": "0.66.9.0-RC3.2",
+      "summary": "Declared # param metadata feeds the existing variable substitution model, while authoritative runs retain selected parameters, resolved commands, legacy-trace artifacts and checkpoint save/load provenance.",
+      "tags": [
+        "script",
+        "parameters",
+        "evidence",
+        "trace",
+        "checkpoint"
+      ],
+      "related": [
+        "course-mapping-live-survey"
+      ],
+      "docs": [
+        "docs/SCRIPT_LANGUAGE_REFERENCE.md",
+        "docs/API_REFERENCE.md",
+        "docs/PROJECT_STATE.md"
+      ],
+      "scripts": [
+        "research/scripts/track/surveys/current-state-course-mapping-parameterized.chqscript",
+        "research/scripts/regression/regression-v06690-rc32-script-parameters.chqscript"
+      ],
+      "apiActions": [
+        "script.run",
+        "checkpoint.load",
+        "checkpoint.save"
+      ],
+      "evidence": [],
+      "article": {
+        "discovery": "Long reusable surveys and the Stage-1 road-material work exposed two tooling gaps: fixed-duration script variants were cumbersome, and legacy trace/checkpoint outputs could escape the authoritative run ZIP.",
+        "method": "RC3.2 treats parameter declarations as metadata over the existing ${name} substitution engine and roots trace/checkpoint collection in the active run artifact tree.",
+        "details": [
+          "Supported parameter types are string, int, bool and select.",
+          "Unknown supplied parameter names and invalid values fail validation.",
+          "Workbench displays parameter controls and a resolved-command preview.",
+          "run-metadata.json records selected parameters and points to resolved-commands.txt.",
+          "legacytrace artifacts are copied with source/size/SHA-256 metadata.",
+          "checkpoint.save copies the real state and metadata into the run; checkpoint.load appends load provenance."
+        ],
+        "limitations": [
+          "Windows PowerShell live execution and exact-archive evidence smoke tests remain promotion gates.",
+          "Server-side script.run is intended for scripts compatible with the server script engine; browser-only orchestration constructs should continue through the full Workbench runner."
+        ]
+      }
+    },
+    {
+      "id": "rc32-lan-mobile-console",
+      "title": "RC3.2 authenticated LAN / mobile Script Console",
+      "kind": "tool",
+      "category": "Workbench / Remote Control",
+      "status": "implemented-awaiting-proof",
+      "confidence": "implementation",
+      "introduced": "0.66.9.0-RC3.2",
+      "updated": "0.66.9.0-RC3.2",
+      "summary": "The normal Start-ChaseHQ.ps1 launch exposes the authenticated front listener on the automatically resolved LAN IPv4 address while leaving the native debugger and private backend loopback-only; -LocalOnly opts out and /console controls the same emulator.",
+      "tags": [
+        "workbench",
+        "lan",
+        "mobile",
+        "security",
+        "script-console"
+      ],
+      "related": [
+        "rc32-script-parameters-evidence"
+      ],
+      "docs": [
+        "docs/RC3.2_LAN_SCRIPT_CONSOLE.md",
+        "docs/PROJECT_STATE.md",
+        "docs/API_REFERENCE.md"
+      ],
+      "apiActions": [
+        "script.run",
+        "frame.snapshot"
+      ],
+      "evidence": [],
+      "article": {
+        "discovery": "Research sessions benefit from driving the Script Console from a phone or tablet without starting another emulator or exposing the entire private control backend by default.",
+        "method": "The launcher keeps the native API/private HTTP backend on 127.0.0.1, resolves the preferred LAN IPv4 address, generates a per-session token, ensures the Windows HTTP URL reservation and Private-profile firewall rule, and adds the LAN front-listener prefix by default. -LocalOnly disables LAN/mobile exposure.",
+        "details": [
+          "Loopback access remains unchanged.",
+          "The initial token query can establish an HTTP-only session cookie.",
+          "/console provides script library/parameters, Run/Validate, Pause/Resume, single-frame step, status and layered snapshot.",
+          "Mobile successful runs are finalized into authoritative run history/evidence."
+        ],
+        "limitations": [
+          "Windows HttpListener binding/firewall behaviour must be smoke-tested on the exact archive and may depend on host policy.",
+          "LAN access is not enabled by default and should not be exposed outside a trusted local network."
+        ]
+      }
+    },
+    {
+      "id": "stage1-road-material-type6",
+      "title": "Stage-1 road-material type-6 causal path",
+      "kind": "discovery",
+      "category": "Track / Road Material",
+      "status": "observed",
+      "confidence": "causal-tested-context",
+      "introduced": "0.66.9.0-RC3.2",
+      "updated": "0.66.9.0-RC3.2",
+      "summary": "Controlled Stage-1 evidence maps course byte 0x06 through CPU-B cache 0x1021CA and downstream road generators to a dirt-like TC0150 road-RAM branch; the value is deliberately not promoted to a universal material enum.",
+      "tags": [
+        "stage1",
+        "road",
+        "material",
+        "tc0150",
+        "cpu-b",
+        "causal"
+      ],
+      "related": [
+        "course-mapping-live-survey"
+      ],
+      "docs": [
+        "docs/chasehq/discoveries/stage1-road-material-type6.md",
+        "docs/PROJECT_STATE.md"
+      ],
+      "apiActions": [
+        "memory.trace.start",
+        "memory.trace.stop",
+        "checkpoint.load"
+      ],
+      "evidence": [],
+      "article": {
+        "discovery": "The Stage-1 course record contains a byte whose controlled 0x00 versus 0x06 variants produce different road-generation output.",
+        "method": "Read/execute/write traces followed the tested byte from 0x10944C into the CPU-B cached byte at 0x1021CA, through reader PC 0x004EF0 and intermediate/render-buffer consumers, then into TC0150 road RAM writer PCs 0x0046BC/0x0046C0/0x0046CC/0x0046CE.",
+        "details": [
+          "0x00 produced the paved-like controlled branch.",
+          "Forced 0x06 produced the dirt-like controlled branch.",
+          "Representative road-RAM words differed as documented in stage1-road-material-type6.md.",
+          "Alternating/back-buffer timing means a single screenshot/frame can show previous rendered state."
+        ],
+        "limitations": [
+          "The observation is scoped to tested Stage-1 records; do not globally label 0x06 as dirt without broader evidence.",
+          "Semantic left/right/material naming still requires independent cross-context proof."
+        ]
+      }
+    },
+    {
+      "id": "chqdev-cross-platform-controller",
+      "title": "chqdev cross-platform build/release controller",
+      "kind": "tool",
+      "category": "Developer / Release Tooling",
+      "status": "authoritative-candidate",
+      "confidence": "implementation",
+      "introduced": "0.66.9.0-RC3.4.4",
+      "updated": "0.66.9.0-RC3.4.5",
+      "summary": "RC3.4.5 promotes standard-library-only chqdev v0.2 to the de facto/authoritative build-release controller, adding deterministic packaging, runtime readiness, focused/Full Regression orchestration and qualification state; legacy shell release tooling is compatibility/fallback only.",
+      "tags": [
+        "chqdev",
+        "build",
+        "release",
+        "windows",
+        "linux",
+        "packaging",
+        "validation"
+      ],
+      "related": [],
+      "docs": [
+        "docs/CHQDEV.md",
+        "docs/RELEASE_PROCESS.md",
+        "VALIDATION_0.66.9.0-RC3.4.5.md"
+      ],
+      "scripts": [
+        "research/scripts/regression/regression-v06690-rc345.chqscript"
+      ],
+      "apiActions": [],
+      "evidence": [],
+      "article": {
+        "discovery": "RC3.4.4 proved chqdev preflight/build/test/package/verify on Windows and Linux, but equivalent 915-file packages had different ZIP SHAs because host metadata was not normalized.",
+        "method": "Make chqdev authoritative and move reproducible packaging, runtime readiness, regression orchestration and qualification state into the Go controller. Keep shell release scripts only as fallback.",
+        "details": [
+          "package fixes lexical paths, timestamps and modes and requires a second byte-identical ZIP",
+          "runtime check probes Workbench health/native/mobile/history",
+          "regression focused/full uses the Workbench script API and finalizes authoritative runs",
+          "qualify persists chqdev-qualification-v2 state",
+          "preflight requires current process docs to identify chqdev as authoritative"
+        ],
+        "limitations": [
+          "Linux v0.2 remains CPU-only for the emulator build; full Linux SDL/frontend remains later work.",
+          "Workbench launching itself is still performed by existing runtime launchers; chqdev v0.2 checks and drives the running instance rather than reimplementing the web host."
+        ]
+      }
+    },
+    {
+      "id": "release.rc346-chqdev-trust-runtime",
+      "title": "RC3.4.6 chqdev trust and runtime lifecycle",
+      "kind": "release-process",
+      "category": "release",
+      "status": "implemented-candidate",
+      "confidence": "implementation",
+      "introduced": "0.66.9.0-RC3.4.6",
+      "updated": "0.66.9.0-RC3.4.6",
+      "summary": "RC3.4.6 removes the manual Windows PowerShell unblocking step by making Zone.Identifier repair part of chqdev preflight/trust and makes chqdev runtime start/stop/restart the normal lifecycle entry point; the current PowerShell Workbench host remains an internal compatibility bridge invoked with ExecutionPolicy Bypass.",
+      "tags": [
+        "chqdev",
+        "release",
+        "windows",
+        "zone.identifier",
+        "mark-of-the-web",
+        "runtime"
+      ],
+      "evidence": [
+        "docs/CHQDEV.md",
+        "docs/RELEASE_PROCESS.md",
+        "VALIDATION_0.66.9.0-RC3.4.6.md"
+      ],
+      "scripts": [
+        "regression/regression-v06690-rc346.chqscript"
+      ]
+    },
+    {
+      "id": "release.rc348-chqdev-param-defaults",
+      "title": "RC3.4.8 chqdev parameter-default parity and failure diagnostics",
+      "kind": "release",
+      "category": "Developer / Release Tooling",
+      "status": "authoritative-candidate",
+      "confidence": "implementation",
+      "introduced": "0.66.9.0-RC3.4.8",
+      "updated": "0.66.9.0-RC3.4.8",
+      "summary": "Fixes RC3.4.7 Go-runner omission of # param defaults, adds real HTTP-backed parameter propagation regression, and preserves exact regression failure/session/run/path diagnostics through qualify --fresh.",
+      "tags": [
+        "chqdev",
+        "regression",
+        "script-parameters",
+        "qualification",
+        "diagnostics"
+      ],
+      "related": [
+        "chqdev-cross-platform-controller"
+      ],
+      "docs": [
+        "docs/CHQDEV.md",
+        "docs/RELEASE_PROCESS.md",
+        "VALIDATION_0.66.9.0-RC3.4.8.md"
+      ],
+      "scripts": [
+        "research/scripts/regression/regression-v06690-rc348.chqscript"
+      ],
+      "apiActions": [],
+      "evidence": [],
+      "article": {
+        "discovery": "RC3.4.7 Windows qualify --fresh stopped immediately before RC347_PARAMETER_FRAMES even though the script declared frames default=4; the same focused and Full Regression scripts passed manually in Workbench.",
+        "method": "Seed Go-runner query resolution and compilation from scriptDefaultVars(source), then execute a real parameterized script against an HTTP test server and fail if ${frames} leaks.",
+        "details": [
+          "default parameter state is now passed into query resolution",
+          "the same defaults seed control-flow compilation",
+          "top-level qualification prints nested regression errors and run paths"
+        ],
+        "limitations": [
+          "Explicit release-regression parameter overrides are not yet a user-facing chqdev option; current release qualification uses packaged defaults."
+        ]
+      }
+    },
+    {
+      "id": "release.rc349-clean-ctest",
+      "title": "RC3.4.9 clean CTest and Windows portability hardening",
+      "kind": "release",
+      "category": "Developer / Release Tooling",
+      "status": "confirmed",
+      "confidence": "windows-exact-archive-proof",
+      "introduced": "0.66.9.0-RC3.4.9",
+      "updated": "0.66.9.0-RC3.4.9",
+      "summary": "Removes the historical cpu_bus_rom_tests exception after direct Windows proof identified stack exhaustion and open-stream deletion semantics; all CTest failures are now fatal.",
+      "tags": [
+        "chqdev",
+        "ctest",
+        "windows",
+        "portability",
+        "runtime-tests"
+      ],
+      "related": [
+        "chqdev-cross-platform-controller"
+      ],
+      "docs": [
+        "docs/CHQDEV.md",
+        "docs/RELEASE_PROCESS.md",
+        "VALIDATION_0.66.9.0-RC3.4.9.md"
+      ],
+      "scripts": [
+        "research/scripts/regression/regression-v06690-rc349.chqscript"
+      ],
+      "apiActions": [],
+      "evidence": [],
+      "article": {
+        "discovery": "Windows runtime_tests stopped SEGFAULTing immediately after sixteen large Runtime locals were moved to heap storage, then exposed a file-in-use failure until eight input streams were explicitly closed before remove/remove_all.",
+        "method": "Carry the proven source changes into a pristine RC3.4.8-derived candidate and remove every known-failure exception from chqdev and legacy wrappers.",
+        "details": [
+          "sixteen Runtime fixtures use std::make_unique",
+          "six tf/pf/cf reader groups close before cleanup",
+          "chqdev treats any CTest failure as fatal",
+          "Windows promotion requires 7/7 CTest PASS"
+        ],
+        "limitations": [
+          "RC3.4.9 exact archive Windows qualify --fresh PASS is complete; this entry is the promoted predecessor proof for v0.66.9.1."
+        ]
+      }
+    },
+    {
+      "id": "release.v06691-governance",
+      "title": "v0.66.9.1 release-governance and documentation consolidation",
+      "kind": "release",
+      "category": "Developer / Release Tooling",
+      "status": "implemented-awaiting-proof",
+      "confidence": "source-and-portable-proof",
+      "introduced": "0.66.9.1",
+      "updated": "0.66.9.1",
+      "summary": "Consolidates the promoted RC3.4.9 chqdev process across all current human/machine-readable documentation and makes process-documentation drift a preflight failure.",
+      "tags": [
+        "chqdev",
+        "release",
+        "documentation",
+        "governance",
+        "deterministic",
+        "ctest"
+      ],
+      "related": [
+        "chqdev-cross-platform-controller"
+      ],
+      "docs": [
+        "docs/RELEASE_GOVERNANCE.md",
+        "docs/RELEASE_PROCESS.md",
+        "docs/CHQDEV.md",
+        "VALIDATION_0.66.9.1.md"
+      ],
+      "scripts": [
+        "research/scripts/regression/regression-v06691.chqscript"
+      ],
+      "apiActions": [],
+      "evidence": [],
+      "article": {
+        "discovery": "RC3.4.9 proved the intended one-command process, but a deep documentation audit found stale operational guidance in QUICK_START, local-build docs, the generated handbook and a few controller-reference lines.",
+        "method": "Update all current operational and machine-readable surfaces together and add a chqdev preflight contract that blocks future release-process drift.",
+        "details": [
+          "chqdev qualify --fresh canonical",
+          "zero tolerated CTest failures",
+          "deterministic exact archive identity",
+          "focused + Full Regression mandatory",
+          "PowerShell/BAT compatibility/fallback only"
+        ],
+        "limitations": [
+          "Final v0.66.9.1 promotion still requires exact-archive Windows qualify --fresh PASS."
+        ]
+      }
+    },
+    {
+      "id": "release.v06692-track-semantics",
+      "title": "v0.66.9.2-RC3 track semantics and evidence isolation",
+      "kind": "release",
+      "category": "Track / Release Tooling",
+      "status": "historical-qualified",
+      "confidence": "causal-runs-019-029-plus-source",
+      "introduced": "0.66.9.2-RC3",
+      "updated": "0.66.9.3",
+      "summary": "Consolidates Runs 019-029 into conservative Track View/API semantics and fixes trace/session/diagnostic evidence isolation.",
+      "tags": [
+        "track",
+        "road",
+        "palette",
+        "environment",
+        "route-indicator",
+        "evidence"
+      ],
+      "related": [],
+      "docs": [
+        "docs/chasehq/discoveries/STAGE1_TRACK_RECORD_0.66.9.2-RC3.md",
+        "VALIDATION.md"
+      ],
+      "scripts": [
+        "research/scripts/regression/regression-v06692-rc3.chqscript"
+      ],
+      "apiActions": [
+        "track.state",
+        "track.records"
+      ],
+      "evidence": [],
+      "article": {
+        "discovery": "Stage-1 record +4 is road processing, +5 palette transition, +6 environment transition, and +7 is type-dependent feature data; +5/+6/+7 therefore cannot define road-material identity.",
+        "method": "Causal A/B runs, layered frame snapshots, trace/disassembly and ROM table extraction across Runs 019-029.",
+        "details": [
+          "+7 0xEB family: FF suppress/clear, 00 standard route indicator, 02 route-indicator variant",
+          "legacy field aliases retained but deprecated",
+          "trace harvesting now requires current-run freshness"
+        ],
+        "limitations": [
+          "Historical note: the v0.66.9.2 line was subsequently Windows-qualified and became the immutable baseline used to develop v0.66.9.3.",
+          "Local research checkpoint binaries referenced by Runs 015-029 are not fabricated when unavailable to the source package."
+        ]
+      }
+    },
+    {
+      "id": "release-v06692-rc4-run-provenance",
+      "kind": "release",
+      "category": "tooling",
+      "status": "implemented-candidate",
+      "confidence": "confirmed",
+      "title": "v0.66.9.2-RC4 authoritative run provenance",
+      "introduced": "0.66.9.2-RC4",
+      "updated": "0.66.9.2-RC4",
+      "summary": "chqdev-created authoritative runs preserve the complete authored source in script.chqscript and persist the real final command count for bundles and Recent Script Runs.",
+      "tags": [
+        "chqdev",
+        "evidence",
+        "run-history",
+        "provenance"
+      ],
+      "docs": [
+        "CHANGELOG.md",
+        "VALIDATION.md",
+        "docs/CHQDEV.md"
+      ],
+      "scripts": [
+        "research/scripts/regression/regression-v06692-rc4.chqscript"
+      ],
+      "apiActions": [
+        "script.runs"
+      ]
+    },
+    {
+      "id": "release-v06692-final",
+      "kind": "release",
+      "category": "release-governance",
+      "status": "promoted-target",
+      "confidence": "confirmed",
+      "title": "v0.66.9.2 final promotion from Windows-qualified RC4",
+      "summary": "v0.66.9.2 finalizes the exact RC4 feature set and its own exact final archive SHA-256 f3c730e5bc41886189c11e23d4998967f205b085fa172a9c30fc812330227b26 passed Windows chqdev qualify --fresh with 7/7 CTest, runtime readiness, focused regression, Full Regression and promotable PASS. It is the closed immutable baseline for subsequent tooling-hardening work.",
+      "introduced": "0.66.9.2",
+      "updated": "0.66.9.2",
+      "tags": [
+        "release",
+        "qualification",
+        "rc4",
+        "promotion"
+      ],
+      "docs": [
+        "CHANGELOG.md",
+        "VALIDATION.md",
+        "docs/PROJECT_STATE.md",
+        "docs/RELEASE_PROCESS.md"
+      ],
+      "scripts": [
+        "research/scripts/regression/regression-v06692.chqscript"
+      ],
+      "apiActions": [
+        "release.assert-version",
+        "script.runs"
+      ]
+    },
+    {
+      "id": "tooling-v06693-rc2-repair-pass",
+      "kind": "release",
+      "category": "tooling",
+      "status": "confirmed",
+      "confidence": "source-plus-rc1-windows-evidence",
+      "title": "v0.66.9.3-RC2 tooling repair pass",
+      "introduced": "0.66.9.3-RC2",
+      "updated": "0.66.9.3",
+      "summary": "Repairs authoritative run finalization, browser command-count parity, nested source-line provenance and corpus result structure exposed by the first real Windows RC1 tooling run, without changing game/emulation behavior.",
+      "tags": [
+        "tooling",
+        "evidence",
+        "script-console",
+        "provenance",
+        "corpus",
+        "windows"
+      ],
+      "docs": [
+        "CHANGELOG.md",
+        "VALIDATION.md",
+        "docs/PROJECT_STATE.md",
+        "docs/API_REFERENCE.md",
+        "docs/SCRIPT_LANGUAGE_REFERENCE.md",
+        "docs/DOCUMENTATION_AUDIT_0.66.9.3-RC3.md"
+      ],
+      "scripts": [
+        "research/scripts/regression/regression-v06693-rc2.chqscript"
+      ],
+      "apiActions": [
+        "corpus.run",
+        "script.runs",
+        "script.run.verify"
+      ],
+      "evidence": [],
+      "article": {
+        "discovery": "RC1 tooling regression completed its command body on Windows but authoritative finalization failed while summing ordered-dictionary byte fields; the same run exposed client-side count, nested line-number and corpus JSON-string gaps.",
+        "method": "Repair the PowerShell finalizer and browser compiler/finalization paths, add static/carry-forward tests, keep RC1 historical, and defer promotion qualification until real Workbench use stops exposing tooling gaps.",
+        "details": [
+          "FINALIZATION_FAILED fail-closed state",
+          "explicit numeric bundle-index byte accumulation",
+          "browser commandCount override including waits",
+          "authored source line preservation",
+          "parsed corpus result objects"
+        ],
+        "limitations": [
+          "RC2 remained intentionally unqualified and was superseded by RC3 after its real Windows bundle exposed source-line transport, structural-count and cross-platform evidence-index/ZIP gaps."
+        ],
+        "qualification": "Superseded by the complete v0.66.9.3-RC5 Windows qualify --fresh PASS; retained as historical development-stage detail inside the promoted v0.66.9.3 release."
+      }
+    },
+    {
+      "id": "tooling-v06693-rc3-stabilization",
+      "kind": "release",
+      "category": "tooling",
+      "status": "confirmed",
+      "confidence": "source-plus-rc2-windows-evidence",
+      "title": "v0.66.9.3-RC3 tooling stabilization",
+      "introduced": "0.66.9.3-RC3",
+      "updated": "0.66.9.3",
+      "summary": "Closes RC2-discovered source-line transport, client-only command evidence, resolved-source provenance, structural regression-budget accounting and cross-platform evidence bundle usability gaps without intentional game/emulation behavior changes.",
+      "tags": [
+        "tooling",
+        "evidence",
+        "script-console",
+        "provenance",
+        "portable-zip",
+        "regression",
+        "windows",
+        "linux"
+      ],
+      "docs": [
+        "CHANGELOG.md",
+        "VALIDATION.md",
+        "docs/PROJECT_STATE.md",
+        "docs/API_REFERENCE.md",
+        "docs/SCRIPT_LANGUAGE_REFERENCE.md",
+        "docs/REGRESSION_COVERAGE_MAP.md",
+        "docs/DOCUMENTATION_AUDIT_0.66.9.3-RC3.md"
+      ],
+      "scripts": [
+        "research/scripts/regression/regression-v06693-rc3.chqscript"
+      ],
+      "apiActions": [
+        "corpus.run",
+        "script.runs",
+        "script.run.verify"
+      ],
+      "evidence": [],
+      "article": {
+        "discovery": "RC2 finalized successfully on Windows but authoritative commands were still attributed to line 1, client-only waits were counted but absent from evidence, the regression budget used a top-level rather than recursive count, and ZIP/index paths were Windows-centric.",
+        "method": "Transport resolved source lines through browser/Go runners, record client-only operations authoritatively, preserve authored and resolved source plus a command map, use portable ZIP paths, and guard Full Regression with recursive structural counting.",
+        "details": [
+          "sourceLine transport",
+          "resolved-script.chqscript",
+          "resolved-command-map.jsonl",
+          "clientRecord wait evidence",
+          "forward-slash ZIP paths",
+          "bundle-index-v2 clickable/filterable HTML",
+          "936 to 746 structural regression reduction"
+        ],
+        "limitations": [
+          "RC3 is intentionally not promotion-qualified yet; it is the working build for diagnosis and should only be replaced for a genuine blocker or coherent later milestone."
+        ],
+        "qualification": "Superseded by the complete v0.66.9.3-RC5 Windows qualify --fresh PASS; retained as historical development-stage detail inside the promoted v0.66.9.3 release."
+      }
+    },
+    {
+      "id": "rc635-caller-provenance",
+      "title": "RC6.3.5 original CPU-A caller-to-tail reconstruction",
+      "kind": "native-reconstruction",
+      "category": "Native Reconstruction",
+      "status": "implemented-awaiting-proof",
+      "confidence": "local-regression-windows-rom-pending",
+      "introduced": "0.67.0.0-RC6.3.5",
+      "updated": "0.67.0.0-RC6.3.5",
+      "summary": "Real RC6.3.4 observed BSR target did not equal the live generated A10C range entry. RC6.3.5 preserves the actual direct-call target and a bounded original execution PC path to classify function tail; CPU-B census persists independent of the CPU-A caller audit; no function or CPU-B native promotion.",
+      "tags": [
+        "ghidra",
+        "cpu-a",
+        "cpu-b",
+        "rom",
+        "boundary",
+        "candidate",
+        "evidence"
+      ],
+      "related": [
+        "rc634-boundary"
+      ]
+    },
+    {
+      "id": "rc637-native-shared-dispatch-cpu-b-edges",
+      "title": "RC6.3.7 — Shared Native Dispatcher and CPU-B Observed Edges",
+      "kind": "native-reconstruction-candidate",
+      "category": "Native Reconstruction",
+      "status": "implemented-awaiting-proof",
+      "confidence": "linux-ctest-and-focused-go-passed-windows-rom-backed-pending",
+      "introduced": "0.67.0.0-RC6.3.7",
+      "updated": "0.67.0.0-RC6.3.7",
+      "summary": "Two previously Windows-verified CPU-A Ghidra-generated ranges now share a bounded opt-in dispatch table and emit per-run original/native/rollback decisions. CPU-B original ROM opcode/next-PC observations are compared to authenticated runtime census; CPU-B generated execution, function boundaries, automatic promotion NOT proven.",
+      "tags": [
+        "native",
+        "ghidra",
+        "cpu-b",
+        "rom-census",
+        "dispatcher",
+        "rollback"
+      ],
+      "related": [],
+      "docs": [
+        "docs/RC6.3.7_SHARED_DISPATCH_CPU_B_EDGES.md"
+      ]
+    },
+    {
+      "id": "rc638-cpu-b-edge-key-corrective",
+      "title": "RC6.3.8 — CPU-B Census/Edge PC Canonicalization",
+      "status": "provisional",
+      "summary": "RC6.3.7 genuine Windows CPU-B original-ROM edge proof matched five hottest ROM instruction PCs only after fixing 24-bit address-key padding between census and edges; full real prior ZIP re-verified; new Windows qualification pending. Strict missing-edge/count/opcode/duplicate tests retained. Native CPU-B and full autonomous promotion still blocked.",
+      "introduced": "0.67.0.0-RC6.3.8",
+      "updated": "0.67.0.0-RC6.3.8",
+      "links": [
+        "docs/RC6.3.8_CPU_B_CENSUS_EDGE_KEY_CORRECTIVE.md"
+      ]
+    },
+    {
+      "id": "rc639-genuine-cpu-b-ghidra-generator",
+      "title": "RC6.3.9 — CPU-B Ghidra ROM discovery and generated BEQ ABI",
+      "status": "candidate-windows-pending",
+      "summary": "Runs CPU-B original interleaved World ROM SHA/CRC-verified Ghidra headless export; matches five real 68000 opcode/PC sites from CPU-B Windows census; compiles generated branch C++ shared library and 2/2 ABI paths with mutation guards. This is NOT live CPU-B native substitution; original/native/rollback whole-machine equivalence still outstanding.",
+      "introduced": "0.67.0.0-RC6.3.9",
+      "updated": "0.67.0.0-RC6.3.9",
+      "links": [
+        "docs/RC6.3.9_GENUINE_CPU_B_GHIDRA_GENERATOR.md"
+      ]
+    },
+    {
+      "id": "rc6310-genuine-cpu-b-live-beq",
+      "title": "RC6.3.10 — Ghidra-generated CPU-B BEQ.B guarded live execution",
+      "kind": "release",
+      "introduced": "0.67.0.0-RC6.3.10",
+      "updated": "0.67.0.0-RC6.3.10",
+      "files": [
+        "docs/RC6.3.10_LIVE_CPU_B_BEQ.md"
+      ],
+      "summary": "Opt-in shared CPU-B native BEQ substitution with original/native/forced rollback and real-ROM gates; Windows acceptance pending; function promotion prohibited."
+    },
+    {
+      "id": "rc6311-cpu-b-irq-ownership",
+      "title": "RC6.3.11 — CPU-B IRQ exception ownership and strict ROM replay",
+      "kind": "release",
+      "introduced": "0.67.0.0-RC6.3.11",
+      "updated": "0.67.0.0-RC6.3.11",
+      "files": [
+        "docs/RC6.3.11_IRQ_OWNERSHIP_CORRECTIVE.md"
+      ],
+      "summary": "Original Windows trace proved four IRQ vector/stack transaction groups were misattributed to BEQ.B; Musashi ACK now owns IRQ vector and stack effects in a distinct byte-exact triplet replay stream. Windows signoff pending; no full-function promotion."
+    },
+    {
+      "id": "rc6312-cpu-b-two-instruction-abi",
+      "title": "RC6.3.12 — authentic CPU-B TST.W plus BEQ generated ABI",
+      "kind": "release",
+      "introduced": "0.67.0.0-RC6.3.12",
+      "updated": "0.67.0.0-RC6.3.12",
+      "files": [
+        "docs/RC6.3.12_CPU_B_TWO_INSTRUCTION_ABI.md"
+      ],
+      "summary": "Original ROM + Ghidra TST.W 0x4D8 and BEQ 0x4DE verified consecutive candidate and four generated C++ ABI scenarios; BEQ alone live verified in RC6.3.11. Pair NOT live, whole function/automation blocked."
     }
-  ]
+  ],
+  "articles": [
+    {
+      "id": "rc347-chqdev-fresh-qualification",
+      "title": "RC3.4.7 chqdev fresh qualification and Go regression runner",
+      "category": "release",
+      "introduced": "0.66.9.0-RC3.4.7",
+      "updated": "0.66.9.0-RC3.4.7",
+      "summary": "RC3.4.7 made chqdev qualify --fresh the canonical fresh Windows release prove-off and moved Full Regression control-flow/include orchestration into the Go controller so the reduced server parser is never asked to parse an entire Workbench control-flow script.",
+      "sources": [
+        "docs/CHQDEV.md",
+        "docs/RELEASE_PROCESS.md",
+        "VALIDATION_0.66.9.0-RC3.4.7.md"
+      ]
+    },
+    {
+      "id": "rc348-chqdev-param-defaults",
+      "title": "RC3.4.8 chqdev parameter-default parity and failure diagnostics",
+      "category": "release",
+      "introduced": "0.66.9.0-RC3.4.8",
+      "updated": "0.66.9.0-RC3.4.8",
+      "summary": "RC3.4.8 fixes Go-runner script parameter defaults and makes qualification failures retain precise run diagnostics.",
+      "sources": [
+        "docs/CHQDEV.md",
+        "docs/RELEASE_PROCESS.md",
+        "VALIDATION_0.66.9.0-RC3.4.8.md"
+      ]
+    },
+    {
+      "id": "rc349-clean-ctest",
+      "title": "RC3.4.9 clean CTest and Windows portability hardening",
+      "category": "release",
+      "introduced": "0.66.9.0-RC3.4.9",
+      "updated": "0.66.9.0-RC3.4.9",
+      "summary": "Windows runtime test portability fixes remove the final tolerated CTest failure and make all CTest failures release-blocking.",
+      "sources": [
+        "docs/CHQDEV.md",
+        "docs/RELEASE_PROCESS.md",
+        "VALIDATION_0.66.9.0-RC3.4.9.md"
+      ]
+    }
+  ],
+  "currentDevelopmentCandidate": "0.67.0.0-RC6.3.15",
+  "rc6313HistoricalStatus": {
+    "release": "0.67.0.0-RC6.3.13",
+    "scope": "CPU-B TST.W+BEQ live opt-in original/native/fallback RC6.3.13 Windows acceptance pending; RC6.3.12 generated pair ABI passed, RC6.3.11 single BEQ live passed",
+    "nextSteps": "Qualify RC6.3.13 genuine ROM-backed three-mode pair; review enclosing CPU-B boundaries; preserve strict IRQ/mapped R16 and fix Full Regression budget <850 without reducing coverage",
+    "wholeFunctionPromotionAllowed": false
+  },
+  "rc6314CurrentStatus": {
+    "release": "0.67.0.0-RC6.3.14",
+    "scope": "RC6.3.14 is a fail-closed audit corrective based on uploaded immutable RC6.3.13 source 49fda552c33de158c3071be48affe732a05de1cf873281024e87209e9accea21: real Windows Debug compilation PASS, RC6.3.13 Ghidra CPU-B pair generated ABI 4/4 PASS; 17,892 single-BEQ native commits were recorded but prior validator rejected 22 separate disabled-pair original-ROM audit rows. New candidate accepts only authenticated inactive CPU-B 0x4D8 original-ROM rows, rejects unexpected active/unknown CPU-B routes, and now audits pair-mode dispatch in all three modes. Updated Go unit/mutation tests PASS locally; full Go suite still fails inherited Full Regression command-budget 1176 >= 850. Actual RC6.3.14 Windows BEQ and pair live three-mode acceptance is PENDING, no promotion.",
+    "nextSteps": "Run RC6.3.14 Windows debug and native reconstruct --fresh --live-health --cpu-b-live to prove single-BEQ plus two-instruction TST+BEQ in all three modes; inspect generated/fault CPU/SR/cycles, mapped R16, IRQ, bus and full machine parity. Keep function-level promotion blocked; separately de-duplicate Full Regression 1176 to <850 preserving unique coverage.",
+    "wholeFunctionPromotionAllowed": false
+  }
 }

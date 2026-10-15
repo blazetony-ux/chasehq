@@ -1,0 +1,25 @@
+OK cpu=A start=0x644E count=24
+0x644E  bsr     $6456
+0x6450  dbra    D1, $644c
+0x6454  rts
+0x6456  ror.l   #4, D2
+0x6458  bsr     $6462
+0x645A  tst.w   D1
+0x645C  bne     $6460
+0x645E  clr.w   D3
+0x6460  rol.l   #4, D2
+0x6462  move.b  D2, D0
+0x6464  andi.b  #$f, D0
+0x6468  beq     $646c
+0x646A  clr.w   D3
+0x646C  tst.w   D3
+0x646E  beq     $6476
+0x6470  move.b  #$20, D0
+0x6474  bra     $6486
+0x6476  cmpi.b  #$a, D0
+0x647A  bcc     $6482
+0x647C  addi.b  #$30, D0
+0x6480  bra     $6486
+0x6482  addi.b  #$37, D0
+0x6486  move.w  D0, (A0)+
+0x6488  rts

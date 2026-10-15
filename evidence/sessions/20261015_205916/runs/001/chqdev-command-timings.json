@@ -1,0 +1,120 @@
+{
+  "schema": "chqdev-command-timings-v1",
+  "runId": "001",
+  "sessionId": "20261015_205916",
+  "totalElapsedMs": 14294,
+  "commands": [
+    {
+      "sequence": 1,
+      "sourceLine": 10,
+      "command": "echo === RC6.3.33 RELEASE SMOKE BEGIN ===",
+      "category": "echo",
+      "elapsedMs": 3914.336,
+      "failed": false
+    },
+    {
+      "sequence": 2,
+      "sourceLine": 12,
+      "command": "api release.assert-version",
+      "category": "api release.assert-version",
+      "elapsedMs": 2760.059,
+      "failed": false
+    },
+    {
+      "sequence": 3,
+      "sourceLine": 13,
+      "command": "api schema action=ghidra.status",
+      "category": "api schema",
+      "elapsedMs": 3283.625,
+      "failed": false
+    },
+    {
+      "sequence": 4,
+      "sourceLine": 14,
+      "command": "api schema action=ghidra.results",
+      "category": "api schema",
+      "elapsedMs": 1337.929,
+      "failed": false
+    },
+    {
+      "sequence": 5,
+      "sourceLine": 15,
+      "command": "api schema action=rea.crosswalk",
+      "category": "api schema",
+      "elapsedMs": 708.739,
+      "failed": false
+    },
+    {
+      "sequence": 6,
+      "sourceLine": 16,
+      "command": "api schema action=rea.function.inspect",
+      "category": "api schema",
+      "elapsedMs": 741.608,
+      "failed": false
+    },
+    {
+      "sequence": 7,
+      "sourceLine": 17,
+      "command": "api ghidra.status",
+      "category": "api ghidra.status",
+      "elapsedMs": 504.791,
+      "failed": false
+    },
+    {
+      "sequence": 8,
+      "sourceLine": 18,
+      "command": "api rea.reports",
+      "category": "api rea.reports",
+      "elapsedMs": 197.392,
+      "failed": false
+    },
+    {
+      "sequence": 9,
+      "sourceLine": 19,
+      "command": "echo === RC6.3.33 RELEASE SMOKE PASS ===",
+      "category": "echo",
+      "elapsedMs": 90.586,
+      "failed": false
+    },
+    {
+      "sequence": 10,
+      "sourceLine": 21,
+      "command": "echo === RC6.3.33 RELEASE SMOKE PRESERVED SESSION ===",
+      "category": "echo",
+      "elapsedMs": 755.715,
+      "failed": false
+    }
+  ],
+  "byCategory": [
+    {
+      "category": "api schema",
+      "count": 4,
+      "totalMs": 6071.901,
+      "maxMs": 3283.625
+    },
+    {
+      "category": "echo",
+      "count": 3,
+      "totalMs": 4760.637,
+      "maxMs": 3914.336
+    },
+    {
+      "category": "api release.assert-version",
+      "count": 1,
+      "totalMs": 2760.059,
+      "maxMs": 2760.059
+    },
+    {
+      "category": "api ghidra.status",
+      "count": 1,
+      "totalMs": 504.791,
+      "maxMs": 504.791
+    },
+    {
+      "category": "api rea.reports",
+      "count": 1,
+      "totalMs": 197.392,
+      "maxMs": 197.392
+    }
+  ]
+}
